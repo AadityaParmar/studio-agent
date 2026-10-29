@@ -1,0 +1,448 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neome.ai/schemas/neome-studio/brd-data.schema.json",
+  "title": "BRD data file",
+  "description": "The structured record of one Engagement behind each BRD. Built by build-brd from the _agent/ markdown; never hand-edited. Docs: brd-data-schema.md.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "enterprise": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/kebab" },
+        "name": { "$ref": "#/$defs/text" }
+      },
+      "required": ["id", "name"],
+      "additionalProperties": false
+    },
+    "engagement": {
+      "type": "object",
+      "properties": {
+        "slug": { "$ref": "#/$defs/kebab" },
+        "title": { "$ref": "#/$defs/text" },
+        "version": { "type": ["integer", "null"], "minimum": 1 },
+        "status": { "enum": ["working-draft", "draft-for-review", "signed-off"] },
+        "date": { "$ref": "#/$defs/date" }
+      },
+      "required": ["slug", "title", "version", "status", "date"],
+      "additionalProperties": false,
+      "if": { "properties": { "status": { "const": "working-draft" } } },
+      "then": { "properties": { "version": { "type": "null" } } },
+      "else": { "properties": { "version": { "type": "integer" } } }
+    },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "glossary": { "type": "array", "items": { "$ref": "#/$defs/term" } },
+    "process": {
+      "type": "object",
+      "properties": {
+        "lanes": { "type": "array", "items": { "$ref": "#/$defs/lane" } },
+        "steps": { "type": "array", "items": { "$ref": "#/$defs/step" } },
+        "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
+      },
+      "required": ["lanes", "steps", "edges"],
+      "additionalProperties": false
+    },
+    "modules": { "type": "array", "items": { "$ref": "#/$defs/module" } },
+    "general": { "$ref": "#/$defs/general" },
+    "plan": { "$ref": "#/$defs/plan" },
+    "openItems": { "type": "array", "items": { "$ref": "#/$defs/openItem" } },
+    "changelog": { "type": "array", "items": { "$ref": "#/$defs/changelogEntry" } },
+    "signOff": { "$ref": "#/$defs/signOff" }
+  },
+  "required": ["schemaVersion", "enterprise", "engagement", "sources", "glossary", "process", "modules", "general", "openItems", "changelog"],
+  "additionalProperties": false,
+
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "kebab": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "sourceId": { "type": "string", "pattern": "^[A-Z]{2,4}(-\\d+)?$" },
+    "oiId": { "type": "string", "pattern": "^OI-(\\d{2}|[1-9]\\d{2})$" },
+    "prefix": { "type": "string", "pattern": "^[A-Z]{2,5}$" },
+    "requirementId": { "type": "string", "pattern": "^[A-Z]{2,5}-(\\d{2}|[1-9]\\d{2})$" },
+    "delivery": { "enum": ["standard", "configuration", "custom"] },
+
+    "provenance": {
+      "description": "Every fact object: cited Sources + proposed flag. Any proposed part makes the whole object proposed. A fact that is not proposed needs at least one Source.",
+      "type": "object",
+      "properties": {
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/sourceId" }, "uniqueItems": true },
+        "proposed": { "type": "boolean" }
+      },
+      "required": ["sources", "proposed"],
+      "if": { "properties": { "proposed": { "const": false } } },
+      "then": { "properties": { "sources": { "minItems": 1 } } }
+    },
+
+    "textFact": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": { "text": { "$ref": "#/$defs/text" } },
+      "required": ["text"],
+      "unevaluatedProperties": false
+    },
+
+    "source": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/sourceId" },
+        "type": { "type": "string" },
+        "title": { "$ref": "#/$defs/text" },
+        "date": { "oneOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "file": { "type": "string" },
+        "engagements": { "type": "array", "items": { "$ref": "#/$defs/kebab" } },
+        "confidential": { "type": "boolean" }
+      },
+      "required": ["id", "type", "title", "date", "file", "engagements", "confidential"],
+      "additionalProperties": false
+    },
+
+    "term": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "term": { "$ref": "#/$defs/text" },
+        "definition": { "$ref": "#/$defs/text" },
+        "avoid": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+        "disputed": { "$ref": "#/$defs/oiId", "description": "The open Open Item that holds the dispute." }
+      },
+      "required": ["term", "definition", "avoid"],
+      "unevaluatedProperties": false
+    },
+
+    "lane": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebab" },
+        "name": { "$ref": "#/$defs/text" },
+        "who": { "type": "string" },
+        "kind": { "enum": ["person", "system", "external"] },
+        "oi": { "$ref": "#/$defs/oiId" }
+      },
+      "required": ["id", "name", "who", "kind"],
+      "unevaluatedProperties": false
+    },
+    "step": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebab" },
+        "lane": { "$ref": "#/$defs/kebab" },
+        "module": { "oneOf": [{ "$ref": "#/$defs/prefix" }, { "type": "null" }] },
+        "label": { "$ref": "#/$defs/text" },
+        "note": { "type": "string" },
+        "kind": { "enum": ["step", "decision", "external"] },
+        "oi": { "$ref": "#/$defs/oiId" }
+      },
+      "required": ["id", "lane", "module", "label", "note", "kind"],
+      "unevaluatedProperties": false
+    },
+    "edge": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "from": { "$ref": "#/$defs/kebab" },
+        "to": { "$ref": "#/$defs/kebab" },
+        "label": { "type": "string" },
+        "alternate": { "type": "boolean" }
+      },
+      "required": ["from", "to", "label", "alternate"],
+      "unevaluatedProperties": false
+    },
+
+    "module": {
+      "type": "object",
+      "properties": {
+        "prefix": { "$ref": "#/$defs/prefix" },
+        "name": { "$ref": "#/$defs/text" },
+        "status": { "type": "string", "pattern": "^(open|claimed|resolved|needs-revisit|merged-into:[A-Z]{2,5})$" },
+        "formerly": { "$ref": "#/$defs/text" },
+        "purpose": { "oneOf": [{ "$ref": "#/$defs/textFact" }, { "type": "null" }] },
+        "kpis": { "type": "array", "items": { "$ref": "#/$defs/textFact" } },
+        "asIs": { "type": "array", "items": { "$ref": "#/$defs/textFact" } },
+        "roles": { "type": "array", "items": { "$ref": "#/$defs/role" } },
+        "records": { "type": "array", "items": { "$ref": "#/$defs/record" } },
+        "statuses": { "type": "array", "items": { "$ref": "#/$defs/status" } },
+        "transitions": { "type": "array", "items": { "$ref": "#/$defs/transition" } },
+        "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } },
+        "exceptions": { "type": "array", "items": { "$ref": "#/$defs/textFact" } },
+        "reports": { "type": "array", "items": { "$ref": "#/$defs/report" } },
+        "integrations": { "type": "array", "items": { "$ref": "#/$defs/integration" } },
+        "volumes": { "type": "array", "items": { "$ref": "#/$defs/textFact" } },
+        "requirements": { "type": "array", "items": { "$ref": "#/$defs/moduleRequirement" } },
+        "mapping": { "oneOf": [{ "$ref": "#/$defs/mapping" }, { "type": "null" }] },
+        "oiRefs": { "type": "array", "items": { "$ref": "#/$defs/oiId" }, "uniqueItems": true }
+      },
+      "required": ["prefix", "name", "status", "purpose", "kpis", "asIs", "roles", "records", "statuses", "transitions",
+        "rules", "exceptions", "reports", "integrations", "volumes", "requirements", "mapping", "oiRefs"],
+      "additionalProperties": false
+    },
+    "role": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "role": { "$ref": "#/$defs/text" },
+        "does": { "type": "string" },
+        "headcount": { "type": "string" }
+      },
+      "required": ["role", "does", "headcount"],
+      "unevaluatedProperties": false
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "entity": { "$ref": "#/$defs/text" },
+        "fields": { "type": "array", "items": { "$ref": "#/$defs/field" } }
+      },
+      "required": ["entity", "fields"],
+      "additionalProperties": false
+    },
+    "field": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "type": { "enum": ["text", "number", "money", "date", "choice", "person", "link-to-entity", "file"] },
+        "required": { "type": "boolean" },
+        "choices": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+        "linkTo": { "$ref": "#/$defs/text" },
+        "notes": { "type": "string" }
+      },
+      "required": ["name", "type", "required", "notes"],
+      "unevaluatedProperties": false
+    },
+    "status": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebab" },
+        "start": { "type": "boolean" },
+        "end": { "type": "boolean" },
+        "oi": { "$ref": "#/$defs/oiId" }
+      },
+      "required": ["id", "start", "end"],
+      "unevaluatedProperties": false
+    },
+    "transition": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "from": { "$ref": "#/$defs/kebab" },
+        "to": { "$ref": "#/$defs/kebab" },
+        "trigger": { "type": "string" }
+      },
+      "required": ["from", "to", "trigger"],
+      "unevaluatedProperties": false
+    },
+    "rule": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "rule": { "$ref": "#/$defs/text" },
+        "when": { "type": "string" },
+        "action": { "type": "string" }
+      },
+      "required": ["rule", "when", "action"],
+      "unevaluatedProperties": false
+    },
+    "report": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "audience": { "type": "string" },
+        "measures": { "type": "string" }
+      },
+      "required": ["name", "audience", "measures"],
+      "unevaluatedProperties": false
+    },
+    "integration": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "system": { "$ref": "#/$defs/text" },
+        "direction": { "type": "string" },
+        "data": { "type": "string" },
+        "owner": { "type": "string" }
+      },
+      "required": ["system", "direction", "data", "owner"],
+      "unevaluatedProperties": false
+    },
+    "mapping": {
+      "type": "object",
+      "properties": {
+        "neomeApp": { "type": ["string", "null"], "description": "Catalog slug, or null when no App fits (then delivery is custom)." },
+        "delivery": { "$ref": "#/$defs/delivery" },
+        "how": { "type": "string" },
+        "indicative": { "const": true }
+      },
+      "required": ["neomeApp", "delivery", "how", "indicative"],
+      "additionalProperties": false,
+      "if": { "properties": { "neomeApp": { "type": "null" } } },
+      "then": { "properties": { "delivery": { "const": "custom" } } }
+    },
+
+    "requirementBase": {
+      "allOf": [{ "$ref": "#/$defs/provenance" }],
+      "properties": {
+        "id": { "$ref": "#/$defs/requirementId" },
+        "title": { "$ref": "#/$defs/text" },
+        "statement": { "$ref": "#/$defs/text" },
+        "acceptance": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+        "priority": { "enum": ["Must", "Should", "Could", "Won't", "TBC"] },
+        "scope": { "enum": ["neome", "neome-tbc", "third-party", "enterprise", "out-of-scope", "open"] },
+        "ois": { "type": "array", "items": { "$ref": "#/$defs/oiId" }, "uniqueItems": true },
+        "delivery": { "$ref": "#/$defs/delivery" },
+        "withdrawn": { "$ref": "#/$defs/text", "description": "Reason. Withdrawn Requirements stay in the file." }
+      },
+      "required": ["id", "title", "statement", "acceptance", "priority", "scope", "ois"]
+    },
+    "moduleRequirement": {
+      "allOf": [{ "$ref": "#/$defs/requirementBase" }],
+      "unevaluatedProperties": false
+    },
+    "generalRequirement": {
+      "allOf": [{ "$ref": "#/$defs/requirementBase" }],
+      "properties": {
+        "id": { "type": "string", "pattern": "^GEN-\\d{2,3}$" },
+        "topic": { "$ref": "#/$defs/generalTopic" }
+      },
+      "required": ["topic"],
+      "unevaluatedProperties": false
+    },
+    "generalTopic": { "enum": ["access", "localisation", "hosting", "migration", "training", "support", "other"] },
+    "general": {
+      "type": "object",
+      "properties": {
+        "requirements": { "type": "array", "items": { "$ref": "#/$defs/generalRequirement" } },
+        "na": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "topic": { "$ref": "#/$defs/generalTopic" },
+              "reason": { "$ref": "#/$defs/text" },
+              "sources": { "type": "array", "items": { "$ref": "#/$defs/sourceId" }, "minItems": 1, "uniqueItems": true }
+            },
+            "required": ["topic", "sources"],
+            "additionalProperties": false
+          }
+        },
+        "oiRefs": {
+          "description": "Open Items (Module = All) listed under a topic in general.md.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "$ref": "#/$defs/oiId" },
+              "topic": { "$ref": "#/$defs/generalTopic" }
+            },
+            "required": ["id", "topic"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["requirements", "na", "oiRefs"],
+      "additionalProperties": false
+    },
+
+    "plan": {
+      "type": "object",
+      "properties": {
+        "phases": {
+          "type": "array",
+          "items": {
+            "allOf": [{ "$ref": "#/$defs/provenance" }],
+            "properties": {
+              "id": { "$ref": "#/$defs/kebab" },
+              "name": { "$ref": "#/$defs/text" },
+              "weekFrom": { "type": ["integer", "null"], "minimum": 1 },
+              "weekTo": { "type": ["integer", "null"], "minimum": 1 },
+              "covers": { "type": "string" },
+              "modules": { "type": "array", "items": { "$ref": "#/$defs/prefix" } }
+            },
+            "required": ["id", "name", "weekFrom", "weekTo", "covers", "modules"],
+            "unevaluatedProperties": false
+          }
+        },
+        "notPlaced": {
+          "type": "array",
+          "items": {
+            "allOf": [{ "$ref": "#/$defs/provenance" }],
+            "properties": {
+              "text": { "$ref": "#/$defs/text" },
+              "ois": { "type": "array", "items": { "$ref": "#/$defs/oiId" } },
+              "modules": { "type": "array", "items": { "$ref": "#/$defs/prefix" } }
+            },
+            "required": ["text", "ois", "modules"],
+            "unevaluatedProperties": false
+          }
+        }
+      },
+      "required": ["phases", "notPlaced"],
+      "additionalProperties": false
+    },
+
+    "openItem": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/oiId" },
+        "question": { "$ref": "#/$defs/text" },
+        "modules": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "oneOf": [{ "$ref": "#/$defs/prefix" }, { "const": "All" }] }
+        },
+        "owner": { "enum": ["enterprise", "neomenta"] },
+        "status": { "enum": ["open", "closed"] },
+        "answer": { "$ref": "#/$defs/text" },
+        "answerSource": { "$ref": "#/$defs/sourceId" },
+        "raisedIn": { "$ref": "#/$defs/sourceId" },
+        "suggested": { "$ref": "#/$defs/text" },
+        "askTo": { "$ref": "#/$defs/text" },
+        "askedIn": { "type": "array", "items": { "type": "string", "pattern": "^QN-\\d{4}-\\d{2}-\\d{2}(-[a-z0-9-]+)?$" } }
+      },
+      "required": ["id", "question", "modules", "owner", "status", "askedIn"],
+      "additionalProperties": false
+    },
+
+    "changelogEntry": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "date": { "$ref": "#/$defs/date" },
+        "status": { "enum": ["draft-for-review", "signed-off"] },
+        "summary": { "$ref": "#/$defs/text" },
+        "changes": { "type": "array", "items": { "$ref": "#/$defs/change" } }
+      },
+      "required": ["version", "date", "status", "summary", "changes"],
+      "additionalProperties": false
+    },
+
+    "change": {
+      "description": "One line of a change log entry: diff of v<N-1> vs v<N>. `text` is the line the BRD shows.",
+      "type": "object",
+      "properties": {
+        "group": { "enum": ["modules", "requirements", "openItems", "plan", "glossary"] },
+        "kind": { "enum": ["added", "resolved", "merged", "renamed", "needs-revisit", "changed", "withdrawn", "raised", "closed", "removed"] },
+        "id": { "$ref": "#/$defs/text", "description": "Module prefix, Requirement ID, OI ID, plan phase ID or Not yet placed text (`plan` for the whole plan), or glossary term." },
+        "text": { "$ref": "#/$defs/text" },
+        "fields": { "type": "array", "items": { "type": "string" }, "description": "Changed fields (Requirement, plan, glossary changes)." }
+      },
+      "required": ["group", "kind", "id", "text"],
+      "additionalProperties": false
+    },
+
+    "signer": {
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "role": { "$ref": "#/$defs/text" },
+        "date": { "$ref": "#/$defs/date" }
+      },
+      "required": ["name", "role", "date"],
+      "additionalProperties": false
+    },
+    "signOff": {
+      "type": "object",
+      "properties": {
+        "enterpriseSigner": { "$ref": "#/$defs/signer" },
+        "neomentaSigner": { "$ref": "#/$defs/signer" },
+        "evidence": { "$ref": "#/$defs/sourceId" },
+        "openAtSignOff": { "type": "array", "items": { "$ref": "#/$defs/oiId" } },
+        "acceptedProposed": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["enterpriseSigner", "neomentaSigner", "evidence", "openAtSignOff", "acceptedProposed"],
+      "additionalProperties": false
+    }
+  }
+}

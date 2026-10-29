@@ -1,0 +1,19 @@
+{
+  "extraKnownMarketplaces": {
+    "neome": {
+      "source": {
+        "source": "directory",
+        "path": "./"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "neome-studio@neome": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx mmdc:*)",
+      "Bash(git:*)"
+    ]
+  }
+}

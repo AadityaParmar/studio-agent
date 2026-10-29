@@ -1,0 +1,106 @@
+Case Studies
+Maniarr's Khakhra
+maniarrs.com
+Field Force Reinvented
+How Maniarr's Khakhra achieved 98% attendance compliance and real-time visibility with Neome
+Maniarr's Khakhra used Neome to digitize field attendance, beat planning, visit logging, order management, inventory, and reporting.
+FMCG manufacturing and distribution
+Gujarat, India
+98%+
+Attendance compliance
+5x
+Faster order processing
+100%
+Order accuracy
+12x
+Reduced follow-up time
+Company
+Maniarr's Khakhra is a fast-growing FMCG company manufacturing and distributing khakhra across a multi-tier retail network of CNFs, super stockists, distributors, and retailers.
+Visit
+maniarrs.com
+Related modules
+Field Visit Management
+CRM
+Inventory and Stock Management
+Quotation and Order Flow
+Attendance and Leave
+The challenge
+Disconnected data, inconsistent reporting, and poor field visibility made daily execution hard to control.
+WhatsApp messages, spreadsheets, and unstructured phone calls created operational chaos.
+Manual order processing took 15-20 minutes and often introduced errors.
+Attendance compliance was around 40%, with 30-40 missed logs monthly.
+Beat adherence and field activity visibility were not available in real time.
+Inventory mismatches appeared across distribution layers.
+Teams spent around 2 hours every day on manual follow-ups.
+The Neome solution
+Neome provided a WhatsApp-like interface with structured field workflows, GPS verification, role-specific forms, and real-time dashboards.
+Smart attendance
+Time-bound prompts with automatic lockouts and GPS verification for accurate attendance.
+Beat planning
+Daily route assignment and real-time tracking for field team adherence.
+Visit logging
+GPS-tagged visits with role-specific forms and photo capture.
+Order management
+Stakeholder-specific workflows for CNF, super stockist, distributor, and retailer orders.
+Inventory control
+Live visibility and automated stock adjustments across distribution levels.
+Real-time dashboard
+Admin visibility across field operations, reporting, and performance.
+Workflow digitized
+1
+Maniarr's
+2
+CNF
+3
+Super Stockist
+4
+Distributors
+5
+Retailers
+Before and after Neome
+Before
+After
+~40% attendance compliance
+98%+ attendance compliance
+30-40 missed attendance logs per month
+Fewer than 5 missed logs per month
+15-20 minutes per order
+Under 3 minutes per order
+Poor beat plan adherence
+Routinely tracked beat adherence
+Verbal visit reporting
+GPS and form-based visit logs
+~2 hours/day of manual follow-up
+Under 10 minutes/day
+Inconsistent order accuracy
+100% order accuracy
+Measured outcomes
+60/62
+Invitations accepted
+Fast rollout adoption.
+33
+Monthly active users
+Recurring platform engagement.
+43,021
+Messages exchanged
+High chat-led usage.
+78,362
+Report accesses
+Operational visibility at scale.
+252,398
+Spreadsheet edits
+Structured updates captured.
+29.41 GB
+Data exchanged
+Active field operations data.
+Key learnings
+A familiar WhatsApp-like interface reduced the learning curve.
+Modular rollout across roles helped adoption without disruption.
+Tight integration between inventory and orders prevented data silos.
+Real-time tracking and transparency improved field team compliance.
+We had no idea if the team was visiting clients or just reporting visits. Everything was manual and disconnected.
+Vatsal, Business Owner
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

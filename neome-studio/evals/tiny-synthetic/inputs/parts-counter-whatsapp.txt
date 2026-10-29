@@ -1,0 +1,10 @@
+[02/09/2026, 09:12] Leena Joshi: Priya, Neomenta asked how the parts counter works. Can you write it here?
+[02/09/2026, 09:30] Priya Nair: Sure. Walk-in customers and boat yards ask for parts. I make a job for each order, with the Tally number, so we can find it later.
+[02/09/2026, 09:31] Priya Nair: Every job has: customer, parts with quantity and price, discount, Tally number.
+[02/09/2026, 09:33] Priya Nair: A job goes Quoted → Confirmed → Delivered → Paid.
+[02/09/2026, 09:35] Priya Nair: Discount over 10% needs your OK. I send you a WhatsApp and wait.
+[02/09/2026, 09:36] Leena Joshi: Yes. Above 10% is always me.
+[02/09/2026, 09:40] Priya Nair: About 120 orders a month. I check stock in Tally before I quote.
+[02/09/2026, 09:41] Priya Nair: Biggest problem is unpaid orders. I want a list of orders not paid after 30 days.
+[02/09/2026, 09:44] Priya Nair: And I am often at the boat yards. I need to make orders from my phone.
+[02/09/2026, 09:47] Leena Joshi: Ok. English only is fine for everybody. Prices in AED.

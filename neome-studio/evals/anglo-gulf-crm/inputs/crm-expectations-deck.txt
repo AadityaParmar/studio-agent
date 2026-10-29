@@ -1,0 +1,140 @@
+Crescent Gulf Chemicals
+CRM Expectations
+Condensed for management review
+September 2026
+
+-----------------------------------------------------------------
+SLIDE 1 - CUSTOMERS, LEADS AND THE SALES PIPELINE
+-----------------------------------------------------------------
+
+Why we need a CRM
+- Customer data sits in personal Excel sheets, WhatsApp and email. When someone leaves, the customer history leaves with them.
+- Management cannot see the pipeline without calling each salesperson.
+
+Customer and contact management
+- One record per customer (account)
+- Customer type, industry, country, assigned salesperson
+- Customer class A / B / C (A = critical)
+- Multiple contacts per customer; mark the decision makers
+- Credit terms visible on the customer
+- Purchase history of the customer
+- Last interaction and next follow-up always visible on the customer
+- Complete customer view: leads, opportunities, quotations, visits, follow-ups all in one place
+
+Lead management
+- Every potential deal captured as a lead with owner + status
+- Qualified lead converts to account and contact, keep the link to the lead
+
+Sales pipeline  <<< MOST IMPORTANT PART >>>
+- Full visibility from first contact to closed deal
+- Stages: Lead > Qualification > Quotation > Negotiation > PO > Won / Lost
+- Each opportunity: customer or lead, product, value, currency, expected close date, stage, owner, country
+- Visual pipeline (board view), count and value per stage
+- Customer PO receipt recorded (PO reference + date)
+
+Pipeline analytics
+- Total pipeline, weighted pipeline, expected orders, actual orders, target - side by side
+- Slice by country / salesperson / product / customer
+- Expected orders in 30 / 60 / 90 day buckets
+- Targets by salesperson, product and country
+- Example value on slide: AED 1.2M weighted pipeline, Q4
+
+Quotation tracking
+- Quotation number, product, quantity, price, validity, approval status, linked opportunity
+- Expected PO date
+- Cost and gross margin on the quotation
+- Revision history - keep every version
+
+-----------------------------------------------------------------
+SLIDE 2 - FIELD WORK, FOLLOW-UPS, DASHBOARDS
+-----------------------------------------------------------------
+
+Customer visits and meetings
+- Log every visit: customer, date, participants, purpose, discussion, linked opportunity,
+  competitor information, next action, owner and deadline
+- Field teams travel across Middle East, Africa and CIS and log visits from phone or tablet
+- Management question: how many visits happened this week and what business came from them?
+
+Discipline rule
+- NO open opportunity without a next action, an owner and a deadline
+
+Follow-ups and reminders (MINIMUM REQUIREMENT)
+- Every follow-up has an owner and a deadline
+- Automatic flags: RED = overdue, ORANGE = due today, YELLOW = due this week, GREEN = completed
+- Reminder to the owner
+
+Customer master again
+- Customer type and industry must be filterable (same as slide 1)
+
+Salesperson dashboard
+- Target vs actual sales, achievement %, conversion ratio, new customers, opportunities,
+  pipeline, weighted pipeline, visits, follow-ups, orders won and lost
+- Collections and outstanding per salesperson
+- Targets per salesperson
+
+Product, geography and molecule view
+- Product: oilfield, water treatment, agrochemicals
+- Geography: UAE, Saudi Arabia, Oman, Africa, CIS, others
+- Molecule: DBNPA, corrosion and scale inhibitors, biocides, others
+
+Product and market intelligence
+- Keep sales teams current on the market
+
+-----------------------------------------------------------------
+SLIDE 3 - MANAGEMENT VIEW, MARKET, ERP
+-----------------------------------------------------------------
+
+One-page management dashboard
+- Sales | Pipeline | Customers | Business Development | Collections | People
+- Risks: lost orders, at-risk customers, delayed deals, overdue actions
+
+Won / lost
+- Every closed opportunity: Won or Lost, with the reason
+
+Competitor tracking
+- Competitor name, price, product, customer preference, competitive advantage,
+  reason for winning or losing
+- Build a competitor database over time
+
+Registration and tender tracker
+- Country, customer, product, registration, authority, submission date, status,
+  expected approval, tender, value
+- Example: Tanzania | Product Y | Approval Pending | Tender Q1 | USD 500K potential
+
+ERP
+- The CRM must NOT run standalone next to the ERP (we use Tally ERP)
+- One flow: CRM > quotation > sales order > ERP > invoice > collection
+- One shared customer master, no double entry
+
+-----------------------------------------------------------------
+SLIDE 4 - MOBILE, COMMUNICATION, WHAT WE EXPECT FROM THE VENDOR
+-----------------------------------------------------------------
+
+Mobile
+- Full functionality on phone and tablet for travelling teams:
+  update visits, add opportunities, upload quotations and notes, set next actions,
+  check customer history, reach contacts
+
+Communication
+- WhatsApp Business: customer conversations become part of the customer history
+- Calendar sync
+- Email integration (Outlook / Gmail)
+
+Users
+- Roles and permissions that match our sales organisation
+
+What we expect from the vendor
+- Process mapping
+- Data migration
+- Masters
+- Roles
+- Pipeline and dashboard configuration
+- Integrations
+- Training
+- UAT
+- Go-live
+- Support
+
+The CRM should be configured around our process, not the other way round.
+
+Thank you

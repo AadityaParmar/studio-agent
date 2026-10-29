@@ -1,0 +1,14 @@
+# CE-2 — Email from accounts on quotes and credit
+
+Type: email · Date: 2026-10-03 · File: inputs/CE-2-email-from-accounts-on-quotes-and-credit.txt
+
+---
+
+From: Joel (Accounts), Harbor Tiles
+Date: 3 Oct 2026
+Subject: Quotes and credit
+
+Hi, following the call. A quote is valid for 15 days. After that the price must be re-checked because container prices change.
+Contractors with overdue invoices older than 60 days should not get a new quote without my OK.
+We also want old customer list from the Excel sheet moved into the new system.
+Regards, Joel

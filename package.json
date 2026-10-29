@@ -1,0 +1,17 @@
+{
+  "name": "neome-studio-repo",
+  "private": true,
+  "type": "module",
+  "description": "Neome Requirements Studio: team repo for the neome-studio Claude Code plugin and Enterprise work.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=2 \"neome-studio/engine/test/**/*.test.mjs\" && node neome-studio/engine/cli.mjs check neome-studio"
+  },
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "12.0.0",
+    "ajv": "8.20.0",
+    "yaml": "2.9.1"
+  }
+}

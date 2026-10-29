@@ -1,0 +1,9 @@
+{
+  "name": "neome-studio",
+  "version": "0.1.0",
+  "description": "Neome Requirements Studio: Inputs → Sources → Modules → Module specs + Prototypes → Questionnaires → BRD with versions and Sign-off.",
+  "author": {
+    "name": "Neomenta"
+  },
+  "license": "UNLICENSED"
+}

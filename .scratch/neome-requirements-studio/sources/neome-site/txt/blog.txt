@@ -1,0 +1,163 @@
+Neome blog
+Field notes from teams running on Neome.
+Long-form essays, product thinking and practical playbooks, written by operators and engineers who scale the work, not just the slideware.
+Guides
+Featured
+How to run WhatsApp CRM without losing the next step
+Deals do not die because WhatsApp is the wrong channel. They die when nobody owns the lead, stages are unclear, and the next step has no date. Here is how operators keep conversation and pipeline together.
+Ashish Patel
+Sep 24, 2026
+·
+9 min read
+Read article →
+More from the team
+Browse the latest writing.
+Insights, product notes, mission essays and field playbooks, updated regularly as we ship.
+Guides
+Real-time business visibility: tools that show you what's happening right now (2026)
+See how real-time business visibility tools help you track sales, stock, and deliveries live in 2026, so you can catch problems fast and act sooner.
+NT
+Neome Team
+Aug 11, 2026
+·
+8 min read
+Guides
+Can AI really run my business operations? What it can (and can't) do in 2026
+Wondering if AI can run your business in 2026? Learn what AI tools can and cannot do, and why human judgment still matters most.
+NT
+Neome Team
+Aug 4, 2026
+·
+9 min read
+Guides
+AI agents vs chatbots vs automation: what's the difference (and what your business needs)
+AI agents, chatbots, and automation are not the same thing. Discover the key differences with simple examples and find the right fit for your business.
+NT
+Neome Team
+Jul 28, 2026
+·
+8 min read
+Guides
+How to choose an AI automation tool for your business: 7 questions to ask (2026)
+Not sure which AI automation tool to pick? This 2026 guide covers 7 simple questions to ask before buying, in plain, easy to understand words.
+NT
+Neome Team
+Jul 21, 2026
+·
+8 min read
+Guides
+7 business processes every SME should automate first
+Running an SME gets easier by automating the right processes. See the 7 tasks that save time, improve efficiency, and support business growth.
+NT
+Neome Team
+Jul 14, 2026
+·
+9 min read
+Guides
+Top workflow automation software for Indian SMEs (2026 guide)
+Compare the best workflow automation software for Indian SMEs in 2026. Learn about features, pricing, and benefits to choose the right solution.
+NT
+Neome Team
+Jul 7, 2026
+·
+11 min read
+Guides
+How to track employee attendance on mobile
+Track employee attendance on mobile with apps, GPS and geofencing. Improve workforce visibility, reduce errors, and manage remote teams easily and efficiently.
+NT
+Neome Team
+Jun 30, 2026
+·
+8 min read
+Guides
+Best operations software for Indian manufacturing SMEs
+Best operations software for Indian manufacturing SMEs to improve inventory, production, accounting, and efficiency with the right ERP solution.
+NT
+Neome Team
+Jun 23, 2026
+·
+10 min read
+Guides
+How to build an efficient operations process for a growing business
+Build efficient operations for your growing business with streamlined workflows, clear accountability, smart automation, and scalable processes.
+NT
+Neome Team
+Jun 16, 2026
+·
+10 min read
+Guides
+How to manage a field sales team without WhatsApp groups
+How to manage a field sales team without WhatsApp groups using field sales software, GPS tracking, and smarter team management tools.
+NT
+Neome Team
+Jun 9, 2026
+·
+9 min read
+Insights
+Why your business feels chaotic at 50 employees
+Why your business feels chaotic at 50 employees and how communication, processes, and leadership gaps create scaling challenges in growing companies.
+NT
+Neome Team
+Jun 18, 2026
+·
+9 min read
+Insights
+Civilizational units: from grain to singularity
+Every era of progress is anchored to a unit that can be measured, audited, and enforced. Here's how that lens explains where automation is heading next.
+NT
+Neome Team
+May 15, 2026
+·
+12 min read
+Product
+Why Neome is a consumer-enterprise hybrid for the next decade
+Most enterprise software still treats the team like an obstacle. Neome treats it like the platform. Here's the bet behind a community-driven automation OS.
+NT
+Neome Team
+May 8, 2026
+·
+6 min read
+Mission
+Democratize automation: our mission for the next ten years
+Enterprise-grade automation cannot stay a privilege of large organizations. Here's the future we're building toward, and the unit of work that will get us there.
+NT
+Neome Team
+Apr 26, 2026
+·
+5 min read
+Strategy
+The blueprint of growth: building Neome as an exponential organization
+Why Neome is built around community developers, open contributions and exponential-org principles, and how that compounds into platform-grade automation.
+NT
+Neome Team
+Apr 12, 2026
+·
+5 min read
+Community
+A community-driven approach to enterprise automation
+A horizontal platform plus local expertise is the only way automation reaches every corner of an enterprise. Here's how the Neome community is structured.
+NT
+Neome Team
+Mar 30, 2026
+·
+5 min read
+Strategy
+Where the next automation opportunities lie
+Saturated categories like CRM and ERP aren't where the next wave will be won. Here's a practical map for builders who want to lead an automation niche.
+NT
+Neome Team
+Mar 15, 2026
+·
+7 min read
+Guides
+Moving from 50 Excel sheets to one system
+A step-by-step approach to migrating master data, inventory, and daily reporting out of scattered spreadsheets, without breaking your team's habits.
+NT
+Neome Team
+Feb 8, 2026
+·
+5 min read
+Have a workflow that deserves a write-up?
+Talk to us about your team's daily reality. The next field note might be yours.
+Talk to us
+Watch demos

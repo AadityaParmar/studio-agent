@@ -1,0 +1,126 @@
+# Replay script for tiny-synthetic. Read by neome-studio/evals/run.mjs; shape in lib/replay.schema.json.
+# Briefs go to the simulated client (with the answer key); placeholders are listed in lib/replay.mjs fill().
+enterprise: marlin-marine
+engagement: service-crm
+consultants:
+  a: { name: Asha Rao, email: asha.rao@example.com }
+  b: { name: Ben Okafor, email: ben.okafor@example.com }
+
+steps:
+  - id: ingest-first
+    as: a
+    skill: ingest
+    args: "Enterprise folder marlin-marine, Engagement service-crm"
+    brief: >-
+      First run for this Enterprise. Two Inputs wait in {ent}/inputs/. Names and titles from the key's
+      Consultant choices. Say yes to what the skill proposes when the key agrees with it.
+
+  - id: review-draft
+    as: a
+    skill: review-draft
+    args: "marlin-marine service-crm"
+    brief: >-
+      Fresh session. Confirm the Module set per the key's Consultant choices. Answer process, roles and
+      Engagement-wide topics from the key; Don't know for the rest.
+
+  - id: ben-claims
+    as: b
+    engine: [module, claim, "{eng}", "{next}", --who, "{who}"]
+    commit: "resolve-module: marlin-marine/service-crm claim {next}"
+    brief: Ben claims the first frontier Module, then his laptop dies.
+
+  - id: ben-locks
+    as: b
+    engine: [lock, "{eng}", --who, "{who}", --skill, build-brd]
+    commit: "build-brd: marlin-marine/service-crm lock"
+    brief: Ben also took the Engagement lock before his laptop died.
+
+  - id: claim-refused
+    as: a
+    skill: resolve-module
+    args: "marlin-marine service-crm {claimed}"
+    maxTurns: 6
+    brief: >-
+      Ask to work on Module {claimed}. If the skill says {b} holds it, do not take another Module: say you
+      will sort it out first, and end.
+
+  - id: studio-clears
+    as: a
+    skill: studio
+    maxTurns: 10
+    brief: >-
+      {b}'s session crashed yesterday and he is on leave; nothing of his is running. When studio offers to
+      clear his stale Engagement lock and his stale claim, say yes to each. Then end.
+
+  - id: resolve-modules
+    as: a
+    skill: resolve-module
+    args: "marlin-marine service-crm"
+    repeat: { max: 3, whileStatus: "^next \\|" }
+    brief: >-
+      Live mode, one Module per session: the one the skill picks. The Enterprise answers through you from the
+      key; Don't know for anything else. Accept the skill's recommended options for Consultant choices.
+
+  - id: release-v1
+    as: a
+    skill: build-brd
+    args: "marlin-marine service-crm release"
+    brief: >-
+      Release a BRD version. Summary line: "First draft for Leena to review". Leave plan weeks empty.
+
+  - id: questionnaire
+    as: a
+    skill: questionnaire
+    args: "marlin-marine service-crm"
+    brief: >-
+      Send to Leena Joshi per the key. Accept the suggested item list and the suggested answers.
+
+  - id: leena-replies
+    enterprise: { write: leena-reply.txt, read: "questionnaires/QN-*.txt" }
+    brief: >-
+      You are Leena Joshi. Write your WhatsApp reply to this Questionnaire per the key's "Questionnaire reply"
+      section, numbered like the Questionnaire.
+
+  - id: ingest-reply
+    as: a
+    skill: ingest
+    args: "marlin-marine service-crm"
+    brief: >-
+      Leena's reply is in {ent}/inputs/. Confirm the match list when it reads the reply right; correct it from
+      the reply text otherwise.
+
+  - id: revisits
+    as: a
+    skill: resolve-module
+    args: "marlin-marine service-crm"
+    repeat: { max: 3, whileStatus: "^next \\|" }
+    brief: >-
+      Revisit the Module the skill picks (the reply changed it). Enterprise answers from the key.
+
+  - id: release-v2
+    as: a
+    skill: build-brd
+    args: "marlin-marine service-crm release"
+    brief: >-
+      Release a BRD version. Summary line: "Leena's answers added". Leave plan weeks empty.
+
+  - id: leena-signs
+    enterprise: { write: leena-signoff.txt }
+    brief: >-
+      You are Leena Joshi. Write your WhatsApp message signing off BRD v2 of the Service and parts CRM for
+      Marlin Marine Services, dated {date}, naming both signers per K-24.
+
+  - id: ingest-signoff
+    as: a
+    skill: ingest
+    args: "marlin-marine service-crm"
+    brief: >-
+      Leena's signed sign-off message is in {ent}/inputs/. It is Sign-off evidence for BRD v2, not a
+      Questionnaire reply.
+
+  - id: sign-off
+    as: a
+    skill: build-brd
+    args: "marlin-marine service-crm sign-off"
+    brief: >-
+      Sign off v2 with the Sign-off evidence just ingested. Signers per K-24, both dated {date}.

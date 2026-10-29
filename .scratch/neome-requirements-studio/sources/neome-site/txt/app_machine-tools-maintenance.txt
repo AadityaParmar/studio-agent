@@ -1,0 +1,263 @@
+Home
+Apps
+Machine / Tools Maintenance
+Machine / Tools Maintenance
+Service the Machine Before It Stops the Line
+Plans that fire on the calendar or the hours run, breakdowns recorded with their downtime and root cause, spares consumed against the job, and a cost figure for every asset.
+Start Free Trial
+Book A Free Demo
+Usage-based triggers
+Downtime recorded
+Cost per asset
+Injection Moulder IM-04
+Moulding line 2
+Running
+Availability
+94%
+Downtime
+11h
+Cost this year
+₹1.9 L
+Labour and parts, against this asset
+Service due in 4 days
+Raised by the schedule and assigned to
+Vikram
+.
+Open work order
+WO-1183
+Hydraulic leak · under repair
+Spare below reorder
+Hydraulic seal kit
+Injection Molder IM-04
+Molding line 2
+Running
+Availability
+94%
+Downtime
+11h
+Cost this year
+$23,000
+Labour and parts, against this asset
+Service due in 4 days
+Raised by the schedule and assigned to
+Jay
+.
+Open work order
+WO-1183
+Hydraulic leak · under repair
+Spare below reorder
+Hydraulic seal kit
+Planned, not remembered
+Triggers on a date or on running hours, whichever comes first.
+Root cause recorded
+So the same fault three times reads as one problem.
+Spares against the job
+Consumption tied to the machine that needed them.
+A number to argue with
+Labour and parts per asset, so replacement is a calculation.
+An unplanned stop costs more than the repair that follows it.
+Three gaps account for most of the downtime a plant absorbs, and none of them is an engineering problem.
+Reactive
+Maintenance happens when something stops
+Servicing is remembered under pressure, so the plant runs on repairs rather than on a plan.
+Unexplained
+The same fault, again
+Each breakdown is fixed and forgotten, so a machine failing three times a year looks like bad luck.
+Uncounted
+Nobody knows what a machine costs to keep
+Labour and parts are absorbed into overheads, so replacing an asset is argued rather than calculated.
+Neome closes all three by planning on usage, recording the cause, and counting what each asset costs.
+Preventive
+Maintenance triggered by the calendar or by the hours run
+A plan fires on a date or on usage, whichever comes first, and raises the task with its checklist and a named technician. Servicing on running hours rather than the calendar alone is what stops a lightly used machine being over-serviced and a hard-worked one being missed.
+Calendar and usage triggers
+Tasks generated automatically
+Checklist per plan
+Injection Moulder IM-04
+Preventive
+Trigger
+Every 500 hours
+Also
+Monthly
+Checklist
+Hydraulic oil level
+Filter replacement
+Clamp alignment
+Safety interlock test
+Vikram
+assigned · next trigger in 60 running hours
+Injection Molder IM-04
+Preventive
+Trigger
+Every 500 hours
+Also
+Monthly
+Checklist
+Hydraulic oil level
+Filter replacement
+Clamp alignment
+Safety interlock test
+Jay
+assigned · next trigger in 60 running hours
+Breakdowns
+Record the downtime and the reason, not just the repair
+A breakdown raises a work order that captures when the line stopped, how long it was down and what actually caused it. Root cause is a field rather than a conversation, which is the only way a repeating fault becomes visible as a pattern instead of a run of separate incidents.
+Work order on breakdown
+Downtime recorded
+Root cause documented
+WO-1183
+Injection Moulder IM-04
+Down
+Hydraulic leak at the clamp
+Reported 09:40 · line stopped
+Downtime
+3h 10m
+Technician
+Vikram
+Root cause
+Seal perished, third failure in 14 months
+WO-1183
+Injection Molder IM-04
+Down
+Hydraulic leak at the clamp
+Reported 09:40 · line stopped
+Downtime
+3h 10m
+Technician
+Jay
+Root cause
+Seal perished, third failure in 14 months
+Spares
+Parts consumed against the machine that needed them
+Spares are issued from stock against the work order, so consumption is tied to the asset and the job. Critical components carry reorder alerts, because discovering that the last seal has gone is a discovery best made before the line is already stopped.
+Issued against the job
+Consumption per machine
+Reorder alerts on critical spares
+Spares
+Ahmedabad plant
+Hydraulic seal kit
+₹4,800
+Issued against
+WO-1183
+Below reorder level
+2 left of a level of 5. A critical spare is not a thing to discover during a breakdown.
+Parts on this machine, this year
+₹1.9 L
+Spares
+Dayton plant
+Hydraulic seal kit
+$580
+Issued against
+WO-1183
+Below reorder level
+2 left of a level of 5. A critical spare is not a thing to discover during a breakdown.
+Parts on this machine, this year
+$23,000
+History
+One machine, one history, patterns included
+Every service and every failure sits on the asset, so three seal failures in fourteen months read as one problem rather than three repairs. That history is what turns an argument about replacing a machine into a calculation.
+Full history per asset
+Repeat faults visible
+Service and failure together
+Injection Moulder IM-04
+14 months
+Sep
+Preventive service
+Jul
+Seal failure, 4h down
+Jun
+Preventive service
+Mar
+Seal failure, 6h down
+Same fault, three times
+Ten hours of downtime on one seal. The history is what turns a repair into a decision.
+Injection Molder IM-04
+14 months
+Sep
+Preventive service
+Jul
+Seal failure, 4h down
+Jun
+Preventive service
+Mar
+Seal failure, 6h down
+Same fault, three times
+Ten hours of downtime on one seal. The history is what turns a repair into a decision.
+Reporting
+What each asset costs, and how much of the month it ran
+Set a date range and every figure below it is bounded by those dates.
+Availability
+Is the plant meeting its plan?
+Uptime against planned running time per machine, which turns a vague sense that the line keeps stopping into a number.
+Downtime by reason
+Why does it stop?
+Hours lost grouped by cause, so a recurring fault is visible instead of being absorbed into the general noise of a shift.
+Cost per asset
+What is it costing to keep?
+Labour and parts booked against the machine that consumed them, which is the figure that makes a replacement decision arguable rather than instinctive.
+All the features, done right
+Asset register
+Machines and tools, by line and plant.
+Calendar plans
+Servicing on a date.
+Usage triggers
+Servicing on running hours.
+Task checklists
+What the service actually involves.
+Technician assignment
+Named, with a schedule.
+Breakdown reporting
+A work order, not a phone call.
+Root cause
+A field, so patterns can be found.
+Downtime tracking
+How long the line was actually stopped.
+Spare parts
+Issued against the work order.
+Critical spare alerts
+Before the line stops, not during.
+Asset history
+Services and failures in one list.
+Cost per asset
+Labour and parts, per machine.
+Before you move your maintenance across
+The questions maintenance teams ask before the first plan is set up in Neome.
+Who is this for?
+Why trigger maintenance on running hours as well as dates?
+What does recording root cause actually achieve?
+How are spare parts handled?
+What does the maintenance cost per asset include?
+How is availability measured?
+Can technicians log work from the floor?
+How does this relate to AMC & Service Management?
+What it costs
+One price, and
+Machine / Tools Maintenance
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Machine / Tools Maintenance
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+AMC & Service Management Software
+Hold every AMC contract with what it covers, generate the preventive visits it entitles the customer to, track SLA, and renew before cover ends.
+Learn more
+Manufacturing Software for Small Business
+Version-controlled bills of materials, work orders planned against real capacity, material deducted as output is recorded, and variance raised during the run.
+Learn more
+Quality Control Software for Manufacturers
+Inspection parameters with written tolerances, checks tied to the receipt or work order that caused them, and a real supplier quality record.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

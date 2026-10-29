@@ -1,0 +1,113 @@
+Case Studies
+LP Hardware
+lphardware.com
+Manufacturing ERP Digitized
+How LP Hardware digitized screw manufacturing with QR inventory, FIFO, and Neome ERP
+LP Hardware connected procurement, QR-based inventory, quality checks, FIFO production, sales dispatch, finance, and HRMS on one Neome ERP platform.
+Screw manufacturing
+India
+90%
+Fewer manual inventory transactions
+50%
+Better inventory accuracy
+40%
+Less raw material wastage
+60%
+Faster quotation & PO processing
+Company
+LP Hardware is a screw manufacturing company with 100+ employees. Growth made spreadsheet-driven procurement, inventory, production, sales, finance, and HR hard to control, creating mismatches, delays, and limited visibility across departments.
+Visit
+lphardware.com
+Related modules
+Manufacturing
+Quality Control
+Inventory and Stock Management
+Purchase Management
+Quotation and Order Flow
+Attendance and Leave
+The challenge
+Disconnected systems across procurement, inventory, production, sales, finance, and HR created duplicate masters, inventory errors, and unfair order fulfillment.
+Disconnected systems across procurement, inventory, production, sales, finance, and HR.
+Duplicate and inconsistent master data living in spreadsheets.
+Manual quotation and purchase order creation with frequent size and specification mismatches.
+No QR-based inward tracking, lab test, or heat test before material approval.
+Raw materials issued randomly instead of FIFO, with poor production visibility.
+Sales dispatches ignored FIFO priority, so newer orders shipped ahead of older pending ones.
+Payment tracking and field employee attendance, visits, and expenses ran in separate tools.
+The Neome solution
+Neome ERP became the single manufacturing platform, covering everything from masters and QR inward through QA, FIFO material issue, production, outbound dispatch, finance, and HRMS.
+Centralized master data
+Customer, vendor, product, specification, size, warehouse, employee, tax, and unit masters unified into one source of truth.
+Digital sales and purchasing
+PDF quotations with email and WhatsApp sharing, plus validated purchase orders with size and specification checks.
+QR-based inward and inventory
+Every inward batch gets a QR code for scan-based receiving, warehouse mapping, batch stock, and FIFO allocation.
+Integrated quality control
+QA inspection, lab test, heat test, and approval or rejection workflows keep defective material out of production.
+FIFO production and dispatch
+Raw materials issue to production on FIFO, finished goods stay QR-tracked, and sales orders ship oldest-first with priority approval overrides.
+Finance and HRMS integration
+Order-wise payments, aging, and reminders connect to sales, while attendance, GPS visits, expenses, and approvals run inside the same ERP.
+Workflow digitized
+1
+Master data
+2
+Quotation & PO
+3
+QR inward
+4
+QA / lab / heat test
+5
+FIFO material issue
+6
+Production
+7
+Finished goods
+8
+QR dispatch
+9
+Payment & HRMS
+Before and after Neome
+Before
+After
+Spreadsheet masters and duplicate records
+Centralized masters across customers, vendors, and products
+Manual inward without QR or quality gates
+QR inward with lab and heat test approvals
+Random raw material issue
+FIFO batch allocation against production orders
+New sales orders dispatching before older ones
+FIFO order priority with approval for exceptions
+Manual inventory and payment tracking
+Real-time stock, QR movement, and order-wise collections
+Separate tools for attendance and field expenses
+Integrated HRMS with GPS visits and expense approvals
+Measured outcomes
+90%
+Manual inventory reduction
+Fewer manual inventory transactions across inward and outward.
+100%
+QR inventory coverage
+Inward and outward inventory tracked through QR scanning.
+50%
+Inventory accuracy gain
+More reliable stock positions across warehouses and batches.
+40%
+Wastage reduction
+FIFO allocation cut raw material aging and waste.
+60%
+Faster quotations & POs
+Digital quotations and validated purchase orders sped procurement.
+Real-time
+Production visibility
+Live production tracking reduced shop-floor delays.
+Key learnings
+QR batch tracking is the foundation for both inventory accuracy and material traceability.
+Quality gates before stock acceptance prevent defects from entering production.
+FIFO rules for materials and sales orders reduce waste and improve fairness for customers.
+Connecting finance and HRMS to operations closes the last visibility gaps management needs to scale.
+Neome ERP transformed manufacturing into a fully integrated digital ecosystem, taking QR inbound and quality tests through to FIFO production, order delivery, finance, and HRMS on a single platform.
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

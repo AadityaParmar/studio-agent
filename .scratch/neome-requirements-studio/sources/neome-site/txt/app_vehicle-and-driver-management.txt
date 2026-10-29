@@ -1,0 +1,411 @@
+Home
+Apps
+Vehicle & Driver Management
+Vehicle & Driver Management
+Every Vehicle Allocated, Every Day’s Rent Collected
+Neome runs the whole rental fleet lifecycle on one platform: onboarding a driver, allocating a vehicle, taking the daily rent from a prepaid wallet, controlling the start with an IoT unit, and turning every complaint into a costed job card. Across every branch you operate.
+Book A Free Demo
+Read the HCD India story
+EV and ICE · 2W, 3W, 4W
+Multi-branch
+IoT ready
+Arun Prakash
+RID-1042
+· active
+KYC done
+Branch
+Gurgaon
+Vehicle allocated
+EV-2417
+Daily rent
+₹249 / day
+Wallet balance
+₹1,840
+7 days of rent covered
+EV-2417 on the road
+IoT unit online · start permitted while the wallet is in credit
+Next start is blocked if rent goes unpaid.
+Wallet ledger
+Daily rent
+− ₹249
+Daily rent
+− ₹249
+Wallet top-up
++ ₹2,000
+Open job card
+Brake pad replacement
+In service
+Gurgaon
+branch
+Marcus Bell
+DRV-1042
+· active
+KYC done
+Branch
+Austin
+Vehicle allocated
+EV-2417
+Daily rent
+$18.00 / day
+Wallet balance
+$126.00
+7 days of rent covered
+EV-2417 on the road
+IoT unit online · start permitted while the wallet is in credit
+Next start is blocked if rent goes unpaid.
+Wallet ledger
+Daily rent
+− $18.00
+Daily rent
+− $18.00
+Wallet top-up
++ $150.00
+Open job card
+Brake pad replacement
+In service
+Austin
+branch
+Driver onboarding
+Documents, agreement and deposit captured before a key is handed over.
+Vehicle allocation
+Every vehicle is either on rent, available, or in the workshop.
+Wallet and daily rent
+Rent debits itself each morning. Nobody chases, nobody counts cash.
+IoT start control
+Unpaid rent blocks the next start, without cutting off a moving vehicle.
+A rental fleet does not lose money on the road. It loses it in the office.
+Three gaps account for most of what a growing fleet leaks, and none of them is a vehicle problem.
+Onboarding
+A day lost before the first mile
+Licence photos on WhatsApp, the agreement in a drawer, the deposit in a notebook. Nobody can say who is cleared to ride.
+Collection
+Rent you chase instead of collect
+A hundred drivers on daily rent means a hundred reminders, and the shortfall only shows up at month end.
+Downtime
+Vehicles off the road, nobody knows why
+A complaint becomes a phone call, the phone call becomes a repair, and the cost never reaches the vehicle it belongs to.
+Neome closes all three by keeping one record per driver and one per vehicle, and making the money, the mileage and the maintenance hang off them.
+Onboarding
+A driver cleared to ride, with nothing left in a drawer
+Capture the licence, the address proof and the signed agreement against the driver record, take the security deposit, and attach the plan they are on. The vehicle cannot be handed over until the checklist is complete, so an unverified driver never leaves the branch on your asset.
+Documents with expiry dates
+Deposit and refund tracked
+Deboarding in one step
+Onboard driver
+Arun Prakash
+·
+Gurgaon
+branch
+4 of 5
+Driving licence
+Verified · expires 04/2029
+Proof of address
+Uploaded and checked
+Rental agreement
+Signed on the tablet
+Security deposit
+₹3,000 received
+Vehicle allocation
+Pick a vehicle at this branch
+Plan attached
+Daily ·
+₹249
+Deposit refundable
+Onboard driver
+Marcus Bell
+·
+Austin
+branch
+4 of 5
+Driver's license
+Verified · expires 04/2029
+Proof of address
+Uploaded and checked
+Rental agreement
+Signed on the tablet
+Security deposit
+$200.00 received
+Vehicle allocation
+Pick a vehicle at this branch
+Plan attached
+Daily ·
+$18.00
+Deposit refundable
+Fleet
+Every vehicle is on rent, available, or in the workshop
+One register per branch holds the chassis, registration, battery or engine, purchase date and insurance for each vehicle, and its live status. Allocate a vehicle to a driver, swap it when one goes in for service, and take it back on deboarding. The history stays on the vehicle.
+Allocation history per vehicle
+Insurance and document expiry
+Branch-wise availability
+Fleet register
+Gurgaon
+· 128
+96
+On rent
+21
+Available
+11
+In service
+EV-2417
+Arun Prakash
+On rent
+EV-2418
+Unallocated
+Available
+EV-2390
+Workshop
+In service
+EV-2355
+Kavita Sharma
+On rent
+Allocate, swap or take a vehicle back without leaving this list.
+Fleet register
+Austin
+· 128
+96
+On rent
+21
+Available
+11
+In service
+EV-2417
+Marcus Bell
+On rent
+EV-2418
+Unallocated
+Available
+EV-2390
+Workshop
+In service
+EV-2355
+Dana Ruiz
+On rent
+Allocate, swap or take a vehicle back without leaving this list.
+Collection
+The rent collects itself, every morning
+Each driver carries a prepaid wallet. The daily plan debits automatically, a weekly or monthly plan does the same on its own cycle, and a top-up made from the driver app lands in the same balance. You stop raising invoices and start reading a balance.
+Daily, weekly or monthly plans
+Low-balance alerts
+Full statement per driver
+Driver wallet ·
+Arun Prakash
+₹2,940
+In credit
+₹249
+debited every morning at 6:00. No invoice to raise, no cash to count.
+Statement
+Mon
+·
+Daily rent
+− ₹249
+Tue
+·
+Daily rent
+− ₹249
+Wed
+·
+Late return fee
+− ₹150
+Wed
+·
+Top-up · card
++ ₹2,000
+Below three days of rent, the driver gets a top-up link on their phone.
+Driver wallet ·
+Marcus Bell
+$216.00
+In credit
+$18.00
+debited every morning at 6:00. No invoice to raise, no cash to count.
+Statement
+Mon
+·
+Daily rent
+− $18.00
+Tue
+·
+Daily rent
+− $18.00
+Wed
+·
+Late return fee
+− $10.00
+Wed
+·
+Top-up · card
++ $150.00
+Below three days of rent, the driver gets a top-up link on their phone.
+IoT
+Unpaid rent stops the next start, not your day
+Connect the telematics unit already fitted to the vehicle and you get live location, odometer and battery on the same screen as the rental. Tie the start permission to the wallet: when the balance runs out, the next start is blocked until it is topped up. A vehicle already moving is never cut off.
+Live location and odometer
+Start tied to wallet balance
+Works with your hardware
+EV-2417
+IoT unit online
+Tracking
+Odometer
+7,742 km
+Battery
+68%
+Last seen
+2 min ago
+06:04
+Start permitted, wallet in credit
+13:22
+Location updated at MG Road, Gurgaon
+21:47
+Parked and locked by driver
+Rule: wallet at
+₹0
+The next start is blocked. A vehicle already moving is never cut off.
+EV-2417
+IoT unit online
+Tracking
+Odometer
+4,812 mi
+Battery
+68%
+Last seen
+2 min ago
+06:04
+Start permitted, wallet in credit
+13:22
+Location updated at E 6th St, Austin
+21:47
+Parked and locked by driver
+Rule: wallet at
+$0
+The next start is blocked. A vehicle already moving is never cut off.
+Maintenance
+Every complaint becomes a job card, every job card a cost
+A driver raises a complaint from their phone. It becomes a job card at the branch workshop, spares are issued against it from your own stores, and the labour and parts are booked to the vehicle. Rent pauses while the vehicle is off the road, so the driver is not charged for your downtime.
+Complaint to job card
+Spare parts issued from stock
+Cost per vehicle
+“Brake lever feels soft”
+Raised by
+Arun Prakash
+from the driver app · EV-2417
+JC-0318
+In progress
+Gurgaon
+workshop · assigned to
+R. Nair
+· rent paused
+Spares issued from stores
+Brake pad set
+×
+1
+₹320
+Brake fluid
+×
+1
+₹90
+Cost booked to EV-2417
+₹410
+“Brake lever feels soft”
+Raised by
+Marcus Bell
+from the driver app · EV-2417
+JC-0318
+In progress
+Austin
+workshop · assigned to
+R. Okafor
+· rent paused
+Spares issued from stores
+Brake pad set
+×
+1
+$24.00
+Brake fluid
+×
+1
+$6.50
+Cost booked to EV-2417
+$30.50
+Reporting
+Run five branches the way you ran one
+Set a date range and every figure below it is bounded by those dates.
+Multi-branch
+Who owns what?
+Each branch carries its own fleet, drivers, workshop and stores. Branch managers see their own operation; head office sees all of them side by side.
+Utilisation and revenue
+Is the fleet earning?
+Vehicles on rent against vehicles owned, revenue per vehicle, idle days, and the drivers whose wallets keep running dry.
+Cost of running
+What is it costing?
+Service history, repeat faults, spares consumed and the maintenance cost carried by each vehicle over its life.
+All the features, done right
+Driver master
+Documents, expiry dates, deposit and status in one record.
+Vehicle master
+Registration, chassis, battery or engine, insurance, purchase.
+Allocation
+Hand over, swap or take back, with the history retained.
+Driver wallet
+Prepaid balance, auto-debit, top-ups and a full statement.
+Rental plans
+Daily, weekly or monthly, with deposits and late fees.
+Live tracking
+Location, odometer and battery from your IoT unit.
+Start control
+Block the next start when rent or wallet goes unpaid.
+Complaints
+Raised by the driver, routed to the branch workshop.
+Job cards
+Service and repair, with labour and parts costed.
+Spare parts
+Stock per branch, issued against a job card.
+Multi-branch
+Separate fleets and teams, one consolidated view.
+Driver app
+Balance, top-up, complaint and documents on the phone.
+Who it is for
+Built for fleets that hand the keys to someone else
+EV and ICE rental fleets
+Two, three and four wheelers rented to drivers by the day, week or month, including subscription and rent-to-own arrangements.
+Delivery and quick commerce
+Fleets attached to delivery, quick commerce, logistics and last-mile operators, where the vehicle is the driver's livelihood and uptime is the product.
+Daily-rent operators
+Anyone collecting rent every day from a large driver base who needs a prepaid wallet and a reliable way to stop a vehicle that is not paying for itself.
+In production
+HCD India runs its electric two-wheeler fleet on Neome
+Rider onboarding, vehicle allocation, IoT-based kilometre and location tracking and automated daily rental deduction, all on one operations dashboard.
+Read the case study
+Before you move your fleet across
+The questions fleet operators ask before they put their first vehicle into Neome.
+Who is this for?
+Is this a ready-made template I can sign up for?
+How does the driver wallet work?
+Can a vehicle be immobilised when the rent is not paid?
+Will it work with the tracking hardware we already have?
+How are complaints, servicing and spare parts handled?
+We run more than one branch. How is that handled?
+How long does a rollout take?
+Do you have customers running this today?
+How it is priced
+Quoted to your operation, not off a price list
+Vehicle & Driver Management
+is licensed and configured to how your fleet runs, so it is not on the per-user plan the self-serve modules use and there is no sign-up price to quote. We scope it on the demo and send a figure against your actual operation.
+Fleet size
+Number of branches
+IoT units connected
+Configuration and rollout
+Licence plus a one-time implementation. Existing customers run hundreds of vehicles across multiple branches on it.
+Book A Free Demo
+Talk to sales
+Related Modules
+Field Service Management Software
+Take the request, dispatch the right engineer, run the job from a checklist on their phone, and close it with a signature before they leave site.
+Learn more
+AMC & Service Management Software
+Hold every AMC contract with what it covers, generate the preventive visits it entitles the customer to, track SLA, and renew before cover ends.
+Learn more
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Book A Free Demo

@@ -1,0 +1,7 @@
+Fonts embedded in the BRD page (engine/brd/render-html.mjs).
+
+- Schibsted Grotesk (400, 500, 600, 700): SIL Open Font License 1.1. https://github.com/schibsted/schibsted-grotesk
+- JetBrains Mono (400, 500, 700): SIL Open Font License 1.1. https://github.com/JetBrains/JetBrainsMono
+
+Latin subsets, taken from the Vendorgate proposal (same files it embeds).
+OFL text: https://openfontlicense.org/open-font-license-official-text/

@@ -1,0 +1,281 @@
+Home
+Apps
+Appointment Booking
+Appointment Booking
+Every Slot Real, Every Customer Reminded
+Book against actual availability rather than someone's diary, let the appointment remind the customer for you, and record why anything moved. No-shows stop being a cost you absorb.
+Start Free Trial
+Book A Free Demo
+Real availability
+Automatic reminders
+No-shows measured
+Today
+Ahmedabad
+10:00
+Site survey
+11:30
+Product demo · Rohit Mehta
+2:00
+Free
+4:30
+Service call
+Assigned to
+Amit
+Reminder sent
+Rohit Mehta
+was reminded a day before and again an hour before.
+No-show rate
+4%
+Down from 19% before reminders
+Booked this week
+38
+Today
+Denver
+10:00
+Site survey
+11:30
+Product demo · Daniel Brooks
+2:00
+Free
+4:30
+Service call
+Assigned to
+Mike
+Reminder sent
+Daniel Brooks
+was reminded a day before and again an hour before.
+No-show rate
+4%
+Down from 19% before reminders
+Booked this week
+38
+Availability, not guesswork
+A taken slot is never offered twice.
+Services sized properly
+A survey and a demo do not take the same hour.
+Reminders that run themselves
+On booking, a day before, an hour before.
+Moves leave a reason
+Rescheduling is logged, not lost in a call.
+An empty slot costs the same as a busy one.
+Three gaps account for most of the time a booking team loses, and none of them is a demand problem.
+Double-booked
+Two people promised the same hour
+Slots live in someone's diary, so availability is whatever the person answering the phone believes.
+Forgotten
+The customer simply does not turn up
+Nobody reminded them, an executive travelled anyway, and the slot is gone either way.
+Untracked
+It moved three times, nobody knows why
+Rescheduling happens over calls, so the reason and the history disappear with the conversation.
+Neome closes all three by making availability real, reminders automatic, and every change a recorded one.
+Booking
+Book against real availability, not a guess
+An appointment is linked to the customer, carries the service being delivered and lands on an executive who is actually free. Status moves through scheduled, completed, cancelled or no-show, so the diary reflects what happened rather than what was planned.
+Customer-linked
+Service on the booking
+Status through to outcome
+Rohit Mehta
+Shakti Polymers
+Scheduled
+Service
+Product demo
+Duration
+45 min
+Slot
+11:30 today
+Assigned to
+Amit
++91 98250 41042
+Book
+Daniel Brooks
+Cascade Polymers
+Scheduled
+Service
+Product demo
+Duration
+45 min
+Slot
+11:30 today
+Assigned to
+Mike
++1 (415) 555-0142
+Book
+Services and slots
+Each service takes the time it actually takes
+A demo, a site survey and a service call are not the same length, so each service type carries its own duration and the team that handles it. The working day is divided into slots accordingly, and the holiday calendar closes days nobody should be booked into.
+Duration per service
+Role-based assignment
+Holiday calendar respected
+Services and slots
+Product demo
+45
+m
+Sales
+Site survey
+90
+m
+Field
+Service call
+60
+m
+Support
+Slots for
+Amit
+10:00
+11:30
+2:00
+4:30
+Tomorrow is a holiday, so the calendar will not offer it.
+Services and slots
+Product demo
+45
+m
+Sales
+Site survey
+90
+m
+Field
+Service call
+60
+m
+Support
+Slots for
+Mike
+10:00
+11:30
+2:00
+4:30
+Tomorrow is a holiday, so the calendar will not offer it.
+Reminders
+The appointment reminds the customer, so nobody has to
+A confirmation goes out on booking, a reminder the day before and another an hour ahead. That sequence is the single biggest lever on no-shows, and it costs the team nothing because it happens without anyone remembering to do it.
+Confirmation on booking
+Day-before and hour-before
+Reschedule link included
+Rohit Mehta
+Confirmed
+On booking
+Confirmation with the slot and the address
+1 day before
+Reminder, with a link to reschedule
+1 hour before
+Final reminder
+No-shows before
+19%
+No-shows now
+4%
+Daniel Brooks
+Confirmed
+On booking
+Confirmation with the slot and the address
+1 day before
+Reminder, with a link to reschedule
+1 hour before
+Final reminder
+No-shows before
+19%
+No-shows now
+4%
+Rescheduling
+Moving an appointment leaves a reason behind
+A reschedule records what it moved from, what it moved to and why. Both the customer and the executive are notified, and the change is logged against the booking, so a slot that has moved three times is visible as a pattern rather than a surprise.
+Reason recorded
+Both sides notified
+Full reschedule history
+Reschedule
+Rohit Mehta
+11:30
+4:30
+Reason
+Customer asked to move it to the afternoon
+Rohit Mehta notified
+Amit notified
+Change logged on the booking
+Reschedule
+Daniel Brooks
+11:30
+4:30
+Reason
+Customer asked to move it to the afternoon
+Daniel Brooks notified
+Mike notified
+Change logged on the booking
+Reporting
+See the diary, and what it is costing
+Set a date range and every figure below it is bounded by those dates.
+Today and upcoming
+What is booked?
+Every appointment for the day and the week ahead, by executive, with free slots visible so a caller can be answered immediately.
+No-show analysis
+Who is not turning up?
+No-show rate over time and by service, so the pattern behind wasted journeys can be seen and addressed.
+Executive load
+Is the work spread?
+Appointments per executive and booking trends across the week, so one person is not carrying the diary.
+All the features, done right
+Appointment sheet
+Search, filter and page through bookings.
+Customer-linked
+The booking sits on the customer record.
+Service types
+Each with its own duration.
+Time slots
+The working day divided properly.
+Holiday calendar
+Closed days cannot be booked.
+Assignment
+To whoever is free and qualified.
+Reminders
+On booking, a day before, an hour before.
+Rescheduling
+With the reason and the history.
+No-show tracking
+Recorded as an outcome, not a gap.
+Dashboards
+Today, upcoming and no-show rate.
+Role-based access
+Book, reassign or administer.
+Mobile apps
+The diary in the field.
+Before you move your diary across
+The questions teams ask before the first appointment is booked in Neome.
+Who is this for?
+How does it stop double bookings?
+What reminders go out, and when?
+What happens when a customer wants to move an appointment?
+Can different services have different durations?
+How is a no-show recorded?
+Who can reassign an appointment?
+Does it work on a phone?
+What it costs
+One price, and
+Appointment Booking
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Appointment Booking
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+CRM Software for Teams of 10 to 10,000
+CRM for small, midsize, and large teams. Capture leads, assign next steps, convert to opportunities, and track pipeline on one dashboard. WhatsApp, chat, Excel, and web. Standard trial or Enterprise demo.
+Learn more
+Lead Management Software for SMEs
+Capture leads from every channel, score them against your own rules, chase them with dated reminders, and see which sources actually convert.
+Learn more
+Field Visit & Sales Tracking App
+Plan visits by territory, confirm them with a location-verified check-in, record the outcome on the spot, and see coverage against plan the same day.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

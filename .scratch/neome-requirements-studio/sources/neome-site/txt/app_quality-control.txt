@@ -1,0 +1,297 @@
+Home
+Apps
+Quality Control
+Quality Control
+An Inspection Is Only Worth the Tolerance Behind It
+Parameters with written ranges, inspections raised against the goods receipt or the work order that caused them, rejections classified so they add up, and a supplier quality record you can open before the next order.
+Start Free Trial
+Book A Free Demo
+Written tolerances
+Tied to the batch
+Patterns, not incidents
+GRN-2208
+Deccan Polymers Pvt Ltd
+Failed
+Checked against tolerance
+Moisture
+0.21%
+max 0.3%
+Melt index
+7.4
+6 to 9
+Contamination
+present
+nil
+Inspected by
+Kavita Sharma
+Batch held
+It cannot be issued to production until
+Neha
+decides.
+Deccan Polymers Pvt Ltd
+3 rejections
+In the last 12 deliveries
+Scrap this month
+₹18,400
+GRN-2208
+Keystone Polymers Inc.
+Failed
+Checked against tolerance
+Moisture
+0.21%
+max 0.3%
+Melt index
+7.4
+6 to 9
+Contamination
+present
+nil
+Inspected by
+Dana Ruiz
+Batch held
+It cannot be issued to production until
+Levi
+decides.
+Keystone Polymers Inc.
+3 rejections
+In the last 12 deliveries
+Scrap this month
+$2,200
+One standard
+The same range applies on every shift.
+Always on a batch
+Results attach to the receipt or the run.
+Defects that count
+Classified, so the pattern surfaces.
+Supplier record
+Rejection rate ready before you reorder.
+Quality fails quietly, in three ordinary ways
+None of them is about how carefully people inspect. They are all about what the inspection is written against and what happens to it afterwards.
+Unwritten
+The standard lives in one inspector's head
+Without a tolerance recorded against the parameter, two people on two shifts pass two different batches and both are certain they were right.
+Detached
+Inspections that float free of the batch
+A check filed separately from the goods receipt or the work order cannot answer what a specific batch was inspected against.
+Unaggregated
+Every rejection is treated as a one-off
+Rejections logged as incidents never become a pattern, so the supplier and the line that cause most of them stay invisible.
+Neome fixes all three by recording the tolerance, attaching the result to the batch, and classifying the defect.
+Checklists
+Tolerances written down, not remembered
+Inspection parameters are configured per item with the tolerance range that decides a pass. That turns the check from a judgement into a measurement, and makes the same standard apply on the night shift and at the second plant.
+Item-wise parameters
+Defined tolerance ranges
+Same standard everywhere
+Inspection parameters
+HDPE Granules 25 kg
+Incoming
+Moisture content
+max 0.3%
+Melt flow index
+6 to 9
+Contamination
+nil
+Bag weight
+±0.5%
+A tolerance written down is the difference between an inspection and an opinion.
+Inspection parameters
+HDPE Pellets 55 lb
+Incoming
+Moisture content
+max 0.3%
+Melt flow index
+6 to 9
+Contamination
+nil
+Bag weight
+±0.5%
+A tolerance written down is the difference between an inspection and an opinion.
+Inspections
+Attached to the receipt or the run that caused it
+Inspections are raised against a goods receipt or against production, so a result always belongs to a specific batch. Pass and fail are recorded with the inspector's name and their remarks, which is what makes a result defensible six months later when a customer asks.
+GRN and production-linked
+Pass and fail tracked
+Inspector accountability
+GRN-2208
+Deccan Polymers Pvt Ltd
+Failed
+Checked against tolerance
+Moisture
+0.21%
+max 0.3%
+Melt index
+7.4
+6 to 9
+Contamination
+present
+nil
+Inspected by
+Kavita Sharma
+Batch held
+It cannot be issued to production until
+Neha
+decides.
+Deccan Polymers Pvt Ltd
+3 rejections
+In the last 12 deliveries
+Scrap this month
+₹18,400
+GRN-2208
+Keystone Polymers Inc.
+Failed
+Checked against tolerance
+Moisture
+0.21%
+max 0.3%
+Melt index
+7.4
+6 to 9
+Contamination
+present
+nil
+Inspected by
+Dana Ruiz
+Batch held
+It cannot be issued to production until
+Levi
+decides.
+Keystone Polymers Inc.
+3 rejections
+In the last 12 deliveries
+Scrap this month
+$2,200
+Rejections
+A defect classification, not a note in a book
+Rejections are logged against the batch with a defect class and a quantity, and routed for a decision between return and rework. Classifying at the point of rejection is what allows the aggregate to mean something, rather than producing a pile of free text nobody can count.
+Defect classification
+Return or rework decision
+Root-cause visibility
+Rejection
+40 bags
+Contamination found
+Photographed at inspection ·
+Kavita Sharma
+Decision
+Waiting on
+Neha
+Options
+Return or rework
+The claim against
+Deccan Polymers Pvt Ltd
+is raised from this record, not reconstructed later.
+Rejection
+40 bags
+Contamination found
+Photographed at inspection ·
+Dana Ruiz
+Decision
+Waiting on
+Levi
+Options
+Return or rework
+The claim against
+Keystone Polymers Inc.
+is raised from this record, not reconstructed later.
+Supplier quality
+The rejection rate that should drive the next order
+Because inspections are tied to receipts, a supplier's rejection rate is a by-product rather than a project. The number is worth having at the moment the next purchase order is placed, which is the only point where it can change anything.
+Rejection rate per supplier
+Built from receipts
+Ready at the next order
+Rejection rate by supplier
+Quarter
+Deccan Polymers Pvt Ltd
+8.4%
+Second supplier
+2.1%
+Third supplier
+0.9%
+Worth something at the next purchase order, which is the only place it can change anything.
+Rejection rate by supplier
+Quarter
+Keystone Polymers Inc.
+8.4%
+Second supplier
+2.1%
+Third supplier
+0.9%
+Worth something at the next purchase order, which is the only place it can change anything.
+Reporting
+Three numbers a quality review actually needs
+Set a date range and every figure below it is bounded by those dates.
+Rejection rate
+How much are we losing?
+Rejected against inspected, broken down by item, by line and by period, so a rise is visible before it is a quarter's worth.
+Supplier quality
+Who keeps sending trouble?
+Rejection rate per supplier across deliveries, with the defects behind it, which is the record to have open in a price negotiation.
+Defect trend
+Is it getting better?
+Defect classes over time, so an improvement can be attributed to something rather than hoped for.
+All the features, done right
+QC checklists
+Configured per item.
+Tolerance ranges
+Written down, not recalled.
+Incoming inspection
+Raised on the goods receipt.
+In-process checks
+Against the work order.
+Pass and fail
+Recorded per parameter.
+Inspector on record
+Every result is attributable.
+Remarks and photos
+Evidence with the result.
+Defect classes
+So rejections can be counted.
+Return or rework
+A decision, not a pile.
+Threshold alerts
+Raised when rejection climbs.
+QC before dispatch
+Made mandatory where it matters.
+Mobile apps
+Inspect at the bay, not at a desk.
+Before you replace the inspection register
+The questions quality and purchase teams ask before the first check is recorded in Neome.
+Who is this for?
+Why insist on tolerance ranges?
+Where do inspections attach?
+What happens when a batch fails?
+Can QC be made mandatory before dispatch?
+How does this help with supplier negotiation?
+Does it connect to purchasing and production?
+Can inspectors work on a phone?
+What it costs
+One price, and
+Quality Control
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Quality Control
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Manufacturing Software for Small Business
+Version-controlled bills of materials, work orders planned against real capacity, material deducted as output is recorded, and variance raised during the run.
+Learn more
+Machine & Tool Maintenance Software
+Trigger maintenance by calendar or running hours, record breakdowns with a root cause, consume spares against the job, and see what each machine really costs.
+Learn more
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

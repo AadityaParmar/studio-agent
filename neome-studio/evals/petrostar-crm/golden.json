@@ -1,0 +1,408 @@
+{
+  "case": "petrostar-crm",
+  "enterprise": {
+    "id": "falcon-ridge",
+    "name": "Falcon Ridge Trading"
+  },
+  "engagement": {
+    "slug": "quote-to-cash-crm",
+    "title": "Quote-to-cash CRM"
+  },
+  "score": [
+    "modules",
+    "mapping"
+  ],
+  "modules": [
+    {
+      "prefix": "CUST",
+      "name": "Customer Master",
+      "mapping": {
+        "neomeApp": "crm",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "CUST-01",
+          "title": "Customer Master",
+          "statement": "Customer records with name, industry, location, contacts grouped by department, and approved vendor status per operator.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "PRIN",
+      "name": "Supplier / Principal Master",
+      "mapping": {
+        "neomeApp": "purchase-management",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "PRIN-01",
+          "title": "Supplier / Principal Master",
+          "statement": "Principal records with manufacturer, contact, approved makes, lead time, pricing (restricted) and certifications.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "APRV",
+      "name": "End-User Product Approval",
+      "mapping": {
+        "neomeApp": "approval-workflows",
+        "delivery": "custom"
+      },
+      "requirements": [
+        {
+          "id": "APRV-01",
+          "title": "End-User Product Approval",
+          "statement": "Track each product's approval per operator: agreement signing, document submission, audit, until approved or rejected.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "OPP",
+      "name": "Opportunity / Project",
+      "mapping": {
+        "neomeApp": "crm",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "OPP-01",
+          "title": "Opportunity / Project",
+          "statement": "Opportunities carry tender stage, probability, competitors and expected value.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "RFQ",
+      "name": "Enquiry / RFQ",
+      "mapping": {
+        "neomeApp": "product-catalog",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "RFQ-01",
+          "title": "Enquiry / RFQ",
+          "statement": "RFQs carry RFQ number, date, customer, project, items, quantities and deadline.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "QUO",
+      "name": "Quotation",
+      "mapping": {
+        "neomeApp": "quotation-and-order-flow",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "QUO-01",
+          "title": "Quotation",
+          "statement": "Quotations carry number, principal cost, selling price, margin, validity, Incoterms and delivery terms.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "FUP",
+      "name": "Offer Follow-Ups",
+      "mapping": {
+        "neomeApp": "ticketing-and-task-management",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "FUP-01",
+          "title": "Offer Follow-Ups",
+          "statement": "Every quotation is tracked from submission to PO, with follow-ups.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "TQ",
+      "name": "Technical Clarifications",
+      "mapping": {
+        "neomeApp": "ticketing-and-task-management",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "TQ-01",
+          "title": "Technical Clarifications",
+          "statement": "Technical queries are tracked with customer comments, TQ status, drawings, datasheets and approvals.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "NEG",
+      "name": "Commercial Negotiation",
+      "mapping": {
+        "neomeApp": "quotation-and-order-flow",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "NEG-01",
+          "title": "Commercial Negotiation",
+          "statement": "Initial, revised, discount and target prices are recorded with their history.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "PROF",
+      "name": "Profit Optimization",
+      "mapping": {
+        "neomeApp": "crm",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "PROF-01",
+          "title": "Profit Optimization",
+          "statement": "Historical cost and price data can be reviewed to optimise margin.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "PO",
+      "name": "PO Management",
+      "mapping": {
+        "neomeApp": "quotation-and-order-flow",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "PO-01",
+          "title": "PO Management",
+          "statement": "Customer POs carry PO number, value, delivery date, payment terms and status, checked against the quotation.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "COMM",
+      "name": "Commission Management",
+      "mapping": {
+        "neomeApp": "quotation-and-order-flow",
+        "delivery": "custom"
+      },
+      "requirements": [
+        {
+          "id": "COMM-01",
+          "title": "Commission Management",
+          "statement": "Commission orders (buyer orders direct from the principal, about 3% commission) are tracked with progress, commission invoicing and payment realisation, separate from own-account orders.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "DOC",
+      "name": "Post-Order Document Approval",
+      "mapping": {
+        "neomeApp": "approval-workflows",
+        "delivery": "custom"
+      },
+      "requirements": [
+        {
+          "id": "DOC-01",
+          "title": "Post-Order Document Approval",
+          "statement": "Post-order documents (ITP, GAD, MTC, WPS/PQR, inspection, deviations) are tracked to client approval before goods move.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "DEL",
+      "name": "Delivery Tracking",
+      "mapping": {
+        "neomeApp": "quotation-and-order-flow",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "DEL-01",
+          "title": "Delivery Tracking",
+          "statement": "Delivery is tracked through production, inspection, RFI, shipping, customs and delivery to site.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "RCV",
+      "name": "Receivables",
+      "mapping": {
+        "neomeApp": "quotation-and-order-flow",
+        "delivery": "configuration"
+      },
+      "requirements": [
+        {
+          "id": "RCV-01",
+          "title": "Receivables",
+          "statement": "Invoices are tracked with due date, payment status and outstanding amount; the principal is paid back to back.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "AFS",
+      "name": "After-Sales",
+      "mapping": {
+        "neomeApp": "amc-and-service-management",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "AFS-01",
+          "title": "After-Sales",
+          "statement": "Complaints, warranty, replacements and customer feedback are tracked.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "RPT",
+      "name": "Reports / Dashboards",
+      "mapping": {
+        "neomeApp": "crm",
+        "delivery": "standard"
+      },
+      "requirements": [
+        {
+          "id": "RPT-01",
+          "title": "Reports / Dashboards",
+          "statement": "Reports on pipeline, won/lost RFQs, margins, pending deliveries and receivables, with notifications.",
+          "priority": "Must",
+          "sources": [
+            "rfp-crm-system-implementation.md"
+          ]
+        }
+      ]
+    }
+  ],
+  "general": {
+    "requirements": [
+      {
+        "id": "GEN-01",
+        "topic": "access",
+        "title": "Role and field-level access",
+        "statement": "Role-based access with field-level permissions; cost, margin, commission and principal pricing visible only to named users.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      },
+      {
+        "id": "GEN-02",
+        "topic": "access",
+        "title": "Two-factor authentication",
+        "statement": "Two-factor login.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      },
+      {
+        "id": "GEN-03",
+        "topic": "access",
+        "title": "Audit trail",
+        "statement": "Changes to sensitive records (pricing, margins, deal values, contact details) are logged.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      },
+      {
+        "id": "GEN-04",
+        "topic": "access",
+        "title": "Export controls",
+        "statement": "Bulk export and download restricted.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      },
+      {
+        "id": "GEN-05",
+        "topic": "migration",
+        "title": "Data migration",
+        "statement": "Existing customer, supplier and historical tender and order records are migrated.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      },
+      {
+        "id": "GEN-06",
+        "topic": "training",
+        "title": "Training",
+        "statement": "Training for users and administrators.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      },
+      {
+        "id": "GEN-07",
+        "topic": "support",
+        "title": "Support",
+        "statement": "Support after go-live, with response times.",
+        "sources": [
+          "rfp-crm-system-implementation.md"
+        ]
+      }
+    ]
+  },
+  "openItems": []
+}

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "neome-studio/evals/golden.schema.json",
+  "title": "Eval case golden file (BRD data file shape where possible)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case", "enterprise", "engagement", "modules", "general", "openItems"],
+  "properties": {
+    "case": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "enterprise": {
+      "type": "object", "additionalProperties": false, "required": ["id", "name"],
+      "properties": { "id": { "$ref": "#/$defs/kebab" }, "name": { "type": "string", "minLength": 1 } }
+    },
+    "engagement": {
+      "type": "object", "additionalProperties": false, "required": ["slug", "title"],
+      "properties": { "slug": { "$ref": "#/$defs/kebab" }, "title": { "type": "string", "minLength": 1 } }
+    },
+    "modules": { "type": "array", "items": { "$ref": "#/$defs/module" } },
+    "general": {
+      "type": "object", "additionalProperties": false, "required": ["requirements"],
+      "properties": { "requirements": { "type": "array", "items": { "$ref": "#/$defs/genRequirement" } } }
+    },
+    "openItems": { "type": "array", "items": { "$ref": "#/$defs/openItem" } },
+    "score": {
+      "description": "Soft metrics this case scores; the rest show n/a. Absent = all.",
+      "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["recall", "openItems", "modules", "mapping"] }
+    },
+    "glossary": { "type": "array", "items": { "$ref": "#/$defs/term" } },
+    "mechanics": { "type": "array", "items": { "$ref": "#/$defs/mechanic" } }
+  },
+  "$defs": {
+    "kebab": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "sources": {
+      "description": "Case Input file names (inputs/…) or answer-key fact IDs (K-NN) the golden item comes from",
+      "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }
+    },
+    "module": {
+      "type": "object", "additionalProperties": false, "required": ["prefix", "name", "requirements"],
+      "properties": {
+        "prefix": { "type": "string", "pattern": "^[A-Z]{2,5}$" },
+        "name": { "type": "string", "minLength": 1 },
+        "mapping": {
+          "type": "object", "additionalProperties": false, "required": ["neomeApp", "delivery"],
+          "properties": {
+            "neomeApp": { "type": ["string", "null"] },
+            "delivery": { "enum": ["standard", "configuration", "custom"] }
+          }
+        },
+        "requirements": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/requirement" } }
+      }
+    },
+    "requirement": {
+      "type": "object", "additionalProperties": false, "required": ["id", "title", "statement", "sources"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z]{2,5}-\\d{2,3}$" },
+        "title": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string", "minLength": 1 },
+        "priority": { "enum": ["Must", "Should", "Could", "Won't", "TBC"] },
+        "sources": { "$ref": "#/$defs/sources" }
+      }
+    },
+    "genRequirement": {
+      "type": "object", "additionalProperties": false, "required": ["id", "topic", "title", "statement", "sources"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^GEN-\\d{2,3}$" },
+        "topic": { "enum": ["access", "localisation", "hosting", "migration", "training", "support", "other"] },
+        "title": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string", "minLength": 1 },
+        "priority": { "enum": ["Must", "Should", "Could", "Won't", "TBC"] },
+        "sources": { "$ref": "#/$defs/sources" }
+      }
+    },
+    "openItem": {
+      "type": "object", "additionalProperties": false, "required": ["id", "question", "modules"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^OI-\\d{2,3}$" },
+        "question": { "type": "string", "minLength": 1 },
+        "modules": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^([A-Z]{2,5}|All)$" } },
+        "answeredBy": { "description": "How the golden expects it to end: an answer-key fact (closed) or unknown (stays open)", "type": "string" }
+      }
+    },
+    "term": {
+      "type": "object", "additionalProperties": false, "required": ["term", "definition"],
+      "properties": { "term": { "type": "string", "minLength": 1 }, "definition": { "type": "string", "minLength": 1 } }
+    },
+    "mechanic": {
+      "description": "Deterministic check on the replay's end state (tiny-synthetic flow mechanics). Paths are relative to the Engagement folder.",
+      "type": "object",
+      "required": ["id", "what", "type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/kebab" },
+        "what": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["file", "text", "oi", "gen", "version", "changes", "modules", "git"] }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "const": "file" } } }, "then": {
+          "required": ["path"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "path": { "type": "string" }, "min": { "type": "integer", "minimum": 1 } } } },
+        { "if": { "properties": { "type": { "const": "text" } } }, "then": {
+          "required": ["path", "pattern"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "path": { "type": "string" }, "pattern": { "type": "string" } } } },
+        { "if": { "properties": { "type": { "const": "oi" } } }, "then": {
+          "required": ["where"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "min": { "type": "integer", "minimum": 1 },
+            "where": { "type": "object", "additionalProperties": false, "minProperties": 1, "properties": {
+              "status": { "enum": ["open", "closed"] },
+              "questionIncludes": { "type": "string" },
+              "answerSourcePrefix": { "type": "string", "pattern": "^[A-Z]{2,4}$" },
+              "raisedInPrefix": { "type": "string", "pattern": "^[A-Z]{2,4}$" } } } } } },
+        { "if": { "properties": { "type": { "const": "gen" } } }, "then": {
+          "required": ["min"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "min": { "type": "integer", "minimum": 1 } } } },
+        { "if": { "properties": { "type": { "const": "version" } } }, "then": {
+          "required": ["version", "status"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "version": { "type": "integer", "minimum": 1 },
+            "status": { "enum": ["draft-for-review", "signed-off"] } } } },
+        { "if": { "properties": { "type": { "const": "changes" } } }, "then": {
+          "required": ["version", "group"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "version": { "type": "integer", "minimum": 1 },
+            "group": { "enum": ["modules", "requirements", "openItems", "plan", "glossary"] },
+            "kind": { "type": "string" }, "min": { "type": "integer", "minimum": 1 } } } },
+        { "if": { "properties": { "type": { "const": "modules" } } }, "then": {
+          "required": ["status"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "status": { "enum": ["open", "claimed", "resolved", "needs-revisit"] } } } },
+        { "if": { "properties": { "type": { "const": "git" } } }, "then": {
+          "required": ["pattern"], "additionalProperties": false,
+          "properties": { "id": true, "what": true, "type": true, "pattern": { "type": "string" }, "min": { "type": "integer", "minimum": 1 } } } }
+      ]
+    }
+  }
+}

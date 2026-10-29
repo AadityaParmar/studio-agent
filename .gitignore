@@ -1,0 +1,9 @@
+# Confidential Inputs never reach git
+enterprises/*/confidential/
+node_modules/
+
+# Not part of the shared repo
+skills-main/
+example/
+.idea/
+.DS_Store

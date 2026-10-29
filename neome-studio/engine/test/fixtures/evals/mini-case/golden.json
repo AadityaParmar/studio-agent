@@ -1,0 +1,42 @@
+{
+  "case": "mini-case",
+  "enterprise": { "id": "harbor-tiles", "name": "Harbor Tiles" },
+  "engagement": { "slug": "crm", "title": "Sales CRM" },
+  "modules": [
+    {
+      "prefix": "ENQ", "name": "Enquiries",
+      "mapping": { "neomeApp": "crm", "delivery": "standard" },
+      "requirements": [
+        { "id": "ENQ-01", "title": "Log an enquiry", "statement": "Log every enquiry.", "sources": ["note.md"] },
+        { "id": "ENQ-02", "title": "Follow-up reminder", "statement": "Remind after 5 days.", "sources": ["note.md"] }
+      ]
+    },
+    {
+      "prefix": "QUO", "name": "Quotations",
+      "mapping": { "neomeApp": "quotation-and-order-flow", "delivery": "configuration" },
+      "requirements": [
+        { "id": "QUO-01", "title": "Make a quotation", "statement": "Make and send a quotation.", "sources": ["note.md"] },
+        { "id": "QUO-02", "title": "Discount approval", "statement": "Approve big discounts.", "sources": ["note.md"] },
+        { "id": "QUO-09", "title": "Not in the replay", "statement": "Something the replay never wrote.", "sources": ["K-02"] }
+      ]
+    }
+  ],
+  "general": {
+    "requirements": [
+      { "id": "GEN-01", "topic": "access", "title": "Roles", "statement": "Who sees what.", "sources": ["note.md"] }
+    ]
+  },
+  "openItems": [
+    { "id": "OI-01", "question": "Usual discount?", "modules": ["QUO"] },
+    { "id": "OI-03", "question": "Tally link?", "modules": ["QUO"] },
+    { "id": "OI-99", "question": "Never asked.", "modules": ["All"] }
+  ],
+  "mechanics": [
+    { "id": "qn", "what": "Questionnaire master", "type": "file", "path": "_agent/questionnaires/QN-*.md" },
+    { "id": "qa-closed", "what": "Reply closed an OI", "type": "oi", "where": { "status": "closed", "answerSourcePrefix": "QA" } },
+    { "id": "raised", "what": "Reply raised an OI", "type": "oi", "where": { "raisedInPrefix": "QA" } },
+    { "id": "gen", "what": "GEN Requirements", "type": "gen", "min": 5 },
+    { "id": "claim", "what": "Ben's claim pushed", "type": "git", "pattern": "^resolve-module: harbor-tiles/crm claim ENQ$" },
+    { "id": "v1", "what": "v1 released", "type": "version", "version": 1, "status": "draft-for-review" }
+  ]
+}

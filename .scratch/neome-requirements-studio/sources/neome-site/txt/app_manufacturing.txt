@@ -1,0 +1,311 @@
+Home
+Apps
+Manufacturing
+Manufacturing
+Find the Variance While the Line Is Still Running
+Bills of materials with versions you can go back to, work orders planned against real work centre capacity, and material that leaves stock as output is recorded rather than at a month-end reconciliation.
+Start Free Trial
+Book A Free Demo
+Versioned BOMs
+Stock in step
+Capacity planning
+WO-2290
+Moulded crate 40 L
+In progress
+Planned
+800
+Produced
+612
+Rejected
+9
+Moulding line 2
+· supervised by
+Vikram
+Material deducted
+HDPE Granules 25 kg
+came off stock as output was recorded, not at month end.
+Variance against
+BOM-118
++2.4%
+More consumed than the BOM allows
+Line utilisation
+84%
+WO-2290
+Molded crate 40 L
+In progress
+Planned
+800
+Produced
+612
+Rejected
+9
+Molding line 2
+· supervised by
+Jay
+Material deducted
+HDPE Pellets 55 lb
+came off stock as output was recorded, not at month end.
+Variance against
+BOM-118
++2.4%
+More consumed than the BOM allows
+Line utilisation
+84%
+Explain any batch
+Old BOM versions stay, so history is answerable.
+Ledger and floor agree
+Material comes off as output goes on.
+Variance while it matters
+Raised during the run, not after it.
+The real bottleneck
+Utilisation per work centre, not per assumption.
+The floor knows what happened. The office finds out on Friday.
+Three gaps account for most of what a production record gets wrong, and none of them is a manufacturing problem.
+Unversioned
+Which recipe did that batch use?
+A bill of materials edited in place cannot explain a batch made before the change, which is exactly when you need it.
+Unreconciled
+Stock and the floor disagree
+Material is consumed on the line and deducted from the ledger days later, so neither figure is trustworthy.
+Unplanned
+Everything is scheduled onto one line
+Without capacity per work centre, orders are planned against optimism and the bottleneck is found in the queue.
+Neome closes all three by versioning the recipe, deducting as you produce, and planning against real capacity.
+Bills of materials
+A recipe with a version, not a file that got edited
+Each product carries a version-controlled bill of materials with component-level quantities, and one version is active at a time. Keeping the earlier versions is what lets a batch produced six months ago be explained, which matters for a customer complaint and for any regulated process.
+Version-controlled BOM
+One active version
+Component-level quantities
+BOM-118
+Moulded crate 40 L
+v4 active
+Per unit
+HDPE Granules 25 kg
+1.8 kg
+Masterbatch
+0.04 kg
+Label set
+1
+Versions 2 and 3 kept, so a batch made last year can still be explained.
+BOM-118
+Molded crate 40 L
+v4 active
+Per unit
+HDPE Pellets 55 lb
+1.8 kg
+Masterbatch
+0.04 kg
+Label set
+1
+Versions 2 and 3 kept, so a batch made last year can still be explained.
+Work orders and capacity
+Planned against the capacity you actually have
+A work order names the product, the quantity and the schedule, and moves through stages the whole plant can see. Output and rejections are recorded as they happen on the floor, so progress at three in the afternoon is a number rather than a walk down the line to look. Because work centres carry their real capacity, the schedule is checked against what the plant can do rather than against what would be convenient, which is what lets you see a bottleneck before the queue forms in front of it.
+Product-based planning
+Output recorded on the floor
+Capacity-based scheduling
+WO-2290
+Moulded crate 40 L
+In progress
+Planned
+800
+Produced
+612
+Rejected
+9
+Moulding line 2
+· supervised by
+Vikram
+Material deducted
+HDPE Granules 25 kg
+came off stock as output was recorded, not at month end.
+Variance against
+BOM-118
++2.4%
+More consumed than the BOM allows
+Line utilisation
+84%
+WO-2290
+Molded crate 40 L
+In progress
+Planned
+800
+Produced
+612
+Rejected
+9
+Molding line 2
+· supervised by
+Jay
+Material deducted
+HDPE Pellets 55 lb
+came off stock as output was recorded, not at month end.
+Variance against
+BOM-118
++2.4%
+More consumed than the BOM allows
+Line utilisation
+84%
+Material
+Stock comes down as output goes up
+Material is deducted against the work order automatically as production is recorded, so the ledger and the floor stop disagreeing. Consumption is compared to what the bill of materials expected, and the variance is raised while the run is still on rather than at a month-end reconciliation.
+Automatic deduction
+Variance against BOM
+Raised during the run
+Consumption
+WO-2290
+BOM expected
+1,102 kg
+Actually issued
+1,128 kg
+Variance
++26 kg
+Raised with
+Vikram
+now, while the run can still be looked at.
+Stock comes down as output goes up, so the ledger is never a separate exercise.
+Consumption
+WO-2290
+BOM expected
+1,102 kg
+Actually issued
+1,128 kg
+Variance
++26 kg
+Raised with
+Jay
+now, while the run can still be looked at.
+Stock comes down as output goes up, so the ledger is never a separate exercise.
+Quality
+Rejections belong to the run that produced them
+Output and rejection are recorded together, so a quality problem is attached to the work order, the line and the shift rather than discovered as a total. Inspections carry through to the same record, which is what makes a pattern in one line or one material visible at all.
+Rejection on the work order
+Linked to line and shift
+Inspection on the same record
+GRN-2208
+Deccan Polymers Pvt Ltd
+Failed
+Checked against tolerance
+Moisture
+0.21%
+max 0.3%
+Melt index
+7.4
+6 to 9
+Contamination
+present
+nil
+Inspected by
+Kavita Sharma
+Batch held
+It cannot be issued to production until
+Neha
+decides.
+Deccan Polymers Pvt Ltd
+3 rejections
+In the last 12 deliveries
+Scrap this month
+₹18,400
+GRN-2208
+Keystone Polymers Inc.
+Failed
+Checked against tolerance
+Moisture
+0.21%
+max 0.3%
+Melt index
+7.4
+6 to 9
+Contamination
+present
+nil
+Inspected by
+Dana Ruiz
+Batch held
+It cannot be issued to production until
+Levi
+decides.
+Keystone Polymers Inc.
+3 rejections
+In the last 12 deliveries
+Scrap this month
+$2,200
+Reporting
+What the plant made, and what is still on the floor
+Set a date range and every figure below it is bounded by those dates.
+Production output
+What did we actually make?
+Quantity produced against quantity planned, by product and by line, taken from what the floor recorded rather than from a figure assembled afterwards.
+Work in progress
+What is still on the floor?
+Open work orders with the material already issued against them, which is the number that explains why the stock ledger and the shelf do not agree.
+Machine utilisation
+Where is the bottleneck?
+Utilisation per work centre against its configured capacity, which is usually not where people assume it is until they see it.
+All the features, done right
+BOM versions
+Controlled, with history kept.
+Component quantities
+Per unit, on the BOM.
+Work orders
+Product, quantity, schedule.
+Output tracking
+Recorded on the floor as it happens.
+Rejection capture
+Against the run that caused it.
+Auto deduction
+Stock falls as output rises.
+Material variance
+Actual against what the BOM allows.
+Work centres
+Configured with real capacity.
+Utilisation
+Where the bottleneck actually is.
+Delay alerts
+Overdue work orders surfaced.
+Auto-close
+Completed orders close themselves.
+Mobile apps
+Record output at the machine.
+Before you move production across
+The questions plant managers ask before the first work order is raised in Neome.
+Who is this for?
+Why version the bill of materials?
+How does material get deducted?
+What does material variance tell you?
+How are work centres used in planning?
+How does this connect to inventory and purchasing?
+Where does quality control fit?
+Can output be recorded at the machine?
+What it costs
+One price, and
+Manufacturing
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Manufacturing
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Quality Control Software for Manufacturers
+Inspection parameters with written tolerances, checks tied to the receipt or work order that caused them, and a real supplier quality record.
+Learn more
+Machine & Tool Maintenance Software
+Trigger maintenance by calendar or running hours, record breakdowns with a root cause, consume spares against the job, and see what each machine really costs.
+Learn more
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

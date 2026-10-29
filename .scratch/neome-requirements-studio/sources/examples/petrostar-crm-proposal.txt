@@ -1,0 +1,537 @@
+Neome Response to RFP · Confidential
+Neome
+C R M  S Y S T E M  I M P L E M E N T A T I O N
+Quote-to-cash on Neome, for
+Petro Star Corporation.
+Our response to PetroStar's RFP: how Neome covers every module your
+team specified, how we protect your commercial data, and how we will
+implement it.
+PREPARED FOR Petro Star Corporation LLC, Muscat, Sultanate of Oman
+ATTENTION Sriram, Finance Manager and Project Coordinator
+PREPARED BY Neomenta Private Limited
+DATE October 2026
+NEOME · NEOME.AI 01
+Neome Executive summary
+E X E C U T I V E  S U M M A R Y
+Every module covered on one platform, with no
+third-party add-ons.
+PetroStar runs a back-to-back trading model from manufacturer approval to after-
+sales, today on informal tools. Neome brings that whole chain into one system, built
+around how your team already works.
+17
+RFP modules mapped to
+Neome
+14
+Delivered as standard or
+by configuration
+3
+Custom modules built on
+the Neome platform
+0
+Third-party add-ons
+needed
+W H A T  W E  U N D E R S T O O D
+W H Y  N E O M E  F I T S
+One flow, not ten tools
+CRM, enquiries, quotations, orders, approvals, tasks
+and service run on one platform with 25+ modules.
+Built to your process
+Custom modules, fields and screens cover the
+operator approvals and commission orders that
+generic CRMs miss.
+Chat-first and mobile
+Your team can update records and get answers in
+plain language across web, mobile, email and
+WhatsApp.
+Locked-down commercials
+Field-level permissions, two-factor login, audit logs
+and export controls protect pricing and margins.
+NEOME · CRM PROPOSAL FOR PETROSTAR 02
+Approvals come first. A product only reaches a tender once each operator (PDO, OQ, Oxy, BP, Shell and others)
+has approved it, and each operator runs its own process.
+Two order types. Own-account orders run through your books. Commission orders go buyer to principal, and
+PetroStar earns a pre-agreed commission of around 3%.
+Documents decide delivery. ITP, GAD, MTC, WPS/PQR and inspection records must close before goods move.
+Margins are sensitive. Cost, margin, commission and principal pricing must stay with a named few.
+SAP stays the system of record for orders and finance. The CRM runs alongside it, with no live integration needed
+now.
+Neome Your process on Neome
+Y O U R  P R O C E S S  O N  N E O M E
+From manufacturer approval to after-sales, in
+one record.
+This is the quote-to-cash flow from Section 4 of your RFP, with the Neome module that
+runs each step.
+B E F O R E  A N Y  T E N D E R :  P R O D U C T  A P P R O V A L ,  T R A C K E D  P E R  O P E R A T O R
+Candidate product and manufacturer to Principal agreement signed to Documents submitted to operator to
+Audit or due diligence to Approved or rejected to Added to operator's approved makes
+Neome custom module: Product Approval Tracker, with the agreement and submitted documents stored on each record
+O W N - A C C O U N T  O R D E R S
+C O M M I S S I O N  O R D E R S :  B U Y E R  O R D E R S  D I R E C T L Y  F R O M  T H E  P R I N C I P A L
+Opportunity, RFQ and quote to Buyer orders from the principal to Order progress tracked to
+Commission invoiced (about 3%) to Payment realised
+Neome custom module: Commission Orders, kept commercially separate from own-account orders and outside your
+order book totals
+Automatic follow-ups
+Reminders on quote validity, RFQ
+deadlines, open TQs and
+overdue invoices.
+Notifications where you
+work
+Alerts by email and WhatsApp as
+well as in the app.
+Works in the field
+The mobile app works offline and
+syncs when you are back online.
+NEOME · CRM PROPOSAL FOR PETROSTAR 03
+01
+Opportunity
+Tender stage,
+probability,
+competitors, expected
+value.
+CRM pipeline
+02
+Enquiry (RFQ)
+RFQ number,
+customer, project,
+items, quantities,
+deadline.
+Inquiry
+03
+Quotation
+Principal cost, selling
+price, margin, validity,
+Incoterms.
+Quotation flow
+04
+Clarify and
+negotiate
+TQs, drawings and
+datasheets. Price
+revisions and history.
+Tasks, approvals
+05
+Customer PO
+Logged and checked
+against the quotation
+submitted.
+Order flow
+06
+Principal PO
+Raised on the
+principal. Production
+and shipment
+followed up.
+Purchase
+07
+Post-order
+documents
+ITP, GAD, MTC,
+WPS/PQR, inspection,
+client approval.
+Custom module
+08
+Delivery
+Inspection, RFI,
+shipping, customs,
+site delivery note.
+Order stages
+09
+Receivables
+Invoice, due date,
+outstanding. Principal
+paid back to back.
+Order stages
+10
+After-sales
+Complaints, warranty,
+replacement,
+feedback.
+Service
+Neome Functional fit · Section 5
+F U N C T I O N A L  F I T  ·  R F P  S E C T I O N  5
+How Neome delivers each module.
+Standard  Neome module, plus field set-up Configuration  Custom fields, layouts, stages and workflows
+Custom module  Built by Neomenta on the Neome platform, no add-on
+MO DUL E YO U R RE Q UI RE M EN T H OW N EOM E DE LIV ERS  IT N EOM E B ASE DE LIV ERY
+Customer
+Master
+Name, industry, location,
+contacts, departments,
+approved vendor status
+Customer accounts with
+contacts grouped by
+department, and approved
+vendor status held per
+operator.
+CRM Standard
+Supplier /
+Principal
+Master
+Manufacturer, contact,
+approved makes, lead time,
+pricing, certifications
+Principal records with
+approved makes, lead times,
+certificates with expiry dates,
+and pricing restricted to
+named users.
+Purchase,
+Product Catalog
+Configuration
+End-User
+Product
+Approval
+Agreement signing,
+document submission,
+audit, tracking until
+approval
+One approval record per
+product and operator, with
+stages from agreement to
+approved or rejected.
+Agreement and submitted
+documents are stored on the
+record, with reminders on
+pending steps.
+Approval
+Workflows
+Custom module
+Opportunity /
+Project
+Tender stage, probability,
+competitors, expected
+value
+Pipeline with tender stages,
+win probability, competitor
+list and expected order
+value.
+CRM, Lead
+Management
+Standard
+Enquiry / RFQ RFQ number, date,
+customer, project, items,
+quantities, deadline
+RFQ records linked to
+customer and opportunity,
+with line items, quantities
+and deadline alerts.
+Product Catalog
+and Inquiry
+Standard
+Quotation Number, cost, selling price,
+margin, validity, Incoterms,
+delivery
+Quotations built from the
+RFQ with principal cost,
+selling price and calculated
+margin. Validity, Incoterms
+and delivery terms are
+included. Cost and margin
+are hidden from
+unauthorised users.
+Quotation and
+Order Flow
+Standard
+NEOME · CRM PROPOSAL FOR PETROSTAR 04
+Neome Functional fit · Section 5
+F U N C T I O N A L  F I T  ·  C O N T I N U E D
+MO DUL E YO U R RE Q UI RE M EN T H OW N EOM E DE LIV ERS  IT N EOM E B ASE DE LIV ERY
+Offer Follow-
+Ups
+Track every quotation from
+submission to PO
+Quote status stages, follow-
+up tasks and automatic
+reminders before validity
+expires.
+Workflow
+Automation,
+Tasks
+Configuration
+Technical
+Clarifications
+Customer comments, TQ
+status, drawings,
+datasheets, approvals
+A TQ log on each RFQ or
+order, with status, comments,
+drawing and datasheet
+attachments, and approval
+steps.
+Ticketing,
+Approval
+Workflows
+Configuration
+Commercial
+Negotiation
+Initial, revised, discount
+and target price, history
+Every price revision is
+recorded against the
+quotation, with discount and
+target price, giving a full
+negotiation history.
+Quotation and
+Order Flow
+Configuration
+Profit
+Optimization
+Review historical cost and
+price data to optimise
+margin
+Margin reports by customer,
+principal, product and
+operator. Your team can also
+ask Neome's AI questions in
+plain language, such as "what
+did we quote for this item last
+year?"
+Dashboards,
+Conversational
+AI
+Configuration
+PO
+Management
+PO number, value, delivery
+date, payment terms, status
+Customer POs logged
+against the winning
+quotation, with variances
+flagged, and the matching
+principal PO linked.
+Quotation and
+Order Flow,
+Purchase
+Standard
+Commission
+Management
+Commission orders,
+progress, commission
+invoicing, payment
+realisation
+A separate order type with
+commission percentage,
+order progress, commission
+invoice and payment
+received. Kept out of own-
+account totals.
+Built on Order
+Flow
+Custom module
+NEOME · CRM PROPOSAL FOR PETROSTAR 05
+Neome Functional fit · Section 5
+F U N C T I O N A L  F I T  ·  C O N T I N U E D
+MO DUL E YO U R RE Q UI RE M EN T H OW N EOM E DE LIV ERS  IT N EOM E B ASE DE LIV ERY
+Post-Order
+Document
+Approval
+ITP, GAD, MTC, WPS/PQR,
+inspection, deviations,
+client approval
+A document checklist per
+order covering each
+document's revision,
+submission date and client
+approval status. Deviations
+are logged, and the order is
+flagged until every document
+is closed.
+Approval
+Workflows
+Custom module
+Delivery
+Tracking
+Production, inspection, RFI,
+shipping, customs, delivery
+to site
+Delivery stages on each
+order, with dates, owners
+and the delivery note
+attached at site.
+Order Flow,
+Workflow
+Automation
+Configuration
+Receivables Invoice, due date, payment
+status, outstanding amount
+Invoice and payment
+tracking per order, with
+overdue alerts and a prompt
+to pay the principal once the
+customer pays. SAP stays
+the financial record.
+Order Flow,
+Dashboards
+Configuration
+After-Sales Complaints, warranty,
+replacement, customer
+feedback
+Service tickets linked to the
+original order and principal,
+with warranty dates,
+replacements and feedback.
+AMC and
+Service,
+Ticketing
+Standard
+Reports /
+Dashboards
+Pipeline, won/lost RFQs,
+margins, pending
+deliveries, receivables,
+notifications
+Real-time dashboards for
+each of these views, with
+automated notifications in
+the app, by email and on
+WhatsApp.
+Real-time
+Dashboards
+Standard
+Named responsibility
+Every record and transaction has an owner and
+assignees, as your RFP requires (Section 4.2, item 13).
+Edition
+We will share the recommended Neome edition for
+about 10 users, with a comparison of editions,
+alongside our commercials.
+NEOME · CRM PROPOSAL FOR PETROSTAR 06
+Neome Security · Section 6
+S E C U R I T Y  A N D  A C C E S S  ·  R F P  S E C T I O N  6
+Your margins stay with
+the people you choose.
+Cost, margin, commission terms and
+principal pricing are visible only to users
+you name. Every change to them is logged.
+SUPPORTED
+Role-based and field-level access
+Roles control which modules and records each user
+sees. Field-level permissions hide cost, margin,
+commission and supplier pricing from everyone
+outside a defined list.
+SUPPORTED
+Two-factor authentication
+Two-factor login for all users.
+SUPPORTED
+Audit trail
+Changes to sensitive records (pricing, margins, deal
+values, contact details) are logged, traceable to the
+user and time.
+SUPPORTED
+Export controls
+Bulk export and download can be restricted to a
+minimal list of users.
+HOSTING
+Data residency
+PetroStar's data is hosted in the United States.
+CERTIFICATIONS
+ISO 27001, SOC 2 Type II, GDPR
+Neome holds ISO 27001 and SOC 2 Type II
+certification and is GDPR compliant.
+BACKUP AND RECOVERY
+Backups and retention
+Backups run every day and are retained for 29 days.
+Neomenta's team carries out backups and any data
+restoration.
+IMPLEMENTATION ACCESS
+No third-party partner
+Neomenta implements directly, so no outside partner
+needs access. Our team works through named
+accounts under the same roles and audit log, and
+PetroStar can remove them at go-live.
+Certifications as published on neome.ai.
+NEOME · CRM PROPOSAL FOR PETROSTAR 07
+Neome Integration and implementation · Sections 7 and 8
+I N T E G R A T I O N  ·  R F P  S E C T I O N  7
+Standalone now, ready for SAP later.
+SAP
+Neome runs standalone at go-live, and SAP stays
+the system of record for orders and finance. When
+you are ready, Neome connects to SAP through
+APIs. We first assess what should flow between the
+two systems (for example customers, orders and
+invoice status), then scope and quote it separately.
+Available today
+Email WhatsApp Slack APIs
+AI agents via MCP
+Others on request
+I M P L E M E N T A T I O N  ·  R F P  S E C T I O N  8
+Delivered directly by Neomenta.
+One Neomenta team, no regional partner. The timeline follows with our commercials.
+01
+Discover
+Workshops with your
+sales, operations and
+finance users to confirm
+stages, fields, roles and
+reports.
+02
+Configure and build
+Masters, modules, the
+three custom modules,
+dashboards, notifications
+and security roles.
+03
+Migrate and test
+Load customers,
+principals and historical
+tenders and orders, then
+run user acceptance
+testing with your team.
+04
+Train and go live
+Role-based training, go-
+live and a period of close
+support.
+Data migration
+We migrate your existing
+customer, supplier and historical
+tender and order records, then
+verify them with you.
+Training
+Separate sessions for users and
+administrators, plus guides and
+our Help Center.
+Support and SLA
+Ongoing support after go-live.
+Response times: critical, same
+business day. High, within 2
+business days. Normal, within 5
+business days. Security issues
+are treated as critical.
+Access reviews and administration
+We recommend reviewing who can see cost, margin and commission data every quarter, and whenever
+someone joins, changes role or leaves. A named PetroStar administrator should own user changes and
+review export and permission activity in the audit log each month.
+NEOME · CRM PROPOSAL FOR PETROSTAR 08
+Neome About Neomenta · Sections 9 and 10
+A B O U T  N E O M E N T A  ·  R F P  S E C T I O N  1 0
+An automation platform
+built for growing
+businesses.
+Neomenta builds Neome, an AI-powered,
+chat-first platform that runs CRM, sales,
+purchase, service, approvals and reporting
+for small and mid-sized enterprises.
+100+
+Paying enterprises
+10,000+
+Workflows run on Neome each day
+25+
+Business modules
+Gulf region
+We already serve customers in the Gulf region. India
+Standard Time is 1.5 hours ahead of Oman, which
+gives a near-complete working-day overlap.
+Relevant experience
+Field sales operations for 260 Brands (FMCG, Zambia)
+and EV rental fleet operations for HCD India, among
+others. Client references are available on request.
+Figures and case studies as published on neome.ai.
+C O M M E R C I A L  P R O P O S A L  ·  R F P  S E C T I O N  9
+Commercials to follow
+We will share our commercial proposal separately. It will include the recommended edition, licensing,
+implementation services and any optional items.
+Next step · A short call to agree next steps neome.ai
+NEOME · CRM PROPOSAL FOR PETROSTAR 09

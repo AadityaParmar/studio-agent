@@ -1,0 +1,110 @@
+Case Studies
+Gallon Water
+gallons.co.in
+ERP & HRMS Transformation
+How Gallon Water automated order tracking, inventory, and collections with Neome ERP
+Gallon Water replaced manual order follow-ups, spreadsheet inventory, and disconnected operations with a fully integrated ERP and HRMS platform.
+Packaged drinking water manufacturing and distribution
+India
+End-to-end
+Order lifecycle tracking
+7-day
+Auto-cancel inactive orders
+Real-time
+Inventory visibility
+1
+Centralized business dashboard
+Company
+Gallon Water manufactures and distributes packaged drinking water across production plants and warehouses. As the business scaled, order fulfillment, inventory, dispatch, payments, and HR needed to operate as one connected system instead of separate manual workflows.
+Visit
+gallons.co.in
+Related modules
+Quotation and Order Flow
+Inventory and Stock Management
+Manufacturing
+Attendance and Leave
+Approval Workflows
+The challenge
+As Gallon Water expanded, orders, production, inventory, dispatches, payments, and employees were managed through manual processes and spreadsheets, which limited visibility and slowed operations.
+No centralized way to see whether an order was pending approval, warehouse-assigned, inventory-allocated, loaded, or dispatched.
+Orders got stuck at process stages with no aging visibility or accountability.
+Operations teams manually followed up across warehouse, dispatch, and sales to move orders forward.
+Old inactive orders stayed open and distorted production planning and inventory allocation.
+Customers with overdue balances could still place new orders, increasing collection risk.
+Inventory across plants and warehouses required manual reconciliation for current, opening, and closing stock.
+Order processing, production, inventory, dispatch, payments, and HR worked as disconnected systems.
+The Neome solution
+Neome delivered a fully integrated ERP and HRMS platform that automated order lifecycle, reminders, credit control, inventory movements, and management visibility.
+Automated order lifecycle
+Orders move automatically from creation through approval, warehouse assignment, inventory allocation, loading, dispatch, and delivery based on actual activity in the system.
+Reminder and escalation engine
+Automated reminders notify responsible teams when orders stay pending beyond defined timelines, preventing bottlenecks.
+Automatic order cancellation
+Orders inactive for more than 7 days are cancelled by business rules so planning and reporting stay accurate.
+Customer credit control
+Outstanding balances are monitored continuously, and overdue customers can be blocked from placing new orders until approval requirements are met.
+Real-time inventory management
+Stock updates from production, material transfers, FG transfers, dispatches, and adjustments give plant-wise and warehouse-wise visibility instantly.
+Centralized business dashboard
+Management views orders, production, inventory, dispatches, payments, and employee activity from one operational dashboard.
+Workflow digitized
+1
+Order created
+2
+Approved
+3
+Warehouse assigned
+4
+Inventory allocated
+5
+Loading completed
+6
+Ready for dispatch
+7
+Dispatched
+8
+Delivered
+Before and after Neome
+Before
+After
+Manual order status chasing across departments
+Automated status updates across the full order lifecycle
+Orders stuck with no escalation
+Timed reminders and escalation for pending orders
+Inactive orders distorting plans
+Auto-cancel for orders inactive beyond 7 days
+Overdue customers still ordering freely
+Credit control with payment-based order blocking
+Manual stock reconciliation across plants
+Real-time plant and warehouse inventory visibility
+Disconnected order, inventory, dispatch, and HR tools
+Single ERP and HRMS source of truth
+Measured outcomes
+Full
+Order visibility
+Complete lifecycle tracking from creation to delivery.
+Faster
+Order-to-dispatch
+Less manual coordination across warehouse and sales teams.
+Higher
+Inventory accuracy
+Automated stock calculations with plant-wise tracking.
+Better
+Collections control
+Automated reminders and credit checks reduced receivable risk.
+Lower
+Operational friction
+Escalations and cancellations reduced stuck and inactive orders.
+One
+Source of truth
+Orders, inventory, production, dispatch, finance, and HR connected.
+Key learnings
+End-to-end order status visibility removes the need for inter-department chase-ups.
+Automated reminders and cancellations keep fulfillment plans current.
+Credit control linked to order placement protects cash flow early.
+Connecting inventory movements to production and dispatch creates trustworthy stock numbers.
+Gallon Water transformed from a manually managed operation into a fully integrated digital ecosystem with real-time control over orders, inventory, production, dispatch, collections, and workforce management.
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

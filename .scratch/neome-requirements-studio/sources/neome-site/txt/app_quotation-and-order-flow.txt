@@ -1,0 +1,327 @@
+Home
+Apps
+Quotation & Order Flow
+Quotation & Order Flow
+Quote in Minutes, and Let the Order Write Itself
+Lines come priced from the catalog, totals and tax calculate themselves, discounts stop at the limit set for each role, and an accepted quote becomes an order in one step.
+Start Free Trial
+Book A Free Demo
+Totals computed
+Discounts governed
+One-step conversion
+QT-2041
+Girnar Constructions
+Valid 15 days
+HDPE Granules 25 kg
+40
+×
+₹2,450
+₹98,000
+PVC Resin 50 kg
+12
+×
+₹4,180
+₹50,160
+Subtotal
+₹1,48,160
+Discount
+− ₹11,850
+GST 18%
+₹24,536
+Total
+₹1,60,846
+Discount needs approval
+₹11,850
+is above
+Amit
+’s limit, so it is waiting on
+Neha
+.
+Converted to order
+SO-1188
+Nothing retyped, nothing re-priced.
+Payment terms
+30 days credit
+QT-2041
+Greenline Construction
+Valid 15 days
+HDPE Pellets 55 lb
+40
+×
+$296.00
+$11,840
+PVC Resin 110 lb
+12
+×
+$505.00
+$6,060
+Subtotal
+$17,900
+Discount
+− $1,432
+Sales tax 8.5%
+$1,400
+Total
+$17,868
+Discount needs approval
+$1,432
+is above
+Mike
+’s limit, so it is waiting on
+Levi
+.
+Converted to order
+SO-1188
+Nothing retyped, nothing re-priced.
+Payment terms
+Net 30
+Quotes that price themselves
+Pick lines from the catalog and the maths is done.
+Discounts with a ceiling
+Each role can go so far, then it needs approval.
+Quote becomes order
+One step, with nothing retyped and nothing lost.
+Through to delivery
+Terms, shipping and status on the same record.
+Deals are not usually lost on price. They are lost on the wait.
+Three gaps account for most of what a sales desk gives away, and none of them is a negotiating problem.
+Slow
+A quote takes an afternoon
+Prices are looked up, totals are typed into a spreadsheet, and the customer waits while a competitor answers.
+Ungoverned
+Discounts are given, not approved
+Each salesperson decides what to shave off, and margin is reconstructed afterwards from what came back.
+Retyped
+The order is the quote, typed again
+Someone re-enters the accepted quote as an order, and the differences only surface at delivery or invoice.
+Neome closes all three by making the quote a priced document, the discount an approved one, and the order a copy of what was agreed.
+Quotations
+A quote that prices itself as you build it
+Pick the customer, pick lines from the catalog, and the rate comes with them. Subtotal, discount and tax recalculate as the lines change, and the validity period is set on the document, so an expired quote is visibly expired rather than quietly honoured.
+Lines from the catalog
+Totals calculated for you
+Validity and expiry tracked
+New quotation
+Girnar Constructions
+·
+Priya Nair
+QT-2041
+Item
+Qty
+Amount
+HDPE Granules 25 kg
+40
+₹98,000
+PVC Resin 50 kg
+12
+₹50,160
+Subtotal
+₹1,48,160
+Discount
+− ₹11,850
+GST 18%
+₹24,536
+Total
+₹1,60,846
+Rates come from the catalog, so a quote cannot invent a price.
+New quotation
+Greenline Construction
+·
+Paula Nelson
+QT-2041
+Item
+Qty
+Amount
+HDPE Pellets 55 lb
+40
+$11,840
+PVC Resin 110 lb
+12
+$6,060
+Subtotal
+$17,900
+Discount
+− $1,432
+Sales tax 8.5%
+$1,400
+Total
+$17,868
+Rates come from the catalog, so a quote cannot invent a price.
+Discount governance
+Each role can discount to a point, then it needs a yes
+Limits belong to the role, not to the person's judgement on the day. A discount inside the limit goes out with the quote; one above it routes to whoever can approve that depth, with the reason recorded. Discounts are tracked at line level and on the document.
+Role-based limits
+Automatic approval routing
+Line and document level
+Discount limits
+Sales executive
+up to 5%
+Sales manager
+up to 12%
+Head of sales
+any
+8% proposed on a line
+Over limit
+Raised by
+Amit
+· routed to
+Neha
+Reason: matching a competitor on a repeat order
+The quote does not go out until the discount is signed off.
+Discount limits
+Sales executive
+up to 5%
+Sales manager
+up to 12%
+Head of sales
+any
+8% proposed on a line
+Over limit
+Raised by
+Mike
+· routed to
+Levi
+Reason: matching a competitor on a repeat order
+The quote does not go out until the discount is signed off.
+Conversion
+Accepted quote becomes an order in one step
+Converting carries the customer, every priced line, the approved discount, the tax and the payment terms straight across. Nothing is retyped, so an order cannot quietly differ from the quotation the customer agreed to, and the quote id stays traceable on the order.
+One-step conversion
+Nothing re-keyed
+Quote id stays traceable
+QT-2041
+Accepted
+Girnar Constructions
+·
+₹1,60,846
+One step
+SO-1188
+In production
+Lines carried
+2 items
+Discount
+₹11,850
+GST 18%
+₹24,536
+Terms
+30 days credit
+QT-2041
+Accepted
+Greenline Construction
+·
+$17,868
+One step
+SO-1188
+In production
+Lines carried
+2 items
+Discount
+$1,432
+Sales tax 8.5%
+$1,400
+Terms
+Net 30
+Terms and logistics
+Payment terms and shipping sit on the order, not in a chat
+Credit days, shipping method and cost are fields on the document, so finance and dispatch read the same commitment the salesperson made. The order then moves through confirmed, in production, dispatched and delivered, with the status visible to whoever asks.
+Credit days configured
+Shipping method and cost
+Delivery status visible
+SO-1188
+Girnar Constructions
+Confirmed
+In production
+Dispatched
+Delivered
+Shipping
+Road freight
+Payment terms
+30 days credit
+SO-1188
+Greenline Construction
+Confirmed
+In production
+Dispatched
+Delivered
+Shipping
+Road freight
+Payment terms
+Net 30
+Reporting
+One document trail from first price to final delivery
+Set a date range and every figure below it is bounded by those dates.
+Quote to order
+What converted?
+Quotations by stage with the orders they became, so a conversion rate is a by-product of the work rather than a separate count somebody maintains.
+Discount given
+What did it cost to win?
+Discount by deal and by person, against the approval each one needed, which is how you tell whether the governance is actually holding.
+Committed value
+What is on the books?
+Order value with its payment terms and delivery status, so finance sees what has been promised without asking sales to assemble it.
+All the features, done right
+Quotations
+Customer-linked, priced from the catalog.
+Auto totals
+Subtotal, discount and tax computed.
+Validity
+Expiry tracked on every quote.
+Discount limits
+Per role, at line and document level.
+Approvals
+Over-limit discounts route automatically.
+Approval history
+Who approved what, and why.
+Quote to order
+One step, nothing re-keyed.
+Delivery tracking
+Confirmed to delivered, visible.
+Tax handling
+Rates come from the product record.
+Payment terms
+Credit days set on the document.
+Shipping
+Method and cost recorded on the order.
+Role-based access
+Executive, manager and admin scopes.
+Before you move your quoting across
+The questions sales desks ask before the first quotation goes out of Neome.
+Who is this for?
+How do discount limits work?
+What carries across when a quote becomes an order?
+Where do the prices come from?
+Can a quotation expire?
+Can finance see what has been committed?
+Does it handle GST and other taxes?
+How does this relate to the CRM?
+What it costs
+One price, and
+Quotation & Order Flow
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Quotation & Order Flow
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Product Catalog Software for SMEs
+One product list every team quotes from, with categories, tax on the item, and price revisions that carry an effective date and an approval trail.
+Learn more
+FMCG Field Sales & Distribution Software
+Digitise attendance, beat plans, outlet visits, orders, executive stock and collections for FMCG makers and distributors. Works offline on a chat app.
+Learn more
+CRM Software for Teams of 10 to 10,000
+CRM for small, midsize, and large teams. Capture leads, assign next steps, convert to opportunities, and track pipeline on one dashboard. WhatsApp, chat, Excel, and web. Standard trial or Enterprise demo.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

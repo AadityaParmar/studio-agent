@@ -1,0 +1,40 @@
+← Back to blog
+Strategy
+How we grow
+The blueprint of growth: building Neome as an exponential organization
+Why Neome is built around community developers, open contributions and exponential-org principles, and how that compounds into platform-grade automation.
+NT
+Neome Team
+April 12, 2026
+5 min read
+“
+Users own their data, contributors own the platform, and the code is open.
+”
+Naval Ravikant
+Speed belongs to whoever can execute fastest. Neome is built around that idea. It is a community-driven conversational automation platform designed to compound through contribution, not consolidation.
+Principles we keep returning to
+Massive transformative purpose.
+Democratize enterprise automation for any team size, anywhere.
+Staff on demand.
+Lean core, deep community of certified developers and partners.
+Community and crowd.
+Contributors own templates, plugins and domain expertise.
+Algorithms.
+AI reasoning embedded into every layer of the platform, not just the chatbot.
+Leveraged assets.
+Cloud-native infrastructure shared across all customers and partners.
+Engagement.
+Real-time feedback loops between platform, community, and customer.
+Why a blueprint, not a brochure
+Most platforms grow by hiring. We want Neome to grow by enabling. The blueprint is a public contract: here's the playbook, here are the principles, here's how community developers can build on top of us and earn recurring revenue. The faster builders compound on Neome, the better the platform gets for everyone.
+If you want to build inside this blueprint as a developer, a domain partner, or a customer with a workflow that doesn't exist anywhere yet, we want to hear from you.
+Keep reading
+More from the Neome blog.
+Strategy
+Where the next automation opportunities lie
+Saturated categories like CRM and ERP aren't where the next wave will be won. Here's a practical map for builders who want to lead an automation niche.
+Read article →
+Curious how this works in practice?
+Watch real teams of every size run on Neome, from solo operators to large enterprises.
+Watch demos
+Talk to us

@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+// Fake Mermaid CLI at the wrong version (ticket 24). Tests point NEOME_MMDC here.
+if (process.argv.includes("--version") || process.argv.includes("-V")) console.log("11.4.0");
+else process.exit(3);

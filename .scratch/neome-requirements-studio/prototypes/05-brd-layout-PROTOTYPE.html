@@ -1,0 +1,364 @@
+<!doctype html>
+<!--
+  PROTOTYPE, throwaway. Ticket 05: BRD page structure and look.
+  Plan: three BRD layouts, switchable via ?variant=A|B|C, same sample data (Anglo Gulf CRM subset).
+  Print (Cmd+P, A4) is the same linear document for every variant, so screen layout and print layout are judged separately.
+  Not production code. Fonts fall back to system; the real template embeds Schibsted Grotesk + JetBrains Mono like Vendorgate.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROTOTYPE · Anglo Gulf CRM · BRD</title>
+<style>
+:root{
+  --surface-base:#F7F7F7; --surface-card:#FFFFFF; --surface-dark:#1D1D1F;
+  --ink-900:#1C1C1E; --ink-700:#3A3A3C; --ink-500:#595959; --ink-400:#8A8A8E; --ink-300:#C7C7C5;
+  --line-subtle:#E6E6E3; --line-strong:#D8D8D4;
+  --neome:#1877D5; --neome-deep:#115EA8; --accent:#F47100;
+  --std:#1E8E5A; --cfg:#1877D5; --cus:#F47100;
+  --sans:'Schibsted Grotesk',-apple-system,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-base);color:var(--ink-700);font-family:var(--sans);font-size:15px;line-height:1.5}
+h1,h2,h3{color:var(--ink-900);margin:0;font-weight:500;text-wrap:balance}
+h1{font-size:clamp(30px,4.5vw,46px);line-height:1.05;letter-spacing:-.03em}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.1;letter-spacing:-.02em}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--neome)}
+.rule{height:3px;width:56px;border-radius:2px;margin:12px 0 14px;background:linear-gradient(90deg,var(--neome) 0 55%,var(--accent) 55% 100%)}
+.lead{font-size:17px;color:var(--ink-500);max-width:64ch}
+.small{font-size:13px;color:var(--ink-500)}
+.mono{font-family:var(--mono)}
+.card{background:var(--surface-card);border:1px solid var(--line-subtle);border-radius:12px;padding:16px 18px}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g5{grid-template-columns:repeat(5,1fr)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-subtle);border-radius:12px;background:#fff;overflow:hidden}
+.metrics .m{padding:16px 18px;border-right:1px solid var(--line-subtle)} .metrics .m:last-child{border-right:0}
+.num{font-family:var(--mono);font-weight:700;font-size:26px;line-height:1;color:var(--ink-900)}
+.num.hl{color:var(--neome)}
+.lab{font-size:12.5px;color:var(--ink-500);margin-top:6px}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-400);margin-bottom:8px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;border:1px solid var(--line-strong);border-radius:999px;padding:2px 8px;background:#fff;color:var(--ink-700);white-space:nowrap}
+.chip.std{border-color:var(--std);color:var(--std)} .chip.cfg{border-color:var(--cfg);color:var(--cfg)} .chip.cus{border-color:var(--cus);color:var(--cus)}
+.chip.must{background:var(--ink-900);color:#fff;border-color:var(--ink-900)}
+.chip.open{border-style:dashed;color:var(--accent);border-color:var(--accent)}
+.chip.prog{background:#FFF4EA;border-color:var(--accent);color:var(--accent)}
+.chip.prop{border-style:dotted;color:var(--ink-500)}
+.oi{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;text-decoration:none}
+.src{font-family:var(--mono);font-size:11px;color:var(--ink-400)}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);text-align:left;font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line-strong)}
+td{padding:9px 10px;border-bottom:1px solid var(--line-subtle);vertical-align:top}
+td.id{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-900);white-space:nowrap}
+td b{color:var(--ink-900);display:block;margin-bottom:2px}
+.tablewrap{border:1px solid var(--line-subtle);border-radius:12px;overflow:hidden}
+.flow{display:flex;gap:6px;align-items:stretch;overflow-x:auto;padding-bottom:4px}
+.flow .st{flex:1 0 120px;background:#fff;border:1px solid var(--line-subtle);border-top:3px solid var(--neome);border-radius:8px;padding:10px 12px;font-size:13px}
+.flow .st.ext{border-top-color:var(--ink-300);background:#FAFAF8}
+.flow .st .mod{font-family:var(--mono);font-size:10.5px;color:var(--ink-400);letter-spacing:.08em}
+.flow .arr{align-self:center;color:var(--ink-300)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink-500)}
+.signbox{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.signbox .card{height:110px;display:flex;flex-direction:column;justify-content:space-between}
+.draftnote{border-left:3px solid var(--accent);background:#FFF8F1;padding:10px 14px;border-radius:0 8px 8px 0;font-size:13.5px}
+
+/* ---------- Variant A: tabbed briefing ---------- */
+.A .wrap{max-width:1080px;margin:0 auto;padding:0 18px 80px}
+.A header.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0 16px;border-bottom:1px solid var(--line-subtle)}
+.logo{display:flex;gap:10px;align-items:center;font-weight:600;font-size:20px;color:var(--ink-900)}
+.logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--neome),var(--neome-deep));display:block}
+.meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-400);text-align:right}
+.A .hero{padding:40px 0 24px}
+.A .tabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line-subtle);margin:26px 0 28px;position:sticky;top:0;background:var(--surface-base);z-index:3}
+.A .tabs button{border:0;background:none;font-family:var(--mono);font-size:12.5px;color:var(--ink-500);padding:13px 12px 11px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.A .tabs button[aria-selected=true]{color:var(--ink-900);border-bottom-color:var(--neome)}
+.A .pane{display:flex;flex-direction:column;gap:22px}
+.A .pane[hidden]{display:none}
+.A .modhead{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-top:14px}
+.A .fit{display:flex;gap:8px;align-items:center}
+
+/* ---------- Variant B: paged document ---------- */
+.B{background:#E4E4E1}
+.B .layout{display:grid;grid-template-columns:230px 1fr;gap:28px;max-width:1120px;margin:0 auto;padding:24px 18px 80px}
+.B nav.toc{position:sticky;top:20px;align-self:start;font-size:13px}
+.B nav.toc a{display:block;padding:5px 8px;border-radius:6px;color:var(--ink-500);text-decoration:none}
+.B nav.toc a:hover{background:#fff;color:var(--ink-900)}
+.B nav.toc .n{font-family:var(--mono);font-size:11px;color:var(--ink-400);margin-right:6px}
+.sheet{background:#fff;width:210mm;max-width:100%;min-height:297mm;margin:0 auto 22px;padding:16mm 15mm 18mm;box-shadow:0 2px 10px rgba(0,0,0,.08);position:relative;display:flex;flex-direction:column;gap:14px}
+.sheet .runhead{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-400);border-bottom:1px solid var(--line-subtle);padding-bottom:6px;margin-bottom:6px}
+.sheet .runfoot{position:absolute;left:15mm;right:15mm;bottom:8mm;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-400)}
+.sheet table{font-size:12px} .sheet td{padding:7px 8px}
+.sheet.cover{justify-content:space-between;background:linear-gradient(180deg,#fff 60%,#F2F6FB)}
+
+/* ---------- Variant C: Module explorer ---------- */
+.C .app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
+.C aside{background:var(--surface-dark);color:#ddd;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.C aside .logo{color:#fff;margin-bottom:18px}
+.C aside .grp{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin:16px 6px 6px}
+.C aside button{display:flex;width:100%;justify-content:space-between;align-items:center;gap:8px;background:none;border:0;color:#ddd;text-align:left;padding:8px 8px;border-radius:7px;cursor:pointer;font:inherit;font-size:13.5px}
+.C aside button:hover{background:#2c2c30}
+.C aside button.on{background:#fff;color:var(--ink-900)}
+.C aside .bar{height:4px;border-radius:2px;background:#3a3a3e;margin-top:4px;overflow:hidden}
+.C aside .bar i{display:block;height:100%;background:var(--neome)}
+.C main{padding:22px 30px 80px;max-width:1100px;display:flex;flex-direction:column;gap:18px}
+.stack{display:flex;flex-direction:column;gap:18px}
+.C .filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 18px}
+.C .filters button{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line-strong);background:#fff;border-radius:999px;padding:5px 11px;cursor:pointer}
+.C .filters button.on{background:var(--ink-900);color:#fff;border-color:var(--ink-900)}
+.C .req{background:#fff;border:1px solid var(--line-subtle);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:80px 1fr auto;gap:12px;margin-bottom:8px}
+.C .req details summary{cursor:pointer;color:var(--neome);font-size:12.5px;margin-top:4px}
+.C .req .side{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.C .oibox{border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;background:#FFFBF6;margin-top:16px}
+.C .mapcard{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0}
+
+/* ---------- switcher ---------- */
+#switcher{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#111;color:#fff;border-radius:999px;padding:6px 8px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;box-shadow:0 6px 24px rgba(0,0,0,.35);z-index:99}
+#switcher button{background:#2a2a2a;color:#fff;border:0;border-radius:999px;width:28px;height:28px;cursor:pointer;font-size:14px}
+#switcher span{padding:0 10px;min-width:260px;text-align:center}
+#print{display:none}
+
+/* ---------- PRINT: always the linear document ---------- */
+@page{size:A4;margin:14mm 14mm 16mm;
+  @bottom-left{content:"Anglo Gulf CRM · BRD v3 · Draft for review";font-family:ui-monospace,monospace;font-size:8pt;color:#8A8A8E}
+  @bottom-right{content:counter(page) " / " counter(pages);font-family:ui-monospace,monospace;font-size:8pt;color:#8A8A8E}}
+@media print{
+  body{background:#fff;font-size:10pt}
+  #screen,#switcher{display:none!important}
+  #print{display:block}
+  .sheet{box-shadow:none;width:auto;min-height:0;padding:0;margin:0;break-after:page;gap:10px}
+  .sheet .runhead,.sheet .runfoot{display:none}
+  .sheet.cover{min-height:262mm}
+  tr,.card,.flow .st{break-inside:avoid}
+  thead{display:table-header-group}
+  h2,h3{break-after:avoid}
+  .flow{flex-wrap:wrap;overflow:visible}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (max-width:820px){.g4,.g5,.metrics{grid-template-columns:repeat(2,1fr)}.B .layout,.C .app{grid-template-columns:1fr}.B nav.toc,.C aside{position:static;height:auto}}
+</style>
+</head>
+<body>
+<div id="screen"></div>
+<div id="print"></div>
+<div id="switcher" aria-label="Prototype variant switcher">
+  <button id="prev" title="Previous (←)">‹</button><span id="vlabel"></span><button id="next" title="Next (→)">›</button>
+</div>
+
+<script>
+/* ======== SAMPLE DATA: Anglo Gulf CRM subset. Shape is a hint for ticket 08, not a decision. ======== */
+const BRD = {
+  meta:{enterprise:"Anglo Gulf",engagement:"CRM",title:"CRM for Anglo Gulf",
+    lead:"What the Neome CRM must do for Anglo Gulf's sales teams, how each requirement will be accepted, and what is still open.",
+    version:"v3",date:"28 October 2026",status:"Draft for review",preparedBy:"Neomenta",
+    purpose:"Set out, in testable terms, what the CRM on Neome must do for Anglo Gulf. Once signed off, this is the baseline for configuration and UAT, and the BRD data file goes to the build team."},
+  sources:[
+    {id:"CE-1",type:"Deck",title:"CRM Expectations deck, slide 1",date:"12 Sep 2026"},
+    {id:"CE-2",type:"Deck",title:"CRM Expectations deck, slide 2",date:"12 Sep 2026"},
+    {id:"QA-1",type:"Q&A",title:"Neomenta clarifications, round 1",date:"29 Sep 2026"},
+    {id:"QA-5",type:"Q&A",title:"Neomenta clarifications, round 1 (approvals)",date:"29 Sep 2026"},
+    {id:"WS-2",type:"Live session",title:"Quotation grilling with Rahul (Sales Head)",date:"21 Oct 2026"},
+    {id:"QN-1",type:"Questionnaire",title:"Questionnaire answers, Lead and Opportunity",date:"25 Oct 2026"},
+    {id:"SD",type:"Decision",title:"Neomenta scope decisions",date:"29 Sep 2026"}],
+  modules:[
+    {prefix:"CUS",name:"Customer and contact management",status:"resolved",
+     purpose:"One record per customer, so no customer data stays in personal Excel, WhatsApp or email.",
+     app:"CRM",delivery:"Standard",fitNote:"Accounts, contacts and master lists as standard. A/B/C class is a master-list field.",
+     reqs:[
+      {id:"CUS-01",title:"Account record",text:"Each customer is one account with customer type, industry, country, salesperson and A/B/C class.",acc:"An account saves with all five fields. Each field filters account lists.",pri:"Must",scope:"Neome",src:["CE-1","CE-2"],ois:[]},
+      {id:"CUS-02",title:"Contacts and decision makers",text:"An account holds many contacts. Any contact can be flagged as decision maker.",acc:"Two or more contacts link to one account. Decision makers show on the account.",pri:"Must",scope:"Neome",src:["CE-1"],ois:[]},
+      {id:"CUS-03",title:"A/B/C classification",text:"Every account carries class A, B or C.",acc:"Class is mandatory with exactly these values. Lists and dashboards filter by it.",pri:"Must",scope:"Neome",src:["CE-1","QA-1"],ois:["OI-05"]},
+      {id:"CUS-04",title:"Credit terms",text:"Credit terms are visible on the account.",acc:"Credit terms show on the account. System of record follows OI-14.",pri:"Must",scope:"Neome, TBC",src:["CE-1"],ois:["OI-14"]}]},
+    {prefix:"LEAD",name:"Lead management",status:"resolved",
+     purpose:"Every potential deal starts as a tracked lead with an owner, a status and a path to an account.",
+     app:"Lead Management",delivery:"Configuration",fitNote:"Standard lead sheet. Status list and conversion rule configured.",
+     reqs:[
+      {id:"LEAD-01",title:"Lead record",text:"Each potential deal is a lead with an owner and a status.",acc:"A lead cannot be saved without owner and status.",pri:"Must",scope:"Neome",src:["CE-1"],ois:[]},
+      {id:"LEAD-02",title:"Lead status list",text:"Lead status uses the list confirmed under OI-01. Admin can change it without code.",acc:"Only confirmed statuses are selectable.",pri:"Must",scope:"Neome, TBC",src:["QN-1"],ois:["OI-01"]},
+      {id:"LEAD-03",title:"Qualify and convert",text:"A qualified lead converts to account and contact in one action, keeping a link back.",acc:"Conversion creates account and contact, sets lead to Converted, links both.",pri:"Must",scope:"Neome",src:["QA-1"],ois:[]}]},
+    {prefix:"QUO",name:"Quotation management",status:"resolved",
+     purpose:"The quotation is prepared outside Neome and tracked on Neome, with approvals driven by discount %.",
+     app:"Quotation & Order Flow",delivery:"Configuration",fitNote:"Quotation record standard. Discount approval matrix configured on role-based discount rules.",
+     reqs:[
+      {id:"QUO-01",title:"Quotation document",text:"The document is prepared outside Neome and attached to a quotation record.",acc:"A file attaches and opens from web and mobile.",pri:"Must",scope:"Neome",src:["SD"],ois:[]},
+      {id:"QUO-04",title:"Cost and gross margin",text:"Cost and gross margin come from Tally ERP.",acc:"Values match Tally for the same quotation.",pri:"Must",scope:"Tally ERP",src:["CE-1","SD"],ois:["OI-19"]},
+      {id:"QUO-06",title:"Discount approval matrix",text:"Approval driven by discount %: <10% none, 10–20% L1, 20–25% L1+L2, >25% L1+L2+L3. Admin can change bands.",acc:"Each band routes to the right levels. Approved only after every level approves.",pri:"Must",scope:"Neome, TBC",src:["QA-5","WS-2"],ois:["OI-08","OI-09"]},
+      {id:"QUO-07",title:"Quotation PDF",text:"Neome does not generate the quotation PDF.",acc:"Not delivered. See QUO-01.",pri:"Won't",scope:"Out of scope",src:["SD"],ois:[]}]},
+    {prefix:"REG",name:"Registration and tender tracker",status:"in-progress",
+     purpose:"Track product registrations with authorities and the tenders they unlock.",
+     app:"Custom module (proposed)",delivery:"Custom",fitNote:"No catalog App fits. Proposed by Neomenta, to confirm: custom module on the platform.",
+     reqs:[
+      {id:"REG-01",title:"Registration record",text:"Track country, customer, product, authority, submission date, status, expected approval, tender and value.",acc:"To be written once scope closes under OI-15.",pri:"TBC",scope:"Open",src:["CE-2","SD"],ois:["OI-15"],proposed:true}]}],
+  process:[
+    {mod:"LEAD",label:"Lead",note:"Status list: OI-01"},
+    {mod:"LEAD",label:"Qualify",note:"Convert to account"},
+    {mod:"CUS",label:"Account + contact",note:"A/B/C class"},
+    {mod:"OPP",label:"Opportunity",note:"Stages: OI-02"},
+    {mod:"QUO",label:"Quotation",note:"Discount approval"},
+    {mod:"OPP",label:"PO received",note:"Position: OI-04"},
+    {mod:"Tally ERP",label:"Order → invoice → collection",note:"Scoped with Tally partner",ext:true}],
+  openItems:[
+    {id:"OI-01",q:"Final lead status list. Two versions exist. Is 'Opportunity grooming' a status?",owner:"Anglo Gulf",affects:["LEAD-02"],status:"open"},
+    {id:"OI-05",q:"Is A/B/C class set by hand or by a rule? Who can change it?",owner:"Anglo Gulf",affects:["CUS-03"],status:"open"},
+    {id:"OI-08",q:"Is discount % per line or on the whole quotation?",owner:"Anglo Gulf",affects:["QUO-06"],status:"open"},
+    {id:"OI-09",q:"Which roles are Levels 1, 2 and 3? Is approval sequential?",owner:"Anglo Gulf",affects:["QUO-06"],status:"open"},
+    {id:"OI-14",q:"System of record for credit terms: Neome or Tally?",owner:"Anglo Gulf, Tally partner",affects:["CUS-04"],status:"open"},
+    {id:"OI-15",q:"Registration tracker: record structure, statuses, users, reports.",owner:"Anglo Gulf",affects:["REG-01"],status:"open"},
+    {id:"OI-19",q:"ERP integration scope, after discussion with the Tally partner.",owner:"Tally partner, Neomenta",affects:["QUO-04"],status:"open"},
+    {id:"OI-03",q:"Do a lead's opportunities move to the new account on conversion?",owner:"Anglo Gulf",affects:["LEAD-03"],status:"closed",answer:"Yes, they move (QN-1)."}],
+  glossary:[
+    {term:"Account",def:"A customer company. Holds contacts, class and credit terms."},
+    {term:"A/B/C class",def:"Customer importance: A critical, B medium, C low."},
+    {term:"Level 1/2/3 approval",def:"Discount approval steps, by discount band."},
+    {term:"CIS",def:"To confirm (OI-06): region, or a field team?"}],
+  changelog:[
+    {v:"v3",date:"28 Oct 2026",what:"QUO resolved after WS-2. OI-03 closed by QN-1. REG added, in progress."},
+    {v:"v2",date:"14 Oct 2026",what:"CUS and LEAD resolved. Priorities proposed."},
+    {v:"v1",date:"30 Sep 2026",what:"First draft from CE deck and QA-1 to QA-6."}]
+};
+
+/* ======== helpers ======== */
+const allReqs = BRD.modules.flatMap(m=>m.reqs.map(r=>({...r,mod:m})));
+const openOIs = BRD.openItems.filter(o=>o.status==="open");
+const dcls = d=>({Standard:"std",Configuration:"cfg",Custom:"cus"}[d]||"");
+const del = d=>`<span class="chip ${dcls(d)}">${d}</span>`;
+const pri = p=>`<span class="chip ${p==="Must"?"must":""}">${p}</span>`;
+const scope = s=>`<span class="chip ${s==="Open"?"open":""}">${s}</span>`;
+const ois = a=>a.map(o=>`<a class="oi" href="#${o}">${o}</a>`).join(" ");
+const srcs = a=>`<span class="src">${a.join(", ")}</span>`;
+const status = m=>m.status==="in-progress"?`<span class="chip prog">In progress</span>`:"";
+const cnt = f=>allReqs.filter(f).length;
+const scopeCounts = ["Neome","Neome, TBC","Tally ERP","Open","Out of scope"].map(s=>({s,n:cnt(r=>r.scope===s)}));
+
+const metrics = ()=>`<div class="metrics">
+  <div class="m"><div class="num">${allReqs.length}</div><div class="lab">Requirements in ${BRD.modules.length} Modules</div></div>
+  <div class="m"><div class="num">${cnt(r=>r.pri==="Must")}</div><div class="lab">Proposed Must</div></div>
+  <div class="m"><div class="num hl">${openOIs.length}</div><div class="lab">Open Items to close</div></div>
+  <div class="m"><div class="num">${BRD.modules.filter(m=>m.status==="resolved").length}/${BRD.modules.length}</div><div class="lab">Modules resolved</div></div></div>`;
+
+const legend = ()=>`<div class="grid g3">
+  <div class="card"><div class="label">Priority (MoSCoW)</div><p class="small">Proposed by Neomenta for ${BRD.meta.enterprise} to confirm.</p><div class="legend" style="margin-top:8px">${pri("Must")} ${pri("Should")} ${pri("Could")} ${pri("Won't")} ${pri("TBC")}</div></div>
+  <div class="card"><div class="label">Scope tag</div><p class="small">Who delivers it.</p><div class="legend" style="margin-top:8px">${["Neome","Neome, TBC","Tally ERP","Anglo Gulf","Out of scope","Open"].map(scope).join(" ")}</div></div>
+  <div class="card"><div class="label">Delivery (indicative)</div><p class="small">From the public catalog. Final in build phase.</p><div class="legend" style="margin-top:8px">${del("Standard")} ${del("Configuration")} ${del("Custom")}</div></div></div>`;
+
+const fitTable = ()=>`<div class="tablewrap"><table><thead><tr><th>Module</th><th>What it covers</th><th>How Neome delivers it</th><th>Neome App</th><th>Delivery</th></tr></thead><tbody>
+  ${BRD.modules.map(m=>`<tr><td class="id">${m.prefix}</td><td><b>${m.name}</b>${m.purpose}</td><td>${m.fitNote}</td><td>${m.app}</td><td>${del(m.delivery)} ${status(m)}</td></tr>`).join("")}
+  </tbody></table></div>`;
+
+const scopeBlock = ()=>`<div class="grid g5">${scopeCounts.map(c=>`<div class="card"><div class="num">${c.n}</div><div class="lab">${c.s}</div></div>`).join("")}</div>`;
+
+const flow = ()=>`<div class="flow">${BRD.process.map((s,i)=>`${i?'<div class="arr">→</div>':""}<div class="st ${s.ext?"ext":""}"><div class="mod">${s.mod}</div><b>${s.label}</b><div class="small">${s.note.replace(/OI-\d+/g,x=>`<a class="oi" href="#${x}">${x}</a>`)}</div></div>`).join("")}</div>`;
+
+const reqTable = m=>`<div class="tablewrap"><table><thead><tr><th>ID</th><th>Requirement</th><th>Acceptance criteria</th><th>Priority</th><th>Scope</th><th>Source</th></tr></thead><tbody>
+  ${m.reqs.map(r=>`<tr><td class="id">${r.id}</td><td><b>${r.title}</b>${r.text}${r.proposed?' <span class="chip prop">proposed, to confirm</span>':""}</td><td>${r.acc}${r.ois.length?`<div style="margin-top:4px">See ${ois(r.ois)}</div>`:""}</td><td>${pri(r.pri)}</td><td>${scope(r.scope)}</td><td>${srcs(r.src)}</td></tr>`).join("")}
+  </tbody></table></div>`;
+
+const modHead = (m,i)=>`<div><div class="eyebrow">Requirements · ${String(i+1).padStart(2,"0")} · ${m.prefix}</div><div class="rule"></div><h2>${m.name}</h2><p class="lead" style="margin-top:6px">${m.purpose}</p>
+  <p class="small" style="margin-top:8px">Neome App: <b style="display:inline">${m.app}</b> · ${del(m.delivery)} <span class="src">indicative</span> ${status(m)}</p></div>`;
+
+const oiTable = (list=BRD.openItems)=>`<div class="tablewrap"><table><thead><tr><th>ID</th><th>Question</th><th>Answer from</th><th>Affects</th><th>Status</th></tr></thead><tbody>
+  ${list.map(o=>`<tr id="${o.id}"><td class="id">${o.id}</td><td>${o.q}${o.answer?`<div class="small" style="margin-top:3px">Answer: ${o.answer}</div>`:""}</td><td>${o.owner}</td><td class="src">${o.affects.join(", ")}</td><td>${o.status==="open"?'<span class="chip open">Open</span>':'<span class="chip">Closed</span>'}</td></tr>`).join("")}
+  </tbody></table></div>`;
+
+const srcTable = ()=>`<div class="tablewrap"><table><thead><tr><th>ID</th><th>Type</th><th>Source</th><th>Date</th></tr></thead><tbody>${BRD.sources.map(s=>`<tr><td class="id">${s.id}</td><td>${s.type}</td><td>${s.title}</td><td class="src">${s.date}</td></tr>`).join("")}</tbody></table></div>`;
+const glossTable = ()=>`<div class="tablewrap"><table><thead><tr><th>Term</th><th>Meaning at ${BRD.meta.enterprise}</th></tr></thead><tbody>${BRD.glossary.map(g=>`<tr><td><b>${g.term}</b></td><td>${g.def}</td></tr>`).join("")}</tbody></table></div>`;
+const changeTable = ()=>`<div class="tablewrap"><table><thead><tr><th>Version</th><th>Date</th><th>What changed</th></tr></thead><tbody>${BRD.changelog.map(c=>`<tr><td class="id">${c.v}</td><td class="src">${c.date}</td><td>${c.what}</td></tr>`).join("")}</tbody></table></div>`;
+const signoff = ()=>`<div class="signbox"><div class="card"><div class="label">For ${BRD.meta.enterprise}</div><div class="small">Name, role, signature, date</div></div><div class="card"><div class="label">For Neomenta</div><div class="small">Name, role, signature, date</div></div></div>`;
+const head = (eb,h,lead)=>`<div><div class="eyebrow">${eb}</div><div class="rule"></div><h2>${h}</h2>${lead?`<p class="lead" style="margin-top:6px">${lead}</p>`:""}</div>`;
+const draftNote = ()=>BRD.modules.some(m=>m.status!=="resolved")?`<div class="draftnote">Some Modules are still in progress. Their Requirements are draft and may change.</div>`:"";
+
+/* ======== SECTIONS: the proposed order, shared by all variants ======== */
+const SECTIONS = [
+  {id:"about",tab:"How to read",html:()=>head("About this document","How to read this document","Each Requirement is numbered, prioritised, scoped and traced to a Source. Anything not agreed is an Open Item, not a guess.")+`<p>${BRD.meta.purpose}</p>`+legend()},
+  {id:"scope",tab:"Scope and Neome fit",html:()=>head("Scope at a glance","What is in, what sits elsewhere, what is open")+scopeBlock()+head("Neome fit","How Neome delivers each Module","Neome App and Delivery are indicative, from the public catalog.")+fitTable()},
+  {id:"process",tab:"Process",html:()=>head("Business process","Lead to collection, end to end","Each step names the Module that owns it. Open points are marked.")+flow()},
+  {id:"reqs",tab:"Requirements",html:()=>draftNote()+BRD.modules.map((m,i)=>modHead(m,i)+reqTable(m)).join('<div style="height:18px"></div>')},
+  {id:"ois",tab:"Open Items",html:()=>head("Open Items register",`${openOIs.length} questions to close before sign-off`,"Nothing here has been assumed in the Requirements.")+oiTable()},
+  {id:"gloss",tab:"Glossary",html:()=>head("Glossary",`${BRD.meta.enterprise} terms used in this document`)+glossTable()},
+  {id:"sources",tab:"Sources",html:()=>head("Sources","Where each Requirement came from")+srcTable()},
+  {id:"versions",tab:"Versions and sign-off",html:()=>head("Versions and sign-off",`${BRD.meta.version} · ${BRD.meta.status}`)+changeTable()+signoff()}];
+
+const cover = ()=>`<div><div class="logo"><i></i>Neome</div></div>
+  <div><div class="eyebrow">Business Requirements Document</div><div class="rule"></div><h1>${BRD.meta.title}</h1><p class="lead" style="margin-top:14px">${BRD.meta.lead}</p></div>
+  ${metrics()}
+  <div class="grid g4 small"><div><div class="label">Prepared by</div>${BRD.meta.preparedBy}</div><div><div class="label">Prepared for</div>${BRD.meta.enterprise}</div><div><div class="label">Version · date</div>${BRD.meta.version} · ${BRD.meta.date}</div><div><div class="label">Status</div>${BRD.meta.status}</div></div>`;
+
+/* ======== VARIANT A: tabbed briefing (Vendorgate) ======== */
+function VariantA(){
+  document.body.className="A";
+  return `<div class="wrap"><header class="top"><div class="logo"><i></i>Neome</div><div class="meta">Prepared for ${BRD.meta.enterprise}<br>${BRD.meta.engagement} BRD · ${BRD.meta.version} · ${BRD.meta.date} · ${BRD.meta.status}</div></header>
+  <section class="hero"><div class="eyebrow">Business Requirements Document</div><div class="rule"></div><h1>${BRD.meta.title}</h1><p class="lead" style="margin-top:14px">${BRD.meta.lead}</p></section>
+  ${metrics()}
+  <nav class="tabs" role="tablist">${SECTIONS.map((s,i)=>`<button role="tab" data-t="${s.id}" aria-selected="${i===0}">${s.tab}</button>`).join("")}</nav>
+  ${SECTIONS.map((s,i)=>`<section class="pane" id="p-${s.id}" ${i?"hidden":""}>${s.html()}</section>`).join("")}</div>`;
+}
+function wireA(){
+  const show=id=>{document.querySelectorAll(".A .tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===id));document.querySelectorAll(".A .pane").forEach(p=>p.hidden=p.id!=="p-"+id);};
+  document.querySelectorAll(".A .tabs button").forEach(b=>b.onclick=()=>show(b.dataset.t));
+  document.querySelectorAll(".A a.oi").forEach(a=>a.onclick=e=>{e.preventDefault();show("ois");setTimeout(()=>document.getElementById(a.getAttribute("href").slice(1))?.scrollIntoView({block:"center"}),0)});
+}
+
+/* ======== VARIANT B: paged A4 document (Anglo Gulf), screen = print ======== */
+function linearDoc(withChrome){
+  const rh = t=>withChrome?`<div class="runhead"><span>${BRD.meta.enterprise} ${BRD.meta.engagement} · BRD ${BRD.meta.version}</span><span>${t}</span></div>`:"";
+  const rf = n=>withChrome?`<div class="runfoot"><span>NEOMENTA · ${BRD.meta.status.toUpperCase()}</span><span>${BRD.meta.date}</span></div>`:"";
+  let out=`<section class="sheet cover" id="s-cover">${cover()}${rf()}</section>`;
+  SECTIONS.forEach(s=>{
+    if(s.id==="reqs"){ BRD.modules.forEach((m,i)=>{out+=`<section class="sheet" id="s-${m.prefix}">${rh(m.prefix)}${i===0?draftNote():""}${modHead(m,i)}${reqTable(m)}${rf()}</section>`;}); }
+    else out+=`<section class="sheet" id="s-${s.id}">${rh(s.tab)}${s.html()}${rf()}</section>`;
+  });
+  return out;
+}
+function VariantB(){
+  document.body.className="B";
+  const toc=[["cover","Cover"],...SECTIONS.flatMap(s=>s.id==="reqs"?BRD.modules.map(m=>[m.prefix,`${m.prefix} · ${m.name}`]):[[s.id,s.tab]])];
+  return `<div class="layout"><nav class="toc"><div class="label">Contents</div>${toc.map(([id,t],i)=>`<a href="#s-${id}"><span class="n">${String(i+1).padStart(2,"0")}</span>${t}</a>`).join("")}</nav><div>${linearDoc(true)}</div></div>`;
+}
+
+/* ======== VARIANT C: Module explorer (app-like) ======== */
+let cState={view:"overview",f:"All"};
+function VariantC(){
+  document.body.className="C";
+  const nav=(v,label,extra="")=>`<button data-v="${v}" class="${cState.view===v?"on":""}"><span>${label}</span>${extra}</button>`;
+  const side=`<aside><div class="logo"><i></i>Neome</div>
+    <div class="small" style="color:#aaa">${BRD.meta.title}<br>${BRD.meta.version} · ${BRD.meta.status}</div>
+    <div class="grp">Overview</div>${nav("overview","Summary and fit")}${nav("process","Process")}
+    <div class="grp">Modules</div>${BRD.modules.map(m=>{const o=m.reqs.filter(r=>r.ois.some(x=>openOIs.find(y=>y.id===x))).length;const pct=Math.round(100*(m.reqs.length-o)/m.reqs.length);
+      return nav(m.prefix,`${m.prefix} · ${m.name}`,`<span class="chip ${dcls(m.delivery)}" style="font-size:9.5px">${m.delivery[0]}</span>`)+`<div class="bar" style="margin:0 8px 6px"><i style="width:${pct}%"></i></div>`}).join("")}
+    <div class="grp">Register</div>${nav("ois","Open Items",`<span class="chip open" style="font-size:10px">${openOIs.length}</span>`)}${nav("gloss","Glossary")}${nav("sources","Sources")}${nav("versions","Versions and sign-off")}</aside>`;
+  let body="";
+  const m=BRD.modules.find(x=>x.prefix===cState.view);
+  if(cState.view==="overview") body=`<div class="eyebrow">Business Requirements Document</div><div class="rule"></div><h1>${BRD.meta.title}</h1><p class="lead" style="margin:12px 0 20px">${BRD.meta.lead}</p>${metrics()}<div style="height:20px"></div>${SECTIONS[1].html()}<div style="height:20px"></div>${SECTIONS[0].html()}`;
+  else if(m){
+    const fs=["All","Must","Open scope","Has Open Item"];
+    const rs=m.reqs.filter(r=>cState.f==="All"||(cState.f==="Must"&&r.pri==="Must")||(cState.f==="Open scope"&&/TBC|Open/.test(r.scope))||(cState.f==="Has Open Item"&&r.ois.length));
+    const mOIs=BRD.openItems.filter(o=>o.status==="open"&&o.affects.some(a=>m.reqs.find(r=>r.id===a)));
+    body=`<div class="eyebrow">Module · ${m.prefix}</div><div class="rule"></div><h2>${m.name} ${status(m)}</h2><p class="lead" style="margin-top:6px">${m.purpose}</p>
+     <div class="mapcard" style="margin:0"><div class="card"><div class="label">Neome App</div><h3>${m.app}</h3></div><div class="card"><div class="label">Delivery · indicative</div>${del(m.delivery)}</div><div class="card"><div class="label">How</div><p class="small">${m.fitNote}</p></div></div>
+     <div class="filters">${fs.map(f=>`<button data-f="${f}" class="${cState.f===f?"on":""}">${f}</button>`).join("")}</div>
+     ${rs.map(r=>`<div class="req"><div class="mono" style="font-weight:700;color:var(--ink-900)">${r.id}</div><div><b style="color:var(--ink-900)">${r.title}</b><div>${r.text}</div><details><summary>Acceptance criteria</summary><div class="small" style="margin-top:4px">${r.acc}</div></details></div><div class="side">${pri(r.pri)}${scope(r.scope)}${srcs(r.src)}${ois(r.ois)}</div></div>`).join("")||'<p class="small">No Requirements match.</p>'}
+     ${mOIs.length?`<div class="oibox"><div class="label" style="color:var(--accent)">Open Items for this Module</div>${mOIs.map(o=>`<p style="margin:4px 0"><span class="oi">${o.id}</span> ${o.q} <span class="src">· ${o.owner}</span></p>`).join("")}</div>`:""}`;
+  } else body=SECTIONS.find(s=>s.id===cState.view).html();
+  return `<div class="app">${side}<main>${body}</main></div>`;
+}
+function wireC(){
+  document.querySelectorAll(".C aside button").forEach(b=>b.onclick=()=>{cState.view=b.dataset.v;cState.f="All";render()});
+  document.querySelectorAll(".C .filters button").forEach(b=>b.onclick=()=>{cState.f=b.dataset.f;render()});
+  document.querySelectorAll(".C a.oi").forEach(a=>a.onclick=e=>{e.preventDefault();cState.view="ois";render();setTimeout(()=>document.getElementById(a.getAttribute("href").slice(1))?.scrollIntoView({block:"center"}),0)});
+}
+
+/* ======== switcher ======== */
+const V={A:["Tabbed briefing (Vendorgate)",VariantA,wireA],B:["Paged A4 document (Anglo Gulf)",VariantB,()=>{}],C:["Module explorer (app-like)",VariantC,wireC]};
+const keys=Object.keys(V);
+function cur(){const v=new URLSearchParams(location.search).get("variant");return keys.includes(v)?v:"A";}
+function render(){const v=cur();document.getElementById("screen").innerHTML=V[v][1]();V[v][2]();document.getElementById("vlabel").textContent=`${v} · ${V[v][0]} · print = linear`;}
+function go(d){const i=(keys.indexOf(cur())+d+keys.length)%keys.length;const u=new URL(location);u.searchParams.set("variant",keys[i]);history.replaceState(null,"",u);render();window.scrollTo(0,0);}
+document.getElementById("prev").onclick=()=>go(-1);document.getElementById("next").onclick=()=>go(1);
+addEventListener("keydown",e=>{if(e.target.closest("input,textarea,[contenteditable]"))return;if(e.key==="ArrowLeft")go(-1);if(e.key==="ArrowRight")go(1);});
+document.getElementById("print").innerHTML=linearDoc(false);
+render();
+</script>
+</body>
+</html>

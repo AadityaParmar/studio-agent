@@ -1,0 +1,938 @@
+BUSINESS REQUIREMENTS DOCUMENT
+CRM for Anglo GulfWhat the Neome CRM must do for Anglo Gulf's sales teams,
+how each requirement will be accepted, and what is still open.
+59
+Requirements
+51
+Proposed Must
+28
+Open items to close
+4 wks
+Implementation plan
+PREPARED BY
+Neomenta
+PREPARED FOR
+Anglo Gulf
+DATE
+29 September 2026
+STATUS
+Draft for review
+NEOMENTA · DRAFT FOR REVIEW neome.ai
+Anglo Gulf CRM · BRD02 / 19
+ABOUT THIS DOCUMENT
+How to read this document
+Each requirement is numbered, prioritised, scoped and traceable to
+where it came from. Anything not yet agreed is an open item, not a
+guess.
+PURPOSE
+Set out, in testable terms, what the CRM on Neome
+must do for Anglo Gulf, based on Anglo Gulf's CRM
+expectations deck and Neomenta's clarifications.
+Once confirmed, this document is the baseline for
+configuration and for user acceptance testing
+(UAT).
+READING A REQUIREMENT
+ID is fixed and used in testing. Acceptance is the
+condition UAT checks. Source points to where the
+requirement came from. OI points to an open item
+that must close before the requirement is final.
+PRIORITY (MOSCOW), PROPOSED BY NEOMENTA FOR ANGLO GULF TO CONFIRM (OI-28)
+Must
+Needed for the core lead-
+to-order process, or
+called critical, most
+important or minimum in
+the deck.
+Should
+Supports the core
+process. The CRM still
+works on day one without
+it.
+Won't
+Excluded from this
+engagement.
+TBC
+Scope still open. Priority is
+set once the open item
+closes.
+SCOPE TAGS
+Neome
+In scope. Delivered on the Neome
+platform.
+Neome, TBC
+In scope on Neome. Detail or logic
+still to be agreed (see open item).
+Tally ERP
+Delivered through the Tally ERP
+integration, scoped separately with
+the Tally partner.
+Anglo Gulf
+Depends on a service Anglo Gulf
+procures, or charged on actuals.
+Out of scope
+Not delivered in this engagement.
+Open
+Scope not yet defined. Needs input
+before it can be committed.
+SOURCES
+CE-1 to CE-4Anglo Gulf CRM Expectations deck, slides 1 to 4 (condensed for management review).
+QA-1 to QA-6Neomenta clarifications to the CRM solution questions, 29 September 2026.
+SD Neomenta scope decisions, 29 September 2026.
+TL Neomenta implementation estimate, 29 September 2026.
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD03 / 19
+SCOPE AT A GLANCE
+What is in, what sits elsewhere, what
+is open
+Most of Anglo Gulf's expectations are delivered on Neome. ERP-
+linked items go through the Tally integration, which is scoped
+separately.
+44
+On Neome
+(15 with detail TBC)
+6
+Through Tally ERP
+integration
+1
+Depends on Anglo
+Gulf procurement
+7
+Scope open
+1
+Out of scope
+Delivered on Neome
+Customers and contacts, leads, opportunities and
+pipeline, targets and forecast, quotation tracking and
+discount approvals, visits, follow-ups, dashboards,
+mobile, calendar sync, roles, and implementation.
+Through the Tally ERP integration
+Order-to-cash flow, shared customer master,
+quotation cost and gross margin, collections and
+outstanding, and email integration. The Tally partner
+shares this scope after discussion.
+QUO-04, DSH-02, COM-03, ERP-01, ERP-02, ERP-03
+Anglo Gulf procures
+WhatsApp Business API, procured by Anglo Gulf or
+charged on actuals.
+COM-01
+Out of scope
+Generating the quotation document or PDF.
+Quotations are prepared outside Neome and
+attached.
+QUO-07
+Open, needs input before commitment
+Product and market intelligence, competitor database, registration and tender tracker, purchase history source, the
+product and molecule view, data migration and post go-live support.
+CUS-05, DSH-04, MI-01, CMP-01, REG-01, IMP-06, IMP-07
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD04 / 19
+BUSINESS PROCESS
+Lead to collection, end to end
+The confirmed shape of the process. Stage names and a few hand-offs are still open and are
+marked where they apply.
+convert
+on the lead or on the account
+Tally ERP
+scoped separately
+with the Tally partner
+Lead
+Status list: OI-01
+Qualification Account and contactA/B/C class
+Opportunity
+Stages: OI-02
+Quotation
+Discount % approval
+PO received
+Position: OI-04
+Sales order Invoice Collection
+Confirmed
+A lead is qualified, then
+converted to an account. An
+opportunity can sit on an
+unconverted lead or on an
+account (QA-1).
+Rules that apply
+throughout
+No open opportunity without
+next action, owner and deadline
+(OPP-04). Discount % drives
+quotation approval (QUO-06).
+Open
+Final lead statuses (OI-01) and
+opportunity stages (OI-02), and
+where PO, approval and order sit
+against Won (OI-04).
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD05 / 19
+REQUIREMENTS · 01
+Customer and contact management
+One record per customer, so no customer data stays in personal
+Excel, WhatsApp or email.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+CUS-01Account record
+Each customer is held as one account
+carrying customer type, industry,
+country, assigned salesperson and
+A/B/C class.
+An account can be saved with all
+five fields. Each field can be used
+as a filter in account lists.
+Must Neome CE-1,
+CE-2
+CUS-02Contacts and decision makers
+An account holds multiple contacts.
+Any contact can be flagged as a
+decision maker.
+Two or more contacts link to one
+account. Flagged decision makers
+are visible on the account.
+Must Neome CE-1
+CUS-03A/B/C classification
+Every account carries a class: A
+(critical), B (medium) or C (low).
+Class is mandatory with exactly
+these three values. Accounts and
+dashboards filter by class.
+See OI-05
+Must Neome CE-1,
+QA-2
+CUS-04Credit terms
+Credit terms are visible on the
+account.
+Credit terms show on the account
+view. The system of record for the
+value follows OI-14.
+See OI-14
+Must
+ Neome, TBCCE-1
+CUS-05Purchase history
+Past purchases of the customer are
+visible from the account.
+Purchase history opens from the
+account. Source and depth follow
+OI-14.
+See OI-14
+Must
+ Open CE-1
+CUS-06Last interaction and next follow-up
+The account always shows the last
+logged interaction and the next open
+follow-up with its owner and date.
+Logging a visit updates the last
+interaction with no manual step.
+The earliest open follow-up
+shows as next.
+Must Neome CE-1
+CUS-07Complete customer view
+Leads, opportunities, quotations,
+visits, follow-ups and WhatsApp
+conversations for a customer are
+reachable from the account.
+From one account, a user opens
+each of these record types
+without searching elsewhere.
+WhatsApp follows COM-01.
+Must Neome CE-1,
+CE-4
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD06 / 19
+REQUIREMENTS · 02
+Lead management
+Every potential deal starts as a tracked lead, with an owner, a status
+and a clear path to an account.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+LEAD-01Lead record
+Each potential deal is captured as a
+lead with an owner and a status.
+A lead cannot be saved without
+an owner and a status.
+Must Neome CE-1
+LEAD-02Lead status list
+Lead status uses the list confirmed
+under OI-01. An admin can add or
+rename statuses without code
+changes.
+Only the confirmed statuses are
+selectable. An admin change
+applies to new and existing leads.
+See OI-01
+Must
+ Neome, TBCQA-6
+LEAD-03Qualify and convert
+A qualified lead converts to an
+account and contact in one action,
+keeping a link back to the original
+lead.
+Conversion creates the account
+and contact with lead details
+carried over, sets the lead to
+Converted, and shows the link on
+both records.
+Must Neome QA-1,
+CE-1
+LEAD-04Opportunity on a lead or an account
+An opportunity can be created against
+an unconverted lead, or against an
+account.
+Both routes work. What happens
+to a lead's opportunities on
+conversion follows OI-03.
+See OI-03
+Must
+ Neome, TBCQA-1
+LEAD-05Closed outcome
+A closed lead records its outcome as
+Disqualified or Converted.
+A lead cannot be closed without
+one of these two outcomes.
+Must Neome QA-6
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD07 / 19
+REQUIREMENTS · 03
+Opportunities and pipeline
+Full visibility from first contact to closed deal. The deck calls the
+sales pipeline the most important part.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+OPP-01Opportunity record
+Each opportunity carries its lead or
+account, product, value, currency,
+expected close date, stage, owner and
+country.
+An opportunity cannot be saved
+without these fields. Currency
+options follow OI-22.
+See OI-22
+Must Neome CE-1
+OPP-02Opportunity stages
+Opportunity stages use the list
+confirmed under OI-02. An admin can
+change stages without code changes.
+Only the confirmed stages are
+selectable. Each stage change is
+recorded with date and user.
+See OI-02
+Must
+ Neome, TBCQA-1,
+QA-6
+OPP-03Visual pipeline
+A board view shows opportunities as
+cards in stage columns, with count
+and total value per column.
+Moving a card changes the stage
+and updates column totals
+straight away.
+Must Neome CE-1
+OPP-04Next action rule
+No open opportunity exists without a
+next action, an owner and a deadline.
+Saving an open opportunity
+without all three is blocked with a
+clear message.
+Must Neome CE-2
+OPP-05Won or lost with reason
+Closing an opportunity records the
+outcome, Won or Lost, and the reason.
+An opportunity cannot be closed
+without an outcome and a reason.
+Reasons are reportable.
+Must Neome CE-3
+OPP-06PO receipt
+Receipt of the customer PO is
+recorded with its reference and date.
+A PO reference and date can be
+entered and are visible on the
+opportunity. Position in the flow
+follows OI-04.
+See OI-04
+Must
+ Neome, TBCCE-1,
+QA-1
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD08 / 19
+REQUIREMENTS · 04
+Pipeline analytics and targets
+Total pipeline, weighted pipeline, expected orders, actual orders and
+target, side by side.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+PIPE-01Pipeline view
+One view shows total pipeline,
+weighted pipeline, expected orders,
+actual orders and target for a selected
+period.
+All five figures show together and
+recalculate when the period
+changes.
+Must Neome CE-1
+PIPE-02Slicing
+Every pipeline figure can be sliced by
+country, salesperson, product and
+customer.
+Each dimension works as a filter
+alone and in combination with the
+others.
+Must Neome CE-1
+PIPE-03Weighted pipeline
+Weighted pipeline is calculated on
+logic agreed with the Anglo Gulf
+business.
+The weighted total equals the
+sum of opportunity-level
+weighted values under the
+agreed logic.
+See OI-10
+Must
+ Neome, TBCCE-1,
+SD
+PIPE-0430, 60 and 90-day expected orders
+Expected orders are grouped into 30,
+60 and 90-day buckets.
+Each opportunity falls in exactly
+one bucket based on the date
+agreed under OI-11.
+See OI-11
+Must
+ Neome, TBCCE-1
+PIPE-05Targets
+Sales targets are held on Neome by
+salesperson, product and country for
+a set period.
+Targets can be entered or
+imported. Achievement % equals
+actual divided by target. Period
+follows OI-12.
+See OI-12
+Must
+ Neome, TBCCE-1,
+CE-2,
+SD
+PIPE-06Actual orders
+Actual orders are counted from the
+source agreed under OI-11.
+Actual order totals reconcile to
+that source for the same period.
+See OI-11
+Must
+ Neome, TBCCE-1
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD09 / 19
+REQUIREMENTS · 05
+Quotation management
+The quotation is prepared outside Neome and tracked on Neome,
+with approvals driven by discount %.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+QUO-01Quotation document
+The quotation document is prepared
+outside Neome and attached to a
+quotation record on Neome.
+A file attaches to the quotation
+record and opens from web
+and mobile.
+Must Neome SD
+QUO-02Quotation record
+Each quotation record holds quotation
+number, product, quantity, price,
+validity, approval status and the linked
+opportunity.
+All fields are visible on the
+record. Which fields are keyed
+on Neome follows OI-13.
+See OI-13
+Must
+ Neome, TBC CE-1
+QUO-03Expected PO date
+Expected PO date is a field on the
+quotation on Neome.
+The field is present, editable
+and reportable.
+Must Neome CE-1,
+SD
+QUO-04Cost and gross margin
+Cost and gross margin for the
+quotation come from Tally ERP.
+Values shown match Tally for
+the same quotation.
+See OI-19
+Must Tally ERP CE-1,
+SD
+QUO-05Revision history
+Each revision is added as a new
+document on the quotation. Earlier
+documents stay available.
+All versions are listed on the
+quotation with upload date and
+user. None are overwritten.
+Must Neome CE-1,
+SD
+QUO-06Discount approval matrix
+Approval is driven by discount %.
+Default bands: under 10% needs no
+approval, 10 to 20% needs Level 1, 20
+to 25% needs Levels 1 and 2, over 25%
+needs Levels 1, 2 and 3. An admin can
+change bands and levels without code
+changes.
+A quotation in each band routes
+to the right levels. It cannot
+show Approved until every
+required level approves. Each
+decision is logged with
+approver and time.
+See OI-08, OI-09
+Must
+ Neome, TBC QA-5
+QUO-07Quotation PDF generation
+Neome does not generate the
+quotation document or PDF.
+Not delivered. See QUO-01. Won't Out of scopeSD
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD10 / 19
+REQUIREMENTS · 06
+Customer visits and meetings
+Every visit logged, so management can see how many visits
+happened and what business came from them.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+VIS-01Visit log
+Each visit captures customer, date,
+participants, purpose, discussion,
+linked opportunity, competitor
+information, next action, owner and
+deadline.
+All fields are available on the visit
+form and saved against the
+customer.
+Must Neome CE-2
+VIS-02Field teams
+Field teams log visits from phone or
+tablet while travelling across the
+Middle East, Africa and CIS.
+A visit logged on mobile appears on
+the web record. Meaning of CIS
+follows OI-06.
+See OI-06
+Must Neome CE-2,
+CE-4
+VIS-03Visits and resulting business
+A report answers how many visits
+happened this week and what
+business resulted.
+The report shows visit count per
+salesperson per week, with
+opportunities and quotations linked
+to those visits.
+Must Neome CE-2
+REQUIREMENTS · 07
+Follow-ups and tasks
+Follow-up reminders are a minimum requirement. Nothing slips
+because nobody owned it.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+TSK-01Owned follow-ups
+Every follow-up has an owner and a
+deadline.
+A follow-up cannot be saved
+without both.
+Must Neome CE-2
+TSK-02Status flags
+Follow-ups are flagged automatically:
+red Overdue, orange Due today,
+yellow Due this week, green
+Completed.
+Flags change with the date and
+completion, with no manual update.
+Must Neome CE-2
+TSK-03Reminders
+The owner receives a reminder for
+each follow-up. An admin sets
+reminder timing.
+A reminder reaches the owner at
+the configured time for every open
+follow-up.
+Must Neome CE-2
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD11 / 19
+REQUIREMENTS · 08
+Dashboards
+A salesperson dashboard, a one-page management dashboard, and
+the product and market view.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+DSH-01Salesperson performance
+Per salesperson: target vs actual
+sales, achievement %, conversion
+ratio, new customers, opportunities,
+pipeline, weighted pipeline, visits,
+follow-ups, and orders won and lost.
+Each metric shows per
+salesperson for a selected period
+and reconciles to the underlying
+records.
+Must Neome CE-2
+DSH-02Collections and outstanding
+Collections and outstanding amounts
+per salesperson are picked up from
+Tally ERP.
+Figures match Tally for the same
+salesperson and date.
+See OI-19
+Must Tally ERPCE-2,
+SD
+DSH-03One-page management dashboard
+Sections for Sales, Pipeline,
+Customers, Business Development,
+Collections and People, plus risks: lost
+orders, at-risk customers, delayed
+deals and overdue actions. Neomenta
+proposes the first set. Further
+dashboards are defined with the
+business.
+The agreed first set is live at go-
+live. Risk definitions follow OI-17.
+See OI-17
+Must
+ Neome, TBCCE-3,
+SD
+DSH-04Product, geography and molecule
+view
+Performance by product (oilfield,
+water treatment, agrochemicals), by
+geography (UAE, Saudi Arabia, Oman,
+Africa, CIS, others) and by molecule
+(DBNPA, corrosion and scale
+inhibitors, biocides, others).
+Each view filters pipeline and
+orders by the chosen dimension.
+Product attributes follow OI-27.
+See OI-07, OI-27
+Should
+Open CE-2
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD12 / 19
+REQUIREMENTS · 09
+Market, competitor and registration
+tracking
+Captured as Anglo Gulf described them. Scope is open until the
+questions in the register are answered.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+MI-01Product and market intelligence
+Capture of buying signals and market
+updates that keep sales teams
+current.
+To be written once scope is agreed
+under OI-07.
+See OI-07
+TBC
+ Open CE-2,
+QA-4
+CMP-01Competitor database
+Capture competitor name, price,
+product, customer preference,
+competitive advantage and reason for
+winning or losing, building a
+competitor database over time.
+To be written once scope is agreed
+under OI-16.
+See OI-16
+TBC
+ Open CE-3,
+SD
+REG-01Registration and tender tracker
+Track country, customer, product,
+registration and authority, with
+submission date, status, expected
+approval, tender and value. Deck
+example: Tanzania, Product Y,
+Approval Pending, Tender Q1, USD
+500K potential.
+To be written once scope is agreed
+under OI-15.
+See OI-15
+TBC
+ Open CE-3,
+SD
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD13 / 19
+REQUIREMENTS · 10
+Mobile and communication
+Full functionality for travelling teams, and customer conversations
+kept in the shared history.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+MOB-01Mobile and tablet
+On phone and tablet, users update
+visits, add opportunities, upload
+quotations and notes, set next actions,
+check customer history and reach
+contacts.
+Each of these six actions
+completes on mobile and shows
+on the web record.
+Must Neome CE-4
+COM-01WhatsApp Business
+Customer WhatsApp conversations
+become part of the shared customer
+history.
+A WhatsApp conversation with a
+customer is viewable from that
+account. WhatsApp Business API
+is procured by Anglo Gulf or
+charged on actuals (OI-20).
+See OI-20
+ShouldAnglo GulfCE-4,
+SD
+COM-02Calendar sync
+Calendar sync is delivered on Neome.
+Calendar and synced items follow
+OI-18.
+See OI-18
+Should
+Neome, TBCCE-4,
+SD
+COM-03Email
+Outlook and Gmail integration is part
+of the ERP integration scope.
+Defined and accepted under the
+ERP integration scope.
+See OI-19
+ShouldTally ERPCE-4,
+SD
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD14 / 19
+REQUIREMENTS · 11
+ERP integration
+The CRM must not run standalone next to the ERP. This integration is
+scoped separately with the Tally partner.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+ERP-01Order-to-cash flow
+CRM to quotation to sales order to ERP
+to invoice to collection runs as one
+flow.
+Defined and accepted under the
+ERP integration scope.
+See OI-19
+Must Tally ERPCE-3,
+SD
+ERP-02Shared customer master
+One shared customer master, with no
+duplicate data entry.
+Defined and accepted under the
+ERP integration scope.
+See OI-19
+Must Tally ERPCE-3,
+SD
+ERP-03Data from Tally into Neome
+At minimum: quotation cost and gross
+margin (QUO-04), and collections and
+outstanding (DSH-02).
+Defined and accepted under the
+ERP integration scope.
+See OI-19
+Must Tally ERPSD
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD15 / 19
+REQUIREMENTS · 12
+Access and implementation
+The CRM is configured around Anglo Gulf's process, not the reverse.
+ID REQUIREMENT ACCEPTANCE CRITERIA PRIORITYSCOPE SOURCE
+ACC-01Roles and permissions
+Users are set up with roles and
+permissions that match Anglo Gulf's
+sales organisation.
+Each role sees and edits only
+what the agreed permission
+matrix allows (OI-21).
+See OI-21
+Must
+ Neome, TBCCE-4
+IMP-01Master data
+Masters are set up in week 1.
+Masters are loaded on Neome by
+the end of week 1.
+See OI-27
+Must Neome CE-4,
+TL
+IMP-02Pipeline and dashboard configuration
+CRM, workflow and process
+configuration in weeks 1 and 2,
+including pipeline and dashboards.
+Configuration matches the
+confirmed lists and rules in this
+document.
+Must Neome CE-4,
+TL
+IMP-03Testing and UAT
+Testing, fixes and final adjustments in
+week 3.
+Anglo Gulf signs off UAT against
+the acceptance criteria in this
+document.
+Must Neome CE-4,
+TL
+IMP-04Go-live and change management
+Go-live and change management,
+which covers training, in week 4.
+Training is delivered to users in
+each role in week 4.
+Must Neome CE-4,
+TL
+IMP-05Process mapping
+Anglo Gulf's sales process is mapped
+before configuration.
+Timing follows OI-26.
+See OI-26
+Must
+ Neome, TBCCE-4
+IMP-06Data migration
+Existing customer and pipeline data is
+migrated.
+Sources, volumes and timing
+follow OI-25.
+See OI-25
+Must
+ Open CE-4
+IMP-07Post go-live support
+Support after go-live.
+Duration and terms follow OI-26.
+See OI-26
+Must
+ Open CE-4
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD16 / 19
+IMPLEMENTATION
+Four weeks from start to go-live
+Neomenta's estimate for standard configuration on Neome. Work that
+depends on other parties runs on its own plan.
+Week 1
+Master data and
+CRM
+configuration
+Masters, users and
+roles, core CRM
+records.
+Week 2
+Workflow and
+process
+configuration
+Stages, approvals,
+reminders, pipeline and
+dashboards.
+Week 3
+Testing, fixes and
+final adjustments
+UAT against the
+acceptance criteria in
+this document.
+Week 4
+Go-live and
+change
+management
+Go-live, with training
+delivered as change
+management.
+Covered by the 4 weeks
+Master data, users and roles, CRM configuration,
+workflows and approvals, pipeline and dashboards,
+testing and UAT, go-live, and training through change
+management (IMP-01 to IMP-04).
+Not yet placed in the plan
+Process mapping and post go-live support (OI-26),
+data migration (OI-25), ERP and email integration (OI-
+19), and any scope that opens up from OI-07, OI-15
+and OI-16.
+What Anglo Gulf expects from the vendor (CE-4)
+Process mapping, data migration, masters, roles, pipeline and dashboard configuration, integrations, training, UAT,
+go-live and support. Each is traced to a requirement in section 12 or to an open item.
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD18 / 19
+OPEN ITEMS REGISTER
+28 questions to close before sign-off
+Each item blocks or shapes the requirements listed against it.
+Nothing here has been assumed in the requirements.
+ID QUESTION NEEDS ANSWERFROM AFFECTS
+OI-01Final lead status list. Two versions exist: (a) New, Contacted, Qualified, On
+hold, Opportunity grooming, Closed (Disqualified or Converted); (b) New,
+Contacted, On hold, Qualified, Disqualified, Converted. Is Opportunity
+grooming a status?
+Neomenta, Anglo
+Gulf
+LEAD-02
+OI-02Final opportunity stage list. Two versions exist: (a) New, Contacted, Quote,
+Negotiations, Won or Lost; (b) Qualified, Requirement Study, Demo or
+Presentation, Won, Lost. The deck used Lead, Qualification, Quotation,
+Negotiation, PO, Won or Lost.
+Neomenta, Anglo
+Gulf
+OPP-02
+OI-03When a lead with opportunities converts, do its opportunities move to the
+new account?
+Anglo Gulf LEAD-04
+OI-04Where do quotation approval, PO receipt and order creation sit relative to
+Won? Is a PO approval step needed?
+Anglo Gulf OPP-06
+OI-05Is the A/B/C class set by hand or by a rule? Who can change it? Anglo Gulf CUS-03
+OI-06Does CIS mean the region (Commonwealth of Independent States, as the
+deck's geography list suggests) or a Customer Information Systems field
+team?
+Anglo Gulf VIS-02, DSH-04
+OI-07Scope of Product and Market Intelligence: analytics views only, or capture of
+buying signals and market updates?
+Anglo Gulf MI-01, DSH-04
+OI-08Is the discount % measured per line against list price, or on the whole
+quotation? If a line is at 22% and the quotation overall at 8%, which decides?
+Anglo Gulf QUO-06
+OI-09Which roles are Levels 1, 2 and 3? Is approval sequential? Which band do
+exactly 10%, 20% and 25% fall in? Is approval on % only, with no value limit?
+Anglo Gulf QUO-06
+OI-10Weighted pipeline logic, for example a probability per stage and who sets it. Anglo Gulf PIPE-03
+OI-11Which date drives the 30, 60 and 90-day buckets (expected PO date or
+expected close date)? Are actual orders counted from PO on Neome or sales
+orders in Tally?
+Anglo Gulf PIPE-04, PIPE-
+06
+OI-12Target period (monthly, quarterly, yearly) and whether targets are value,
+quantity or both.
+Anglo Gulf PIPE-05
+OI-13With the quotation document made outside Neome, which quotation fields
+are keyed on Neome? Discount % and value are needed for approvals and
+pipeline.
+Anglo Gulf QUO-02, QUO-06
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026
+Anglo Gulf CRM · BRD19 / 19
+Open items register, continued
+ID QUESTION NEEDS ANSWERFROM AFFECTS
+OI-14System of record for credit terms and purchase history: Neome or Tally? Anglo Gulf, Tally
+partner
+CUS-04, CUS-05
+OI-15Registration and tender tracker: record structure, statuses, authorities, users
+and reports.
+Anglo Gulf REG-01
+OI-16Competitor database: what Anglo Gulf wants captured, where, and by whom. Anglo Gulf CMP-01
+OI-17Definitions of at-risk customer and delayed deal, and the first set of
+management dashboards.
+Anglo Gulf,
+Neomenta
+DSH-03
+OI-18Calendar sync: Outlook or Google, and which items sync (visits, follow-ups,
+meetings).
+Anglo Gulf COM-02
+OI-19ERP integration scope, including email, after discussion with the Tally partner. Tally partner,
+Neomenta
+QUO-04, DSH-
+02, COM-03,
+ERP-01 to ERP-
+03
+OI-20WhatsApp Business API: does Anglo Gulf procure it, or is it charged on
+actuals?
+Anglo Gulf COM-01
+OI-21Number of users by role, and the role and permission matrix. Anglo Gulf ACC-01
+OI-22Currencies in use (AED appears in the deck) and the reporting currency. Anglo Gulf OPP-01, PIPE-
+01
+OI-23Languages required, including whether Arabic is needed. Anglo Gulf All
+OI-24Hosting or data residency rules, and single sign-on requirements. Anglo Gulf All
+OI-25Data migration: sources (Excel, other systems), record volumes, and where it
+fits in the 4-week plan.
+Anglo Gulf,
+Neomenta
+IMP-06
+OI-26Timing of process mapping, and duration and terms of post go-live support. Neomenta IMP-05, IMP-07
+OI-27Product master: list of products with product line and molecule attributes,
+and its source.
+Anglo Gulf DSH-04, IMP-01
+OI-28Confirmation of the proposed MoSCoW priority on each requirement. Anglo Gulf All
+NEOMENTA · DRAFT FOR REVIEW 29 September 2026

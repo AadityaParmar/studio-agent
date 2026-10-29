@@ -1,0 +1,573 @@
+Home
+Apps
+CRM
+CRM for small, midsize, and large teams
+From First Enquiry to Closed Revenue, Tracked in One CRM
+Neome CRM is small business CRM that also fits midsize and large teams from about 10 to 10,000 people. Capture leads, assign an owner and a dated next step, convert to accounts and opportunities, and track pipeline on one dashboard. Work from WhatsApp, chat, Excel, and web so field and office stay on the same CRM. Start on Standard with a 15-day trial, or book an Enterprise demo for custom workflows, integrations, and SLA.
+Start Free Trial
+Book A Free Demo
+Live in hours
+Fully customizable
+Role-based access
+Lead
+L213 · created today
+92% fit
+Company name
+Shakti Polymers Pvt Ltd
+Contact person
+Rohit Mehta
+Lead source
+AI Agent
+Reachable on
+Email · WhatsApp · LinkedIn
+Assigned to
+Amit
+Next step
+Follow-up 4:00 PM
+New Lead Assigned!
+Shakti Polymers Pvt Ltd
+·
+Rohit Mehta
+Delivered to
+Amit
+'s chat · 11:25 AM
+Sales talk · team chat
+@
+Amit
+can you send
+Rohit
+the revised quotation today?
+On it, sending now
+Open pipeline
+₹1.59 Cr
+5 open deals · value by stage
+Lead
+L213 · created today
+92% fit
+Company name
+Cascade Polymers Inc.
+Contact person
+Daniel Brooks
+Lead source
+AI Agent
+Reachable on
+Email · WhatsApp · LinkedIn
+Assigned to
+Mike
+Next step
+Follow-up 4:00 PM
+New Lead Assigned!
+Cascade Polymers Inc.
+·
+Daniel Brooks
+Delivered to
+Mike
+'s chat · 11:25 AM
+Sales talk · team chat
+@
+Mike
+can you send
+Daniel
+the revised quotation today?
+On it, sending now
+Open pipeline
+$191,000
+5 open deals · value by stage
+AI lead generation & scoring
+An agent sources prospects and scores them before you call.
+Email, WhatsApp & LinkedIn
+Reach a lead on the channel they actually answer.
+Team chat built in
+Talk it through beside the deal, with @mentions.
+Follow-up reminders
+Every next step is dated, raised as a task and chased.
+The workspace
+One screen, no app switching
+Leads, deals, activities, tasks, team chat and dashboards are one application, not a folder of separate tools. Assign a lead and its owner hears about it where they already work; close one and the pipeline total updates itself. Nothing is exported, emailed or re-keyed to move a deal along.
+Deals rarely die loudly. They just go quiet.
+Three gaps account for most of what a growing business loses, and none of them is a selling problem.
+Unowned
+Nobody's name is on the lead
+Everyone assumes someone else has it, and nobody called.
+Unrecorded
+The deal lives in someone's head
+The price was discussed. None of it was written down.
+Unforecastable
+You can name deals, not the number
+What the pipeline is worth is a guess, not a figure.
+Neome CRM closes all three by making one record carry the lead all the way to the revenue.
+Capture
+Every lead lands in one place, whoever sends it
+One form, six labelled sections, and the company and contact carry straight through to the account when the lead converts. Account type and industry come from your own master lists, and you can add a missing value without leaving the form.
+Attach the enquiry or visiting card
+Source and campaign tracked
+Assign in the same send
+New lead
+L213
+Company details
+Company name *
+Shakti Polymers Pvt Ltd
+Contact person *
+Rohit Mehta
+Mobile number
++91 98250 41042
+Business details
+Account type
+Prospect
++
+Industry type
+Plastics & Polymers
++
+Enquiry mail.pdf attached
+AI Agent · assigned to
+Amit
+SEND
+New lead
+L213
+Company details
+Company name *
+Cascade Polymers Inc.
+Contact person *
+Daniel Brooks
+Mobile number
++1 (415) 555-0142
+Business details
+Account type
+Prospect
++
+Industry type
+Plastics & Polymers
++
+Enquiry mail.pdf attached
+AI Agent · assigned to
+Mike
+SEND
+Follow-ups
+Never lose a follow-up to someone's memory
+Log the call, the meeting or the site visit with one line of outcome. The date and the person are filled in for you and cannot be backdated. Answer two questions and the lead gets a dated next step and a Pending task, both raised in the same send.
+7 activity types
+Dated next step
+Task raised automatically
+Activity
+Date (prefilled)
+08/09/2026
+Done by (prefilled)
+Amit
+Activity type
+Call
+Email
+Meeting
+Site Visit
+What was discussed *
+Demo scheduled today, 4 PM.
+Is a follow-up required?
+Yes
+Add this as a task?
+Yes
+Next follow-up
+08/09
+, 4:00 PM
+SEND
+Task raised automatically
+Task id
+TASK105
+Title
+Demo with Rohit Mehta
+Assigned to
+Amit
+Pending
+Activity
+Date (prefilled)
+09/08/2026
+Done by (prefilled)
+Mike
+Activity type
+Call
+Email
+Meeting
+Site Visit
+What was discussed *
+Demo scheduled today, 4 PM.
+Is a follow-up required?
+Yes
+Add this as a task?
+Yes
+Next follow-up
+09/08
+, 4:00 PM
+SEND
+Task raised automatically
+Task id
+TASK105
+Title
+Demo with Daniel Brooks
+Assigned to
+Mike
+Pending
+Conversion
+One send writes three records, with nothing retyped
+Mark the lead Converted and pick the route. Neome writes the account, the contact person and the opportunity together, carrying the type, industry, phone and email across. Attach the deal to an existing account or let it create a new one.
+Account + contact + opportunity
+Or account and contact only
+Lead id stays traceable
+LEAD L213
+Shakti Polymers
+Converted
+Account with contact and opportunity
+Account
+Shakti Polymers Pvt Ltd
+Prospect · Plastics & Polymers
+Contact person
+Rohit Mehta · CTO
+Primary contact: Yes
+Opportunity
+Inventory & Production Suite
+₹40 L · closes 15/10/2026
+LEAD L213
+Cascade Polymers
+Converted
+Account with contact and opportunity
+Account
+Cascade Polymers Inc.
+Prospect · Plastics & Polymers
+Contact person
+Daniel Brooks · CTO
+Primary contact: Yes
+Opportunity
+Inventory & Production Suite
+$48,000 · closes 10/15/2026
+Pipeline
+The whole pipeline on one board
+Deals sit as cards under the stage they have actually reached, with the value and the owner on the face of each one. Drag a card to move the deal. Every column totals what it is holding, so the forecast updates itself.
+Your own stages
+Kanban or sheet view
+Won, or a recorded lost reason
+Opportunity board
+5 open deals
+Qualification
+₹70 L
+Shakti Polymers
+₹40 L
+A
+Amit
+Gokul Dairy
+₹30 L
+N
+Neha
+Demo / Presentation
+₹43 L
+Deepak Contractors
+₹43 L
+A
+Amit
+Quotation Sent
+₹20 L
+Shree Auto Components
+₹20 L
+V
+Vikram
+Bharat Machine Tools
+₹62 L
+N
+Neha
+moving stage
+Negotiation
+₹26 L
+Deccan Process Equipment
+₹26 L
+N
+Neha
+Opportunity board
+5 open deals
+Qualification
+$84,000
+Cascade Polymers
+$48,000
+M
+Mike
+Lakeside Dairy
+$36,000
+L
+Levi
+Demo / Presentation
+$52,000
+Brightline Contractors
+$52,000
+M
+Mike
+Quotation Sent
+$24,000
+Prime Auto Parts
+$24,000
+J
+Jay
+Atlas Machinery
+$75,000
+L
+Levi
+moving stage
+Negotiation
+$31,000
+Midwest Process Equip.
+$31,000
+L
+Levi
+AI
+Most CRMs wait to be filled. This one helps fill itself
+An AI agent sources prospects that match the customers you already sell to, turns genuine inbound enquiries into leads, completes the detail that came in half-blank and scores the list. Then run an email campaign against those leads, once or on a schedule.
+Tagged with the AI Agent source
+Scored before anyone calls
+One-time or scheduled sends
+Enquiries arriving on WhatsApp can feed the same queue.
+WhatsApp Inquiry Management
+syncs the groups and chats you choose and tells a real enquiry from chatter.
+AI lead agent
+Annapurna Food Group
+AI Agent
+92
+fit score
+Girnar Trading Co.
+AI Agent
+78
+fit score
+Deccan Agro Supply
+AI Agent
+61
+fit score
+Email campaign
+Recipients: 3 leads from this agent run
+Send now
+Schedule
+12/09/2026, 09:00 AM
+Save
+AI lead agent
+Sunrise Food Group
+AI Agent
+92
+fit score
+Keystone Trading Co.
+AI Agent
+78
+fit score
+Redwood Agro Supply
+AI Agent
+61
+fit score
+Email campaign
+Recipients: 3 leads from this agent run
+Send now
+Schedule
+09/12/2026, 09:00 AM
+Save
+Migration
+Bring the spreadsheet you already have
+Pick your Excel file and map its headers onto CRM fields. Anything already named the same maps itself, mandatory fields are flagged before the import runs, and the row count in the sheet header confirms exactly what landed.
+Column mapping
+Mandatory fields flagged
+Bulk-assign owners after import
+Bulk data insert
+leads-september.xlsx
+Sheet column
+CRM field
+Lead date
+Lead date *
+Company
+Company name *
+Contact person
+Contact person *
+Mobile
+Mobile number
+Email id
+Email
+Matching headers map themselves
+40 leads imported in one pass
+Bulk data insert
+leads-september.xlsx
+Sheet column
+CRM field
+Lead date
+Lead date *
+Company
+Company name *
+Contact name
+Contact person *
+Phone
+Mobile number
+Email
+Email
+Matching headers map themselves
+40 leads imported in one pass
+Reporting
+Turn what your team entered into a forecast
+Set a date range and every figure below it is bounded by those dates.
+Lead Dashboard
+Are leads moving?
+New, open, follow-up and converted counters, the funnel by status, lead ageing, which channels convert, and how loaded each owner is.
+Sales Executive Performance
+Is each person productive?
+One executive's leads, conversions, opportunities, open pipeline and revenue won, plus their activity mix and a worklist sorted by days open.
+CRM Performance
+Is the pipeline healthy?
+Open pipeline, revenue won, conversion rate, value at every stage, value carried by each executive, ageing deals, and why deals were lost.
+All the features, done right
+Lead sheet
+Search, filter, sort and page through every lead.
+Ownership
+Assign to an active employee; they are told instantly.
+Activity log
+Call, email, meeting, site visit, WhatsApp, SMS, video.
+Tasks
+Raised from a follow-up, with an id and a status.
+Accounts
+Many contacts per account, one flagged primary.
+Opportunities
+Stage, expected value, closure date, payment terms.
+Sales talk
+Team chat with @mentions, inside the CRM.
+Bulk update
+Filter, select many rows, set one field across all.
+Integrations
+Email, WhatsApp and LinkedIn against the record.
+Role-based access
+Executive, manager and admin see different scopes.
+Automation
+Inactivity nudges, reminders and auto-raised tasks.
+Mobile apps
+Android and iOS, with the same records.
+Organisation admin
+Every module plus master data and all three dashboards. Sets up the reference lists, imports and assigns in bulk, reads the company numbers.
+Sales executive
+Their own leads, opportunities, activities and tasks, plus the CRM chat that delivers their notifications. Sales managers add team visibility and reassignment.
+Built-in governance:
+a Won opportunity cannot be approved by the person who raised it.
+Who it is for
+Small, midsize, and large teams run the same CRM
+The difference is not the product. It is whether you start it yourself on Standard or have the workflows scoped with us on Enterprise.
+Founders and ops heads at growing teams
+About 10 to 200 people, wanting chat-first CRM without a long admin project.
+Directors, plant and sales heads at midsize companies
+Needing one shared pipeline across the field and the office.
+Ops and IT leaders at large organizations
+Wanting chat-first CRM with Enterprise workflows, integrations, and an SLA.
+Manufacturing and field teams
+Already working in WhatsApp, chat, Excel, and email.
+Not the right fit
+Teams whose system of record is a custom Salesforce build
+If the project is that implementation, Neome is not what you are shopping for.
+Neome vs Salesforce
+Not the right fit
+Teams that want a static contact list
+No ownership, no dated next step, no pipeline. A spreadsheet already does that.
+Weighing it against something else?
+Neome vs Zoho
+Neome vs Salesforce
+All comparisons
+Customer proof
+Used by real field and ops teams
+260 Brands
+FMCG field sales and distribution digitized attendance, beat plans, visits, orders, stock, and collections on one platform.
+Maniarr's Khakhra
+FMCG manufacturing and field distribution digitized attendance, beat planning, visit logging, orders, and inventory.
+HCD India
+Electric two-wheeler rental and fleet ops connected rider onboarding, fleet, payments, and IoT on one platform.
+More stories
+Configuration
+Eight lists, and you own all of them
+Every lead, account and opportunity picks its values from these. An admin edits them directly, which is what makes the dashboards worth reading.
+The eight master data lists in Neome CRM, what each one controls, and the values it ships with.
+Master list
+What it controls
+Values it ships with
+Account type
+How a lead or an account is classified
+Distributor, Dealer, Retailer, Stockist, Trader, Manufacturing, Partner, Enterprise, Direct Customer
+Distributor, Dealer, Retailer, Stockist, Trader, Manufacturing, Partner, Enterprise, Direct Customer
+Industry type
+The industry tagged on every lead and account
+Construction, Pharmaceutical, Dairy & Food, Chemicals & Petrochemicals, Logistics & Supply
+Construction, Pharmaceutical, Dairy & Food, Chemicals & Petrochemicals, Logistics & Supply
+Territory
+City, state and country used for sales coverage
+Your own sales geography
+Your own sales geography
+Payment terms
+Credit terms offered on an opportunity
+Advance, 7 days, 30 days, 60 days, 90 days credit
+Advance, 7 days, 30 days, 60 days, 90 days credit
+Opportunity stage
+The pipeline your deals move through
+Qualification, Requirement Study, Demo / Presentation, Quotation Sent, Negotiation, Order Confirmation
+Qualification, Requirement Study, Demo / Presentation, Quotation Sent, Negotiation, Order Confirmation
+Activity type
+How an interaction was made
+Call, Email, Meeting, Site Visit, WhatsApp, SMS, Video Call
+Call, Email, Meeting, Site Visit, WhatsApp, SMS, Video Call
+Employee
+Users, their role, their manager and active status
+Your sales team
+Your sales team
+Lost reasons
+Why a deal did not close
+Budget, Competitor, Timeline, No response
+Budget, Competitor, Timeline, No response
+Before you move your pipeline across
+The questions sales teams ask before they put their first lead into Neome CRM.
+Who is this for?
+Is Neome only a small business CRM?
+What is the best CRM for a small business that lives on WhatsApp?
+Can a large team run Neome CRM?
+Is Neome CRM free?
+Does Neome CRM include lead management and pipeline?
+How is Neome CRM different from a WhatsApp spreadsheet?
+How long does it take to get the CRM running?
+Can I import the leads I already have in a spreadsheet?
+What happens when a lead is assigned to someone?
+Can I reassign a lot of leads at once?
+What exactly does converting a lead create?
+Can I change the pipeline stages to match how we sell?
+How does the AI lead generation work?
+Can I email the leads the AI generates?
+Does it work on a phone?
+Who can see which records?
+What it costs
+One price, and
+CRM
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+CRM
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Or Enterprise
+When the workflows have to fit you
+Larger teams run
+CRM
+on Enterprise: custom workflows, integrations with the systems you already have, and an SLA. It is scoped on a call rather than sold from a page, because the answer depends on how your teams actually work.
+Custom workflows
+Integrations
+SLA
+Book A Free Demo
+See full pricing
+Related Modules
+Lead Management Software for SMEs
+Capture leads from every channel, score them against your own rules, chase them with dated reminders, and see which sources actually convert.
+Learn more
+WhatsApp Inquiry Management for SMEs
+Neome connects to the WhatsApp groups you choose, tells a real inquiry apart from small talk, and lets you reply straight back without opening the app.
+Learn more
+Quotation & Order Management Software
+Build quotations that price themselves, hold discounts to a limit per role, and turn an accepted quote into an order in one step with nothing retyped.
+Learn more
+Ready to run CRM on WhatsApp, chat, Excel, and web?
+Start a 15-day Standard trial, or book an Enterprise demo.
+Start Free Trial
+Book A Free Demo

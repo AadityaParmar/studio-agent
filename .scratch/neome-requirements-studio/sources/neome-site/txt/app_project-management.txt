@@ -1,0 +1,303 @@
+Home
+Apps
+Project Management
+Project Management
+Catch the Overrun While the Project Can Still Absorb It
+Dated milestones instead of a percentage somebody feels, tasks with owners and deadlines, hours logged where the work happened, and a budget alert at the point it is still worth having.
+Start Free Trial
+Book A Free Demo
+Milestone progress
+Time at task level
+Budget alerts early
+Ahmedabad plant rollout
+Girnar Constructions
+On track
+Survey
+100%
+Installation
+60%
+Commissioning
+0%
+Led by
+Vikram
+₹27 L
+of
+₹42 L
+Spend against the project, not against a guess at the end.
+Hours logged
+412
+Against tasks, by the people doing them
+Overdue
+3 tasks
+Dayton plant rollout
+Greenline Construction
+On track
+Survey
+100%
+Installation
+60%
+Commissioning
+0%
+Led by
+Jay
+$328,000
+of
+$510,000
+Spend against the project, not against a guess at the end.
+Hours logged
+412
+Against tasks, by the people doing them
+Overdue
+3 tasks
+Progress you can check
+A milestone is met or it is not. A percentage is a feeling.
+Work with a name on it
+Tasks under milestones, with owners and dates.
+Estimate from evidence
+Hours logged on the task, so the next quote is grounded.
+Overruns forecast
+Raised at 80 percent, not confirmed at 110.
+Projects rarely fail late. They are just found out late.
+Three gaps account for most of what goes wrong on a delivery, and none of them is a capability problem.
+Unmeasured
+Progress is a percentage somebody feels
+Without milestones, a project is 80 percent done for two months and nobody can say what is left.
+Unlogged
+Nobody knows what it actually took
+Hours are never recorded, so the next estimate is the last guess with a bit added for comfort.
+Unwatched
+The overrun arrives fully formed
+Spend is compared to budget at the end, by which point the project is the thing that has to absorb it.
+Neome closes all three by measuring against milestones, logging the hours, and raising the overrun early.
+Planning
+A plan with milestones, not a start and a hope
+A project is linked to its client, carries a timeline broken into dated milestones, has a named project manager and a budget allocated up front. Milestones are what make progress a measurement rather than an impression, because a milestone is either met or it is not.
+Client-linked projects
+Dated milestones
+Budget allocated up front
+Ahmedabad plant rollout
+Girnar Constructions
+12 weeks
+Project manager
+Vikram
+Budget
+₹42 L
+Starts
+1 Oct
+Ends
+22 Dec
+Milestones
+Survey complete
+18 Oct
+Installation done
+26 Nov
+Commissioned
+20 Dec
+Dayton plant rollout
+Greenline Construction
+12 weeks
+Project manager
+Jay
+Budget
+$510,000
+Starts
+1 Oct
+Ends
+22 Dec
+Milestones
+Survey complete
+18 Oct
+Installation done
+26 Nov
+Commissioned
+20 Dec
+Tasks
+Work assigned to a person, with a date
+Tasks sit under milestones with an owner and a due date, and status moves as they are worked. Reminders arrive before a date rather than after it, which is the difference between a plan that is managed and one that is reported on.
+Owner and due date
+Status across the workflow
+Reminders before the date
+Tasks
+on
+TKT-4417
+Collect the rejected sample
+Done
+Amit
+Raise a supplier claim
+Today
+Amit
+Update the inspection note
+1 day over
+Vikram
+A ticket closes when its tasks do, so closure is a fact rather than an opinion.
+Tasks
+on
+TKT-4417
+Collect the rejected sample
+Done
+Mike
+Raise a supplier claim
+Today
+Mike
+Update the inspection note
+1 day over
+Jay
+A ticket closes when its tasks do, so closure is a fact rather than an opinion.
+Time
+Log the hours, then estimate from evidence
+Time is logged against the task by the person doing it, so effort accumulates where the work happened. That is what turns the next estimate from a guess into a comparison, and it is the only honest way to find out which kinds of work consistently take longer than planned.
+Task-level time logging
+Effort per project
+Estimates from evidence
+Ahmedabad plant rollout
+Girnar Constructions
+On track
+Survey
+100%
+Installation
+60%
+Commissioning
+0%
+Led by
+Vikram
+₹27 L
+of
+₹42 L
+Spend against the project, not against a guess at the end.
+Hours logged
+412
+Against tasks, by the people doing them
+Overdue
+3 tasks
+Dayton plant rollout
+Greenline Construction
+On track
+Survey
+100%
+Installation
+60%
+Commissioning
+0%
+Led by
+Jay
+$328,000
+of
+$510,000
+Spend against the project, not against a guess at the end.
+Hours logged
+412
+Against tasks, by the people doing them
+Overdue
+3 tasks
+Budget
+See the overrun forming, not the overrun that happened
+Spend accrues against the project as labour is logged and expenses are booked, with alerts at the thresholds you set. A forecast overrun raised at eighty percent utilisation is a problem; the same figure at the end is just a number in a report.
+Spend against budget
+Threshold alerts
+Expenses booked to the project
+Spent of budget
+₹27 L
+of
+₹42 L
+78% used
+Labour
+64%
+Materials
+31%
+Travel
+5%
+Forecast overrun
+₹1.8 L
+Raised at 80 percent, while there is still a project left to change.
+Spent of budget
+$328,000
+of
+$510,000
+78% used
+Labour
+64%
+Materials
+31%
+Travel
+5%
+Forecast overrun
+$22,000
+Raised at 80 percent, while there is still a project left to change.
+Reporting
+One view across every project running
+Set a date range and every figure below it is bounded by those dates.
+Active projects
+What is running?
+Every live project with its stage, its owner and its milestone dates, so a portfolio is read rather than assembled the night before the meeting.
+Budget utilisation
+Where is the overrun forming?
+Spend and hours against budget per project, drawn from the tasks and time already recorded, so an overrun is visible while it can still be absorbed.
+Overdue tasks
+What has slipped?
+Tasks past their date grouped by project and owner, which is the earliest honest signal that a delivery date is going to move.
+All the features, done right
+Projects
+Linked to the client they are for.
+Milestones
+Dated, so progress is measurable.
+Project manager
+One named owner per project.
+Tasks
+Owner, due date and status.
+Deadline alerts
+Before the date, not after.
+Time logging
+Against the task, by the doer.
+Effort tracking
+What work actually took.
+Budget allocation
+Set when the project starts.
+Project expenses
+Booked against the project.
+Threshold alerts
+At the point you can still act.
+Portfolio view
+Every active project together.
+Mobile apps
+Update a task from anywhere.
+Before you move your projects across
+The questions delivery teams ask before the first project is planned in Neome.
+Who is this for?
+Why insist on milestones?
+Does time logging mean timesheets?
+How does budget tracking work?
+Can expenses be charged to a project?
+How is this different from Ticketing & Task Management?
+What does the portfolio view show?
+Does it work on a phone?
+What it costs
+One price, and
+Project Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Project Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Task & Ticket Management Software for SMEs
+Every issue becomes a ticket with a category, a priority and an SLA, breaks into tasks with owners and dates, and escalates before it breaches.
+Learn more
+Approval Workflow Software for SMEs
+Route requests through the chain the value demands, show the requester exactly where theirs is, and escalate the ones sitting in an inbox.
+Learn more
+Expense Management Software for SMEs
+Claims raised with the receipt attached, checked against category limits as they are submitted, routed through manager and finance, with a trail on every one.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

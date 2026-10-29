@@ -1,0 +1,372 @@
+<!doctype html>
+<!--
+  PROTOTYPE, throwaway. Ticket 10: Module Prototype shape.
+  Plan: three Module Prototype shapes for one Module (Anglo Gulf Quotation, QUO), switchable via ?variant=A|B|C.
+  All three read the same SPEC object below, which mirrors spec.md sections 2/4/5/11/13 (roles, records, statuses, requirements, OIs).
+    A = Clickable app mock (sheet / kanban / form, role switcher, approve buttons that change state)
+    B = Guided scenario walkthrough (story steps, each tied to the Requirements + OIs it proves)
+    C = Mobile screens + Requirement trace (phone frames per role, click a Requirement to see where it shows)
+  Look = ui-reference/tokens.md (Vendorgate design system). Not production code. State in memory only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROTOTYPE · Anglo Gulf · Quotation Module</title>
+<style>
+:root{
+  --surface-base:#F7F7F7; --surface-card:#FFFFFF; --surface-dark:#1D1D1F;
+  --ink-900:#1C1C1E; --ink-700:#3A3A3C; --ink-500:#595959; --ink-400:#8A8A8E; --ink-300:#C7C7C5;
+  --line-subtle:#E6E6E3; --line-strong:#D8D8D4;
+  --neome:#1877D5; --neome-deep:#115EA8; --neome-soft:#E8F1FB; --accent:#F47100; --accent-soft:#FFF1E6;
+  --ok:#1E8E5A; --ok-soft:#E5F4EC; --bad:#C0392B; --bad-soft:#FBEAE8;
+  --sans:'Schibsted Grotesk',-apple-system,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-base);color:var(--ink-700);font-family:var(--sans);font-size:14px;line-height:1.45}
+h1,h2,h3,h4{color:var(--ink-900);margin:0;font-weight:600}
+button{font-family:inherit}
+.mono{font-family:var(--mono)}
+.small{font-size:12px;color:var(--ink-500)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--neome)}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;border:1px solid var(--line-strong);border-radius:999px;padding:1px 7px;background:#fff;color:var(--ink-700);white-space:nowrap}
+.chip.req{border-color:var(--neome);color:var(--neome);background:var(--neome-soft);cursor:pointer}
+.chip.oi{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.chip.prop{border-style:dashed;color:var(--ink-500)}
+.st{display:inline-block;font-size:11.5px;font-weight:600;border-radius:6px;padding:2px 8px}
+.st-Draft{background:#EEE;color:var(--ink-700)}
+.st-InApproval{background:var(--accent-soft);color:var(--accent)}
+.st-Approved{background:var(--ok-soft);color:var(--ok)}
+.st-Rejected{background:var(--bad-soft);color:var(--bad)}
+.st-Sent{background:var(--neome-soft);color:var(--neome-deep)}
+.btn{border:1px solid var(--line-strong);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px}
+.btn.primary{background:var(--neome);border-color:var(--neome);color:#fff}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.card{background:#fff;border:1px solid var(--line-subtle);border-radius:12px}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:6px;font-size:12.5px}
+.callout.blue{border-color:var(--neome);background:var(--neome-soft)}
+table{border-collapse:collapse;width:100%}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-400);text-align:left;font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line-strong);background:#FAFAF9;position:sticky;top:0}
+td{padding:9px 10px;border-bottom:1px solid var(--line-subtle);vertical-align:top}
+tr.row:hover td{background:#F3F8FE;cursor:pointer}
+.hl{outline:2px solid var(--accent)!important;outline-offset:2px;border-radius:6px;transition:outline .2s}
+.reqtag{display:none}
+body.showtags .reqtag{display:inline-block}
+.banner{background:var(--surface-dark);color:#fff;padding:8px 16px;display:flex;gap:12px;align-items:center;font-size:12.5px}
+.banner b{color:#fff}
+.banner .chip{background:transparent;color:#ddd;border-color:#555}
+
+/* ---------- A: app mock ---------- */
+.A-shell{display:grid;grid-template-columns:220px 1fr;height:calc(100vh - 38px)}
+.A-side{background:#fff;border-right:1px solid var(--line-subtle);padding:14px 10px;display:flex;flex-direction:column;gap:2px}
+.A-side .app{display:flex;gap:8px;align-items:center;padding:4px 8px 14px}
+.A-side .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--neome),var(--neome-deep));color:#fff;display:grid;place-items:center;font-weight:700}
+.A-side a{padding:7px 10px;border-radius:8px;color:var(--ink-700);text-decoration:none;font-size:13.5px;display:flex;justify-content:space-between}
+.A-side a.on{background:var(--neome-soft);color:var(--neome-deep);font-weight:600}
+.A-side a.off{color:var(--ink-300)}
+.A-main{display:flex;flex-direction:column;min-width:0}
+.A-top{display:flex;align-items:center;gap:12px;padding:12px 18px;background:#fff;border-bottom:1px solid var(--line-subtle)}
+.A-tabs{display:flex;gap:4px;margin-left:12px}
+.A-tabs button{border:0;background:none;padding:6px 12px;border-radius:8px;cursor:pointer;color:var(--ink-500)}
+.A-tabs button.on{background:var(--surface-base);color:var(--ink-900);font-weight:600}
+.A-body{flex:1;overflow:auto;padding:16px 18px;display:flex;gap:16px}
+.A-body .listwrap{flex:1;min-width:0}
+.A-drawer{width:440px;flex-shrink:0;padding:0;overflow:auto;max-height:100%}
+.A-drawer .hd{padding:14px 16px;border-bottom:1px solid var(--line-subtle);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:1}
+.sec{padding:12px 16px;border-bottom:1px solid var(--line-subtle)}
+.sec h4{font-size:11px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);font-weight:500;margin-bottom:8px}
+.fld{display:grid;grid-template-columns:130px 1fr;gap:8px;padding:4px 0;align-items:center}
+.fld label{font-size:12.5px;color:var(--ink-500)}
+.fld .v{font-size:13.5px;color:var(--ink-900)}
+.fld input,.fld select{font:inherit;font-size:13px;padding:4px 8px;border:1px solid var(--line-strong);border-radius:6px;width:100%}
+.ladder{display:flex;gap:6px;flex-wrap:wrap}
+.step{flex:1;min-width:90px;border:1px solid var(--line-subtle);border-radius:8px;padding:6px 8px;font-size:12px}
+.step.done{border-color:var(--ok);background:var(--ok-soft)}
+.step.now{border-color:var(--accent);background:var(--accent-soft)}
+.step.rej{border-color:var(--bad);background:var(--bad-soft)}
+.step.skip{opacity:.4}
+.kan{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:10px}
+.kcol{background:#EFEFEC;border-radius:10px;padding:8px;min-height:300px}
+.kcol h4{font-size:12px;margin:2px 4px 8px;display:flex;justify-content:space-between}
+.kcard{background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:6px;border:1px solid var(--line-subtle);cursor:pointer;font-size:12.5px}
+.log{font-size:12px;font-family:var(--mono);color:var(--ink-500)}
+.log div{padding:2px 0}
+
+/* ---------- B: walkthrough ---------- */
+.B{display:grid;grid-template-columns:260px 1fr 320px;height:calc(100vh - 38px)}
+.B-list{background:#fff;border-right:1px solid var(--line-subtle);padding:16px 12px;overflow:auto}
+.B-list .sc{padding:10px 12px;border-radius:10px;cursor:pointer;margin-bottom:6px;border:1px solid transparent}
+.B-list .sc.on{background:var(--neome-soft);border-color:#CFE2F7}
+.B-list .sc .t{font-weight:600;color:var(--ink-900);font-size:13.5px}
+.B-stage{padding:22px 28px;overflow:auto}
+.B-steps{display:flex;gap:4px;margin:12px 0 18px}
+.B-steps span{flex:1;height:4px;border-radius:2px;background:var(--line-strong)}
+.B-steps span.on{background:var(--neome)}
+.B-actor{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--neome);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.B-screen{max-width:560px}
+.B-proof{background:#fff;border-left:1px solid var(--line-subtle);padding:18px 16px;overflow:auto}
+.B-proof .acc{font-size:12.5px;padding:6px 0 6px 20px;position:relative}
+.B-proof .acc:before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+
+/* ---------- C: mobile + trace ---------- */
+.C{display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 38px)}
+.C-phones{display:flex;gap:28px;padding:24px;flex-wrap:wrap;justify-content:center;align-content:flex-start}
+.phone{width:300px;height:620px;border-radius:38px;background:#111;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.phone .scr{background:var(--surface-base);border-radius:28px;height:100%;overflow:auto;position:relative}
+.phone .bar{background:#fff;padding:26px 14px 10px;border-bottom:1px solid var(--line-subtle);position:sticky;top:0}
+.phone .cap{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-500);margin-top:8px}
+.mcard{background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;border:1px solid var(--line-subtle)}
+.mrow{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0}
+.mrow span:first-child{color:var(--ink-500)}
+.C-trace{background:#fff;border-left:1px solid var(--line-subtle);padding:18px 16px;overflow:auto}
+.C-trace .r{padding:8px 10px;border-radius:8px;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
+.C-trace .r:hover{background:var(--surface-base)}
+.C-trace .r.on{border-color:var(--accent);background:var(--accent-soft)}
+
+/* ---------- switcher ---------- */
+#switcher{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#111;color:#fff;border-radius:999px;padding:6px 8px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;box-shadow:0 6px 24px rgba(0,0,0,.35);z-index:99}
+#switcher button{background:#2a2a2a;color:#fff;border:0;border-radius:999px;width:28px;height:28px;cursor:pointer;font-size:14px}
+#switcher span{padding:0 10px;min-width:300px;text-align:center}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="switcher" aria-label="Prototype variant switcher">
+  <button onclick="go(-1)">←</button><span id="vlabel"></span><button onclick="go(1)">→</button>
+</div>
+<script>
+/* ======== SPEC: what build-prototype would read from _agent/modules/QUO-quotation/spec.md ======== */
+const SPEC = {
+  enterprise:"Anglo Gulf", module:"Quotation", prefix:"QUO", app:"Sales CRM (indicative)", delivery:"Configuration",
+  roles:[ // spec §2
+    {id:"SE", name:"Sales Executive", does:"creates quotation, uploads document, submits", src:"CE-1"},
+    {id:"L1", name:"Sales Manager", does:"approval Level 1", src:"QA-5", proposed:true, oi:"OI-09"},
+    {id:"L2", name:"Head of Sales", does:"approval Level 2", src:"QA-5", proposed:true, oi:"OI-09"},
+    {id:"L3", name:"Managing Director", does:"approval Level 3", src:"QA-5", proposed:true, oi:"OI-09"},
+    {id:"AD", name:"Admin", does:"edits discount bands and levels", src:"QA-5"},
+  ],
+  fields:[ // spec §4  entity Quotation
+    {id:"no", label:"Quotation no.", type:"text", req:true, sec:"Quotation", reqs:["QUO-02"]},
+    {id:"opp", label:"Opportunity", type:"link", linkTo:"Opportunity", req:true, sec:"Quotation", reqs:["QUO-02"]},
+    {id:"customer", label:"Customer", type:"link", linkTo:"Customer", req:true, sec:"Quotation", reqs:["QUO-02"]},
+    {id:"product", label:"Product", type:"link", linkTo:"Product", req:true, sec:"Lines", reqs:["QUO-02"]},
+    {id:"qty", label:"Quantity", type:"number", req:true, sec:"Lines", reqs:["QUO-02"]},
+    {id:"price", label:"Price", type:"money", req:true, sec:"Lines", reqs:["QUO-02"]},
+    {id:"disc", label:"Discount %", type:"number", req:true, sec:"Lines", reqs:["QUO-06"], oi:"OI-13", proposed:true},
+    {id:"validity", label:"Valid until", type:"date", req:true, sec:"Quotation", reqs:["QUO-02"]},
+    {id:"po", label:"Expected PO date", type:"date", req:false, sec:"Quotation", reqs:["QUO-03"]},
+    {id:"cost", label:"Cost (from Tally)", type:"money", req:false, sec:"Margin", reqs:["QUO-04"], oi:"OI-19"},
+    {id:"gm", label:"Gross margin", type:"money", req:false, sec:"Margin", reqs:["QUO-04"], oi:"OI-19"},
+    {id:"docs", label:"Documents", type:"file", req:true, sec:"Documents", reqs:["QUO-01","QUO-05"]},
+    {id:"owner", label:"Owner", type:"person", req:true, sec:"Quotation", reqs:["QUO-02"]},
+  ],
+  statuses:["Draft","InApproval","Approved","Rejected","Sent"], // spec §5
+  statusLabel:{Draft:"Draft",InApproval:"In approval",Approved:"Approved",Rejected:"Rejected",Sent:"Sent"},
+  transitions:[["Draft","InApproval","Submit (discount ≥ 10%)"],["Draft","Approved","Submit (discount < 10%)"],["InApproval","Approved","last required level approves"],["InApproval","Rejected","any level rejects"],["Rejected","Draft","new revision uploaded"],["Approved","Sent","sent to customer"]],
+  bands:[ {lt:10, levels:[]}, {lt:20, levels:["L1"]}, {lt:25, levels:["L1","L2"]}, {lt:101, levels:["L1","L2","L3"]} ], // QUO-06 defaults
+  requirements:[ // spec §11
+    {id:"QUO-01", title:"Quotation document", acc:["A file attaches to the quotation record","It opens from web and mobile"], pr:"Must"},
+    {id:"QUO-02", title:"Quotation record", acc:["Number, product, qty, price, validity, approval status and linked opportunity are visible on the record"], pr:"Must", oi:"OI-13"},
+    {id:"QUO-03", title:"Expected PO date", acc:["Field is present, editable and reportable"], pr:"Must"},
+    {id:"QUO-04", title:"Cost and gross margin", acc:["Values shown match Tally for the same quotation"], pr:"Must", oi:"OI-19"},
+    {id:"QUO-05", title:"Revision history", acc:["All versions listed with upload date and user","None are overwritten"], pr:"Must"},
+    {id:"QUO-06", title:"Discount approval matrix", acc:["A quotation in each band routes to the right levels","It cannot show Approved until every required level approves","Each decision is logged with approver and time","Admin can change bands without code"], pr:"Must", oi:"OI-08, OI-09"},
+  ],
+  ois:{ // spec §13 (gist only)
+    "OI-08":"Discount per line or on whole quotation?",
+    "OI-09":"Who are Levels 1–3? Sequential? Which band do exactly 10/20/25% fall in?",
+    "OI-13":"Which fields are keyed on Neome vs only in the document?",
+    "OI-19":"Tally integration scope (cost, margin).",
+  },
+};
+const fmt = n => "AED " + Number(n).toLocaleString();
+const levelsFor = d => SPEC.bands.find(b => d < b.lt).levels;
+const roleName = id => SPEC.roles.find(r => r.id===id).name;
+
+/* ======== sample records (in memory) ======== */
+function seed(){ return [
+  {no:"Q-2026-114", opp:"OPP-201 Al Noor Pumps", customer:"Al Noor Trading", product:"Centrifugal pump CP-40", qty:12, price:18500, disc:8,  validity:"2026-11-30", po:"2026-12-10", cost:150000, owner:"Rashid K.", status:"Approved", approvals:[], docs:[{v:1,name:"Q-114_v1.pdf",by:"Rashid K.",at:"21 Oct 10:02"}], log:["21 Oct 10:03 · Rashid K. · submitted · 8% → no approval needed","21 Oct 10:03 · system · Approved"]},
+  {no:"Q-2026-117", opp:"OPP-207 Gulf Steel", customer:"Gulf Steel LLC", product:"Valve set VS-9", qty:40, price:2400, disc:22, validity:"2026-11-15", po:"2026-11-28", cost:70000, owner:"Meera S.", status:"InApproval", approvals:[{lvl:"L1",d:"approved",by:"Sales Manager",at:"27 Oct 16:40"}], docs:[{v:1,name:"Q-117_v1.pdf",by:"Meera S.",at:"27 Oct 11:20"}], log:["27 Oct 11:21 · Meera S. · submitted · 22% → L1 + L2","27 Oct 16:40 · Sales Manager · L1 approved"]},
+  {no:"Q-2026-118", opp:"OPP-210 Emirates Agro", customer:"Emirates Agro", product:"Drip line kit DL-2", qty:300, price:310, disc:14, validity:"2026-11-20", po:"", cost:70000, owner:"Rashid K.", status:"InApproval", approvals:[], docs:[{v:1,name:"Q-118_v1.pdf",by:"Rashid K.",at:"28 Oct 09:15"}], log:["28 Oct 09:16 · Rashid K. · submitted · 14% → L1"]},
+  {no:"Q-2026-120", opp:"OPP-215 Coastal Marine", customer:"Coastal Marine", product:"Bilge pump BP-7", qty:6, price:9200, disc:28, validity:"2026-12-05", po:"2027-01-10", cost:44000, owner:"Meera S.", status:"Rejected", approvals:[{lvl:"L1",d:"approved",by:"Sales Manager",at:"25 Oct 12:00"},{lvl:"L2",d:"rejected",by:"Head of Sales",at:"26 Oct 09:30"}], docs:[{v:1,name:"Q-120_v1.pdf",by:"Meera S.",at:"24 Oct 15:00"}], log:["24 Oct 15:01 · Meera S. · submitted · 28% → L1 + L2 + L3","25 Oct 12:00 · Sales Manager · L1 approved","26 Oct 09:30 · Head of Sales · L2 rejected · 'margin too thin'"]},
+  {no:"Q-2026-121", opp:"OPP-216 Desert Build", customer:"Desert Build Co", product:"Booster set BS-3", qty:2, price:56000, disc:5, validity:"2026-12-15", po:"", cost:90000, owner:"Rashid K.", status:"Draft", approvals:[], docs:[], log:[]},
+  {no:"Q-2026-109", opp:"OPP-190 Oasis Hotels", customer:"Oasis Hotels", product:"Pressure pump PP-12", qty:4, price:14000, disc:12, validity:"2026-11-01", po:"2026-11-05", cost:41000, owner:"Meera S.", status:"Sent", approvals:[{lvl:"L1",d:"approved",by:"Sales Manager",at:"15 Oct 10:00"}], docs:[{v:1,name:"Q-109_v1.pdf",by:"Meera S.",at:"14 Oct 09:00"},{v:2,name:"Q-109_v2.pdf",by:"Meera S.",at:"15 Oct 08:30"}], log:["14 Oct · submitted","15 Oct · L1 approved","16 Oct · sent to customer"]},
+];}
+let DATA = seed();
+const value = q => q.qty*q.price*(1-q.disc/100);
+const gm = q => value(q)-q.cost;
+const nextLevel = q => { const need = levelsFor(q.disc); return need.find(l => !q.approvals.some(a => a.lvl===l && a.d==="approved")); };
+const statusChip = s => `<span class="st st-${s}">${SPEC.statusLabel[s]}</span>`;
+const reqTag = ids => ids.map(i=>`<span class="chip req reqtag" title="${SPEC.requirements.find(r=>r.id===i)?.title||''}">${i}</span>`).join(" ");
+const oiTag = o => o ? `<span class="chip oi" title="${o.split(", ").map(x=>x+": "+SPEC.ois[x]).join(" | ")}">${o}</span>` : "";
+
+function ladderHTML(q){
+  const need = levelsFor(q.disc);
+  if(!need.length) return `<div class="small">Discount ${q.disc}% &lt; 10% → no approval needed ${reqTag(["QUO-06"])}</div>`;
+  return `<div class="ladder">${["L1","L2","L3"].map(l=>{
+    const a = q.approvals.find(x=>x.lvl===l);
+    const req = need.includes(l);
+    const cls = !req?"skip": a?.d==="approved"?"done": a?.d==="rejected"?"rej": (q.status==="InApproval" && nextLevel(q)===l)?"now":"";
+    return `<div class="step ${cls}"><b>${l}</b> · ${roleName(l)}<br><span class="small">${!req?"not needed":a?`${a.d} · ${a.at}`:"waiting"}</span></div>`;
+  }).join("")}</div>`;
+}
+
+/* ======== VARIANT A: clickable app mock ======== */
+let A = {role:"SE", tab:"sheet", open:null};
+function actA(kind){
+  const q = DATA.find(x=>x.no===A.open); const who = roleName(A.role); const t = "now";
+  if(kind==="submit"){ const need=levelsFor(q.disc); q.status = need.length?"InApproval":"Approved"; q.log.push(`${t} · ${who} · submitted · ${q.disc}% → ${need.length?need.join(" + "):"no approval needed"}`); if(!need.length) q.log.push(`${t} · system · Approved`); }
+  if(kind==="approve"){ const l=nextLevel(q); q.approvals.push({lvl:l,d:"approved",by:who,at:t}); q.log.push(`${t} · ${who} · ${l} approved`); if(!nextLevel(q)){q.status="Approved"; q.log.push(`${t} · system · Approved (all required levels)`);} }
+  if(kind==="reject"){ const l=nextLevel(q); q.approvals.push({lvl:l,d:"rejected",by:who,at:t}); q.status="Rejected"; q.log.push(`${t} · ${who} · ${l} rejected`); }
+  if(kind==="revise"){ const v=q.docs.length+1; q.docs.push({v,name:`${q.no.slice(-5)}_v${v}.pdf`,by:who,at:t}); q.approvals=[]; q.status="Draft"; q.log.push(`${t} · ${who} · uploaded v${v} · back to Draft`); }
+  if(kind==="send"){ q.status="Sent"; q.log.push(`${t} · ${who} · sent to customer`); }
+  render();
+}
+function formA(q){
+  const secs = [...new Set(SPEC.fields.map(f=>f.sec))];
+  const val = f => {
+    if(f.id==="gm") return fmt(gm(q)) + ` <span class="small">(${Math.round(gm(q)/value(q)*100)}%)</span>`;
+    if(f.id==="docs") return q.docs.length? q.docs.map(d=>`<div>📄 ${d.name} <span class="small">v${d.v} · ${d.by} · ${d.at}</span></div>`).join("") : `<span class="small">none yet</span>`;
+    if(f.type==="money") return fmt(q[f.id]);
+    if(f.type==="link") return `<a href="#" onclick="return false" style="color:var(--neome)">${q[f.id]}</a>`;
+    if(f.id==="disc") return q.disc+"%";
+    return q[f.id]||`<span class="small">—</span>`;
+  };
+  const editable = q.status==="Draft" && A.role==="SE";
+  const field = f => `<div class="fld"><label>${f.label}${f.req?" *":""}</label><div class="v">${
+      editable && ["qty","price","disc","po","validity"].includes(f.id) ? `<input value="${q[f.id]}" onchange="DATA.find(x=>x.no==='${q.no}')['${f.id}']=${["qty","price","disc"].includes(f.id)?"+this.value":"this.value"};render()">` : val(f)
+    } ${reqTag(f.reqs)} ${oiTag(f.oi)} ${f.proposed?'<span class="chip prop">proposed</span>':''}</div></div>`;
+  const nl = nextLevel(q);
+  const acts = [];
+  if(A.role==="SE" && q.status==="Draft") acts.push(`<button class="btn primary" onclick="actA('submit')">Submit</button>`);
+  if(A.role==="SE" && q.status==="Rejected") acts.push(`<button class="btn" onclick="actA('revise')">Upload new revision</button>`);
+  if(A.role==="SE" && q.status==="Approved") acts.push(`<button class="btn primary" onclick="actA('send')">Mark sent</button>`);
+  if(q.status==="InApproval"){ const can = A.role===nl;
+    acts.push(`<button class="btn primary" ${can?"":"disabled"} onclick="actA('approve')">Approve ${nl}</button><button class="btn danger" ${can?"":"disabled"} onclick="actA('reject')">Reject</button>`);
+    if(!can) acts.push(`<span class="small">Waiting on ${nl} · ${roleName(nl)}</span>`); }
+  return `<div class="card A-drawer">
+    <div class="hd"><div><div class="eyebrow">Quotation</div><h3>${q.no}</h3></div><div>${statusChip(q.status)} <button class="btn" onclick="A.open=null;render()">✕</button></div></div>
+    <div class="sec" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">${acts.join("")||'<span class="small">No action for this role</span>'}</div>
+    <div class="sec"><h4>Approval ${reqTag(["QUO-06"])} ${oiTag("OI-08, OI-09")}</h4>${ladderHTML(q)}<div class="small" style="margin-top:6px">Value ${fmt(value(q))}</div></div>
+    ${secs.map(s=>`<div class="sec"><h4>${s}</h4>${SPEC.fields.filter(f=>f.sec===s).map(field).join("")}</div>`).join("")}
+    <div class="sec"><h4>Activity log</h4><div class="log">${q.log.map(l=>`<div>${l}</div>`).join("")||"—"}</div></div>
+  </div>`;
+}
+function viewA(){
+  const rows = DATA;
+  const sheet = `<div class="card" style="overflow:auto"><table><tr><th>No.</th><th>Customer</th><th>Product</th><th>Value</th><th>Disc.</th><th>Valid until</th><th>Exp. PO</th><th>Status</th><th>Owner</th></tr>
+    ${rows.map(q=>`<tr class="row" onclick="A.open='${q.no}';render()"><td class="mono">${q.no}</td><td>${q.customer}</td><td>${q.product}</td><td class="mono">${fmt(value(q))}</td><td class="mono">${q.disc}%</td><td>${q.validity}</td><td>${q.po||"—"}</td><td>${statusChip(q.status)}</td><td>${q.owner}</td></tr>`).join("")}</table></div>`;
+  const kan = `<div class="kan">${SPEC.statuses.map(s=>{const qs=rows.filter(q=>q.status===s);return `<div class="kcol"><h4>${SPEC.statusLabel[s]}<span class="small">${qs.length}</span></h4>${qs.map(q=>`<div class="kcard" onclick="A.open='${q.no}';render()"><div class="mono" style="font-size:11px">${q.no}</div><b>${q.customer}</b><div class="small">${fmt(value(q))} · ${q.disc}%${s==="InApproval"?" · waiting "+nextLevel(q):""}</div></div>`).join("")}</div>`}).join("")}</div>`;
+  const mine = A.role.startsWith("L") ? rows.filter(q=>q.status==="InApproval" && nextLevel(q)===A.role) : null;
+  const inbox = mine ? `<div class="card" style="padding:14px 16px;margin-bottom:12px"><b>My approvals (${mine.length})</b> <span class="small">· as ${roleName(A.role)}</span>${mine.map(q=>`<div class="row" style="padding:6px 0;cursor:pointer" onclick="A.open='${q.no}';render()"><span class="mono">${q.no}</span> · ${q.customer} · ${q.disc}% · ${fmt(value(q))}</div>`).join("")||'<div class="small">Nothing waiting.</div>'}</div>` : "";
+  return `<div class="A-shell">
+    <div class="A-side"><div class="app"><div class="logo">N</div><div><b style="color:var(--ink-900)">${SPEC.app}</b><div class="small">${SPEC.enterprise}</div></div></div>
+      <a class="off">Leads</a><a class="off">Opportunities</a><a class="on">Quotations <span>${DATA.length}</span></a><a class="off">Visits</a><a class="off">Dashboard</a>
+      <div style="margin-top:auto" class="small">Other Modules greyed: this Prototype covers <b>QUO</b> only.</div></div>
+    <div class="A-main">
+      <div class="A-top"><h3>Quotations</h3>
+        <div class="A-tabs">${["sheet","kanban"].map(t=>`<button class="${A.tab===t?"on":""}" onclick="A.tab='${t}';render()">${t==="sheet"?"Sheet":"Kanban"}</button>`).join("")}</div>
+        <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+          <label class="small"><input type="checkbox" ${document.body.classList.contains("showtags")?"checked":""} onchange="document.body.classList.toggle('showtags',this.checked)"> show Requirement tags</label>
+          <span class="small">View as</span><select onchange="A.role=this.value;render()" style="font:inherit;padding:4px 8px;border-radius:8px;border:1px solid var(--line-strong)">${SPEC.roles.map(r=>`<option value="${r.id}" ${A.role===r.id?"selected":""}>${r.name}${r.proposed?" (proposed)":""}</option>`).join("")}</select>
+          <button class="btn" onclick="DATA=seed();A.open=null;render()">Reset</button></div></div>
+      <div class="A-body"><div class="listwrap">${inbox}${A.tab==="sheet"?sheet:kan}</div>${A.open?formA(DATA.find(q=>q.no===A.open)):""}</div>
+    </div></div>`;
+}
+
+/* ======== VARIANT B: guided scenario walkthrough ======== */
+const SCEN = [
+  {t:"Small discount, no approval", d:"8% discount goes straight to Approved.", steps:[
+    {who:"SE", do:"Creates quotation Q-121 for Desert Build, attaches the PDF made outside Neome.", q:{no:"Q-2026-121",customer:"Desert Build Co",disc:5,status:"Draft",docs:1}, reqs:["QUO-01","QUO-02"]},
+    {who:"SE", do:"Sets Expected PO date and submits. Discount 5% is under 10%, so no approval is needed.", q:{no:"Q-2026-121",customer:"Desert Build Co",disc:5,status:"Approved",docs:1,po:"2027-01-15"}, reqs:["QUO-03","QUO-06"]},
+  ]},
+  {t:"22% discount, two levels", d:"Needs L1 then L2 before it shows Approved.", steps:[
+    {who:"SE", do:"Submits Q-117 at 22%. The band 20–25% needs Levels 1 and 2.", q:{no:"Q-2026-117",customer:"Gulf Steel LLC",disc:22,status:"InApproval",ap:[]}, reqs:["QUO-06"], oi:"OI-08"},
+    {who:"L1", do:"Sales Manager gets it in My approvals and approves. Status stays In approval.", q:{no:"Q-2026-117",customer:"Gulf Steel LLC",disc:22,status:"InApproval",ap:["L1"]}, reqs:["QUO-06"], oi:"OI-09"},
+    {who:"L2", do:"Head of Sales approves. Every required level done → Approved. Both decisions logged with name and time.", q:{no:"Q-2026-117",customer:"Gulf Steel LLC",disc:22,status:"Approved",ap:["L1","L2"]}, reqs:["QUO-06"]},
+  ]},
+  {t:"Rejected, then revised", d:"L2 rejects; new revision keeps old PDF.", steps:[
+    {who:"L2", do:"Head of Sales rejects Q-120 (28%) with a reason.", q:{no:"Q-2026-120",customer:"Coastal Marine",disc:28,status:"Rejected",ap:["L1"],rej:"L2",docs:1}, reqs:["QUO-06"]},
+    {who:"SE", do:"Uploads v2 of the quotation PDF at 18%. v1 stays listed. Back to Draft, then resubmit → only L1 now.", q:{no:"Q-2026-120",customer:"Coastal Marine",disc:18,status:"InApproval",ap:[],docs:2}, reqs:["QUO-05","QUO-06"]},
+  ]},
+  {t:"Edge: exactly 10%", d:"Open Item shows inside the story.", steps:[
+    {who:"SE", do:"Submits at exactly 10%. Is that 'no approval' or 'Level 1'? Spec says ≥10% → L1, but this is not confirmed.", q:{no:"Q-2026-122",customer:"Oasis Hotels",disc:10,status:"InApproval",ap:[]}, reqs:["QUO-06"], oi:"OI-09", open:true},
+  ]},
+  {t:"Admin changes bands", d:"No code change.", steps:[
+    {who:"AD", do:"Admin edits the band table: 10–20% → L1. Saves. New quotations use the new bands.", admin:true, reqs:["QUO-06"]},
+  ]},
+];
+let B = {s:0, i:0};
+function miniForm(q){
+  const need = levelsFor(q.disc); const ap=q.ap||[];
+  return `<div class="card" style="padding:0">
+    <div class="sec" style="display:flex;justify-content:space-between;align-items:center"><div><div class="eyebrow">Quotation</div><b>${q.no}</b> · ${q.customer}</div>${statusChip(q.status)}</div>
+    <div class="sec"><div class="fld"><label>Discount %</label><div class="v">${q.disc}%</div></div>
+      ${q.po?`<div class="fld"><label>Expected PO date</label><div class="v">${q.po}</div></div>`:""}
+      ${q.docs?`<div class="fld"><label>Documents</label><div class="v">${Array.from({length:q.docs},(_,i)=>`📄 v${i+1}`).join(" &nbsp; ")}</div></div>`:""}</div>
+    <div class="sec"><h4>Approval</h4>${need.length?`<div class="ladder">${["L1","L2","L3"].map(l=>`<div class="step ${!need.includes(l)?"skip":ap.includes(l)?"done":q.rej===l?"rej":(q.status==="InApproval"&&need.find(x=>!ap.includes(x))===l)?"now":""}"><b>${l}</b><br><span class="small">${!need.includes(l)?"not needed":ap.includes(l)?"approved":q.rej===l?"rejected":"waiting"}</span></div>`).join("")}</div>`:'<span class="small">Under 10% → none needed</span>'}</div></div>`;
+}
+function viewB(){
+  const sc = SCEN[B.s], st = sc.steps[B.i], role = SPEC.roles.find(r=>r.id===st.who);
+  const screen = st.admin ? `<div class="card" style="padding:14px"><div class="eyebrow">Settings · Discount bands</div><table style="margin-top:8px"><tr><th>From %</th><th>To %</th><th>Levels</th></tr><tr><td>0</td><td>10</td><td>—</td></tr><tr><td>10</td><td>20</td><td><span class="hl">L1</span></td></tr><tr><td>20</td><td>25</td><td>L1, L2</td></tr><tr><td>25</td><td>100</td><td>L1, L2, L3</td></tr></table></div>` : miniForm(st.q);
+  return `<div class="B">
+    <div class="B-list"><div class="eyebrow" style="margin-bottom:10px">${SPEC.prefix} · Scenarios</div>
+      ${SCEN.map((s,k)=>`<div class="sc ${k===B.s?"on":""}" onclick="B={s:${k},i:0};render()"><div class="t">${k+1}. ${s.t}</div><div class="small">${s.d}</div></div>`).join("")}</div>
+    <div class="B-stage"><div class="small">Scenario ${B.s+1} · step ${B.i+1} of ${sc.steps.length}</div><h2>${sc.t}</h2>
+      <div class="B-steps">${sc.steps.map((_,k)=>`<span class="${k<=B.i?"on":""}"></span>`).join("")}</div>
+      <div class="B-actor"><div class="avatar">${st.who}</div><div><b>${role.name}</b>${role.proposed?' <span class="chip prop">proposed</span>':""}<div>${st.do}</div></div></div>
+      ${st.open?`<div class="callout" style="margin-bottom:12px"><b>${st.oi} open:</b> ${SPEC.ois[st.oi]} The Enterprise must answer before this behaviour is final.</div>`:""}
+      <div class="B-screen">${screen}</div>
+      <div style="display:flex;gap:8px;margin-top:16px"><button class="btn" ${B.i===0?"disabled":""} onclick="B.i--;render()">← Back</button><button class="btn primary" onclick="${B.i<sc.steps.length-1?"B.i++":"B={s:(B.s+1)%SCEN.length,i:0}"};render()">${B.i<sc.steps.length-1?"Next →":"Next scenario →"}</button></div></div>
+    <div class="B-proof"><div class="eyebrow">This step proves</div>
+      ${st.reqs.map(id=>{const r=SPEC.requirements.find(x=>x.id===id);return `<div style="margin:10px 0 14px"><span class="chip req">${r.id}</span> <b>${r.title}</b> <span class="small">${r.pr}</span>${r.acc.map(a=>`<div class="acc">${a}</div>`).join("")}</div>`}).join("")}
+      ${st.oi?`<div class="eyebrow" style="color:var(--accent);margin-top:18px">Open Item</div><div style="margin-top:6px">${oiTag(st.oi)} ${SPEC.ois[st.oi]}</div>`:""}
+      <div class="eyebrow" style="margin-top:22px">Coverage</div><div class="small" style="margin-top:6px">${SPEC.requirements.map(r=>{const hit=SCEN.some(s=>s.steps.some(x=>x.reqs.includes(r.id)));return `<div>${hit?"✓":"✗"} ${r.id} ${r.title}</div>`}).join("")}</div></div>
+  </div>`;
+}
+
+/* ======== VARIANT C: mobile screens + Requirement trace ======== */
+let C = {req:null};
+function viewC(){
+  const q = DATA[1]; const h = id => C.req && id.split(" ").includes(C.req) ? "hl" : "";
+  const list = `<div class="phone"><div class="scr"><div class="bar"><div class="small">Sales CRM</div><b>Quotations</b></div>
+      ${DATA.slice(0,5).map(x=>`<div class="mcard ${h("QUO-02")}"><div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:11px">${x.no}</span>${statusChip(x.status)}</div><b>${x.customer}</b><div class="small">${fmt(value(x))} · ${x.disc}%</div></div>`).join("")}
+    </div><div class="cap" style="color:#999">Sales Executive · list</div></div>`;
+  const rec = `<div class="phone"><div class="scr"><div class="bar"><div class="small">‹ Quotations</div><b>${q.no}</b> ${statusChip(q.status)}</div>
+      <div class="mcard ${h("QUO-02")}"><div class="mrow"><span>Customer</span><span>${q.customer}</span></div><div class="mrow"><span>Opportunity</span><span style="color:var(--neome)">${q.opp.split(" ")[0]}</span></div><div class="mrow"><span>Product</span><span>${q.product}</span></div><div class="mrow"><span>Qty × price</span><span>${q.qty} × ${fmt(q.price)}</span></div><div class="mrow"><span>Valid until</span><span>${q.validity}</span></div></div>
+      <div class="mcard ${h("QUO-03")}"><div class="mrow"><span>Expected PO</span><span>${q.po}</span></div></div>
+      <div class="mcard ${h("QUO-04")}"><div class="mrow"><span>Cost (Tally)</span><span>${fmt(q.cost)}</span></div><div class="mrow"><span>Gross margin</span><span>${fmt(gm(q))}</span></div><div style="margin-top:4px">${oiTag("OI-19")}</div></div>
+      <div class="mcard ${h("QUO-01 QUO-05")}"><b style="font-size:12.5px">Documents</b>${q.docs.concat([{v:2,name:"Q-117_v2.pdf",by:"Meera S.",at:"28 Oct"}]).map(d=>`<div class="mrow"><span>📄 v${d.v}</span><span class="small">${d.by} · ${d.at}</span></div>`).join("")}</div>
+    </div><div class="cap" style="color:#999">Sales Executive · record</div></div>`;
+  const appr = `<div class="phone"><div class="scr"><div class="bar"><div class="small">My approvals · 1</div><b>Approve ${q.no}?</b></div>
+      <div class="mcard"><b>${q.customer}</b><div class="small">${fmt(value(q))}</div><div style="font-size:28px;font-weight:700;color:var(--accent);margin:6px 0">${q.disc}% <span class="small">discount</span></div></div>
+      <div class="mcard ${h("QUO-06")}">${ladderHTML(q)}</div>
+      <div class="mcard ${h("QUO-04")}"><div class="mrow"><span>Gross margin</span><span>${Math.round(gm(q)/value(q)*100)}%</span></div></div>
+      <div style="display:flex;gap:8px;margin:10px"><button class="btn danger" style="flex:1">Reject</button><button class="btn primary ${h("QUO-06")}" style="flex:1">Approve L2</button></div>
+      <div class="mcard log ${h("QUO-06")}">${q.log.map(l=>`<div>${l}</div>`).join("")}</div>
+    </div><div class="cap" style="color:#999">Head of Sales (L2, proposed) · approve</div></div>`;
+  return `<div class="C"><div class="C-phones">${list}${rec}${appr}</div>
+    <div class="C-trace"><div class="eyebrow">Requirement trace</div><div class="small" style="margin:6px 0 12px">Click a Requirement to see where the Prototype shows it.</div>
+      ${SPEC.requirements.map(r=>`<div class="r ${C.req===r.id?"on":""}" onclick="C.req=C.req==='${r.id}'?null:'${r.id}';render()"><span class="chip req">${r.id}</span> <b>${r.title}</b> ${oiTag(r.oi)}<div class="small" style="margin-top:3px">${r.acc.join(" · ")}</div></div>`).join("")}
+      <div class="eyebrow" style="margin-top:18px">Statuses</div><div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">${SPEC.statuses.map(statusChip).join(" → ")}</div></div></div>`;
+}
+
+/* ======== switcher ======== */
+const VARIANTS = {A:["Clickable app mock",viewA], B:["Guided scenario walkthrough",viewB], C:["Mobile screens + Requirement trace",viewC]};
+const keys = Object.keys(VARIANTS);
+function cur(){const v=new URLSearchParams(location.search).get("variant");return keys.includes(v)?v:"A";}
+function go(d){const i=(keys.indexOf(cur())+d+keys.length)%keys.length;const u=new URL(location);u.searchParams.set("variant",keys[i]);history.replaceState(null,"",u);render();}
+function render(){
+  const v=cur();
+  document.getElementById("vlabel").textContent = `${v} (${VARIANTS[v][0]})`;
+  const banner = `<div class="banner"><b>PROTOTYPE</b> · ${SPEC.enterprise} · Module <span class="chip">${SPEC.prefix}</span> ${SPEC.module} · ${SPEC.requirements.length} Requirements · ${Object.keys(SPEC.ois).length} Open Items <span style="margin-left:auto" class="chip">${SPEC.app} · ${SPEC.delivery}</span></div>`;
+  document.getElementById("app").innerHTML = banner + VARIANTS[v][1]();
+}
+document.addEventListener("keydown",e=>{const t=e.target;if(t.matches("input,textarea,select,[contenteditable]"))return;if(e.key==="ArrowLeft")go(-1);if(e.key==="ArrowRight")go(1);});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+Home
+Apps
+Inventory & Stock Management
+Inventory & Stock Management
+Know What You Hold, and Which Warehouse Holds It
+Quantity per location rather than one company total, a ledger that updates as goods are received, issued, transferred and adjusted, and an alert that arrives before the stock-out does.
+Start Free Trial
+Book A Free Demo
+Multi-warehouse
+Full stock ledger
+Low-stock alerts
+Ahmedabad Depot
+On hand
+HDPE Granules 25 kg
+reorder at
+150
+412
+PVC Resin 50 kg
+reorder at
+120
+96
+Industrial Adhesive 5 L
+reorder at
+80
+240
+Below reorder level
+PVC Resin 50 kg
+is at
+96
+, under its level of
+120
+.
+Stock value
+₹84.6 L
+Across both warehouses
+Recent movement
+GRN-2208 received
++ 200
+SO-1188 issued
+− 40
+Transfer out
+− 60
+Dayton Depot
+On hand
+HDPE Pellets 55 lb
+reorder at
+150
+412
+PVC Resin 110 lb
+reorder at
+120
+96
+Industrial Adhesive 1 gal
+reorder at
+80
+240
+Below reorder level
+PVC Resin 110 lb
+is at
+96
+, under its level of
+120
+.
+Stock value
+$1.02 M
+Across both warehouses
+Recent movement
+GRN-2208 received
++ 200
+SO-1188 issued
+− 40
+Transfer out
+− 60
+Stock where it actually is
+A total never tells you whether the depot can ship.
+Every movement traced
+Receipts, issues, transfers and adjustments, each with a cause.
+Warned, not surprised
+Reorder levels raise the alert before a customer does.
+What it is worth
+Valuation and ageing, so you see the cash tied up.
+Most stock problems are not shortages. They are not knowing.
+Three gaps account for most of what a stockholding business loses, and none of them is a buying problem.
+Unlocated
+You know the total, not the place
+One number across every warehouse hides the fact that the stock is in the wrong one.
+Untraced
+It was there last week
+Goods move without an entry, so the count drifts and nobody can say which movement caused it.
+Unnoticed
+The stock-out arrives before the warning
+Reorder levels live in a person's judgement, so a shortage is found by a customer, not a report.
+Neome closes all three by holding quantity per place, making every movement an entry, and putting the threshold on the item.
+Items and warehouses
+A total is not the same as availability
+Every item carries its category, unit, reorder level and safety stock, and its quantity is held per warehouse rather than as one figure. That is the difference between knowing you have four hundred bags and knowing whether the depot taking the order has any.
+Reorder and safety stock
+Multi-warehouse quantities
+Category and unit on the item
+HDPE Granules 25 kg
+Raw material · Bag
+In stock
+Reorder level
+150
+Safety stock
+60
+Held where
+Ahmedabad Depot
+268
+Rajkot Depot
+144
+412 in total, but never 412 in one place.
+HDPE Pellets 55 lb
+Raw material · Bag
+In stock
+Reorder level
+150
+Safety stock
+60
+Held where
+Dayton Depot
+268
+Columbus Depot
+144
+412 in total, but never 412 in one place.
+Receiving
+Receiving the goods is the stock entry
+A goods receipt is raised against the purchase order, recording what was ordered, what arrived and what was rejected. Accepting it updates the ledger in the same action, so there is no second place anyone has to remember to update afterwards.
+GRN against the order
+Accepted and rejected recorded
+Ledger updated in the same step
+GRN-2208
+Deccan Polymers Pvt Ltd
+Accepted
+Ordered
+200
+Received
+200
+Rejected
+0
+LEDGER UPDATED
+HDPE Granules 25 kg
+at
+Ahmedabad Depot
++ 200
+Receiving is the stock entry. There is no second place to remember.
+GRN-2208
+Keystone Polymers Inc.
+Accepted
+Ordered
+200
+Received
+200
+Rejected
+0
+LEDGER UPDATED
+HDPE Pellets 55 lb
+at
+Dayton Depot
++ 200
+Receiving is the stock entry. There is no second place to remember.
+Transfers and adjustments
+Stock cannot leave one book without entering another
+A transfer moves quantity out of one warehouse and into another with a transit state in between, so nothing sits in neither. An adjustment for damage or a count difference is raised with a reason and waits for approval before it touches the ledger.
+Inter-warehouse transfers
+Transit state in between
+Adjustments need approval
+Transfer
+In transit
+Ahmedabad Depot
+Rajkot Depot
+60 bags · out of one book and into the other, not into neither
+Adjustment
+Waiting on
+Neha
+Damage in handling
+− 4
+Raised by
+Amit
+· nothing moves until it is approved
+Transfer
+In transit
+Dayton Depot
+Columbus Depot
+60 bags · out of one book and into the other, not into neither
+Adjustment
+Waiting on
+Levi
+Damage in handling
+− 4
+Raised by
+Mike
+· nothing moves until it is approved
+Alerts
+The shortage announces itself
+Reorder level and safety stock sit on the item, so falling below either raises a low-stock alert rather than waiting for someone to notice. The point is not the alert; it is that the threshold is a number the business agreed rather than a judgement made under pressure.
+Low-stock alerts
+Thresholds per item
+Raised before the stock-out
+Ahmedabad Depot
+On hand
+HDPE Granules 25 kg
+reorder at
+150
+412
+PVC Resin 50 kg
+reorder at
+120
+96
+Industrial Adhesive 5 L
+reorder at
+80
+240
+Below reorder level
+PVC Resin 50 kg
+is at
+96
+, under its level of
+120
+.
+Stock value
+₹84.6 L
+Across both warehouses
+Recent movement
+GRN-2208 received
++ 200
+SO-1188 issued
+− 40
+Transfer out
+− 60
+Dayton Depot
+On hand
+HDPE Pellets 55 lb
+reorder at
+150
+412
+PVC Resin 110 lb
+reorder at
+120
+96
+Industrial Adhesive 1 gal
+reorder at
+80
+240
+Below reorder level
+PVC Resin 110 lb
+is at
+96
+, under its level of
+120
+.
+Stock value
+$1.02 M
+Across both warehouses
+Recent movement
+GRN-2208 received
++ 200
+SO-1188 issued
+− 40
+Transfer out
+− 60
+Reporting
+What the stock is worth, and what it is doing
+Set a date range and every figure below it is bounded by those dates.
+Stock valuation
+What is tied up?
+The value of what you hold, by warehouse and by category, which is the number the balance sheet asks for and the one nobody can produce from a shelf count.
+Fast against slow moving
+How much of it is working?
+The split between stock that turns and stock that sits, so the working capital question is answered item by item rather than in aggregate.
+Inventory ageing
+What has sat too long?
+Stock by how long it has been held, which is usually where the cash went and the first place to look when the balance and the shelf disagree.
+All the features, done right
+Item master
+Category, unit, reorder and safety stock.
+Multi-warehouse
+Quantity per location, not one total.
+Locations
+Structured storage within a warehouse.
+Stock ledger
+Every movement, with its cause.
+Goods receipt
+GRN against the purchase order.
+Transfers
+Out of one book and into another.
+Adjustments
+With a reason, and an approval.
+Low-stock alerts
+Raised before the stock-out.
+Stock valuation
+What is tied up, and where.
+Inventory ageing
+What has sat too long.
+Role-based access
+Executive, manager and admin scopes.
+Mobile apps
+Count and check from the floor.
+Before you move your stock across
+The questions operations teams ask before the first count goes into Neome.
+Who is this for?
+How does multi-warehouse stock work?
+What updates the stock ledger?
+Can anyone adjust stock?
+How do low-stock alerts work?
+Does it connect to purchasing and sales?
+What does the valuation actually show?
+Can we count stock from the floor?
+What it costs
+One price, and
+Inventory & Stock Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Inventory & Stock Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Purchase Management Software for SMEs
+Raise a request against a real budget, release the order only after approval, buy from vendors you have rated, and hold an invoice that does not match.
+Learn more
+Product Lifecycle (PLM) Software for SMEs
+Version products properly, assess the impact of a change before approving it, and issue a change order that tells every affected department when it starts.
+Learn more
+Manufacturing Software for Small Business
+Version-controlled bills of materials, work orders planned against real capacity, material deducted as output is recorded, and variance raised during the run.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

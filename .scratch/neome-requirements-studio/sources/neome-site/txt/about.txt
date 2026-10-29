@@ -1,0 +1,92 @@
+About Neome
+Built by operators who know how hard it is to scale without structure.
+Neome was born out of the frustration of watching growing businesses get bottlenecked by chaotic spreadsheets, endless WhatsApp follow-ups, and rigid legacy software. We built the platform we wished we had when scaling our previous companies.
+Talk to us
+Watch demos
+100+
+Active customers
+25+
+Pre-built modules
+10k+
+Workflows automated daily
+Why Neome exists
+The system we wished we had, built for real-world execution.
+Neome is a conversational automation platform designed to work for one person or a team of ten thousand. It's a consumer-enterprise hybrid, with consumer-grade simplicity and enterprise-level power.
+Our focus is simple: deliver powerful, ready-to-deploy systems that are practical, scalable, and built for real-world execution. Start with what you need and expand seamlessly as you grow.
+Neome =
+AI ( Messaging + Spreadsheet + Drive )
+What makes Neome different
+Built on four ideas the enterprise world keeps getting wrong.
+Beyond privacy, security, governance, and compliance, Neome is built on the foundations that growing teams actually need.
+01
+Accessibility
+An intuitive, universal interface that needs no training. Work where your team already lives, in messaging, spreadsheets, and drives.
+02
+Affordability
+Real-time interactivity with phased adoption. No disruptive integrations and no rip-and-replace, so you can start small and grow.
+03
+Pluggability
+Effortless integration through ready-to-use plugins for the SaaS apps you already rely on. Connect what you have, extend as you go.
+04
+AI Native
+An LLM reasoning engine embedded into every layer instead of bolted on. Automate decisions, summaries, and follow-ups across your workflows.
+100+
+Active customers
+25+
+Pre-built modules
+10k+
+Workflows automated daily
+Leadership
+The founders behind Neome.
+Proven builders with a track record of scaling enterprise platforms and executing successful exits.
+Mitesh Majithia
+Co-founder and CEO, Neomenta
+Proven startup builder with multiple successful exits. Mitesh brings deep experience scaling organizations, driving growth, and leading companies from inception to acquisition.
+Payswiff
+:
+Lead investor & Chairman, exited to Cholamandalam ($70M)
+Martjack
+:
+Strategy Head & Lead investor, acquired by Capillary ($22M)
+SPS Corp
+:
+Acquired, scaled 3x, and exited to Aurionpro ($5M)
+Bhavesh Soni
+Founder and CTO, Neomenta
+A distinguished engineering leader with decades of experience architecting large-scale enterprise platforms and modular software ecosystems.
+Krista Software
+:
+Founder and CTO ($18M raised)
+Match.com
+:
+Principal Architect
+i2 Technologies
+:
+Fellow and Distinguished Engineer
+Trust and security
+Enterprise-grade by default.
+Your operational data is protected by industry-standard encryption, continuous monitoring, and strict access controls across every module and every workflow.
+End-to-end data encryption in transit and at rest
+Role-based access control across every module
+Regular security audits and automated vulnerability scanning
+Isolated customer data environments
+Where we work
+Globally distributed. Locally available.
+Neomenta
+operates from the US and India, serving customers worldwide.
+USA
+office
+Neomenta Inc.
+16192 Coastal Highway
+Lewes, DE 19958
+USA
+India
+office
+Neomenta Private Limited
+Block B, 606, Navratna Corporate Park
+Ambli-Bopal Road, Ahmedabad 380058
+India
+Want to see Neome run on your workflow?
+Share your process and team size. We'll point you to the right modules or schedule a guided walkthrough.
+Talk to us
+Browse modules

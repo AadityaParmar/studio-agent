@@ -1,0 +1,279 @@
+Home
+Apps
+Knowledge Library
+Knowledge Library
+Write It Down Before the Person Who Knows It Leaves
+Articles organised so they can be found, reviewed before they go live, versioned so old guidance survives, and improved from what readers rated and what they searched for and did not find.
+Start Free Trial
+Book A Free Demo
+Reviewed before live
+Version history
+Failed searches tracked
+Commissioning a moulding line
+by
+Vikram
+Published
+Version
+3
+Category
+Commissioning
+Reviewed and released by
+Neha
+2 articles out of date
+Flagged automatically, because stale guidance is worse than none.
+Reader rating
+4.6
+Across 212 reads this month
+Waiting for approval
+3
+Commissioning a molding line
+by
+Jay
+Published
+Version
+3
+Category
+Commissioning
+Reviewed and released by
+Levi
+2 articles out of date
+Flagged automatically, because stale guidance is worse than none.
+Reader rating
+4.6
+Across 212 reads this month
+Waiting for approval
+3
+Findable, not just stored
+Categories and search, because a library nobody navigates dies.
+Checked before it is trusted
+A confident wrong answer is worse than none.
+History kept
+What the guidance used to say still exists.
+Written from demand
+Searches that found nothing become the next articles.
+A knowledge base is trusted right up until it is wrong once.
+Three gaps account for most of why internal libraries get abandoned, and none of them is a writing problem.
+Undocumented
+The knowledge left when the person did
+How something is actually done lived with one experienced colleague, and now it is being rediscovered.
+Unverified
+Nobody checked before it went live
+An article published straight from a draft is a confident answer that may be wrong, which is worse than none.
+Stale
+The guidance describes last year's process
+Articles are written once and never revisited, so the library is trusted right up until it is not.
+Neome closes all three by reviewing before publishing, keeping the history, and writing from what readers actually searched for.
+Structure
+Findable, or it may as well not exist
+Articles are organised into categories and written with proper formatting rather than pasted as flat text, so the library can be navigated as well as searched. A knowledge base nobody can find their way around gets used once and abandoned.
+Category-based organisation
+Rich formatting
+Navigable by team and customer
+Commissioning a moulding line
+by
+Vikram
+Published
+Version
+3
+Category
+Commissioning
+Reviewed and released by
+Neha
+2 articles out of date
+Flagged automatically, because stale guidance is worse than none.
+Reader rating
+4.6
+Across 212 reads this month
+Waiting for approval
+3
+Commissioning a molding line
+by
+Jay
+Published
+Version
+3
+Category
+Commissioning
+Reviewed and released by
+Levi
+2 articles out of date
+Flagged automatically, because stale guidance is worse than none.
+Reader rating
+4.6
+Across 212 reads this month
+Waiting for approval
+3
+Publishing
+Through review, not straight to live
+An article moves from draft to review to published, with an approver releasing it. Because a confident wrong answer does more harm than a missing one, the review step is the difference between a library people trust and one they check twice.
+Draft, review, publish
+Approver releases it
+Controlled publishing
+Commissioning a moulding line
+Draft
+Vikram
+In review
+Neha
+Published
+Neha
+Versions
+v3
+live
+Added the torque settings
+v2
+Corrected the sequence
+Commissioning a molding line
+Draft
+Jay
+In review
+Levi
+Published
+Levi
+Versions
+v3
+live
+Added the torque settings
+v2
+Corrected the sequence
+Versions
+Keep what changed, not just what is current
+Every article carries its version history, so an update does not erase what the guidance used to say. That matters when something was done the old way for a reason, and it matters more when somebody needs to know which version was live at the time.
+Version tracking
+Full history retained
+What changed, recorded
+Approval chain
+Configured per request type and value
+Up to a small amount
+1 level
+Department head
+Above that
+2 levels
+Department head, then finance
+Capital spend
+2 levels
+Finance, then director
+₹6.4 L
+falls in the third band, so it needs two signatures rather than one.
+Approval chain
+Configured per request type and value
+Up to a small amount
+1 level
+Department head
+Above that
+2 levels
+Department head, then finance
+Capital spend
+2 levels
+Finance, then director
+$77,000
+falls in the third band, so it needs two signatures rather than one.
+Audience
+One library, and nothing internal reaching a customer
+Role-based access decides what each audience sees, so internal procedures, field work instructions and customer-facing how-to articles live in one library without leaking into each other. That is what makes it safe to open part of it through the portal.
+Access by role
+Internal and customer-facing
+Nothing exposed by accident
+Who sees what
+Internal teams
+Scoped
+Procedures, specs, handovers
+Field technicians
+Scoped
+Work instructions only
+Customers
+Scoped
+How-to articles via the portal
+Commissioning a moulding line
+Internal
+One library, three audiences. Nothing internal reaches the portal by accident.
+Who sees what
+Internal teams
+Scoped
+Procedures, specs, handovers
+Field technicians
+Scoped
+Work instructions only
+Customers
+Scoped
+How-to articles via the portal
+Commissioning a molding line
+Internal
+One library, three audiences. Nothing internal reaches the portal by accident.
+Reporting
+Let the readers tell you what to write next
+Set a date range and every figure below it is bounded by those dates.
+Article ratings
+What is helping?
+Ratings per article, which separates the pages that are working from the ones that are quietly misleading people.
+Searches with no result
+What is missing?
+The questions your team asked that the library could not answer, which is the most useful list it produces and the one that should decide what gets written next.
+Most viewed
+What is being used?
+Views by article and by category, so effort goes where it is read rather than where it was easiest to write.
+All the features, done right
+Categories
+So the library can be navigated.
+Rich articles
+Formatted, not pasted flat.
+Search
+Across every published article.
+Approval workflow
+Review before it goes live.
+Version tracking
+What changed, and when.
+Version history
+Old guidance is kept, not erased.
+Article ratings
+Readers say what helped.
+Usage insights
+What is read, and what is not.
+Failed searches
+The questions you cannot answer.
+Outdated alerts
+Stale articles flagged for review.
+Role-based access
+Author, approver, viewer, admin.
+Mobile apps
+Look it up where the work is.
+Before you start writing it down
+The questions teams ask before the first article goes into Neome.
+Who is this for?
+Why require approval before publishing?
+Why keep old versions?
+What do failed searches tell you?
+How are outdated articles handled?
+Can customers see it too?
+How does this connect to support?
+Does it work on a phone?
+What it costs
+One price, and
+Knowledge Library
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Knowledge Library
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Employee Community & Engagement App
+Discussions organised by category and department, threaded replies that stay with the question, and moderation before or after a post appears.
+Learn more
+Task & Ticket Management Software for SMEs
+Every issue becomes a ticket with a category, a priority and an SLA, breaks into tasks with owners and dates, and escalates before it breaches.
+Learn more
+E-Learning & Training Software for SMEs
+Courses built once and delivered the same way to every shift, onboarding assigned on joining, progress tracked per person, certificates on completion.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

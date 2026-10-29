@@ -1,0 +1,125 @@
+{
+  "description": "Neome App catalog slugs (URL ids, https://www.neome.ai/app/<slug>). Machine-readable list for build-brd mapping checks. From research ticket 01.",
+  "apps": [
+    {
+      "slug": "crm",
+      "name": "CRM"
+    },
+    {
+      "slug": "lead-management",
+      "name": "Lead Management"
+    },
+    {
+      "slug": "whatsapp-inquiry-management",
+      "name": "WhatsApp Inquiry Management"
+    },
+    {
+      "slug": "product-catalog",
+      "name": "Product Catalog & Inquiry"
+    },
+    {
+      "slug": "quotation-and-order-flow",
+      "name": "Quotation & Order Flow"
+    },
+    {
+      "slug": "appointment-booking",
+      "name": "Appointment Booking"
+    },
+    {
+      "slug": "support-chat-and-customer-portal",
+      "name": "Support Chat & Customer Portal"
+    },
+    {
+      "slug": "ticketing-and-task-management",
+      "name": "Ticketing & Task Management"
+    },
+    {
+      "slug": "project-management",
+      "name": "Project Management"
+    },
+    {
+      "slug": "approval-workflows",
+      "name": "Approval Workflows"
+    },
+    {
+      "slug": "knowledge-library",
+      "name": "Knowledge Library"
+    },
+    {
+      "slug": "inventory-and-stock-management",
+      "name": "Inventory & Stock Management"
+    },
+    {
+      "slug": "purchase-management",
+      "name": "Purchase Management"
+    },
+    {
+      "slug": "product-lifecycle-management",
+      "name": "Product Lifecycle Management"
+    },
+    {
+      "slug": "manufacturing",
+      "name": "Manufacturing"
+    },
+    {
+      "slug": "quality-control",
+      "name": "Quality Control"
+    },
+    {
+      "slug": "machine-tools-maintenance",
+      "name": "Machine / Tools Maintenance"
+    },
+    {
+      "slug": "amc-and-service-management",
+      "name": "AMC & Service Management"
+    },
+    {
+      "slug": "field-visit-management",
+      "name": "Field Visit Management"
+    },
+    {
+      "slug": "gate-pass-management",
+      "name": "Gate Pass Management"
+    },
+    {
+      "slug": "field-service",
+      "name": "Field Service"
+    },
+    {
+      "slug": "employee-directory",
+      "name": "Employee Directory"
+    },
+    {
+      "slug": "recruitment",
+      "name": "Recruitment"
+    },
+    {
+      "slug": "attendance-and-leave",
+      "name": "Attendance & Leave"
+    },
+    {
+      "slug": "expense-management",
+      "name": "Expense Management"
+    },
+    {
+      "slug": "e-learning",
+      "name": "E-Learning"
+    },
+    {
+      "slug": "internal-community-forum",
+      "name": "Internal Community Forum"
+    },
+    {
+      "slug": "event-management",
+      "name": "Event Management"
+    },
+    {
+      "slug": "vehicle-and-driver-management",
+      "name": "Vehicle & Driver Management"
+    },
+    {
+      "slug": "fmcg-field-sales-and-distribution",
+      "name": "FMCG Field Sales & Distribution"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+Neomenta implementation estimate - Crescent Gulf CRM
+29 Sep 2026
+Standard configuration on Neome. 4 weeks start to go-live.
+
+Week 1 - master data and CRM configuration (masters, users and roles, core CRM records). Masters loaded by end of week 1.
+Week 2 - workflow and process configuration (stages, approvals, reminders, pipeline and dashboards).
+Week 3 - testing, fixes, final adjustments. UAT with Crescent Gulf.
+Week 4 - go-live and change management. Training is part of change management, for users in each role.
+
+Not in the 4 weeks: process mapping timing, data migration, post go-live support, ERP / email integration (Tally partner).

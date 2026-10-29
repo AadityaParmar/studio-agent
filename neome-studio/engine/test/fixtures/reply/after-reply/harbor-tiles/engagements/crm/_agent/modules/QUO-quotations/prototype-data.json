@@ -1,0 +1,130 @@
+{
+  "entity": "Quotation",
+  "roles": [
+    { "role": "Sales exec", "person": "Arjun", "reqs": ["QUO-01", "QUO-06"] },
+    { "role": "Sales head", "person": "Meera", "reqs": ["QUO-02", "QUO-07"] },
+    { "role": "Accounts", "person": "Joel", "reqs": ["QUO-03"] }
+  ],
+  "fields": [
+    { "entity": "Quotation", "name": "Enquiry", "reqs": ["QUO-01"] },
+    { "entity": "Quotation", "name": "Discount %", "reqs": ["QUO-02"] },
+    { "entity": "Quotation", "name": "Valid until", "reqs": ["QUO-04"] },
+    { "entity": "Quotation", "name": "Replaces", "reqs": ["QUO-06"] },
+    { "entity": "Quotation line", "name": "Rate", "reqs": ["QUO-01"] }
+  ],
+  "transitions": [
+    { "from": "draft", "to": "waiting-approval", "action": "Submit for approval", "by": ["Sales exec"], "notify": ["Sales head", "Accounts"], "reqs": ["QUO-02", "QUO-03"], "rules": ["Discount approval", "Credit check"] },
+    { "from": "waiting-approval", "to": "sent", "action": "Approve and send", "by": ["Sales head", "Accounts"], "notify": ["Sales exec"], "reqs": ["QUO-02", "QUO-03"], "rules": ["Approval result"] },
+    { "from": "waiting-approval", "to": "draft", "action": "Reject", "by": ["Sales head", "Accounts"], "notify": ["Sales exec"], "reqs": ["QUO-02", "QUO-03"], "rules": ["Approval result"] },
+    { "from": "draft", "to": "sent", "action": "Send PDF", "by": ["Sales exec"], "reqs": ["QUO-01"], "guard": [{ "field": "Discount %", "op": "<=", "value": 8 }] },
+    { "from": "sent", "to": "accepted", "action": "Mark accepted", "by": ["Sales exec"], "reqs": ["QUO-05"] },
+    { "from": "sent", "to": "lost", "action": "Mark lost", "by": ["Sales exec"] },
+    { "from": "sent", "to": "expired", "action": "Validity ends", "by": ["system"], "reqs": ["QUO-04"], "rules": ["Expiry"] },
+    { "from": "sent", "to": "replaced", "action": "Revise", "by": ["Sales exec"], "reqs": ["QUO-06"] }
+  ],
+  "rules": [
+    { "rule": "Discount approval", "reqs": ["QUO-02"] },
+    { "rule": "Credit check", "reqs": ["QUO-03"] }
+  ],
+  "reports": [
+    { "name": "Quotations to orders", "reqs": ["QUO-07"] }
+  ],
+  "rows": [
+    {
+      "id": "Q-1036", "status": "accepted",
+      "values": { "Number": "Q-1036", "Enquiry": "E-2201 Kochi walk-in", "Buyer": "Thomas Builders", "Discount %": 5, "Total": 184000, "Valid until": "2026-10-20" },
+      "children": { "Quotation line": [{ "Tile": "Matt grey 600x600", "Boxes": 80, "Square feet": 1240, "Rate": 155 }] },
+      "log": [["2026-10-05", "Arjun (Sales exec)", "Sent PDF"], ["2026-10-09", "Arjun (Sales exec)", "Marked accepted; sent to Tally"]]
+    },
+    {
+      "id": "Q-1037", "status": "lost",
+      "values": { "Number": "Q-1037", "Enquiry": "E-2204 WhatsApp", "Buyer": "Rekha Nair", "Discount %": 0, "Total": 42000, "Valid until": "2026-10-22" },
+      "children": { "Quotation line": [{ "Tile": "Wood-look 200x1200", "Boxes": 14, "Square feet": 300, "Rate": 140 }] }
+    },
+    {
+      "id": "Q-1038", "status": "expired",
+      "values": { "Number": "Q-1038", "Enquiry": "E-2207 phone", "Buyer": "Coastline Homes", "Discount %": 6, "Total": 96000, "Valid until": "2026-10-24" },
+      "children": { "Quotation line": [{ "Tile": "Glossy white 300x600", "Boxes": 40, "Square feet": 640, "Rate": 160 }] }
+    },
+    {
+      "id": "Q-1039", "status": "replaced",
+      "values": { "Number": "Q-1039", "Enquiry": "E-2210 Calicut walk-in", "Buyer": "Malabar Constructions", "Discount %": 8, "Total": 312000, "Valid until": "2026-11-12" },
+      "children": { "Quotation line": [{ "Tile": "Anti-skid 300x300", "Boxes": 160, "Square feet": 2080, "Rate": 150 }] }
+    },
+    {
+      "id": "Q-1040", "status": "waiting-approval",
+      "values": { "Number": "Q-1040", "Enquiry": "E-2212 phone", "Buyer": "Periyar Contractors", "Discount %": 4, "Total": 268000, "Valid until": "2026-11-28" },
+      "children": { "Quotation line": [{ "Tile": "Vitrified beige 800x800", "Boxes": 110, "Square feet": 1760, "Rate": 152 }] },
+      "log": [["2026-10-28", "Arjun (Sales exec)", "Submitted for approval: contractor with an invoice 64 days overdue"]]
+    },
+    {
+      "id": "Q-1042", "status": "sent",
+      "values": { "Number": "Q-1042", "Enquiry": "E-2215 WhatsApp", "Buyer": "Anitha George", "Discount %": 3, "Total": 58000, "Valid until": "2026-11-13", "Replaces": "Q-1039" },
+      "children": { "Quotation line": [{ "Tile": "Terracotta 400x400", "Boxes": 30, "Square feet": 386, "Rate": 150 }] }
+    },
+    {
+      "id": "Q-1044", "status": "draft",
+      "values": { "Number": "Q-1044", "Enquiry": "E-2218 Kochi walk-in", "Buyer": "Green Villa Interiors", "Discount %": 12, "Total": 145000, "Valid until": "2026-11-13" },
+      "children": { "Quotation line": [{ "Tile": "Marble-look 600x1200", "Boxes": 50, "Square feet": 1000, "Rate": 165 }] }
+    },
+    {
+      "id": "Q-1046", "status": "draft",
+      "values": { "Number": "Q-1046", "Enquiry": "E-2220 phone", "Buyer": "Suresh Menon", "Discount %": 5, "Total": 36000, "Valid until": "2026-11-13" },
+      "children": { "Quotation line": [{ "Tile": "Matt grey 600x600", "Boxes": 16, "Square feet": 248, "Rate": 155 }] }
+    }
+  ],
+  "scenarios": [
+    {
+      "title": "Small discount, sent straight away",
+      "summary": "5% needs no approval; the buyer accepts and it goes to Tally.",
+      "steps": [
+        { "actor": "Sales exec", "action": "Makes Q-1046 for Suresh Menon from his enquiry at 5% and sends the PDF from his phone.", "row": "Q-1046", "transition": { "from": "draft", "to": "sent" }, "proves": ["QUO-01", "QUO-02"] },
+        { "actor": "Sales exec", "action": "The buyer accepts. Arjun marks it accepted; only now it goes to Tally.", "row": "Q-1046", "transition": { "from": "sent", "to": "accepted" }, "proves": ["QUO-05"], "oi": "OI-03" }
+      ]
+    },
+    {
+      "title": "Discount above 8% waits for the sales head",
+      "summary": "12% stops in Waiting approval until the sales head approves.",
+      "steps": [
+        { "actor": "Sales exec", "action": "Submits Q-1044 at 12%. Above 8%, so it cannot be sent yet.", "row": "Q-1044", "transition": { "from": "draft", "to": "waiting-approval" }, "proves": ["QUO-02"] },
+        { "actor": "Sales head", "action": "Meera gets the bot message, approves, and the PDF goes to the buyer.", "row": "Q-1044", "transition": { "from": "waiting-approval", "to": "sent" }, "screen": "chat", "proves": ["QUO-02"] }
+      ]
+    },
+    {
+      "title": "Contractor with an overdue invoice",
+      "summary": "Accounts must OK it first; here accounts rejects.",
+      "steps": [
+        { "actor": "Accounts", "action": "Joel sees Periyar Contractors has an invoice 64 days overdue and rejects Q-1040.", "row": "Q-1040", "transition": { "from": "waiting-approval", "to": "draft" }, "proves": ["QUO-03"] },
+        { "actor": "Sales exec", "action": "Arjun sees Q-1040 back in Draft on the kanban.", "row": "Q-1040", "screen": "kanban", "proves": ["QUO-03"] }
+      ]
+    },
+    {
+      "title": "Buyer asks for changes",
+      "summary": "A revised quotation replaces the old one.",
+      "steps": [
+        { "actor": "Sales exec", "action": "Anitha George wants a different tile. Arjun revises Q-1042; the old one shows as Replaced and the new one links to it.", "row": "Q-1042", "transition": { "from": "sent", "to": "replaced" }, "proves": ["QUO-06"] }
+      ]
+    },
+    {
+      "title": "Validity ends",
+      "summary": "No answer in time: the quotation expires.",
+      "steps": [
+        { "actor": "system", "action": "Q-1042 passes its Valid until date without acceptance and is marked Expired; prices need a re-check.", "row": "Q-1042", "transition": { "from": "sent", "to": "expired" }, "proves": ["QUO-04"] }
+      ]
+    },
+    {
+      "title": "Buyer says no",
+      "summary": "Lost is final until OI-09 is answered.",
+      "steps": [
+        { "actor": "Sales exec", "action": "The buyer of Q-1042 buys elsewhere. Arjun marks it lost.", "row": "Q-1042", "transition": { "from": "sent", "to": "lost" }, "proves": [] }
+      ]
+    },
+    {
+      "title": "Quotations to orders",
+      "summary": "The sales head checks the monthly report.",
+      "steps": [
+        { "actor": "Sales head", "action": "Meera opens Quotations to orders to see, per sales exec, quotations sent and accepted.", "screen": "report", "report": "Quotations to orders", "proves": ["QUO-07"] }
+      ]
+    }
+  ]
+}

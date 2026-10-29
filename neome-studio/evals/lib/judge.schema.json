@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "neome-studio/evals/judge.schema.json",
+  "title": "LLM judge output: one entry per golden item, per actual Requirement and per Don't know",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requirements", "openItems", "modules", "extras", "sourceCheck", "dontKnow"],
+  "properties": {
+    "requirements": {
+      "description": "Every golden Requirement (Module and GEN) once. matchedBy = actual Requirement IDs that say the same thing; empty = missed",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["golden", "matchedBy", "note"],
+        "properties": { "golden": { "type": "string" }, "matchedBy": { "type": "array", "items": { "type": "string" } }, "note": { "type": "string" } }
+      }
+    },
+    "openItems": {
+      "description": "Every golden Open Item once. coveredBy = actual Open Item IDs asking it, or actual Requirement IDs that hold its correct answer; empty = missed",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["golden", "coveredBy", "note"],
+        "properties": { "golden": { "type": "string" }, "coveredBy": { "type": "array", "items": { "type": "string" } }, "note": { "type": "string" } }
+      }
+    },
+    "modules": {
+      "description": "Every golden Module once. matchedBy = actual Module prefixes covering it (merge or split allowed); empty = missed",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["golden", "matchedBy", "note"],
+        "properties": { "golden": { "type": "string" }, "matchedBy": { "type": "array", "items": { "type": "string" } }, "note": { "type": "string" } }
+      }
+    },
+    "extras": {
+      "description": "Every actual Requirement no golden Requirement matched, once",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "tag", "note"],
+        "properties": { "id": { "type": "string" }, "tag": { "enum": ["plausible", "noise"] }, "note": { "type": "string" } }
+      }
+    },
+    "sourceCheck": {
+      "description": "Every actual Requirement once: does each cited Source text say it? invented = cited but the Source does not say it",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "verdict", "note"],
+        "properties": { "id": { "type": "string" }, "verdict": { "enum": ["supported", "proposed", "invented"] }, "note": { "type": "string" } }
+      }
+    },
+    "dontKnow": {
+      "description": "Every client log answer marked dontKnow once (by its n). oi = the actual Open Item that holds the question; null = none",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["n", "oi", "note"],
+        "properties": { "n": { "type": "integer" }, "oi": { "type": ["string", "null"] }, "note": { "type": "string" } }
+      }
+    }
+  }
+}

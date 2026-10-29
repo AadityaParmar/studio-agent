@@ -1,0 +1,30 @@
+# 37 — `build-brd` skill
+
+**What to build:** The Consultant runs `build-brd` for a preview (default), a release (asked for a one-line summary), or a Sign-off (signers + evidence Source). The skill calls the engine under the Engagement lock, reports errors/warnings in plain words, and pushes. Spec: stories 104–108, 121–130.
+
+**Blocked by:** 27 — BRD Sign-off mode; 28 — `ingest` first run + shared git/lock protocol
+
+**Status:** resolved
+
+- [x] Pull, lock, engine call, commit + push, clear lock
+- [x] Preview default; release asks for summary line; Sign-off asks for signers and evidence Source (must already be ingested)
+- [x] Engine errors and warnings relayed plainly with next step; mmdc missing → "run `npm ci`"
+- [x] Never edits the BRD data file or views by hand
+
+## Comments
+
+- Done 2026-10-29. Skill `neome-studio/skills/build-brd/SKILL.md` (7 steps: scope/mode, check (pull, `mmdc-check`, dry run, no lock), ask (release summary line + optional plan weeks; sign-off evidence Source + 2 signers from its text copy), start (lock + push), build (engine call, map change-log line; failure → clear lock, push), after Sign-off (`glossary agree --signed`, own glossary commit), report + end (per-mode message + staged files)) + new `references/problems.md` (every engine error/warning class → plain words → next step / owning skill; resolved-Module gap → offer `module revisit --skill build-brd`; Sign-off blockers; other messages). Engine: `build-brd --check` now a dry run of every mode (was preview only): release prints `change: <text>` lines + `note [sign-off]` blockers (`--summary` optional), sign-off checks latest version / preconditions / evidence if given (`--signers`/`--evidence` optional) — both write nothing, no mmdc. New `ENGINE mmdc-check [<dir>]` (same lookup + `mmdc-missing`/`mmdc-version` messages with "Run `npm ci`" as a build; exit 0/1/2), wired in `cli.mjs`. Docs: `brd-data-schema.md` `--check` + `mmdc-check` lines. Tests: new `engine/test/build-brd-skill.test.mjs` (8: mmdc-check ok/missing/wrong/usage; release check lists changes + notes, writes nothing, no mmdc; release check errors + empty summary; sign-off check no version / counts / evidence / signers / already signed; sign-off check blockers; problems.md covers every class the build source can print; SKILL text + links; release run over a local bare git remote following the skill steps: lock commit first, then work + cleared lock in one commit). `ingest.test.mjs` line for `--check --mode release` updated (was exit 2, now a dry run → exit 1 on that broken fixture, nothing written). `npm test`: 310 pass, check 11 skills OK.
+- Small choices (my call; revisit if wrong):
+  - Dry run (`--check`) + `mmdc-check` before the lock, so errors / missing mmdc stop the skill with no lock commit churn; the real build after the lock re-validates.
+  - Map change-log line written by the skill (not the engine) for release (`BRD v<N> released: <summary>`) and sign-off (`BRD v<N> signed off [<ID>]`); none for preview (too frequent). Engine stays read-only on `_agent/` markdown.
+  - Plan weeks: no other skill writes them (review-draft leaves them empty, "Consultant only"). build-brd release asks when `warning [plan] … no weeks set` and writes only the week cells the Consultant gives; Source cell stays (still proposed until the Enterprise agrees). Never suggests numbers.
+  - Signers suggested from the evidence Source's text copy; anything it does not show is asked. Evidence not registered → stop and send the Consultant to `ingest` (build-brd never registers Sources).
+  - After Sign-off: `glossary agree --signed` run inside build-brd with its own Glossary-writes commit (`enterprise-glossary: …`) before the build-brd End commit. `(proposed, to confirm)` marks in Requirement markdown are not rewritten (engine clears `proposed` in data on every later build, per ticket 27).
+  - Failure after lock: undo own plan week edits (`git checkout -- plan.md`), clear lock, commit `map.md` only `build-brd: <ent>/<slug> unlock, build failed`. `mmdc-failed` retried once first (known puppeteer flake under load).
+  - Release with 0 changes since `v<N-1>`: allowed only if the Consultant still wants it.
+  - Commit messages: `build-brd: <ent>/<slug> preview` / `release v<N>` / `sign-off v<N> [<ID>]`; views committed with the data.
+- Verified: engine behaviour via tests; release flow over a local bare remote (lock push, build, unlock, one commit, clean tree); manual dry runs on `brd/resolved` and `reply/after-reply` fixtures (after-reply: release check ok, 10 warnings, sign-off blocked by ENQ open, QUO needs-revisit, 8 TBC priorities). Not verified: live `/neome-studio:build-brd` Claude session (judgement steps: summarising warnings, suggesting summary line / signers), real GitHub push (repo has no remote; not a git repo), push-rejected retry, sign-off + glossary commit over git, Windows.
+- Handoffs:
+  - 38 (`studio`): setup check → `ENGINE mmdc-check` (exit 1 = `npm ci`). BRD readiness → `ENGINE build-brd <eng> --mode sign-off --check` (latest released version) or `--mode release --check` `note [sign-off]` lines (current markdown); both write nothing, no mmdc. Latest version/status = `_agent/brd/versions/v<N>.json` or map change-log lines `BRD v<N> released/signed off`. `lock: … · build-brd · …` left after a failed run = stale-lock offer.
+  - 39 (READMEs): Skills you run: build-brd modes (preview any time; release asks one summary line + optional plan weeks; sign-off needs the signed copy ingested first as an `SO-n` Source). Troubleshooting: "Mermaid CLI missing / wrong version → `npm ci`"; `mmdc-failed` → run again. Where things live: `brd/preview.html` (working draft, not for circulation), `brd/v<N>.html` (send/print, signature boxes). Plan weeks are set through build-brd release.
+  - 41/42 (evals): release + sign-off + change log for tiny-synthetic: run `--mode release --check` to compare expected `change:` lines before the real release; sign-off needs an `SO-n` Source in the answer-key Inputs; git flow pattern in `build-brd-skill.test.mjs` (bare remote).

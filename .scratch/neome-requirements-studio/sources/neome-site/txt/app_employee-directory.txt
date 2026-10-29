@@ -1,0 +1,297 @@
+Home
+Apps
+Employee Directory
+Employee Directory
+The Org Chart the Rest of the Platform Routes By
+One record per person with their role, department and reporting manager, changes kept with the date they took effect, and a structure that leave requests and approvals actually follow.
+Start Free Trial
+Book A Free Demo
+Live reporting lines
+Effective-dated changes
+Self-service lookup
+Kavita Sharma
+EMP-2041
+Active
+Designation
+Shift supervisor
+Department
+Production
+Reports to
+Neha
+Location
+Ahmedabad plant
+Role changed 1 Apr
+Effective-dated, so the record shows what was true then as well as now.
+Headcount
+184
+Across 6 departments
+Joined this month
+Arun Prakash
+Onboarding checklist raised
+Dana Ruiz
+EMP-2041
+Active
+Designation
+Shift supervisor
+Department
+Production
+Reports to
+Levi
+Location
+Dayton plant
+Role changed 1 Apr
+Effective-dated, so the record shows what was true then as well as now.
+Headcount
+184
+Across 6 departments
+Joined this month
+Marcus Bell
+Onboarding checklist raised
+One profile, not three
+Role, department, location and contact in one place.
+A tree that does work
+Leave and approvals route by it, so it stays correct.
+History survives
+Who held a role in March is still answerable.
+Joiners set up properly
+The checklist is raised, not remembered.
+A directory nobody trusts is a directory nobody updates.
+Three gaps account for most of why an org record goes stale, and none of them is an HR effort problem.
+Scattered
+The org chart is a slide from last year
+Roles and reporting lines live in a deck nobody updates, so the current structure is whatever people remember.
+Undated
+Somebody changed role, nobody knows when
+Records are overwritten, so a question about who reported to whom in March cannot be answered at all.
+Misrouted
+Approvals go to the wrong manager
+Leave and expenses route by a structure that is out of date, so requests land with someone who left the team.
+Neome closes all three by keeping one record, dating every change, and making the structure do real work.
+Records
+One record per person, complete enough to be useful
+An employee carries a code, a department, a designation, a location and contact details, with the full profile in one place rather than spread across a payroll file, a spreadsheet and somebody's memory. It is the record every other module points at when it needs to know who someone is.
+Employee code and department
+Designation and contact
+One profile, not three
+Kavita Sharma
+EMP-2041
+Active
+Designation
+Shift supervisor
+Department
+Production
+Reports to
+Neha
+Location
+Ahmedabad plant
+Role changed 1 Apr
+Effective-dated, so the record shows what was true then as well as now.
+Headcount
+184
+Across 6 departments
+Joined this month
+Arun Prakash
+Onboarding checklist raised
+Dana Ruiz
+EMP-2041
+Active
+Designation
+Shift supervisor
+Department
+Production
+Reports to
+Levi
+Location
+Dayton plant
+Role changed 1 Apr
+Effective-dated, so the record shows what was true then as well as now.
+Headcount
+184
+Across 6 departments
+Joined this month
+Marcus Bell
+Onboarding checklist raised
+Structure
+A reporting line the platform actually routes by
+Each person has a reporting manager, and departments group the people who work together. This is not decoration: leave requests, expense claims and approvals all follow this tree, which is what makes keeping it correct worth the effort.
+Reporting manager on the record
+Department grouping
+Approvals route by it
+Reporting line
+Production
+Rohit Mehta
+Operations head
+Neha
+Production manager
+Kavita Sharma
+Shift supervisor
+Arun Prakash
+Shift operator
+Approvals and leave routing read this tree, so it has to be right.
+Reporting line
+Production
+Daniel Brooks
+Operations head
+Levi
+Production manager
+Dana Ruiz
+Shift supervisor
+Marcus Bell
+Shift operator
+Approvals and leave routing read this tree, so it has to be right.
+Lifecycle
+Changes carry the date they took effect
+A promotion, a transfer or an exit is recorded with its effective date rather than overwriting what was there. That keeps the history intact, so the question of who held a role in March has an answer, which matters for audits and for any dispute about a decision made at the time.
+Effective-dated changes
+Status history retained
+Full lifecycle visible
+Kavita Sharma
+Production
+In at 8:52
+This week
+Mon
+in
+Tue
+in
+Wed
+late
+Thu
+leave
+Fri
+in
+Wednesday, in at 9:41
+Neha
+was told the same morning, not at month end.
+Production
+present today
+22 of 26
+Dana Ruiz
+Production
+In at 8:52
+This week
+Mon
+in
+Tue
+in
+Wed
+late
+Thu
+leave
+Fri
+in
+Wednesday, in at 9:41
+Levi
+was told the same morning, not at month end.
+Production
+present today
+22 of 26
+Joiners
+A new joiner triggers the work a new joiner needs
+Adding someone raises the onboarding checklist rather than relying on whoever usually remembers. Because the directory is also where the team finds each other, a new person is discoverable on their first day instead of being introduced twice and forgotten.
+Onboarding checklist triggered
+New joiners visible
+Self-service lookup
+Suresh Patel
+Maintenance engineer
+Round 3 of 3
+Technical
+Neha
+4
+Practical
+Neha
+5
+Final
+Rohit Mehta
+Thu 11:00
+Rated against the same criteria every time, so panels can be compared.
+Carl Munroe
+Maintenance engineer
+Round 3 of 3
+Technical
+Levi
+4
+Practical
+Levi
+5
+Final
+Daniel Brooks
+Thu 11:00
+Rated against the same criteria every time, so panels can be compared.
+Reporting
+What the headcount is, and how it is changing
+Set a date range and every figure below it is bounded by those dates.
+Headcount
+How many, and where?
+Total employees by department and location, and how that has moved, which is the figure every plan starts from.
+New joiners
+Who has just arrived?
+Recent starters with their onboarding progress, so a new person is not three weeks in before somebody notices a step was missed.
+Department distribution
+How is the shape changing?
+Where people sit across the organisation over time, which is what makes a quietly growing department visible before a budget round.
+All the features, done right
+Employee profile
+Code, department, designation, contact.
+Reporting structure
+Manager on every record.
+Departments
+Teams grouped as they work.
+Locations
+Which site someone is at.
+Status history
+Effective-dated, never overwritten.
+Role changes
+Promotions and transfers recorded.
+Onboarding
+Checklist raised on a new joiner.
+Directory search
+Find anyone, by name or team.
+Feeds the platform
+Leave and approvals route by it.
+Headcount
+By department and over time.
+Role-based access
+HR, manager, employee, admin.
+Mobile apps
+Look someone up from anywhere.
+Before you move your people records across
+The questions HR teams ask before the first employee goes into Neome.
+Who is this for?
+Why do effective dates matter?
+What actually uses the reporting structure?
+Can employees see the directory themselves?
+What happens when someone joins?
+How is an exit handled?
+Does this connect to attendance and expenses?
+Does it work on a phone?
+What it costs
+One price, and
+Employee Directory
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Employee Directory
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Attendance & Leave Management Software
+Mark attendance where people actually work, route leave to the line manager with balances and cover in view, and see who is available today.
+Learn more
+Recruitment & Hiring Software for SMEs
+Open a position against a budgeted band, keep every candidate in one pipeline, rate interviews against the same criteria, and route the offer for approval.
+Learn more
+Employee Community & Engagement App
+Discussions organised by category and department, threaded replies that stay with the question, and moderation before or after a post appears.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

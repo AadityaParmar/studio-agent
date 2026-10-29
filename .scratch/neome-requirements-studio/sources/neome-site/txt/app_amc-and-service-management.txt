@@ -1,0 +1,285 @@
+Home
+Apps
+AMC & Service Management
+AMC & Service Management
+Deliver the Contract You Actually Sold
+Every AMC holds what it covers and what it does not, generates the preventive visits it promised, measures SLA against those terms, and raises the renewal while there is still cover to renew.
+Start Free Trial
+Book A Free Demo
+Visits from the contract
+SLA against the promise
+Renewal alerts
+AMC-0471
+Girnar Constructions
+Active
+Asset covered
+Compressor CP-210
+Site
+Ahmedabad plant
+Contract value
+₹2.4 L
+Visits used
+3 of 4 this year
+Renews in
+38 days
+Raised now, so the conversation happens before cover lapses.
+Next preventive visit
+14th ·
+Vikram
+SLA compliance
+96%
+AMC-0471
+Greenline Construction
+Active
+Asset covered
+Compressor CP-210
+Site
+Dayton plant
+Contract value
+$29,000
+Visits used
+3 of 4 this year
+Renews in
+38 days
+Raised now, so the conversation happens before cover lapses.
+Next preventive visit
+14th ·
+Jay
+SLA compliance
+96%
+Cover in writing
+Inclusions and exclusions, so callouts start from agreement.
+Visits scheduled for you
+The contract generates them, not somebody's memory.
+SLA you promised
+Escalated before a breach, while it still matters.
+Renewals in time
+Raised with the visit history beside them.
+A service contract is a promise. Most of them are kept from memory.
+Three gaps account for most of what a service business gives away, and none of them is a technical problem.
+Unscheduled
+The preventive visit nobody booked
+A contract promises four visits a year, and the fourth is remembered in the month the contract renews.
+Undefined
+Both sides remember the cover differently
+What the contract includes was agreed in a conversation, so every callout starts with an argument.
+Unrenewed
+Cover lapsed before anyone called
+Renewal dates sit in a spreadsheet, so a contract ends quietly and the customer only notices at a breakdown.
+Neome closes all three by putting the cover, the schedule and the renewal on the contract itself.
+Contracts
+The contract says what is covered, and what is not
+An AMC is linked to the customer and the assets it covers, carrying the terms, the inclusions and, just as importantly, the exclusions. One contract can span several sites and several machines, so a customer with three plants is one relationship rather than three spreadsheets.
+Customer and asset linked
+Inclusions and exclusions
+Multi-site, multi-asset
+AMC-0471
+2 sites · 3 assets
+Covered
+Parts and labour
+Excluded
+Consumables
+Preventive visits
+4 a year
+Response time
+Within 8 working hours
+Renewal
+In 38 days
+What is excluded matters as much as what is covered, so it is on the contract.
+AMC-0471
+2 sites · 3 assets
+Covered
+Parts and labour
+Excluded
+Consumables
+Preventive visits
+4 a year
+Response time
+Within 8 working hours
+Renewal
+In 38 days
+What is excluded matters as much as what is covered, so it is on the contract.
+Preventive visits
+The visits the contract promised, scheduled by the contract
+Visit frequency is configured on the contract, so the schedule generates itself rather than depending on someone remembering. Each visit is assigned to a technician with its checklist attached, and a visit that has not happened is visible as a shortfall against what was sold.
+Frequency from the contract
+Technician assignment
+Execution tracked
+Compressor CP-210
+Quarterly
+Jan
+done
+Apr
+done
+Jul
+done
+Oct
+due
+October visit
+Assigned to
+Vikram
+· checklist attached
+The schedule comes from the contract, so a missed visit is a breach you can see.
+Compressor CP-210
+Quarterly
+Jan
+done
+Apr
+done
+Jul
+done
+Oct
+due
+October visit
+Assigned to
+Jay
+· checklist attached
+The schedule comes from the contract, so a missed visit is a breach you can see.
+Breakdowns
+A breakdown between visits still belongs to the contract
+A corrective call is raised against the same contract and asset, so the history of a machine is one list rather than scattered across visit reports and phone calls. Response and resolution deadlines come from the contract rather than an internal target, and a call approaching one escalates before it breaches, which is the only point at which that information is still worth having. A third failure on the same asset in six months is visible as a pattern, which is what turns a service call into a conversation about replacement.
+Raised against the asset
+SLA from the contract
+Escalation before breach
+SR-2290
+On site
+Pressure test
+Seal replaced
+Photo of the repair
+Customer sign-off
+Parts used
+Seal kit × 1
+Issued from stores against this job
+Signed off on the phone, in front of the customer, not typed up that evening.
+SR-2290
+On site
+Pressure test
+Seal replaced
+Photo of the repair
+Customer sign-off
+Parts used
+Seal kit × 1
+Issued from stores against this job
+Signed off on the phone, in front of the customer, not typed up that evening.
+Renewals
+The renewal conversation happens while there is still cover
+Expiry dates raise alerts well before they arrive, with the contract's visit history and SLA record beside them. That turns a renewal from an awkward call into an evidenced one, and it stops cover lapsing quietly between a customer and a supplier who both assumed the other would raise it.
+Renewal alerts
+History beside the date
+Expiry visible in advance
+AMC-0471
+Girnar Constructions
+Active
+Asset covered
+Compressor CP-210
+Site
+Ahmedabad plant
+Contract value
+₹2.4 L
+Visits used
+3 of 4 this year
+Renews in
+38 days
+Raised now, so the conversation happens before cover lapses.
+Next preventive visit
+14th ·
+Vikram
+SLA compliance
+96%
+AMC-0471
+Greenline Construction
+Active
+Asset covered
+Compressor CP-210
+Site
+Dayton plant
+Contract value
+$29,000
+Visits used
+3 of 4 this year
+Renews in
+38 days
+Raised now, so the conversation happens before cover lapses.
+Next preventive visit
+14th ·
+Jay
+SLA compliance
+96%
+Reporting
+Whether the contract was honoured, and whether it paid
+Set a date range and every figure below it is bounded by those dates.
+Visit compliance
+Did they get what they paid for?
+Visits completed against the visits the contract entitles the customer to, which is the shortfall a renewal conversation turns on and the one nobody can produce from a diary.
+SLA compliance
+Are we keeping the promise?
+Response and resolution times measured against the commitment in the contract rather than an internal target, by customer and by contract.
+Contract profitability
+Which contracts are worth renewing?
+Visits, corrective calls and parts consumed costed against what the contract is worth, so a contract that is quietly losing money is visible before it is renewed at the same price.
+All the features, done right
+AMC contracts
+Customer and asset linked.
+Coverage terms
+Inclusions and exclusions stated.
+Multi-site
+Several sites on one contract.
+Visit scheduling
+Frequency from the contract.
+Technician assignment
+Named, with a checklist.
+Breakdown calls
+Raised against the same asset.
+Asset history
+Every visit and failure in one list.
+Parts used
+Issued from stores against the job.
+SLA tracking
+Measured against the contract.
+Escalation
+Before a breach, not after.
+Renewal alerts
+Raised while cover still runs.
+Mobile apps
+Technicians close on site.
+Before you move your contracts across
+The questions service businesses ask before the first AMC goes into Neome.
+Who is this for?
+Why record exclusions as well as inclusions?
+How are preventive visits scheduled?
+What happens when a machine breaks down between visits?
+How does SLA tracking work?
+How far ahead do renewal alerts arrive?
+Can technicians close a visit on site?
+How does this relate to Field Service?
+What it costs
+One price, and
+AMC & Service Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+AMC & Service Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Field Service Management Software
+Take the request, dispatch the right engineer, run the job from a checklist on their phone, and close it with a signature before they leave site.
+Learn more
+Machine & Tool Maintenance Software
+Trigger maintenance by calendar or running hours, record breakdowns with a root cause, consume spares against the job, and see what each machine really costs.
+Learn more
+Vehicle Rental & Fleet Management Software
+Onboard drivers, allocate vehicles, take the daily rent from a prepaid wallet and control the start with an IoT unit. Multi-branch fleet software.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

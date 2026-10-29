@@ -1,0 +1,127 @@
+Case Studies
+260 Brands
+260brands.com
+Field Sales & Distribution Digitized
+How 260 Brands digitized field sales, executive stock, and collections across Zambia with Neome
+260 Brands moved attendance, beat plans, sales visits, orders, executive stock, modern trade, collections, and quality complaints onto one Neome platform, with native apps that keep working when the field team has no network.
+FMCG food and beverage manufacturing and distribution
+Lusaka, Zambia
+Offline
+Full offline mode with auto-sync
+GPS-verified
+Attendance and sales visits
+Beat-wise
+Route planning and coverage
+1
+Platform for sales, stock, and collections
+Company
+260 Brands is an African consumer goods manufacturer based in the Chinika Industrial Area, Lusaka. It manufactures, markets, and distributes food and beverage brands including Golden Goodness, Emilios, Thobwa, HEPS, and Nutrameal, all made from locally sourced ingredients supplied by local suppliers and smallholder farmers. Its route to market runs through field sales teams, traditional retail beats, modern trade accounts, and tricycle riders serving last-mile outlets.
+Visit
+260brands.com
+Related modules
+Field Visit Management
+Attendance and Leave
+Quotation and Order Flow
+Inventory and Stock Management
+Quality Control
+CRM
+The challenge
+Field execution, stock held by sales executives, modern trade accounts, collections, and quality complaints were tracked across phone calls, spreadsheets, and paper, leaving management with little reliable visibility into what happened each day. Much of that work happens on beats through remote areas where mobile network is weak or missing entirely.
+No dependable record of whether field teams reported for work or worked their assigned beats.
+Sales visits were reported verbally, with no way to confirm an outlet had actually been visited.
+Orders captured on paper and over calls were slow to process and easy to get wrong.
+Stock issued to sales executives could not be reconciled against what they sold or returned.
+Beat and route plans lived on paper, so coverage gaps only surfaced after the fact.
+Modern trade accounts needed different handling from traditional retail but ran through the same informal process.
+Quality complaints from the market were collected informally and often lost before resolution.
+Sales targets, achievement, and outstanding collections were reconciled by hand at month end.
+Sales teams travel daily to remote areas with little or no mobile network, so nothing could be recorded at the point of the visit.
+The field team is not highly technical, so anything that looked like conventional sales software risked poor adoption.
+The Neome solution
+Neome gave 260 Brands native Android and iOS apps with a chat-based interface and full offline support, so attendance, beats, visits, orders, executive stock, collections, and complaints run as connected workflows whether or not the team has a signal, with real-time dashboards for sales management.
+Team attendance
+Time-bound attendance capture with GPS verification gives supervisors an accurate daily record across field and depot teams.
+Beat planning and rider routes
+Daily beats and routes are assigned and tracked for sales executives, with tricycle rider routes covering last-mile outlets.
+Sales visits and quality complaints
+Visits are GPS-tagged with role-specific forms and photo capture, and quality complaints raised in the market are logged with evidence and tracked to closure.
+Orders across traditional and modern trade
+Field orders from retail beats and modern trade accounts are captured digitally through workflows suited to each channel.
+Executive stock request and assignment
+Warehouse inventory connects to per-executive stock through a request-and-assign flow, so what each executive carries is reconciled against sales and returns.
+Targets, collections, and ledger
+Sales targets and achievement track against live activity, while payment collection entries post to a customer ledger instead of month-end reconciliation.
+Full offline mode on native apps
+Native Android and iOS apps let the team record attendance, visits, orders, stock, and collections with no connection at all. Anything submitted or edited offline syncs automatically once the device is back on a network.
+Chat-based interface
+The apps work through a familiar chat-style interface, so a non-technical field team picks the platform up quickly instead of being trained on conventional sales software.
+Workflow digitized
+1
+Attendance
+2
+Beat plan assigned
+3
+Outlet visit
+4
+Order captured
+5
+Stock assigned
+6
+Delivery
+7
+Payment collected
+8
+Ledger updated
+Before and after Neome
+Before
+After
+Attendance reported informally
+Time-bound attendance with GPS verification
+Beat plans on paper with unclear coverage
+Assigned beats and rider routes tracked daily
+Visits confirmed verbally
+GPS-tagged visits with forms and photo capture
+Orders on paper and over phone calls
+Digital orders for both retail beats and modern trade
+Stock with executives left unreconciled
+Request-and-assign stock tracked per executive
+Quality complaints lost in informal channels
+Logged complaints tracked through to closure
+Targets and collections reconciled at month end
+Live target achievement and a running payment ledger
+Nothing recordable where the network dropped out
+Full offline capture that syncs automatically on reconnect
+Software the field team would need training to use
+Chat-based interface the team learns in a single sitting
+Measured outcomes
+Verified
+Field attendance
+GPS-backed attendance replaced informal reporting across field teams.
+Daily
+Beat coverage
+Planned versus actual coverage is visible the same day, not weeks later.
+Offline
+Field data capture
+Visits, orders, stock, and collections are recorded with no signal and sync on reconnect.
+Reconciled
+Executive stock
+Stock assigned to each executive ties back to sales and returns.
+Tracked
+Collections
+Payment entries post to a ledger with visible outstanding balances.
+One
+Source of truth
+Attendance, visits, orders, stock, collections, and complaints in one system.
+Key learnings
+A field tool has to keep working with no signal and sync later, or remote beats simply go unrecorded.
+A chat-based interface let a non-technical sales team adopt the platform with very little training.
+GPS verification on attendance and visits turns field reporting into evidence rather than recollection.
+Traditional beats and modern trade need distinct order workflows, but they belong on the same platform.
+Tracking stock in the hands of sales executives closes the gap between dispatch and actual sales.
+Capturing quality complaints in the field, with photos, protects the brand before issues spread.
+Linking targets and collections to daily activity removes the month-end reconciliation scramble.
+260 Brands now runs its Zambian route to market on one platform. The field team works through a chat-based app that keeps recording in low-network areas and syncs automatically, so attendance, visits, orders, stock, collections, and quality complaints stay connected end to end.
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

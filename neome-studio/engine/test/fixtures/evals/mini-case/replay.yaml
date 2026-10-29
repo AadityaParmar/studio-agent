@@ -1,0 +1,24 @@
+enterprise: harbor-tiles
+engagement: crm
+consultants:
+  a: { name: Asha Rao, email: asha@example.com }
+  b: { name: Ben Okafor, email: ben@example.com }
+steps:
+  - id: ingest-first
+    as: a
+    skill: ingest
+    args: "harbor-tiles crm"
+    brief: First run for {ent}.
+  - id: ben-claims
+    as: b
+    engine: [module, claim, "{eng}", "{next}", --who, "{who}"]
+    commit: "resolve-module: harbor-tiles/crm claim {next}"
+  - id: reply
+    enterprise: { write: meera-reply.txt }
+    brief: Reply as Meera on {date}.
+  - id: resolve
+    as: a
+    skill: resolve-module
+    args: "harbor-tiles crm {claimed}"
+    repeat: { max: 2, whileStatus: "^claimed \\|" }
+    brief: Ask for {claimed}, held by {b}.

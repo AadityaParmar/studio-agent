@@ -1,0 +1,116 @@
+Case Studies
+HCD India
+hcdindia.com
+Rider & Fleet Transformation
+How HCD India connected rider onboarding, fleet, payments, and IoT with Neome
+HCD India replaced manual rider onboarding, rental collection, complaint follow-ups, and disconnected fleet tracking with one integrated rider and fleet management platform.
+Electric two-wheeler rental and fleet management
+Gurgaon, India
+End-to-end
+Rider and fleet lifecycle
+IoT-based
+Vehicle KM and location tracking
+Automated
+Daily rental deduction
+1
+Centralized operations dashboard
+Company
+HCD India (Human Centered Design LLP) rents electric two-wheelers to riders for last-mile delivery and quick commerce. Its operations span riders, vehicles, branches, rentals, payments, maintenance, complaints, and spare parts, an ecosystem that became difficult to run through manual, disconnected processes as it grew.
+Visit
+hcdindia.com
+Related modules
+Field Service
+Ticketing and Task Management
+AMC and Service Management
+Inventory and Stock Management
+Approval Workflows
+The challenge
+HCD manages a large ecosystem of riders, vehicles, branches, rentals, payments, maintenance, complaints, and spare parts. As operations grew, running these activities manually and across disconnected processes became increasingly difficult.
+Manual rider onboarding with no centralized view of the rider pipeline.
+Vehicle assignment and availability tracked by hand across multiple branches.
+Daily rental calculation and collection handled as a manual process.
+Rider payments, outstanding balances, and wallet recharges tracked manually.
+Limited visibility into vehicle kilometres and actual fleet usage.
+Complaint registration and follow-up managed manually, with job work and invoices tracked separately.
+Spare-parts and vehicle inventory managed outside any connected system.
+No way to connect payment status with vehicle operations.
+The Neome solution
+Neome designed and built an integrated Rider & Fleet Management Platform covering admin web, rider mobile app, and IoT, so information flows automatically from one stage of the operation to the next instead of each process being digitized in isolation.
+Rider lifecycle management
+Rider pipeline, onboarding, documents, profile, status, discounts, and history run in one place, from first contact through verification to active rider.
+Fleet and branch management
+Vehicle master, rider-to-vehicle mapping, availability, movement, and maintenance are tracked branch-wise across every location.
+Digital wallet and online payments
+Riders recharge online while the platform records transactions, automatic deductions, and outstanding balances in a single ledger.
+Automated rental workflow
+Daily rental is calculated and deducted automatically, with rider-wise, pending, and historical rental tracking.
+Complaint, job work, and invoicing
+Rider complaints are assigned, converted into job work with parts and labour drawn from spare-parts inventory, invoiced, and closed with status tracking throughout.
+IoT tracking with payment-linked vehicle control
+Connected vehicles report location, kilometres, status, and usage. When a rider crosses a configured payment threshold, the supported IoT infrastructure can restrict the vehicle and re-enable it once payment or recharge completes.
+Workflow digitized
+1
+Rider pipeline
+2
+Onboarding
+3
+Verification
+4
+Vehicle assignment
+5
+Wallet activation
+6
+Daily rental
+7
+IoT tracking
+8
+Maintenance and job work
+Before and after Neome
+Before
+After
+Manual, multi-step rider onboarding
+Digitized onboarding with a centralized rider pipeline
+Vehicle assignment tracked manually
+Digital rider-to-vehicle mapping
+Disconnected processes across branches
+Centralized branch management and reporting
+Manual rental calculation and collection
+Automated rental calculation and deduction
+Manual payment tracking and recharge
+Digital wallet with online recharge and payments
+Limited visibility into vehicle KM and usage
+IoT-based kilometre and usage monitoring
+Manual complaint reporting and job-work tracking
+Digital complaint-to-job-work workflow with invoicing
+Manual intervention to enforce payment
+Payment-linked vehicle control
+Measured outcomes
+Connected
+Operational workflows
+Riders, vehicles, payments, complaints, maintenance, and inventory run as linked processes.
+Digital
+Payment management
+Wallet, online recharge, automated deductions, and centralized transaction history.
+IoT-based
+Fleet visibility
+Vehicle kilometres, location, and status reported from connected vehicles.
+Structured
+Complaint resolution
+Complaint-to-job-work workflow with status tracking through to closure.
+One
+Management view
+Central dashboards for rider, vehicle, payment, rental, inventory, and complaint data.
+Lower
+Manual intervention
+Automated rental, payment, and fleet workflows reduce operational follow-up.
+Key learnings
+Digitizing the whole workflow creates more value than digitizing individual tasks.
+Real-time IoT data on kilometres and usage gives management a truer picture of fleet activity.
+Automated rental deductions and wallet transactions remove repetitive manual work.
+Giving riders direct access to payments, recharge, and complaints reduces dependency on branch teams.
+Connecting payment status to vehicle operations creates control while reducing manual intervention.
+HCD now runs riders, vehicles, branches, rentals, wallet, payments, complaints, job work, inventory, and IoT as one centralized solution: a more automated, transparent, scalable, and data-driven fleet operation.
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

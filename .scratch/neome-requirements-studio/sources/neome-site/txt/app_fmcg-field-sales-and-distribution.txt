@@ -1,0 +1,341 @@
+Home
+Apps
+FMCG Field Sales & Distribution
+FMCG Field Sales & Distribution
+Know What Happened on Every Beat, Before the Team Gets Back
+Attendance, beat plans, outlet visits, orders, executive stock, collections and quality complaints run as one connected workflow on a chat-style app your field team learns in a sitting. It keeps recording where there is no network and syncs itself when there is.
+Book A Free Demo
+Read the 260 Brands story
+Works with no signal
+Chat-style app
+GPS verified
+Suresh Patel
+Satellite Beat
+·
+Ahmedabad
+Present
+Today’s beat
+Shree Provision Store
+Visited
+Jai Kirana Mart
+Visited
+Ganesh Super Store
+Next
+Krishna Traders
+Planned
+Coverage
+2 of 4 outlets
+Working offline
+3 visits and 1 order saved on the phone. They upload themselves when a signal returns.
+Order captured
+Shree Provision Store
+₹12,400
+Collected today
+₹8,500
+Posted to the customer ledger
+Carl Munroe
+Downtown Route
+·
+Dayton
+Present
+Today’s beat
+Riverside Grocers
+Visited
+Midtown Market
+Visited
+Eastside Super Store
+Next
+Parkway Traders
+Planned
+Coverage
+2 of 4 outlets
+Working offline
+3 visits and 1 order saved on the phone. They upload themselves when a signal returns.
+Order captured
+Riverside Grocers
+$1,480
+Collected today
+$1,020
+Posted to the customer ledger
+Attendance and beats
+Who reported, where they were, and which beat they actually worked.
+Visits and orders
+GPS-tagged visits with photos, and orders captured at the counter.
+Stock with each executive
+Requested, assigned, and reconciled against what was sold.
+Complaints from the market
+Raised at the counter with a photo and a batch number, tracked to closure.
+The field is not the problem. Not knowing what happened there is.
+Three gaps account for most of what a growing field operation loses, and none of them is a selling problem.
+Unverified
+You are told the beat was worked
+Attendance and visits come back as a phone call or a message, so the day is a recollection rather than a record.
+Unreconciled
+Stock leaves the warehouse and disappears
+What an executive carries, sells and returns is squared up at month end, long after anything can be done about it.
+Unconnected
+Orders, collections and complaints live apart
+Each sits in a different book or chat, so nobody can see what an outlet ordered, paid and complained about together.
+Neome closes all three by making one app record the day as it happens, with or without a network.
+Attendance and beats
+The day starts on the record, not on a phone call
+Attendance opens in a time-bound window with the location verified, and closes on its own, so a morning cannot be backdated. Each executive gets the beat assigned for the day, and planned coverage sits next to actual coverage while the day is still running.
+GPS-verified attendance
+Daily beat assignment
+Planned against actual coverage
+Suresh Patel
+Marked present 9:12 AM
+Location verified
+Window closes 10:00.
+After that the day is marked absent, so nobody backdates a morning.
+Beat assigned today
+Satellite Beat
+4
+outlets ·
+Ahmedabad
+Planned vs actual
+Rider routes
+Leave and holidays
+Carl Munroe
+Marked present 9:12 AM
+Location verified
+Window closes 10:00.
+After that the day is marked absent, so nobody backdates a morning.
+Beat assigned today
+Downtown Route
+4
+outlets ·
+Dayton
+Planned vs actual
+Rider routes
+Leave and holidays
+Visits and complaints
+Every outlet visit leaves evidence behind
+Visits are GPS-tagged and captured on a form built for that role, with shelf photos and a stock check against the outlet. A quality complaint raised at the counter carries the photo and the batch number, and is tracked to closure rather than lost in a chat.
+Role-specific visit forms
+Photo capture
+Complaints tracked to closure
+Shree Provision Store
+Visit logged 11:24 AM
+GPS tagged
+Shelf photo
+Attached
+Stock check
+Recorded
+Quality complaint
+Open
+Packet seal loose, batch B-2417
+Photo attached · raised from the visit · assigned to QA
+Riverside Grocers
+Visit logged 11:24 AM
+GPS tagged
+Shelf photo
+Attached
+Stock check
+Recorded
+Quality complaint
+Open
+Packet seal loose, batch B-2417
+Photo attached · raised from the visit · assigned to QA
+Orders and collections
+Traditional retail and modern trade, on their own workflows
+A beat order at a kirana counter and a modern trade order against a purchase order are not the same transaction, so they do not share a form. Both draw on one catalog and one price list, and both route to the distributor or depot that will actually fulfil them. A payment taken against either posts straight to that customer's ledger, so the outstanding balance is live and the executive standing in the shop can see what is owed before writing the next order.
+Retail beat orders
+Modern trade workflow
+Payment posts to the ledger
+Traditional retail
+Beat order
+Shree Provision Store
+Routed to
+Patel Distributors
+₹12,400
+Modern trade
+Own workflow
+BigBasket Retail
+PO reference
+Agreed terms
+Listing check
+One catalog and one price list behind both, so the same SKU cannot cost two things.
+Traditional retail
+Beat order
+Riverside Grocers
+Routed to
+Keystone Distributors
+$1,480
+Modern trade
+Own workflow
+Northgate Retail
+PO reference
+Agreed terms
+Listing check
+One catalog and one price list behind both, so the same SKU cannot cost two things.
+Executive stock
+Close the gap between the warehouse and the van
+An executive requests stock, a supervisor assigns it, and from that moment what they are carrying is a number you can see. Sales and returns come off it automatically, so the balance in the van is known during the month rather than reconstructed after it.
+Request and assign flow
+Sales and returns deducted
+Balance per executive
+Stock with
+Suresh Patel
+Today
+Product
+Assigned
+Sold
+Left
+Khakhra 200g
+120
+86
+34
+Namkeen 400g
+80
+54
+26
+Biscuit 150g
+150
+118
+32
+Request for 60 more
+Waiting on
+Neha
+Pending
+Stock with
+Carl Munroe
+Today
+Product
+Assigned
+Sold
+Left
+Crackers 200g
+120
+86
+34
+Savoury mix 400g
+80
+54
+26
+Biscuits 150g
+150
+118
+32
+Request for 60 more
+Waiting on
+Levi
+Pending
+Offline and adoption
+A dead network stops the signal, not the day
+Native Android and iOS apps record attendance, visits, orders, stock and collections with no connection at all, and upload everything the moment a bar of signal returns. The whole thing runs through a chat-style interface, which is why field teams who would not sit through training pick it up in a sitting.
+Full offline capture
+Automatic sync
+Chat-style interface
+Field app
+No signal
+Good morning. Mark attendance for today?
+Yes
+Location captured. Your beat has 4 outlets. Start with the first?
+Waiting to sync
+Outlet visits
+3
+Order
+1
+Payment entry
+1
+Uploads by itself the moment
+Suresh Patel
+has a bar of signal.
+Field app
+No signal
+Good morning. Mark attendance for today?
+Yes
+Location captured. Your beat has 4 outlets. Start with the first?
+Waiting to sync
+Outlet visits
+3
+Order
+1
+Payment entry
+1
+Uploads by itself the moment
+Carl Munroe
+has a bar of signal.
+Reporting
+What the field did today, read from what the field recorded
+Set a date range and every figure below it is bounded by those dates.
+Beat coverage
+Was the plan worked?
+Outlets planned against outlets actually visited, per executive and per beat, which is the difference between a route plan and a route that happened.
+Target achievement
+Where are we against the number?
+Achievement tracked against target from the orders as they are booked, so it is a running figure through the month rather than a surprise at the end of it.
+Collections and outstanding
+What is still owed?
+Payments collected on the beat against the outstanding balance per customer, live, because the entry made at the counter is the ledger entry.
+All the features, done right
+Team attendance
+Time-bound, GPS-verified, with leave and holidays.
+Beat and route planning
+Daily beats per executive.
+Rider visits
+Tricycle and last-mile rider routes.
+Sales visit tracking
+GPS-tagged, role-specific forms, photos.
+Order management
+Retail beat orders through to fulfilment.
+Modern trade
+Its own workflow, terms and PO references.
+Executive inventory
+Request, assign and reconcile per person.
+Warehouse inventory
+Depot stock connected to what goes out.
+Quality complaints
+Raised in the market with photos, tracked to closure.
+Targets and achievement
+Per executive, against live activity.
+Collections and ledger
+Payment entries with outstanding balances.
+Internal chat support
+The field team asks the office inside the app.
+In production
+Manufacturers already run their route to market on it
+Maniarr's Khakhra
+Gujarat, India
+Attendance compliance went from around 40 percent to over 98 percent, order processing from 15 to 20 minutes down to under 3, and daily follow-up time from about 2 hours to under 10 minutes.
+Read the case study
+260 Brands
+Lusaka, Zambia
+Runs attendance, beats, visits, orders, executive stock, modern trade, collections and quality complaints across Zambia, on teams working remote beats with weak or missing network.
+Read the case study
+Before you put your field force on it
+The questions manufacturers and distributors ask before the first beat goes digital.
+Who is this for?
+Is this a ready-made template I can sign up for?
+What happens when the field team has no mobile network?
+Will a non-technical field team actually use it?
+How does executive stock work?
+Can it handle both traditional retail and modern trade?
+How are quality complaints handled?
+How long does a rollout take?
+Do you have customers running this today?
+How it is priced
+Quoted to your operation, not off a price list
+FMCG Field Sales & Distribution
+is licensed and configured to how your fleet runs, so it is not on the per-user plan the self-serve modules use and there is no sign-up price to quote. We scope it on the demo and send a figure against your actual operation.
+Fleet size
+Number of branches
+IoT units connected
+Configuration and rollout
+Licence plus a one-time implementation. Existing customers run hundreds of vehicles across multiple branches on it.
+Book A Free Demo
+Talk to sales
+Related Modules
+Field Visit & Sales Tracking App
+Plan visits by territory, confirm them with a location-verified check-in, record the outcome on the spot, and see coverage against plan the same day.
+Learn more
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Quotation & Order Management Software
+Build quotations that price themselves, hold discounts to a limit per role, and turn an accepted quote into an order in one step with nothing retyped.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Book A Free Demo

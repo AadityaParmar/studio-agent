@@ -1,0 +1,289 @@
+Home
+Apps
+Product Lifecycle Management
+Product Lifecycle Management
+Change the Spec Once, and Tell Everyone Who Needs to Know
+Controlled versions with the reason behind each, change requests that state their impact before anyone approves them, and a dated change order that reaches every affected department at the same time.
+Start Free Trial
+Book A Free Demo
+Controlled versions
+Impact before approval
+Audit-ready trail
+CR-0342
+HDPE Granules 25 kg
+Approved
+v3.1
+v4.0
+Reason
+Supplier grade change, tightened moisture tolerance
+Raised by
+Rohit Mehta
+· approved by
+Neha
+ECO-0119
+issued
+Implementation set for the 1st, so nobody guesses when it starts.
+Departments notified
+Production
+Quality
+Purchase
+Stores
+Open changes
+6
+CR-0342
+HDPE Pellets 55 lb
+Approved
+v3.1
+v4.0
+Reason
+Supplier grade change, tightened moisture tolerance
+Raised by
+Daniel Brooks
+· approved by
+Levi
+ECO-0119
+issued
+Implementation set for the 1st, so nobody guesses when it starts.
+Departments notified
+Production
+Quality
+Purchase
+Stores
+Open changes
+6
+One version is current
+No more building to two different specs.
+Impact stated first
+The approver decides with the consequences in view.
+A change with a date
+Stores can run old material down on purpose.
+Everyone told at once
+Notification comes from the record, not from memory.
+A product change is rarely the hard part. Telling everyone is.
+Three gaps account for most of the disruption a change causes, and none of them is an engineering problem.
+Unversioned
+Nobody can say which spec is current
+Drawings and specifications live in folders with names like final-2, so two departments build to different ones.
+Unassessed
+The change was approved, then understood
+What it would cost production, purchasing and stores was worked out after the decision, not before it.
+Uncoordinated
+Half the plant heard about it
+The change went live on a date some teams knew and others did not, so old stock kept being used.
+Neome closes all three by controlling the version, assessing the impact before the decision, and dating the instruction that follows.
+Versions
+One current version, and a reason for every one before it
+Each product carries controlled version numbering, with the change reason recorded against the version it produced and the approval that released it. That turns a version number from a label into a record, so the question of why the spec changed has an answer after the person who changed it has moved on.
+Controlled numbering
+Change reason recorded
+Approval before release
+HDPE Granules 25 kg
+v4.0
+live
+v4.0
+Neha
+Supplier grade change
+v3.1
+Neha
+Packaging spec revised
+v3.0
+Neha
+Initial release
+A version number is only useful if the reason behind it survived.
+HDPE Pellets 55 lb
+v4.0
+live
+v4.0
+Levi
+Supplier grade change
+v3.1
+Levi
+Packaging spec revised
+v3.0
+Levi
+Initial release
+A version number is only useful if the reason behind it survived.
+Change requests
+Write down the impact before anyone decides
+A change request names an owner and states what it would do to production, purchasing, stores and quality before it goes for approval. The approver is then deciding with the consequences in front of them, which is the difference between a considered change and one that is understood in the weeks after it lands.
+Named owner
+Impact assessed upfront
+Standard workflow
+CR-0342
+Owned by
+Rohit Mehta
+Waiting on
+Neha
+Impact assessed
+Production
+New moisture check on intake
+Purchase
+Supplier spec to be reissued
+Stores
+Old grade to be run down first
+The impact is written down before the decision, not discovered after it.
+CR-0342
+Owned by
+Daniel Brooks
+Waiting on
+Levi
+Impact assessed
+Production
+New moisture check on intake
+Purchase
+Supplier spec to be reissued
+Stores
+Old grade to be run down first
+The impact is written down before the decision, not discovered after it.
+Change orders
+An approved change becomes a dated instruction
+Approval issues an engineering change order carrying the implementation date and the person responsible for carrying it out. A date on the record is what lets stores run old material down deliberately rather than discovering the switch when a batch is rejected.
+Issued on approval
+Implementation date
+Named owner for execution
+ECO-0119
+In progress
+Approved
+ECO issued
+Departments notified
+Implemented on the 1st
+Carried out by
+Vikram
+Effective
+1st of next month
+ECO-0119
+In progress
+Approved
+ECO issued
+Departments notified
+Implemented on the 1st
+Carried out by
+Jay
+Effective
+1st of next month
+Coordination
+Every affected department hears it at the same time
+Departments touched by a change are notified when the order is issued rather than told by whoever remembers. Because the notification comes from the record, the teams working to the old spec and the teams working to the new one are not the same teams by accident.
+Automatic notification
+Cross-team visibility
+One implementation date
+CR-0342
+HDPE Granules 25 kg
+Approved
+v3.1
+v4.0
+Reason
+Supplier grade change, tightened moisture tolerance
+Raised by
+Rohit Mehta
+· approved by
+Neha
+ECO-0119
+issued
+Implementation set for the 1st, so nobody guesses when it starts.
+Departments notified
+Production
+Quality
+Purchase
+Stores
+Open changes
+6
+CR-0342
+HDPE Pellets 55 lb
+Approved
+v3.1
+v4.0
+Reason
+Supplier grade change, tightened moisture tolerance
+Raised by
+Daniel Brooks
+· approved by
+Levi
+ECO-0119
+issued
+Implementation set for the 1st, so nobody guesses when it starts.
+Departments notified
+Production
+Quality
+Purchase
+Stores
+Open changes
+6
+Reporting
+See what is changing, and what is waiting
+Set a date range and every figure below it is bounded by those dates.
+Active changes
+What is in flight?
+Every open change request and change order with its stage, owner and implementation date, so nothing is in progress unnoticed.
+Pending approvals
+What is waiting on whom?
+Requests sitting for a decision, with how long they have waited, so a change is not held up by an inbox.
+Version history
+How did we get here?
+Version distribution across products and the full history behind any one of them, with the reason and the approver on each step.
+All the features, done right
+Version control
+Controlled numbering per product.
+Version history
+Reason and approver on every step.
+Change requests
+Standardised, with an owner.
+Impact analysis
+Assessed before the decision.
+Approval workflow
+A version releases only on a yes.
+Change orders
+Issued when the change is approved.
+Implementation date
+Dated, so teams can plan around it.
+Department notification
+Everyone affected, at the same time.
+Cross-team visibility
+Who is doing what, and by when.
+Dashboards
+Active changes and pending approvals.
+Traceability
+An audit reads the chain, not the folder.
+Role-based access
+Product, operations and admin scopes.
+Before you move your change control across
+The questions engineering and operations teams ask before the first change request is raised in Neome.
+Who is this for?
+What problem does version control actually solve?
+Why assess impact before approval rather than after?
+What is the difference between a change request and a change order?
+How do other departments find out?
+Why does the implementation date matter so much?
+Does this help with audits and compliance?
+Does it connect to the product catalog and inventory?
+What it costs
+One price, and
+Product Lifecycle Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Product Lifecycle Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Manufacturing Software for Small Business
+Version-controlled bills of materials, work orders planned against real capacity, material deducted as output is recorded, and variance raised during the run.
+Learn more
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Purchase Management Software for SMEs
+Raise a request against a real budget, release the order only after approval, buy from vendors you have rated, and hold an invoice that does not match.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

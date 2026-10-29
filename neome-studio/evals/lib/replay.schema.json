@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "neome-studio/evals/replay.schema.json",
+  "title": "Eval case replay script (replay.yaml)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["enterprise", "engagement", "consultants", "steps"],
+  "properties": {
+    "enterprise": { "$ref": "#/$defs/kebab" },
+    "engagement": { "$ref": "#/$defs/kebab" },
+    "consultants": {
+      "description": "Two Consultants, one clone each, both pushing to one local bare remote",
+      "type": "object", "additionalProperties": false, "required": ["a", "b"],
+      "properties": { "a": { "$ref": "#/$defs/consultant" }, "b": { "$ref": "#/$defs/consultant" } }
+    },
+    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } }
+  },
+  "$defs": {
+    "kebab": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "consultant": {
+      "type": "object", "additionalProperties": false, "required": ["name", "email"],
+      "properties": { "name": { "type": "string", "minLength": 1 }, "email": { "type": "string", "minLength": 3 } }
+    },
+    "step": {
+      "type": "object",
+      "required": ["id"],
+      "properties": { "id": { "$ref": "#/$defs/kebab" } },
+      "oneOf": [
+        {
+          "description": "Run one user skill headless; the simulated client answers each message",
+          "additionalProperties": false,
+          "required": ["id", "as", "skill", "brief"],
+          "properties": {
+            "id": true,
+            "as": { "enum": ["a", "b"] },
+            "skill": { "enum": ["studio", "ingest", "review-draft", "resolve-module", "questionnaire", "build-brd"] },
+            "args": { "type": "string" },
+            "brief": { "type": "string", "minLength": 1 },
+            "maxTurns": { "type": "integer", "minimum": 1, "maximum": 100 },
+            "repeat": {
+              "description": "Run again while the Engagement status output matches whileStatus (checked before each run), at most max runs",
+              "type": "object", "additionalProperties": false, "required": ["max", "whileStatus"],
+              "properties": { "max": { "type": "integer", "minimum": 1, "maximum": 10 }, "whileStatus": { "type": "string" } }
+            }
+          }
+        },
+        {
+          "description": "A Consultant acts outside a skill: pull, one engine command, commit, push (no LLM)",
+          "additionalProperties": false,
+          "required": ["id", "as", "engine", "commit"],
+          "properties": {
+            "id": true,
+            "as": { "enum": ["a", "b"] },
+            "engine": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "commit": { "type": "string", "minLength": 1 },
+            "expectExit": { "type": "integer" },
+            "brief": { "type": "string" }
+          }
+        },
+        {
+          "description": "The simulated Enterprise writes an Input (reply, signed copy) into clone a's inputs/",
+          "additionalProperties": false,
+          "required": ["id", "enterprise", "brief"],
+          "properties": {
+            "id": true,
+            "enterprise": {
+              "type": "object", "additionalProperties": false, "required": ["write"],
+              "properties": {
+                "write": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*$" },
+                "read": { "description": "Engagement-relative glob of a view to hand over (newest match), e.g. questionnaires/QN-*.txt", "type": "string" }
+              }
+            },
+            "brief": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    }
+  }
+}

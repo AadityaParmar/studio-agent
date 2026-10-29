@@ -1,0 +1,14 @@
+{
+  "name": "neome",
+  "owner": {
+    "name": "Neomenta"
+  },
+  "description": "Neomenta team marketplace. Holds the neome-studio plugin.",
+  "plugins": [
+    {
+      "name": "neome-studio",
+      "source": "./neome-studio",
+      "description": "Neome Requirements Studio: turn Enterprise Inputs into a signed-off BRD."
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+Home
+Apps
+WhatsApp Inquiry Management
+WhatsApp Inquiry Management
+Every WhatsApp Enquiry in One Place, Not Lost in the Chatter
+Neome connects to the WhatsApp groups and chats you choose, tells a real enquiry apart from small talk, and lets you reply straight back into WhatsApp without opening the app.
+Start Free Trial
+Book A Free Demo
+Keep your number
+Live in minutes
+Shared team inbox
+Inbox
+5 synced chats
+R
+Rajdhani Trading
+11:24
+Do you have 500 units in stock for next week?
+Inquiry
+S
+Shanti Builders Group
+11:18
+Anyone free for lunch tomorrow?
+General
+H
+Hindustan Supply Co.
+10:52
+Please share your rate card for Q4.
+Inquiry
+T
+Trade Circle · 214 members
+09:40
+Good morning everyone 🙏
+General
+Reply delivered
+Sent to
+Rajdhani Trading
+on WhatsApp, from your business number.
+The customer never sees a different app.
+AI detection · today
+12
+inquiries
+84
+general
+Inquiry workflow
+New
+4
+In Progress
+2
+Closed
+6
+Inbox
+5 synced chats
+R
+Riverside Trading
+11:24
+Do you have 500 units in stock for next week?
+Inquiry
+M
+Metro Builders Group
+11:18
+Anyone free for lunch tomorrow?
+General
+H
+Harbor Supply Co.
+10:52
+Please share your rate card for Q4.
+Inquiry
+T
+Trade Circle · 214 members
+09:40
+Morning all 👋
+General
+Reply delivered
+Sent to
+Riverside Trading
+on WhatsApp, from your business number.
+The customer never sees a different app.
+AI detection · today
+12
+inquiries
+84
+general
+Inquiry workflow
+New
+4
+In Progress
+2
+Closed
+6
+AI inquiry detection
+Every message is tagged Inquiry or General as it arrives.
+One unified inbox
+Every synced group and chat on one screen, one search bar.
+Two-way reply
+Answer from Neome; it lands on WhatsApp as normal.
+You choose what syncs
+All groups, selected ones, or none. Changeable anytime.
+Somewhere in that group chat is a customer waiting for a reply
+Small and medium businesses live inside WhatsApp: trade groups, supplier circles, customer chats. That's also where the chaos lives.
+Buried
+Enquiries get lost
+A real order sits unread between forty messages of chatter.
+Unowned
+No one is clearly on it
+Anyone might reply, or nobody does, and you find out days later.
+Forgotten
+No record once it scrolls
+No trail of what was asked, promised, or followed up.
+Neome closes all three by reading the groups you choose, telling an enquiry apart from the chatter, and giving every one of them a status.
+Setup
+Keep the number your customers already message
+Neome links to your existing WhatsApp the same way WhatsApp Web does. Scan once and you are connected, with no new number and no waiting on API approvals. Then choose exactly what it listens to: all your groups, hand-picked ones, or none, with one-to-one chats controlled separately.
+No new number
+Per-group control
+Change it anytime
+Your WhatsApp number
+Connected
++91 98250 41042
+Linked the way WhatsApp Web is. No new number.
+Sync which groups?
+All groups
+Selected groups only
+No groups
+Rajdhani Trading
+Shanti Builders
+Hindustan Supply
+One-to-one chats
+Controlled separately from groups
+On
+Your WhatsApp number
+Connected
++1 (415) 555-0142
+Linked the way WhatsApp Web is. No new number.
+Sync which groups?
+All groups
+Selected groups only
+No groups
+Riverside Trading
+Metro Builders
+Harbor Supply
+One-to-one chats
+Controlled separately from groups
+On
+AI
+The difference between an order and small talk
+Every incoming message is read and tagged automatically as an Inquiry or General chatter. Your team's queue only ever surfaces what actually needs a response, so a genuine customer question never hides behind two hundred members saying good morning.
+Tagged on arrival
+Inquiry or General
+Nothing to configure
+Incoming messages
+Auto-tagged
+Do you have 500 units in stock for next week?
+Inquiry
+Good morning everyone 🙏
+General
+Please share your rate card for Q4.
+Inquiry
+Haha same here 😄
+General
+Your queue shows the two that need a reply, not all four.
+Incoming messages
+Auto-tagged
+Do you have 500 units in stock for next week?
+Inquiry
+Morning all 👋
+General
+Please share your rate card for Q4.
+Inquiry
+Haha same here 😄
+General
+Your queue shows the two that need a reply, not all four.
+Reply
+Answer from Neome, arrive on WhatsApp
+Send a reply from the unified inbox and it is delivered as an ordinary WhatsApp message from your business number. Nothing looks different to the customer, and your team never opens the app or passes a phone around to answer.
+From your business number
+One shared inbox
+Unlimited seats
+R
+Rajdhani Trading
+WhatsApp ·
++91 98795 50155
+Do you have 500 units in stock for next week?
+Yes, 500 in stock, we can dispatch Tuesday. Sending the quote now.
+Delivered from your business number
+Reply from Neome…
+R
+Riverside Trading
+WhatsApp ·
++1 (415) 555-0155
+Do you have 500 units in stock for next week?
+Yes, 500 in stock, we can dispatch Tuesday. Sending the quote now.
+Delivered from your business number
+Reply from Neome…
+Workflow
+Every enquiry has a status, not just a timestamp
+Move each one through New, In Progress and Closed so nothing quietly falls through. You can see what is still open at a glance, and the record survives long after the chat has scrolled past it.
+New → In Progress → Closed
+Open queue at a glance
+A record that persists
+Inquiry board
+4 open
+New
+Rajdhani Trading
+500 units, next week
+Hindustan Supply Co.
+Q3 rate card
+In Progress
+Shanti Builders
+Quote sent, awaiting reply
+Closed
+Sagar Timber Yard
+Ordered · 120 units
+Inquiry board
+4 open
+New
+Riverside Trading
+500 units, next week
+Harbor Supply Co.
+Q4 rate card
+In Progress
+Metro Builders
+Quote sent, awaiting reply
+Closed
+Northgate Yard
+Ordered · 120 units
+Reporting
+What the inbox knows once it has been reading for a week
+Set a date range and every figure below it is bounded by those dates.
+Inquiry against general
+How much of it is actually business?
+The split the AI makes across every synced group, which is the first honest measure of how much of that chatter was ever worth reading.
+Open queue by status
+What is still unanswered?
+New, In Progress and Closed across the whole inbox, so what is outstanding is a number rather than a scroll through five group chats.
+Volume by group
+Which groups are worth syncing?
+Inquiries per synced group and chat, which shows where the real enquiries come from and which groups are only noise.
+Demo
+See how it works, then set it up yourself
+A short walkthrough of Neome pulling enquiries out of WhatsApp group chatter and into one organised inbox, and two more covering the whole setup: connecting your number and switching on AI inquiry detection.
+Demo
+Watch on YouTube
+Turn a WhatsApp message into a tracked inquiry in seconds.
+Setup Guide
+Watch on YouTube
+Connect WhatsApp to Neome: step-by-step setup.
+Setup Guide
+Watch on YouTube
+Connect OpenAI for AI-powered inquiry detection.
+All the features, done right
+Unified inbox
+Every synced group and chat, one search bar.
+AI detection
+Inquiry or General, tagged on every message.
+Listening controls
+All groups, selected only, or none.
+Two-way reply
+Lands as a normal WhatsApp message.
+Inquiry workflow
+New, In Progress and Closed statuses.
+Built for teams
+A seat each, sharing one inbox.
+Your own number
+No new number, no API approval wait.
+Mobile apps
+Android and iOS, with the same inbox.
+Scan to connect
+Linked the way WhatsApp Web is.
+One-to-one chats
+Controlled apart from groups.
+Searchable record
+It survives the scroll.
+Open queue
+What is still unanswered, at a glance.
+Try it
+Point it at your own groups and see what it finds
+Connect one WhatsApp number, pick a couple of groups, and see what is actually an enquiry within a day. Everything below is on from the first message.
+Unified inbox for every synced group and chat
+AI inquiry detection on every incoming message
+Full listening controls: all, selected, or no groups
+Two-way reply straight back into WhatsApp
+Inquiry workflow: New → In Progress → Closed
+Start Free Trial
+Before you connect a group
+The questions teams ask before syncing their first WhatsApp group.
+Who is this for?
+Do I need a new WhatsApp number?
+Can I control exactly which chats sync?
+Will my customers know I'm replying from Neome?
+How does the AI tell an inquiry apart from chatter?
+What happens after the 15-day trial?
+Can more than one person on my team use it?
+How does this relate to the CRM?
+What it costs
+One price, and
+WhatsApp Inquiry Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+WhatsApp Inquiry Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+CRM Software for Teams of 10 to 10,000
+CRM for small, midsize, and large teams. Capture leads, assign next steps, convert to opportunities, and track pipeline on one dashboard. WhatsApp, chat, Excel, and web. Standard trial or Enterprise demo.
+Learn more
+Lead Management Software for SMEs
+Capture leads from every channel, score them against your own rules, chase them with dated reminders, and see which sources actually convert.
+Learn more
+Customer Support & Portal Software
+Answer customers in live chat with their whole history attached, turn a conversation into a tracked ticket automatically, and give them a portal to check it.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

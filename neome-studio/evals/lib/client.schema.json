@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "neome-studio/evals/client.schema.json",
+  "title": "Simulated client output for one message",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action", "text", "answers"],
+  "properties": {
+    "action": { "description": "reply = send text back; end = the message asks nothing (final report) or the brief says stop", "enum": ["reply", "end"] },
+    "text": { "description": "What the Consultant types back (empty when action is end)", "type": "string" },
+    "answers": {
+      "description": "One entry per question answered in text",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["question", "answer", "keys", "dontKnow", "as"],
+        "properties": {
+          "question": { "type": "string" },
+          "answer": { "type": "string" },
+          "keys": { "description": "Answer-key fact IDs used (K-NN); empty for Don't know and Consultant choices", "type": "array", "items": { "type": "string" } },
+          "dontKnow": { "type": "boolean" },
+          "as": { "enum": ["enterprise", "consultant"] }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,307 @@
+Home
+Apps
+Product Catalog
+Product Catalog & Inquiry
+One Product List Every Team Quotes From
+Codes, categories, cost and selling price, and the tax rate all sit on one record that sales, stores and finance read. A price change carries a date, an approver and a trail.
+Start Free Trial
+Book A Free Demo
+Multi-level categories
+Price history kept
+Tax on the item
+Catalog
+412 items
+HDPE Granules 25 kg
+PRD-1042
+₹2,450
+PVC Resin 50 kg
+PRD-1043
+₹4,180
+Industrial Adhesive 5 L
+PRD-1044
+₹1,260
+GST
+on the product
+18%
+sits on the item, so every quote and order computes it the same way.
+Price revision
+HDPE Granules 25 kg
+₹2,310
+₹2,450
+Waiting on
+Neha
+Takes effect
+From the date you set
+Old quotes keep the old price.
+Catalog
+412 items
+HDPE Pellets 55 lb
+PRD-1042
+$296.00
+PVC Resin 110 lb
+PRD-1043
+$505.00
+Industrial Adhesive 1 gal
+PRD-1044
+$152.00
+Sales tax
+on the product
+8.5%
+sits on the item, so every quote and order computes it the same way.
+Price revision
+HDPE Pellets 55 lb
+$279.00
+$296.00
+Waiting on
+Levi
+Takes effect
+From the date you set
+Old quotes keep the old price.
+One product record
+Sales, stores and finance stop keeping their own copies.
+Categories that scale
+A parent and child tree every report reads.
+Dated price revisions
+Changes start when you intend, with the history kept.
+Approval before it applies
+Nobody edits a price quietly on the way to a quote.
+A catalog is not a list. It is what every other number depends on.
+Three gaps account for most of what goes wrong downstream, and none of them is a product problem.
+Duplicated
+Three teams, three product lists
+Sales quotes from one sheet, stores counts another, finance bills from a third, and none of them agree.
+Undated
+The price changed, nobody knows when
+A number was edited in a spreadsheet, so no quote can be defended and no margin can be explained.
+Unclassified
+You cannot report on what is not filed
+Without a category tree, nobody can say which line sells, so the question gets answered by feel.
+Neome closes all three by making one record the source, and every change to it a dated, approved event.
+Products
+One record every team quotes, counts and bills from
+A product carries its code, category, unit, type and whether it is a stock item, with cost and selling price on the same screen as its tax rate. Sales, stores and finance all read that record, so a quote, a stock count and an invoice cannot disagree about what a thing is or costs.
+Code, unit and product type
+Cost against selling price
+Stock or non-stock
+HDPE Granules 25 kg
+PRD-1042
+Active
+Category
+Raw material
+Unit
+Bag
+Product type
+Finished goods
+Stock item
+Yes
+Cost price
+₹2,310
+Selling price
+₹2,450
+GST
+18%
+HDPE Pellets 55 lb
+PRD-1042
+Active
+Category
+Raw material
+Unit
+Bag
+Product type
+Finished goods
+Stock item
+Yes
+Cost price
+$279.00
+Selling price
+$296.00
+Sales tax
+8.5%
+Categories
+A tree that grows with the range
+Products sit in a multi-level category structure with parent and child levels, so a new line is filed rather than appended. Every picker, filter and report reads the same tree, which is what makes the question of which category actually sells answerable.
+Multi-level hierarchy
+Parent and child mapping
+Reports read the same tree
+Categories
+Parent and child
+Raw material
+168
+Polymers
+94
+Resins
+74
+Consumables
+121
+Adhesives
+48
+Reports and pickers read this tree, so adding a line does not mean rebuilding anything.
+Categories
+Parent and child
+Raw material
+168
+Polymers
+94
+Resins
+74
+Consumables
+121
+Adhesives
+48
+Reports and pickers read this tree, so adding a line does not mean rebuilding anything.
+Pricing and tax
+A price change with a date, an approver and a trail
+A revision is proposed rather than typed over. It carries the effective date it starts from and waits for the approval your rules require, and the full history stays on the product. Quotes raised before the change keep the price they were raised at. The tax rate lives on the item alongside it, so every quote, order and invoice computes it the same way and nobody applies last year's number.
+Effective-date pricing
+Approval before it applies
+Tax rate on the item
+Price history
+HDPE Granules 25 kg
+PROPOSED
+Waiting on
+Neha
+₹2,310
+₹2,450
+Effective from the 1st of next month
+Earlier revisions
+12 Jan
+·
+Neha
+Approved
+04 Sep
+·
+Neha
+Approved
+Nobody changes a price quietly. The trail is the record.
+Price history
+HDPE Pellets 55 lb
+PROPOSED
+Waiting on
+Levi
+$279.00
+$296.00
+Effective from the 1st of next month
+Earlier revisions
+12 Jan
+·
+Levi
+Approved
+04 Sep
+·
+Levi
+Approved
+Nobody changes a price quietly. The trail is the record.
+Migration
+Bring the list you already keep
+Pick your spreadsheet and map its headers onto catalog fields. Anything already named the same maps itself, mandatory fields are flagged before the import runs, and every imported row picks up the default tax rate so nothing lands half-configured.
+Column mapping
+Mandatory fields flagged
+Tax applied on import
+Bulk import
+products-master.xlsx
+Sheet column
+Catalog field
+Item code
+Product code *
+Description
+Product name *
+Group
+Category *
+Rate
+Selling price
+412 rows ready · each picks up the default
+GST
+Import
+Bulk import
+products-master.xlsx
+Sheet column
+Catalog field
+Item code
+Product code *
+Description
+Product name *
+Group
+Category *
+Rate
+Selling price
+412 rows ready · each picks up the default
+Sales tax
+Import
+Reporting
+What the catalog can tell you once it is filed properly
+Set a date range and every figure below it is bounded by those dates.
+Performance by category
+Which part of the range sells?
+Sales read against the same category tree every picker and filter uses, which is what lets you compare lines without maintaining a second classification somewhere else.
+Price revision history
+What did we charge, and when?
+Every revision with its effective date and its approver, so a question about what a customer was quoted last year is a retrieval rather than an argument.
+Active and retired lines
+What is still being sold?
+Activation and deactivation logged per product, so a retired line stops appearing in pickers without disappearing from the history that explains an old order.
+All the features, done right
+Product master
+Code, name, category, unit and type.
+Category tree
+Multi-level, parent and child.
+Tax on the item
+Computed the same way everywhere.
+Cost and price
+Both on the record, margin visible.
+Price revisions
+Effective dates and full history.
+Price approvals
+A change waits for the right person.
+Stock classification
+Stock and non-stock items separated.
+Activation log
+Retiring a line is recorded, not silent.
+Search and filter
+Find by code, name or category.
+Bulk import
+Bring the sheet you already keep.
+Feeds the rest
+Quotes, orders and stock read it.
+Mobile apps
+The same catalog in the field.
+Before you move your product list across
+The questions teams ask before they make one catalog the source.
+Who is this for?
+How does tax work on a product?
+What happens when a price changes?
+Can I stop a salesperson changing a price?
+How deep can the category structure go?
+What is the difference between a stock and a non-stock item?
+Can I import the product list I already have?
+How does this connect to quotations and stock?
+What it costs
+One price, and
+Product Catalog
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Product Catalog
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Quotation & Order Management Software
+Build quotations that price themselves, hold discounts to a limit per role, and turn an accepted quote into an order in one step with nothing retyped.
+Learn more
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Purchase Management Software for SMEs
+Raise a request against a real budget, release the order only after approval, buy from vendors you have rated, and hold an invoice that does not match.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

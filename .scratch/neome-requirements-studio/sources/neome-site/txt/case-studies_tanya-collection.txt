@@ -1,0 +1,116 @@
+Case Studies
+Tanya Collection Ltd
+tanyacollection.com
+Jewellery Manufacturing Digitized
+How Tanya Collection Ltd brought jewellery manufacturing, CRM, and vendor operations onto Neome
+Tanya Collection Ltd replaced disconnected tracking across manufacturing, workers, vendors, customers, repairs, and internal follow-ups with one platform built around its jewellery workflow.
+Fine diamond jewellery manufacturing
+Bangkok, Thailand
+1
+Platform for jewellery operations
+End-to-end
+FO plan through end of process
+Custom
+Workflows around their process
+Live
+Management dashboard
+Company
+Tanya Collection Ltd is a fine diamond jewellery manufacturer based at the Gemopolis Industrial Estate in Bangkok, Thailand, established in 1997. It designs and manufactures jewellery for retailers and brands. Manufacturing planning, workers, vendors, customer relationships, repairs, and internal approvals had been tracked separately, and the company needed one platform aligned with how that jewellery workflow actually runs.
+Visit
+tanyacollection.com
+Related modules
+CRM
+Product Catalog
+Manufacturing
+Ticketing and Task Management
+Machine / Tools Maintenance
+Appointment Booking
+The challenge
+Tanya Collection was running manufacturing planning, workers, vendors, customers, repairs, and internal approvals as separate processes. As the business grew, that made status hard to see and follow-up dependent on whoever last held the record.
+Different teams kept their own records, with no shared view of the operation.
+Manufacturing and FO planning needed tighter coordination.
+Worker rejects and production activity had no structured tracking.
+Vendor rates and vendor business lived outside a central record.
+Customer and CRM interactions had no single history.
+Repair and maintenance work lacked consistent follow-up.
+Meetings, calendars, checklists, and internal complaints were hard to see.
+Management had no real-time dashboard across these activities.
+The Neome solution
+Neome brought those activities onto one platform, with modules and workflows configured around Tanya Collection's jewellery manufacturing process.
+CRM and jewellery catalogue
+Customer records, interactions, CRM registers, customer labour, and the jewellery catalogue sit in one history the team can look up.
+Manufacturing and worker management
+FO plans, worker rejects, production checklists, and end-of-process (EOP) tracking give manufacturing a structured record from plan through completion.
+Vendor management
+Vendor rates, vendor business, and related activity are kept in one place for the teams that work with them.
+Repair and maintenance
+Repairs and maintenance are logged with status and follow-up, so open work stays visible.
+Meetings, checklists, and complaints
+Calendar items, meeting follow-ups, operational checklists, tickets, and internal complaints can be assigned, owned, and tracked through to resolution.
+Rates and the management dashboard
+FX position, vendor rates, and customer labour sit alongside a dashboard covering CRM, manufacturing, rejects, vendors, repairs, tickets, and meetings.
+Workflow digitized
+1
+CRM
+2
+Jewellery catalogue
+3
+FO plan
+4
+Manufacturing
+5
+Worker rejects
+6
+Vendors
+7
+Repair and maintenance
+8
+Tickets
+9
+End of process
+10
+Dashboard
+Before and after Neome
+Before
+After
+Customer, vendor, and worker records kept separately
+One platform for customer, vendor, worker, and manufacturing information
+Activity status chased across teams
+Dashboards and workflows show where work stands
+Meetings, complaints, tickets, and repairs followed up informally
+Follow-ups assigned and monitored through to resolution
+FO planning, rejects, and end of process tracked informally
+Manufacturing steps recorded in a structured workflow
+Vendor business and rates held in disconnected records
+Vendor rates and vendor business kept in one system
+Teams depended on multiple records to find an update
+Relevant business information available from the same platform
+Measured outcomes
+One
+Operational platform
+Customer, vendor, worker, manufacturing, and follow-up records managed together.
+Clearer
+Process visibility
+Dashboards and structured workflows show the status of key activities.
+Assigned
+Follow-up
+Meetings, complaints, tickets, repairs, and maintenance can be owned and monitored.
+Structured
+Manufacturing
+FO planning, worker rejects, and end-of-process activity tracked systematically.
+Central
+Vendor records
+Vendor business and vendor rates maintained in one system.
+Custom
+Jewellery workflow
+The platform follows Tanya Collection's manufacturing process.
+Key learnings
+Jewellery manufacturing needs the platform shaped around FO plans, worker rejects, vendors, and repairs.
+Central records for customers, vendors, and workers remove the need to rebuild history from separate files.
+Assigning meetings, complaints, tickets, and repairs makes follow-up visible to the team that owns it.
+A single dashboard is what lets management see CRM, manufacturing, vendors, and repairs together.
+Tanya Collection now runs CRM, the jewellery catalogue, FO planning, worker rejects, vendors, repairs, tickets, and end-of-process tracking as one connected workflow, with management visibility across the operation.
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

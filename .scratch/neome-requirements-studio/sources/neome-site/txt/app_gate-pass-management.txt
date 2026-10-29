@@ -1,0 +1,285 @@
+Home
+Apps
+Gate Pass Management
+Gate Pass Management
+Nothing Leaves the Gate on Somebody's Word
+Passes carry the material, the purpose and a photograph, outward movement is approved before it reaches security, and a returnable stays open until it actually comes back.
+Start Free Trial
+Book A Free Demo
+Approved before the gate
+Returnables chased
+Searchable log
+GP-3318
+Outward · returnable
+Approved
+Material
+Injection mould die
+Purpose
+Sent out for repair
+Going to
+Deccan Toolworks
+Verified at
+Gate 2
+·
+GJ 01 KL 4412
+Return overdue by 6 days
+A returnable that has not come back is a pass still open, not a closed one.
+Today at the gate
+24
+in
+19
+out
+Visitor on site
+Rohit Mehta
+Shakti Polymers
+GP-3318
+Outward · returnable
+Approved
+Material
+Injection mold die
+Purpose
+Sent out for repair
+Going to
+Keystone Toolworks
+Verified at
+Gate 2
+·
+OH 4412 TRK
+Return overdue by 6 days
+A returnable that has not come back is a pass still open, not a closed one.
+Today at the gate
+24
+in
+19
+out
+Visitor on site
+Daniel Brooks
+Cascade Polymers
+A pass, not a conversation
+Material, quantity, purpose and a photo on the record.
+Approval before the gate
+Security checks a document, not a person's authority.
+Returnables stay open
+Something is chasing the die that went out for repair.
+Who is on site
+A live list, which a paper register cannot give you.
+The gate is where accountability usually stops.
+Three gaps account for most of what walks off a site, and none of them is a security problem.
+Unapproved
+It left on somebody's word
+The guard was told it was fine, so material moved on a verbal instruction nobody can produce later.
+Unreturned
+The returnable never came back
+A die went out for repair months ago, and nobody is chasing it because nobody is tracking it.
+Unsearchable
+The register is a book at the gate
+Finding one movement means reading pages, so the log exists but nothing is ever actually looked up.
+Neome closes all three by approving before the gate, keeping returnables open, and making the log something you can search.
+Raising a pass
+Say what is leaving, and whether it is coming back
+A pass records the material, the quantity, the purpose and a photograph of the item, and its type decides what follows. Marking it returnable sets an expected return date, which is the difference between an item that is tracked and one that is simply gone.
+Inward and outward
+Returnable or not
+Photo and purpose recorded
+New gate pass
+Outward
+Returnable
+Non-returnable
+Inward
+Material
+Injection mould die
+Quantity
+1 set
+Purpose
+Sent out for repair
+Expected back
+In 10 days
+Photo of the item attached
+by
+Amit
+New gate pass
+Outward
+Returnable
+Non-returnable
+Inward
+Material
+Injection mold die
+Quantity
+1 set
+Purpose
+Sent out for repair
+Expected back
+In 10 days
+Photo of the item attached
+by
+Mike
+Approval
+The guard checks a pass, not a person
+Outward movement is approved before it reaches the gate, so security verifies a document rather than judging whether the person in front of them has the authority. Each step carries its time, which makes the sequence an audit trail rather than three separate claims.
+Approval before movement
+Verified at the gate
+Time-stamped steps
+GP-3318
+Amit
+Raised the pass
+14:02
+Neha
+Approved the movement
+14:20
+Gate 2
+Verified at the gate
+15:07
+Nothing leaves on a verbal instruction. The guard checks the pass, not the person.
+GP-3318
+Mike
+Raised the pass
+14:02
+Levi
+Approved the movement
+14:20
+Gate 2
+Verified at the gate
+15:07
+Nothing leaves on a verbal instruction. The guard checks the pass, not the person.
+Returnables
+Something is chasing the item that went out for repair
+Returnable passes stay open until the material comes back, with the overdue ones surfaced rather than buried. A tool sent out for repair and never returned is the most expensive kind of loss, because nobody is looking for something they do not know is missing.
+Open until returned
+Expected return dates
+Overdue surfaced
+Still out
+1 overdue
+Injection mould die
+6 days over
+GP-3318
+Calibration jig
+due in 3 days
+GP-3402
+Test cylinder
+due in 9 days
+GP-3410
+A returnable that never came back is the most expensive kind of missing, because nobody is looking for it.
+Still out
+1 overdue
+Injection mold die
+6 days over
+GP-3318
+Calibration jig
+due in 3 days
+GP-3402
+Test cylinder
+due in 9 days
+GP-3410
+A returnable that never came back is the most expensive kind of missing, because nobody is looking for it.
+Vehicles and visitors
+One log that answers who is on the premises
+Vehicles are recorded in and out against the pass they carry, and visitors are signed in with who they are seeing and when they arrived. A paper register at the gate cannot answer who is on site right now, which is exactly the question asked in an emergency.
+Vehicle in and out
+Visitor sign-in
+Live on-site list
+Vehicle
+Out 15:07
+GJ 01 KL 4412
+Driver
+Ramesh
+· carrying
+GP-3318
+Visitor
+On site
+Rohit Mehta
+Shakti Polymers
+· in at 11:05 to see
+Amit
+One log answers who is on the premises right now, which a paper register never can.
+Vehicle
+Out 15:07
+OH 4412 TRK
+Driver
+Ryan
+· carrying
+GP-3318
+Visitor
+On site
+Daniel Brooks
+Cascade Polymers
+· in at 11:05 to see
+Mike
+One log answers who is on the premises right now, which a paper register never can.
+Reporting
+What is open, and what has not come back
+Set a date range and every figure below it is bounded by those dates.
+Active passes
+What is open?
+Every pass still open, with its type, its purpose and the person who raised it, so nothing is outstanding unnoticed.
+Pending returns
+What has not come back?
+Returnable items still out, ordered by how overdue they are, which is the list nobody has when the register is paper.
+Entry and exit log
+Who came through?
+Daily entries and exits with the visitor log beside them, searchable by date, vehicle, person or material.
+All the features, done right
+Digital gate passes
+Inward and outward.
+Configurable types
+Returnable, non-returnable, inward.
+Material detail
+Item, quantity and purpose.
+Photo attachment
+What left, as it looked.
+Approval workflow
+Before anything reaches the gate.
+Gate verification
+Security checks the pass.
+Expected return
+A date on every returnable.
+Overdue alerts
+Chasing what has not come back.
+Vehicle log
+In and out, against the pass.
+Visitor log
+Who is here, and who they are seeing.
+Searchable history
+By date, vehicle, person or material.
+Mobile apps
+Raised and verified at the gate.
+Before you replace the register at the gate
+The questions stores and security teams ask before the first pass is raised in Neome.
+Who is this for?
+What is the difference between a returnable and non-returnable pass?
+Why approve before the material reaches the gate?
+How are overdue returns handled?
+Does it replace the visitor register at the gate?
+Can passes be raised and verified on a phone?
+How searchable is the history?
+Does this connect to inventory?
+What it costs
+One price, and
+Gate Pass Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Gate Pass Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Attendance & Leave Management Software
+Mark attendance where people actually work, route leave to the line manager with balances and cover in view, and see who is available today.
+Learn more
+Employee Community & Engagement App
+Discussions organised by category and department, threaded replies that stay with the question, and moderation before or after a post appears.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

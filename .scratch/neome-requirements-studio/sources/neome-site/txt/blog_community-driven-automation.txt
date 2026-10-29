@@ -1,0 +1,40 @@
+← Back to blog
+Community
+Built with the community
+A community-driven approach to enterprise automation
+A horizontal platform plus local expertise is the only way automation reaches every corner of an enterprise. Here's how the Neome community is structured.
+NT
+Neome Team
+March 30, 2026
+5 min read
+Automation does not generalize cleanly. A tea stall, a tile factory, and a multinational sales org all run real businesses, but the daily friction looks completely different inside each one. The only way to reach all of them is to combine a horizontal platform with local expertise. That's what the Neome community is for.
+What the community brings
+Knowledge.
+Domain depth across industries, geographies and customer types that no central team could ever replicate.
+Engagement.
+On-the-ground education, sales, and service, which is the part of adoption a platform can never own alone.
+Expertise.
+Customizations, integrations, and deployments that fit a specific workflow instead of a generic template.
+What Neome provides
+A horizontal platform.
+A scalable, secure automation foundation for any team size and any industry.
+A template store.
+Ready-to-use blueprints that can be cloned, customized and shipped quickly.
+Education and certification.
+Training tracks that turn developers and operators into Neome experts.
+A three-sided ecosystem
+The model only works if every side wins. Customers get trust, multi-device access and admin-grade dashboards. Community developers get an advanced studio, full development tools, and managed payments. Enterprises get reliable infrastructure, globally distributed deployment, and a curated module store. When all three sides compound, the platform grows faster than any single team could grow it.
+Keep reading
+More from the Neome blog.
+Guides
+How to run WhatsApp CRM without losing the next step
+Deals do not die because WhatsApp is the wrong channel. They die when nobody owns the lead, stages are unclear, and the next step has no date. Here is how operators keep conversation and pipeline together.
+Read article →
+Guides
+Real-time business visibility: tools that show you what's happening right now (2026)
+See how real-time business visibility tools help you track sales, stock, and deliveries live in 2026, so you can catch problems fast and act sooner.
+Read article →
+Curious how this works in practice?
+Watch real teams of every size run on Neome, from solo operators to large enterprises.
+Watch demos
+Talk to us

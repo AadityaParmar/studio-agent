@@ -1,0 +1,321 @@
+<!doctype html>
+<!--
+  PROTOTYPE, throwaway. Ticket 06: Process diagram rendering.
+  Plan: four ways to draw the end-to-end process + per-Module status flows, switchable via ?variant=A|B|C|D,
+  all drawn from the same data (Anglo Gulf CRM subset). Toggle "A4 preview" (or Cmd+P) to judge print.
+  A = HTML swimlane grid (Vendorgate), connectors measured from the DOM at runtime.
+  B = Mermaid, text source generated from data, rendered by mermaid.js (loaded from CDN here; real BRD would inline ~3 MB).
+  C = Inline SVG from a pure layout function (data -> SVG string, no DOM). Same function can run at build time.
+  D = No diagram. Numbered step table + status transition table.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROTOTYPE · Process diagram rendering</title>
+<style>
+:root{
+  --surface-base:#F7F7F7; --surface-card:#FFFFFF;
+  --ink-900:#1C1C1E; --ink-700:#3A3A3C; --ink-500:#595959; --ink-400:#8A8A8E; --ink-300:#C7C7C5;
+  --line-subtle:#E6E6E3; --line-strong:#D8D8D4;
+  --neome:#1877D5; --neome-deep:#115EA8; --accent:#F47100; --std:#1E8E5A;
+  --sans:'Schibsted Grotesk',-apple-system,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-base);color:var(--ink-700);font-family:var(--sans);font-size:15px;line-height:1.5}
+h1,h2,h3{color:var(--ink-900);margin:0;font-weight:500}
+h2{font-size:28px;letter-spacing:-.02em;line-height:1.1}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--neome)}
+.rule{height:3px;width:56px;border-radius:2px;margin:12px 0 14px;background:linear-gradient(90deg,var(--neome) 0 55%,var(--accent) 55% 100%)}
+.lead{font-size:16px;color:var(--ink-500);max-width:64ch}
+.small{font-size:13px;color:var(--ink-500)}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-400);margin-bottom:8px}
+.card{background:#fff;border:1px solid var(--line-subtle);border-radius:12px;padding:16px 18px}
+.oi{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;text-decoration:none}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;border:1px solid var(--line-strong);border-radius:999px;padding:2px 8px;background:#fff;white-space:nowrap}
+.chip.open{border-style:dashed;color:var(--accent);border-color:var(--accent)}
+.page{max-width:1080px;margin:0 auto;padding:28px 22px 110px;display:flex;flex-direction:column;gap:22px}
+.sec{display:flex;flex-direction:column;gap:12px}
+.how{border-left:3px solid var(--neome);background:#F2F7FD;padding:10px 14px;border-radius:0 8px 8px 0;font-size:13.5px}
+.how b{color:var(--ink-900)}
+.how ul{margin:4px 0 0;padding-left:18px}
+
+/* A4 preview: content width of an A4 page with 15mm margins */
+body.a4{background:#E4E4E1}
+body.a4 .page{width:210mm;max-width:none;background:#fff;padding:16mm 15mm;margin:20px auto 110px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+body.a4 .how{display:none}
+
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);text-align:left;font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line-strong)}
+td{padding:8px 10px;border-bottom:1px solid var(--line-subtle);vertical-align:top}
+td.n{font-family:var(--mono);font-size:12px;color:var(--ink-400);width:34px}
+td.mod{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--ink-900)}
+.tablewrap{border:1px solid var(--line-subtle);border-radius:12px;overflow:hidden}
+tr{break-inside:avoid}
+
+/* ---------- A: HTML swimlane ---------- */
+.lscroll{overflow-x:auto;border:1px solid var(--line-subtle);border-radius:12px;background:#fff}
+.lgrid{position:relative;display:grid;row-gap:12px;padding-bottom:18px;min-width:640px}
+.lane-bg{border-right:1px solid var(--line-subtle)} .lane-bg:last-of-type{border-right:0}
+.lane-bg.sys{background:var(--surface-base)} .lane-bg.ext{background:repeating-linear-gradient(135deg,#fff 0 8px,#FAFAF8 8px 16px)}
+.lane-h{grid-row:1;padding:12px 10px 10px 22px;border-bottom:1px solid var(--line-subtle);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-500);z-index:1}
+.lane-h b{display:block;font-family:var(--sans);font-size:13.5px;letter-spacing:-.01em;text-transform:none;color:var(--ink-900);font-weight:600}
+.lnode{position:relative;z-index:2;margin:0 10px 0 22px;padding:7px 10px 7px 12px;background:#fff;border:1px solid var(--line-strong);border-left:3px solid var(--neome);border-radius:8px;font-size:13px;line-height:1.25}
+.lnode.decision{border-left-color:var(--accent)}
+.lnode.ext{border-left-color:var(--ink-300);background:#FAFAF8}
+.lnode .m{font-family:var(--mono);font-size:10px;color:var(--ink-400);float:right;margin-left:6px}
+.lnode b{display:block;color:var(--ink-900)}
+.lnode .s{font-size:11.5px;color:var(--ink-500)}
+.lsvg{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+.lsvg path{fill:none;stroke:var(--ink-300);stroke-width:1.5}
+.lsvg path.alt{stroke:var(--accent);stroke-dasharray:4 3}
+.lsvg text{font-family:var(--mono);font-size:10px;fill:var(--accent)}
+.track{display:flex;gap:0;align-items:flex-start;overflow-x:auto;padding:4px 0}
+.track .col{display:flex;flex-direction:column;gap:8px;align-items:center}
+.track .arr{color:var(--ink-300);padding:6px 6px 0;font-size:14px}
+.st{border:1px solid var(--line-strong);border-radius:999px;padding:4px 12px;font-size:13px;background:#fff;white-space:nowrap}
+.st.start{border-color:var(--neome);color:var(--neome-deep);font-weight:600}
+.st.end{background:var(--ink-900);color:#fff;border-color:var(--ink-900)}
+.st.open{border-style:dashed;border-color:var(--accent);color:var(--accent)}
+.trans{font-size:12.5px;color:var(--ink-500);margin-top:8px}
+
+/* ---------- B: Mermaid ---------- */
+.mm{background:#fff;border:1px solid var(--line-subtle);border-radius:12px;padding:14px;overflow-x:auto}
+.mm svg{max-width:100%;height:auto}
+details pre{font-size:11.5px;background:#1d1d1f;color:#ddd;padding:12px;border-radius:8px;overflow:auto;max-height:260px}
+
+/* ---------- C: generated SVG ---------- */
+.svgbox{background:#fff;border:1px solid var(--line-subtle);border-radius:12px;padding:10px}
+.svgbox svg{display:block;width:100%;height:auto}
+
+/* ---------- switcher ---------- */
+#switcher{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#111;color:#fff;border-radius:999px;padding:6px 8px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;box-shadow:0 6px 24px rgba(0,0,0,.35);z-index:99}
+#switcher button{background:#2a2a2a;color:#fff;border:0;border-radius:999px;height:28px;min-width:28px;padding:0 10px;cursor:pointer;font-family:inherit;font-size:12px}
+#switcher button.on{background:var(--neome)}
+#switcher span{padding:0 10px;min-width:280px;text-align:center}
+
+@media print{
+  @page{size:A4;margin:15mm}
+  body{background:#fff} #switcher,.how,details{display:none!important}
+  .page{max-width:none;padding:0;margin:0;box-shadow:none}
+  .sec{break-before:page} .sec:first-of-type{break-before:auto}
+  .lscroll,.mm,.svgbox{overflow:visible;border:0;padding:0}
+  .lgrid{min-width:0}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="switcher"><button id="prev" title="Previous (←)">←</button><span id="vlabel"></span><button id="next" title="Next (→)">→</button><button id="a4">A4 preview</button></div>
+
+<script>
+/* ======== SAMPLE DATA: Anglo Gulf CRM. Shape is a hint for ticket 08, not a decision. ======== */
+const P = {
+  lanes:[
+    {id:"exec",who:"Anglo Gulf",name:"Sales executive"},
+    {id:"mgr",who:"Anglo Gulf",name:"Approvers L1–L3",oi:"OI-09"},
+    {id:"sys",who:"Automated",name:"Neome",kind:"system"},
+    {id:"tally",who:"Outside Neome",name:"Tally ERP",kind:"ext"}],
+  steps:[
+    {id:"s1",lane:"exec",mod:"LEAD",label:"Capture lead",note:"Owner + status"},
+    {id:"s2",lane:"exec",mod:"LEAD",label:"Qualify",note:"Status list: OI-01"},
+    {id:"s3",lane:"sys",mod:"CUS",label:"Convert to account",note:"Account + contact, link kept"},
+    {id:"s4",lane:"exec",mod:"OPP",label:"Open opportunity",note:"Stages: OI-02"},
+    {id:"s5",lane:"exec",mod:"QUO",label:"Attach quotation",note:"Prepared outside Neome"},
+    {id:"s6",lane:"tally",mod:"QUO",label:"Cost + margin",note:"Pulled from Tally: OI-19"},
+    {id:"s7",lane:"sys",mod:"QUO",label:"Route by discount %",note:"Bands set by admin",kind:"decision"},
+    {id:"s8",lane:"mgr",mod:"QUO",label:"Approve or reject",note:"Sequential? OI-09"},
+    {id:"s9",lane:"exec",mod:"QUO",label:"Send to customer",note:"Approved version only"},
+    {id:"s10",lane:"exec",mod:"OPP",label:"PO received",note:"Position: OI-04"},
+    {id:"s11",lane:"tally",mod:"Tally ERP",label:"Order → invoice → collection",note:"Scoped with Tally partner",kind:"ext"}],
+  edges:[
+    ["s1","s2"],["s2","s3","qualified"],["s3","s4"],["s4","s5"],["s5","s6"],["s6","s7"],
+    ["s7","s8","≥10%"],["s7","s9","<10%",true],["s8","s9","approved"],["s8","s5","rejected",true],
+    ["s9","s10","won"],["s10","s11"]]
+};
+const FLOWS = [
+  {mod:"LEAD",name:"Lead status",oi:"OI-01",
+   states:[{id:"New",start:true},{id:"Contacted"},{id:"On hold"},{id:"Opportunity grooming",open:true},{id:"Qualified"},{id:"Converted",end:true},{id:"Disqualified",end:true}],
+   trans:[["New","Contacted","first call"],["Contacted","On hold"],["On hold","Contacted","resumed"],["Contacted","Opportunity grooming"],["Opportunity grooming","Qualified"],["Contacted","Qualified"],["Qualified","Converted","convert action"],["Contacted","Disqualified"],["Qualified","Disqualified"]]},
+  {mod:"QUO",name:"Quotation status",oi:"OI-09",
+   states:[{id:"Draft",start:true},{id:"Pending approval"},{id:"Approved"},{id:"Rejected"},{id:"Sent"},{id:"Won",end:true},{id:"Lost",end:true}],
+   trans:[["Draft","Pending approval","discount ≥10%"],["Draft","Approved","discount <10%"],["Pending approval","Approved","all levels approve"],["Pending approval","Rejected","any level rejects"],["Rejected","Draft","revise"],["Approved","Sent"],["Sent","Won","PO received"],["Sent","Lost"]]}
+];
+
+/* ======== helpers ======== */
+const esc = s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const oiLink = s=>esc(s).replace(/OI-\d+/g,x=>`<a class="oi" href="#${x}">${x}</a>`);
+const laneIx = id=>P.lanes.findIndex(l=>l.id===id);
+const stepIx = id=>P.steps.findIndex(s=>s.id===id);
+/* level layout for status flows: column = BFS depth from start, row = order within column */
+function levels(f){
+  const col={}; const start=f.states.find(s=>s.start).id; col[start]=0; const q=[start];
+  while(q.length){const a=q.shift(); f.trans.filter(t=>t[0]===a).forEach(t=>{if(col[t[1]]===undefined){col[t[1]]=col[a]+1;q.push(t[1]);}});}
+  f.states.forEach(s=>{if(col[s.id]===undefined)col[s.id]=0;});
+  const cols=[]; f.states.forEach(s=>{(cols[col[s.id]]=cols[col[s.id]]||[]).push(s);});
+  return {col,cols};
+}
+const head = (eyebrow,title,lead)=>`<div><div class="eyebrow">${eyebrow}</div><h2 style="margin-top:6px">${title}</h2><div class="rule"></div><p class="lead">${lead}</p></div>`;
+
+/* ======== A: HTML swimlane grid, connectors measured after layout ======== */
+function VariantA(){
+  const n=P.lanes.length, rows=P.steps.length+1;
+  let g=`<div class="lgrid" id="lgrid" style="grid-template-columns:repeat(${n},minmax(150px,1fr))">`;
+  P.lanes.forEach((l,i)=>g+=`<div class="lane-bg ${l.kind||""}" style="grid-column:${i+1};grid-row:1 / ${rows+1}"></div>`);
+  P.lanes.forEach((l,i)=>g+=`<div class="lane-h" style="grid-column:${i+1}">${esc(l.who)}<b>${esc(l.name)} ${l.oi?oiLink(l.oi):""}</b></div>`);
+  P.steps.forEach((s,i)=>g+=`<div class="lnode ${s.kind||""}" data-id="${s.id}" style="grid-column:${laneIx(s.lane)+1};grid-row:${i+2}"><span class="m">${String(i+1).padStart(2,"0")} · ${esc(s.mod)}</span><b>${esc(s.label)}</b><span class="s">${oiLink(s.note)}</span></div>`);
+  g+=`<svg class="lsvg" id="lsvg"></svg></div>`;
+  const flows=FLOWS.map(f=>{const {cols}=levels(f);
+    return `<div class="card"><div class="label">${f.mod} · ${esc(f.name)} ${oiLink(f.oi)}</div><div class="track">${cols.map((c,i)=>`${i?'<div class="arr">→</div>':""}<div class="col">${c.map(s=>`<span class="st ${s.start?"start":""} ${s.end?"end":""} ${s.open?"open":""}">${esc(s.id)}${s.open?" ?":""}</span>`).join("")}</div>`).join("")}</div>
+      <div class="trans">${f.trans.filter(t=>t[2]).map(t=>`${esc(t[0])} → ${esc(t[1])}: <i>${esc(t[2])}</i>`).join(" · ")}</div></div>`;}).join("");
+  return {html:`<div class="sec">${head("Business process","Lead to collection, end to end","Lanes are who does it. Each step names the Module that owns it. Orange dashed lines are alternate paths.")}<div class="lscroll">${g}</div></div>
+    <div class="sec">${head("Status flows","How records move","One flow per Module that has statuses.")}${flows}</div>`,
+    after:drawA,
+    how:`<b>A · HTML swimlane (Vendorgate).</b><ul><li>CSS grid places steps by lane and row; JS measures boxes and draws SVG connectors.</li><li>Offline: yes, ~80 lines JS. From data: yes.</li><li>Print: connectors redrawn on <code>beforeprint</code>; risk of drift if layout reflows. Wide lanes squeeze on A4.</li><li>Status flow is a chip track, not a true graph: loops and back-edges only listed as text.</li></ul>`};
+}
+function drawA(){
+  const grid=document.getElementById("lgrid"), svg=document.getElementById("lsvg"); if(!grid)return;
+  const NS="http://www.w3.org/2000/svg";
+  svg.setAttribute("viewBox",`0 0 ${grid.offsetWidth} ${grid.offsetHeight}`); svg.innerHTML="";
+  const box=id=>{const e=grid.querySelector(`[data-id="${id}"]`);return {l:e.offsetLeft,r:e.offsetLeft+e.offsetWidth,t:e.offsetTop,b:e.offsetTop+e.offsetHeight,cx:e.offsetLeft+e.offsetWidth/2};};
+  let gut=0;
+  P.edges.forEach(([f,t,lab,alt])=>{
+    const a=box(f),c=box(t),back=stepIx(t)<stepIx(f); let d,lx,ly;
+    if(back){const x=grid.offsetWidth-8-(gut++)*8; d=`M${a.r} ${(a.t+a.b)/2} H${x} V${(c.t+c.b)/2} H${c.r}`; lx=x-60; ly=(a.t+c.b)/2;}
+    else{const ym=a.b+6; d=`M${a.cx} ${a.b} V${ym} H${c.cx} V${c.t}`; lx=(a.cx+c.cx)/2+4; ly=ym+10;}
+    const p=document.createElementNS(NS,"path"); p.setAttribute("d",d); if(alt)p.setAttribute("class","alt"); svg.appendChild(p);
+    if(lab&&alt){const tx=document.createElementNS(NS,"text"); tx.setAttribute("x",lx); tx.setAttribute("y",ly); tx.textContent=lab; svg.appendChild(tx);}
+  });
+}
+
+/* ======== B: Mermaid ======== */
+function mmId(s){return s.replace(/[^A-Za-z0-9]/g,"_");}
+function mmQ(s){return '"'+String(s).replace(/"/g,"'")+'"';}
+function mermaidProcess(){
+  let m="flowchart TB\n";
+  P.lanes.forEach(l=>{m+=`  subgraph ${l.id}[${mmQ(l.name)}]\n    direction TB\n`;
+    P.steps.filter(s=>s.lane===l.id).forEach(s=>{const t=mmQ(`${s.mod} · ${s.label}<br/><small>${s.note}</small>`);m+=`    ${s.id}${s.kind==="decision"?`{${t}}`:`[${t}]`}\n`;});
+    m+="  end\n";});
+  P.edges.forEach(([f,t,lab,alt])=>{m+=`  ${f} ${alt?"-.->":"-->"}${lab?`|${mmQ(lab)}|`:""} ${t}\n`;});
+  m+="  classDef ext fill:#FAFAF8,stroke:#C7C7C5\n  classDef dec fill:#FFF4EA,stroke:#F47100\n";
+  m+=`  class ${P.steps.filter(s=>s.kind==="ext").map(s=>s.id).join(",")} ext\n  class ${P.steps.filter(s=>s.kind==="decision").map(s=>s.id).join(",")} dec\n`;
+  return m;
+}
+function mermaidFlow(f){
+  let m="stateDiagram-v2\n  direction LR\n";
+  f.states.forEach(s=>m+=`  state ${mmQ(s.id+(s.open?" ?":""))} as ${mmId(s.id)}\n`);
+  f.states.filter(s=>s.start).forEach(s=>m+=`  [*] --> ${mmId(s.id)}\n`);
+  f.trans.forEach(t=>m+=`  ${mmId(t[0])} --> ${mmId(t[1])}${t[2]?" : "+t[2]:""}\n`);
+  f.states.filter(s=>s.end).forEach(s=>m+=`  ${mmId(s.id)} --> [*]\n`);
+  f.states.filter(s=>s.open).forEach(s=>m+=`  class ${mmId(s.id)} open\n`);
+  return m+"  classDef open stroke:#F47100,stroke-dasharray:4 3,color:#F47100\n";
+}
+function VariantB(){
+  const blocks=[["proc",mermaidProcess()],...FLOWS.map(f=>["f_"+f.mod,mermaidFlow(f)])];
+  return {html:`<div class="sec">${head("Business process","Lead to collection, end to end","Mermaid flowchart, one subgraph per lane.")}<div class="mm" id="mm_proc">Loading mermaid…</div><details><summary class="small">Generated Mermaid source</summary><pre>${esc(blocks[0][1])}</pre></details></div>
+    <div class="sec">${head("Status flows","How records move","Mermaid state diagrams.")}${FLOWS.map((f,i)=>`<div class="card"><div class="label">${f.mod} · ${esc(f.name)} ${oiLink(f.oi)}</div><div class="mm" id="mm_f_${f.mod}"></div><details><summary class="small">Source</summary><pre>${esc(blocks[i+1][1])}</pre></details></div>`).join("")}</div>`,
+    after:()=>renderMermaid(blocks),
+    how:`<b>B · Mermaid.</b><ul><li>Data → Mermaid text → mermaid.js renders SVG in the browser.</li><li>Offline: only if mermaid.min.js (~3 MB) is inlined in every BRD. Here it loads from CDN.</li><li>Print: SVG, prints well. Layout is Mermaid's choice: lanes as subgraphs often come out uneven and hard to control.</li><li>Real state graph with loops and labelled transitions for free. Source is readable and diffable.</li></ul>`};
+}
+let mmLoaded=null;
+function renderMermaid(blocks){
+  mmLoaded=mmLoaded||new Promise((res,rej)=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";s.onload=res;s.onerror=rej;document.head.appendChild(s);})
+    .then(()=>mermaid.initialize({startOnLoad:false,theme:"base",themeVariables:{fontFamily:"system-ui",primaryColor:"#fff",primaryBorderColor:"#1877D5",lineColor:"#8A8A8E",fontSize:"13px"}}));
+  mmLoaded.then(async()=>{for(const [id,src] of blocks){const el=document.getElementById("mm_"+id); if(!el)continue;
+      try{const {svg}=await mermaid.render("r_"+id+Date.now(),src); el.innerHTML=svg;}catch(e){el.textContent="Mermaid error: "+e.message;}}})
+    .catch(()=>{const el=document.getElementById("mm_proc"); if(el)el.textContent="Could not load mermaid.js (offline?). This is the offline risk.";});
+}
+
+/* ======== C: pure layout function, data -> SVG string ======== */
+const C_FONT="system-ui,-apple-system,sans-serif", C_MONO="ui-monospace,Menlo,monospace";
+function svgText(x,y,s,o={}){return `<text x="${x}" y="${y}" font-family="${o.mono?C_MONO:C_FONT}" font-size="${o.size||12}" fill="${o.fill||"#1C1C1E"}" ${o.anchor?`text-anchor="${o.anchor}"`:""} ${o.weight?`font-weight="${o.weight}"`:""} ${o.halo?'paint-order="stroke" stroke="#fff" stroke-width="3"':""}>${esc(s)}</text>`;}
+function processSVG(){
+  const colW=165,headH=46,rowH=54,bw=140,bh=38,gutter=44,n=P.lanes.length,W=n*colW+gutter,H=headH+P.steps.length*rowH+10;
+  const pos=s=>{const i=stepIx(s),l=laneIx(P.steps[i].lane);const x=l*colW+(colW-bw)/2,y=headH+i*rowH+(rowH-bh)/2;return {x,y,cx:x+bw/2,cy:y+bh/2,r:x+bw,b:y+bh};};
+  let o=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Business process swimlane"><defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#8A8A8E"/></marker><marker id="aho" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#F47100"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#fff"/><line x1="0" y1="0" x2="0" y2="8" stroke="#F0F0EC" stroke-width="4"/></pattern></defs>`;
+  P.lanes.forEach((l,i)=>{const x=i*colW;
+    o+=`<rect x="${x}" y="0" width="${colW}" height="${H}" fill="${l.kind==="system"?"#F7F7F7":l.kind==="ext"?"url(#hatch)":"#fff"}" stroke="#E6E6E3"/>`;
+    o+=svgText(x+10,17,l.who.toUpperCase(),{mono:1,size:9,fill:"#8A8A8E"})+svgText(x+10,35,l.name+(l.oi?"  "+l.oi:""),{size:12.5,weight:600});});
+  o+=`<line x1="0" y1="${headH}" x2="${n*colW}" y2="${headH}" stroke="#D8D8D4"/>`;
+  let gut=0;
+  P.edges.forEach(([f,t,lab,alt])=>{const a=pos(f),c=pos(t),back=stepIx(t)<stepIx(f);let d,lx,ly;
+    if(back){const x=n*colW+10+(gut++)*12;d=`M${a.r} ${a.cy} H${x} V${c.cy} H${c.r+2}`;lx=x+3;ly=(a.cy+c.cy)/2;}
+    else if(a.cx===c.cx){d=`M${a.cx} ${a.b} V${c.y-2}`;lx=a.cx+5;ly=(a.b+c.y)/2+4;}
+    else{const ym=a.b+8;d=`M${a.cx} ${a.b} V${ym} H${c.cx} V${c.y-2}`;lx=Math.min(a.cx,c.cx)+(Math.abs(a.cx-c.cx)/2)-12;ly=ym-3;}
+    o+=`<path d="${d}" fill="none" stroke="${alt?"#F47100":"#8A8A8E"}" stroke-width="1.3" ${alt?'stroke-dasharray="4 3"':""} marker-end="url(#${alt?"aho":"ah"})"/>`;
+    if(lab)o+=back?`<g transform="translate(${lx},${ly}) rotate(90)">${svgText(0,0,lab,{mono:1,size:9,fill:"#F47100",anchor:"middle",halo:1})}</g>`:svgText(lx,ly,lab,{mono:1,size:9,fill:alt?"#F47100":"#595959",halo:1});});
+  //`<g transform="translate(${lx},${ly}) rotate(90)">${svgText(0,0,lab,{mono:1,size:9,fill:"#F47100",anchor:"middle"})}</g>`:svgText(lx,ly,lab,{mono:1,size:9,fill:alt?"#F47100":"#595959"});});
+  P.steps.forEach((s,i)=>{const p=pos(s.id);
+    if(s.kind==="decision")o+=`<path d="M${p.x+10} ${p.y} H${p.r-10} L${p.r} ${p.cy} L${p.r-10} ${p.b} H${p.x+10} L${p.x} ${p.cy}Z" fill="#FFF4EA" stroke="#F47100"/>`;
+    else o+=`<rect x="${p.x}" y="${p.y}" width="${bw}" height="${bh}" rx="6" fill="${s.kind==="ext"?"#FAFAF8":"#fff"}" stroke="${s.kind==="ext"?"#C7C7C5":"#1877D5"}"/>`;
+    o+=svgText(p.x+8,p.y+15,s.label.length>22?s.label.slice(0,21)+"…":s.label,{size:11.5,weight:600});
+    o+=svgText(p.x+8,p.y+29,(s.note.length>26?s.note.slice(0,25)+"…":s.note),{size:9.5,fill:/OI-\d+/.test(s.note)?"#F47100":"#595959"});
+    o+=svgText(p.r-4,p.y-3,String(i+1).padStart(2,"0")+" · "+s.mod,{mono:1,size:8.5,fill:"#8A8A8E",anchor:"end"});});
+  return o+"</svg>";
+}
+function flowSVG(f){
+  const {col,cols}=levels(f),cw=200,rh=56,bw=124,bh=28,top=14,W=cols.length*cw,maxRows=Math.max(...cols.map(c=>c.length)),H=top+maxRows*rh+34;
+  const row={}; cols.forEach(c=>c.forEach((s,i)=>row[s.id]=i));
+  const P2=id=>{const x=col[id]*cw+(cw-bw)/2,y=top+row[id]*rh;return {x,y,cx:x+bw/2,cy:y+bh/2,r:x+bw,b:y+bh};};
+  const LBL=[];let o=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 ${W} ${H}" style="max-width:${W}px" role="img" aria-label="${esc(f.name)}"><defs><marker id="ah2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="#8A8A8E"/></marker></defs>`;
+  f.trans.forEach(t=>{const a=P2(t[0]),c=P2(t[1]);let d,lx,ly;
+    if(col[t[1]]>col[t[0]]){const mx=(a.r+c.x)/2;d=`M${a.r} ${a.cy} C${mx} ${a.cy} ${mx} ${c.cy} ${c.x-2} ${c.cy}`;lx=mx;ly=(a.cy+c.cy)/2-4;}
+    else if(col[t[1]]===col[t[0]]){const s=row[t[1]]>row[t[0]];d=s?`M${a.cx-14} ${a.b} V${c.y-2}`:`M${a.cx+14} ${a.y} V${c.b+2}`;lx=a.cx+(s?-10:18);ly=(a.cy+c.cy)/2+3;}
+    else{const yb=Math.max(a.b,c.b)+16;d=`M${a.cx} ${a.b} C${a.cx} ${yb} ${c.cx} ${yb} ${c.cx} ${c.b+2}`;lx=(a.cx+c.cx)/2;ly=yb+4;}
+    o+=`<path d="${d}" fill="none" stroke="#8A8A8E" stroke-width="1.2" marker-end="url(#ah2)"/>`;
+    LBL.push([lx,ly,t[2]]);});
+  LBL.forEach(([x,y,t])=>{if(t)o+=svgText(x,y,t,{mono:1,size:8.5,fill:"#595959",anchor:"middle",halo:1});});
+  f.states.forEach(s=>{const p=P2(s.id);
+    o+=`<rect x="${p.x}" y="${p.y}" width="${bw}" height="${bh}" rx="14" fill="${s.end?"#1C1C1E":"#fff"}" stroke="${s.open?"#F47100":s.start?"#1877D5":s.end?"#1C1C1E":"#D8D8D4"}" ${s.open?'stroke-dasharray="4 3"':""} stroke-width="1.3"/>`;
+    o+=svgText(p.cx,p.cy+4,s.id+(s.open?" ?":""),{size:11,anchor:"middle",fill:s.end?"#fff":s.open?"#F47100":"#1C1C1E",weight:s.start?600:400});});
+  return o+"</svg>";
+}
+function VariantC(){
+  return {html:`<div class="sec">${head("Business process","Lead to collection, end to end","Lanes are who does it. Each step names the Module that owns it. Orange dashed lines are alternate paths.")}<div class="svgbox">${processSVG()}</div></div>
+    <div class="sec">${head("Status flows","How records move","One state graph per Module that has statuses.")}${FLOWS.map(f=>`<div class="card"><div class="label">${f.mod} · ${esc(f.name)} ${oiLink(f.oi)}</div><div class="svgbox" style="border:0;padding:0">${flowSVG(f)}</div></div>`).join("")}</div>`,
+    how:`<b>C · Generated inline SVG.</b><ul><li>A pure function turns data into an SVG string. No DOM measuring, no library. Can run at build time, so the BRD file holds finished SVG.</li><li>Offline: yes. Print: vector, scales to A4 width, never drifts.</li><li>Cost: we own the layout code (~100 lines). Long labels are cut, not wrapped. Odd graphs may need hand tuning.</li><li>OI refs in text are not clickable inside SVG (could be added as &lt;a&gt;).</li></ul>`};
+}
+
+/* ======== D: no diagram, tables ======== */
+function VariantD(){
+  const laneName=id=>P.lanes[laneIx(id)].name;
+  const nexts=s=>P.edges.filter(e=>e[0]===s.id).map(e=>`${String(stepIx(e[1])+1).padStart(2,"0")}${e[2]?` <i class="small">(${esc(e[2])})</i>`:""}`).join(", ");
+  return {html:`<div class="sec">${head("Business process","Lead to collection, end to end","Numbered steps. Who does it, which Module owns it, where it goes next.")}
+    <div class="tablewrap"><table><thead><tr><th>#</th><th>Step</th><th>Who</th><th>Module</th><th>Next</th></tr></thead><tbody>
+    ${P.steps.map((s,i)=>`<tr><td class="n">${String(i+1).padStart(2,"0")}</td><td><b style="color:var(--ink-900)">${esc(s.label)}</b><div class="small">${oiLink(s.note)}</div></td><td>${esc(laneName(s.lane))}</td><td class="mod">${esc(s.mod)}</td><td>${nexts(s)||"–"}</td></tr>`).join("")}
+    </tbody></table></div></div>
+    <div class="sec">${head("Status flows","How records move","One transition table per Module that has statuses.")}${FLOWS.map(f=>`<div class="card"><div class="label">${f.mod} · ${esc(f.name)} ${oiLink(f.oi)}</div>
+      <p class="small" style="margin-bottom:8px">Statuses: ${f.states.map(s=>`<span class="st ${s.start?"start":""} ${s.end?"end":""} ${s.open?"open":""}" style="font-size:12px;padding:2px 8px">${esc(s.id)}${s.open?" ?":""}</span>`).join(" ")}</p>
+      <div class="tablewrap"><table><thead><tr><th>From</th><th>To</th><th>When</th></tr></thead><tbody>${f.trans.map(t=>`<tr><td>${esc(t[0])}</td><td>${esc(t[1])}</td><td class="small">${esc(t[2]||"–")}</td></tr>`).join("")}</tbody></table></div></div>`).join("")}</div>`,
+    how:`<b>D · No diagram, tables.</b><ul><li>Steps and transitions as plain tables, same as the Requirement tables.</li><li>Offline, print, from data: all trivial. Rows never split.</li><li>Cost: no picture. Hard to see lanes, hand-offs and loops at a glance.</li></ul>`};
+}
+
+/* ======== switcher ======== */
+const V={A:["HTML swimlane",VariantA],B:["Mermaid",VariantB],C:["Generated SVG",VariantC],D:["Tables, no diagram",VariantD]};
+const keys=Object.keys(V);
+let cur=new URLSearchParams(location.search).get("variant"); if(!V[cur])cur="A";
+let a4=new URLSearchParams(location.search).get("a4")==="1";
+function render(){
+  const v=V[cur][1]();
+  document.body.classList.toggle("a4",a4);
+  document.getElementById("root").innerHTML=`<div class="page"><div class="how">${v.how}</div>${v.html}</div>`;
+  document.getElementById("vlabel").textContent=`${cur} (${V[cur][0]})`;
+  document.getElementById("a4").classList.toggle("on",a4);
+  const u=new URL(location); u.searchParams.set("variant",cur); a4?u.searchParams.set("a4","1"):u.searchParams.delete("a4"); history.replaceState(null,"",u);
+  window.__after=v.after||null; if(v.after)requestAnimationFrame(v.after);
+}
+const go=d=>{cur=keys[(keys.indexOf(cur)+d+keys.length)%keys.length];render();};
+document.getElementById("prev").onclick=()=>go(-1);
+document.getElementById("next").onclick=()=>go(1);
+document.getElementById("a4").onclick=()=>{a4=!a4;render();};
+document.addEventListener("keydown",e=>{if(e.target.closest("input,textarea,[contenteditable]"))return;if(e.key==="ArrowLeft")go(-1);if(e.key==="ArrowRight")go(1);});
+window.addEventListener("resize",()=>{if(cur==="A")drawA();});
+window.addEventListener("beforeprint",()=>{if(cur==="A")drawA();});
+window.addEventListener("afterprint",()=>{if(cur==="A")drawA();});
+render();
+</script>
+</body>
+</html>

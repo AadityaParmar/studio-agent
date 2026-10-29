@@ -1,0 +1,315 @@
+Home
+Apps
+Ticketing & Task Management
+Ticketing & Task Management
+Give the Issue an Owner and a Clock
+Tickets carry a category, a priority and an SLA from the moment they land, break into tasks somebody owns, and escalate to a manager before the deadline rather than after it.
+Start Free Trial
+Book A Free Demo
+SLA by category
+Tasks with owners
+Escalation before breach
+TKT-4417
+Priya Nair
+·
+Girnar Constructions
+High
+Batch rejected at incoming inspection
+Assigned
+Amit
+SLA left
+2h of 4h
+Tasks on this ticket
+Collect the rejected sample
+Raise a supplier claim
+Escalating in 30 minutes
+Neha
+is told before the breach, not in the monthly report.
+Open tickets
+28
+4 breaching today
+SLA compliance
+92%
+TKT-4417
+Paula Nelson
+·
+Greenline Construction
+High
+Batch rejected at incoming inspection
+Assigned
+Mike
+SLA left
+2h of 4h
+Tasks on this ticket
+Collect the rejected sample
+Raise a supplier claim
+Escalating in 30 minutes
+Levi
+is told before the breach, not in the monthly report.
+Open tickets
+28
+4 breaching today
+SLA compliance
+92%
+Never a group chat
+Every issue has one owner, not everyone's attention.
+A clock set by rule
+Category and priority decide the deadline, not tone of voice.
+Work broken down
+Tasks with owners, so closure is a fact.
+Warned in time
+Escalation while something can still be done.
+Work raised in a chat belongs to everyone, which means nobody.
+Three gaps account for most of what a busy team drops, and none of them is a capacity problem.
+Unowned
+The issue was raised in a group chat
+Everyone saw it and nobody owns it, so the first anyone knows of it being missed is the complaint.
+Untimed
+Urgent means whatever the sender felt
+Without a category and a clock, the queue is worked by who chased hardest rather than what is owed.
+Unfinished
+Closed, but the work was not done
+A ticket is marked resolved while the follow-up nobody wrote down is still outstanding.
+Neome closes all three by giving the issue an owner, the clock a rule, and the closure a definition.
+Tickets
+An issue with an owner, a category and a clock
+Every ticket is linked to whoever raised it, classified by category and priority, and carries an SLA deadline from the moment it lands. That is what turns a queue from a list of complaints into something that can be worked in the order the business actually owes.
+Customer or colleague linked
+Category and priority
+SLA from creation
+TKT-4417
+Priya Nair
+·
+Girnar Constructions
+High
+Batch rejected at incoming inspection
+Assigned
+Amit
+SLA left
+2h of 4h
+Tasks on this ticket
+Collect the rejected sample
+Raise a supplier claim
+Escalating in 30 minutes
+Neha
+is told before the breach, not in the monthly report.
+Open tickets
+28
+4 breaching today
+SLA compliance
+92%
+TKT-4417
+Paula Nelson
+·
+Greenline Construction
+High
+Batch rejected at incoming inspection
+Assigned
+Mike
+SLA left
+2h of 4h
+Tasks on this ticket
+Collect the rejected sample
+Raise a supplier claim
+Escalating in 30 minutes
+Levi
+is told before the breach, not in the monthly report.
+Open tickets
+28
+4 breaching today
+SLA compliance
+92%
+SLA
+The deadline comes from a rule, not from a mood
+Response times are configured by category and priority, so a quality issue and an access request are not measured against the same clock. The rule decides the deadline, which removes the argument about whether something was urgent from the moment it was raised.
+Configured per category
+Priority-driven timelines
+Monitoring and breach alerts
+SLA by category
+Quality issue
+High
+4 hours
+Quality issue
+Normal
+1 working day
+Access request
+Normal
+2 working days
+TKT-4417
+2h left
+Escalates to
+Neha
+at 30 minutes remaining
+The clock starts from the rule, not from when someone looked at it.
+SLA by category
+Quality issue
+High
+4 hours
+Quality issue
+Normal
+1 working day
+Access request
+Normal
+2 working days
+TKT-4417
+2h left
+Escalates to
+Levi
+at 30 minutes remaining
+The clock starts from the rule, not from when someone looked at it.
+Tasks
+Break the ticket into work somebody owns
+Tasks hang off the ticket with their own owner and due date, so resolving something that takes three people is tracked as three pieces of work rather than one vague state. A ticket closes when its tasks do, which makes closure a fact rather than an opinion.
+Ticket-linked tasks
+Owner and due date
+Reminders before the date
+Tasks
+on
+TKT-4417
+Collect the rejected sample
+Done
+Amit
+Raise a supplier claim
+Today
+Amit
+Update the inspection note
+1 day over
+Vikram
+A ticket closes when its tasks do, so closure is a fact rather than an opinion.
+Tasks
+on
+TKT-4417
+Collect the rejected sample
+Done
+Mike
+Raise a supplier claim
+Today
+Mike
+Update the inspection note
+1 day over
+Jay
+A ticket closes when its tasks do, so closure is a fact rather than an opinion.
+Escalation
+Somebody hears about it before it breaches
+A ticket approaching its deadline escalates to the manager while there is still time to act. Auto-close after the customer confirms keeps the queue honest at the other end, so open tickets are genuinely open rather than resolved ones nobody tidied.
+Escalation before breach
+Overdue rules
+Auto-close on confirmation
+Ahmedabad plant rollout
+Girnar Constructions
+On track
+Survey
+100%
+Installation
+60%
+Commissioning
+0%
+Led by
+Vikram
+₹27 L
+of
+₹42 L
+Spend against the project, not against a guess at the end.
+Hours logged
+412
+Against tasks, by the people doing them
+Overdue
+3 tasks
+Dayton plant rollout
+Greenline Construction
+On track
+Survey
+100%
+Installation
+60%
+Commissioning
+0%
+Led by
+Jay
+$328,000
+of
+$510,000
+Spend against the project, not against a guess at the end.
+Hours logged
+412
+Against tasks, by the people doing them
+Overdue
+3 tasks
+Reporting
+See the queue, and whether it is getting better
+Set a date range and every figure below it is bounded by those dates.
+Open and breaching
+What needs attention now?
+Open tickets by category and priority, with the ones breaching today separated out, so the day starts with the right list.
+Resolution time
+How long are we taking?
+Time to first response and to resolution, by category, so a slow area is visible as a pattern rather than a feeling.
+Backlog and compliance
+Is it getting better?
+Backlog over time against SLA compliance, which together show whether the team is keeping up or quietly falling behind.
+All the features, done right
+Tickets
+Linked to whoever raised them.
+Categories
+So the right rule applies.
+Priority
+Set by rule, not by tone of voice.
+SLA tracking
+A deadline from the moment it lands.
+Tasks
+Owned work hanging off the ticket.
+Due dates
+With reminders before they pass.
+Assignment
+Named owner, not a shared inbox.
+Escalation
+Before the breach, to the manager.
+Auto-close
+After the customer confirms.
+Full history
+Every status change, with its author.
+Dashboards
+Open load, breaches, backlog.
+Mobile apps
+Pick up a ticket anywhere.
+Before you move your queue across
+The questions teams ask before the first ticket is raised in Neome.
+Who is this for?
+How are SLA deadlines decided?
+What is the difference between a ticket and a task?
+What happens when a ticket is about to breach?
+Why auto-close after confirmation?
+Can this handle internal work as well as customer issues?
+How does this relate to Support Chat & Customer Portal?
+How does it relate to Approval Workflows?
+What it costs
+One price, and
+Ticketing & Task Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Ticketing & Task Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Project Management Software for SMEs
+Plan against milestones, assign tasks with dates, log the hours actually spent, and see a budget overrun forming while the project can still absorb it.
+Learn more
+Approval Workflow Software for SMEs
+Route requests through the chain the value demands, show the requester exactly where theirs is, and escalate the ones sitting in an inbox.
+Learn more
+Knowledge Base Software for SMEs
+Publish what your team knows through review rather than straight to live, keep the version history, and let ratings and failed searches say what to write next.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

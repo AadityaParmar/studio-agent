@@ -1,0 +1,56 @@
+# Replay script for anglo-gulf-crm. Read by neome-studio/evals/run.mjs; shape in lib/replay.schema.json.
+# Briefs go to the simulated client (with the answer key); placeholders are listed in lib/replay.mjs fill().
+enterprise: crescent-gulf
+engagement: sales-crm
+consultants:
+  a: { name: Asha Rao, email: asha.rao@example.com }
+  b: { name: Ben Okafor, email: ben.okafor@example.com }
+
+steps:
+  - id: ingest-first
+    as: a
+    skill: ingest
+    args: "Enterprise folder crescent-gulf, Engagement sales-crm"
+    brief: >-
+      First run for this Enterprise. Four Inputs wait in {ent}/inputs/. Names and titles from the key's
+      Consultant choices. Say yes to what the skill proposes when the key agrees with it.
+
+  - id: review-draft
+    as: a
+    skill: review-draft
+    args: "crescent-gulf sales-crm"
+    brief: >-
+      Fresh session. Confirm the Module set per the key's Consultant choices. Answer from the key; Don't know
+      for the rest.
+
+  - id: resolve-modules
+    as: a
+    skill: resolve-module
+    args: "crescent-gulf sales-crm"
+    repeat: { max: 10, whileStatus: "^next \\|" }
+    brief: >-
+      Live mode, one Module per session: the one the skill picks. The Enterprise answers through you from the
+      key; Don't know for anything else. Accept the skill's recommended options for Consultant choices.
+
+  - id: resolve-modules-more
+    as: a
+    skill: resolve-module
+    args: "crescent-gulf sales-crm"
+    repeat: { max: 6, whileStatus: "^next \\|" }
+    brief: >-
+      Same as before: live mode, the Module the skill picks, Enterprise answers from the key only.
+
+  - id: release-v1
+    as: a
+    skill: build-brd
+    args: "crescent-gulf sales-crm release"
+    brief: >-
+      Release a BRD version. Summary line: "First draft for Rania to review". Leave plan weeks empty.
+
+  - id: questionnaire
+    as: a
+    skill: questionnaire
+    args: "crescent-gulf sales-crm"
+    brief: >-
+      Send to Rania Haddad per the key. Accept the suggested item list and the suggested answers. Then end:
+      no reply is part of this case.

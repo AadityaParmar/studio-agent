@@ -1,0 +1,75 @@
+← Back to blog
+Insights
+A long read
+Civilizational units: from grain to singularity
+Every era of progress is anchored to a unit that can be measured, audited, and enforced. Here's how that lens explains where automation is heading next.
+NT
+Neome Team
+May 15, 2026
+12 min read
+Civilization moves forward by inventing units it can count, prove, and enforce. Grain. Atoms. Bits. Cycles. Percepts. Actions. Self. Each step shrinks the cost of accounting for something that used to be expensive, and the company that captures the new ledger captures the era.
+A unit becomes real the moment strangers can dispute it cheaply and the system can resolve the disagreement without collapsing.
+The unit test
+A civilizational unit is the smallest primitive you can audit and enforce cheaply enough to scale disputes across strangers. The progression is always the same: measure it, audit it, penalize misuse, quantify loss, insure it, then automate it. The moment something becomes insurable, it becomes institutional.
+Grain → Atoms → Bits
+Agriculture didn't matter because grain fed people. It mattered because grain was discrete, storable, transportable, taxable, and redistributable. The first writing didn't preserve poetry. It tracked rations. The first scribe was an accountant.
+The Industrial Revolution standardized atoms (repeatable matter shaped by repeatable machines). Factories standardized time itself; Britain's railways forced a single national clock long before philosophy demanded one. Once coordination needed synchronization, time became infrastructure.
+Information turned originals into copies. Once anything could be represented as bits, replication and transmission costs collapsed toward zero. Value migrated to the things still scarce: verification, ranking, gating, search.
+Cycles → Percepts → Actions
+When information became free, attention became expensive. The Communication Revolution made return visits priceable. Social networks were attention refineries running on notifications, feeds and infinite scroll, all optimized for one variable: come back.
+AI introduced the percept: a machine-usable interpretation of reality, compact enough to store, fast enough to act on. Whether it is a spam score, a fraud risk, a churn probability or a stop-sign detection, every percept is a tiny structured receipt of the world.
+Then agents started acting. The shift is small in language but huge in consequence: “notify me when the price drops” becomes “buy it when the price drops.” Detect, decide, execute, all without waiting for permission each time.
+Self as the next unit
+If actions become abundant, the scarce thing becomes the authority to take them. Who is allowed to do what, under what constraints, with what proof, and who pays when it goes wrong? That bundle (identity plus constraints plus liability) is the unit of the singularity era.
+Selves will become forkable. A single operator will spawn thousands of bounded agents inside one policy envelope and direct them like a beam. The product, increasingly, will be the policy rather than the interface.
+The civilizational stack at a glance
+Era
+Unit
+Audit primitive
+Outcome
+Agricultural
+Grain
+The ledger
+Survival
+Industrial
+Atoms
+The spec
+Throughput
+Information
+Bits
+The database
+Replication
+Communication
+Cycles
+The dashboard
+Attention
+AI
+Percepts
+The model score
+Meaning
+Agentic
+Actions
+The audit log
+Delegation
+Singularity
+Self
+The policy contract
+Accountability
+What this means for builders
+For founders.
+Pick a unit that becomes cheaper to audit because you exist. Don't sell “AI”. Sell a new default primitive that installs itself into how an industry already keeps score.
+For operators.
+Provenance and rollback are non-negotiable. If you can't explain it, reverse it, and insure it, it's not automation. It's a bet.
+For investors.
+The moat isn't the demo. It's the control plane that becomes non-optional once the unit shifts.
+The only question that matters in this transition: what unit are you betting your company on, and who gets to enforce it?
+Keep reading
+More from the Neome blog.
+Insights
+Why your business feels chaotic at 50 employees
+Why your business feels chaotic at 50 employees and how communication, processes, and leadership gaps create scaling challenges in growing companies.
+Read article →
+Curious how this works in practice?
+Watch real teams of every size run on Neome, from solo operators to large enterprises.
+Watch demos
+Talk to us

@@ -1,0 +1,281 @@
+Home
+Apps
+Purchase Management
+Purchase Management
+Approve the Spend Before It Becomes a Bill
+Requests raised against a visible budget, orders released only after approval, vendors rated on the orders you actually placed, and an invoice held the moment it stops matching.
+Start Free Trial
+Book A Free Demo
+Budget in view
+Approval before release
+Invoices matched
+PR-1904
+Production
+·
+Amit
+Approved
+HDPE Granules 25 kg
+PO-4412
+₹4,90,000
+Deccan Polymers Pvt Ltd
+Invoice does not match
+INV-8821
+is
+₹7,200
+above
+PO-4412
+, so it is held for review.
+Production
+budget
+₹41 L
+of
+₹60 L
+Preferred vendor
+Deccan Polymers Pvt Ltd
+Rated 4.6 on delivery
+PR-1904
+Production
+·
+Mike
+Approved
+HDPE Pellets 55 lb
+PO-4412
+$59,200
+Keystone Polymers Inc.
+Invoice does not match
+INV-8821
+is
+$870
+above
+PO-4412
+, so it is held for review.
+Production
+budget
+$492,000
+of
+$720,000
+Preferred vendor
+Keystone Polymers Inc.
+Rated 4.6 on delivery
+Requests with a figure
+The department sees its budget while it asks.
+Approval, then order
+No vendor is committed by a phone call.
+Vendors rated on evidence
+Delivery and quality from the orders you placed.
+Mismatches held
+A crept-up rate is caught before payment, not after.
+Procurement rarely overspends deliberately. It overspends invisibly.
+Three gaps account for most of what a buying function leaks, and none of them is a negotiation problem.
+Unbudgeted
+The spend is known after it happens
+Requests are made without a figure in front of anyone, so the department finds its limit by crossing it.
+Unapproved
+The order was already sent
+Someone committed the company over a phone call, and the approval was arranged afterwards, if at all.
+Unmatched
+The invoice was paid, not checked
+Nobody compared it to the order or the delivery, so a wrong quantity or a crept-up rate went through.
+Neome closes all three by putting the budget in front of the request, the approval before the order, and the order beside the invoice.
+Requests
+A request made against a number, not a hope
+Purchase requests are raised by department, naming the item, the quantity and why it is needed, with the department's remaining budget visible on the same screen. Spending becomes a decision made with the figure in view rather than a total discovered at year end.
+Department-wise requests
+Budget visible while raising
+Reason on the record
+PR-1904
+Raised by
+Amit
+Production
+Item
+HDPE Granules 25 kg
+Quantity
+200 bags
+Needed by
+End of month
+Reason
+Production run
+Budget left this year
+₹41 L
+of
+₹60 L
+PR-1904
+Raised by
+Mike
+Production
+Item
+HDPE Pellets 55 lb
+Quantity
+200 bags
+Needed by
+End of month
+Reason
+Production run
+Budget left this year
+$492,000
+of
+$720,000
+Approval
+Nothing reaches a vendor without passing the chain
+A request routes to whoever approves for that department and value. Only on approval is the purchase order generated and released, so the order the vendor receives is by definition one the company agreed to. Pending approvals are chased automatically rather than by whoever remembers.
+Approval before release
+PO generated on approval
+Pending reminders
+Approval chain
+Amit
+Raised the request
+Neha
+Approved for the department
+Purchase order
+Released automatically
+PO-4412
+₹4,90,000
+Sent to
+Deccan Polymers Pvt Ltd
+Nothing reaches a vendor without passing the chain.
+Approval chain
+Mike
+Raised the request
+Levi
+Approved for the department
+Purchase order
+Released automatically
+PO-4412
+$59,200
+Sent to
+Keystone Polymers Inc.
+Nothing reaches a vendor without passing the chain.
+Vendors
+Buy from the vendor the record recommends
+A vendor master holds contact and payment detail in one place, and every order placed feeds a rating for delivery and quality. Preferred vendors are marked on evidence rather than habit, which matters most when the person who knew who to call has left.
+Central vendor master
+Delivery and quality ratings
+Preferred vendors marked
+Deccan Polymers Pvt Ltd
+38 orders
+Preferred
+Delivery
+4.6
+Quality
+4.2
+Terms
+30 d
+Girnar Packaging
+3.1 delivery
+Not preferred, 9 orders
+Ratings come from orders placed, so the preference is earned rather than habitual.
+Keystone Polymers Inc.
+38 orders
+Preferred
+Delivery
+4.6
+Quality
+4.2
+Terms
+30 d
+Northgate Packaging
+3.1 delivery
+Not preferred, 9 orders
+Ratings come from orders placed, so the preference is earned rather than habitual.
+Matching
+An invoice that does not match does not get paid
+Invoices are verified against the purchase order and what was actually received. A difference in rate or quantity is flagged as a discrepancy and the invoice is held, so a crept-up price or a short delivery is caught before payment rather than found in a reconciliation months later.
+Matched to the order
+Checked against receipt
+Discrepancies held
+Invoice matching
+Order PO-4412
+₹4,90,000
+Invoice INV-8821
+₹4,97,200
+Discrepancy
+₹7,200
+Held for review. It does not reach payment until it is resolved.
+Received quantity is checked against the order too, so a short delivery is not paid in full.
+Invoice matching
+Order PO-4412
+$59,200
+Invoice INV-8821
+$60,070
+Discrepancy
+$870
+Held for review. It does not reach payment until it is resolved.
+Received quantity is checked against the order too, so a short delivery is not paid in full.
+Reporting
+See the committed spend, not just the paid spend
+Set a date range and every figure below it is bounded by those dates.
+Purchase order status
+What is outstanding?
+Orders by stage from released to received, so what is on its way is as visible as what has already arrived.
+Spend by department
+Who is spending what?
+Committed and paid value per department against budget, which is the view a budget conversation needs and a paid-invoice report cannot give.
+Committed against paid
+What have we agreed to?
+An approved order is money committed whether or not the invoice has arrived, so finance plans against what the company agreed rather than what happened to clear.
+All the features, done right
+Purchase requests
+By department, with a reason.
+Budget allocation
+Per department, visible while raising.
+Approval workflow
+By department and value.
+Purchase orders
+Generated on approval, not before.
+Pending reminders
+Approvals chase themselves.
+Vendor master
+Contact and payment detail in one place.
+Vendor ratings
+Delivery and quality, from real orders.
+Invoice matching
+Against the order and the receipt.
+Discrepancies
+Flagged and held before payment.
+Spend reporting
+By department, against budget.
+Audit trail
+Who asked, who approved, what changed.
+Role-based access
+Executive, manager and admin scopes.
+Before you move your purchasing across
+The questions procurement and finance teams ask before the first request is raised in Neome.
+Who is this for?
+How does budget control work?
+When is the purchase order actually created?
+What is matched when an invoice arrives?
+How are vendors rated?
+Does this connect to inventory?
+What can finance see?
+Is there an audit trail?
+What it costs
+One price, and
+Purchase Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Purchase Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Inventory Management Software for SMEs
+Know what you hold, where you hold it and what it is worth, with a stock ledger that updates as goods are received, issued, transferred and adjusted.
+Learn more
+Product Lifecycle (PLM) Software for SMEs
+Version products properly, assess the impact of a change before approving it, and issue a change order that tells every affected department when it starts.
+Learn more
+Gate Pass Management System for SMEs
+Raise inward and outward gate passes with photos and a purpose, approve before anything moves, and chase the returnables that never came back.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

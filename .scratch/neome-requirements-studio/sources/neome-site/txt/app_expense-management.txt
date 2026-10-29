@@ -1,0 +1,273 @@
+Home
+Apps
+Expense Management
+Expense Management
+Tell Them It Is Over the Limit Before They Submit It
+Receipts photographed where the money was spent, category limits checked as the claim is written, manager and finance each answering their own question, and a status the claimant can see.
+Start Free Trial
+Book A Free Demo
+Receipt at the moment
+Limits checked live
+Status visible
+Kavita Sharma
+Travel claim
+₹4,200
+Site travel, Jamnagar
+receipt-scan.jpg
+₹1,200
+over the
+₹3,000
+limit
+Flagged as it was submitted, not after it was paid.
+Two approvals needed
+Neha
+, then finance, because it crossed the limit.
+Claimed this month
+₹2.8 L
+Pending claims
+9
+Dana Ruiz
+Travel claim
+$510
+Site travel, Columbus
+receipt-scan.jpg
+$145
+over the
+$365
+limit
+Flagged as it was submitted, not after it was paid.
+Two approvals needed
+Levi
+, then finance, because it crossed the limit.
+Claimed this month
+$34,000
+Pending claims
+9
+Evidence, not memory
+The receipt is photographed at the till, not found later.
+Policy before rejection
+The breach is shown while the claim is being written.
+Two different checks
+The manager judges the spend, finance verifies it.
+Status without asking
+The claimant can see which desk it is on.
+Rejection is the most expensive way to explain a policy.
+Three gaps account for most of the friction in an expense process, and none of them is an honesty problem.
+Unevidenced
+The receipt was in a jacket pocket
+Claims arrive weeks later with paper that may or may not exist, so finance is auditing memory.
+Unchecked
+Policy is enforced by rejection
+Limits are discovered when a claim comes back, which wastes the claimant's time and the approver's.
+Unpaid
+The claim is somewhere between two people
+Nobody can say whether it is with the manager or finance, so employees chase and finance apologises.
+Neome closes all three by capturing the receipt at the till, checking the limit at submission, and showing the claimant the stage.
+Claims
+Raised where the money was spent
+A claim is linked to the employee, classified by category and carries the receipt as an attachment captured on a phone at the time. A photograph taken at the restaurant is a better record than a paper slip found three weeks later, and it removes the argument about whether it existed.
+Employee-linked claims
+Receipt attached
+Category classification
+Kavita Sharma
+Travel claim
+₹4,200
+Site travel, Jamnagar
+receipt-scan.jpg
+₹1,200
+over the
+₹3,000
+limit
+Flagged as it was submitted, not after it was paid.
+Two approvals needed
+Neha
+, then finance, because it crossed the limit.
+Claimed this month
+₹2.8 L
+Pending claims
+9
+Dana Ruiz
+Travel claim
+$510
+Site travel, Columbus
+receipt-scan.jpg
+$145
+over the
+$365
+limit
+Flagged as it was submitted, not after it was paid.
+Two approvals needed
+Levi
+, then finance, because it crossed the limit.
+Claimed this month
+$34,000
+Pending claims
+9
+Policy
+The limit is checked while it is being claimed
+Categories carry configurable limits, and a claim above one is flagged at submission rather than at rejection. The claimant sees the breach as they submit, so they can correct it, explain it or expect the extra approval, instead of finding out a week later that the answer was no.
+Configurable limits
+Validated at submission
+Breach shown to the claimant
+Category limits
+Travel, per day
+₹3,000
+Meals, per day
+set by policy
+Accommodation
+set by policy
+Kavita Sharma
+₹4,200
+The employee sees the breach while submitting, so there is no surprise rejection.
+Category limits
+Travel, per day
+$365
+Meals, per day
+set by policy
+Accommodation
+set by policy
+Dana Ruiz
+$510
+The employee sees the breach while submitting, so there is no surprise rejection.
+Approval
+Manager first, finance second, both recorded
+Claims route to the line manager for the judgement about whether the spend was reasonable, and then to finance for verification before payment. Two steps because they are two different questions, and a claim crossing a limit picks up the extra approval automatically.
+Manager-level routing
+Finance verification
+Extra approval over a limit
+Reporting line
+Production
+Rohit Mehta
+Operations head
+Neha
+Production manager
+Kavita Sharma
+Shift supervisor
+Arun Prakash
+Shift operator
+Approvals and leave routing read this tree, so it has to be right.
+Reporting line
+Production
+Daniel Brooks
+Operations head
+Levi
+Production manager
+Dana Ruiz
+Shift supervisor
+Marcus Bell
+Shift operator
+Approvals and leave routing read this tree, so it has to be right.
+Visibility
+The claimant can see where it is
+Status is visible to the person who raised it at every stage, which removes most of the chasing that expense processes generate. The full approval trail stays on the claim, so an audit question about who authorised a payment is a retrieval rather than an investigation.
+Status visible to the claimant
+Full approval trail
+Audit as retrieval
+Kavita Sharma
+2 days, casual leave
+Waiting on
+Neha
+Balance
+Casual
+6
+Sick
+4
+Earned
+11
+Nobody else in
+Production
+is away
+The approver decides with the cover in front of them.
+Dana Ruiz
+2 days, casual leave
+Waiting on
+Levi
+Balance
+Casual
+6
+Sick
+4
+Earned
+11
+Nobody else in
+Production
+is away
+The approver decides with the cover in front of them.
+Reporting
+See the spend by category, before the year closes
+Set a date range and every figure below it is bounded by those dates.
+Spend by category
+Where is the money going?
+Claims grouped by category across the period, which is what makes an unexpected line obvious while there is still a year left to do something about it.
+Monthly trend
+Is it climbing?
+Claim value month by month, so a rise shows up as it happens rather than in the summary that arrives after the year has closed.
+Approved against rejected
+Is the policy doing anything?
+The split between approved and rejected claims by category, which shows whether a limit is shaping behaviour or just creating rework.
+All the features, done right
+Expense claims
+Linked to the employee who spent.
+Receipt capture
+Photographed at the time.
+Categories
+Travel, meals, accommodation, yours.
+Category limits
+Configurable per category.
+Limit validation
+Checked at submission.
+Manager approval
+Routed by reporting line.
+Finance verification
+A second, different check.
+Multi-level routing
+Extra approval over a limit.
+Status visibility
+The claimant can see the stage.
+Approval trail
+Who authorised, and when.
+Spend reporting
+By category and over time.
+Mobile apps
+Claim from where you spent.
+Before you move claims across
+The questions finance and HR teams ask before the first claim is raised in Neome.
+Who is this for?
+Why validate limits at submission rather than at approval?
+Why two approval steps?
+What happens to a claim over the limit?
+How are receipts handled?
+Can employees see where their claim is?
+Is the trail good enough for an audit?
+How does this connect to projects and approvals?
+What it costs
+One price, and
+Expense Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Expense Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Attendance & Leave Management Software
+Mark attendance where people actually work, route leave to the line manager with balances and cover in view, and see who is available today.
+Learn more
+Approval Workflow Software for SMEs
+Route requests through the chain the value demands, show the requester exactly where theirs is, and escalate the ones sitting in an inbox.
+Learn more
+Project Management Software for SMEs
+Plan against milestones, assign tasks with dates, log the hours actually spent, and see a budget overrun forming while the project can still absorb it.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

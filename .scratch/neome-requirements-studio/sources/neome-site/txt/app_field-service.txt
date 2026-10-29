@@ -1,0 +1,265 @@
+Home
+Apps
+Field Service
+Field Service
+Close the Job Before the Engineer Leaves Site
+Requests arrive with a priority and a deadline, the engineer is dispatched with the asset history already attached, and the job is run from a checklist and signed off on the phone.
+Start Free Trial
+Book A Free Demo
+SLA on every ticket
+Checklist-driven jobs
+Signed off on site
+SR-2290
+Girnar Constructions
+High
+Compressor CP-210
+not holding pressure
+Assigned
+Vikram
+SLA left
+5h of 8h
+History
+Third call on this asset in six months. All three are on the record.
+SR-2290
+Greenline Construction
+High
+Compressor CP-210
+not holding pressure
+Assigned
+Jay
+SLA left
+5h of 8h
+History
+Third call on this asset in six months. All three are on the record.
+A queue with an order
+Priority and deadline, not whoever called loudest.
+Arrive informed
+The asset history goes with the engineer.
+Recorded where it happened
+Checklist, photos and parts, on the phone.
+Signed, then billed
+Closure on site releases it the same day.
+A second visit costs more than the first one saved.
+Three gaps account for most of what a field service desk loses, and none of them is a technical skill problem.
+Unprioritised
+Every request is urgent to the person who raised it
+Without a priority and a deadline, the loudest customer is served first rather than the one owed a response.
+Unequipped
+The engineer arrives without the history
+Nobody told them the machine failed twice already, so the visit repeats a diagnosis that was already done.
+Unclosed
+The job is finished, the paperwork is not
+Reports are written that evening from memory, so the record is thinner than the work and billing waits.
+Neome closes all three by giving the ticket a deadline, the engineer the history, and the job a signature.
+Requests
+Every request arrives with a priority and a deadline
+A service ticket is linked to the customer, classified by priority and category, and carries an SLA deadline from the moment it is raised. That is what lets a queue be worked in the order the business owes rather than the order the phone rang.
+Customer-linked tickets
+Priority and category
+SLA deadline on creation
+SR-2290
+Girnar Constructions
+High
+Compressor CP-210
+not holding pressure
+Assigned
+Vikram
+SLA left
+5h of 8h
+History
+Third call on this asset in six months. All three are on the record.
+SR-2290
+Greenline Construction
+High
+Compressor CP-210
+not holding pressure
+Assigned
+Jay
+SLA left
+5h of 8h
+History
+Third call on this asset in six months. All three are on the record.
+Dispatch
+Send the engineer who can actually finish it
+Assignment considers who is free, who is near and who has handled that equipment before, and the engineer receives the ticket with the asset's full history attached. Arriving informed is usually the difference between one visit and two.
+Assignment with availability
+History attached
+Scheduled on the calendar
+Compressor CP-210
+Quarterly
+Jan
+done
+Apr
+done
+Jul
+done
+Oct
+due
+October visit
+Assigned to
+Vikram
+· checklist attached
+The schedule comes from the contract, so a missed visit is a breach you can see.
+Compressor CP-210
+Quarterly
+Jan
+done
+Apr
+done
+Jul
+done
+Oct
+due
+October visit
+Assigned to
+Jay
+· checklist attached
+The schedule comes from the contract, so a missed visit is a breach you can see.
+On site
+The job runs from a checklist, not from recollection
+The engineer works through the checklist on their phone, records what was done, attaches photographs of the fault and the repair, and logs the parts used against the job. Everything is captured where the work happened rather than reconstructed afterwards.
+Checklist on mobile
+Photo capture
+Parts logged to the job
+SR-2290
+On site
+Pressure test
+Seal replaced
+Photo of the repair
+Customer sign-off
+Parts used
+Seal kit × 1
+Issued from stores against this job
+Signed off on the phone, in front of the customer, not typed up that evening.
+SR-2290
+On site
+Pressure test
+Seal replaced
+Photo of the repair
+Customer sign-off
+Parts used
+Seal kit × 1
+Issued from stores against this job
+Signed off on the phone, in front of the customer, not typed up that evening.
+Closure
+Signed off before the engineer leaves site
+The customer signs on the device, which closes the ticket and releases it for billing the same day. A digital sign-off also settles the question of what was agreed on site, which is otherwise the most expensive kind of disagreement to have a month later.
+Digital sign-off
+Closed on site
+Released for billing
+AMC-0471
+Girnar Constructions
+Active
+Asset covered
+Compressor CP-210
+Site
+Ahmedabad plant
+Contract value
+₹2.4 L
+Visits used
+3 of 4 this year
+Renews in
+38 days
+Raised now, so the conversation happens before cover lapses.
+Next preventive visit
+14th ·
+Vikram
+SLA compliance
+96%
+AMC-0471
+Greenline Construction
+Active
+Asset covered
+Compressor CP-210
+Site
+Dayton plant
+Contract value
+$29,000
+Visits used
+3 of 4 this year
+Renews in
+38 days
+Raised now, so the conversation happens before cover lapses.
+Next preventive visit
+14th ·
+Jay
+SLA compliance
+96%
+Reporting
+See the breach coming, and the engineer behind the numbers
+Set a date range and every figure below it is bounded by those dates.
+Approaching breach
+What needs attention now?
+Tickets nearing their deadline, escalated before they breach, which is the only point at which the information can still change the outcome.
+Engineer performance
+Who is carrying what?
+Jobs closed, time on site and first-visit fix rate per engineer, read from the record rather than from an impression.
+Breach analysis
+Where is it going wrong?
+Breaches grouped by customer, engineer and equipment type, which is the difference between blaming one person and finding the actual cause.
+All the features, done right
+Service requests
+Customer-linked, with a category.
+Priority
+So the queue has an order.
+SLA deadlines
+Set the moment a ticket is raised.
+Dispatch
+By availability, area and skill.
+Asset history
+Attached before the engineer arrives.
+Job checklists
+Worked through on the phone.
+Photo capture
+The fault and the repair, recorded.
+Parts used
+Logged against the job from stores.
+Digital sign-off
+The customer signs on site.
+Escalation
+Before the deadline, not after.
+Engineer performance
+Jobs, times and first-time fix.
+Mobile apps
+The whole job from a phone.
+Before you move your service desk across
+The questions service teams ask before the first ticket is raised in Neome.
+Who is this for?
+How are SLA deadlines set?
+What does the engineer see before they arrive?
+Can the job be closed on site?
+Why does the digital sign-off matter?
+How do parts get onto the job?
+What happens when a ticket is about to breach?
+How does this relate to AMC & Service Management?
+What it costs
+One price, and
+Field Service
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Field Service
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+AMC & Service Management Software
+Hold every AMC contract with what it covers, generate the preventive visits it entitles the customer to, track SLA, and renew before cover ends.
+Learn more
+Field Visit & Sales Tracking App
+Plan visits by territory, confirm them with a location-verified check-in, record the outcome on the spot, and see coverage against plan the same day.
+Learn more
+Vehicle Rental & Fleet Management Software
+Onboard drivers, allocate vehicles, take the daily rent from a prepaid wallet and control the start with an IoT unit. Multi-branch fleet software.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

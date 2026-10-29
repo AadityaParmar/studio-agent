@@ -1,0 +1,29 @@
+# 43 — `upstream-check` tool
+
+**What to build:** The maintainer runs `upstream-check` to diff each cloned skill's upstream from its pinned version to a new tag, and gets a proposed re-adapted edit (keeping How to talk, studio terms, facade paths) to accept or reject per skill. Spec: Upstream pins, stories 147–150.
+
+**Blocked by:** 21 — Repo + plugin scaffold, pack lint, CI
+
+**Status:** resolved
+
+- [x] Script + driver prompt; fetches upstream tags to temp dir; diffs old pin → new tag; reads CHANGELOG
+- [x] Proposes re-adapt per skill; maintainer accepts per skill; never auto-merges
+- [x] Unchanged or rejected → pin-only bump
+- [x] Skills with `upstreamDiverged: <reason>` skipped
+- [x] Maintainer-only; not shown by `studio`
+
+## Comments
+
+- Done 2026-10-29. Script `neome-studio/maintainer/upstream-check.mjs` (node built-ins + `yaml`; header documents every line and file): `diff <plugin-dir> [--to <version>] [--repo <url|dir>] [--out <dir>]` bare-clones upstream (default `https://github.com/mattpocock/skills`) into a temp dir, resolves version → ref (tag `v<v>` / `<v>` / `mattpocock-skills@<v>`, else oldest commit whose `package.json` has that version), default target = highest version tag; per skill with `upstream` and no `upstreamDiverged`: `git diff` old pin → target over all its upstream paths, old/new snapshots, CHANGELOG entries in range (whole range + per-skill entries naming its upstream skills); prints `skill | <name> | changed|unchanged|gone|current|skipped`, `error`, `licence | changed|unchanged` (diffs upstream `LICENSE`), `done` counts; never writes in the plugin; exit 0/1/2. `pin <plugin-dir> <skill> <version>` = pin-only bump: rewrites only the `upstreamVersion:` line; refuses diverged (pin stays for history), no `upstream`, unknown skill, not-newer version. Driver prompt `neome-studio/maintainer/upstream-check.md` (How to talk verbatim; 4 steps: start on branch `upstream-<to>`, diff, per skill (one path per status; `changed` → take/leave per hunk, before/after proposal keeping How to talk, GLOSSARY.md terms, facade paths, engine calls, git ownership; accept / reject / change; edit nothing before accept; accept → edit + `check` + pin; reject → pin only + reason), gate + report (`npm test`; re-adapt → evals + approval before `main`; pin-only → checks only)); commit messages `upstream-check: <skill> <from> → <to> pin only (upstream unchanged)` / `re-adapt (<what>)` / `pin only (rejected: <reason>)`. Tests: new `engine/test/upstream-check.test.mjs` (9; local fixture upstream git repo built in the test with tags v1.3.1/v1.3.2/v1.4.0, no network): every status line + files + plugin untouched; `--to` narrows range + pin-newer error; no tags → package.json fallback; error lines (bad path, unknown pin, unknown target, unreachable repo); bad args; pin edits only one line and `check` still passes; pin refusals; maintainer-only (not in `skills/`, no SKILL.md names it, `cli.mjs upstream-check` unknown); driver prompt shape. Commands: `npm test` → 330 pass, check 11 skills OK.
+- Small choices (my call; revisit if wrong):
+  - Location: `neome-studio/maintainer/` (ticket 20 wording), not `skills/` and not an engine command. Keeps the 11 Consultant-facing skills and `check` count unchanged; tests stay in `engine/test/` so the `npm test` glob and CI need no change.
+  - Pin-only bumps go through a tool command (`pin`) so the front-matter edit is exact; re-adapted text is written by the agent only after the maintainer accepts. The tool has no apply/merge mode.
+  - Extra statuses beyond the ticket: `gone` (upstream path removed/moved; maintainer picks new path / `upstreamDiverged` / leave, no default), `current`, `error`; and a `licence` line (upstream `LICENSE` diff → offer to update `LICENSE-upstream`).
+  - Version with no tag → fallback to the commit that set it in `package.json` (ticket 20: "CHANGELOG maps version → commit if needed"; package.json is exact, CHANGELOG commit links are per entry, not per release).
+  - Per-skill CHANGELOG filter matches the upstream skill's last path segment as `` `name` ``, `**name**`, `/name` or `name:`; whole-range CHANGELOG also written, so a missed match is still visible.
+  - Driver puts all commits of a run on branch `upstream-<to>`, merged to `main` by the maintainer after the gate (ticket 18: `main` = what Consultants pull).
+- Verified: tests above (local git fixtures, offline); one real read-only run against GitHub (`diff neome-studio`, temp out dir, deleted after): upstream has tags v1.2.3…v1.3.2 (annotated, `v` prefix); result: `grill-module` changed (grilling 1.3.2: "yes" accepts the recommended answer; fresh-context sub-agent), build-prototype / enterprise-glossary / questionnaire / write-module-spec unchanged, studio skipped, licence unchanged. Not applied: the actual 1.3.2 update is the maintainer's run. Not verified: driver prompt in a live Claude session (proposal quality, accept/reject flow), commits and `git push` (repo is not a git repo, no remote), evals gate (ticket 41 not built), Windows paths.
+- Handoffs:
+  - 39 (READMEs): plugin README "maintainer tools": `upstream-check` = tell Claude "follow `neome-studio/maintainer/upstream-check.md`"; on demand (~quarterly / new upstream release); needs network; never shown by `studio`. Origins table stays skill → upstream name; pin lives only in front-matter (`upstream`, `upstreamVersion`, optional `upstreamDiverged`). Current upstream release 1.3.2 is pending a run (grill-module changed).
+  - 41 (evals): driver step 4 says re-adapted skill text needs evals + maintainer approval before merge to `main`, pin-only bumps checks only; it points at `neome-studio/evals/` for the runner. Give the runner a one-line command the driver can name (e.g. run all cases on the current branch) and update that step's pointer when built.
+

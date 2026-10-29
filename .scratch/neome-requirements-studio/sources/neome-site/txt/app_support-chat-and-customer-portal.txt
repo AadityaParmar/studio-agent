@@ -1,0 +1,291 @@
+Home
+Apps
+Support Chat & Customer Portal
+Support Chat & Customer Portal
+Answer Once, and Let the Customer Check the Rest Themselves
+Live chat with every past conversation already attached, saved replies for the questions that repeat, a ticket raised automatically when one is needed, and a portal where customers track it without calling.
+Start Free Trial
+Book A Free Demo
+History attached
+Tickets from chat
+Self-service portal
+P
+Priya Nair
+Girnar Constructions
+Any update on
+SO-1188
+? It was due yesterday.
+Dispatched this morning, arriving tomorrow. Raising a ticket so you can track it.
+Handled by
+Amit
+TKT-3312
+First reply in 1m 40s
+Templates answer the questions that repeat, so people answer the ones that do not.
+Customer portal
+Priya Nair
+sees
+Their tickets
+Order history
+Past chats
+Open tickets
+12
+P
+Paula Nelson
+Greenline Construction
+Any update on
+SO-1188
+? It was due yesterday.
+Dispatched this morning, arriving tomorrow. Raising a ticket so you can track it.
+Handled by
+Mike
+TKT-3312
+First reply in 1m 40s
+Templates answer the questions that repeat, so people answer the ones that do not.
+Customer portal
+Paula Nelson
+sees
+Their tickets
+Order history
+Past chats
+Open tickets
+12
+Chat with context
+Nobody asks the customer to explain it again.
+Saved replies
+The repeat questions answer themselves, with the detail filled in.
+Nothing evaporates
+A promise in a chat becomes a ticket with an owner.
+Customers self-serve
+Their tickets and orders, without a phone call.
+Support is slow for one reason: nobody has the context.
+Three gaps account for most of the time a support desk loses, and none of them is an effort problem.
+Repeated
+The customer explains it again
+A new person picks up the thread with none of the history, so the customer tells the story a third time.
+Unrecorded
+The chat ended, the problem did not
+A promise made in a conversation leaves no ticket behind, so nothing chases it and nobody owns it.
+Interrupting
+Every status question is a phone call
+Customers cannot see their own tickets or orders, so the only way to find out is to interrupt someone.
+Neome closes all three by attaching the history, turning conversations into tickets, and letting customers look for themselves.
+Live chat
+Answer with the whole history already on screen
+Chat sessions are linked to the customer, so every earlier conversation is attached before a word is typed. Agents see a queue with who is waiting and for how long, sessions are assigned rather than grabbed, and a manager can watch the room without stepping into it.
+Customer-linked sessions
+Full conversation history
+Assignment and monitoring
+Live queue
+3 active
+Priya Nair
+Amit
+waiting 40s
+Ops desk
+Amit
+replied
+Accounts
+Neha
+replied
+Every past conversation with
+Girnar Constructions
+is attached, so nobody starts from nothing.
+Live queue
+3 active
+Paula Nelson
+Mike
+waiting 40s
+Ops desk
+Mike
+replied
+Accounts
+Levi
+replied
+Every past conversation with
+Greenline Construction
+is attached, so nobody starts from nothing.
+Templates
+Stop retyping the answer to the same question
+Saved replies cover the questions that repeat, and they fill in the detail from the conversation rather than arriving as generic boilerplate. That keeps first-response times short and leaves agents with time for the questions that actually need thinking about.
+Predefined responses
+Context filled automatically
+Faster first reply
+Saved replies
+Context-aware
+Order status
+Your order is dispatched and arrives…
+Return policy
+Returns are accepted within 14 days…
+Payment link
+Here is the link to settle the balance…
+Inserted into the reply
+Your order
+SO-1188
+is dispatched and arrives tomorrow.
+The order number fills itself from the conversation.
+Saved replies
+Context-aware
+Order status
+Your order is dispatched and arrives…
+Return policy
+Returns are accepted within 14 days…
+Payment link
+Here is the link to settle the balance…
+Inserted into the reply
+Your order
+SO-1188
+is dispatched and arrives tomorrow.
+The order number fills itself from the conversation.
+Tickets
+A conversation becomes something that can be chased
+When a chat needs work beyond the conversation, it becomes a ticket automatically, carrying the customer, the conversation and any order reference with it. The chat stays linked, so whoever picks the ticket up reads what was said instead of asking the customer to repeat it.
+Raised from the chat
+Conversation stays attached
+Owner and status
+Chat with
+Priya Nair
+“Any update on
+SO-1188
+? It was due yesterday.”
+Raised automatically
+TKT-3312
+In progress
+Customer
+Girnar Constructions
+Assigned to
+Amit
+Linked order
+SO-1188
+Source
+Live chat
+The conversation stays attached, so the next person reads it rather than asking again.
+Chat with
+Paula Nelson
+“Any update on
+SO-1188
+? It was due yesterday.”
+Raised automatically
+TKT-3312
+In progress
+Customer
+Greenline Construction
+Assigned to
+Mike
+Linked order
+SO-1188
+Source
+Live chat
+The conversation stays attached, so the next person reads it rather than asking again.
+Customer portal
+Let customers answer their own status questions
+A portal gives your customer their own tickets, their order history and their past conversations, with role-based access deciding what each contact sees. Most status questions never become a call, and the ones that do start from the same record you are looking at.
+Their tickets and orders
+Role-based access
+Start a chat from the portal
+Girnar Constructions
+Signed in as
+Priya Nair
+Portal
+Your tickets
+TKT-3312
+Delivery query
+In progress
+TKT-3180
+Invoice copy
+Closed
+Your order
+SO-1188
+· dispatched
+Ask
+Greenline Construction
+Signed in as
+Paula Nelson
+Portal
+Your tickets
+TKT-3312
+Delivery query
+In progress
+TKT-3180
+Invoice copy
+Closed
+Your order
+SO-1188
+· dispatched
+Ask
+Reporting
+One view of what support is actually carrying
+Set a date range and every figure below it is bounded by those dates.
+Open load
+What is support carrying?
+Open tickets and live conversations by category and owner, on the same screen as the conversations that produced them.
+First response time
+How fast do we answer?
+Time to first reply across chat and tickets, which is the number customers actually judge support on.
+Who is asking most
+Where is the load coming from?
+Volume by customer and by topic, which usually points at a product problem or a gap in the portal rather than at the support team.
+All the features, done right
+Live chat
+Customer-linked, real-time sessions.
+Conversation history
+Every past chat attached.
+Assignment
+Sessions land with a named agent.
+Saved replies
+For the questions that repeat.
+Tickets from chat
+Raised automatically, with context.
+Linked records
+Orders and tickets on the same thread.
+Customer portal
+Their tickets, orders and chats.
+Role-based access
+Agent, manager, customer, admin.
+First-response time
+Measured, not estimated.
+Dashboards
+Open load and per-agent performance.
+Manager monitoring
+Watch the room without interrupting.
+Mobile apps
+Answer from a phone.
+Before you move your support across
+The questions support teams ask before the first customer chat lands in Neome.
+Who is this for?
+How is this different from WhatsApp Inquiry Management?
+What does the customer see in the portal?
+When does a chat become a ticket?
+Do saved replies sound like canned responses?
+Can a manager see what agents are doing?
+How does this connect to ticketing and the CRM?
+Does it work on a phone?
+What it costs
+One price, and
+Support Chat & Customer Portal
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Support Chat & Customer Portal
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+CRM Software for Teams of 10 to 10,000
+CRM for small, midsize, and large teams. Capture leads, assign next steps, convert to opportunities, and track pipeline on one dashboard. WhatsApp, chat, Excel, and web. Standard trial or Enterprise demo.
+Learn more
+Task & Ticket Management Software for SMEs
+Every issue becomes a ticket with a category, a priority and an SLA, breaks into tasks with owners and dates, and escalates before it breaches.
+Learn more
+Knowledge Base Software for SMEs
+Publish what your team knows through review rather than straight to live, keep the version history, and let ratings and failed searches say what to write next.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

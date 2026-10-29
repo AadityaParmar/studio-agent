@@ -1,0 +1,442 @@
+<!doctype html>
+<!--
+  PROTOTYPE, throwaway. Ticket 14: Prototype look from real Neome screens.
+  Same shape and data as ticket 10 (Anglo Gulf Quotation, 3 tabs). Only the look changes.
+  Look = ui-reference/tokens.md "Neome product" section, taken from example/crm-screenshots/.
+  Patterns copied: tile launcher + left panel, grey title bars, sheet with Action/Sr No. columns,
+  tinted kanban columns with label:value cards, right drawer with DETAILS/ACTIVITY tabs and
+  outlined fields, bottom SEND-style action bar, blue FAB, bot notifications in the chat list,
+  two-device view (desktop role + phone role) from the demo video.
+  Not production code. State in memory only.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROTOTYPE · Anglo Gulf · Quotation Module (Neome look)</title>
+<style>
+:root{
+  --primary:#1976D2; --primary-dark:#1565C0; --primary-soft:#E3F2FD;
+  --frame:#466686; --label:#3F6A90; --text:#212121; --text-2:#5F6368; --text-3:#9E9E9E;
+  --bar:#E8E8E8; --panel:#F6F6F6; --page:#FCFCFC; --card:#FFFFFF; --line:#E0E0E0; --outline:#C4C4C4;
+  --tile-green:#E2F6E4; --icon-green:#2E7D32; --tile-blue:#E0F2FA; --icon-blue:#1565C0; --tile-grey:#E6ECEE; --icon-grey:#37474F;
+  --k-blue:#DEF0FA; --k-lav:#E6E0F2; --k-green:#E2F6E4; --k-pink:#F6E2E2; --k-amber:#FBEFD9;
+  --s-blue:#1565C0; --s-purple:#6A1B9A; --s-green:#2E7D32; --s-red:#C62828; --s-amber:#A15C00;
+  --chat-bg:#E8E4DC; --bubble-out:#D4FECC; --bubble-in:#FFFFFF;
+  --oi:#F47100; --oi-soft:#FFF1E6;
+  --font:Roboto,'Helvetica Neue',Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.4}
+button{font-family:inherit}
+.small{font-size:12px;color:var(--text-2)}
+.chip{display:inline-block;font-size:10.5px;border:1px solid var(--outline);border-radius:999px;padding:0 6px;background:#fff;color:var(--text-2);white-space:nowrap;vertical-align:middle;line-height:16px}
+.chip.req{border-color:var(--primary);color:var(--primary);background:var(--primary-soft);cursor:pointer}
+.chip.oi{border-color:var(--oi);color:var(--oi);background:var(--oi-soft)}
+.chip.prop{border-style:dashed}
+.reqtag{display:none} body.showtags .reqtag{display:inline-block}
+.hl{outline:2px solid var(--oi)!important;outline-offset:2px;border-radius:6px}
+.ico{display:inline-grid;place-items:center;width:22px;height:22px;color:#555;font-size:16px}
+/* status text, Neome shows status as coloured value, not a pill */
+.s-Draft{color:var(--s-blue)} .s-InApproval{color:var(--s-purple)} .s-Approved{color:var(--s-green)} .s-Rejected{color:var(--s-red)} .s-Sent{color:var(--s-amber)}
+
+/* ---------- prototype chrome (not Neome) ---------- */
+.banner{background:#1D1D1F;color:#ddd;padding:6px 16px;display:flex;gap:10px;align-items:center;font-size:12px}
+.banner b{color:#fff} .banner .chip{background:transparent;color:#ddd;border-color:#555}
+.ptabs{display:flex;border-bottom:1px solid var(--line);background:#fff;padding:0 16px;align-items:center}
+.ptabs button{border:0;background:none;padding:12px 18px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2);cursor:pointer;border-bottom:2px solid transparent}
+.ptabs button.on{color:var(--primary);border-color:var(--primary)}
+.ptabs .right{margin-left:auto;display:flex;gap:12px;align-items:center}
+.tbtn{border:0;background:none;color:var(--primary);font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:13px;cursor:pointer;padding:6px 8px;border-radius:4px}
+.tbtn:hover{background:var(--primary-soft)} .tbtn.red{color:var(--s-red)} .tbtn:disabled{color:var(--text-3);cursor:not-allowed;background:none}
+
+/* ---------- device frame, as in the demo video ---------- */
+.dev-wrap{display:flex;flex-direction:column;gap:8px}
+.dev-title{display:flex;justify-content:space-between;align-items:center;color:var(--primary-dark);font-size:20px}
+.dev-title select{font:inherit;font-size:20px;color:var(--primary-dark);border:0;background:none;cursor:pointer;padding:0}
+.dev{border:2px solid var(--frame);border-radius:6px;background:var(--card);overflow:hidden;display:flex;position:relative}
+
+/* left panel: launcher */
+.lp{width:300px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column}
+.bar{height:58px;background:var(--bar);display:flex;align-items:center;gap:12px;padding:0 14px;flex-shrink:0}
+.bar .t{font-size:16px} .bar .sub{font-size:13px;color:var(--text-2)}
+.avatar{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#666;font-size:15px;flex-shrink:0}
+.searchpill{margin:12px 14px;background:#fff;border-radius:22px;padding:9px 14px;color:var(--text-3);display:flex;gap:10px;align-items:center;font-size:14px;border:1px solid #EEE}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:4px 14px 14px}
+.tile{border-radius:6px;padding:10px 6px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:6px;border:2px solid transparent;font-size:12.5px;color:var(--text)}
+.tile .g{font-size:30px;align-self:center;line-height:1;height:40px;display:grid;place-items:center}
+.tile.green{background:var(--tile-green)} .tile.green .g{color:var(--icon-green)}
+.tile.blue{background:var(--tile-blue)} .tile.blue .g{color:var(--icon-blue)}
+.tile.grey{background:var(--tile-grey)} .tile.grey .g{color:var(--icon-grey)}
+.tile.on{border-color:#90CAF9;background:#CFE6FA}
+.tile.off{opacity:.38;cursor:default}
+.notif{display:flex;gap:10px;padding:10px 14px;border-top:1px solid #EEE;background:#fff;font-size:13px;cursor:pointer}
+.notif .who{display:flex;justify-content:space-between} .notif .time{color:var(--text-3);font-size:12px}
+.notif .msg{color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.notif .msg b{color:var(--text)}
+
+/* main pane */
+.mp{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
+.mp .bar .ttl{display:flex;flex-direction:column} .mp .bar .acts{margin-left:auto;display:flex;gap:6px;align-items:center}
+.viewsw{display:flex;border:1px solid var(--outline);border-radius:4px;overflow:hidden}
+.viewsw button{border:0;background:#fff;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--text-2)}
+.viewsw button.on{background:var(--primary-soft);color:var(--primary-dark);font-weight:500}
+.mp .searchrow{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.mp .searchrow .searchpill{flex:1;margin:0}
+.body{flex:1;overflow:auto;position:relative}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{font-weight:500;text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;white-space:nowrap;color:var(--text)}
+th .f{color:var(--text-3);font-size:11px;margin-left:4px}
+td{padding:8px 10px;border-bottom:1px solid #F0F0F0;white-space:nowrap;color:var(--text)}
+tr.row:hover td{background:#F5F9FD;cursor:pointer}
+td.act{color:var(--text-3);letter-spacing:2px}
+.pager{display:flex;justify-content:flex-end;gap:18px;padding:8px 14px;font-size:12px;color:var(--text-2);border-top:1px solid var(--line)}
+.kan{display:flex;height:100%;min-height:440px}
+.kcol{flex:1;min-width:210px;padding:8px}
+.kcol h4{margin:4px 0 10px;text-align:center;font-weight:400;font-size:15px}
+.kcard{background:#fff;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.12);margin-bottom:8px;font-size:12.5px;cursor:pointer}
+.kcard .in{padding:8px 10px}
+.kv{display:flex;gap:6px;line-height:1.6} .kv .k{color:var(--label)} .kv .v{color:var(--text-2)}
+.kcard .ft{border-top:1px solid #EEE;padding:4px 10px;text-align:right;font-size:11.5px;color:var(--text-2)}
+.fab{position:absolute;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--primary);color:#fff;border:0;font-size:26px;box-shadow:0 3px 8px rgba(0,0,0,.3);cursor:pointer}
+
+/* drawer: record detail */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.32);z-index:2}
+.drawer{position:absolute;top:0;right:0;bottom:0;width:400px;background:#fff;z-index:3;display:flex;flex-direction:column;box-shadow:-2px 0 6px rgba(0,0,0,.15)}
+.drawer .bar{background:#fff;border-bottom:1px solid var(--line)}
+.dtabs{display:flex;border-bottom:1px solid var(--line)}
+.dtabs button{flex:1;border:0;background:none;padding:12px;font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--text-2);cursor:pointer;border-bottom:2px solid transparent}
+.dtabs button.on{color:var(--primary);border-color:var(--primary)}
+.dbody{flex:1;overflow:auto;padding:6px 16px 16px}
+.secdiv{display:flex;align-items:center;gap:10px;color:var(--text-2);font-size:13.5px;margin:16px 0 4px}
+.secdiv:before,.secdiv:after{content:"";flex:1;height:1px;background:var(--line)}
+.ofld{position:relative;border:1px solid var(--outline);border-radius:4px;padding:16px 12px 7px;margin-top:14px;font-size:15px;min-height:46px;display:flex;align-items:center;gap:8px}
+.ofld label{position:absolute;top:-8px;left:9px;background:#fff;padding:0 4px;font-size:12px;color:var(--text-2)}
+.ofld .val{flex:1;min-width:0}
+.ofld input{border:0;font:inherit;width:100%;outline:none;padding:0}
+.ofld.ro{background:#FAFAFA} .ofld.ro .val{color:var(--text-2)}
+.ofld .tr{color:var(--text-2);font-size:15px}
+.ofld a{color:var(--primary);text-decoration:none}
+.helper{font-size:12px;color:var(--text-2);margin:3px 12px 0}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin:3px 2px 0}
+.dfoot{border-top:1px solid var(--line);background:var(--bar);padding:6px 12px;display:flex;gap:6px;align-items:center;justify-content:flex-end}
+.dfoot .note{margin-right:auto;font-size:12px;color:var(--text-2)}
+.lad{display:flex;flex-direction:column;gap:2px;margin-top:6px}
+.lad div{display:flex;justify-content:space-between;font-size:13px;padding:6px 10px;border-radius:4px;background:#FAFAFA}
+.lad .done{background:var(--k-green)} .lad .now{background:var(--k-lav)} .lad .rej{background:var(--k-pink)} .lad .skip{opacity:.4}
+.timeline div{padding:8px 0;border-bottom:1px solid #F0F0F0;font-size:13px}
+.timeline .when{color:var(--text-3);font-size:12px}
+
+/* ---------- tab A layout ---------- */
+.A{padding:18px 24px}
+.A .dev{height:calc(100vh - 175px);min-height:520px}
+
+/* ---------- phone ---------- */
+.phone{width:320px;flex-shrink:0}
+.phone .dev{height:620px;flex-direction:column}
+.phone .scr{flex:1;overflow:auto;background:var(--panel);position:relative}
+.phone .tiles{grid-template-columns:repeat(3,1fr)}
+.chat{background:var(--chat-bg);flex:1;overflow:auto;padding:12px 10px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:85%;border-radius:6px;padding:6px 9px;font-size:13px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub.in{background:var(--bubble-in);align-self:flex-start} .bub.out{background:var(--bubble-out);align-self:flex-end}
+.bub .nm{color:var(--s-purple);font-size:12.5px;margin-bottom:2px} .bub .tm{color:var(--text-3);font-size:11px;text-align:right}
+.bub .card{border-left:3px solid var(--primary);background:#F4F8FC;padding:6px 8px;border-radius:3px;margin:4px 0}
+.datepill{align-self:center;background:#fff;border-radius:6px;padding:3px 10px;font-size:12px;color:var(--text-2)}
+.cbar{display:flex;gap:8px;align-items:center;padding:8px;background:var(--panel);border-top:1px solid var(--line)}
+.cbar .in{flex:1;background:#fff;border-radius:20px;padding:8px 12px;color:var(--text-3);font-size:13px}
+.cap{text-align:center;font-size:12px;color:var(--text-2);margin-top:6px}
+
+/* ---------- tab B: scenarios ---------- */
+.B{display:grid;grid-template-columns:250px 1fr 300px;height:calc(100vh - 82px)}
+.B-list{background:var(--panel);border-right:1px solid var(--line);overflow:auto}
+.B-list .sc{padding:12px 14px;border-bottom:1px solid #EEE;cursor:pointer}
+.B-list .sc.on{background:#CFE6FA}
+.B-list .sc .t{font-weight:500}
+.B-stage{padding:18px 24px;overflow:auto}
+.prog{display:flex;gap:4px;margin:10px 0 14px} .prog span{flex:1;height:4px;border-radius:2px;background:var(--line)} .prog span.on{background:var(--primary)}
+.B-two{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.B-two .desk{flex:1;min-width:380px}
+.B-two .desk .dev{height:520px}
+.B-two .desk .drawer{position:static;width:100%;box-shadow:none}
+.B-two .phone .dev{height:520px}
+.B-proof{background:#fff;border-left:1px solid var(--line);padding:16px;overflow:auto}
+.B-proof h5{margin:0 0 8px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+.acc{font-size:13px;padding:4px 0 4px 20px;position:relative} .acc:before{content:"✓";position:absolute;left:0;color:var(--s-green);font-weight:700}
+.callout{border-left:3px solid var(--oi);background:var(--oi-soft);padding:8px 12px;border-radius:4px;font-size:13px;margin-bottom:12px}
+
+/* ---------- tab C ---------- */
+.C{display:grid;grid-template-columns:1fr 340px;min-height:calc(100vh - 82px)}
+.C-phones{display:flex;gap:24px;padding:20px;flex-wrap:wrap;justify-content:center;align-content:flex-start}
+.C-trace{background:#fff;border-left:1px solid var(--line);padding:16px;overflow:auto}
+.C-trace .r{padding:8px 10px;border-radius:4px;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
+.C-trace .r:hover{background:var(--panel)} .C-trace .r.on{border-color:var(--oi);background:var(--oi-soft)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ======== SPEC: same object as ticket 10 (from _agent/modules/QUO-quotation/spec.md) ======== */
+const SPEC = {
+  enterprise:"Anglo Gulf", module:"Quotation", prefix:"QUO", app:"Sales CRM (indicative)", appShort:"Sales CRM", delivery:"Configuration",
+  roles:[
+    {id:"SE", name:"Sales Executive", person:"Rashid K.", src:"CE-1"},
+    {id:"L1", name:"Sales Manager", person:"Omar F.", src:"QA-5", proposed:true, oi:"OI-09"},
+    {id:"L2", name:"Head of Sales", person:"Leila H.", src:"QA-5", proposed:true, oi:"OI-09"},
+    {id:"L3", name:"Managing Director", person:"Sami A.", src:"QA-5", proposed:true, oi:"OI-09"},
+    {id:"AD", name:"Admin", person:"Priya N.", src:"QA-5"},
+  ],
+  fields:[
+    {id:"no", label:"Quotation no.", type:"text", req:true, sec:"Quotation details", reqs:["QUO-02"], sys:true},
+    {id:"opp", label:"Opportunity", type:"link", linkTo:"Opportunity", req:true, sec:"Quotation details", reqs:["QUO-02"]},
+    {id:"customer", label:"Customer", type:"link", linkTo:"Customer", req:true, sec:"Quotation details", reqs:["QUO-02"]},
+    {id:"validity", label:"Valid until", type:"date", req:true, sec:"Quotation details", reqs:["QUO-02"]},
+    {id:"po", label:"Expected PO date", type:"date", req:false, sec:"Quotation details", reqs:["QUO-03"]},
+    {id:"owner", label:"Owner", type:"person", req:true, sec:"Quotation details", reqs:["QUO-02"]},
+    {id:"product", label:"Product", type:"link", linkTo:"Product", req:true, sec:"Lines", reqs:["QUO-02"]},
+    {id:"qty", label:"Quantity", type:"number", req:true, sec:"Lines", reqs:["QUO-02"]},
+    {id:"price", label:"Price", type:"money", req:true, sec:"Lines", reqs:["QUO-02"]},
+    {id:"disc", label:"Discount %", type:"number", req:true, sec:"Lines", reqs:["QUO-06"], oi:"OI-13", proposed:true},
+    {id:"cost", label:"Cost (from Tally)", type:"money", req:false, sec:"Margin", reqs:["QUO-04"], oi:"OI-19", sys:true},
+    {id:"gm", label:"Gross margin", type:"money", req:false, sec:"Margin", reqs:["QUO-04"], oi:"OI-19", sys:true},
+    {id:"docs", label:"Documents", type:"file", req:true, sec:"Documents", reqs:["QUO-01","QUO-05"]},
+  ],
+  statuses:["Draft","InApproval","Approved","Rejected","Sent"],
+  statusLabel:{Draft:"Draft",InApproval:"In approval",Approved:"Approved",Rejected:"Rejected",Sent:"Sent"},
+  statusTint:{Draft:"--k-blue",InApproval:"--k-lav",Approved:"--k-green",Rejected:"--k-pink",Sent:"--k-amber"},
+  bands:[ {lt:10, levels:[]}, {lt:20, levels:["L1"]}, {lt:25, levels:["L1","L2"]}, {lt:101, levels:["L1","L2","L3"]} ],
+  requirements:[
+    {id:"QUO-01", title:"Quotation document", acc:["A file attaches to the quotation record","It opens from web and mobile"], pr:"Must"},
+    {id:"QUO-02", title:"Quotation record", acc:["Number, product, qty, price, validity, approval status and linked opportunity are visible on the record"], pr:"Must", oi:"OI-13"},
+    {id:"QUO-03", title:"Expected PO date", acc:["Field is present, editable and reportable"], pr:"Must"},
+    {id:"QUO-04", title:"Cost and gross margin", acc:["Values shown match Tally for the same quotation"], pr:"Must", oi:"OI-19"},
+    {id:"QUO-05", title:"Revision history", acc:["All versions listed with upload date and user","None are overwritten"], pr:"Must"},
+    {id:"QUO-06", title:"Discount approval matrix", acc:["A quotation in each band routes to the right levels","It cannot show Approved until every required level approves","Each decision is logged with approver and time","Admin can change bands without code"], pr:"Must", oi:"OI-08, OI-09"},
+  ],
+  ois:{
+    "OI-08":"Discount per line or on whole quotation?",
+    "OI-09":"Who are Levels 1–3? Sequential? Which band do exactly 10/20/25% fall in?",
+    "OI-13":"Which fields are keyed on Neome vs only in the document?",
+    "OI-19":"Tally integration scope (cost, margin).",
+  },
+  // launcher tiles: this Module's entity active, other Modules greyed. Kind decides tile colour (Neome: green = data, blue = report, grey = master data).
+  tiles:[
+    {n:"Opportunity", g:"↗", k:"green", off:true}, {n:"Quotation", g:"🧾", k:"green", me:true}, {n:"Customer", g:"🏢", k:"green", off:true},
+    {n:"Sales talk", g:"💬", k:"green", off:true}, {n:"Quote dash", g:"▦", k:"blue", off:true}, {n:"Discount bands", g:"🛢", k:"grey", me:true, admin:true},
+  ],
+};
+const fmt = n => "AED " + Number(n).toLocaleString();
+const levelsFor = d => SPEC.bands.find(b => d < b.lt).levels;
+const role = id => SPEC.roles.find(r => r.id===id);
+
+function seed(){ return [
+  {no:"Q-2026-114", opp:"OPP-201 Al Noor Pumps", customer:"Al Noor Trading", product:"Centrifugal pump CP-40", qty:12, price:18500, disc:8,  validity:"30/11/2026", po:"10/12/2026", cost:150000, owner:"Rashid K.", status:"Approved", approvals:[], docs:[{v:1,name:"Q-114_v1.pdf",by:"Rashid K.",at:"21/10 10:02"}], log:[["21/10 10:03","Rashid K.","submitted · 8% → no approval needed"],["21/10 10:03","system","Approved"]], time:"10:03 AM"},
+  {no:"Q-2026-117", opp:"OPP-207 Gulf Steel", customer:"Gulf Steel LLC", product:"Valve set VS-9", qty:40, price:2400, disc:22, validity:"15/11/2026", po:"28/11/2026", cost:70000, owner:"Meera S.", status:"InApproval", approvals:[{lvl:"L1",d:"approved",by:"Omar F.",at:"27/10 16:40"}], docs:[{v:1,name:"Q-117_v1.pdf",by:"Meera S.",at:"27/10 11:20"}], log:[["27/10 11:21","Meera S.","submitted · 22% → L1 + L2"],["27/10 16:40","Omar F.","L1 approved"]], time:"04:40 PM"},
+  {no:"Q-2026-118", opp:"OPP-210 Emirates Agro", customer:"Emirates Agro", product:"Drip line kit DL-2", qty:300, price:310, disc:14, validity:"20/11/2026", po:"", cost:70000, owner:"Rashid K.", status:"InApproval", approvals:[], docs:[{v:1,name:"Q-118_v1.pdf",by:"Rashid K.",at:"28/10 09:15"}], log:[["28/10 09:16","Rashid K.","submitted · 14% → L1"]], time:"09:16 AM"},
+  {no:"Q-2026-120", opp:"OPP-215 Coastal Marine", customer:"Coastal Marine", product:"Bilge pump BP-7", qty:6, price:9200, disc:28, validity:"05/12/2026", po:"10/01/2027", cost:44000, owner:"Meera S.", status:"Rejected", approvals:[{lvl:"L1",d:"approved",by:"Omar F.",at:"25/10 12:00"},{lvl:"L2",d:"rejected",by:"Leila H.",at:"26/10 09:30"}], docs:[{v:1,name:"Q-120_v1.pdf",by:"Meera S.",at:"24/10 15:00"}], log:[["24/10 15:01","Meera S.","submitted · 28% → L1 + L2 + L3"],["25/10 12:00","Omar F.","L1 approved"],["26/10 09:30","Leila H.","L2 rejected · 'margin too thin'"]], time:"09:30 AM"},
+  {no:"Q-2026-121", opp:"OPP-216 Desert Build", customer:"Desert Build Co", product:"Booster set BS-3", qty:2, price:56000, disc:5, validity:"15/12/2026", po:"", cost:90000, owner:"Rashid K.", status:"Draft", approvals:[], docs:[], log:[], time:"11:12 AM"},
+  {no:"Q-2026-109", opp:"OPP-190 Oasis Hotels", customer:"Oasis Hotels", product:"Pressure pump PP-12", qty:4, price:14000, disc:12, validity:"01/11/2026", po:"05/11/2026", cost:41000, owner:"Meera S.", status:"Sent", approvals:[{lvl:"L1",d:"approved",by:"Omar F.",at:"15/10 10:00"}], docs:[{v:1,name:"Q-109_v1.pdf",by:"Meera S.",at:"14/10 09:00"},{v:2,name:"Q-109_v2.pdf",by:"Meera S.",at:"15/10 08:30"}], log:[["14/10","Meera S.","submitted"],["15/10","Omar F.","L1 approved"],["16/10","Meera S.","sent to customer"]], time:"02:01 PM"},
+];}
+let DATA = seed();
+let NOTIFS = [{to:"L1", t:"04:20 PM", m:"<b>Approval needed!</b> Q-2026-118 · 14% waits for you"}, {to:"SE", t:"09:30 AM", m:"<b>Rejected</b> Q-2026-120 by Head of Sales"}];
+const value = q => q.qty*q.price*(1-q.disc/100);
+const gm = q => value(q)-q.cost;
+const nextLevel = q => levelsFor(q.disc).find(l => !q.approvals.some(a => a.lvl===l && a.d==="approved"));
+const st = s => `<span class="s-${s}">${SPEC.statusLabel[s]}</span>`;
+const reqTag = ids => ids.map(i=>`<span class="chip req reqtag" title="${SPEC.requirements.find(r=>r.id===i)?.title||''}">${i}</span>`).join(" ");
+const oiTag = o => o ? `<span class="chip oi" title="${o.split(", ").map(x=>x+": "+SPEC.ois[x]).join(" | ")}">${o}</span>` : "";
+const propTag = p => p ? `<span class="chip prop">proposed</span>` : "";
+
+/* ---------- shared Neome pieces ---------- */
+const launcher = (activeTile, roleId, notifs, phone) => `
+  <div class="bar"><div class="avatar">👤</div><div class="t">${SPEC.appShort}</div><span class="ico" style="margin-left:auto">🔔</span></div>
+  <div class="searchpill">🔍 Search messages or data</div>
+  <div class="tiles">${SPEC.tiles.filter(t=>!t.admin||roleId==="AD").map(t=>`<div class="tile ${t.k} ${t.off?"off":""} ${activeTile===t.n?"on":""}" ${t.me&&!phone?`onclick="A.entity='${t.n}';A.open=null;render()"`:""}><div class="g">${t.g}</div>${t.n}</div>`).join("")}</div>
+  ${notifs.filter(n=>n.to===roleId).map(n=>`<div class="notif"><div class="avatar" style="background:#EEE">👤</div><div style="flex:1;min-width:0"><div class="who"><span>${SPEC.appShort}</span><span class="time">${n.t}</span></div><div class="msg">✨ ${n.m}</div></div></div>`).join("")}`;
+
+function ladder(q){
+  const need = levelsFor(q.disc);
+  if(!need.length) return `<div class="helper">Discount ${q.disc}% is under 10%, so no approval is needed. ${reqTag(["QUO-06"])}</div>`;
+  return `<div class="lad">${["L1","L2","L3"].map(l=>{
+    const a = q.approvals.find(x=>x.lvl===l), req = need.includes(l);
+    const cls = !req?"skip": a?.d==="approved"?"done": a?.d==="rejected"?"rej": (q.status==="InApproval"&&nextLevel(q)===l)?"now":"";
+    return `<div class="${cls}"><span>${l} · ${role(l).name} ${propTag(role(l).proposed)}</span><span class="small">${!req?"not needed":a?`${a.d} · ${a.at}`:(cls==="now"?"waiting":"—")}</span></div>`;
+  }).join("")}</div>`;
+}
+
+function fieldHTML(q, f, editable){
+  let v;
+  if(f.id==="gm") v = `${fmt(gm(q))} <span class="small">(${Math.round(gm(q)/value(q)*100)}%)</span>`;
+  else if(f.id==="docs") v = q.docs.length ? q.docs.map(d=>`<div>📄 <a href="#" onclick="return false">${d.name}</a> <span class="small">v${d.v} · ${d.by} · ${d.at}</span></div>`).join("") : `<span class="small">Nothing here</span>`;
+  else if(f.type==="money") v = fmt(q[f.id]);
+  else if(f.type==="link") v = `<a href="#" onclick="return false">${q[f.id]}</a>`;
+  else if(f.id==="disc") v = q.disc+"%";
+  else v = q[f.id] || "";
+  if(editable && ["qty","price","disc","po","validity"].includes(f.id)) v = `<input value="${q[f.id]}" onchange="DATA.find(x=>x.no==='${q.no}')['${f.id}']=${["qty","price","disc"].includes(f.id)?"+this.value":"this.value"};render()">`;
+  const trail = f.type==="date"?`<span class="tr">📅</span>`: f.type==="link"?`<span class="tr">＋ ✕</span>`: f.type==="person"?`<span class="tr">✕</span>`: f.type==="file"?`<span class="tr">📎</span>`:"";
+  return `<div class="ofld ${f.sys||!editable?"ro":""}"><label>${f.label}${f.req?" *":""}</label><div class="val">${v}</div>${editable?trail:""}</div>
+    ${f.id==="no"?`<div class="helper">System-generated ID</div>`:""}
+    ${(f.oi||f.proposed)?`<div class="tags">${oiTag(f.oi)} ${propTag(f.proposed)}</div>`:""}<div class="tags">${reqTag(f.reqs)}</div>`;
+}
+
+function drawer(q, roleId, opts={}){
+  const editable = q.status==="Draft" && roleId==="SE";
+  const secs = [...new Set(SPEC.fields.map(f=>f.sec))];
+  const nl = nextLevel(q), acts = [];
+  if(roleId==="SE" && q.status==="Draft") acts.push(`<button class="tbtn" onclick="act('${q.no}','submit')">➤ Submit</button>`);
+  if(roleId==="SE" && q.status==="Rejected") acts.push(`<button class="tbtn" onclick="act('${q.no}','revise')">📎 Upload new revision</button>`);
+  if(roleId==="SE" && q.status==="Approved") acts.push(`<button class="tbtn" onclick="act('${q.no}','send')">➤ Mark sent</button>`);
+  if(q.status==="InApproval"){ const can = roleId===nl;
+    acts.push(`<button class="tbtn red" ${can?"":"disabled"} onclick="act('${q.no}','reject')">✕ Reject</button><button class="tbtn" ${can?"":"disabled"} onclick="act('${q.no}','approve')">✓ Approve ${nl}</button>`); }
+  const note = q.status==="InApproval" && roleId!==nl ? `Waiting on ${nl} · ${role(nl).name}` : (!acts.length?"No action for this role":"");
+  const tab = opts.tab || A.dtab;
+  const details = `
+    <div class="secdiv">Approval</div>${ladder(q)}<div class="tags">${reqTag(["QUO-06"])} ${oiTag("OI-08, OI-09")}</div>
+    <div class="ofld ro"><label>Status</label><div class="val">${st(q.status)}</div></div>
+    ${secs.map(s=>`<div class="secdiv">${s}</div>${SPEC.fields.filter(f=>f.sec===s).map(f=>fieldHTML(q,f,editable)).join("")}`).join("")}`;
+  const activity = `<div class="timeline">${q.log.map(([w,who,what])=>`<div><div class="when">${w} · ${who}</div>${what}</div>`).join("")||'<div class="small">Nothing here</div>'}</div>`;
+  return `<div class="drawer">
+    <div class="bar"><span class="ico" style="cursor:pointer" onclick="${opts.static?"":"A.open=null;render()"}">›</span><div class="t">Quotation</div><span class="ico" style="margin-left:auto">🗑</span></div>
+    <div class="dtabs"><button class="${tab==="d"?"on":""}" onclick="A.dtab='d';render()">DETAILS</button><button class="${tab==="a"?"on":""}" onclick="A.dtab='a';render()">ACTIVITY</button></div>
+    <div class="dbody">${tab==="d"?details:activity}</div>
+    <div class="dfoot"><span class="note">${note}</span><span class="ico">💬</span>${acts.join("")}</div></div>`;
+}
+
+function act(no, kind){
+  const q = DATA.find(x=>x.no===no), who = role(A.role).person, t = "now";
+  if(kind==="submit"){ const need=levelsFor(q.disc); q.status = need.length?"InApproval":"Approved"; q.log.push([t,who,`submitted · ${q.disc}% → ${need.length?need.join(" + "):"no approval needed"}`]); if(need.length) NOTIFS.unshift({to:need[0],t:"now",m:`<b>Approval needed!</b> ${q.no} · ${q.disc}% waits for you`}); else q.log.push([t,"system","Approved"]); }
+  if(kind==="approve"){ const l=nextLevel(q); q.approvals.push({lvl:l,d:"approved",by:who,at:t}); q.log.push([t,who,`${l} approved`]); const n=nextLevel(q); if(!n){q.status="Approved"; q.log.push([t,"system","Approved (all required levels)"]); NOTIFS.unshift({to:"SE",t:"now",m:`<b>Approved</b> ${q.no}`});} else NOTIFS.unshift({to:n,t:"now",m:`<b>Approval needed!</b> ${q.no} · ${q.disc}% waits for you`}); }
+  if(kind==="reject"){ const l=nextLevel(q); q.approvals.push({lvl:l,d:"rejected",by:who,at:t}); q.status="Rejected"; q.log.push([t,who,`${l} rejected`]); NOTIFS.unshift({to:"SE",t:"now",m:`<b>Rejected</b> ${q.no} by ${role(l).name}`}); }
+  if(kind==="revise"){ const v=q.docs.length+1; q.docs.push({v,name:`${q.no.slice(-5)}_v${v}.pdf`,by:who,at:t}); q.approvals=[]; q.status="Draft"; q.log.push([t,who,`uploaded v${v} · back to Draft`]); }
+  if(kind==="send"){ q.status="Sent"; q.log.push([t,who,"sent to customer"]); }
+  render();
+}
+
+/* ======== TAB A: clickable app (desktop, Neome look) ======== */
+let A = {role:"SE", view:"kanban", open:null, dtab:"d", entity:"Quotation"};
+function bands(){
+  return `<div class="bar"><span class="ico">≡</span><div class="ttl"><div class="t">Discount bands</div><div class="sub">Master data · Total rows: 4</div></div></div>
+  <table><tr><th>Sr No.</th><th>From %</th><th>To %</th><th>Levels needed</th></tr>
+  ${SPEC.bands.map((b,i)=>`<tr><td>${i+1}</td><td>${i?SPEC.bands[i-1].lt:0}</td><td>${b.lt>100?100:b.lt}</td><td>${b.levels.join(", ")||"—"}</td></tr>`).join("")}</table>
+  <div class="helper" style="margin:10px 14px">Admin edits rows here, no code. ${reqTag(["QUO-06"])} ${oiTag("OI-09")}</div>`;
+}
+function viewA(){
+  const rows = DATA;
+  const cols = ["Quotation no.","Customer","Product","Value","Disc.","Valid until","Exp. PO date","Status","Owner"];
+  const sheet = `<table><tr><th>Action</th><th>Sr No.</th>${cols.map(c=>`<th>${c}<span class="f">▾ ⋮</span></th>`).join("")}</tr>
+    ${rows.map((q,i)=>`<tr class="row" onclick="A.open='${q.no}';render()"><td class="act">› ⋯</td><td>${i+1}</td><td>${q.no}</td><td>${q.customer}</td><td>${q.product}</td><td>${fmt(value(q))}</td><td>${q.disc}%</td><td>${q.validity}</td><td>${q.po}</td><td>${st(q.status)}</td><td>${q.owner}</td></tr>`).join("")}</table>`;
+  const kan = `<div class="kan">${SPEC.statuses.map(s=>{const qs=rows.filter(q=>q.status===s);return `<div class="kcol" style="background:var(${SPEC.statusTint[s]})"><h4 class="s-${s}">${SPEC.statusLabel[s]} (${qs.length})</h4>${qs.map(q=>`<div class="kcard" onclick="A.open='${q.no}';render()"><div class="in">
+      <div class="kv"><span class="k">Quotation no.:</span><span class="v">${q.no}</span></div>
+      <div class="kv"><span class="k">Customer:</span><span class="v">${q.customer}</span></div>
+      <div class="kv"><span class="k">Value:</span><span class="v">${fmt(value(q))}</span></div>
+      <div class="kv"><span class="k">Discount:</span><span class="v">${q.disc}%</span></div>
+      <div class="kv"><span class="k">Owner:</span><span class="v">${q.owner}</span></div>
+      <div class="kv"><span class="k">Status:</span>${st(s)}${s==="InApproval"?`<span class="v">· waiting ${nextLevel(q)}</span>`:""}</div></div>
+      <div class="ft">💬 &nbsp;${q.time}</div></div>`).join("")}</div>`}).join("")}</div>`;
+  const main = A.entity==="Discount bands" ? bands() : `
+    <div class="bar"><span class="ico">≡</span><div class="ttl"><div class="t">Quotation sheet</div><div class="sub">Total rows: ${rows.length}</div></div>
+      <div class="acts"><div class="viewsw">${["sheet","kanban"].map(v=>`<button class="${A.view===v?"on":""}" onclick="A.view='${v}';render()">${v==="sheet"?"Sheet":"Kanban"}</button>`).join("")}</div><span class="ico">⟳</span><span class="ico">⚲</span><span class="ico">⋮</span></div></div>
+    <div class="searchrow"><div class="searchpill">🔍 Search</div><span class="ico">⚲</span></div>
+    <div class="body">${A.view==="sheet"?sheet:kan}</div>
+    ${A.view==="sheet"?`<div class="pager"><span>1–${rows.length} of ${rows.length}</span><span>|‹ ‹ › ›|</span></div>`:""}
+    ${A.role==="SE"?`<button class="fab" title="New quotation">+</button>`:""}
+    ${A.open?`<div class="dim" onclick="A.open=null;render()"></div>${drawer(DATA.find(q=>q.no===A.open), A.role)}`:""}`;
+  return `<div class="A"><div class="dev-wrap">
+    <div class="dev-title"><select onchange="A.role=this.value;A.open=null;A.entity='Quotation';render()">${SPEC.roles.map(r=>`<option value="${r.id}" ${A.role===r.id?"selected":""}>${r.person} (${r.name}${r.proposed?", proposed":""})</option>`).join("")}</select><span class="ico">⋮</span></div>
+    <div class="dev"><div class="lp">${launcher(A.entity, A.role, NOTIFS)}</div><div class="mp">${main}</div></div></div></div>`;
+}
+
+/* ======== TAB B: guided scenarios, two-device view (actor desktop + next role phone) ======== */
+const SCEN = [
+  {t:"Small discount, no approval", d:"5% goes straight to Approved.", steps:[
+    {who:"SE", do:"Creates Q-121 for Desert Build and attaches the PDF made outside Neome.", q:{no:"Q-2026-121",status:"Draft",docs:1}, reqs:["QUO-01","QUO-02"]},
+    {who:"SE", do:"Sets Expected PO date and submits. 5% is under 10%, so no approval.", q:{no:"Q-2026-121",status:"Approved",docs:1,po:"15/01/2027"}, notify:{to:"SE",m:"<b>Approved</b> Q-2026-121"}, reqs:["QUO-03","QUO-06"]},
+  ]},
+  {t:"22% discount, two levels", d:"L1 then L2 before Approved.", steps:[
+    {who:"SE", do:"Submits Q-117 at 22%. Band 20–25% needs Levels 1 and 2.", q:{no:"Q-2026-117",status:"InApproval",ap:[]}, notify:{to:"L1",m:"<b>Approval needed!</b> Q-2026-117 · 22% waits for you"}, reqs:["QUO-06"], oi:"OI-08"},
+    {who:"L1", do:"Sales Manager taps the notification and approves. Status stays In approval.", q:{no:"Q-2026-117",status:"InApproval",ap:["L1"]}, notify:{to:"L2",m:"<b>Approval needed!</b> Q-2026-117 · 22% waits for you"}, reqs:["QUO-06"], oi:"OI-09"},
+    {who:"L2", do:"Head of Sales approves. All levels done → Approved. Both decisions logged.", q:{no:"Q-2026-117",status:"Approved",ap:["L1","L2"]}, notify:{to:"SE",m:"<b>Approved</b> Q-2026-117"}, reqs:["QUO-06"]},
+  ]},
+  {t:"Rejected, then revised", d:"L2 rejects; new revision keeps old PDF.", steps:[
+    {who:"L2", do:"Head of Sales rejects Q-120 (28%) with a reason.", q:{no:"Q-2026-120",status:"Rejected",ap:["L1"],rej:"L2",docs:1}, notify:{to:"SE",m:"<b>Rejected</b> Q-2026-120 by Head of Sales"}, reqs:["QUO-06"]},
+    {who:"SE", do:"Uploads v2 at 18%. v1 stays listed. Resubmits → only L1 now.", q:{no:"Q-2026-120",status:"InApproval",ap:[],docs:2,disc:18}, notify:{to:"L1",m:"<b>Approval needed!</b> Q-2026-120 · 18% waits for you"}, reqs:["QUO-05","QUO-06"]},
+  ]},
+  {t:"Edge: exactly 10%", d:"Open Item shows inside the story.", steps:[
+    {who:"SE", do:"Submits at exactly 10%. 'No approval' or 'Level 1'? Spec says ≥10% → L1, not confirmed.", q:{no:"Q-2026-114",status:"InApproval",ap:[],disc:10}, notify:{to:"L1",m:"<b>Approval needed?</b> Q-2026-114 · 10%"}, reqs:["QUO-06"], oi:"OI-09", open:true},
+  ]},
+  {t:"Admin changes bands", d:"No code change.", steps:[
+    {who:"AD", do:"Admin opens Discount bands (master data), sets 10–20% → L1, saves. New quotations use it.", admin:true, reqs:["QUO-06"]},
+  ]},
+];
+let B = {s:0, i:0};
+function stepRecord(s){
+  const base = JSON.parse(JSON.stringify(seed().find(x=>x.no===s.q.no)));
+  base.status = s.q.status; if(s.q.disc!=null) base.disc = s.q.disc; if(s.q.po) base.po = s.q.po;
+  base.approvals = (s.q.ap||[]).map(l=>({lvl:l,d:"approved",by:role(l).person,at:"step"})); if(s.q.rej) base.approvals.push({lvl:s.q.rej,d:"rejected",by:role(s.q.rej).person,at:"step"});
+  if(s.q.docs) base.docs = Array.from({length:s.q.docs},(_,i)=>({v:i+1,name:`${base.no.slice(-5)}_v${i+1}.pdf`,by:base.owner,at:"step"}));
+  return base;
+}
+function phoneHome(roleId, notifs, cap){
+  return `<div class="phone"><div class="dev-title" style="font-size:16px">${role(roleId).person} (${role(roleId).name})</div><div class="dev"><div class="scr">${launcher(null, roleId, notifs, true)}</div></div>${cap?`<div class="cap">${cap}</div>`:""}</div>`;
+}
+function viewB(){
+  const sc = SCEN[B.s], s = sc.steps[B.i], r = role(s.who);
+  const desk = s.admin ? `<div class="dev"><div class="mp">${bands()}</div></div>` : `<div class="dev">${drawer(stepRecord(s), "none", {static:true, tab:"d"}).replace('class="drawer"','class="drawer" style="position:static;width:100%;box-shadow:none"')}</div>`;
+  const phone = s.notify ? phoneHome(s.notify.to, [{to:s.notify.to,t:"now",m:s.notify.m}], "Neome notifies the next role") : "";
+  return `<div class="B">
+    <div class="B-list">${SCEN.map((x,k)=>`<div class="sc ${k===B.s?"on":""}" onclick="B={s:${k},i:0};render()"><div class="t">${k+1}. ${x.t}</div><div class="small">${x.d}</div></div>`).join("")}</div>
+    <div class="B-stage"><div class="small">Scenario ${B.s+1} · step ${B.i+1} of ${sc.steps.length} · proposed by Neomenta, to confirm</div><h2 style="margin:4px 0 0;font-weight:400">${sc.t}</h2>
+      <div class="prog">${sc.steps.map((_,k)=>`<span class="${k<=B.i?"on":""}"></span>`).join("")}</div>
+      ${s.open?`<div class="callout"><b>${s.oi} open:</b> ${SPEC.ois[s.oi]} The Enterprise must answer before this is final.</div>`:""}
+      <p style="margin:0 0 12px"><b>${r.person} (${r.name})</b> ${propTag(r.proposed)} · ${s.do}</p>
+      <div class="B-two"><div class="desk dev-wrap"><div class="dev-title" style="font-size:16px">${r.person} (${r.name})</div>${desk}</div>${phone}</div>
+      <div style="display:flex;gap:8px;margin-top:14px"><button class="tbtn" ${B.i===0?"disabled":""} onclick="B.i--;render()">‹ Back</button><button class="tbtn" onclick="${B.i<sc.steps.length-1?"B.i++":"B={s:(B.s+1)%SCEN.length,i:0}"};render()">${B.i<sc.steps.length-1?"Next ›":"Next scenario ›"}</button></div></div>
+    <div class="B-proof"><h5>This step proves</h5>
+      ${s.reqs.map(id=>{const q=SPEC.requirements.find(x=>x.id===id);return `<div style="margin:8px 0 14px"><span class="chip req">${q.id}</span> <b>${q.title}</b> <span class="small">${q.pr}</span>${q.acc.map(a=>`<div class="acc">${a}</div>`).join("")}</div>`}).join("")}
+      ${s.oi?`<h5 style="color:var(--oi);margin-top:16px">Open Item</h5><div>${oiTag(s.oi)} ${SPEC.ois[s.oi]}</div>`:""}
+      <h5 style="margin-top:20px">Coverage</h5><div class="small">${SPEC.requirements.map(q=>{const hit=SCEN.some(x=>x.steps.some(y=>y.reqs.includes(q.id)));return `<div>${hit?"✓":"✗"} ${q.id} ${q.title}</div>`}).join("")}</div></div>
+  </div>`;
+}
+
+/* ======== TAB C: mobile screens + Requirement trace ======== */
+let C = {req:null};
+function viewC(){
+  const q = DATA[1]; const h = id => C.req && id.split(" ").includes(C.req) ? "hl" : "";
+  const home = `<div class="phone"><div class="dev-title" style="font-size:16px">Leila H. (Head of Sales)</div><div class="dev"><div class="scr ${h("QUO-06")}">${launcher(null,"L2",[{to:"L2",t:"04:40 PM",m:`<b>Approval needed!</b> ${q.no} · ${q.disc}% waits for you`}],true)}</div></div><div class="cap">home · bot notification</div></div>`;
+  const rec = `<div class="phone"><div class="dev-title" style="font-size:16px">Meera S. (Sales Executive)</div><div class="dev">
+      <div class="bar" style="background:#fff;border-bottom:1px solid var(--line)"><span class="ico">‹</span><div class="t">Quotation</div></div>
+      <div class="scr" style="background:#fff;padding:0 14px 14px">
+        <div class="${h("QUO-02")}"><div class="secdiv">Quotation details</div>
+          <div class="ofld ro"><label>Quotation no.</label><div class="val">${q.no}</div></div>
+          <div class="ofld ro"><label>Customer *</label><div class="val"><a href="#">${q.customer}</a></div></div>
+          <div class="ofld ro"><label>Product *</label><div class="val">${q.product}</div></div>
+          <div class="ofld ro"><label>Status</label><div class="val">${st(q.status)}</div></div></div>
+        <div class="ofld ro ${h("QUO-03")}"><label>Expected PO date</label><div class="val">${q.po}</div><span class="tr">📅</span></div>
+        <div class="${h("QUO-04")}"><div class="secdiv">Margin</div><div class="ofld ro"><label>Gross margin</label><div class="val">${fmt(gm(q))}</div></div><div class="tags">${oiTag("OI-19")}</div></div>
+        <div class="${h("QUO-01 QUO-05")}"><div class="secdiv">Documents</div>${q.docs.concat([{v:2,name:"Q-117_v2.pdf",by:"Meera S.",at:"28/10"}]).map(d=>`<div class="small" style="padding:4px 0">📄 ${d.name} · v${d.v} · ${d.by} · ${d.at}</div>`).join("")}</div>
+      </div></div><div class="cap">record</div></div>`;
+  const appr = `<div class="phone"><div class="dev-title" style="font-size:16px">Leila H. (Head of Sales)</div><div class="dev">
+      <div class="bar"><span class="ico">‹</span><div class="avatar" style="width:28px;height:28px">🧾</div><div><div class="t" style="font-size:14px">${SPEC.appShort}</div><div class="sub" style="font-size:12px">bot</div></div></div>
+      <div class="chat"><div class="datepill">Today</div>
+        <div class="bub in"><div class="nm">${SPEC.appShort}</div>✨ <b>Approval needed!</b><div class="card ${h("QUO-06")}"><b>${q.no}</b> · ${q.customer}<br>${fmt(value(q))} · <b style="color:var(--oi)">${q.disc}%</b> discount<br>Margin ${Math.round(gm(q)/value(q)*100)}%</div><div class="tm">04:40 PM</div></div>
+        <div class="bub in ${h("QUO-06")}"><div class="nm">${SPEC.appShort}</div>${ladder(q)}<div class="tm">04:40 PM</div></div>
+        <div class="bub out ${h("QUO-06")}">✓ Approve L2<div class="tm">04:52 PM ✓✓</div></div>
+      </div>
+      <div class="dfoot"><button class="tbtn red">✕ Reject</button><button class="tbtn">✓ Approve L2</button></div></div><div class="cap">approve from chat (pattern guessed, see note)</div></div>`;
+  return `<div class="C"><div class="C-phones">${home}${rec}${appr}</div>
+    <div class="C-trace"><h5 style="margin:0 0 6px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)">Requirement trace</h5><div class="small" style="margin-bottom:12px">Click a Requirement to see where it shows.</div>
+      ${SPEC.requirements.map(r=>`<div class="r ${C.req===r.id?"on":""}" onclick="C.req=C.req==='${r.id}'?null:'${r.id}';render()"><span class="chip req">${r.id}</span> <b>${r.title}</b> ${oiTag(r.oi)}<div class="small" style="margin-top:3px">${r.acc.join(" · ")}</div></div>`).join("")}</div></div>`;
+}
+
+/* ======== tabs ======== */
+const TABS = {app:["App",viewA], scen:["Scenarios",viewB], mob:["Mobile + trace",viewC]};
+let TAB = "app";
+function render(){
+  const banner = `<div class="banner"><b>PROTOTYPE</b> · ${SPEC.enterprise} · Module <span class="chip">${SPEC.prefix}</span> ${SPEC.module} · ${SPEC.requirements.length} Requirements · ${Object.keys(SPEC.ois).length} Open Items · sample data <span style="margin-left:auto" class="chip">${SPEC.app} · ${SPEC.delivery}</span></div>`;
+  const tabs = `<div class="ptabs">${Object.entries(TABS).map(([k,[n]])=>`<button class="${TAB===k?"on":""}" onclick="TAB='${k}';render()">${n}</button>`).join("")}
+    <div class="right"><label class="small"><input type="checkbox" ${document.body.classList.contains("showtags")?"checked":""} onchange="document.body.classList.toggle('showtags',this.checked)"> show Requirement tags</label><button class="tbtn" onclick="DATA=seed();NOTIFS=[];A.open=null;render()">Reset</button></div></div>`;
+  document.getElementById("app").innerHTML = banner + tabs + TABS[TAB][1]();
+}
+render();
+</script>
+</body>
+</html>

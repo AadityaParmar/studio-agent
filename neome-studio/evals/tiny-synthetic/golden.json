@@ -1,0 +1,74 @@
+{
+  "case": "tiny-synthetic",
+  "enterprise": { "id": "marlin-marine", "name": "Marlin Marine Services" },
+  "engagement": { "slug": "service-crm", "title": "Service and parts CRM" },
+  "modules": [
+    {
+      "prefix": "JOB",
+      "name": "Service jobs",
+      "mapping": { "neomeApp": "amc-and-service-management", "delivery": "configuration" },
+      "requirements": [
+        { "id": "JOB-01", "title": "Log a job", "statement": "The front desk logs a job with boat name, owner name and phone, engine make and model, the owner's complaint and the date the boat comes in; the job number is given automatically.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-16"] },
+        { "id": "JOB-02", "title": "Assign a technician", "statement": "The Workshop Manager assigns each job to one technician.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-15"] },
+        { "id": "JOB-03", "title": "Job statuses", "statement": "A job moves Booked → In workshop → Waiting for parts → Done → Invoiced, each step by the role that owns it; the front desk can cancel a job before In workshop.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-15", "K-20"] },
+        { "id": "JOB-04", "title": "Hours and parts on the job", "statement": "The technician records hours worked and parts used on the job from a phone, replacing the paper job card.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-14"] },
+        { "id": "JOB-05", "title": "Waiting-for-parts list", "statement": "A list of every boat waiting for parts, oldest first, for the Workshop Manager and the front desk.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-18"] },
+        { "id": "JOB-06", "title": "Job-done WhatsApp message", "statement": "When a job is Done the boat owner gets a WhatsApp message from the workshop's WhatsApp Business number saying the boat is ready for collection.", "priority": "Should", "sources": ["workshop-call-notes.md", "K-06"] },
+        { "id": "JOB-07", "title": "Monthly technician report", "statement": "A monthly report of jobs and hours per technician for the Owner and the Workshop Manager.", "priority": "Should", "sources": ["workshop-call-notes.md", "K-19"] },
+        { "id": "JOB-08", "title": "Daily list for invoicing", "statement": "Accounts gets a daily list of Done jobs to key invoices into Tally by hand, then marks each job Invoiced; invoices stay in Tally.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-05"] },
+        { "id": "JOB-09", "title": "Customers and boats", "statement": "Boat owners and boat yards are kept as customers; one owner can have several boats, and each boat keeps its job history.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-22"] }
+      ]
+    },
+    {
+      "prefix": "PRT",
+      "name": "Parts orders",
+      "mapping": { "neomeApp": "quotation-and-order-flow", "delivery": "configuration" },
+      "requirements": [
+        { "id": "PRT-01", "title": "Record a parts order", "statement": "The Sales Lead records a parts order with customer, parts with quantity and price, discount and Tally number.", "priority": "Must", "sources": ["parts-counter-whatsapp.txt"] },
+        { "id": "PRT-02", "title": "Parts order statuses", "statement": "A parts order moves Quoted → Confirmed → Delivered → Paid; the Sales Lead moves it to Delivered, Accounts sets Paid; it can be cancelled before Delivered.", "priority": "Must", "sources": ["parts-counter-whatsapp.txt", "K-26", "K-20"] },
+        { "id": "PRT-03", "title": "Discount approval", "statement": "A discount above 10% needs the Owner's approval (the Workshop Manager when she is away) before the order goes on.", "priority": "Must", "sources": ["parts-counter-whatsapp.txt", "K-04"] },
+        { "id": "PRT-04", "title": "Unpaid orders list", "statement": "A list of parts orders Delivered and not Paid 30 days after delivery, for the Sales Lead and Accounts.", "priority": "Must", "sources": ["parts-counter-whatsapp.txt", "K-17"] },
+        { "id": "PRT-05", "title": "Orders from the phone", "statement": "The Sales Lead can create and update parts orders from her phone at the boat yards.", "priority": "Should", "sources": ["parts-counter-whatsapp.txt", "K-12"] },
+        { "id": "PRT-06", "title": "Tally stock in view", "statement": "The Sales Lead can see Tally stock for a part when quoting.", "priority": "Could", "sources": ["parts-counter-whatsapp.txt", "K-12"] }
+      ]
+    }
+  ],
+  "general": {
+    "requirements": [
+      { "id": "GEN-01", "topic": "access", "title": "Who sees what", "statement": "Technicians see only their own jobs; the Owner sees everything.", "priority": "Must", "sources": ["workshop-call-notes.md"] },
+      { "id": "GEN-02", "topic": "migration", "title": "Move the Excel job history", "statement": "All columns of the Jobs 2025 and Jobs 2026 Excel sheets (about 900 rows) move into the new system; parts order history stays in Tally.", "priority": "Must", "sources": ["workshop-call-notes.md", "K-08"] },
+      { "id": "GEN-03", "topic": "localisation", "title": "English and AED", "statement": "English only; prices in AED.", "sources": ["parts-counter-whatsapp.txt"] },
+      { "id": "GEN-04", "topic": "training", "title": "Training", "statement": "Everyone who uses the system is trained; Neome trains the Workshop Manager and the Sales Lead, who train their teams.", "sources": ["K-09"] },
+      { "id": "GEN-05", "topic": "support", "title": "Support", "statement": "Standard Neome support; the Owner raises issues.", "sources": ["K-10"] }
+    ]
+  },
+  "openItems": [
+    { "id": "OI-01", "question": "Does \"job\" mean a boat's workshop visit (call notes) or a parts counter order (WhatsApp)?", "modules": ["JOB", "PRT"], "answeredBy": "K-03" },
+    { "id": "OI-02", "question": "Who approves a discount above 10% when the Owner is away?", "modules": ["PRT"], "answeredBy": "K-04" },
+    { "id": "OI-03", "question": "How do Done jobs and Delivered parts orders reach Tally for invoicing: by hand or a link?", "modules": ["JOB", "PRT"], "answeredBy": "K-05" },
+    { "id": "OI-04", "question": "Can Tally stock be shown in the new system, and how?", "modules": ["PRT"], "answeredBy": "unknown: Leena skips it" },
+    { "id": "OI-05", "question": "Which WhatsApp number sends the job-done message to boat owners?", "modules": ["JOB"], "answeredBy": "K-06" },
+    { "id": "OI-06", "question": "Any hosting, data residency or single sign-on needs?", "modules": ["All"], "answeredBy": "unknown" },
+    { "id": "OI-07", "question": "Can boat owners see the status of their job online themselves?", "modules": ["JOB"], "answeredBy": "unknown: raised by Leena in her reply (K-23)" }
+  ],
+  "glossary": [
+    { "term": "Job", "definition": "One boat visit to the workshop for a service or a repair." },
+    { "term": "Parts order", "definition": "A parts counter sale to a walk-in customer or a boat yard." }
+  ],
+  "mechanics": [
+    { "id": "glossary-conflict", "what": "\"job\" meaning clash raised as an Open Item", "type": "oi", "where": { "questionIncludes": "job" } },
+    { "id": "questionnaire-sent", "what": "Questionnaire master written", "type": "file", "path": "_agent/questionnaires/QN-*.md" },
+    { "id": "reply-closes-oi", "what": "Reply closed an Open Item citing the QA Source", "type": "oi", "where": { "status": "closed", "answerSourcePrefix": "QA" } },
+    { "id": "reply-new-question", "what": "Leena's new question raised as an Open Item from the reply", "type": "oi", "where": { "raisedInPrefix": "QA" } },
+    { "id": "reply-dont-know", "what": "Don't know or skipped item stays open with a note", "type": "text", "path": "_agent/open-items.md", "pattern": "\\|\\s*open\\s*\\|.*\\[QA-\\d+\\]" },
+    { "id": "needs-revisit", "what": "Reply set a Module needs-revisit (map change log)", "type": "text", "path": "_agent/map.md", "pattern": "needs.revisit.*\\[QA-\\d+\\]" },
+    { "id": "gen", "what": "Engagement-wide Requirements written", "type": "gen", "min": 3 },
+    { "id": "all-resolved", "what": "Every Module resolved", "type": "modules", "status": "resolved" },
+    { "id": "v1-released", "what": "v1 released as draft for review", "type": "version", "version": 1, "status": "draft-for-review" },
+    { "id": "v2-signed", "what": "v2 signed off", "type": "version", "version": 2, "status": "signed-off" },
+    { "id": "v2-change-log", "what": "v2 change log lists Open Items closed by the reply", "type": "changes", "version": 2, "group": "openItems", "kind": "closed" },
+    { "id": "claim-held", "what": "Ben's claim was pushed", "type": "git", "pattern": "^resolve-module: marlin-marine/service-crm claim " },
+    { "id": "stale-lock-cleared", "what": "studio cleared Ben's stale lock", "type": "git", "pattern": "^studio: marlin-marine/service-crm clear stale lock of Ben Okafor" },
+    { "id": "stale-claim-released", "what": "studio released Ben's stale claim", "type": "git", "pattern": "^studio: marlin-marine/service-crm release stale claim of Ben Okafor" }
+  ]
+}

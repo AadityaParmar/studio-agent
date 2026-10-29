@@ -1,0 +1,139 @@
+/* BRD page. Vendorgate tokens. Screen = app (#screen); print = linear document (#print). */
+:root{
+  --surface-base:#F7F7F7; --surface-card:#FFFFFF; --surface-dark:#1D1D1F; --surface-dark-2:#262629;
+  --ink-900:#1C1C1E; --ink-700:#3A3A3C; --ink-500:#595959; --ink-400:#8A8A8E; --ink-300:#C7C7C5;
+  --line-subtle:#E6E6E3; --line-strong:#D8D8D4;
+  --neome:#1877D5; --neome-deep:#115EA8; --accent:#F47100;
+  --std:#1E8E5A; --cfg:#1877D5; --cus:#F47100;
+  --sans:'Schibsted Grotesk',-apple-system,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface-base);color:var(--ink-700);font-family:var(--sans);font-size:15px;line-height:1.5}
+h1,h2,h3{color:var(--ink-900);margin:0;font-weight:500;text-wrap:balance}
+h1{font-size:clamp(30px,4.5vw,46px);line-height:1.05;letter-spacing:-.03em}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.1;letter-spacing:-.02em}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+a{color:var(--neome)}
+code{font-family:var(--mono);font-size:.9em}
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--neome)}
+.rule{height:3px;width:56px;border-radius:2px;margin:12px 0 14px;background:linear-gradient(90deg,var(--neome) 0 55%,var(--accent) 55% 100%)}
+.lead{font-size:17px;color:var(--ink-500);max-width:64ch}
+.small{font-size:13px;color:var(--ink-500)}
+.mono{font-family:var(--mono)}
+.card{background:var(--surface-card);border:1px solid var(--line-subtle);border-radius:12px;padding:16px 18px}
+.grid{display:grid;gap:10px}
+.g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g6{grid-template-columns:repeat(6,1fr)}
+.stack{display:flex;flex-direction:column;gap:18px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-subtle);border-radius:12px;background:#fff;overflow:hidden}
+.metrics.m5{grid-template-columns:repeat(5,1fr)}
+.metrics .m{padding:16px 18px;border-right:1px solid var(--line-subtle)} .metrics .m:last-child{border-right:0}
+.num{font-family:var(--mono);font-weight:700;font-size:26px;line-height:1;color:var(--ink-900)}
+.num.hl{color:var(--neome)}
+.lab{font-size:12.5px;color:var(--ink-500);margin-top:6px}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-400);margin-bottom:8px}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;border:1px solid var(--line-strong);border-radius:999px;padding:2px 8px;background:#fff;color:var(--ink-700);white-space:nowrap;line-height:1.5}
+.chip.std{border-color:var(--std);color:var(--std)} .chip.cfg{border-color:var(--cfg);color:var(--cfg)} .chip.cus{border-color:var(--cus);color:var(--cus)}
+.chip.open{border-style:dashed;color:var(--accent);border-color:var(--accent)}
+.chip.must{background:var(--ink-900);color:#fff;border-color:var(--ink-900)}
+.chip.prog{background:#FFF4EA;border-color:var(--accent);color:var(--accent)}
+.chip.prop{border-style:dotted;color:var(--ink-500)}
+.chip.dead{color:var(--ink-400);border-color:var(--ink-300)}
+.oi{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;text-decoration:none}
+.src{font-family:var(--mono);font-size:11px;color:var(--ink-400)}
+a.src{text-decoration:none}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.draftnote{border-left:3px solid var(--accent);background:#FFF8F1;padding:10px 14px;border-radius:0 8px 8px 0;font-size:13.5px}
+.banner{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px dashed var(--accent);border-radius:8px;padding:6px 12px;background:#FFFBF6;align-self:flex-start}
+.diagram{margin:0;background:#fff;border:1px solid var(--line-subtle);border-radius:12px;padding:16px;overflow-x:auto;text-align:center}
+.diagram svg{display:inline-block;max-width:100%;height:auto}
+/* Mermaid SVG keeps its own look: undo page rules whose selectors also match Mermaid class names or tags.
+   Mermaid's own #id-scoped rules still win (higher specificity). A test keeps this list complete. */
+.diagram svg .label{font-family:inherit;font-size:inherit;letter-spacing:normal;text-transform:none;margin:0;color:inherit}
+.empty{color:var(--ink-400);font-size:13.5px}
+.logo{display:flex;gap:10px;align-items:center;font-weight:600;font-size:20px;color:var(--ink-900)}
+.logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--neome),var(--neome-deep));display:block}
+
+/* tables */
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);text-align:left;font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line-strong)}
+td{padding:9px 10px;border-bottom:1px solid var(--line-subtle);vertical-align:top}
+td.id{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-900);white-space:nowrap}
+td b.t{color:var(--ink-900);display:block;margin-bottom:2px}
+td ul{margin:4px 0 0;padding-left:18px}
+.tablewrap{border:1px solid var(--line-subtle);border-radius:12px;overflow:hidden}
+tr.dead td,.req.dead{color:var(--ink-400)}
+tr.dead td b.t,.req.dead b.t{color:var(--ink-400);text-decoration:line-through}
+tr:target td,.req:target{background:#FFF4EA}
+
+/* screen app */
+.app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
+aside{background:var(--surface-dark);color:#ddd;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .logo{color:#fff;margin-bottom:12px}
+aside .meta{font-size:12.5px;color:#aaa;margin:0 6px}
+aside .grp{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin:16px 6px 6px}
+aside a{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#ddd;text-decoration:none;padding:8px;border-radius:7px;font-size:13.5px}
+aside a:hover{background:var(--surface-dark-2)}
+aside a.on{background:#fff;color:var(--ink-900)}
+aside .chip{font-size:9.5px;padding:1px 6px}
+aside .bar{height:4px;border-radius:2px;background:#3a3a3e;margin:0 8px 6px;overflow:hidden}
+aside .bar i{display:block;height:100%;background:var(--neome)}
+main{padding:22px 30px 80px;max-width:1100px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.view{display:flex;flex-direction:column;gap:18px;padding-bottom:28px}
+.js .view{display:none}
+.js .view.on{display:flex}
+.mapcard{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.filters{display:none;gap:6px;flex-wrap:wrap}
+.js .filters{display:flex}
+.filters button{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line-strong);background:#fff;border-radius:999px;padding:5px 11px;cursor:pointer;color:var(--ink-700)}
+.filters button.on{background:var(--ink-900);color:#fff;border-color:var(--ink-900)}
+.req{background:#fff;border:1px solid var(--line-subtle);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:80px 1fr auto;gap:12px;margin-bottom:8px}
+.req[hidden]{display:none}
+.req .rid{font-family:var(--mono);font-weight:700;color:var(--ink-900);font-size:13px}
+.req b.t{color:var(--ink-900)}
+.req details summary{cursor:pointer;color:var(--neome);font-size:12.5px;margin-top:4px}
+.req details ul{margin:4px 0 0;padding-left:18px;font-size:13px;color:var(--ink-500)}
+.req .side{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.nomatch{display:none}
+.nomatch.on{display:block}
+.oibox{border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;background:#FFFBF6}
+.oibox p{margin:4px 0}
+.gen-topic{display:flex;flex-direction:column;gap:8px}
+.gen-topic h3 .small{font-weight:400}
+td.plan-weeks{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.signbox{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.signbox .card{min-height:110px;display:flex;flex-direction:column;justify-content:space-between}
+.signline{display:flex;align-items:flex-end;gap:8px;margin-top:14px}
+.signline .label{min-width:72px}
+.signline .line{flex:1;border-bottom:1px solid var(--ink-400);height:18px}
+.signlists{margin-top:10px}
+.signlists .card{min-height:0;justify-content:flex-start}
+.signlists ul{margin:6px 0 0;padding-left:18px}
+#print{display:none}
+
+@media (max-width:820px){.g4,.g6,.metrics,.mapcard{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:1fr}aside{position:static;height:auto}}
+
+/* print: always the full linear document, whatever is on screen */
+@media print{
+  body{background:#fff;font-size:10pt}
+  #screen{display:none!important}
+  #print{display:block}
+  .psec{break-before:page;display:flex;flex-direction:column;gap:12px}
+  .psec:first-child{break-before:auto}
+  .psec.cover{min-height:250mm;justify-content:space-between}
+  h1{font-size:30pt} h2{font-size:18pt}
+  h2,h3,.eyebrow,.rule{break-after:avoid}
+  table{font-size:9pt}
+  thead{display:table-header-group}
+  tfoot{display:table-footer-group}
+  tr,.card,.oibox,.metrics,.signbox,.draftnote,.diagram{break-inside:avoid}
+  .diagram{border:0;padding:0;overflow:visible}
+  .diagram svg{max-height:240mm}
+  .tablewrap{overflow:visible;border-radius:0;border:0}
+  .metrics,.g4{grid-template-columns:repeat(4,1fr)} .metrics.m5{grid-template-columns:repeat(5,1fr)} .g6{grid-template-columns:repeat(6,1fr)} .g3,.mapcard{grid-template-columns:repeat(3,1fr)}
+  a{color:inherit;text-decoration:none}
+  .oi{color:var(--accent)}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

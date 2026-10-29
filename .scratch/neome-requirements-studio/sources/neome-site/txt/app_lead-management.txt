@@ -1,0 +1,337 @@
+Home
+Apps
+Lead Management
+Lead Management
+Know Which Lead to Call First, Every Morning
+Every enquiry lands in one sheet with a source, an owner and a score, so your team works the list from the top instead of picking whichever name they remember. Quiet leads raise their own alert before they go cold.
+Start Free Trial
+Book A Free Demo
+Live in hours
+Scored worklist
+Role-based access
+Girnar Constructions
+Priya Nair
+Score
+82
+Source
+Website
+Territory
+West
+Assigned to
+Amit
+Next step
+Call back, 4:00 PM
+Worklist, best first
+Scored on source, engagement and fit, so nobody guesses who to call.
+Queue
+Girnar Constructions
+82
+Annapurna Foods
+74
+Bharat Machine Tools
+61
+This month
+48
+new
+7
+converted
+Greenline Construction
+Paula Nelson
+Score
+82
+Source
+Website
+Territory
+West
+Assigned to
+Mike
+Next step
+Call back, 4:00 PM
+Worklist, best first
+Scored on source, engagement and fit, so nobody guesses who to call.
+Queue
+Greenline Construction
+82
+Harbor Foods
+74
+Atlas Machinery
+61
+This month
+48
+new
+7
+converted
+Capture from any channel
+Website, referral, exhibition or walk-in, all into one sheet.
+Scored before anyone calls
+Your own rules decide who is worth the next hour.
+Nothing goes quiet
+Inactivity alerts and dated reminders, raised for you.
+Know which source pays
+Conversion and ageing per channel, not a gut feeling.
+Most leads are not lost. They are just never called.
+Three gaps account for most of what a growing sales team leaks, and none of them is a selling problem.
+Unsorted
+Every lead looks equally urgent
+So the newest one wins the morning, not the one most likely to buy.
+Unchased
+The quiet ones go quiet for good
+Nobody notices a lead nobody has touched for a fortnight.
+Unmeasured
+You cannot name your best channel
+Spend keeps going where it always went, not where deals come from.
+Neome closes all three by giving every lead a source, a score, an owner and a dated next step.
+Capture
+One sheet, whichever way the enquiry arrived
+Website form, referral, exhibition, walk-in or a cold call all write the same record, with the source picked from a list your admin owns. Add the missing source without leaving the form, and assign the owner in the same send.
+Your own source list
+Territory on the record
+Assign as you save
+New lead
+Company name *
+Girnar Constructions
+Contact person *
+Priya Nair
+Mobile number
++91 98795 41180
+City
+Ahmedabad
+Lead source, from your own list
+Website
+Referral
+Exhibition
+Walk-in
+Cold call
+Campaign
+Assign to
+Amit
+Send
+New lead
+Company name *
+Greenline Construction
+Contact person *
+Paula Nelson
+Mobile number
++1 (415) 555-0188
+City
+Denver
+Lead source, from your own list
+Website
+Referral
+Exhibition
+Walk-in
+Cold call
+Campaign
+Assign to
+Mike
+Send
+Qualification
+The list arrives already in the right order
+Scoring rules you set, on source weight, response time, confirmed budget and territory fit, put a number on every lead as it lands. The worklist sorts itself, so the first call of the day is the one worth making.
+Rule-based scoring
+Best first, automatically
+Qualification notes kept
+Worklist
+Scored
+Girnar Constructions
+Website
+·
+Amit
+82
+Annapurna Foods
+Referral
+·
+Neha
+74
+Bharat Machine Tools
+Exhibition
+·
+Vikram
+61
+Gokul Dairy
+Walk-in
+·
+Amit
+45
+Rules behind the score
+Source weight
+Replied within 24h
+Budget confirmed
+Territory fit
+Worklist
+Scored
+Greenline Construction
+Website
+·
+Mike
+82
+Harbor Foods
+Referral
+·
+Levi
+74
+Atlas Machinery
+Trade Show
+·
+Jay
+61
+Lakeside Dairy
+Walk-in
+·
+Mike
+45
+Rules behind the score
+Source weight
+Replied within 24h
+Budget confirmed
+Territory fit
+Follow-ups
+A lead cannot go quiet without someone hearing about it
+Calls, meetings and emails are logged against the lead with the date and the person filled in. Go a week without contact and the owner is nudged and the manager can see it. Every next step carries a date, not an intention.
+Full interaction timeline
+Inactivity alerts
+Dated reminders
+Girnar Constructions
+Interaction history
+Call · 12 Mar
+Asked for a revised quote
+Meeting · 09 Mar
+Site visit, spec agreed
+Email · 04 Mar
+Catalog sent
+No contact for 7 days
+Amit
+was nudged, and
+Neha
+can see it too.
+Next: call back
+Tomorrow 4 PM
+Greenline Construction
+Interaction history
+Call · 12 Mar
+Asked for a revised quote
+Meeting · 09 Mar
+Site visit, spec agreed
+Email · 04 Mar
+Catalog sent
+No contact for 7 days
+Mike
+was nudged, and
+Levi
+can see it too.
+Next: call back
+Tomorrow 4 PM
+Measurement
+Find out which channel is actually paying
+The funnel shows where leads stall between new, contacted, qualified and converted. Source performance ranks the channels by what they convert rather than what they cost, and lead ageing surfaces anything sitting open too long.
+Funnel by stage
+Conversion by source
+Lead ageing
+Lead funnel
+This month
+New
+48
+Contacted
+31
+Qualified
+19
+Converted
+7
+Best source
+Referral
+Open past 14 days
+9 leads
+Lead funnel
+This month
+New
+48
+Contacted
+31
+Qualified
+19
+Converted
+7
+Best source
+Referral
+Open past 14 days
+9 leads
+Reporting
+Which channel pays, and who is keeping up
+Set a date range and every figure below it is bounded by those dates.
+Lead performance
+Are leads moving?
+New, contacted, qualified and converted counts, the conversion rate between them, and where the drop-off sits.
+Source performance
+Which channel pays?
+Volume against conversion for every source, so the best and worst channels are named rather than guessed.
+Executive performance
+Is each person keeping up?
+Leads held, response times, conversions and a worklist sorted by days open, per sales executive.
+All the features, done right
+Lead sheet
+Search, filter, sort and page through every lead.
+Multi-channel capture
+Website, referral, event, walk-in or campaign.
+Lead scoring
+Your own rules put a number on every lead.
+Assignment
+By territory or by hand, with instant notice.
+Activity log
+Calls, meetings, emails and notes, dated.
+Inactivity alerts
+A quiet lead nudges its owner by itself.
+Follow-up tasks
+Raised from an activity, with a status.
+Conversion
+Qualified leads carry straight into the CRM.
+Bulk update
+Filter, select many rows, set one field.
+Role-based access
+Executive, manager and admin see different scopes.
+Dashboards
+Funnel, source performance and lead ageing.
+Mobile apps
+Android and iOS, with the same records.
+Built-in governance:
+a lead conversion cannot be approved by the person who raised it.
+Before you move your leads across
+The questions sales teams ask before they put their first enquiry into Neome.
+Who is this for?
+How is this different from the CRM?
+How does the lead scoring work?
+Can leads be assigned automatically?
+What stops a lead being forgotten?
+Can I import the leads I already have?
+Who can see which leads?
+Does it work on a phone?
+What it costs
+One price, and
+Lead Management
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Lead Management
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+CRM Software for Teams of 10 to 10,000
+CRM for small, midsize, and large teams. Capture leads, assign next steps, convert to opportunities, and track pipeline on one dashboard. WhatsApp, chat, Excel, and web. Standard trial or Enterprise demo.
+Learn more
+Appointment Booking Software for SMEs
+Book against real availability, remind the customer automatically, reschedule with the reason recorded, and see the no-show rate per executive.
+Learn more
+Quotation & Order Management Software
+Build quotations that price themselves, hold discounts to a limit per role, and turn an accepted quote into an order in one step with nothing retyped.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

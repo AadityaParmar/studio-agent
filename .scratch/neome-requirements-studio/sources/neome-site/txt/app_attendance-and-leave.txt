@@ -1,0 +1,303 @@
+Home
+Apps
+Attendance & Leave
+Attendance & Leave
+Know Who Is Here Before the Shift Starts
+Attendance recorded as it happens rather than compiled at month end, leave balances the employee can see before asking, and an approver who can see who else is already away.
+Start Free Trial
+Book A Free Demo
+Marked in the moment
+Balances visible
+Cover before approval
+Kavita Sharma
+Production
+In at 8:52
+This week
+Mon
+in
+Tue
+in
+Wed
+late
+Thu
+leave
+Fri
+in
+Wednesday, in at 9:41
+Neha
+was told the same morning, not at month end.
+Production
+present today
+22 of 26
+Dana Ruiz
+Production
+In at 8:52
+This week
+Mon
+in
+Tue
+in
+Wed
+late
+Thu
+leave
+Fri
+in
+Wednesday, in at 9:41
+Levi
+was told the same morning, not at month end.
+Production
+present today
+22 of 26
+Recorded, not reconstructed
+Check-in as it happens, so the month end is not a guess.
+Balances on the request
+Employees know what is left before they ask.
+Clashes caught early
+The approver sees who else is away those days.
+Availability, not headcount
+Attendance and leave together answer the real question.
+Headcount is not the question. Who is here this morning is.
+Three gaps account for most of what a workforce record gets wrong, and none of them is a discipline problem.
+Reconstructed
+Attendance is compiled at month end
+A register is typed up from memory and notes, so the record is an approximation nobody can dispute or defend.
+Untracked
+Nobody knows what leave is left
+Balances live in a spreadsheet one person maintains, so employees ask and managers guess.
+Uncovered
+Three people off the same day
+Leave is approved one request at a time with no view of the team, and the gap is discovered on the morning.
+Neome closes all three by capturing the day as it happens, showing the balance, and putting cover in front of the approver.
+Attendance
+Marked where the day actually starts
+Check-in and check-out are recorded per employee as they happen rather than compiled afterwards, so daily attendance across a team is a fact rather than a reconstruction. Late arrivals and absences surface the same morning, which is the only time anything can be done about them.
+Check-in and check-out
+Daily team visibility
+Late and absent detected
+Kavita Sharma
+Production
+In at 8:52
+This week
+Mon
+in
+Tue
+in
+Wed
+late
+Thu
+leave
+Fri
+in
+Wednesday, in at 9:41
+Neha
+was told the same morning, not at month end.
+Production
+present today
+22 of 26
+Dana Ruiz
+Production
+In at 8:52
+This week
+Mon
+in
+Tue
+in
+Wed
+late
+Thu
+leave
+Fri
+in
+Wednesday, in at 9:41
+Levi
+was told the same morning, not at month end.
+Production
+present today
+22 of 26
+Leave
+A balance the employee can see before they ask
+Leave types carry their own quotas, and the balance is on the request rather than in somebody's spreadsheet. Requests route to the line manager from the directory's reporting structure, so nobody has to work out who should approve what.
+Configurable leave types
+Balances visible to the employee
+Routed to the manager
+Kavita Sharma
+2 days, casual leave
+Waiting on
+Neha
+Balance
+Casual
+6
+Sick
+4
+Earned
+11
+Nobody else in
+Production
+is away
+The approver decides with the cover in front of them.
+Dana Ruiz
+2 days, casual leave
+Waiting on
+Levi
+Balance
+Casual
+6
+Sick
+4
+Earned
+11
+Nobody else in
+Production
+is away
+The approver decides with the cover in front of them.
+Cover
+Approve leave with the team calendar in view
+An approver sees who else in the team is already away for those dates, so a clash is caught at the point of decision rather than on the morning it bites. Approving leave without that view is how three people end up off on the same day.
+Team calendar on the request
+Clash visible before approval
+Department-wise view
+Reporting line
+Production
+Rohit Mehta
+Operations head
+Neha
+Production manager
+Kavita Sharma
+Shift supervisor
+Arun Prakash
+Shift operator
+Approvals and leave routing read this tree, so it has to be right.
+Reporting line
+Production
+Daniel Brooks
+Operations head
+Levi
+Production manager
+Dana Ruiz
+Shift supervisor
+Marcus Bell
+Shift operator
+Approvals and leave routing read this tree, so it has to be right.
+Availability
+Who is actually here today
+Attendance and leave together answer the question a supervisor actually has, which is not how many people are employed but how many are available this morning. Combining them is what turns two records into one useful number.
+Present today by team
+Leave and attendance combined
+Availability at a glance
+Kavita Sharma
+EMP-2041
+Active
+Designation
+Shift supervisor
+Department
+Production
+Reports to
+Neha
+Location
+Ahmedabad plant
+Role changed 1 Apr
+Effective-dated, so the record shows what was true then as well as now.
+Headcount
+184
+Across 6 departments
+Joined this month
+Arun Prakash
+Onboarding checklist raised
+Dana Ruiz
+EMP-2041
+Active
+Designation
+Shift supervisor
+Department
+Production
+Reports to
+Levi
+Location
+Dayton plant
+Role changed 1 Apr
+Effective-dated, so the record shows what was true then as well as now.
+Headcount
+184
+Across 6 departments
+Joined this month
+Marcus Bell
+Onboarding checklist raised
+Reporting
+What payroll needs, and what the floor needs
+Set a date range and every figure below it is bounded by those dates.
+Present today
+Who is available?
+Headcount present against expected, by team and location, so a shortfall is known at the start of the shift rather than during it.
+Leave pending
+What needs a decision?
+Requests awaiting approval by manager and by age, so a request does not sit unanswered while somebody plans around an assumption.
+Attendance summary
+What is the pattern?
+Attendance over a period with late arrivals and absence, and leave balances by type, which is what payroll and any conversation about a pattern needs.
+All the features, done right
+Check-in and out
+Recorded as it happens.
+Daily team view
+Who is in, across a team.
+Late detection
+Flagged the same morning.
+Leave types
+Casual, sick, earned, your own.
+Balance quotas
+Per type, visible to the employee.
+Approval routing
+To the line manager, automatically.
+Team calendar
+Cover visible before approving.
+Department view
+Leave and attendance by team.
+Alerts
+Late arrivals to HR and managers.
+Summary reports
+For payroll and for patterns.
+Role-based access
+Employee, manager, HR, admin.
+Mobile apps
+Mark attendance from the floor.
+Before you move attendance across
+The questions HR and supervisors ask before the first day is marked in Neome.
+Who is this for?
+How is attendance actually marked?
+Can leave types be configured?
+Who approves leave?
+How does the team calendar help an approver?
+What does the availability view show?
+Does this connect to payroll?
+Does it work for field teams with no network?
+What it costs
+One price, and
+Attendance & Leave
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Attendance & Leave
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Employee Directory Software for SMEs
+One record per person with their role, department and reporting line, changes kept with their effective dates, and an org structure the platform routes by.
+Learn more
+Expense Management Software for SMEs
+Claims raised with the receipt attached, checked against category limits as they are submitted, routed through manager and finance, with a trail on every one.
+Learn more
+Gate Pass Management System for SMEs
+Raise inward and outward gate passes with photos and a purpose, approve before anything moves, and chase the returnables that never came back.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

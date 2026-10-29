@@ -1,0 +1,98 @@
+Case Studies
+Mahadev TurnTech
+mturntech.com
+Manufacturing Revolution
+How Mahadev TurnTech transformed manual manufacturing operations with Neome
+Mahadev TurnTech digitized attendance, order processing, production reporting, inventory alerts, and performance tracking with Neome.
+Precision brass components manufacturing
+Jamnagar, India
+85%
+Efficiency improvement
+90%
+Error reduction
+100%
+Process automation
+24/7
+Real-time monitoring
+Company
+Mahadev TurnTech is a precision brass components manufacturer, supplier, and exporter serving organizations across India and international markets. The company uses AutoCAD technology and CNC, VMC, TMC, CDM, and SPM machines for customized brass products.
+Visit
+mturntech.com
+Related modules
+Manufacturing
+Quality Control
+Inventory and Stock Management
+Quotation and Order Flow
+Lead Management
+The challenge
+Manual operations were creating bottlenecks across attendance, orders, production reporting, inventory, and follow-ups.
+Manual attendance created inaccuracies, time theft, and payroll errors.
+Order teams struggled with margin tracking, live order updates, purchase orders, dispatch reminders, and partial deliveries.
+Daily, weekly, and monthly production reports took heavy manual effort.
+Stock blind spots caused production delays when raw materials ran low unexpectedly.
+Worker performance and productivity patterns were difficult to measure.
+Lead and quotation follow-ups were inconsistent, creating missed opportunities.
+The Neome solution
+Neome connected manufacturing workflows into a single operational system with mobile access, automated calculations, and real-time reporting.
+Smart attendance system
+Mobile punch-in/out integrated with payroll to reduce manual errors and automate salary calculations.
+Automated order processing
+Profit margin tracking, live order updates, raw material purchase orders, and dispatch notifications.
+Real-time production dashboard
+Live production tracking on mobile with automated daily, weekly, and monthly reporting.
+Intelligent inventory alerts
+Automated low-stock notifications sent to responsible teams before shortages affect production.
+Performance analytics
+Person-wise and product-wise productivity tracking for clearer worker performance visibility.
+Lead management
+Lead tracking and automated quotation follow-ups so opportunities are not missed.
+Workflow digitized
+1
+Order creation
+2
+Work order generation
+3
+Production planning
+4
+Material management
+5
+Daily production
+6
+Quality control
+7
+Packing and dispatch
+Before and after Neome
+Before
+After
+Manual attendance tracking
+Automated mobile punch-in/out
+Weekly and monthly report generation
+Real-time production monitoring
+Reactive inventory management
+Proactive stock level management
+No lead tracking system
+Complete lead lifecycle tracking
+Multiple production dispatches impossible
+Multiple dispatches per order
+No raw material tracking
+Comprehensive raw material tracking
+Inconsistent production planning
+Intelligent production and order planning
+Measured outcomes
+85%
+Time efficiency
+Reduction in administrative time.
+90%
+Accuracy improvement
+Reduction in operational errors.
+24/7
+Mobile accessibility
+Access to operations from anywhere.
+100%
+Process optimization
+Automated workflow coverage.
+Neome seamlessly integrates messaging, spreadsheets, and your personal drive in an easily adaptable, pluggable, all-in-one solution.
+Ready to map your workflow?
+Talk to Neome about the modules and rollout path that fit your team.
+Contact us
+Watch demos

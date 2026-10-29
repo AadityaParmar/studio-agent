@@ -1,0 +1,283 @@
+Home
+Apps
+Approval Workflows
+Approval Workflows
+Stop Asking Whose Desk It Is On
+Chains set by request type and value, a live pipeline the requester can read, escalation when something sits too long, and a trail that answers an auditor without a search through mailboxes.
+Start Free Trial
+Book A Free Demo
+Rules by value
+Live pipeline
+Escalation built in
+Capital purchase
+PR-1904
+·
+Amit
+₹6.4 L
+Amit
+Raised
+Neha
+Approved
+Rohit Mehta
+Waiting
+Two levels, because the amount crossed a threshold.
+Escalates after 2 days
+A request does not wait indefinitely on one inbox.
+Rohit Mehta
+has pending
+4
+Oldest waiting 1 day
+Average turnaround
+19h
+Capital purchase
+PR-1904
+·
+Mike
+$77,000
+Mike
+Raised
+Levi
+Approved
+Daniel Brooks
+Waiting
+Two levels, because the amount crossed a threshold.
+Escalates after 2 days
+A request does not wait indefinitely on one inbox.
+Daniel Brooks
+has pending
+4
+Oldest waiting 1 day
+Average turnaround
+19h
+The rule decides
+Value sets the chain, so the route never varies.
+No more chasing
+The requester can see the stage without asking.
+Nothing stalls on leave
+Escalation and delegation, both on the record.
+Audit as retrieval
+Who agreed to what, and when, permanently.
+Most approvals are not refused. They are just waited on.
+Three gaps account for most of the delay in a decision, and none of them is a judgement problem.
+Invisible
+Nobody knows whose desk it is on
+The requester chases the last person they emailed, who forwarded it on a week ago to someone else.
+Inconsistent
+Who signs depends on who is asked
+Without a rule tied to value, the same decision takes one signature or three depending on the route it took.
+Stalled
+It has been in an inbox for a fortnight
+An approver on leave stops everything behind them, because nothing moves a request on but that person.
+Neome closes all three by letting the rule choose the route, showing the stage, and moving what has stalled.
+Chains
+The value decides who has to sign
+Approval chains are configured per request type and value band, so a small purchase takes one signature and a capital one takes two. Because the rule decides, the same decision follows the same route every time rather than depending on who was asked first.
+Per request type
+Value-banded levels
+Multi-level chains
+Approval chain
+Configured per request type and value
+Up to a small amount
+1 level
+Department head
+Above that
+2 levels
+Department head, then finance
+Capital spend
+2 levels
+Finance, then director
+₹6.4 L
+falls in the third band, so it needs two signatures rather than one.
+Approval chain
+Configured per request type and value
+Up to a small amount
+1 level
+Department head
+Above that
+2 levels
+Department head, then finance
+Capital spend
+2 levels
+Finance, then director
+$77,000
+falls in the third band, so it needs two signatures rather than one.
+Visibility
+The requester can see whose desk it is on
+A live pipeline shows every request, the stage it has reached and who it is waiting on, with the requester told at each step. That removes the chasing, which is usually more expensive in time than the approval itself.
+Live pipeline
+Current stage visible
+Requester told at each step
+Capital purchase
+PR-1904
+·
+Amit
+₹6.4 L
+Amit
+Raised
+Neha
+Approved
+Rohit Mehta
+Waiting
+Two levels, because the amount crossed a threshold.
+Escalates after 2 days
+A request does not wait indefinitely on one inbox.
+Rohit Mehta
+has pending
+4
+Oldest waiting 1 day
+Average turnaround
+19h
+Capital purchase
+PR-1904
+·
+Mike
+$77,000
+Mike
+Raised
+Levi
+Approved
+Daniel Brooks
+Waiting
+Two levels, because the amount crossed a threshold.
+Escalates after 2 days
+A request does not wait indefinitely on one inbox.
+Daniel Brooks
+has pending
+4
+Oldest waiting 1 day
+Average turnaround
+19h
+Escalation and delegation
+One person on leave should not stop everything
+A request unanswered past its threshold escalates to the next approver rather than sitting still. Approvers can delegate while away, with the delegation recorded on every request they act on, so cover is arranged rather than improvised.
+Escalation on overdue
+Delegation while away
+Both recorded on the request
+Escalation
+After 2 days
+Unanswered requests move up rather than sitting still.
+The requester is told at each stage, so nobody has to ask where it is.
+Delegation
+Active
+Neha
+Rohit Mehta
+Until the 14th · recorded on every request they act on
+Escalation
+After 2 days
+Unanswered requests move up rather than sitting still.
+The requester is told at each stage, so nobody has to ask where it is.
+Delegation
+Active
+Levi
+Daniel Brooks
+Until the 14th · recorded on every request they act on
+Audit
+Who agreed to what, and when, permanently
+Every request keeps its full history: who raised it, what it said, who approved, when, and anything they added. An auditor asking why something was bought is answered by retrieving a record rather than by reconstructing a thread from mailboxes that may no longer exist.
+Complete request history
+Approver and timestamp
+Retrievable, not reconstructed
+Commissioning a moulding line
+Draft
+Vikram
+In review
+Neha
+Published
+Neha
+Versions
+v3
+live
+Added the torque settings
+v2
+Corrected the sequence
+Commissioning a molding line
+Draft
+Jay
+In review
+Levi
+Published
+Levi
+Versions
+v3
+live
+Added the torque settings
+v2
+Corrected the sequence
+Reporting
+Find the bottleneck by name
+Set a date range and every figure below it is bounded by those dates.
+Pending approvals
+What is waiting?
+Everything currently awaiting a decision, by approver and by age, so a bottleneck is a name rather than a feeling.
+Turnaround time
+How long do we take?
+Cycle time from request to decision by type and value band, which is the number that tells you whether the process is helping or just existing.
+Escalation frequency
+Where does it stick?
+How often requests escalate and past whom, which usually points at a workload problem rather than an attitude one.
+All the features, done right
+Approval chains
+Per request type and value.
+Multi-level
+One signature or three, by rule.
+Live pipeline
+Every request and its stage.
+Approver alerts
+On arrival, not on a reminder.
+Escalation
+Overdue requests move up.
+Delegation
+Cover arranged, and recorded.
+Approver comments
+The reason travels with the decision.
+Rejection reasons
+A no that explains itself.
+Full audit trail
+Who, what, when, permanently.
+Turnaround reporting
+Cycle time by type.
+Role-based access
+Requester, approver, admin.
+Mobile apps
+Approve from anywhere.
+Before you move your approvals across
+The questions teams ask before the first request is routed through Neome.
+Who is this for?
+How are approval chains configured?
+How does the requester know where their request is?
+What happens when an approver is on leave?
+Can an approver explain a decision?
+Is the trail good enough for an audit?
+What can be routed through an approval?
+Can approvals be given on a phone?
+What it costs
+One price, and
+Approval Workflows
+is already in it
+₹
+299
+/ user / month
+$
+9.99
+/ user / month
+There is no separate charge for this module. The same per-user price covers
+Approval Workflows
+and the other 25+ modules, so adding a second or third one costs nothing extra.
+15-day free trial
+No credit card to start
+Billed monthly · Minimum 5 users
+Start Free Trial
+See full pricing
+Related Modules
+Task & Ticket Management Software for SMEs
+Every issue becomes a ticket with a category, a priority and an SLA, breaks into tasks with owners and dates, and escalates before it breaches.
+Learn more
+Project Management Software for SMEs
+Plan against milestones, assign tasks with dates, log the hours actually spent, and see a budget overrun forming while the project can still absorb it.
+Learn more
+Expense Management Software for SMEs
+Claims raised with the receipt attached, checked against category limits as they are submitted, routed through manager and finance, with a trail on every one.
+Learn more
+Ready to implement this service?
+Talk to our team and get a rollout plan aligned to your business process.
+Start Free Trial

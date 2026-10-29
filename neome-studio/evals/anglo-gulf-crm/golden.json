@@ -1,0 +1,870 @@
+{
+  "case": "anglo-gulf-crm",
+  "enterprise": {
+    "id": "crescent-gulf",
+    "name": "Crescent Gulf Chemicals"
+  },
+  "engagement": {
+    "slug": "sales-crm",
+    "title": "CRM for Crescent Gulf"
+  },
+  "modules": [
+    {
+      "prefix": "CUS",
+      "name": "Customer and contact management",
+      "requirements": [
+        {
+          "id": "CUS-01",
+          "title": "Account record",
+          "statement": "Each customer is held as one account carrying customer type, industry, country, assigned salesperson and A/B/C class; each field can filter account lists.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "CUS-02",
+          "title": "Contacts and decision makers",
+          "statement": "An account holds multiple contacts; any contact can be flagged as a decision maker.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "CUS-03",
+          "title": "A/B/C classification",
+          "statement": "Every account carries a mandatory class: A (critical), B (medium) or C (low); accounts and dashboards filter by class.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "CUS-04",
+          "title": "Credit terms",
+          "statement": "Credit terms are visible on the account.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "CUS-05",
+          "title": "Purchase history",
+          "statement": "Past purchases of the customer are visible from the account.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "CUS-06",
+          "title": "Last interaction and next follow-up",
+          "statement": "The account always shows the last logged interaction and the next open follow-up with its owner and date.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "CUS-07",
+          "title": "Complete customer view",
+          "statement": "Leads, opportunities, quotations, visits, follow-ups and WhatsApp conversations for a customer are reachable from the account.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "LEAD",
+      "name": "Lead management",
+      "requirements": [
+        {
+          "id": "LEAD-01",
+          "title": "Lead record",
+          "statement": "Each potential deal is captured as a lead with an owner and a status.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "LEAD-02",
+          "title": "Lead status list",
+          "statement": "Lead status uses one confirmed list; an admin can add or rename statuses without code changes.",
+          "priority": "Must",
+          "sources": [
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "LEAD-03",
+          "title": "Qualify and convert",
+          "statement": "A qualified lead converts to an account and contact in one action, keeping a link back to the original lead.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "LEAD-04",
+          "title": "Opportunity on a lead or an account",
+          "statement": "An opportunity can be created against an unconverted lead, or against an account.",
+          "priority": "Must",
+          "sources": [
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "LEAD-05",
+          "title": "Closed outcome",
+          "statement": "A closed lead records its outcome as Disqualified or Converted.",
+          "priority": "Must",
+          "sources": [
+            "crm-solution-clarifications.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "OPP",
+      "name": "Opportunities and pipeline",
+      "requirements": [
+        {
+          "id": "OPP-01",
+          "title": "Opportunity record",
+          "statement": "Each opportunity carries its lead or account, product, value, currency, expected close date, stage, owner and country.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "OPP-02",
+          "title": "Opportunity stages",
+          "statement": "Opportunity stages use one confirmed list; an admin can change stages without code changes; each stage change is recorded with date and user.",
+          "priority": "Must",
+          "sources": [
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "OPP-03",
+          "title": "Visual pipeline",
+          "statement": "A board view shows opportunities as cards in stage columns, with count and total value per column.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "OPP-04",
+          "title": "Next action rule",
+          "statement": "No open opportunity exists without a next action, an owner and a deadline.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "OPP-05",
+          "title": "Won or lost with reason",
+          "statement": "Closing an opportunity records the outcome, Won or Lost, and the reason.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "OPP-06",
+          "title": "PO receipt",
+          "statement": "Receipt of the customer PO is recorded with its reference and date.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "crm-solution-clarifications.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "PIPE",
+      "name": "Pipeline analytics and targets",
+      "requirements": [
+        {
+          "id": "PIPE-01",
+          "title": "Pipeline view",
+          "statement": "One view shows total pipeline, weighted pipeline, expected orders, actual orders and target for a selected period.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "PIPE-02",
+          "title": "Slicing",
+          "statement": "Every pipeline figure can be sliced by country, salesperson, product and customer.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "PIPE-03",
+          "title": "Weighted pipeline",
+          "statement": "Weighted pipeline is calculated on logic agreed with the Crescent Gulf business.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "PIPE-04",
+          "title": "30, 60 and 90-day expected orders",
+          "statement": "Expected orders are grouped into 30, 60 and 90-day buckets.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "PIPE-05",
+          "title": "Targets",
+          "statement": "Sales targets are held on Neome by salesperson, product and country for a set period.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "PIPE-06",
+          "title": "Actual orders",
+          "statement": "Actual orders are counted from one agreed source and reconcile to it.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "QUO",
+      "name": "Quotation management",
+      "requirements": [
+        {
+          "id": "QUO-01",
+          "title": "Quotation document",
+          "statement": "The quotation document is prepared outside Neome and attached to a quotation record on Neome.",
+          "priority": "Must",
+          "sources": [
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "QUO-02",
+          "title": "Quotation record",
+          "statement": "Each quotation record holds quotation number, product, quantity, price, validity, approval status and the linked opportunity.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "QUO-03",
+          "title": "Expected PO date",
+          "statement": "Expected PO date is a field on the quotation on Neome.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "QUO-04",
+          "title": "Cost and gross margin",
+          "statement": "Cost and gross margin for the quotation come from Tally ERP.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "QUO-05",
+          "title": "Revision history",
+          "statement": "Each revision is added as a new document on the quotation; earlier documents stay available.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "QUO-06",
+          "title": "Discount approval matrix",
+          "statement": "Approval is driven by discount %: under 10% none, 10 to 20% Level 1, 20 to 25% Levels 1 and 2, over 25% Levels 1, 2 and 3; an admin can change bands and levels without code changes.",
+          "priority": "Must",
+          "sources": [
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "QUO-07",
+          "title": "Quotation PDF generation",
+          "statement": "Neome does not generate the quotation document or PDF (out of scope).",
+          "priority": "Won't",
+          "sources": [
+            "neomenta-scope-decisions.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "VIS",
+      "name": "Customer visits and meetings",
+      "requirements": [
+        {
+          "id": "VIS-01",
+          "title": "Visit log",
+          "statement": "Each visit captures customer, date, participants, purpose, discussion, linked opportunity, competitor information, next action, owner and deadline.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "VIS-02",
+          "title": "Field teams",
+          "statement": "Field teams log visits from phone or tablet while travelling across the Middle East, Africa and CIS.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "VIS-03",
+          "title": "Visits and resulting business",
+          "statement": "A report shows how many visits happened per salesperson per week and what business (opportunities, quotations) resulted.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "TSK",
+      "name": "Follow-ups and tasks",
+      "requirements": [
+        {
+          "id": "TSK-01",
+          "title": "Owned follow-ups",
+          "statement": "Every follow-up has an owner and a deadline.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "TSK-02",
+          "title": "Status flags",
+          "statement": "Follow-ups are flagged automatically: red Overdue, orange Due today, yellow Due this week, green Completed.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "TSK-03",
+          "title": "Reminders",
+          "statement": "The owner receives a reminder for each follow-up; an admin sets reminder timing.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "DSH",
+      "name": "Dashboards",
+      "requirements": [
+        {
+          "id": "DSH-01",
+          "title": "Salesperson performance",
+          "statement": "Per salesperson: target vs actual sales, achievement %, conversion ratio, new customers, opportunities, pipeline, weighted pipeline, visits, follow-ups, and orders won and lost.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        },
+        {
+          "id": "DSH-02",
+          "title": "Collections and outstanding",
+          "statement": "Collections and outstanding amounts per salesperson are picked up from Tally ERP.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "DSH-03",
+          "title": "One-page management dashboard",
+          "statement": "Sections for Sales, Pipeline, Customers, Business Development, Collections and People, plus risks: lost orders, at-risk customers, delayed deals and overdue actions; Neomenta proposes the first set.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "DSH-04",
+          "title": "Product, geography and molecule view",
+          "statement": "Performance by product (oilfield, water treatment, agrochemicals), geography (UAE, Saudi Arabia, Oman, Africa, CIS, others) and molecule (DBNPA, corrosion and scale inhibitors, biocides, others).",
+          "priority": "Should",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "MKT",
+      "name": "Market, competitor and registration tracking",
+      "requirements": [
+        {
+          "id": "MKT-01",
+          "title": "Product and market intelligence",
+          "statement": "Capture of buying signals and market updates that keep sales teams current; scope open.",
+          "priority": "TBC",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "crm-solution-clarifications.md"
+          ]
+        },
+        {
+          "id": "MKT-02",
+          "title": "Competitor database",
+          "statement": "Capture competitor name, price, product, customer preference, competitive advantage and reason for winning or losing, building a competitor database; scope open.",
+          "priority": "TBC",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "MKT-03",
+          "title": "Registration and tender tracker",
+          "statement": "Track country, customer, product, registration and authority, with submission date, status, expected approval, tender and value; scope open.",
+          "priority": "TBC",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "COM",
+      "name": "Mobile and communication",
+      "requirements": [
+        {
+          "id": "COM-01",
+          "title": "WhatsApp Business",
+          "statement": "Customer WhatsApp conversations become part of the shared customer history; the WhatsApp Business API is procured by Crescent Gulf or charged on actuals.",
+          "priority": "Should",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "COM-02",
+          "title": "Calendar sync",
+          "statement": "Calendar sync is delivered on Neome.",
+          "priority": "Should",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "COM-03",
+          "title": "Email",
+          "statement": "Outlook and Gmail integration is part of the ERP integration scope.",
+          "priority": "Should",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "COM-04",
+          "title": "Mobile and tablet",
+          "statement": "On phone and tablet, users update visits, add opportunities, upload quotations and notes, set next actions, check customer history and reach contacts.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt"
+          ]
+        }
+      ]
+    },
+    {
+      "prefix": "ERP",
+      "name": "ERP integration",
+      "requirements": [
+        {
+          "id": "ERP-01",
+          "title": "Order-to-cash flow",
+          "statement": "CRM to quotation to sales order to ERP to invoice to collection runs as one flow, scoped with the Tally partner.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "ERP-02",
+          "title": "Shared customer master",
+          "statement": "One shared customer master with Tally, with no duplicate data entry.",
+          "priority": "Must",
+          "sources": [
+            "crm-expectations-deck.txt",
+            "neomenta-scope-decisions.md"
+          ]
+        },
+        {
+          "id": "ERP-03",
+          "title": "Data from Tally into Neome",
+          "statement": "At minimum quotation cost and gross margin, and collections and outstanding, come from Tally into Neome.",
+          "priority": "Must",
+          "sources": [
+            "neomenta-scope-decisions.md"
+          ]
+        }
+      ]
+    }
+  ],
+  "general": {
+    "requirements": [
+      {
+        "id": "GEN-01",
+        "topic": "access",
+        "title": "Roles and permissions",
+        "statement": "Users are set up with roles and permissions that match Crescent Gulf's sales organisation.",
+        "priority": "Must",
+        "sources": [
+          "crm-expectations-deck.txt"
+        ]
+      },
+      {
+        "id": "GEN-02",
+        "topic": "migration",
+        "title": "Data migration",
+        "statement": "Existing customer and pipeline data is migrated.",
+        "priority": "Must",
+        "sources": [
+          "crm-expectations-deck.txt"
+        ]
+      },
+      {
+        "id": "GEN-03",
+        "topic": "training",
+        "title": "Training",
+        "statement": "Training for users in each role is delivered as part of go-live and change management.",
+        "priority": "Must",
+        "sources": [
+          "crm-expectations-deck.txt",
+          "implementation-estimate.txt"
+        ]
+      },
+      {
+        "id": "GEN-04",
+        "topic": "support",
+        "title": "Post go-live support",
+        "statement": "Support is given after go-live.",
+        "priority": "Must",
+        "sources": [
+          "crm-expectations-deck.txt"
+        ]
+      },
+      {
+        "id": "GEN-05",
+        "topic": "other",
+        "title": "Process mapping",
+        "statement": "Crescent Gulf's sales process is mapped before configuration.",
+        "priority": "Must",
+        "sources": [
+          "crm-expectations-deck.txt"
+        ]
+      }
+    ]
+  },
+  "openItems": [
+    {
+      "id": "OI-01",
+      "question": "Final lead status list: two versions exist (sales head's list with Opportunity grooming vs the regional sheet). Is Opportunity grooming a status?",
+      "modules": [
+        "LEAD"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-02",
+      "question": "Final opportunity stage list: the deck, the call and the regional sheet each give a different list.",
+      "modules": [
+        "OPP"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-03",
+      "question": "When a lead with opportunities converts, do its opportunities move to the new account?",
+      "modules": [
+        "LEAD"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-04",
+      "question": "Where do quotation approval, PO receipt and order creation sit relative to Won? Is a PO approval step needed?",
+      "modules": [
+        "OPP"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-05",
+      "question": "Is the A/B/C class set by hand or by a rule? Who can change it?",
+      "modules": [
+        "CUS"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-06",
+      "question": "Does CIS mean the region (Commonwealth of Independent States) or something else, such as a team?",
+      "modules": [
+        "VIS",
+        "DSH"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-07",
+      "question": "Scope of product and market intelligence: analytics views only, or capture of buying signals and market updates?",
+      "modules": [
+        "MKT",
+        "DSH"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-08",
+      "question": "Is the discount % measured per line against list price, or on the whole quotation?",
+      "modules": [
+        "QUO"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-09",
+      "question": "Which roles are approval Levels 1, 2 and 3? Is approval sequential? Which band do exactly 10%, 20% and 25% fall in? Any value limit?",
+      "modules": [
+        "QUO"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-10",
+      "question": "Weighted pipeline logic, for example a probability per stage and who sets it.",
+      "modules": [
+        "PIPE"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-11",
+      "question": "Which date drives the 30, 60 and 90-day buckets, and are actual orders counted from PO on Neome or sales orders in Tally?",
+      "modules": [
+        "PIPE"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-12",
+      "question": "Target period (monthly, quarterly, yearly) and whether targets are value, quantity or both.",
+      "modules": [
+        "PIPE"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-13",
+      "question": "With the quotation document made outside Neome, which quotation fields are keyed on Neome?",
+      "modules": [
+        "QUO"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-14",
+      "question": "System of record for credit terms and purchase history: Neome or Tally?",
+      "modules": [
+        "CUS"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-15",
+      "question": "Registration and tender tracker: record structure, statuses, authorities, users and reports.",
+      "modules": [
+        "MKT"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-16",
+      "question": "Competitor database: what is captured, where, and by whom.",
+      "modules": [
+        "MKT"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-17",
+      "question": "Definitions of at-risk customer and delayed deal, and the first set of management dashboards.",
+      "modules": [
+        "DSH"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-18",
+      "question": "Calendar sync: Outlook or Google, and which items sync?",
+      "modules": [
+        "COM"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-19",
+      "question": "ERP integration scope, including email, after discussion with the Tally partner.",
+      "modules": [
+        "QUO",
+        "DSH",
+        "COM",
+        "ERP"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-20",
+      "question": "WhatsApp Business API: does Crescent Gulf procure it, or is it charged on actuals?",
+      "modules": [
+        "COM"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-21",
+      "question": "Number of users by role, and the role and permission matrix.",
+      "modules": [
+        "All"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-22",
+      "question": "Currencies in use (AED appears in the deck) and the reporting currency.",
+      "modules": [
+        "OPP",
+        "PIPE"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-23",
+      "question": "Languages required, including whether Arabic is needed.",
+      "modules": [
+        "All"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-24",
+      "question": "Hosting or data residency rules, and single sign-on requirements.",
+      "modules": [
+        "All"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-25",
+      "question": "Data migration: sources, record volumes, and where it fits in the 4-week plan.",
+      "modules": [
+        "All"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-26",
+      "question": "Timing of process mapping, and duration and terms of post go-live support.",
+      "modules": [
+        "All"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-27",
+      "question": "Product master: list of products with product line and molecule attributes, and its source.",
+      "modules": [
+        "DSH"
+      ],
+      "answeredBy": "unknown"
+    },
+    {
+      "id": "OI-28",
+      "question": "Confirmation of the proposed MoSCoW priority on each Requirement.",
+      "modules": [
+        "All"
+      ],
+      "answeredBy": "unknown"
+    }
+  ],
+  "mechanics": [
+    {
+      "id": "gen",
+      "what": "Engagement-wide Requirements written",
+      "type": "gen",
+      "min": 3
+    },
+    {
+      "id": "all-resolved",
+      "what": "Every Module resolved",
+      "type": "modules",
+      "status": "resolved"
+    },
+    {
+      "id": "v1-released",
+      "what": "v1 released as draft for review",
+      "type": "version",
+      "version": 1,
+      "status": "draft-for-review"
+    },
+    {
+      "id": "questionnaire-sent",
+      "what": "Questionnaire master written",
+      "type": "file",
+      "path": "_agent/questionnaires/QN-*.md"
+    }
+  ]
+}
