@@ -1,7 +1,5 @@
 # Map: Field Operations
 
-lock: Aditya Parmar · review-draft · 2026-10-29T17:23Z
-
 ## Destination
 
 A signed-off BRD for Field Operations.
@@ -19,23 +17,39 @@ A signed-off BRD for Field Operations.
 
 | Prefix | Module | Status |
 |---|---|---|
-| MST | Masters | draft |
-| BEAT | Beat Planning | draft |
-| ATT | Attendance | draft |
-| LEAVE | Leave Management | draft |
-| INV | Inventory | draft |
-| VB | Visit Book | draft |
-| LEAD | Leads | draft |
-| MKT | Marketing Visits | draft |
-| MT | Modern Trade | draft |
-| CMP | Customer Complaints | draft |
-| FB | Feedback | draft |
-| RPT | Reports and Dashboards | draft |
-| COM | Communication | draft |
-| AI | AI Features | draft |
-| SAP | SAP Integration | draft |
+| MST | Masters | open |
+| BEAT | Beat Planning | open |
+| ATT | Attendance | open |
+| LEAVE | Leave Management | open |
+| INV | Inventory | open |
+| VB | Visit Book | open |
+| LEAD | Leads | open |
+| MKT | Marketing Visits | open |
+| MT | Modern Trade | open |
+| CMP | Customer Complaints | open |
+| FB | Feedback | open |
+| RPT | Reports and Dashboards | open |
+| COM | Communication | open |
+| AI | AI Features | open |
+| SAP | SAP Integration | open |
 
 ## Change log
 
 - 2026-10-29: Engagement created.
 - 2026-10-29: ingest: 2 Sources, 15 Modules drafted.
+- 2026-10-29: review-draft: 15 Modules confirmed, process skeleton, topics, plan skeleton.
+- 2026-10-29: review-draft: MST confirmed.
+- 2026-10-29: review-draft: BEAT confirmed.
+- 2026-10-29: review-draft: ATT confirmed.
+- 2026-10-29: review-draft: LEAVE confirmed.
+- 2026-10-29: review-draft: INV confirmed.
+- 2026-10-29: review-draft: LEAD confirmed.
+- 2026-10-29: review-draft: MKT confirmed.
+- 2026-10-29: review-draft: MT confirmed.
+- 2026-10-29: review-draft: CMP confirmed.
+- 2026-10-29: review-draft: FB confirmed.
+- 2026-10-29: review-draft: VB confirmed.
+- 2026-10-29: review-draft: RPT confirmed.
+- 2026-10-29: review-draft: COM confirmed.
+- 2026-10-29: review-draft: AI confirmed.
+- 2026-10-29: review-draft: SAP confirmed.

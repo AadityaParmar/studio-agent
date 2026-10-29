@@ -2,8 +2,10 @@
 status: open
 prefix: LEAVE
 name: Leave Management
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # LEAVE — Leave Management
@@ -19,7 +21,7 @@ Name: Leave Management
 | role | does what | headcount | Source |
 |---|---|---|---|
 | Employee | Applies for leave | | [RFP-1] |
-| Supervisor | Approves or rejects leave | | [RFP-1] |
+| Sales Supervisor | Approves or rejects leave (RFP-1 says "supervisor"; OI-04, OI-29) | | (proposed, to confirm) |
 
 ## 3 Process
 

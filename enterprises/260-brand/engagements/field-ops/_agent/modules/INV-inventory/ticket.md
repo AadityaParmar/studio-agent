@@ -2,8 +2,10 @@
 status: open
 prefix: INV
 name: Inventory
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # INV — Inventory

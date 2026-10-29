@@ -2,8 +2,10 @@
 status: open
 prefix: VB
 name: Visit Book
-draft: true
-blockedBy: []
+blockedBy: [BEAT, INV]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # VB — Visit Book

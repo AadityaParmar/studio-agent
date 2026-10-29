@@ -2,8 +2,10 @@
 status: open
 prefix: RPT
 name: Reports and Dashboards
-draft: true
-blockedBy: []
+blockedBy: [VB]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # RPT — Reports and Dashboards
@@ -18,8 +20,7 @@ Name: Reports and Dashboards
 
 | role | does what | headcount | Source |
 |---|---|---|---|
-| Admin | Views reports | | [RFP-1] |
-| Owner | Full access to analytics | | [RFP-1] |
+| Owner | Views reports (RFP-1 diagram says "Admin", proposed = Owner; OI-04); full access to analytics | | [RFP-1] |
 | Sales Supervisor | Monitors performance | | [RFP-1] |
 
 ## 3 Process

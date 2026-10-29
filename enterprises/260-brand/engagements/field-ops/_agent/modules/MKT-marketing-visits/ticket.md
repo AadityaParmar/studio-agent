@@ -2,8 +2,10 @@
 status: open
 prefix: MKT
 name: Marketing Visits
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # MKT — Marketing Visits

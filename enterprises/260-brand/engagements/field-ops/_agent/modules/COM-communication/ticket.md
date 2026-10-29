@@ -2,8 +2,10 @@
 status: open
 prefix: COM
 name: Communication
-draft: true
-blockedBy: []
+blockedBy: [VB, CMP]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # COM — Communication
@@ -13,6 +15,13 @@ Name: Communication
 ## 1 Purpose and KPIs
 
 - Purpose: Reach users and customers through WhatsApp, push notifications, market-specific messages and a Notice Board. [RFP-1]
+
+## 2 Roles
+
+| role | does what | headcount | Source |
+|---|---|---|---|
+| Customer | Gets WhatsApp order confirmations, payment updates and complaint resolutions (OI-60) | | [RFP-1] |
+| Owner | Posts notices and market messages (OI-59, OI-61) | | (proposed, to confirm) |
 
 ## 3 Process
 

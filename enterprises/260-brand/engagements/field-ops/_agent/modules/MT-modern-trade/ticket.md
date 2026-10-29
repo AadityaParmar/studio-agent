@@ -2,8 +2,10 @@
 status: open
 prefix: MT
 name: Modern Trade
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # MT — Modern Trade
@@ -19,7 +21,7 @@ Name: Modern Trade
 | role | does what | headcount | Source |
 |---|---|---|---|
 | Sales Agent | Submits daily modern trade updates | | [RFP-1] |
-| Supervisor | Adds Modern Trade (per diagram); reviews | | [RFP-1] |
+| Sales Supervisor | Adds Modern Trade (per diagram); reviews (RFP-1 says "Supervisor"; OI-04, OI-46) | | (proposed, to confirm) |
 
 ## 3 Process
 

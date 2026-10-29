@@ -2,8 +2,10 @@
 status: open
 prefix: SAP
 name: SAP Integration
-draft: true
-blockedBy: []
+blockedBy: [MST, VB]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # SAP — SAP Integration

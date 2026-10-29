@@ -68,3 +68,7 @@
 | OI-64 | AI planogram suggestions: from what input (Modern Trade shelf images?), what output, who uses it? | AI, MT | Enterprise | Sales Head | | open | | |
 | OI-65 | Customers, products and employees made in neome push to SAP. Need any check or approval before they reach SAP? | SAP, MST | Enterprise | Owner | | open | | |
 | OI-66 | Who in 260 Brands signs off this BRD? RFP-1 signature line is blank. | All | Enterprise | Owner | | open | | |
+| OI-67 | Which currency do orders, payments and invoices use? Which languages must the app support? No Source says. | All | Enterprise | Owner | | open | | |
+| OI-68 | Hosting: neome cloud is fine? Any data residency rule? Do users log in with mobile/password, or with company SSO? | All | Enterprise | Owner | | open | | |
+| OI-69 | Training: who needs it (field staff, supervisors, owner), in what form (on-site, video, train-the-trainer), and when? | All | Enterprise | Owner | | open | | |
+| OI-70 | Support after go-live: who supports users, in which hours, through which channel? | All | Enterprise | Owner | | open | | |

@@ -2,8 +2,10 @@
 status: open
 prefix: ATT
 name: Attendance
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # ATT — Attendance

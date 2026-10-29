@@ -2,8 +2,10 @@
 status: open
 prefix: AI
 name: AI Features
-draft: true
-blockedBy: []
+blockedBy: [MT]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # AI — AI Features
@@ -13,6 +15,13 @@ Name: AI Features
 ## 1 Purpose and KPIs
 
 - Purpose: AI help: form filling through NLP, AI based planogram suggestions, and Ask Neome. [RFP-1]
+
+## 2 Roles
+
+| role | does what | headcount | Source |
+|---|---|---|---|
+| Sales Agent | Fills forms through NLP (OI-63) | | (proposed, to confirm) |
+| Owner | Uses Ask Neome (OI-62) | | (proposed, to confirm) |
 
 ## 3 Process
 

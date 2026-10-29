@@ -2,8 +2,10 @@
 status: open
 prefix: BEAT
 name: Beat Planning
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # BEAT — Beat Planning

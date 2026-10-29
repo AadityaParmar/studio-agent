@@ -2,8 +2,10 @@
 status: open
 prefix: CMP
 name: Customer Complaints
-draft: true
-blockedBy: []
+blockedBy: [MST]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # CMP — Customer Complaints

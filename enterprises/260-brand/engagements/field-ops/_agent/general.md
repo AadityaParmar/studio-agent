@@ -41,7 +41,11 @@ Proposed: yes
 
 ## Localisation
 
+- OI-67: Currency and app languages.
+
 ## Hosting
+
+- OI-68: Hosting, data residency, login / SSO.
 
 ## Migration
 
@@ -58,9 +62,12 @@ Proposed: yes
 
 ## Training
 
+- OI-69: Who is trained, how, when.
+
 ## Support
 
 - OI-13: What "Change Requests" means.
+- OI-70: Support after go-live: who, hours, channel.
 
 ## Other
 

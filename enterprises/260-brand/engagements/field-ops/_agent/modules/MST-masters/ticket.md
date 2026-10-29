@@ -2,8 +2,10 @@
 status: open
 prefix: MST
 name: Masters
-draft: true
 blockedBy: []
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # MST — Masters
