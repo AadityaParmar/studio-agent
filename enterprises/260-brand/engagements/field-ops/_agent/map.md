@@ -1,5 +1,7 @@
 # Map: Field Operations
 
+lock: Aditya Parmar · review-draft · 2026-10-29T17:23Z
+
 ## Destination
 
 A signed-off BRD for Field Operations.
