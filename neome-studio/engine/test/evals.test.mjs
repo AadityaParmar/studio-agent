@@ -54,7 +54,7 @@ before(() => {
 test("check: tiny-synthetic and every shipped case are valid; mini-case fixture too", () => {
   const r = run(["check"]);
   assert.equal(r.code, 0, r.out);
-  for (const c of ["tiny-synthetic", "anglo-gulf-crm", "petrostar-crm"]) assert.ok(r.lines.includes(`case | ${c} | ok`), r.out);
+  for (const c of ["tiny-synthetic", "anglo-gulf-crm"]) assert.ok(r.lines.includes(`case | ${c} | ok`), r.out);
   const m = run(["check", mini]);
   assert.equal(m.code, 0, m.out);
   assert.deepEqual(run(["list"]).lines, r.lines);

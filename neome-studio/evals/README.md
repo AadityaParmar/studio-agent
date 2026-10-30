@@ -22,7 +22,6 @@ One folder per Eval case: `inputs/` (anonymised raw Inputs), `answer-key.md` (fa
 |---|---|
 | [tiny-synthetic](tiny-synthetic/README.md) | Flow mechanics: Questionnaire loop, glossary conflict, GEN, release + Sign-off + change log, claim/lock |
 | [anglo-gulf-crm](anglo-gulf-crm/README.md) | Full flow on a real CRM BRD (56 Requirements, 28 Open Items). Inputs reconstructed from the golden BRD: recall reads high |
-| [petrostar-crm](petrostar-crm/README.md) | Mapping only (`score`): 17 RFP Modules → Delivery class. RFP reconstructed from the proposal |
 
 ## How a run works
 

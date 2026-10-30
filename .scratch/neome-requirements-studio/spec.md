@@ -221,7 +221,7 @@ Humans only drop files and read generated views. All working files live in agent
 
 141. As the plugin maintainer, I want deterministic checks on every push touching the plugin or fixtures (GitHub Action and `npm test` locally), so that broken skills never reach Consultants.
 142. As the plugin maintainer, I want a lint that every skill carries the How to talk block verbatim and valid front-matter, so that tone and metadata stay consistent.
-143. As the plugin maintainer, I want golden-replay evals (anglo-gulf full flow, petrostar mapping, tiny-synthetic mechanics) with a simulated Enterprise answering only from an answer key, so that I can measure skill quality.
+143. As the plugin maintainer, I want golden-replay evals (anglo-gulf full flow, tiny-synthetic mechanics) with a simulated Enterprise answering only from an answer key, so that I can measure skill quality.
 144. As the plugin maintainer, I want an LLM-judged scorecard with hard gates (valid data, zero uncited non-proposed facts, zero invented facts) and soft thresholds (recall ≥80%, Open Items ≥70%, Module set ≥80%, mapping ≥70%, no regression >5 points), so that I can approve or block a skill change.
 145. As the plugin maintainer, I want a "don't know" from the simulated Enterprise to end as an Open Item, so that the eval catches assumptions.
 146. As the plugin maintainer, I want an eyeball checklist for Prototype and BRD look, so that visual quality is checked by a human.
@@ -437,10 +437,10 @@ Requirement  {id, title, statement, acceptance[], priority: Must|Should|Could|Wo
   3. **Eval seam (golden replay).** Whole-skill replay of each Eval case with a simulated Enterprise subagent answering only from its answer key → scorecard by LLM judge. Not a unit test; gates merges to `main`.
 - Fixture cases for the engine (hand-written, small, in the plugin test folder): valid in-progress Engagement; valid fully resolved Engagement; broken references (missing Source, missing OI, bad transition, unknown catalog slug, `GEN` used as Module prefix, disputed term without open OI, bad plan refs, `weekFrom > weekTo`); resolved Module with missing acceptance (error) vs in-progress (warning); sign-off blocked (unresolved Module, uncovered GEN topic, Must with TBC/open); two releases for change-log diff; signed version then new build clears proposed; missing / wrong-version `mmdc`.
 - Checks run on every push touching the plugin or fixtures (GitHub Action) and locally via `npm test`.
-- Eval cases: `anglo-gulf-crm` (full flow; golden 59 Requirements, 28 OIs), `petrostar-crm` (mapping only), `tiny-synthetic` (questionnaire loop, glossary conflict, GEN, release + sign-off + change log, claim/lock). Each has anonymised Inputs, answer key, golden JSON in BRD-data shape, README. Results written per date and case with a per-item match table.
+- Eval cases: `anglo-gulf-crm` (full flow; golden 59 Requirements, 28 OIs), `tiny-synthetic` (questionnaire loop, glossary conflict, GEN, release + sign-off + change log, claim/lock). Each has anonymised Inputs, answer key, golden JSON in BRD-data shape, README. Results written per date and case with a per-item match table.
 - Scorecard: schema + cross-ref valid (hard 100%), uncited non-proposed facts (hard 0), invented facts (hard 0), Requirement recall ≥80%, Open Items caught ≥70%, Module set ≥80%, mapping Delivery class ≥70%, extra Requirements listed and tagged plausible/noise, no metric drop >5 points vs last `main` result. Thresholds are starting values; maintainer may adjust with a reason.
 - Gate: skill text change → checks + evals + maintainer approval (spot-check ~10 matches) before merge to `main`. Pin-only bump → checks only. Prototype and BRD look → eyeball checklist (tabs work, Neome look, prints A4).
-- Prior art: none in this repo yet (greenfield). Upstream `skills-main` has no test suite to copy. Throwaway prototypes (BRD layout, process diagram, Module Prototype, Neome look) are visual references for templates, not tests. Anglo Gulf BRD and PetroStar proposal text are the golden references.
+- Prior art: none in this repo yet (greenfield). Upstream `skills-main` has no test suite to copy. Throwaway prototypes (BRD layout, process diagram, Module Prototype, Neome look) are visual references for templates, not tests. Anglo Gulf BRD text is the golden reference.
 - Rollout: after evals pass, one real Engagement shadowed by the maintainer before team use.
 
 ## Out of Scope
@@ -459,7 +459,7 @@ Requirement  {id, title, statement, acceptance[], priority: Must|Should|Could|Wo
 
 ## Further Notes
 
-- Build prerequisite (not a decision): the Consultant supplies Anglo Gulf raw Inputs (CE-1..4, QA-1..6, SD, TL) and the PetroStar RFP, anonymised (client, people, phones) and committed as eval fixtures; golden docs anonymised to match. Evals cannot run before this.
+- Build prerequisite (not a decision): the Consultant supplies Anglo Gulf raw Inputs (CE-1..4, QA-1..6, SD, TL), anonymised (client, people, phones) and committed as eval fixtures; golden docs anonymised to match. Evals cannot run before this.
 - Reference material to carry into the plugin: Neome App catalog reference (30 Apps, building blocks, cross-App index, Delivery heuristics, gaps) and UI tokens. The throwaway HTML prototypes for tickets 05, 06, 10 and 14 are the visual starting point for the BRD and Prototype templates.
 - Not yet specified: real Neome approval screens (revisit when screenshots exist).
 - Design history: [map.md](map.md) and tickets 01–20 in [issues/](issues/). README-draft.md is the starting point for both READMEs.
