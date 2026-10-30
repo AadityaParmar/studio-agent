@@ -1,5 +1,7 @@
 # Map: Field Operations
 
+lock: Aditya Parmar · resolve-module · 2026-10-30T10:27Z
+
 ## Destination
 
 A signed-off BRD for Field Operations.
