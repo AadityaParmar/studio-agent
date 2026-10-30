@@ -17,7 +17,7 @@
     {"entity": "Payment", "name": "Payment Mode", "reqs": ["VB-04"]},
     {"entity": "Payment", "name": "Change to be given", "reqs": ["VB-04"]},
     {"entity": "Invoice", "name": "Invoice Number", "reqs": ["VB-09"]},
-    {"entity": "Invoice", "name": "SAP sync", "reqs": ["VB-06"], "oi": "OI-11"}
+    {"entity": "Invoice", "name": "SAP sync", "reqs": ["VB-06"]}
   ],
   "transitions": [
     {"from": "placed", "to": "invoiced", "action": "Make invoice", "by": ["Sales Agent"], "notify": ["Sales Supervisor"], "reqs": ["VB-05", "VB-06", "VB-09"], "rules": ["Invoice number", "VAT", "Invoice to SAP", "Invoice delivery"]},
@@ -88,7 +88,7 @@
       "title": "Invoice cannot reach SAP",
       "summary": "No link to SAP: invoice shows Waiting to sync, is retried and the agent carries on.",
       "steps": [
-        {"actor": "Sales Agent", "action": "See an invoice marked Waiting to sync; the push is retried until SAP has it", "row": "ORD-3103", "screen": "record", "proves": ["VB-06"], "oi": "OI-11"}
+        {"actor": "Sales Agent", "action": "See an invoice marked Waiting to sync; the push is retried until SAP has it", "row": "ORD-3103", "screen": "record", "proves": ["VB-06"]}
       ]
     },
     {
