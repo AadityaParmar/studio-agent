@@ -1,9 +1,9 @@
 ---
-status: resolved
+status: needs-revisit
 prefix: RPT
 name: Reports and Dashboards
 blockedBy: [VB]
-revisitReason:
+revisitReason: "OI-84 answered: estimate 10 report users, each opening reports about 4 times/day [QA-1]"
 formerly:
 claimedBy: Aditya Parmar
 ---

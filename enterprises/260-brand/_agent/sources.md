@@ -18,3 +18,4 @@
 | WS-12 | session log | grill-module session COM | 2026-10-30 | inputs/WS-12-grill-module-session-com.md | field-ops |  |
 | WS-13 | session log | grill-module session AI | 2026-10-30 | inputs/WS-13-grill-module-session-ai.md | field-ops |  |
 | WS-14 | session log | grill-module session SAP | 2026-10-30 | inputs/WS-14-grill-module-session-sap.md | field-ops |  |
+| QA-1 | questionnaire reply | Mitesh reply to QN-2026-10-30 |  | inputs/QA-1-mitesh-reply-to-qn-2026-10-30.md | field-ops | reply to QN-2026-10-30 |

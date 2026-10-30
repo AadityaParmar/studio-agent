@@ -2,8 +2,8 @@
 
 Prefix: MST
 Name: Masters
-Status: resolved
-Sources: RFP-1, IN-1
+Status: claimed
+Sources: RFP-1, IN-1, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -136,89 +136,89 @@ Sources: RFP-1, IN-1
 
 Statement: The system keeps an Employee Master with contact details, assigned Beats (multi select) and Casual, Sick and Total Leave Balance. [RFP-1]
 Acceptance:
-- Owner adds an employee, picks one or more Beats, and Total Leave Balance shows Casual + Sick. (proposed, to confirm)
+- Owner adds an employee, picks one or more Beats, and Total Leave Balance shows Casual + Sick. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-22, OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-02 — Customer Master
 
 Statement: The system keeps a Customer Master with the fields in RFP-1 §5.2, where Route fills itself from the chosen Beat. [RFP-1]
 Acceptance:
-- Owner adds a customer, picks a Beat, and the Route of that Beat fills in. (proposed, to confirm)
+- Owner adds a customer, picks a Beat, and the Route of that Beat fills in. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-14, OI-15, OI-16, OI-17, OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-03 — Customer GEO Tagging
 
 Statement: Each customer's location is GEO tagged in the neome app. [RFP-1, IN-1]
 Acceptance:
-- A customer record shows its map location after tagging. (proposed, to confirm)
+- A customer record shows its map location after tagging. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1, IN-1
+Sources: RFP-1, IN-1, QA-1
 OIs: OI-21, OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-04 — Product Master
 
 Statement: The system keeps a Product Master with Image, Product Code, Product, Case Size, Category (from Category Master) and Price. [RFP-1]
 Acceptance:
-- Owner adds a product with a Category from the Category Master and it can be picked in orders. (proposed, to confirm)
+- Owner adds a product with a Category from the Category Master and it can be picked in orders. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-18, OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-05 — Beat and Route Masters
 
 Statement: The system keeps a Route Master and a Beat Master, each Beat linked to one Route. [RFP-1]
 Acceptance:
-- Owner adds a Route, then a Beat on that Route; the Beat shows its Route. (proposed, to confirm)
+- Owner adds a Route, then a Beat on that Route; the Beat shows its Route. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-06 — Store Master
 
 Statement: The system keeps a Store Master of modern trade stores with store name, store supervisor, email, supervisor mobile number, area name and location. [RFP-1]
 Acceptance:
-- A Store added to the Store Master can be picked in Modern Trade. (proposed, to confirm)
+- A Store added to the Store Master can be picked in Modern Trade. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-20, OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-07 — Category Master
 
 Statement: The system keeps a Category Master used to categorise products and competitor products. [RFP-1]
 Acceptance:
-- Categories added appear as choices in Product Master and Competitor Master. (proposed, to confirm)
+- Categories added appear as choices in Product Master and Competitor Master. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-75
-Proposed: yes
+Proposed: no
 
 ### MST-08 — Competitor Master
 
 Statement: The system keeps a Competitor Master: competitor name and its products (image, product code, product, case size, category). [RFP-1]
 Acceptance:
-- A competitor with products can be picked in Modern Trade competitor activities. (proposed, to confirm)
+- A competitor with products can be picked in Modern Trade competitor activities. [QA-1]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1
+Sources: RFP-1, QA-1
 OIs: OI-19, OI-75
-Proposed: yes
+Proposed: no
 
 ## 12 Neome mapping
 
@@ -229,21 +229,11 @@ How: Customer → Outlet, Beat and Route → Beat / route, Product → product c
 ## 13 Open Items
 
 - OI-10: System of record for customers, products, employees.
-- OI-14: Customer Category and Classification values.
-- OI-15: TPIN meaning, format, required.
 - OI-16: Who makes Customer Code.
-- OI-17: Who adds and edits each master.
 - OI-18: One price per product or price lists; tax.
 - OI-19: Who maintains Competitor Master; meaning of Competitor diagram.
 - OI-20: Are Stores also Customers?
-- OI-21: Who GEO tags customers and when.
 - OI-22: Who sets leave balances; quota, accrual.
 - OI-65: Checks before neome-made masters reach SAP.
-- OI-01: Does "Completed" mean already built and live?
-- OI-06: Users per role and volumes.
 - OI-07: Offline use in the field.
-- OI-71: Goals, KPIs and pain for Masters.
-- OI-72: Master record statuses and deactivation.
-- OI-73: Master lists and exports needed.
 - OI-74: SAP owner on 260 Brands side.
-- OI-75: Confirm priority, Scope tag, acceptance of proposed Requirements.

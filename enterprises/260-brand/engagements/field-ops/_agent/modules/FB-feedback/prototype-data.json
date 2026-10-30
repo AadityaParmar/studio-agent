@@ -7,7 +7,7 @@
  ],
  "fields": [
   {"entity": "Feedback", "name": "Entered By", "reqs": ["FB-01"]},
-  {"entity": "Feedback", "name": "Customer", "reqs": ["FB-01"], "oi": "OI-82"},
+  {"entity": "Feedback", "name": "Customer", "reqs": ["FB-01"]},
   {"entity": "Feedback answer", "name": "Question", "reqs": ["FB-02"]},
   {"entity": "Feedback answer", "name": "Rating", "reqs": ["FB-01"]},
   {"entity": "Feedback answer", "name": "Comment", "reqs": ["FB-01"]},
@@ -37,8 +37,8 @@
  ],
  "scenarios": [
   {"title": "Sales Agent records feedback", "summary": "Happy path with a rating and comment per question.", "steps": [
-   {"actor": "Sales Agent", "action": "Opens the Owner's questions and records the customer's rating and an optional comment for each", "row": "FBK-201", "screen": "record", "proves": ["FB-01"], "oi": "OI-82"},
-   {"actor": "Sales Agent", "action": "Records feedback with no network; it shows after sync", "row": "FBK-203", "screen": "record", "proves": ["FB-01"], "oi": "OI-81"}
+   {"actor": "Sales Agent", "action": "Opens the Owner's questions and records the customer's rating and an optional comment for each", "row": "FBK-201", "screen": "record", "proves": ["FB-01"]},
+   {"actor": "Sales Agent", "action": "Records feedback with no network; it shows after sync", "row": "FBK-203", "screen": "record", "proves": ["FB-01"]}
   ]},
   {"title": "Owner sets the questions", "summary": "Fixed list the Owner can change.", "steps": [
    {"actor": "Owner", "action": "Adds and changes questions in the fixed list; Sales Agents cannot", "screen": "rules", "proves": ["FB-02"]}

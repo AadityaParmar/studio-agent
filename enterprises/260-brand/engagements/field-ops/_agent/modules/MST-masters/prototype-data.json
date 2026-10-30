@@ -1,18 +1,18 @@
 {
   "entity": "Customer",
   "roles": [
-    {"role": "Owner", "person": "Chanda (Owner)", "reqs": ["MST-01", "MST-02", "MST-04", "MST-05", "MST-06", "MST-07", "MST-08"], "oi": "OI-17"},
+    {"role": "Owner", "person": "Chanda (Owner)", "reqs": ["MST-01", "MST-02", "MST-04", "MST-05", "MST-06", "MST-07", "MST-08"]},
     {"role": "Sales Agent", "person": "Mwila (Sales Agent)", "reqs": ["MST-02", "MST-04"]},
     {"role": "Sales Supervisor", "person": "Bwalya (Sales Supervisor)", "reqs": ["MST-01", "MST-05"]}
   ],
   "fields": [
     {"entity": "Customer", "name": "Customer Code", "reqs": ["MST-02"], "oi": "OI-16"},
-    {"entity": "Customer", "name": "TPIN", "reqs": ["MST-02"], "oi": "OI-15"},
+    {"entity": "Customer", "name": "TPIN", "reqs": ["MST-02"]},
     {"entity": "Customer", "name": "Beat", "reqs": ["MST-02", "MST-05"]},
     {"entity": "Customer", "name": "Route", "reqs": ["MST-02", "MST-05"]},
-    {"entity": "Customer", "name": "Category", "reqs": ["MST-02"], "oi": "OI-14"},
-    {"entity": "Customer", "name": "Classification", "reqs": ["MST-02"], "oi": "OI-14"},
-    {"entity": "Customer", "name": "Location", "reqs": ["MST-03"], "oi": "OI-21"},
+    {"entity": "Customer", "name": "Category", "reqs": ["MST-02"]},
+    {"entity": "Customer", "name": "Classification", "reqs": ["MST-02"]},
+    {"entity": "Customer", "name": "Location", "reqs": ["MST-03"]},
     {"entity": "Employee", "name": "Beat", "reqs": ["MST-01"]},
     {"entity": "Employee", "name": "Total Leave Balance", "reqs": ["MST-01"], "oi": "OI-22"},
     {"entity": "Product", "name": "Category", "reqs": ["MST-04", "MST-07"]},
@@ -35,12 +35,12 @@
   ],
   "scenarios": [
     {"title": "Set up a Route, Beat and Customer", "summary": "Owner builds the base lists; Route fills itself from the Beat.", "steps": [
-      {"actor": "Owner", "action": "Adds Route West, then Beat Matero North on Route West", "screen": "sheet", "proves": ["MST-05"], "oi": "OI-17"},
+      {"actor": "Owner", "action": "Adds Route West, then Beat Matero North on Route West", "screen": "sheet", "proves": ["MST-05"]},
       {"actor": "Owner", "action": "Adds customer Matero Wholesale, picks Beat Matero North; Route West fills in", "row": "C-1004", "proves": ["MST-02"], "oi": "OI-16"},
       {"actor": "Sales Agent", "action": "Opens the customer list for the Beat and finds Matero Wholesale", "screen": "sheet", "proves": ["MST-02"]}
     ]},
     {"title": "GEO tag a customer", "summary": "Customer location recorded in the neome app.", "steps": [
-      {"actor": "Sales Agent", "action": "Opens Lusaka Corner Shop (no location yet) and tags its map location", "row": "C-1002", "proves": ["MST-03"], "oi": "OI-21"}
+      {"actor": "Sales Agent", "action": "Opens Lusaka Corner Shop (no location yet) and tags its map location", "row": "C-1002", "proves": ["MST-03"]}
     ]},
     {"title": "Products, categories and competitors", "summary": "Category Master feeds Product and Competitor Masters.", "steps": [
       {"actor": "Owner", "action": "Adds Category Dairy, then a product in Dairy with Case Size and Price", "screen": "sheet", "proves": ["MST-07", "MST-04"], "oi": "OI-18"},

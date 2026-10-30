@@ -2,7 +2,7 @@
 
 Prefix: FB
 Name: Feedback
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, WS-10
 
 ## 1 Purpose and KPIs
@@ -121,6 +121,4 @@ How: Feedback and Feedback answer (question, 1 to 5 rating, comment) have no ent
 
 ## 13 Open Items
 
-- OI-81: Feedbacks per day.
-- OI-82: Which customer gave each feedback.
 - OI-83: Neomenta to check: Feedback Configuration or Custom module.

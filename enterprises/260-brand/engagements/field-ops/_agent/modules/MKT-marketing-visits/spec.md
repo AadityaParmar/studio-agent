@@ -2,7 +2,7 @@
 
 Prefix: MKT
 Name: Marketing Visits
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, WS-1, WS-7
 
 ## 1 Purpose and KPIs
@@ -186,4 +186,4 @@ How: Marketing Visit and Rider visit → Outlet visit and Rider visit/route with
 
 ## 13 Open Items
 
-- OI-77: Visits per day, and in peak season.
+N/A: no open Open Items.

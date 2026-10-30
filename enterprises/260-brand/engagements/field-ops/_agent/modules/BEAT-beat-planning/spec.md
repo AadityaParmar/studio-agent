@@ -2,7 +2,7 @@
 
 Prefix: BEAT
 Name: Beat Planning
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, IN-1, WS-1
 
 ## 1 Purpose and KPIs
@@ -178,4 +178,4 @@ How: Beat → Beat / route; Employee - Beat Mapping and Weekly Beat Plan → dai
 
 ## 13 Open Items
 
-- OI-72: Beat moved to another Route (and inactive Beat) in Masters.
+N/A: no open Open Items.

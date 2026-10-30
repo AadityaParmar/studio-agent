@@ -2,7 +2,7 @@
 
 Prefix: CMP
 Name: Customer Complaints
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, WS-9
 
 ## 1 Purpose and KPIs
@@ -186,4 +186,4 @@ How: Customer Complaint → Quality complaint (description, batch number, photo,
 
 ## 13 Open Items
 
-- OI-79: Complaints per day.
+N/A: no open Open Items.

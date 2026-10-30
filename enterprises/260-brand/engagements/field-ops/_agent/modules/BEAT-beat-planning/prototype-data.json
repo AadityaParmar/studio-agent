@@ -59,7 +59,7 @@
     ]},
     {"title": "Make a Beat inactive", "summary": "Owner makes a Beat inactive; employees unmapped, customers stay, Supervisor moves them.", "steps": [
       {"actor": "Owner", "action": "Makes Chilenje inactive; Mwila is unmapped from it", "row": "B-02", "transition": {"from": "active", "to": "inactive"}, "proves": ["BEAT-05"]},
-      {"actor": "Sales Supervisor", "action": "Moves the Chilenje customers to Kabwata East", "row": "B-02", "screen": "record", "proves": ["BEAT-05"], "oi": "OI-72"},
+      {"actor": "Sales Supervisor", "action": "Moves the Chilenje customers to Kabwata East", "row": "B-02", "screen": "record", "proves": ["BEAT-05"]},
       {"actor": "Owner", "action": "Makes Old Soweto active again (proposed)", "row": "B-04", "transition": {"from": "inactive", "to": "active"}, "proves": ["BEAT-05"]}
     ]},
     {"title": "Beat plan list", "summary": "Supervisor checks who works which Beat.", "steps": [

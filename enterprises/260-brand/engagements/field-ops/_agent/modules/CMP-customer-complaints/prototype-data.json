@@ -1,7 +1,7 @@
 {
  "entity": "Complaint",
  "roles": [
-  {"role": "Sales Agent", "person": "Bwalya", "reqs": ["CMP-01"], "oi": "OI-79"},
+  {"role": "Sales Agent", "person": "Bwalya", "reqs": ["CMP-01"]},
   {"role": "Quality Manager", "person": "Chipo", "reqs": ["CMP-02", "CMP-03", "CMP-05"]},
   {"role": "Sales Head", "person": "Ruth", "reqs": ["CMP-04", "CMP-06"]}
  ],
@@ -53,7 +53,7 @@
    {"actor": "Quality Manager", "action": "Tries to change Closed CMP-1004; refused, a new complaint is needed", "row": "CMP-1004", "screen": "record", "proves": ["CMP-02"]}
   ]},
   {"title": "Complaint sheet", "summary": "Who sees what.", "steps": [
-   {"actor": "Sales Agent", "action": "Sees own complaints only in the Complaint Sheet", "screen": "report", "report": "Complaint Sheet", "proves": ["CMP-06"], "oi": "OI-79"}
+   {"actor": "Sales Agent", "action": "Sees own complaints only in the Complaint Sheet", "screen": "report", "report": "Complaint Sheet", "proves": ["CMP-06"]}
   ]}
  ]
 }

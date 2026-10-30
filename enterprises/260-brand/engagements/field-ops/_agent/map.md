@@ -17,19 +17,19 @@ A signed-off BRD for Field Operations.
 
 | Prefix | Module | Status |
 |---|---|---|
-| MST | Masters | resolved |
-| BEAT | Beat Planning | resolved |
+| MST | Masters | claimed |
+| BEAT | Beat Planning | needs-revisit |
 | ATT | Attendance | resolved |
 | LEAVE | Leave Management | resolved |
 | INV | Inventory | resolved |
-| VB | Visit Book | resolved |
+| VB | Visit Book | needs-revisit |
 | LEAD | Leads | resolved |
-| MKT | Marketing Visits | resolved |
-| MT | Modern Trade | resolved |
-| CMP | Customer Complaints | resolved |
-| FB | Feedback | resolved |
-| RPT | Reports and Dashboards | resolved |
-| COM | Communication | resolved |
+| MKT | Marketing Visits | needs-revisit |
+| MT | Modern Trade | needs-revisit |
+| CMP | Customer Complaints | needs-revisit |
+| FB | Feedback | needs-revisit |
+| RPT | Reports and Dashboards | needs-revisit |
+| COM | Communication | needs-revisit |
 | AI | AI Features | resolved |
 | SAP | SAP Integration | resolved |
 
@@ -83,3 +83,14 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: AI resolved.
 - 2026-10-30: resolve-module: SAP claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: SAP resolved.
+- 2026-10-30: questionnaire: QN-2026-10-30 to Mitesh, 28 Open Item(s).
+- 2026-10-30: ingest: MST needs revisit: OI-14, OI-15, OI-17, OI-21 and OI-71 answered: category and classification values, TPIN rules, master ownership and customer GEO capture; master pain/KPI [QA-1]
+- 2026-10-30: ingest: BEAT needs revisit: OI-72 answered: Active/Inactive status and linked records when a Beat is inactive [QA-1]
+- 2026-10-30: ingest: VB needs revisit: OI-76 answered: retain visit, order and invoice records for an estimated 7 years [QA-1]
+- 2026-10-30: ingest: MKT needs revisit: OI-77 answered: estimate 40 Marketing Visits/day, up to 80 in peak season [QA-1]
+- 2026-10-30: ingest: MT needs revisit: OI-78 answered: estimate 30 Modern Trade updates/day across about 20 Stores [QA-1]
+- 2026-10-30: ingest: CMP needs revisit: OI-79 answered: estimate 5 complaints/day [QA-1]
+- 2026-10-30: ingest: FB needs revisit: OI-81 answered: estimate 30 feedback records/day; OI-82 confirms feedback links to a Customer [QA-1]
+- 2026-10-30: ingest: RPT needs revisit: OI-84 answered: estimate 10 report users, each opening reports about 4 times/day [QA-1]
+- 2026-10-30: ingest: COM needs revisit: OI-85 answered: estimate 10 notices/week [QA-1]
+- 2026-10-30: resolve-module: MST claimed by Aditya Parmar (revisit).

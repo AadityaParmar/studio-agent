@@ -1,9 +1,9 @@
 ---
-status: resolved
+status: needs-revisit
 prefix: COM
 name: Communication
 blockedBy: [VB, CMP]
-revisitReason:
+revisitReason: "OI-85 answered: estimate 10 notices/week [QA-1]"
 formerly:
 claimedBy: Aditya Parmar
 ---

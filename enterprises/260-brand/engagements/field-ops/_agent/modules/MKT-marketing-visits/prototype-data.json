@@ -257,8 +257,7 @@
      "actor": "Sales Head",
      "action": "Looks at the sheet; daily volume is not known",
      "screen": "sheet",
-     "proves": [],
-     "oi": "OI-77"
+     "proves": []
     }
    ]
   }

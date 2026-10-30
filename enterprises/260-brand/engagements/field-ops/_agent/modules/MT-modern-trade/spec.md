@@ -2,7 +2,7 @@
 
 Prefix: MT
 Name: Modern Trade
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, WS-8
 
 ## 1 Purpose and KPIs
@@ -190,4 +190,4 @@ How: Modern Trade update and Store → Outlet visit with GPS tag, shelf photo an
 
 ## 13 Open Items
 
-- OI-78: Updates per day, and number of Stores.
+N/A: no open Open Items.

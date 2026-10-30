@@ -67,7 +67,7 @@
    {"actor": "Sales Supervisor", "action": "Opens the Customer Master Heat Map, clicks a customer for name, Category and last-30-days sales; a customer without GEO is missing", "screen": "report", "report": "Customer Master Heat Map", "proves": ["RPT-06"]}
   ]},
   {"title": "Report views per day unknown", "summary": "Open Item: how many people open reports a day.", "steps": [
-   {"actor": "Owner", "action": "Asked how often managers open reports", "screen": "sheet", "proves": [], "oi": "OI-84"}
+   {"actor": "Owner", "action": "Asked how often managers open reports", "screen": "sheet", "proves": []}
   ]}
  ]
 }

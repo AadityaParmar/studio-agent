@@ -2,7 +2,7 @@
 
 Prefix: VB
 Name: Visit Book
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, IN-1, WS-4, WS-5
 
 ## 1 Purpose and KPIs
@@ -296,4 +296,3 @@ How: Visit → Outlet visit with GPS tag; Order and Order Item → Beat order (t
 ## 13 Open Items
 
 - OI-11: Sync timing per data type (shared with SAP, INV); the invoice part is answered [WS-5], the rest is open.
-- OI-76: How long visit, order and invoice records are kept.

@@ -2,7 +2,7 @@
 
 Prefix: COM
 Name: Communication
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, WS-12
 
 ## 1 Purpose and KPIs
@@ -154,4 +154,4 @@ How: Notice and Notice Board → Post in an Announcements Category with access s
 
 ## 13 Open Items
 
-- OI-85: Notices per week.
+N/A: no open Open Items.

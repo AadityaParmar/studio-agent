@@ -10,8 +10,7 @@
     "MT-03",
     "MT-04",
     "MT-06"
-   ],
-   "oi": "OI-78"
+   ]
   },
   {
    "role": "Sales Supervisor",
@@ -335,8 +334,7 @@
       "MT-02",
       "MT-03",
       "MT-04"
-     ],
-     "oi": "OI-78"
+     ]
     },
     {
      "actor": "Sales Supervisor",

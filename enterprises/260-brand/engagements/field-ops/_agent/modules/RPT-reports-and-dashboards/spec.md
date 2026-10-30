@@ -2,7 +2,7 @@
 
 Prefix: RPT
 Name: Reports and Dashboards
-Status: resolved
+Status: needs-revisit
 Sources: RFP-1, WS-11
 
 ## 1 Purpose and KPIs
@@ -217,4 +217,4 @@ How: Target → the App's Target entity (monthly, per Sales Agent, with product 
 
 ## 13 Open Items
 
-- OI-84: Report views per day.
+N/A: no open Open Items.

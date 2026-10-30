@@ -14,8 +14,7 @@
    "reqs": [
     "COM-03",
     "COM-04"
-   ],
-   "oi": "OI-85"
+   ]
   },
   {
    "role": "Sales Agent",
@@ -264,8 +263,7 @@
      "actor": "Sales Head",
      "action": "Posts notices; how many a week is not known",
      "screen": "sheet",
-     "proves": [],
-     "oi": "OI-85"
+     "proves": []
     }
    ]
   }
