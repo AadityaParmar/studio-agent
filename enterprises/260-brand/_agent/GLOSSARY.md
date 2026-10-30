@@ -77,8 +77,8 @@ _Avoid_: Daily Visits
 _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
 
 **Marketing Visit**:
-A visit recorded by marketing field staff, with visit type and customer details.
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+A visit recorded by a Tricycle Rider (or Sales Agent) for sampling and brand awareness, with Visit type and customer details.
+_Source_: RFP-1, WS-7 · _Status_: proposed · _Used in_: field-ops
 
 **School Visit**:
 A visit to a school, recording its procurement officer, head teacher and number of children.
@@ -92,6 +92,14 @@ _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
 A household visit, recording the person met and family size.
 _Avoid_: D2D
 _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+
+**Visit type**:
+The kind of Marketing Visit: School, Farm, Door to door or Shop activation.
+_Source_: WS-7 · _Status_: proposed · _Used in_: field-ops
+
+**D2D - Nurtamilk**:
+A door to door campaign for the Nurtamilk brand.
+_Source_: RFP-1, WS-7 · _Status_: proposed · _Used in_: field-ops
 
 **Modern Trade**:
 Daily update for a modern trade Store: shelf photos, stock count, competitor activities, supervisor review.
