@@ -12201,6 +12201,8 @@
         "statement": "Each user type gets role-based access for their scope. Area Sales Managers see their own area; Regional Sales Managers see their own region and approve leave escalations; Sales Head and Owner see all. The Owner alone has settings.",
         "acceptance": [
           "A Sales Supervisor can approve a leave escalation.",
+          "A Quality Manager can view all Complaints and change their status, with no other access.",
+          "\"Supervisor\" means Sales Supervisor; \"Admin\" means Owner. Sales Agents, Tricycle Riders and Sales Supervisors are Employees.",
           "An Area Sales Manager sees only their own area's modules and has no settings or user admin.",
           "A Regional Sales Manager sees only their own region and has no settings.",
           "A Sales Head sees all data and reports and can set targets, with no settings."
@@ -12250,6 +12252,44 @@
         "topic": "access"
       },
       {
+        "id": "GEN-07",
+        "title": "Currency and languages",
+        "statement": "Use ZMW (Zambian Kwacha), an English app, and Nyanja voice input for NLP.",
+        "acceptance": [
+          "Orders, payments and invoices use ZMW.",
+          "The app uses English; NLP voice input supports English and Nyanja."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-67"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "neome-tbc",
+        "topic": "localisation"
+      },
+      {
+        "id": "GEN-08",
+        "title": "Hosting and login",
+        "statement": "Run on Neome cloud with mobile number and OTP login; no data residency rule applies.",
+        "acceptance": [
+          "Users log in with mobile number and OTP.",
+          "Data is hosted on Neome cloud with no residency constraint."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-68"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "neome-tbc",
+        "topic": "hosting"
+      },
+      {
         "id": "GEN-04",
         "title": "Load existing SAP data",
         "statement": "Existing SAP data is loaded to neome through the plugin at start: customers (about 4,000), products (about 120), employees (about 100) and open balances per customer; no order history.",
@@ -12269,6 +12309,42 @@
         "priority": "Must",
         "scope": "neome",
         "topic": "migration"
+      },
+      {
+        "id": "GEN-09",
+        "title": "Training",
+        "statement": "Train field staff and supervisors/managers one week before go-live.",
+        "acceptance": [
+          "Field staff get two on-site sessions at Lusaka depot; supervisors and managers get train-the-trainer and short videos."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-69"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "neome-tbc",
+        "topic": "training"
+      },
+      {
+        "id": "GEN-10",
+        "title": "Support",
+        "statement": "Neomenta provides support Mon–Sat, 08:00–18:00 CAT by WhatsApp and email; 260 Brands IT admin is first line.",
+        "acceptance": [
+          "Support is available in the stated hours and channels."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-70"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "neome-tbc",
+        "topic": "support"
       },
       {
         "id": "GEN-05",
@@ -12291,17 +12367,55 @@
         "title": "Real-time updates",
         "statement": "Data entered in the field shows to supervisors in real time.",
         "acceptance": [
-          "An order placed by an agent shows in the supervisor's Order Sheet/Report within a minute."
+          "An order placed by an agent shows in the supervisor's Order Sheet/Report within a minute.",
+          "Field visits, orders and attendance work offline and sync when online."
         ],
         "sources": [
-          "RFP-1"
+          "RFP-1",
+          "WS-5",
+          "QA-1"
         ],
-        "ois": [
-          "OI-07"
-        ],
+        "ois": [],
         "proposed": true,
         "priority": "TBC",
         "scope": "open",
+        "topic": "other"
+      },
+      {
+        "id": "GEN-11",
+        "title": "Full implementation scope",
+        "statement": "This BRD covers all 34 RFP-1 scope items; all will be built new in neome because the old pilot app is being dropped.",
+        "acceptance": [
+          "All 34 RFP-1 scope items are included for new implementation."
+        ],
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "ois": [
+          "OI-01"
+        ],
+        "proposed": false,
+        "priority": "Must",
+        "scope": "neome",
+        "topic": "other"
+      },
+      {
+        "id": "GEN-12",
+        "title": "Field operations sizing",
+        "statement": "The solution supports about 100 field and management staff, about 4,000 customers, 120 products, 90 Beats, 15 routes, 1,200 visits and 700 orders per day.",
+        "acceptance": [
+          "It supports the stated users, master counts and daily visit/order volumes."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-06"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "neome-tbc",
         "topic": "other"
       }
     ],
