@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: CMP
 name: Customer Complaints
 blockedBy: [MST]
