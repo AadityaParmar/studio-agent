@@ -156,7 +156,7 @@ Yearly list of Zambian public holidays kept by the Owner; not counted in leave.
 _Source_: WS-3 · _Status_: proposed · _Used in_: field-ops
 
 **Depot Stock**:
-Warehouse stock per product at the depot, read from SAP every 30 minutes; neome keeps no warehouse transactions.
+Warehouse stock per product at the depot, read from SAP every 30 minutes; no warehouse transactions are kept in the app.
 _Source_: WS-4 · _Status_: proposed · _Used in_: field-ops
 
 **Stock in hand**:

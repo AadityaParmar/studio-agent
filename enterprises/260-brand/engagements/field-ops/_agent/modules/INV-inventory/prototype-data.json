@@ -1,0 +1,79 @@
+{
+  "entity": "Stock Return",
+  "roles": [
+    {"role": "Sales Supervisor", "person": "Mutale", "reqs": ["INV-01", "INV-03", "INV-04", "INV-05"]},
+    {"role": "Sales Agent", "person": "Bwalya", "reqs": ["INV-02", "INV-03"]},
+    {"role": "Area Sales Manager", "person": "Natasha", "reqs": ["INV-04", "INV-05"]},
+    {"role": "Regional Sales Manager", "person": "Kelvin", "reqs": ["INV-04", "INV-05"]},
+    {"role": "Sales Head", "person": "Ruth", "reqs": ["INV-04", "INV-05"]},
+    {"role": "Owner", "person": "Joseph", "reqs": ["INV-04", "INV-05"]}
+  ],
+  "fields": [
+    {"entity": "Assign Inventory", "name": "Quantity", "reqs": ["INV-01"]},
+    {"entity": "Assign Inventory", "name": "Total Amount", "reqs": ["INV-01"]},
+    {"entity": "Sales Agent Inventory", "name": "Sold Qty", "reqs": ["INV-02"]},
+    {"entity": "Sales Agent Inventory", "name": "In Hand Qty", "reqs": ["INV-02", "INV-03", "INV-05"]},
+    {"entity": "Stock Return", "name": "Returned Qty", "reqs": ["INV-03"]},
+    {"entity": "Stock Return", "name": "Counted Qty", "reqs": ["INV-03"]},
+    {"entity": "Depot Stock", "name": "Quantity", "reqs": ["INV-04"]}
+  ],
+  "transitions": [
+    {"from": "pending", "to": "accepted", "action": "Count and accept return", "by": ["Sales Supervisor"], "notify": ["Sales Agent"], "reqs": ["INV-03"], "rules": ["Accept return"]}
+  ],
+  "rules": [
+    {"rule": "Total Amount", "reqs": ["INV-01"]},
+    {"rule": "Own agents only", "reqs": ["INV-01"]},
+    {"rule": "Order reduces inventory", "reqs": ["INV-02"]},
+    {"rule": "No order above stock", "reqs": ["INV-02"]},
+    {"rule": "Cancelled order", "reqs": ["INV-02"]},
+    {"rule": "Accept return", "reqs": ["INV-03"]},
+    {"rule": "Depot stock refresh", "reqs": ["INV-04"]}
+  ],
+  "reports": [
+    {"name": "Stock in hand", "reqs": ["INV-05"]},
+    {"name": "Depot stock", "reqs": ["INV-04"]}
+  ],
+  "rows": [
+    {"id": "SR-2201", "status": "pending", "values": {"Date": "2026-11-02", "Employee": "Bwalya M.", "Product": "Nurtamilk 500ml", "Returned Qty": 12}, "children": {}, "log": [["17:40", "Bwalya M.", "Returned 12 unsold packs"]]},
+    {"id": "SR-2202", "status": "pending", "values": {"Date": "2026-11-02", "Employee": "Temwani K.", "Product": "Mango Juice 1L", "Returned Qty": 8}, "children": {}},
+    {"id": "SR-2203", "status": "pending", "values": {"Date": "2026-11-02", "Employee": "Mulenga C.", "Product": "Nurtamilk 1L", "Returned Qty": 5}, "children": {}},
+    {"id": "SR-2204", "status": "accepted", "values": {"Date": "2026-11-01", "Employee": "Bwalya M.", "Product": "Yoghurt 250ml", "Returned Qty": 10, "Counted Qty": 10}, "children": {}, "log": [["18:10", "Mutale (Sales Supervisor)", "Counted 10, accepted"]]},
+    {"id": "SR-2205", "status": "accepted", "values": {"Date": "2026-11-01", "Employee": "Temwani K.", "Product": "Mango Juice 1L", "Returned Qty": 6, "Counted Qty": 5}, "children": {}, "log": [["18:20", "Mutale (Sales Supervisor)", "Counted 5 of 6, difference 1 shown"]]}
+  ],
+  "scenarios": [
+    {
+      "title": "Day with stock: assign, sell, return, count",
+      "summary": "Supervisor checks depot stock, assigns stock, agent sells from it, returns the rest, Supervisor counts and accepts.",
+      "steps": [
+        {"actor": "Sales Supervisor", "action": "Open Depot stock to see what the depot holds (from SAP, 30 minutes old at most)", "screen": "report", "report": "Depot stock", "proves": ["INV-04"]},
+        {"actor": "Sales Supervisor", "action": "Assign Inventory to own Sales Agent Bwalya: 10 packs at ZMW 50 and 5 packs at ZMW 20; Total Amount ZMW 600; no approval", "screen": "rules", "proves": ["INV-01"]},
+        {"actor": "Sales Agent", "action": "Place an order for 3 packs; In Hand Qty drops by 3", "screen": "rules", "proves": ["INV-02"]},
+        {"actor": "Sales Supervisor", "action": "Count the 12 packs Bwalya returned and accept the return", "row": "SR-2201", "transition": {"from": "pending", "to": "accepted"}, "proves": ["INV-03"]},
+        {"actor": "Sales Supervisor", "action": "Open Stock in hand, filter by agent and product, export to Excel", "screen": "report", "report": "Stock in hand", "proves": ["INV-05"]}
+      ]
+    },
+    {
+      "title": "Counted quantity differs",
+      "summary": "Agent returned 6, Supervisor counts 5; difference shows, no extra approval.",
+      "steps": [
+        {"actor": "Sales Supervisor", "action": "Enter counted quantity 5 for 6 returned and accept; the difference of 1 shows on the return", "row": "SR-2202", "transition": {"from": "pending", "to": "accepted"}, "proves": ["INV-03"]}
+      ]
+    },
+    {
+      "title": "Order above assigned stock is blocked",
+      "summary": "Agent holds 4 packs and tries to order 6.",
+      "steps": [
+        {"actor": "Sales Agent", "action": "Try to order 6 packs with 4 in hand; the order cannot be placed", "screen": "rules", "proves": ["INV-02"]},
+        {"actor": "Sales Supervisor", "action": "Cancel an order before Invoiced; its quantity goes back into the agent's inventory", "screen": "rules", "proves": ["INV-02"]}
+      ]
+    },
+    {
+      "title": "Agent does not return stock",
+      "summary": "Return not made at end of day; stock stays with the agent the next day.",
+      "steps": [
+        {"actor": "Sales Agent", "action": "Next morning the unreturned packs still show in own inventory, also offline", "screen": "sheet", "proves": ["INV-03"]},
+        {"actor": "Sales Supervisor", "action": "Accept the late return after counting", "row": "SR-2203", "transition": {"from": "pending", "to": "accepted"}, "proves": ["INV-03"]}
+      ]
+    }
+  ]
+}

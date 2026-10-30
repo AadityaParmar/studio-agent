@@ -10,7 +10,7 @@
 | OI-06 | How many users per role (Sales Agents, Tricycle Riders, Sales Supervisors, managers)? Volumes: customers, products, beats, visits and orders per day? | All | Enterprise | Owner | | open | | |
 | OI-07 | Must the app work offline in the field (no network), syncing later? | All | Enterprise | Sales Supervisor | | open | | |
 | OI-08 | Which SAP / ERP exactly (product, version), and what API access exists? RFP-1 says both "SAP" and "third-party ERP systems". | SAP | Enterprise | Owner | | open | | |
-| OI-09 | Stock sync with ERP is in RFP-1 §8.3 but not in IN-1. Is stock sync in scope, both ways? | SAP, INV | Enterprise | Owner | | open | | |
+| OI-09 | Stock sync with ERP is in RFP-1 §8.3 but not in IN-1. Is stock sync in scope, both ways? | SAP, INV | Enterprise | Owner | | closed | | WS-4 |
 | OI-10 | Customers, products and employees can change in both SAP and neome. Which is the system of record per data type, and which change wins on a clash? | SAP, MST | Enterprise | Owner | SAP is system of record (proposed, to confirm) | open | | |
 | OI-11 | How often should each data type sync (customers, products, employees, stock)? Should invoices go to SAP at once? | SAP, INV, VB | Enterprise | Owner | | open | | |
 | OI-12 | Which existing SAP data loads at start (customers, products, employees, open balances, history), and how many records? | All, SAP | Enterprise | Owner | | open | | |
@@ -33,10 +33,10 @@
 | OI-29 | Who approves leave: the employee's Sales Supervisor? Escalation if not acted on? | LEAVE | Enterprise | Owner | Employee's Sales Supervisor (proposed, to confirm) | closed | | WS-3 |
 | OI-30 | Half Day leave takes 0.5 day from balance? Leave beyond balance allowed (unpaid)? | LEAVE | Enterprise | Owner | | closed | | WS-3 |
 | OI-31 | Do leave days count weekly offs and holidays? Is there a holiday list? | LEAVE | Enterprise | Owner | | closed | | WS-3 |
-| OI-32 | Assign Inventory: quantity per product? How is Total Amount worked out (quantity × Price)? | INV | Enterprise | Sales Supervisor | quantity × Price (proposed, to confirm) | open | | |
-| OI-33 | Stock Return (Pending): who returns what, when (end of day?), who accepts it? | INV | Enterprise | Sales Supervisor | | open | | |
-| OI-34 | "Inventory" (RFP-1 scope item 33, Pending): warehouse stock beyond Sales Agent Inventory? | INV | Enterprise | Owner | | open | | |
-| OI-35 | Does an order reduce the Sales Agent Inventory? Can an order be more than the assigned stock? | INV, VB | Enterprise | Sales Supervisor | Yes; no (proposed, to confirm) | open | | |
+| OI-32 | Assign Inventory: quantity per product? How is Total Amount worked out (quantity × Price)? | INV | Enterprise | Sales Supervisor | quantity × Price (proposed, to confirm) | closed | | WS-4 |
+| OI-33 | Stock Return (Pending): who returns what, when (end of day?), who accepts it? | INV | Enterprise | Sales Supervisor | | closed | | WS-4 |
+| OI-34 | "Inventory" (RFP-1 scope item 33, Pending): warehouse stock beyond Sales Agent Inventory? | INV | Enterprise | Owner | | closed | | WS-4 |
+| OI-35 | Does an order reduce the Sales Agent Inventory? Can an order be more than the assigned stock? | INV, VB | Enterprise | Sales Supervisor | Yes; no (proposed, to confirm) | closed | | WS-4 |
 | OI-36 | Order Status: what values, and who or what moves them (delivery, invoice)? | VB | Enterprise | Sales Supervisor | | open | | |
 | OI-37 | Payment: which modes (cash, UPI, cheque)? Credit sales and part payment allowed? | VB | Enterprise | Owner | | open | | |
 | OI-38 | Invoice made in neome: format, numbering, tax; given to the customer how (print, WhatsApp)? | VB, SAP | Enterprise | Owner | | open | | |

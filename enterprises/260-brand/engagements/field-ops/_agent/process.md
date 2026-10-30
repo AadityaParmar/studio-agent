@@ -64,8 +64,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| assign-inventory | supervisor | INV | Assign Inventory | Sales Agent Inventory | step | OI-32 | RFP-1 |
-| stock-return | agent | INV | Stock Return | | step | OI-33 | RFP-1 |
+| view-depot-stock | supervisor | INV | View depot stock | Read only, from SAP every 30 min; Supervisor and above | step | | WS-4 |
+| assign-inventory | supervisor | INV | Assign Inventory | Quantity per product to own Sales Agent; Total Amount = quantity x Price; no approval | step | | RFP-1, WS-4 |
+| reduce-inventory | agent | INV | Order reduces Sales Agent Inventory | Order cannot exceed stock; cancel before Invoiced puts it back | step | | WS-4 |
+| stock-return | agent | INV | Stock Return | End of day, unsold stock; Pending | step | | RFP-1, WS-4 |
+| accept-return | supervisor | INV | Count and accept Stock Return | Counted quantity entered; Pending → Accepted | step | | WS-4 |
 
 ## VB — Visit Book
 
@@ -167,8 +170,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-customer | geo-tag-customer | | yes | IN-1 |
 | add-store | mt-check-in | | yes | RFP-1 |
 | add-competitor | mt-record | competitor activities | yes | RFP-1 |
-| sync-stock | assign-inventory | | yes | RFP-1 |
-| assign-inventory | stock-return | | yes | RFP-1 |
+| sync-stock | view-depot-stock | SAP to neome, every 30 min | no | WS-4 |
+| view-depot-stock | assign-inventory | | no | WS-4 |
+| assign-inventory | stock-return | unsold stock, end of day | yes | RFP-1, WS-4 |
+| place-order | reduce-inventory | order placed | no | WS-4 |
+| stock-return | accept-return | | no | WS-4 |
 | add-visit | add-complaint | complaint | yes | RFP-1 |
 | add-visit | record-feedback | feedback | yes | RFP-1 |
 | add-visit | add-lead | new lead | yes | RFP-1 |
