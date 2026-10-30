@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: FB
 name: Feedback
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # FB — Feedback
