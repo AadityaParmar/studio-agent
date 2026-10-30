@@ -63,13 +63,13 @@ A product's case size, kept in the Product Master and Competitor Master.
 _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
 
 **Sales Agent Inventory**:
-Products a Sales Supervisor has assigned to a Sales Agent to sell from.
+Products a Sales Supervisor has assigned to a Sales Agent to sell from; orders reduce it.
 _Avoid_: Assign Inventory, Stock Assignment
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+_Source_: RFP-1, WS-4 · _Status_: proposed · _Used in_: field-ops
 
 **Stock Return**:
-Return of stock; process not yet defined.
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+Unsold stock a Sales Agent returns at end of day; the Sales Supervisor counts it at the depot and accepts it (Pending, Accepted).
+_Source_: RFP-1, WS-4 · _Status_: proposed · _Used in_: field-ops
 
 **Visit Book**:
 Record of a customer visit by sales or marketing staff, with an optional order and payment.
@@ -154,3 +154,11 @@ _Source_: WS-3 · _Status_: proposed · _Used in_: field-ops
 **Holiday List**:
 Yearly list of Zambian public holidays kept by the Owner; not counted in leave.
 _Source_: WS-3 · _Status_: proposed · _Used in_: field-ops
+
+**Depot Stock**:
+Warehouse stock per product at the depot, read from SAP every 30 minutes; neome keeps no warehouse transactions.
+_Source_: WS-4 · _Status_: proposed · _Used in_: field-ops
+
+**Stock in hand**:
+Report of what each Sales Agent holds per product: assigned, sold, returned, in hand.
+_Source_: WS-4 · _Status_: proposed · _Used in_: field-ops
