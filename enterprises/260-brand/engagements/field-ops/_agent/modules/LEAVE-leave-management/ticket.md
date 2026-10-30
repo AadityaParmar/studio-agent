@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: LEAVE
 name: Leave Management
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # LEAVE — Leave Management
