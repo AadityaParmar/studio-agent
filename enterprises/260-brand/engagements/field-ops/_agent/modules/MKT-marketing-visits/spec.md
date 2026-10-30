@@ -2,8 +2,8 @@
 
 Prefix: MKT
 Name: Marketing Visits
-Status: needs-revisit
-Sources: RFP-1, WS-1, WS-7
+Status: resolved
+Sources: RFP-1, WS-1, WS-7, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -107,7 +107,7 @@ N/A: no integration; visits stay in neome and are not sent to SAP. [WS-7]
 
 - 25 Tricycle Riders and 60 Sales Agents may record visits. [WS-7]
 - Works offline; visits sync when online. [WS-7]
-- OI-77: Visits per day, and in peak season.
+- About 40 Marketing Visits per day, up to 80 per day in peak season. [QA-1]
 
 ## 11 Requirements
 

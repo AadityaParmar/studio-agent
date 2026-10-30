@@ -24,7 +24,7 @@ A signed-off BRD for Field Operations.
 | INV | Inventory | resolved |
 | VB | Visit Book | resolved |
 | LEAD | Leads | resolved |
-| MKT | Marketing Visits | claimed |
+| MKT | Marketing Visits | resolved |
 | MT | Modern Trade | needs-revisit |
 | CMP | Customer Complaints | needs-revisit |
 | FB | Feedback | needs-revisit |
@@ -100,3 +100,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: VB claimed by Aditya Parmar (revisit).
 - 2026-10-30: resolve-module: VB resolved (revisit).
 - 2026-10-30: resolve-module: MKT claimed by Aditya Parmar (revisit).
+- 2026-10-30: resolve-module: MKT resolved (revisit).

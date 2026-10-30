@@ -1,9 +1,9 @@
 ---
-status: claimed
+status: resolved
 prefix: MKT
 name: Marketing Visits
 blockedBy: [MST]
-revisitReason: "OI-77 answered: estimate 40 Marketing Visits/day, up to 80 in peak season [QA-1]"
+revisitReason:
 formerly:
 claimedBy: Aditya Parmar
 ---
