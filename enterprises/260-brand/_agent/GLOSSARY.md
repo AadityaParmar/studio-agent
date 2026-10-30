@@ -194,3 +194,7 @@ _Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
 **Quality Manager**:
 Quality team member who resolves customer complaints: investigates, fills Operator and Shift, writes the resolution note, sets the statuses.
 _Source_: WS-9 · _Status_: proposed · _Used in_: field-ops
+
+**Feedback**:
+Customer opinion recorded by a Sales Agent as a rating from 1 to 5 and an optional comment for each question in the Owner's fixed question list.
+_Source_: RFP-1, WS-10 · _Status_: proposed · _Used in_: field-ops
