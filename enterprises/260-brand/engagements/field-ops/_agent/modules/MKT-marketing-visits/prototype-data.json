@@ -1,0 +1,266 @@
+{
+ "entity": "Marketing Visit",
+ "roles": [
+  {
+   "role": "Tricycle Rider",
+   "person": "Chilufya",
+   "reqs": [
+    "MKT-01",
+    "MKT-02",
+    "MKT-03",
+    "MKT-04",
+    "MKT-05"
+   ]
+  },
+  {
+   "role": "Sales Agent",
+   "person": "Bwalya",
+   "reqs": [
+    "MKT-01",
+    "MKT-06"
+   ]
+  },
+  {
+   "role": "Sales Supervisor",
+   "person": "Mutale",
+   "reqs": [
+    "MKT-06"
+   ]
+  },
+  {
+   "role": "Sales Head",
+   "person": "Ruth",
+   "reqs": [
+    "MKT-06"
+   ]
+  }
+ ],
+ "fields": [
+  {
+   "entity": "Marketing Visit",
+   "name": "Visit type",
+   "reqs": [
+    "MKT-01"
+   ]
+  },
+  {
+   "entity": "Marketing Visit",
+   "name": "Beat",
+   "reqs": [
+    "MKT-01"
+   ]
+  },
+  {
+   "entity": "Marketing Visit",
+   "name": "Location",
+   "reqs": [
+    "MKT-01"
+   ]
+  },
+  {
+   "entity": "Marketing Visit",
+   "name": "Images",
+   "reqs": [
+    "MKT-01"
+   ]
+  },
+  {
+   "entity": "School Visit",
+   "name": "School name",
+   "reqs": [
+    "MKT-03"
+   ]
+  },
+  {
+   "entity": "Farm Visit",
+   "name": "Gender",
+   "reqs": [
+    "MKT-04"
+   ]
+  },
+  {
+   "entity": "Door to door Visit",
+   "name": "Visitor name",
+   "reqs": [
+    "MKT-05"
+   ]
+  }
+ ],
+ "transitions": [],
+ "rules": [
+  {
+   "rule": "Same day edit",
+   "reqs": [
+    "MKT-01"
+   ]
+  },
+  {
+   "rule": "Route from Beat",
+   "reqs": [
+    "MKT-01"
+   ]
+  }
+ ],
+ "reports": [
+  {
+   "name": "Marketing Visit Sheet",
+   "reqs": [
+    "MKT-06"
+   ]
+  },
+  {
+   "name": "Marketing Visits report",
+   "reqs": [
+    "MKT-06"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "id": "MV-101",
+   "status": "",
+   "values": {
+    "Date": "2026-11-02",
+    "Visited By": "Chilufya",
+    "Visit type": "School",
+    "Beat": "Kabulonga Beat",
+    "Route": "Route 3",
+    "Customer name": "Grace Banda",
+    "Mobile number": "0977000111",
+    "Location": "-15.41, 28.30"
+   }
+  },
+  {
+   "id": "MV-102",
+   "status": "",
+   "values": {
+    "Date": "2026-11-02",
+    "Visited By": "Chilufya",
+    "Visit type": "Door to door",
+    "Beat": "Kabulonga Beat",
+    "Route": "Route 3",
+    "Customer name": "Joyce Phiri",
+    "Address": "Plot 12, Kabulonga",
+    "Location": "-15.40, 28.31"
+   }
+  },
+  {
+   "id": "MV-103",
+   "status": "",
+   "values": {
+    "Date": "2026-11-03",
+    "Visited By": "Bwalya",
+    "Visit type": "Shop activation",
+    "Beat": "Matero Beat",
+    "Route": "Route 5",
+    "Customer name": "Matero Mini Mart",
+    "Location": "-15.38, 28.25"
+   }
+  },
+  {
+   "id": "MV-104",
+   "status": "",
+   "values": {
+    "Date": "2026-11-03",
+    "Visited By": "Chilufya",
+    "Visit type": "Farm",
+    "Beat": "Chilanga Beat",
+    "Route": "Route 7",
+    "Customer name": "Peter Mulenga",
+    "Mobile number": "0966000222",
+    "Remarks": "Sampled Nurtamilk",
+    "Location": "-15.55, 28.27"
+   }
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Rider records a Marketing Visit",
+   "summary": "Happy path with Beat, new person, GPS and photo.",
+   "steps": [
+    {
+     "actor": "Tricycle Rider",
+     "action": "Picks the Beat, types a new person's name and mobile, chooses Visit type Door to door, adds a photo",
+     "row": "MV-102",
+     "screen": "record",
+     "proves": [
+      "MKT-01",
+      "MKT-02"
+     ]
+    },
+    {
+     "actor": "Tricycle Rider",
+     "action": "Fills a School Visit, Farm Visit and Door to door Visit form; each keeps location and photo",
+     "screen": "sheet",
+     "proves": [
+      "MKT-03",
+      "MKT-04",
+      "MKT-05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Visits offline and same day edit",
+   "summary": "No network; rider fixes a visit before the day ends.",
+   "steps": [
+    {
+     "actor": "Tricycle Rider",
+     "action": "Records a Farm Visit with no network; it syncs when online and can be changed until the day ends",
+     "row": "MV-104",
+     "screen": "record",
+     "proves": [
+      "MKT-01"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Sales Agent and managers view visits",
+   "summary": "Own versus all, and the Sales Head report.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Records a Shop activation visit and sees only own visits",
+     "row": "MV-103",
+     "screen": "record",
+     "proves": [
+      "MKT-01",
+      "MKT-06"
+     ]
+    },
+    {
+     "actor": "Sales Supervisor",
+     "action": "Opens the Marketing Visit Sheet, filters by Beat and Visit type, exports to Excel",
+     "screen": "sheet",
+     "report": "Marketing Visit Sheet",
+     "proves": [
+      "MKT-06"
+     ]
+    },
+    {
+     "actor": "Sales Head",
+     "action": "Opens the Marketing Visits report: visits per rider",
+     "screen": "report",
+     "report": "Marketing Visits report",
+     "proves": [
+      "MKT-06"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Open Item: visits per day",
+   "summary": "Volume not known yet.",
+   "steps": [
+    {
+     "actor": "Sales Head",
+     "action": "Looks at the sheet; daily volume is not known",
+     "screen": "sheet",
+     "proves": [],
+     "oi": "OI-77"
+    }
+   ]
+  }
+ ]
+}

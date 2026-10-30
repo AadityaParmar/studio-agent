@@ -97,8 +97,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| add-marketing-visit | rider | MKT | Add Marketing Visit | Marketing Visit Sheet | step | OI-42 | RFP-1 |
-| add-field-visit | agent | MKT | Add School / Farm / Door to door Visit | | step | OI-44 | RFP-1 |
+| add-marketing-visit | rider | MKT | Add Marketing Visit | Pick Beat; existing Customer or new person; Visit type; GPS, photo; Marketing Visit Sheet | step | | RFP-1, WS-7 |
+| add-field-visit | rider | MKT | Add School / Farm / Door to door Visit | Goal: sampling and brand awareness | step | | RFP-1, WS-7 |
+| agent-marketing-visit | agent | MKT | Add Marketing Visit | Sales Agent may also record it | step | | RFP-1, WS-7 |
+| view-marketing-visits | supervisor | MKT | View Marketing Visit Sheet | Own for rider or agent; all for Supervisor and above; Sales Head report; Excel | step | | RFP-1, WS-7 |
 
 ## MT — Modern Trade
 
@@ -199,6 +201,9 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-complaint | resolve-complaint | | no | RFP-1 |
 | resolve-complaint | send-whatsapp | resolution message | yes | RFP-1 |
 | assign-beats | add-marketing-visit | | yes | RFP-1 |
+| add-marketing-visit | view-marketing-visits | | yes | WS-7 |
+| agent-marketing-visit | view-marketing-visits | | yes | WS-7 |
+| add-field-visit | view-marketing-visits | | yes | WS-7 |
 | clock-in | clock-out | | no | RFP-1 |
 | clock-out | add-overtime | | yes | RFP-1 |
 | clock-in | fix-clock-out | no clock out by 23:59 | yes | WS-2 |

@@ -43,10 +43,10 @@
 | OI-39 | Must every visit have an order? If no order, is a reason recorded? | VB, RPT | Enterprise | Sales Supervisor | | closed | | WS-5 |
 | OI-40 | Product Catalog (RFP-1 scope item 10): what does it show Sales Agents beyond the Product Master (images, price, stock)? | VB | Enterprise | Sales Supervisor | | closed | | WS-5 |
 | OI-41 | Lead: what fields, who follows it up, statuses, and when does a Lead become a Customer? RFP-1 has no Lead form. | LEAD | Enterprise | Sales Head | | closed | | WS-6 |
-| OI-42 | Who does Marketing Visits: Tricycle Rider (RFP-1 §3 and overall flow chart), Sales Agent (Marketing visit diagram) or "sales or marketing staff" (form text)? | MKT | Enterprise | Sales Head | | open | | |
-| OI-43 | Marketing Visit: diagram picks a customer (Beat Master, Route Master); form types Customer name, mobile, address, email. Which? Visit type values? | MKT | Enterprise | Sales Head | | open | | |
-| OI-44 | School, Farm and Door to door Visits: who does them, what is their goal, and what is "D2D - Nurtamilk"? | MKT | Enterprise | Sales Head | | open | | |
-| OI-45 | Farm and Door to door Visit "Visitor name": is it the person visited? Gender values? | MKT | Enterprise | Sales Head | | open | | |
+| OI-42 | Who does Marketing Visits: Tricycle Rider (RFP-1 §3 and overall flow chart), Sales Agent (Marketing visit diagram) or "sales or marketing staff" (form text)? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
+| OI-43 | Marketing Visit: diagram picks a customer (Beat Master, Route Master); form types Customer name, mobile, address, email. Which? Visit type values? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
+| OI-44 | School, Farm and Door to door Visits: who does them, what is their goal, and what is "D2D - Nurtamilk"? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
+| OI-45 | Farm and Door to door Visit "Visitor name": is it the person visited? Gender values? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
 | OI-46 | Who fills Modern Trade: Sales Agent (RFP-1 text and overall flow chart) or Supervisor (Modern Trade diagram)? What can Supervisor review do (approve, reject, comment)? | MT | Enterprise | Sales Head | | open | | |
 | OI-47 | Modern Trade Check In / Check Out: time and location? Must the user be at the Store? | MT | Enterprise | Sales Supervisor | | open | | |
 | OI-48 | Closing stock from Modern Trade: report only, or does it feed stock in SAP / ERP? | MT, SAP | Enterprise | Owner | | open | | |
@@ -78,3 +78,4 @@
 | OI-74 | Who in 260 Brands owns SAP and the link to neome on your side? | MST, SAP | Enterprise | Owner | | open | | |
 | OI-75 | Confirm the proposed priority, Scope tag and acceptance criteria of: MST-01, MST-02, MST-03, MST-04, MST-05, MST-06, MST-07, MST-08 | All | Enterprise | Owner | As proposed in the BRD (proposed, to confirm) | open | | |
 | OI-76 | How long must visit, order and invoice records be kept? Enterprise did not know [WS-5]. | VB | Enterprise | Owner | | open | | |
+| OI-77 | How many Marketing Visits a day, and in peak season? Enterprise did not know [WS-7]. | MKT | Enterprise | Sales Head | | open | | |
