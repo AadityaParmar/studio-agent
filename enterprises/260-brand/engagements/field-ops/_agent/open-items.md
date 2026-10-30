@@ -23,16 +23,16 @@
 | OI-19 | Who maintains the Competitor Master? The "Competitor" diagram shows a Sales Agent: Add Visit → Add Products from Product Master. What does that flow mean? | MST, MT | Enterprise | Sales Supervisor | | open | | |
 | OI-20 | Are Stores (modern trade) also Customers in the Customer Master, or a separate list only? | MST, MT | Enterprise | Sales Head | | open | | |
 | OI-21 | Customer GEO Tagging: who captures the location and when (on adding the customer, on first visit)? Who can change it? | MST | Enterprise | Sales Supervisor | | open | | |
-| OI-22 | Casual and Sick Leave Balance: who sets them, yearly quota, accrual, carry forward? | MST, LEAVE | Enterprise | Owner | | open | | |
+| OI-22 | Casual and Sick Leave Balance: who sets them, yearly quota, accrual, carry forward? | MST, LEAVE | Enterprise | Owner | | closed | | WS-3 |
 | OI-23 | Beat Planning: only Employee - Beat Mapping (beats on the Employee), or a day-wise plan of which beat on which day? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
 | OI-24 | Can one Beat be assigned to many employees at once? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
 | OI-25 | Arrival Status On Time / Late: what start time and grace period? Same for all or per employee? | ATT | Enterprise | Owner | | closed | | WS-2 |
 | OI-26 | Camera verification on clock in/out: photo only, or face match? Is location captured too? | ATT | Enterprise | Owner | | closed | | WS-2 |
 | OI-27 | Overtime: RFP-1 describes it with the Attendance text ("Records clock-in/out times along with camera verification"). What is Overtime for, who approves it, what Status values? | ATT | Enterprise | Owner | | closed | | WS-2 |
 | OI-28 | What happens when an employee forgets to clock out? | ATT | Enterprise | Sales Supervisor | | closed | | WS-2 |
-| OI-29 | Who approves leave: the employee's Sales Supervisor? Escalation if not acted on? | LEAVE | Enterprise | Owner | Employee's Sales Supervisor (proposed, to confirm) | open | | |
-| OI-30 | Half Day leave takes 0.5 day from balance? Leave beyond balance allowed (unpaid)? | LEAVE | Enterprise | Owner | | open | | |
-| OI-31 | Do leave days count weekly offs and holidays? Is there a holiday list? | LEAVE | Enterprise | Owner | | open | | |
+| OI-29 | Who approves leave: the employee's Sales Supervisor? Escalation if not acted on? | LEAVE | Enterprise | Owner | Employee's Sales Supervisor (proposed, to confirm) | closed | | WS-3 |
+| OI-30 | Half Day leave takes 0.5 day from balance? Leave beyond balance allowed (unpaid)? | LEAVE | Enterprise | Owner | | closed | | WS-3 |
+| OI-31 | Do leave days count weekly offs and holidays? Is there a holiday list? | LEAVE | Enterprise | Owner | | closed | | WS-3 |
 | OI-32 | Assign Inventory: quantity per product? How is Total Amount worked out (quantity × Price)? | INV | Enterprise | Sales Supervisor | quantity × Price (proposed, to confirm) | open | | |
 | OI-33 | Stock Return (Pending): who returns what, when (end of day?), who accepts it? | INV | Enterprise | Sales Supervisor | | open | | |
 | OI-34 | "Inventory" (RFP-1 scope item 33, Pending): warehouse stock beyond Sales Agent Inventory? | INV | Enterprise | Owner | | open | | |

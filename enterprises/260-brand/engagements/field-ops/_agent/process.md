@@ -52,9 +52,13 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| apply-leave | employee | LEAVE | Apply Leave | Balance shown | step | OI-30 | RFP-1 |
-| approve-leave | supervisor | LEAVE | Approve leave? | Pending → Approved / Rejected | decision | OI-29 | RFP-1 |
-| update-leave-balance | supervisor | LEAVE | Update Leave Balance | On approval | step | OI-22 | RFP-1 |
+| set-leave-balance | owner | LEAVE | Set leave balances | Casual 12, Sick 10 a year, credited 1 Jan; Casual carries forward max 5 | step | | WS-3 |
+| maintain-holidays | owner | LEAVE | Keep yearly holiday list | Zambia public holidays; not counted in leave | step | | WS-3 |
+| apply-leave | employee | LEAVE | Apply Leave | Balance shown; Half Day = 0.5 day; beyond balance = Unpaid Leave; Sundays and holidays not counted | step | | RFP-1, WS-3 |
+| cancel-leave | employee | LEAVE | Cancel own Pending leave | Approved leave cannot be cancelled by the Employee | step | | WS-3 |
+| approve-leave | supervisor | LEAVE | Approve leave? | Pending → Approved / Rejected; 48 h then Area Sales Manager | decision | | RFP-1, WS-3 |
+| update-leave-balance | supervisor | LEAVE | Update Leave Balance | On approval | step | | RFP-1, WS-3 |
+| notify-leave-decision | employee | LEAVE | Get push: leave approved or rejected | | step | | WS-3 |
 
 ## INV — Inventory
 
@@ -175,8 +179,12 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | clock-out | add-overtime | | yes | RFP-1 |
 | clock-in | fix-clock-out | no clock out by 23:59 | yes | WS-2 |
 | add-overtime | approve-overtime | | no | WS-2 |
-| apply-leave | approve-leave | | no | RFP-1 |
-| approve-leave | update-leave-balance | approved | no | RFP-1 |
+| set-leave-balance | apply-leave | | no | WS-3 |
+| maintain-holidays | apply-leave | days not counted | yes | WS-3 |
+| apply-leave | approve-leave | | no | RFP-1, WS-3 |
+| apply-leave | cancel-leave | | yes | WS-3 |
+| approve-leave | update-leave-balance | approved | no | RFP-1, WS-3 |
+| approve-leave | notify-leave-decision | approved or rejected | no | WS-3 |
 | mt-check-in | mt-record | | no | RFP-1 |
 | mt-record | mt-check-out | | no | RFP-1 |
 | mt-check-out | mt-review | | no | RFP-1 |

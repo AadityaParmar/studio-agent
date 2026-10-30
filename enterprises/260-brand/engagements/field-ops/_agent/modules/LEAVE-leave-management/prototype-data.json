@@ -1,0 +1,78 @@
+{
+  "entity": "Leave",
+  "roles": [
+    {"role": "Employee", "person": "Mwila (Sales Agent)", "reqs": ["LEAVE-01", "LEAVE-02", "LEAVE-03", "LEAVE-08"]},
+    {"role": "Sales Supervisor", "person": "Bwalya (Sales Supervisor)", "reqs": ["LEAVE-03", "LEAVE-04", "LEAVE-07"]},
+    {"role": "Area Sales Manager", "person": "Natasha (Area Sales Manager)", "reqs": ["LEAVE-03"]},
+    {"role": "Owner", "person": "Chanda (Owner)", "reqs": ["LEAVE-05", "LEAVE-06"]},
+    {"role": "Regional Sales Manager", "person": "Temba (Regional Sales Manager)", "reqs": ["LEAVE-07"]},
+    {"role": "Sales Head", "person": "Chola (Sales Head)", "reqs": ["LEAVE-07"]}
+  ],
+  "fields": [
+    {"entity": "Leave", "name": "Leave For", "reqs": ["LEAVE-01"]},
+    {"entity": "Leave", "name": "Days", "reqs": ["LEAVE-01", "LEAVE-06"]},
+    {"entity": "Leave", "name": "Unpaid Days", "reqs": ["LEAVE-02"]},
+    {"entity": "Leave", "name": "Status", "reqs": ["LEAVE-03"]},
+    {"entity": "Leave", "name": "Casual/Sick Leave Balance", "reqs": ["LEAVE-04"]},
+    {"entity": "Leave Balance", "name": "Year Quota", "reqs": ["LEAVE-05"]},
+    {"entity": "Leave Balance", "name": "Carry Forward", "reqs": ["LEAVE-05"]},
+    {"entity": "Holiday", "name": "Date", "reqs": ["LEAVE-06"]}
+  ],
+  "transitions": [
+    {"from": "pending", "to": "approved", "action": "Approve leave", "by": ["Sales Supervisor", "Area Sales Manager"], "reqs": ["LEAVE-03", "LEAVE-04", "LEAVE-08"], "rules": ["Approval", "Escalation", "Update balance", "Push on decision"]},
+    {"from": "pending", "to": "rejected", "action": "Reject leave", "by": ["Sales Supervisor", "Area Sales Manager"], "reqs": ["LEAVE-03", "LEAVE-08"], "rules": ["Approval", "Escalation", "Push on decision"]}
+  ],
+  "rules": [
+    {"rule": "Update balance", "reqs": ["LEAVE-04"]},
+    {"rule": "Yearly credit", "reqs": ["LEAVE-05"]},
+    {"rule": "Half Day", "reqs": ["LEAVE-01"]},
+    {"rule": "Beyond balance", "reqs": ["LEAVE-02"]},
+    {"rule": "Days not counted", "reqs": ["LEAVE-01", "LEAVE-06"]},
+    {"rule": "Approval", "reqs": ["LEAVE-03"]},
+    {"rule": "Escalation", "reqs": ["LEAVE-03"]},
+    {"rule": "Push on decision", "reqs": ["LEAVE-08"]}
+  ],
+  "reports": [
+    {"name": "Leave Sheet", "reqs": ["LEAVE-07"]},
+    {"name": "Leave register", "reqs": ["LEAVE-07"]}
+  ],
+  "rows": [
+    {"id": "LV-01", "status": "pending", "values": {"Employee": "Mwila (Sales Agent)", "Casual/Sick Leave Balance": 10, "Leave For": "Full Day", "Type Of Leave": "Casual Leave", "From Date": "2026-11-02", "To Date": "2026-11-04", "Leave Reason": "Family visit", "Days": 3, "Unpaid Days": 0, "Status": "Pending"},
+     "children": {"Leave Balance": [{"Employee": "Mwila (Sales Agent)", "Type Of Leave": "Casual Leave", "Year Quota": 12, "Carry Forward": 3}]},
+     "log": [["2026-10-29 09:10", "Mwila", "Applied for leave"]]},
+    {"id": "LV-02", "status": "approved", "values": {"Employee": "Joyce (Sales Agent)", "Casual/Sick Leave Balance": 8, "Leave For": "Half Day", "Type Of Leave": "Sick Leave", "From Date": "2026-10-26", "To Date": "2026-10-26", "Leave Reason": "Clinic visit", "Days": 0.5, "Unpaid Days": 0, "Status": "Approved", "Approved By": "Bwalya (Sales Supervisor)"},
+     "children": {"Leave Balance": [{"Employee": "Joyce (Sales Agent)", "Type Of Leave": "Sick Leave", "Year Quota": 10, "Carry Forward": 0}]},
+     "log": [["2026-10-25 17:00", "Joyce", "Applied for leave"], ["2026-10-26 08:00", "Bwalya", "Approved leave"]]},
+    {"id": "LV-03", "status": "rejected", "values": {"Employee": "Kalu (Tricycle Rider)", "Casual/Sick Leave Balance": 5, "Leave For": "Full Day", "Type Of Leave": "Casual Leave", "From Date": "2026-10-30", "To Date": "2026-10-30", "Leave Reason": "Personal errand", "Days": 1, "Unpaid Days": 0, "Status": "Rejected", "Approved By": "Bwalya (Sales Supervisor)"},
+     "children": {"Leave Balance": [{"Employee": "Kalu (Tricycle Rider)", "Type Of Leave": "Casual Leave", "Year Quota": 12, "Carry Forward": 0}]},
+     "log": [["2026-10-28 10:00", "Kalu", "Applied for leave"], ["2026-10-28 15:00", "Bwalya", "Rejected leave (campaign day)"]]},
+    {"id": "LV-04", "status": "pending", "values": {"Employee": "Mulenga (Sales Agent)", "Casual/Sick Leave Balance": 2, "Leave For": "Full Day", "Type Of Leave": "Casual Leave", "From Date": "2026-12-22", "To Date": "2026-12-29", "Leave Reason": "Year end travel", "Days": 6, "Unpaid Days": 4, "Status": "Pending"},
+     "children": {"Leave Balance": [{"Employee": "Mulenga (Sales Agent)", "Type Of Leave": "Casual Leave", "Year Quota": 12, "Carry Forward": 5}], "Holiday": [{"Date": "2026-12-25", "Name": "Christmas Day"}]},
+     "log": [["2026-10-27 09:00", "Mulenga", "Applied for leave"], ["2026-10-29 09:05", "system", "48 hours passed, sent to Area Sales Manager"]]}
+  ],
+  "scenarios": [
+    {"title": "Apply, approve, balance updated", "summary": "Employee applies; Sales Supervisor approves; balance drops; Employee gets a push.", "steps": [
+      {"actor": "Employee", "action": "Applies for 3 days Casual Leave and sees the balance of 10 on the form; Status Pending", "row": "LV-01", "screen": "record", "proves": ["LEAVE-01", "LEAVE-03"]},
+      {"actor": "Sales Supervisor", "action": "Approves the leave; Casual balance drops by 3", "row": "LV-01", "transition": {"from": "pending", "to": "approved"}, "proves": ["LEAVE-03", "LEAVE-04", "LEAVE-08"]}
+    ]},
+    {"title": "Leave rejected", "summary": "Sales Supervisor rejects; the Employee adds a new request if needed.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Rejects the leave; Employee gets a push and the balance stays", "row": "LV-01", "transition": {"from": "pending", "to": "rejected"}, "proves": ["LEAVE-03", "LEAVE-08"]}
+    ]},
+    {"title": "Half Day", "summary": "A Half Day takes 0.5 day.", "steps": [
+      {"actor": "Employee", "action": "Joyce applied for a Half Day of Sick Leave; the form shows 0.5 day", "row": "LV-02", "screen": "record", "proves": ["LEAVE-01"]}
+    ]},
+    {"title": "Beyond balance is Unpaid Leave", "summary": "More days than balance is allowed; extra days are Unpaid Leave. Sundays and holidays not counted.", "steps": [
+      {"actor": "Employee", "action": "Applies 22 to 29 Dec with a balance of 2: Sundays and 25 Dec are not counted, 6 days, 4 shown as Unpaid Days", "row": "LV-04", "screen": "record", "proves": ["LEAVE-01", "LEAVE-02", "LEAVE-06"]}
+    ]},
+    {"title": "Supervisor does not act in 48 hours", "summary": "Leave goes to the Area Sales Manager.", "steps": [
+      {"actor": "Area Sales Manager", "action": "Gets the leave after 48 hours and approves it", "row": "LV-04", "transition": {"from": "pending", "to": "approved"}, "proves": ["LEAVE-03"]}
+    ]},
+    {"title": "Owner sets balances and holidays", "summary": "Yearly quota, carry forward and holiday list.", "steps": [
+      {"actor": "Owner", "action": "Checks the yearly credit on 1 Jan: Casual 12, Sick 10; carry forward of Casual max 5, Sick none", "screen": "rules", "proves": ["LEAVE-05"]},
+      {"actor": "Owner", "action": "Adds 25 December to the Holiday List so it is not counted in leave", "row": "LV-04", "screen": "record", "proves": ["LEAVE-06"]}
+    ]},
+    {"title": "Leave register", "summary": "Supervisor and above check leave.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Opens the Leave register for a date, filters by agent, exports to Excel", "screen": "report", "report": "Leave register", "proves": ["LEAVE-07"]}
+    ]}
+  ]
+}
