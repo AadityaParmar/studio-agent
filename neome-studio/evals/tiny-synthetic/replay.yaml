@@ -56,7 +56,7 @@ steps:
     as: a
     skill: resolve-module
     args: "marlin-marine service-crm"
-    repeat: { max: 3, whileStatus: "^next \\|" }
+    repeat: { max: 3, whileStatus: "^(next \\||claimed \\|.*\\| yours$)" }
     brief: >-
       Live mode, one Module per session: the one the skill picks. The Enterprise answers through you from the
       key; Don't know for anything else. Accept the skill's recommended options for Consultant choices.
@@ -93,7 +93,7 @@ steps:
     as: a
     skill: resolve-module
     args: "marlin-marine service-crm"
-    repeat: { max: 3, whileStatus: "^next \\|" }
+    repeat: { max: 3, whileStatus: "^(next \\||claimed \\|.*\\| yours$)" }
     brief: >-
       Revisit the Module the skill picks (the reply changed it). Enterprise answers from the key.
 

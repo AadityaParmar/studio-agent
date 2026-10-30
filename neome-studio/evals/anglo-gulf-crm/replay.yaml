@@ -27,7 +27,7 @@ steps:
     as: a
     skill: resolve-module
     args: "crescent-gulf sales-crm"
-    repeat: { max: 10, whileStatus: "^next \\|" }
+    repeat: { max: 10, whileStatus: "^(next \\||claimed \\|.*\\| yours$)" }
     brief: >-
       Live mode, one Module per session: the one the skill picks. The Enterprise answers through you from the
       key; Don't know for anything else. Accept the skill's recommended options for Consultant choices.
@@ -36,7 +36,7 @@ steps:
     as: a
     skill: resolve-module
     args: "crescent-gulf sales-crm"
-    repeat: { max: 6, whileStatus: "^next \\|" }
+    repeat: { max: 6, whileStatus: "^(next \\||claimed \\|.*\\| yours$)" }
     brief: >-
       Same as before: live mode, the Module the skill picks, Enterprise answers from the key only.
 
