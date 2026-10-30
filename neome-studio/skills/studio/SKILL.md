@@ -17,7 +17,7 @@ upstreamDiverged: "Routes the 6 Neome Studio user skills from engine state (setu
 
 Tell the Consultant where things stand and the next step. Read-only: the engine reads the files; you relay. The one write is clearing a stale lock or claim, after the Consultant says yes (step 5).
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier and claims: [map-logic.md](../../reference/map-logic.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier and claims: [map-logic.md](../../reference/map-logic.md). Next step format: [next-session.md](../../reference/next-session.md).
 
 **Skills you point at** (the only six; building blocks run inside `resolve-module`):
 
@@ -58,7 +58,7 @@ Done when pulled, or the failure relayed.
 ENGINE status --who "<who>"
 ```
 
-One `engagement` line each; `enterprise` lines = Inputs waiting for `ingest`. Several Engagements → the one the Consultant named, else ask. None → go to step 4 with its `step` line. Then:
+One `engagement` line each; `enterprise` lines = Inputs waiting for `ingest`. Several Engagements → the one the Consultant named (args: `<eng>`), else ask. None → go to step 4 with its `step` line. Then:
 
 ```
 ENGINE status <eng> --who "<who>"
@@ -74,9 +74,9 @@ Show, short, grouped:
 
 Done when every line kind the engine printed is in the summary.
 
-## 4. Next step
+## 4. Next session
 
-Relay the `step` lines, most urgent first; one line each: `/neome-studio:<skill>` and why. Name the Module for `resolve-module`. Lock held by someone else → `ingest`, `review-draft` and `build-brd` wait for it (or step 5); `resolve-module` and `questionnaire` can run.
+Relay the `step` lines as [next-session.md](../../reference/next-session.md) says: up to 3, most urgent first, `/neome-studio:<skill> <args> — <why>`. Lock held by someone else → `ingest`, `review-draft` and `build-brd` wait for it (or step 5); `resolve-module` and `questionnaire` can run. Pull failed in step 2 → from local copy. After step 5, show it again from the new status.
 
 Done when the Consultant has a next step, or a question to settle first.
 

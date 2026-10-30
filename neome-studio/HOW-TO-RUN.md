@@ -22,7 +22,13 @@ Zero to Sign-off, step by step. Terms per [GLOSSARY.md](../GLOSSARY.md). Full de
 3. **Git name**: `git config --global user.name "Your Name"` (claims and locks show it).
 4. **Packages**: `npm ci` in the repo root.
 5. **Open Claude Code** from the repo root: `claude`. Trust the folder.
-6. **Check**: type `/neome-studio:` and the skills show.
+6. **Check**: type `/neome-studio:` and the skills show. Not there? Install the plugin by hand, inside Claude Code:
+   ```
+   /plugin marketplace add "<repo-root-path>"
+   /plugin install neome-studio@neome
+   /reload-plugins
+   ```
+   Or type `/plugin` → Marketplaces → add the repo root path → pick `neome-studio` → Install.
 7. **Run `/neome-studio:studio`**. All setup lines should be `ok`. It names the fix for any `miss`.
 
 Claude Code may ask to run `node neome-studio/engine/cli.mjs …`. Allow it.

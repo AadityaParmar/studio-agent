@@ -8,7 +8,7 @@ The Claude Code plugin behind the Neome Requirements Studio. Consultants read th
 neome-studio/
   .claude-plugin/plugin.json    plugin manifest (marketplace: ../.claude-plugin/marketplace.json)
   skills/<skill>/SKILL.md       11 skills (+ references/ per skill)
-  reference/                    shared: How to talk, git protocol + lock, map logic, Neome App catalog, fonts
+  reference/                    shared: How to talk, git protocol + lock, map logic, next session, Neome App catalog, fonts
   engine/                       deterministic CLI the skills call; tests + fixtures in engine/test/
   maintainer/                   upstream-check (script + driver prompt)
   evals/                        eval runner (run.mjs + driver eval.md), Eval cases, results/, eyeball checklist
@@ -66,7 +66,7 @@ The pin lives only in each cloned skill's front-matter: `upstream` (path or list
 
 | Command | Used by |
 |---|---|
-| `setup-check`, `status` | `studio` (read-only) |
+| `setup-check`, `status` | `studio` (read-only); every user skill runs `status` last for its Next session step ([reference/next-session.md](reference/next-session.md)) |
 | `init-engagement`, `add-source`, `reply` | `ingest` (`add-source` also `grill-module`, `review-draft`) |
 | `lock`, `unlock` | `ingest`, `review-draft`, `build-brd`, `resolve-module` (shared edits); `studio` clears a stale lock with `unlock --force` |
 | `module` | `review-draft`, `resolve-module`, `ingest` (revisit), `studio` (stale claim) |
@@ -75,7 +75,7 @@ The pin lives only in each cloned skill's front-matter: `upstream` (path or list
 | `build-prototype` | `build-prototype`; `ingest` rebuilds a view after a reply |
 | `new-questionnaire`, `export-questionnaire` | `questionnaire` |
 | `build-brd`, `mmdc-check` | `build-brd`; `ingest`, `review-draft`, `grill-module` validate with `build-brd --check` (writes nothing) |
-| `check` | `npm test`, maintainer (read-only pack lint) |
+| `check` | `npm test`, maintainer (read-only pack lint; user skills must have the Next session step) |
 
 `setup-check` runs before `npm ci` (commands load lazily). Read-only commands: `setup-check`, `status`, `mmdc-check`, `spec-check`, `check`, and any `build-brd --check`.
 

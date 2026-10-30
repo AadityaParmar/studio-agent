@@ -14,7 +14,11 @@
 //   release | ready | … / release | blocked | … / release | error | [cls] msg
 //   signoff | v<N> | ready / blocked | <why>      (latest released, unsigned)
 //   signoff | next | ready / blocked | <why>      (current markdown: what a release now would carry)
-//   step | <skill> | <why>                        (next steps; only the six user skills)
+//   step | <skill> | <args> | <why>               (next steps, most urgent first; only the six user skills)
+//     Always 4 cells: split on ` | `. <args> = what to type after `/neome-studio:<skill>`: the repo-relative
+//     Engagement path `enterprises/<ent>/engagements/<slug>` (forward slashes), + ` <PREFIX>` for resolve-module.
+//     No Engagement to name (repo / Enterprise view) → empty cell: `step | ingest |  | <why>`.
+//   done | v<N> signed off; nothing changed since  (no BRD step left)
 // Exit 0; 2 = bad arguments.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join, resolve, basename, dirname, relative, sep } from "node:path";
@@ -46,10 +50,13 @@ export function status(args) {
 }
 
 const line = (ctx, ...cells) => ctx.out.push(cells.filter((c) => c !== null && c !== undefined && c !== "").join(" | "));
-const step = (ctx, skill, why) => {
+// args may be "" (kept as an empty cell, so a step line always has 4 cells).
+const step = (ctx, skill, args, why) => {
   if (!USER_SKILLS.includes(skill)) throw new Error(`status: step names "${skill}", not a user skill`);
-  line(ctx, "step", skill, why);
+  ctx.out.push(["step", skill, args, why].join(" | "));
 };
+// Repo-relative Engagement path, as the skills take it.
+const engPath = (dir) => `enterprises/${basename(dirname(dirname(dir)))}/engagements/${basename(dir)}`;
 const readdirs = (d) => (existsSync(d) ? readdirSync(d, { withFileTypes: true }).filter((e) => e.isDirectory() && !e.name.startsWith(".")).map((e) => e.name).sort() : []);
 const read = (p) => (existsSync(p) ? readFileSync(p, "utf8") : "");
 
@@ -92,8 +99,8 @@ function overview(ctx, entDirs) {
     }
   }
   line(ctx, "status", `${engagements} Engagement(s)`);
-  if (fresh) step(ctx, "ingest", `${fresh} Input(s) waiting to be registered`);
-  else if (!engagements) step(ctx, "ingest", "first run: drop the Enterprise's Inputs in enterprises/<ent>/inputs/, then name the Enterprise and Engagement");
+  if (fresh) step(ctx, "ingest", "", `${fresh} Input(s) waiting to be registered`);
+  else if (!engagements) step(ctx, "ingest", "", "first run: drop the Enterprise's Inputs in enterprises/<ent>/inputs/, then name the Enterprise and Engagement");
 }
 
 const title = (mapText) => (firstHeading(mapText) ?? "").replace(/^map:\s*/i, "");
@@ -153,7 +160,7 @@ function engagement(ctx, dir) {
   }
 
   const brd = readiness(ctx, dir);
-  steps(ctx, { lines, modules, inputs, notAsked, chased, brd });
+  steps(ctx, engPath(dir), { lines, modules, inputs, notAsked, chased, brd });
 }
 
 // Open Items register rows, with the optional `note` column the reply loop writes.
@@ -233,34 +240,41 @@ function readiness(ctx, dir) {
 }
 
 // Next steps, most urgent first. Only the six user skills.
-function steps(ctx, { lines, modules, inputs, notAsked, chased, brd }) {
+function steps(ctx, eng, { lines, modules, inputs, notAsked, chased, brd }) {
   const live = modules.filter((m) => !/^merged-into/.test(String(m.fm.status ?? "")));
-  if (inputs.length) step(ctx, "ingest", `${inputs.length} new Input(s) not registered yet`);
+  if (inputs.length) step(ctx, "ingest", eng, `${inputs.length} new Input(s) not registered yet`);
   if (!live.length) {
-    step(ctx, "ingest", "no Modules yet: drop Inputs in inputs/, then ingest drafts them");
+    step(ctx, "ingest", eng, "no Modules yet: drop Inputs in inputs/, then ingest drafts them");
     return;
   }
   const drafts = lines.filter((l) => l.startsWith("draft |")).map((l) => l.split(" | ")[1]);
-  if (drafts.length) step(ctx, "review-draft", `draft Module(s) to confirm: ${drafts.join(", ")} (fresh session)`);
+  if (drafts.length) step(ctx, "review-draft", eng, `draft Module(s) to confirm: ${drafts.join(", ")} (fresh session)`);
+  // A Module claimed by --who: resume it (a stopped resolve-module session keeps its claim).
+  if (ctx.who) {
+    for (const l of lines) {
+      const c = l.match(/^claimed \| ([A-Z]{2,5}) \| .* \| by (.+)$/);
+      if (c && c[2] === ctx.who) step(ctx, "resolve-module", `${eng} ${c[1]}`, `resume ${c[1]}: claimed by you`);
+    }
+  }
   const next = lines.filter((l) => l.startsWith("next |")).map((l) => {
     const [, p, , st] = l.split(" | ");
-    return st === "needs-revisit" ? `${p} (revisit)` : p;
+    return { p, label: st === "needs-revisit" ? `${p} (revisit)` : p };
   });
-  if (next.length) step(ctx, "resolve-module", `next: ${next.join(", ")} (one per session)`);
+  if (next.length) step(ctx, "resolve-module", `${eng} ${next[0].p}`, `next: ${next.map((n) => n.label).join(", ")} (one per session)`);
   if (notAsked.length || chased.length) {
     const parts = [notAsked.length && `${notAsked.length} not asked yet`, chased.length && `${chased.length} to chase`].filter(Boolean);
-    step(ctx, "questionnaire", `Enterprise Open Items: ${parts.join(", ")}`);
+    step(ctx, "questionnaire", eng, `Enterprise Open Items: ${parts.join(", ")}`);
   }
   const allResolved = live.every((m) => m.fm.status === "resolved" && m.fm.draft !== true);
   const signed = brd.latest?.data.engagement.status === "signed-off";
-  if (brd.errors) step(ctx, "build-brd", `preview shows the ${brd.errors} error(s) to fix and which skill fixes each`);
+  if (brd.errors) step(ctx, "build-brd", eng, `preview shows the ${brd.errors} error(s) to fix and which skill fixes each`);
   else if (allResolved && (!brd.latest || brd.changes > 0)) {
-    step(ctx, "build-brd", `release v${brd.n}${brd.blockers.length ? ` (${brd.blockers.length} Sign-off blocker(s) to settle before signing)` : " (ready for Sign-off once released)"}`);
+    step(ctx, "build-brd", eng, `release v${brd.n}${brd.blockers.length ? ` (${brd.blockers.length} Sign-off blocker(s) to settle before signing)` : " (ready for Sign-off once released)"}`);
   } else if (brd.latest && !signed && brd.latestBlockers?.length === 0) {
-    step(ctx, "build-brd", `sign-off v${brd.latest.n} once its signed copy is in inputs/ and ingested`);
+    step(ctx, "build-brd", eng, `sign-off v${brd.latest.n} once its signed copy is in inputs/ and ingested`);
   } else if (signed && brd.changes === 0) {
     line(ctx, "done", `v${brd.latest.n} signed off; nothing changed since`);
   } else {
-    step(ctx, "build-brd", "preview any time to share progress");
+    step(ctx, "build-brd", eng, "preview any time to share progress");
   }
 }

@@ -229,6 +229,9 @@ Humans only drop files and read generated views. All working files live in agent
 148. As the plugin maintainer, I want an `upstream-check` tool that diffs upstream old pin → new tag and proposes a re-adapted edit that keeps How to talk, studio terms and facade paths, for me to accept per skill, so that upstream fixes reach the pack safely.
 149. As the plugin maintainer, I want to mark a skill `upstreamDiverged` with a reason, so that the check skips it.
 150. As the plugin maintainer, I want the upstream MIT notice shipped with the plugin, so that attribution is correct.
+151. As a Consultant, I want every user skill to end with "Next session:" and up to 3 next steps, most urgent first, so that I know what to run next without calling `studio`.
+152. As a Consultant, I want each next step as a runnable line `/neome-studio:<skill> <engagement-path> [<PREFIX>]` with a short why, so that I can copy-paste it into a fresh session.
+153. As a Consultant, I want those next steps to match what `studio` would say, so that the two never disagree.
 
 ## Implementation Decisions
 

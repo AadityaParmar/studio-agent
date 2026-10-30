@@ -13,19 +13,19 @@ disable-model-invocation: true
 
 Turn the `ingest` draft into a confirmed Module set the team can work from: one confirmed ticket per Module, a process skeleton with roles, every Engagement-wide topic covered, and a plan skeleton. The Consultant decides; you propose. Every fact cites a Source or is `(proposed, to confirm)`; every unknown becomes an Open Item.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Ticket fields and moves: [map-logic.md](../../reference/map-logic.md). File shapes: [review-shapes.md](references/review-shapes.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Ticket fields and moves: [map-logic.md](../../reference/map-logic.md). File shapes: [review-shapes.md](references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md).
 
 ## 1. Scope
 
 This conversation already ran `ingest` → ask the Consultant to start a new session and run `/neome-studio:review-draft` there; stop.
 
-Need `<ent>` and `<slug>`; ask if not given. Run `ENGINE module list <eng>` and read `_agent/general.md`, `process.md`, `plan.md`. The **work list**:
+Args: `<eng>` (`<ent> <slug>` also fine); ask if not given. Run `ENGINE module list <eng>` and read `_agent/general.md`, `process.md`, `plan.md`. The **work list**:
 
 - Modules shown `draft` (first run: all; re-run: only those a later `ingest` added).
 - Topics in `general.md` not yet covered (no GEN Requirement, no `N/A`, no `- OI-NN` bullet).
 - Process sections and plan placement missing for any draft Module (or no `process.md` tables / no `plan.md` yet).
 
-Empty work list → tell the Consultant the draft is already reviewed; suggest `/neome-studio:resolve-module`; stop. Done when the work list is fixed.
+Empty work list → tell the Consultant the draft is already reviewed; stop. Done when the work list is fixed.
 
 ## 2. Start
 
@@ -89,6 +89,9 @@ Tell the Consultant, short:
 - Process: lanes, steps count. Topics: each covered by Requirement, N/A or OI.
 - Plan: Modules per phase; Not yet placed. Weeks are theirs to set.
 - New Open Items (top 5 questions).
-- Next: `/neome-studio:resolve-module` (first frontier Module), or `/neome-studio:questionnaire` for the `All` Open Items.
 
 Add map change-log line `- YYYY-MM-DD: review-draft: <n> Modules confirmed, process skeleton, topics, plan skeleton.` Clear the lock, then End (git-protocol): `review-draft: <ent>/<slug> <n> Modules confirmed`. Stage with `git add -A <paths>` so renamed folders' old paths go too: the WS input, its text copy, the Source register, and every `_agent/` file written.
+
+## 8. Next session
+
+Last thing of every run, after End; every stop above ends here too. Follow [next-session.md](../../reference/next-session.md): `ENGINE status <eng> --who "<who>"`, up to 3 `step` lines as `/neome-studio:<skill> <args> — <why>`. Done when the block is shown.

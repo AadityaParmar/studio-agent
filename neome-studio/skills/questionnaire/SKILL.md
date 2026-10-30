@@ -16,11 +16,11 @@ upstreamVersion: 1.3.1
 
 Send the Enterprise its open Open Items as one Questionnaire, addressed to one named contact, so answers come back async. **Grill the send, not the subject**: ask the Consultant only who it goes to and which Modules; the Open Items already hold the questions. Each item carries a suggested answer the contact can say Yes to, or none when you cannot defend one.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git: [git-protocol.md](../../reference/git-protocol.md) (no Engagement lock). Item, order, master and views: [questionnaire-shapes.md](references/questionnaire-shapes.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git: [git-protocol.md](../../reference/git-protocol.md) (no Engagement lock). Item, order, master and views: [questionnaire-shapes.md](references/questionnaire-shapes.md). Next session: [next-session.md](../../reference/next-session.md).
 
 ## 1. The send
 
-Need `<ent>` and `<slug>`; ask if not given. Pull (git-protocol Start). Ask in one go:
+Args: `<eng>` (`<ent> <slug>` also fine); ask if not given. Pull (git-protocol Start). Ask in one go:
 
 - **To**: the one named Enterprise contact, and their role.
 - **Modules**: all (default), or the Modules to narrow to (`All` = the Engagement-wide ones).
@@ -65,3 +65,7 @@ Tell the Consultant, short:
 - Reply in any form: drop it in `enterprises/<ent>/inputs/`, then run `/neome-studio:ingest`; it reads the reply as a QA Source and proposes the answers OI by OI.
 
 End (git-protocol): `questionnaire: <ent>/<slug> <QN> to <name>, <n> items`. Stage `open-items.md`, `map.md`, `_agent/questionnaires/<QN>.md`, `questionnaires/<QN>.html`, `questionnaires/<QN>.txt`.
+
+## 6. Next session
+
+Last thing of every run, after End; every stop above ends here too. Follow [next-session.md](../../reference/next-session.md): `ENGINE status <eng> --who "<who>"`, up to 3 `step` lines as `/neome-studio:<skill> <args> — <why>`. Done when the block is shown.

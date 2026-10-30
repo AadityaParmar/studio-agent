@@ -102,6 +102,6 @@ Map change-log line: `- <date>: ingest: QA-n (reply to QN-…): <n> Open Items c
 
 ## Report
 
-Closed (Yes / Edit), still open (Don't know / no answer), new Open Items, Modules set needs-revisit (reason), GEN Requirements added or changed, terms agreed, holds. Next: `/neome-studio:resolve-module` for each revisit; `/neome-studio:questionnaire` to chase what is still open.
+Closed (Yes / Edit), still open (Don't know / no answer), new Open Items, Modules set needs-revisit (reason), GEN Requirements added or changed, terms agreed, holds. Next steps (revisits, chasing what is still open) come from the skill's Next session step.
 
 Commit: the reply in `inputs/`, `_agent/sources.md`, `_agent/sources/QA-n.md`, `open-items.md`, `general.md`, `process.md`, `map.md`, every ticket, `spec.md` and `prototype-data.json` touched, rebuilt Prototype views.

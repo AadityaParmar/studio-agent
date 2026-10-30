@@ -13,19 +13,19 @@ disable-model-invocation: true
 
 Take one Module from the frontier to `resolved` in this session: claim it, grill it, write its Module spec and Neome mapping, build its Prototype, close the ticket. Open Items may stay open; a gap is an Open Item, never a guess. A **revisit** (Module `needs-revisit`) is the same path, narrowed to what its `revisitReason` names.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier, claim, close, moves: [map-logic.md](../../reference/map-logic.md). Shapes of `process.md` and `general.md`: [review-shapes.md](../review-draft/references/review-shapes.md). The building blocks run no git; you commit what they hand back.
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier, claim, close, moves: [map-logic.md](../../reference/map-logic.md). Shapes of `process.md` and `general.md`: [review-shapes.md](../review-draft/references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md). The building blocks run no git; you commit what they hand back.
 
 ## 1. Scope
 
 One Module per session: this conversation already resolved a Module → ask the Consultant to start a new session; stop.
 
-Need `<ent>` and `<slug>`; ask if not given. Pull (git-protocol Start), then:
+Args: `<eng> [<PREFIX>]` (`<ent> <slug> [<PREFIX>]` also fine); ask if not given. Pull (git-protocol Start), then:
 
 ```
 ENGINE module frontier <eng>
 ```
 
-Show the `next` lines (revisits first) and who holds `claimed` ones. The Consultant picks one, else take the first `next`. Empty → say what blocks the Modules (`blocked`, `draft` → `/neome-studio:review-draft`); stop.
+Show the `next` lines (revisits first) and who holds `claimed` ones. `<PREFIX>` given → that Module; else the Consultant picks one, else take the first `next`. Empty → say what blocks the Modules (`blocked`, `draft`); stop.
 
 Ask the mode: **live** (Enterprise on the call, or the Consultant relays what they said) or **from Inputs**. Done when Module, mode and pass are fixed: pass = **revisit** when the line shows `needs-revisit` (carry its `revisitReason`), else **first pass**.
 
@@ -108,8 +108,11 @@ Tell the Consultant, short:
 - Prototype: `prototypes/<PREFIX>-<slug>.html` and its scenarios; send it to the Enterprise; feedback comes back as an Input through `/neome-studio:ingest`.
 - Shared edits: GEN Requirements, plan, process, moves; anything left as an Open Item for want of the lock.
 - Open Items still open (top 5).
-- Next: the next frontier Module in a new session, or `/neome-studio:questionnaire`.
 
 Clear the lock if you took it, then End (git-protocol): `resolve-module: <ent>/<slug> <PREFIX> resolved` (revisit: `<PREFIX> revisit resolved`; merge/split: `<PREFIX> merged into <TARGET>`). Stage with `git add -A <paths>`: every file the hand-backs list (WS input, its text copy, `sources.md`, `ticket.md`, `spec.md`, `prototype-data.json`, `open-items.md`), `process.md`, `general.md`, `plan.md`, `map.md`, the Prototype view, and renamed or removed paths.
 
-**Stopping early** (Consultant quits, a block fails): commit and push what is written, keeping the claim, and say how to resume: run `resolve-module` again on the same Module. The Consultant hands the Module back instead → `ENGINE module release <eng> <PREFIX> --who "<who>"`, then End. Lock taken → clear it first.
+**Stopping early** (Consultant quits, a block fails): commit and push what is written, keeping the claim. Next session shows how to resume (`resolve-module <eng> <PREFIX>`, claimed by you). The Consultant hands the Module back instead → `ENGINE module release <eng> <PREFIX> --who "<who>"`, then End. Lock taken → clear it first.
+
+## 10. Next session
+
+Last thing of every run, after End; every stop above ends here too. Follow [next-session.md](../../reference/next-session.md): `ENGINE status <eng> --who "<who>"`, up to 3 `step` lines as `/neome-studio:<skill> <args> — <why>`. Done when the block is shown.

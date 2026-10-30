@@ -13,7 +13,7 @@ disable-model-invocation: true
 
 Build the BRD with the engine, under the Engagement lock, and relay what it says in plain words with a next step. The engine is the only writer of the BRD data file, snapshots and pages: your writes are limited to the lock, the map change-log line, and plan weeks the Consultant gives. A BRD problem is fixed in the `_agent/` markdown by the skill that owns it, then the BRD is rebuilt.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). What each engine message means and its next step: [problems.md](references/problems.md). Data file, release and sign-off rules: [brd-data-schema.md](references/brd-data-schema.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). What each engine message means and its next step: [problems.md](references/problems.md). Data file, release and sign-off rules: [brd-data-schema.md](references/brd-data-schema.md). Next session: [next-session.md](../../reference/next-session.md).
 
 **Modes**:
 
@@ -23,7 +23,7 @@ Build the BRD with the engine, under the Engagement lock, and relay what it says
 
 ## 1. Scope
 
-Need `<ent>`, `<slug>` and the mode; ask if not given. "Build / show / refresh the BRD" = preview; "send / release a version" = release; "they signed" = sign-off. Done when all three are fixed.
+Args: `<eng> [<mode>]` (`<ent> <slug> [<mode>]` also fine). Need `<ent>`, `<slug>` and the mode; ask if not given. "Build / show / refresh the BRD" = preview; "send / release a version" = release; "they signed" = sign-off. Done when all three are fixed.
 
 ## 2. Check
 
@@ -89,7 +89,7 @@ Tell the Consultant, short:
 - Warnings, summed up (problems.md), each with its next step.
 - release: `v<N>`, change count by group, the summary line; send `v<N>.html` to the Enterprise (it prints to A4 with empty signature boxes). `note [sign-off]` lines → what must happen before this can be signed.
 - sign-off: `v<N>` signed by whom, evidence `<ID>`; Open Items still open; proposed items accepted; glossary terms agreed. Later changes go into a new release (`draft-for-review`).
-- Next: preview → the skill that fixes the top warning, or release when ready; release → wait for the Enterprise's comments or signed copy, both come back as Inputs through `/neome-studio:ingest`.
+- release: wait for the Enterprise's comments or signed copy; both come back as Inputs through `/neome-studio:ingest`.
 
 Clear the lock, then End (git-protocol). Message and files (paths under `<eng>/`):
 
@@ -98,3 +98,7 @@ Clear the lock, then End (git-protocol). Message and files (paths under `<eng>/`
 | preview | `build-brd: <ent>/<slug> preview` | `_agent/brd/brd-data.json`, `brd/preview.html`, `_agent/map.md` |
 | release | `build-brd: <ent>/<slug> release v<N>` | `_agent/brd/versions/v<N>.json`, `brd/v<N>.html`, `_agent/map.md`, `_agent/plan.md` if weeks were set |
 | sign-off | `build-brd: <ent>/<slug> sign-off v<N> [<ID>]` | `_agent/brd/versions/v<N>.json`, `brd/v<N>.html`, `_agent/map.md` |
+
+## 8. Next session
+
+Last thing of every run, after End; every stop above ends here too. Follow [next-session.md](../../reference/next-session.md): `ENGINE status <eng> --who "<who>"`, up to 3 `step` lines as `/neome-studio:<skill> <args> — <why>`. Done when the block is shown.

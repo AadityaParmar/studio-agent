@@ -83,6 +83,26 @@ test("description is required", () => {
   assert.match(r.out, /ingest: description missing/);
 });
 
+// User skills (`disable-model-invocation: true`) must end with the Next session step (ticket 45).
+const userSkill = (body) => ({ frontMatter: "name: ingest\ndescription: Register Inputs.\ndisable-model-invocation: true", body });
+const nextSession = "\n## 9. Next session\n\nFollow [next-session.md](../../reference/next-session.md).";
+
+test("user skill with the Next session step passes; building block needs none", () => {
+  assert.equal(check(makePlugin({ skills: { ingest: userSkill(goodBody + nextSession) } })).code, 0);
+  assert.equal(check(makePlugin({ skills: { ingest: good } })).code, 0, "no disable-model-invocation → building block");
+});
+
+test("user skill without the Next session step or its link fails", () => {
+  const none = check(makePlugin({ skills: { ingest: userSkill(goodBody) } }));
+  assert.equal(none.code, 1);
+  assert.match(none.out, /ingest: user skill without a `## <n>\. Next session` step/);
+  assert.match(none.out, /ingest: user skill does not link reference\/next-session\.md/);
+  const noLink = check(makePlugin({ skills: { ingest: userSkill(goodBody + "\n## 9. Next session\n\nRun status.") } }));
+  assert.equal(noLink.code, 1);
+  assert.doesNotMatch(noLink.out, /Next session` step/);
+  assert.match(noLink.out, /does not link reference\/next-session\.md/);
+});
+
 test("every error is reported, not just the first", () => {
   const r = check(makePlugin({
     skills: {

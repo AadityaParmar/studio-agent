@@ -160,9 +160,9 @@ test("status: frontier, Open Items to chase, BRD readiness and next steps; write
   assert.ok(l.includes("release | ready | v1 would log 0 change(s) since start | 10 warning(s)"));
   assert.ok(l.includes("signoff | next | blocked | Module QUO is needs-revisit; every Module must be resolved or merged"));
   assert.deepEqual(l.filter((x) => x.startsWith("step |")), [
-    "step | resolve-module | next: ENQ (one per session)",
-    "step | questionnaire | Enterprise Open Items: 2 to chase",
-    "step | build-brd | preview any time to share progress",
+    "step | resolve-module | enterprises/harbor-tiles/engagements/crm ENQ | next: ENQ (one per session)",
+    "step | questionnaire | enterprises/harbor-tiles/engagements/crm | Enterprise Open Items: 2 to chase",
+    "step | build-brd | enterprises/harbor-tiles/engagements/crm | preview any time to share progress",
   ]);
   assert.deepEqual(files(e.root), before);
 });
@@ -187,17 +187,21 @@ test("status: lock (who, skill, since, age), claims with since, holds, Inputs wa
   assert.ok(l.includes("input | confidential/salaries.csv | not in the Source register"));
   assert.ok(l.includes("input | inputs/call with joel.txt | not in the Source register"));
   assert.equal(stepSkills(mine.stdout)[0], "ingest");
-  assert.match(mine.stdout, /^step \| ingest \| 2 new Input\(s\) not registered yet$/m);
+  assert.match(mine.stdout, /^step \| ingest \| enterprises\/harbor-tiles\/engagements\/crm \| 2 new Input\(s\) not registered yet$/m);
+
+  // Own claim → resume it, Module prefix in the args (a stopped resolve-module session keeps its claim).
+  assert.match(mine.stdout, /^step \| resolve-module \| enterprises\/harbor-tiles\/engagements\/crm QUO \| resume QUO: claimed by you$/m);
 
   const ben = run(["status", e.eng, "--who", "Ben", "--now", now]);
   assert.match(ben.stdout, new RegExp(`^lock \\| Ben \\| build-brd \\| ${since} \\| 2h 5m \\| yours$`, "m"));
   assert.doesNotMatch(ben.stdout, /^claimed .*\| yours$/m);
+  assert.doesNotMatch(ben.stdout, /resume QUO/);
 
   // Resolved Module without its Prototype view → gap.
   const done = enterprise("resolve-module/after-resolve/harbor-tiles");
   assert.match(run(["status", done.eng]).stdout, /^gap \| QUO \| resolved without its Prototype: prototypes\/QUO-quotations\.html missing$/m);
   assert.match(run(["status", done.eng]).stdout, /^oi \| not asked \| OI-02, OI-03, OI-05/m);
-  assert.match(run(["status", done.eng]).stdout, /^step \| questionnaire \| Enterprise Open Items: 10 not asked yet$/m);
+  assert.match(run(["status", done.eng]).stdout, /^step \| questionnaire \| enterprises\/harbor-tiles\/engagements\/crm \| Enterprise Open Items: 10 not asked yet$/m);
 });
 
 test("status: draft Modules → review-draft; no Modules → ingest", () => {
@@ -205,14 +209,14 @@ test("status: draft Modules → review-draft; no Modules → ingest", () => {
   const r = run(["status", d.eng]);
   assert.equal(r.code, 0, r.out);
   assert.match(r.stdout, /^draft \| [A-Z]+ \| .* \| run review-draft$/m);
-  assert.match(r.stdout, /^step \| review-draft \| draft Module\(s\) to confirm: .* \(fresh session\)$/m);
+  assert.match(r.stdout, /^step \| review-draft \| enterprises\/harbor-tiles\/engagements\/crm \| draft Module\(s\) to confirm: .* \(fresh session\)$/m);
 
   const root = tmp("init");
   const ent = join(root, "acme");
   assert.equal(run(["init-engagement", ent, "crm", "--name", "Acme", "--title", "CRM"]).code, 0);
   const empty = run(["status", join(ent, "engagements", "crm")]);
   assert.equal(empty.code, 0, empty.out);
-  assert.match(empty.stdout, /^step \| ingest \| no Modules yet: drop Inputs in inputs\/, then ingest drafts them$/m);
+  assert.match(empty.stdout, /^step \| ingest \| enterprises\/acme\/engagements\/crm \| no Modules yet: drop Inputs in inputs\/, then ingest drafts them$/m);
 });
 
 test("status: BRD readiness through release and Sign-off", () => {
@@ -220,7 +224,7 @@ test("status: BRD readiness through release and Sign-off", () => {
   const first = run(["status", e.eng]);
   assert.match(first.stdout, /^release \| ready \| v1 would log 0 change\(s\) since start \| 3 warning\(s\)$/m);
   assert.match(first.stdout, /^signoff \| next \| ready$/m);
-  assert.match(first.stdout, /^step \| build-brd \| release v1 \(ready for Sign-off once released\)$/m);
+  assert.match(first.stdout, /^step \| build-brd \| enterprises\/harbor-tiles\/engagements\/crm \| release v1 \(ready for Sign-off once released\)$/m);
 
   // Broken reference → release blocked, errors listed, build-brd preview to see them all.
   const reg = join(e.ent, "_agent", "sources.md");
@@ -229,7 +233,7 @@ test("status: BRD readiness through release and Sign-off", () => {
   const broken = run(["status", e.eng]);
   assert.match(broken.stdout, /^release \| blocked \| \d+ error\(s\), \d+ warning\(s\)$/m);
   assert.match(broken.stdout, /^release \| error \| \[[a-z-]+\] .*CE-1/m);
-  assert.match(broken.stdout, /^step \| build-brd \| preview shows the \d+ error\(s\) to fix and which skill fixes each$/m);
+  assert.match(broken.stdout, /^step \| build-brd \| enterprises\/harbor-tiles\/engagements\/crm \| preview shows the \d+ error\(s\) to fix and which skill fixes each$/m);
   writeFileSync(reg, ok);
 
   assert.equal(run(["build-brd", e.eng, "--mode", "release", "--summary", "First version"]).code, 0);
@@ -237,7 +241,7 @@ test("status: BRD readiness through release and Sign-off", () => {
   assert.match(released.stdout, /^brd \| v1 draft-for-review \d{4}-\d{2}-\d{2}$/m);
   assert.match(released.stdout, /^signoff \| v1 \| ready$/m);
   assert.match(released.stdout, /^release \| ready \| v2 would log 0 change\(s\) since v1/m);
-  assert.match(released.stdout, /^step \| build-brd \| sign-off v1 once its signed copy is in inputs\/ and ingested$/m);
+  assert.match(released.stdout, /^step \| build-brd \| enterprises\/harbor-tiles\/engagements\/crm \| sign-off v1 once its signed copy is in inputs\/ and ingested$/m);
 
   appendFileSync(reg, "| SO-1 | sign-off | Signed BRD v1 | 2026-10-28 | inputs/SO-1-signed.pdf | crm | |\n");
   const signed = run(["build-brd", e.eng, "--mode", "sign-off", "--signers", "Asha Rao | Sales head | 2026-10-28", "Ravi Menon | Consultant | 2026-10-28", "--evidence", "SO-1"]);
@@ -261,13 +265,13 @@ test("status from the repo root: one line per Engagement; Enterprises with Input
     "enterprise | acme | no Engagement yet | 1 Input(s) waiting",
     "engagement | harbor-tiles/crm | Sales CRM | Modules: 1 next, 1 blocked | 3 open Open Item(s) | no lock",
     "status | 1 Engagement(s)",
-    "step | ingest | 1 Input(s) waiting to be registered",
+    "step | ingest |  | 1 Input(s) waiting to be registered",
   ]);
   assert.deepEqual(lines(run(["status", e.ent]).stdout).slice(-1), ["status | 1 Engagement(s)"]);
 
   const empty = tmp("empty");
   mkdirSync(join(empty, "enterprises"));
-  assert.match(run(["status", empty]).stdout, /^step \| ingest \| first run: drop the Enterprise's Inputs in enterprises\/<ent>\/inputs\//m);
+  assert.match(run(["status", empty]).stdout, /^step \| ingest \|  \| first run: drop the Enterprise's Inputs in enterprises\/<ent>\/inputs\//m);
   assert.equal(run(["status", tmp("nothing")]).code, 2);
   assert.equal(run(["status", e.eng, "--now", "soon"]).code, 2);
   assert.equal(run(["status", e.eng, "--force"]).code, 2);
@@ -291,6 +295,14 @@ test("status steps name only the six user skills, across every fixture Engagemen
     const skills = stepSkills(r.stdout);
     assert.ok(skills.length || /^done \|/m.test(r.stdout), `${eng}: no next step`);
     for (const s of skills) assert.ok(SIX.includes(s), `${eng}: step names ${s}`);
+    // Always 4 cells; args = the Engagement path, + one Module prefix for resolve-module only.
+    for (const l of lines(r.stdout).filter((x) => x.startsWith("step | "))) {
+      const cells = l.split(" | ");
+      assert.equal(cells.length, 4, `${eng}: ${l}`);
+      const re = cells[1] === "resolve-module" ? /^enterprises\/[a-z0-9-]+\/engagements\/[a-z0-9-]+ [A-Z]{2,5}$/ : /^enterprises\/[a-z0-9-]+\/engagements\/[a-z0-9-]+$/;
+      assert.match(cells[2], re, `${eng}: ${l}`);
+      assert.ok(cells[3].trim(), `${eng}: ${l}`);
+    }
   }
 });
 
@@ -373,7 +385,7 @@ test("stale lock and claim: cleared with --force after asking, one studio commit
   assert.match(after.stdout, /^lock \| none$/m);
   assert.doesNotMatch(after.stdout, /^claimed \|/m);
   assert.match(after.stdout, /^blocked \| QUO \| Quotations \| is blocked by ENQ/m);
-  assert.match(after.stdout, /^step \| resolve-module \| next: ENQ \(one per session\)$/m);
+  assert.match(after.stdout, /^step \| resolve-module \| enterprises\/harbor-tiles\/engagements\/crm ENQ \| next: ENQ \(one per session\)$/m);
   assert.equal(git(ravi, env, "status", "--porcelain").out, "");
   // Ben pulls: lock gone on his side too.
   assert.equal(git(ben, env, "pull", "--rebase", "--autostash").code, 0);

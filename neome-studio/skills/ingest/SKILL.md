@@ -13,11 +13,11 @@ disable-model-invocation: true
 
 Turn Inputs dropped in `enterprises/<ent>/inputs/` and `confidential/` into Sources and a cited draft, and read Questionnaire replies back into the record. Every fact cites a Source or is `(proposed, to confirm)`. Every gap becomes an Open Item.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Draft file shapes: [draft-shapes.md](references/draft-shapes.md). Ticket fields: [map-logic.md](../../reference/map-logic.md). Questionnaire replies: [reply-loop.md](references/reply-loop.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Draft file shapes: [draft-shapes.md](references/draft-shapes.md). Ticket fields: [map-logic.md](../../reference/map-logic.md). Questionnaire replies: [reply-loop.md](references/reply-loop.md). Next session: [next-session.md](../../reference/next-session.md).
 
 ## 1. Scope
 
-Need `<ent>` (Enterprise folder, kebab-case) and `<slug>` (Engagement, kebab-case, no dates). Ask the Consultant if not given. List files in `inputs/` and `confidential/` whose path is not in the `file` column of `_agent/sources.md`: these are the **new Inputs**.
+Args: `<eng>` = `enterprises/<ent>/engagements/<slug>` (`<ent> <slug>` also fine). Need `<ent>` (Enterprise folder, kebab-case) and `<slug>` (Engagement, kebab-case, no dates). Ask the Consultant if not given. List files in `inputs/` and `confidential/` whose path is not in the `file` column of `_agent/sources.md`: these are the **new Inputs**.
 
 - No new Inputs → say so, stop.
 - A new Input is a Questionnaire **reply** (names a `QN-…`, quotes OI IDs, or answers the numbered items of a sent Questionnaire in `_agent/questionnaires/`) → note which QN it answers; ask the Consultant when unsure. A reply pasted into the chat → save it verbatim as `inputs/<contact>-reply.md` first.
@@ -84,6 +84,9 @@ Tell the Consultant, short:
 - Modules: prefix · name · Requirements count.
 - Engagement-wide Requirements count; Open Items count (top 5 questions).
 - Glossary terms added, updated, disputed.
-- Next: new session, `/neome-studio:review-draft` (after drafting); reply-loop Report's next step (after replies only).
 
 Add the map change-log line(s). Clear the lock, then End (git-protocol): `ingest: <ent>/<slug> <n> Sources, <n> Modules drafted` (replies only: `ingest: <ent>/<slug> QA-n reply to <QN>, <n> Open Items closed`). Include renamed Inputs, `_agent/` files and the Engagement folder.
+
+## 9. Next session
+
+Last thing of every run, after End; every stop above ends here too. Follow [next-session.md](../../reference/next-session.md): `ENGINE status <eng> --who "<who>"`, up to 3 `step` lines as `/neome-studio:<skill> <args> — <why>`. Done when the block is shown.

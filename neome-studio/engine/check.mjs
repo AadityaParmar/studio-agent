@@ -1,5 +1,7 @@
 // Pack lint: every skill keeps the How to talk block verbatim and valid front-matter;
-// cloned skills pin their upstream, and the upstream licence ships while any do.
+// cloned skills pin their upstream, and the upstream licence ships while any do;
+// every user skill (`disable-model-invocation: true`) ends with the Next session step (ticket 45):
+// a `## <n>. Next session` heading that links reference/next-session.md.
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -57,6 +59,10 @@ function checkSkill(dir, name) {
     else if (!/^\d+\.\d+\.\d+$/.test(String(fm.upstreamVersion))) {
       errors.push(`upstreamVersion "${fm.upstreamVersion}" is not a version like 1.3.1`);
     }
+  }
+  if (fm["disable-model-invocation"] === true) {
+    if (!/^## \d+\. Next session$/m.test(text)) errors.push("user skill without a `## <n>. Next session` step");
+    if (!text.includes("](../../reference/next-session.md)")) errors.push("user skill does not link reference/next-session.md");
   }
   if (fm.upstreamDiverged !== undefined && !String(fm.upstreamDiverged ?? "").trim()) {
     errors.push("upstreamDiverged needs a reason");

@@ -27,7 +27,7 @@ Modules ready to take, in map order:
 - `status: open` or `needs-revisit`, and
 - every `blockedBy` prefix is `resolved` or `merged-into` a resolved Module.
 
-`needs-revisit` first (shorter pass), then `open`. `claimed` = someone is on it; show `claimedBy`. Empty frontier with Modules still open = blocked; show what blocks them. `ENGINE module frontier <eng>` prints it: `next | <P> | <name> | <status>[ | revisitReason]`, then `draft`, `claimed | … | by <who>`, `blocked | … | <why>`, `resolved` lines. `ENGINE status <eng>` (read-only, used by `studio`) prints the same lines, claims with `since <date>` from the change log.
+`needs-revisit` first (shorter pass), then `open`. `claimed` = someone is on it; show `claimedBy`. Empty frontier with Modules still open = blocked; show what blocks them. `ENGINE module frontier <eng>` prints it: `next | <P> | <name> | <status>[ | revisitReason]`, then `draft`, `claimed | … | by <who>`, `blocked | … | <why>`, `resolved` lines. `ENGINE status <eng>` (read-only, used by `studio` and every user skill's Next session step) prints the same lines, claims with `since <date>` from the change log.
 
 ## Claim
 
