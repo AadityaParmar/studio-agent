@@ -31,7 +31,7 @@ A signed-off BRD for Field Operations.
 | RPT | Reports and Dashboards | resolved |
 | COM | Communication | resolved |
 | AI | AI Features | resolved |
-| SAP | SAP Integration | open |
+| SAP | SAP Integration | claimed |
 
 ## Change log
 
@@ -81,3 +81,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: COM resolved.
 - 2026-10-30: resolve-module: AI claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: AI resolved.
+- 2026-10-30: resolve-module: SAP claimed by Aditya Parmar.

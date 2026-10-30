@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: SAP
 name: SAP Integration
 blockedBy: [MST, VB]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # SAP — SAP Integration
