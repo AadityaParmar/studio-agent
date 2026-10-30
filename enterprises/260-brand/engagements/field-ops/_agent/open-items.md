@@ -14,7 +14,7 @@
 | OI-10 | Customers, products and employees can change in both SAP and neome. Which is the system of record per data type, and which change wins on a clash? | SAP, MST | Enterprise | Owner | SAP is system of record (proposed, to confirm) | open | | |
 | OI-11 | How often should each data type sync (customers, products, employees, stock)? Should invoices go to SAP at once? | SAP, INV, VB | Enterprise | Owner | | open | | |
 | OI-12 | Which existing SAP data loads at start (customers, products, employees, open balances, history), and how many records? | All, SAP | Enterprise | Owner | | open | | |
-| OI-13 | What is "Change Requests" (RFP-1 scope item 31, Pending)? | All | Enterprise | Owner | | open | | |
+| OI-13 | What is "Change Requests" (RFP-1 scope item 31, Pending)? | All | Enterprise | Owner | | closed | | WS-6 |
 | OI-14 | Customer Category and Classification: what values? | MST | Enterprise | Sales Head | | open | | |
 | OI-15 | TPIN: confirm it is the tax ID, its format, and if it is required. | MST | Enterprise | Owner | | open | | |
 | OI-16 | Customer Code: made by neome, typed in, or taken from SAP? | MST, SAP | Enterprise | Owner | | open | | |
@@ -42,7 +42,7 @@
 | OI-38 | Invoice made in neome: format, numbering, tax; given to the customer how (print, WhatsApp)? | VB, SAP | Enterprise | Owner | | closed | | WS-5 |
 | OI-39 | Must every visit have an order? If no order, is a reason recorded? | VB, RPT | Enterprise | Sales Supervisor | | closed | | WS-5 |
 | OI-40 | Product Catalog (RFP-1 scope item 10): what does it show Sales Agents beyond the Product Master (images, price, stock)? | VB | Enterprise | Sales Supervisor | | closed | | WS-5 |
-| OI-41 | Lead: what fields, who follows it up, statuses, and when does a Lead become a Customer? RFP-1 has no Lead form. | LEAD | Enterprise | Sales Head | | open | | |
+| OI-41 | Lead: what fields, who follows it up, statuses, and when does a Lead become a Customer? RFP-1 has no Lead form. | LEAD | Enterprise | Sales Head | | closed | | WS-6 |
 | OI-42 | Who does Marketing Visits: Tricycle Rider (RFP-1 §3 and overall flow chart), Sales Agent (Marketing visit diagram) or "sales or marketing staff" (form text)? | MKT | Enterprise | Sales Head | | open | | |
 | OI-43 | Marketing Visit: diagram picks a customer (Beat Master, Route Master); form types Customer name, mobile, address, email. Which? Visit type values? | MKT | Enterprise | Sales Head | | open | | |
 | OI-44 | School, Farm and Door to door Visits: who does them, what is their goal, and what is "D2D - Nurtamilk"? | MKT | Enterprise | Sales Head | | open | | |

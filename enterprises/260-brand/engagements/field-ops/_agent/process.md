@@ -87,7 +87,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| add-lead | agent | LEAD | Add Lead | Lead Sheet/Report | step | OI-41 | RFP-1 |
+| add-lead | agent | LEAD | Add Lead | Shop, owner, phone, address, GEO, Category, notes; Status New | step | | RFP-1, WS-6 |
+| follow-up-lead | agent | LEAD | Follow up Lead | Status: New, Contacted, Interested, Lost | step | | WS-6 |
+| convert-lead | agent | LEAD | Convert Lead to Customer | Raises a Change Request; Lead Converted | step | | WS-6 |
+| approve-lead-customer | supervisor | LEAD | Approve new Customer | Change Request approved; push to agent | step | | WS-6 |
+| view-leads | supervisor | LEAD | View Lead Sheet/Report | Own Leads for agent; all for Supervisor and above; Excel | step | | RFP-1, WS-6 |
 
 ## MKT — Marketing Visits
 
@@ -187,6 +191,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-visit | add-complaint | complaint | yes | RFP-1 |
 | add-visit | record-feedback | feedback | yes | RFP-1 |
 | add-visit | add-lead | new lead | yes | RFP-1 |
+| add-lead | follow-up-lead | | no | WS-6 |
+| follow-up-lead | convert-lead | interested | no | WS-6 |
+| convert-lead | approve-lead-customer | Change Request | no | WS-6 |
+| approve-lead-customer | sync-masters | new Customer, neome to SAP | no | WS-6 |
+| add-lead | view-leads | | yes | RFP-1, WS-6 |
 | add-complaint | resolve-complaint | | no | RFP-1 |
 | resolve-complaint | send-whatsapp | resolution message | yes | RFP-1 |
 | assign-beats | add-marketing-visit | | yes | RFP-1 |

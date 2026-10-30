@@ -1,0 +1,428 @@
+{
+ "entity": "Lead",
+ "roles": [
+  {
+   "role": "Sales Agent",
+   "person": "Bwalya",
+   "reqs": [
+    "LEAD-01",
+    "LEAD-02",
+    "LEAD-03",
+    "LEAD-04"
+   ]
+  },
+  {
+   "role": "Sales Supervisor",
+   "person": "Mutale",
+   "reqs": [
+    "LEAD-03",
+    "LEAD-04"
+   ]
+  },
+  {
+   "role": "Area Sales Manager",
+   "person": "Natasha",
+   "reqs": [
+    "LEAD-04"
+   ]
+  },
+  {
+   "role": "Regional Sales Manager",
+   "person": "Kelvin",
+   "reqs": [
+    "LEAD-04"
+   ]
+  },
+  {
+   "role": "Sales Head",
+   "person": "Ruth",
+   "reqs": [
+    "LEAD-04"
+   ]
+  },
+  {
+   "role": "Owner",
+   "person": "Joseph",
+   "reqs": [
+    "LEAD-04"
+   ]
+  }
+ ],
+ "fields": [
+  {
+   "entity": "Lead",
+   "name": "Shop name",
+   "reqs": [
+    "LEAD-01"
+   ]
+  },
+  {
+   "entity": "Lead",
+   "name": "Category",
+   "reqs": [
+    "LEAD-01",
+    "LEAD-04"
+   ]
+  },
+  {
+   "entity": "Lead",
+   "name": "Status",
+   "reqs": [
+    "LEAD-02",
+    "LEAD-04"
+   ]
+  },
+  {
+   "entity": "Lead",
+   "name": "Sales Agent",
+   "reqs": [
+    "LEAD-01",
+    "LEAD-02"
+   ]
+  }
+ ],
+ "transitions": [
+  {
+   "from": "new",
+   "to": "contacted",
+   "action": "Mark contacted",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "LEAD-02"
+   ],
+   "rules": [
+    "Owner of Lead"
+   ]
+  },
+  {
+   "from": "contacted",
+   "to": "interested",
+   "action": "Mark interested",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "LEAD-02"
+   ],
+   "rules": [
+    "Owner of Lead"
+   ]
+  },
+  {
+   "from": "interested",
+   "to": "converted",
+   "action": "Convert to Customer",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "LEAD-03"
+   ],
+   "rules": [
+    "Convert to Customer",
+    "Final statuses"
+   ],
+   "notify": [
+    "Sales Supervisor"
+   ]
+  },
+  {
+   "from": "new",
+   "to": "lost",
+   "action": "Mark lost",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "LEAD-02"
+   ],
+   "rules": [
+    "Final statuses"
+   ]
+  },
+  {
+   "from": "contacted",
+   "to": "lost",
+   "action": "Mark lost",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "LEAD-02"
+   ],
+   "rules": [
+    "Final statuses"
+   ]
+  },
+  {
+   "from": "interested",
+   "to": "lost",
+   "action": "Mark lost",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "LEAD-02"
+   ],
+   "rules": [
+    "Final statuses"
+   ]
+  }
+ ],
+ "rules": [
+  {
+   "rule": "Owner of Lead",
+   "reqs": [
+    "LEAD-01",
+    "LEAD-02"
+   ]
+  },
+  {
+   "rule": "Convert to Customer",
+   "reqs": [
+    "LEAD-03"
+   ]
+  },
+  {
+   "rule": "Final statuses",
+   "reqs": [
+    "LEAD-02"
+   ]
+  },
+  {
+   "rule": "Push",
+   "reqs": [
+    "LEAD-03"
+   ]
+  }
+ ],
+ "reports": [
+  {
+   "name": "Lead Sheet/Report",
+   "reqs": [
+    "LEAD-04"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "id": "L-301",
+   "status": "new",
+   "values": {
+    "Shop name": "Chilenje Fresh Store",
+    "Owner name": "Mercy Banda",
+    "Phone": "0971 000 111",
+    "Address": "Chilenje, Lusaka",
+    "Category": "Retail Shop",
+    "Date": "2026-11-02",
+    "Sales Agent": "Bwalya M."
+   },
+   "children": {},
+   "log": [
+    [
+     "09:20",
+     "Bwalya M.",
+     "Added Lead"
+    ]
+   ]
+  },
+  {
+   "id": "L-302",
+   "status": "contacted",
+   "values": {
+    "Shop name": "Kabwata Wholesale",
+    "Owner name": "Joe Phiri",
+    "Phone": "0972 000 222",
+    "Address": "Kabwata, Lusaka",
+    "Category": "Wholesaler",
+    "Date": "2026-11-01",
+    "Sales Agent": "Temwani K."
+   },
+   "children": {}
+  },
+  {
+   "id": "L-303",
+   "status": "interested",
+   "values": {
+    "Shop name": "Woodlands Mart",
+    "Owner name": "Grace Zulu",
+    "Phone": "0973 000 333",
+    "Address": "Woodlands, Lusaka",
+    "Category": "Supermarket",
+    "Date": "2026-10-30",
+    "Sales Agent": "Bwalya M."
+   },
+   "children": {},
+   "log": [
+    [
+     "14:05",
+     "Bwalya M.",
+     "Owner wants prices and credit"
+    ]
+   ]
+  },
+  {
+   "id": "L-304",
+   "status": "converted",
+   "values": {
+    "Shop name": "Kalingalinga Tuck",
+    "Owner name": "Peter Mwale",
+    "Phone": "0974 000 444",
+    "Address": "Kalingalinga, Lusaka",
+    "Category": "Retail Shop",
+    "Date": "2026-10-20",
+    "Sales Agent": "Mulenga C."
+   },
+   "children": {},
+   "log": [
+    [
+     "16:00",
+     "Mulenga C.",
+     "Converted; Change Request approved by Mutale (Sales Supervisor)"
+    ]
+   ]
+  },
+  {
+   "id": "L-305",
+   "status": "lost",
+   "values": {
+    "Shop name": "Matero Basic School",
+    "Owner name": "Ruth Tembo",
+    "Phone": "0975 000 555",
+    "Address": "Matero, Lusaka",
+    "Category": "School",
+    "Date": "2026-10-18",
+    "Sales Agent": "Temwani K."
+   },
+   "children": {}
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Lead to Customer",
+   "summary": "Agent adds a Lead, follows it up, converts it; Supervisor approves the new Customer.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Add a Lead for Chilenje Fresh Store with shop, owner, phone, address, GEO, Category and notes; it starts New",
+     "row": "L-301",
+     "screen": "record",
+     "proves": [
+      "LEAD-01"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Call the owner and mark the Lead contacted",
+     "row": "L-301",
+     "transition": {
+      "from": "new",
+      "to": "contacted"
+     },
+     "proves": [
+      "LEAD-02"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Owner wants to stock Nurtamilk; mark interested",
+     "row": "L-302",
+     "transition": {
+      "from": "contacted",
+      "to": "interested"
+     },
+     "proves": [
+      "LEAD-02"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Convert the Lead; a Change Request for a new Customer goes to the Sales Supervisor, then SAP after approval",
+     "row": "L-303",
+     "transition": {
+      "from": "interested",
+      "to": "converted"
+     },
+     "proves": [
+      "LEAD-03"
+     ]
+    },
+    {
+     "actor": "Sales Supervisor",
+     "action": "Approve the Change Request; the agent gets a push",
+     "screen": "rules",
+     "proves": [
+      "LEAD-03"
+     ]
+    },
+    {
+     "actor": "Sales Supervisor",
+     "action": "Open the Lead Sheet/Report, filter by agent and Status, see Leads converted per month, export to Excel",
+     "screen": "report",
+     "report": "Lead Sheet/Report",
+     "proves": [
+      "LEAD-04"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Lead lost",
+   "summary": "Lead not interested; Lost is final, agent adds a new Lead later.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Mark the Lead lost; it cannot be changed or reopened",
+     "row": "L-302",
+     "transition": {
+      "from": "contacted",
+      "to": "lost"
+     },
+     "proves": [
+      "LEAD-02"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "A Lead that is still New can also be marked lost",
+     "row": "L-301",
+     "transition": {
+      "from": "new",
+      "to": "lost"
+     },
+     "proves": [
+      "LEAD-02"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "An Interested Lead can be marked lost",
+     "row": "L-303",
+     "transition": {
+      "from": "interested",
+      "to": "lost"
+     },
+     "proves": [
+      "LEAD-02"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "No network in the field",
+   "summary": "Agent adds a Lead offline; it syncs later.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Add a Lead with no network; it shows in the Lead Sheet/Report after sync",
+     "screen": "sheet",
+     "proves": [
+      "LEAD-01"
+     ]
+    }
+   ]
+  }
+ ]
+}
