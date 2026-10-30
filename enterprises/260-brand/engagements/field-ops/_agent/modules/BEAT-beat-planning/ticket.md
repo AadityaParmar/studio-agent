@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: BEAT
 name: Beat Planning
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # BEAT — Beat Planning
