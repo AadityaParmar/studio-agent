@@ -24,8 +24,8 @@
 | OI-20 | Are Stores (modern trade) also Customers in the Customer Master, or a separate list only? | MST, MT | Enterprise | Sales Head | | open | | |
 | OI-21 | Customer GEO Tagging: who captures the location and when (on adding the customer, on first visit)? Who can change it? | MST | Enterprise | Sales Supervisor | | open | | |
 | OI-22 | Casual and Sick Leave Balance: who sets them, yearly quota, accrual, carry forward? | MST, LEAVE | Enterprise | Owner | | open | | |
-| OI-23 | Beat Planning: only Employee - Beat Mapping (beats on the Employee), or a day-wise plan of which beat on which day? | BEAT | Enterprise | Sales Supervisor | | open | | |
-| OI-24 | Can one Beat be assigned to many employees at once? | BEAT | Enterprise | Sales Supervisor | | open | | |
+| OI-23 | Beat Planning: only Employee - Beat Mapping (beats on the Employee), or a day-wise plan of which beat on which day? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
+| OI-24 | Can one Beat be assigned to many employees at once? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
 | OI-25 | Arrival Status On Time / Late: what start time and grace period? Same for all or per employee? | ATT | Enterprise | Owner | | open | | |
 | OI-26 | Camera verification on clock in/out: photo only, or face match? Is location captured too? | ATT | Enterprise | Owner | | open | | |
 | OI-27 | Overtime: RFP-1 describes it with the Attendance text ("Records clock-in/out times along with camera verification"). What is Overtime for, who approves it, what Status values? | ATT | Enterprise | Owner | | open | | |
@@ -73,7 +73,7 @@
 | OI-69 | Training: who needs it (field staff, supervisors, owner), in what form (on-site, video, train-the-trainer), and when? | All | Enterprise | Owner | | open | | |
 | OI-70 | Support after go-live: who supports users, in which hours, through which channel? | All | Enterprise | Owner | | open | | |
 | OI-71 | Masters: what goes wrong today with the master lists, and which number shows success (KPI)? No Source says. | MST | Enterprise | Owner | | open | | |
-| OI-72 | Master records: do they get Active / Inactive status instead of delete? When a Beat is made inactive or moved to another Route, what happens to its Customers and Employees? | MST | Enterprise | Owner | Active / Inactive; inactive hidden from pick lists, linked records keep history (proposed, to confirm) | open | | |
+| OI-72 | Master records: do they get Active / Inactive status instead of delete? When a Beat is made inactive or moved to another Route, what happens to its Customers and Employees? | MST, BEAT | Enterprise | Owner | Active / Inactive; inactive hidden from pick lists, linked records keep history (proposed, to confirm) | open | | |
 | OI-73 | Which master lists or exports do you need (for example Customers by Beat)? | MST | Enterprise | Owner | Sheet per master, filter by Beat / Route / Category, export to Excel (proposed, to confirm) | open | | |
 | OI-74 | Who in 260 Brands owns SAP and the link to neome on your side? | MST, SAP | Enterprise | Owner | | open | | |
 | OI-75 | Confirm the proposed priority, Scope tag and acceptance criteria of: MST-01, MST-02, MST-03, MST-04, MST-05, MST-06, MST-07, MST-08 | All | Enterprise | Owner | As proposed in the BRD (proposed, to confirm) | open | | |

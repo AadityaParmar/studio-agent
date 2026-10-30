@@ -1,0 +1,69 @@
+{
+  "entity": "Beat",
+  "roles": [
+    {"role": "Sales Supervisor", "person": "Bwalya (Sales Supervisor)", "reqs": ["BEAT-01", "BEAT-03", "BEAT-04", "BEAT-05", "BEAT-07"]},
+    {"role": "Area Sales Manager", "person": "Natasha (Area Sales Manager)", "reqs": ["BEAT-01", "BEAT-07"]},
+    {"role": "Owner", "person": "Chanda (Owner)", "reqs": ["BEAT-05"]},
+    {"role": "Sales Agent", "person": "Mwila (Sales Agent)", "reqs": ["BEAT-02", "BEAT-06"]},
+    {"role": "Tricycle Rider", "person": "Kalu (Tricycle Rider)", "reqs": ["BEAT-01", "BEAT-04"]}
+  ],
+  "fields": [
+    {"entity": "Beat", "name": "Beat Status", "reqs": ["BEAT-05"]},
+    {"entity": "Employee - Beat Mapping", "name": "Employee", "reqs": ["BEAT-01"]},
+    {"entity": "Employee - Beat Mapping", "name": "Beat", "reqs": ["BEAT-01", "BEAT-04"]},
+    {"entity": "Weekly Beat Plan", "name": "Weekday", "reqs": ["BEAT-03"]},
+    {"entity": "Weekly Beat Plan", "name": "Beat", "reqs": ["BEAT-03"]}
+  ],
+  "transitions": [
+    {"from": "active", "to": "inactive", "action": "Make Beat inactive", "by": ["Owner"], "reqs": ["BEAT-05"], "rules": ["Inactive Beat"]},
+    {"from": "inactive", "to": "active", "action": "Make Beat active", "by": ["Owner"], "reqs": ["BEAT-05"]}
+  ],
+  "rules": [
+    {"rule": "One Beat, one Sales Agent", "reqs": ["BEAT-04"]},
+    {"rule": "Customers of assigned Beats only", "reqs": ["BEAT-02", "BEAT-06"]},
+    {"rule": "Inactive Beat", "reqs": ["BEAT-05"]},
+    {"rule": "No approval", "reqs": ["BEAT-01", "BEAT-03"]}
+  ],
+  "reports": [
+    {"name": "Beat plan list", "reqs": ["BEAT-07"]}
+  ],
+  "rows": [
+    {"id": "B-01", "status": "active", "values": {"Beat": "Kabwata East", "Route": "Route South", "Beat Status": "Active"},
+     "children": {
+       "Employee - Beat Mapping": [{"Employee": "Mwila (Sales Agent)", "Beat": "Kabwata East"}, {"Employee": "Kalu (Tricycle Rider)", "Beat": "Kabwata East"}],
+       "Weekly Beat Plan": [{"Employee": "Mwila (Sales Agent)", "Weekday": "Monday", "Beat": "Kabwata East"}]
+     },
+     "log": [["2026-10-26 08:10", "Bwalya", "Mapped Mwila to Kabwata East"]]},
+    {"id": "B-02", "status": "active", "values": {"Beat": "Chilenje", "Route": "Route South", "Beat Status": "Active"},
+     "children": {
+       "Employee - Beat Mapping": [{"Employee": "Mwila (Sales Agent)", "Beat": "Chilenje"}],
+       "Weekly Beat Plan": [{"Employee": "Mwila (Sales Agent)", "Weekday": "Tuesday", "Beat": "Chilenje"}]
+     }},
+    {"id": "B-03", "status": "active", "values": {"Beat": "Matero North", "Route": "Route West", "Beat Status": "Active"},
+     "children": {
+       "Employee - Beat Mapping": [{"Employee": "Joyce (Sales Agent)", "Beat": "Matero North"}]
+     }},
+    {"id": "B-04", "status": "inactive", "values": {"Beat": "Old Soweto", "Route": "Route West", "Beat Status": "Inactive"},
+     "children": {"Employee - Beat Mapping": []}}
+  ],
+  "scenarios": [
+    {"title": "Assign Beats and plan the week", "summary": "Supervisor maps Beats to an agent, then plans each weekday; agent sees today's Beat.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Maps Beat Kabwata East and Beat Chilenje to Mwila, no approval needed", "row": "B-01", "screen": "record", "proves": ["BEAT-01"]},
+      {"actor": "Sales Supervisor", "action": "Plans Kabwata East on Monday and Chilenje on Tuesday for Mwila", "row": "B-02", "screen": "record", "proves": ["BEAT-03"]},
+      {"actor": "Sales Agent", "action": "On Monday, opens today's Beat and sees only Kabwata East customers first when placing an order", "row": "B-01", "screen": "record", "proves": ["BEAT-02"]},
+      {"actor": "Sales Agent", "action": "Goes offline and still opens today's Beat and its customers", "row": "B-01", "screen": "record", "proves": ["BEAT-06"]}
+    ]},
+    {"title": "One Beat, one Sales Agent", "summary": "A second Sales Agent cannot take a Beat that is held; a rider can share it.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Tries to map Matero North to a second Sales Agent: refused, Joyce still holds it", "row": "B-03", "screen": "rules", "proves": ["BEAT-04"]},
+      {"actor": "Sales Supervisor", "action": "Maps Matero North to Kalu (Tricycle Rider): allowed", "row": "B-03", "screen": "record", "proves": ["BEAT-04", "BEAT-01"]}
+    ]},
+    {"title": "Make a Beat inactive", "summary": "Owner makes a Beat inactive; employees unmapped, customers stay, Supervisor moves them.", "steps": [
+      {"actor": "Owner", "action": "Makes Chilenje inactive; Mwila is unmapped from it", "row": "B-02", "transition": {"from": "active", "to": "inactive"}, "proves": ["BEAT-05"]},
+      {"actor": "Sales Supervisor", "action": "Moves the Chilenje customers to Kabwata East", "row": "B-02", "screen": "record", "proves": ["BEAT-05"], "oi": "OI-72"},
+      {"actor": "Owner", "action": "Makes Old Soweto active again (proposed)", "row": "B-04", "transition": {"from": "inactive", "to": "active"}, "proves": ["BEAT-05"]}
+    ]},
+    {"title": "Beat plan list", "summary": "Supervisor checks who works which Beat.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Opens the Beat plan list and filters by agent Mwila", "screen": "report", "report": "Beat plan list", "proves": ["BEAT-07"]}
+    ]}
+  ]
+}

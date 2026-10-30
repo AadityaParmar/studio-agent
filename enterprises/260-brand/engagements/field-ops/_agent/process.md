@@ -32,7 +32,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| assign-beats | supervisor | BEAT | Assign Beats | Employee - Beat Mapping | step | OI-23 | RFP-1, IN-1 |
+| assign-beats | supervisor | BEAT | Assign Beats | Employee - Beat Mapping; one Sales Agent per Beat; no approval | step | | RFP-1, IN-1, WS-1 |
+| plan-week | supervisor | BEAT | Make Weekly Beat Plan | Beat per weekday, Monday to Saturday | step | | WS-1 |
+| see-todays-beat | agent | BEAT | See today's Beat | Works offline; customers of mapped Beats | step | | WS-1 |
+| make-beat-inactive | owner | BEAT | Make Beat inactive | Employees unmapped; customers stay | step | OI-72 | WS-1 |
+| move-customers | supervisor | BEAT | Move customers to another Beat | After a Beat goes inactive | step | | WS-1 |
 
 ## ATT — Attendance
 
@@ -173,3 +177,8 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | mt-record | mt-check-out | | no | RFP-1 |
 | mt-check-out | mt-review | | no | RFP-1 |
 | mt-record | planogram-suggest | shelf images | yes | (proposed, to confirm) |
+| assign-beats | plan-week | | no | WS-1 |
+| plan-week | see-todays-beat | | no | WS-1 |
+| see-todays-beat | add-visit | customer from Beat | no | RFP-1, WS-1 |
+| make-beat-inactive | move-customers | | yes | WS-1 |
+| move-customers | assign-beats | remap employees | yes | (proposed, to confirm) |
