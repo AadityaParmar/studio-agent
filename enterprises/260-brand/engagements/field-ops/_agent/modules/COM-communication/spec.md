@@ -2,8 +2,8 @@
 
 Prefix: COM
 Name: Communication
-Status: needs-revisit
-Sources: RFP-1, WS-12
+Status: resolved
+Sources: RFP-1, WS-12, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -86,7 +86,7 @@ Nothing goes to SAP. [WS-12]
 
 - WhatsApp: one invoice per order, about 700 orders a day, plus Resolved complaints. [WS-12]
 - Notices can be read offline; posting needs network. [WS-12]
-- OI-85: Notices per week.
+- Estimate 10 notices per week. [QA-1]
 
 ## 11 Requirements
 
