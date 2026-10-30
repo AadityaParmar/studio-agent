@@ -103,20 +103,20 @@ _Source_: RFP-1, WS-7 · _Status_: proposed · _Used in_: field-ops
 
 **Modern Trade**:
 Daily update for a modern trade Store: shelf photos, stock count, competitor activities, supervisor review.
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+_Source_: RFP-1, WS-8 · _Status_: proposed · _Used in_: field-ops
 
 **Store**:
-A modern trade store in the Store Master.
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+A modern trade store; also a Customer (Category Supermarket) flagged "Modern Trade".
+_Source_: RFP-1, WS-8 · _Status_: proposed · _Used in_: field-ops
 
 **Closing Stock Inventory**:
 Stock per product per Store from Modern Trade stock counts.
 _Avoid_: Closing stock
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+_Source_: RFP-1, WS-8 · _Status_: proposed · _Used in_: field-ops
 
 **Competitor**:
-A competing brand and its products, kept in the Competitor Master.
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+A competing brand and its products, kept in the Competitor Master by the Sales Supervisor.
+_Source_: RFP-1, WS-8 · _Status_: proposed · _Used in_: field-ops
 
 **Customer Complaint**:
 A customer's product quality complaint logged by an agent for resolution tracking.
