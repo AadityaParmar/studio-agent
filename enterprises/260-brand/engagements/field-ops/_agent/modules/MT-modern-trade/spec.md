@@ -2,8 +2,8 @@
 
 Prefix: MT
 Name: Modern Trade
-Status: needs-revisit
-Sources: RFP-1, WS-8
+Status: resolved
+Sources: RFP-1, WS-8, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -108,7 +108,7 @@ N/A: no integration; Closing Stock Inventory is report only and is not sent to S
 
 - 60 Sales Agents may fill updates; 8 Sales Supervisors review. [WS-8]
 - Works offline; updates sync when online. [WS-8]
-- OI-78: Updates per day, and number of Stores.
+- Estimate 30 Modern Trade updates per day across about 20 Stores. [QA-1]
 
 ## 11 Requirements
 

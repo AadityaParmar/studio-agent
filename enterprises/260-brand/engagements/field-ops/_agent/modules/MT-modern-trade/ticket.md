@@ -1,9 +1,9 @@
 ---
-status: claimed
+status: resolved
 prefix: MT
 name: Modern Trade
 blockedBy: [MST]
-revisitReason: "OI-78 answered: estimate 30 Modern Trade updates/day across about 20 Stores [QA-1]"
+revisitReason:
 formerly:
 claimedBy: Aditya Parmar
 ---
