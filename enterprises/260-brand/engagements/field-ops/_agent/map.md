@@ -29,7 +29,7 @@ A signed-off BRD for Field Operations.
 | CMP | Customer Complaints | resolved |
 | FB | Feedback | resolved |
 | RPT | Reports and Dashboards | resolved |
-| COM | Communication | open |
+| COM | Communication | claimed |
 | AI | AI Features | open |
 | SAP | SAP Integration | open |
 
@@ -77,3 +77,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: FB resolved.
 - 2026-10-30: resolve-module: RPT claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: RPT resolved.
+- 2026-10-30: resolve-module: COM claimed by Aditya Parmar.

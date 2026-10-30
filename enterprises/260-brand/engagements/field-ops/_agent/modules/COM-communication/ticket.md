@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: COM
 name: Communication
 blockedBy: [VB, CMP]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # COM — Communication
