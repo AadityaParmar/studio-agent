@@ -52,6 +52,18 @@ a.src{text-decoration:none}
 /* Mermaid SVG keeps its own look: undo page rules whose selectors also match Mermaid class names or tags.
    Mermaid's own #id-scoped rules still win (higher specificity). A test keeps this list complete. */
 .diagram svg .label{font-family:inherit;font-size:inherit;letter-spacing:normal;text-transform:none;margin:0;color:inherit}
+/* Zoom (screen, script on): toolbar + scroll box; page.js sets the SVG width. */
+.diagram.zoomable{overflow:visible;padding:0;text-align:left}
+.diagram .zbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--line-subtle)}
+.diagram .zbar button{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line-strong);background:#fff;border-radius:999px;padding:4px 11px;cursor:pointer;color:var(--ink-700);min-width:30px}
+.diagram .zbar button:hover{border-color:var(--ink-900)}
+.diagram .zbar .zpct{font-family:var(--mono);font-size:11.5px;color:var(--ink-700);min-width:44px;text-align:center}
+.diagram .zbar .zhint{font-size:12px;color:var(--ink-400);margin-left:auto}
+.diagram .zview{overflow:auto;max-height:80vh;padding:16px;cursor:grab}
+.diagram .zview.drag{cursor:grabbing;user-select:none}
+.diagram .zview svg{display:block;margin:0 auto;max-width:none}
+.diagram.zoomable:fullscreen{background:#fff;display:flex;flex-direction:column}
+.diagram.zoomable:fullscreen .zview{max-height:none;flex:1}
 .empty{color:var(--ink-400);font-size:13.5px}
 .logo{display:flex;gap:10px;align-items:center;font-weight:600;font-size:20px;color:var(--ink-900)}
 .logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--neome),var(--neome-deep));display:block}

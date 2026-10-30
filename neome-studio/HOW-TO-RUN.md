@@ -33,6 +33,33 @@ Zero to Sign-off, step by step. Terms per [GLOSSARY.md](../GLOSSARY.md). Full de
 
 Claude Code may ask to run `node neome-studio/engine/cli.mjs …`. Allow it.
 
+### Other AI tools (Codex, Gemini CLI, Cursor, Copilot, OpenCode…)
+
+Skills are plain `SKILL.md` folders. Engine is plain Node. Any agent that reads Agent Skills can run them. Do steps 1–4 above, then from repo root:
+
+1. **Link the skills** where your tool looks. One link, not a copy, so `git pull` updates it.
+   ```
+   ln -s ../neome-studio/skills .agents/skills      # Codex, Gemini CLI, Cursor, Copilot, OpenCode
+   ```
+   Tool only reads its own folder? Link that instead:
+
+   | Tool | Folder |
+   |---|---|
+   | Gemini CLI | `.gemini/skills` |
+   | Cursor | `.cursor/skills` |
+   | GitHub Copilot | `.github/skills` |
+   | OpenCode | `.opencode/skills` |
+   | Windsurf | `.windsurf/skills` |
+
+   Folder already there (even empty)? Remove it first: `rmdir .agents/skills`. Windows: `mklink /D .agents\skills ..\neome-studio\skills` (admin or Developer Mode).
+2. **Give it the rules.** Tools read `AGENTS.md` (Gemini: `GEMINI.md`), not `CLAUDE.md`: `ln -s CLAUDE.md AGENTS.md`.
+3. **Open the tool from repo root.** Skills run `node neome-studio/engine/cli.mjs …` from there. Allow it.
+4. **Run skills by name**, no `neome-studio:` prefix: `studio`, `ingest`, `review-draft`, `resolve-module`, `questionnaire`, `build-brd`. Type `/studio` (Codex: `$studio`), or say "run the studio skill". Everywhere below, `/neome-studio:<skill>` = that skill.
+5. **Start yourself.** Some tools ignore "user-run only" and may auto-start a skill. Always call the six above by hand.
+6. **Check**: run `studio`. All setup lines `ok`.
+
+Tool has no skill support? Point it at the file: "read `neome-studio/skills/studio/SKILL.md` and follow it".
+
 ---
 
 ## 1. Drop Inputs
