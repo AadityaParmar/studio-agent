@@ -2,11 +2,6 @@
 
 Look up what you want to change → touch these files → run these checks → bump these versions. Baseline: [v1/](v1/README.md) (tag `v1`). Docs index: [README.md](README.md). Terms per [GLOSSARY.md](../GLOSSARY.md).
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 ---
 
 ## 1. Process for any change
@@ -19,7 +14,7 @@ Look up what you want to change → touch these files → run these checks → b
 
 ## 2. Invariants (break only by explicit decision)
 
-- How to talk block verbatim in every skill (`neome-studio/reference/how-to-talk.md`; `check` enforces).
+- How to talk lives only in root `CLAUDE.md`, for text humans read; no skill or doc copies it (`check` enforces for skills).
 - Facade: humans touch only `inputs/`, `confidential/`; views (`brd/`, `prototypes/`, `questionnaires/`) are rebuilt, never read back.
 - Markdown in `_agent/` = truth. JSON built, never hand-edited.
 - Every fact cites a Source or is `(proposed, to confirm)`. Gaps → Open Items.
@@ -37,7 +32,7 @@ Paths under `neome-studio/` unless rooted.
 | **A term / new concept** | `GLOSSARY.md`, `GLOSSARY-MAP.md` | every skill text using it; `CLAUDE.md` if rule | `npm test`, grep old word |
 | **Root agent rules** | `CLAUDE.md` | README Rules of thumb | — |
 | **Consultant docs** | `README.md`, `neome-studio/HOW-TO-RUN.md` | `neome-studio/README.md` (maintainer) | `engine/test/readmes.test.mjs` |
-| **Add / rename a skill** | `skills/<name>/SKILL.md` (front-matter + How to talk) | `studio` skill table (if user skill), `engine/status.mjs` step lines, `reference/next-session.md`, READMEs, D02 | `check`, `studio.test.mjs` |
+| **Add / rename a skill** | `skills/<name>/SKILL.md` (front-matter) | `studio` skill table (if user skill), `engine/status.mjs` step lines, `reference/next-session.md`, READMEs, D02 | `check`, `studio.test.mjs` |
 | **Skill behaviour (text)** | `skills/<name>/SKILL.md` + `references/` | — | `npm test` + evals |
 | **Question bank / grilling topics** | `skills/grill-module/references/question-bank.md`, `grill-shapes.md` | spec template if new section | evals |
 | **Module spec sections / Requirement block** | `skills/write-module-spec/references/spec-template.md`, `spec-example.md` | `engine/brd/read-engagement.mjs`, `engine/spec-check.mjs`, schema, `engine/test/fixtures/` | `write-module-spec.test.mjs`, `build-brd.test.mjs` |

@@ -2,11 +2,6 @@
 
 Start here to change the `neome-studio` plugin. Consultants running the plugin read the [repo README](../README.md) instead. Terms per [GLOSSARY.md](../GLOSSARY.md).
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 ## Read in this order
 
 1. [route.md](route.md): "I want to change X" → files to touch, checks, versions to bump. Process for any change.
@@ -29,7 +24,7 @@ Start here to change the `neome-studio` plugin. Consultants running the plugin r
 | [../neome-studio/HOW-TO-RUN.md](../neome-studio/HOW-TO-RUN.md) | Consultant step-by-step, zero to Sign-off |
 | [../neome-studio/evals/README.md](../neome-studio/evals/README.md) | evals: run, scorecard, thresholds (parsed by `scorecard.mjs`), eyeball checklist |
 | [../neome-studio/maintainer/upstream-check.md](../neome-studio/maintainer/upstream-check.md) | upstream skills bump driver |
-| [../neome-studio/reference/](../neome-studio/reference/) | runtime refs skills load: how-to-talk, git protocol, map logic, next session, Neome App catalog |
+| [../neome-studio/reference/](../neome-studio/reference/) | runtime refs skills load: git protocol, map logic, next session, Neome App catalog |
 
 Docs inside `neome-studio/` stay there: tests and the engine read them by path.
 

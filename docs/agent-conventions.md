@@ -2,11 +2,6 @@
 
 How engineering skills (mattpocock-skills etc.) use this repo: issue tracker, triage labels, domain docs. Merged from the old `docs/agents/{issue-tracker,triage-labels,domain}.md`.
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 ## Issue tracker: local markdown
 
 Issues and specs live as markdown under `.scratch/` (created on demand; one folder per live effort). Finished efforts move to `docs/v<N>/history/` at release.

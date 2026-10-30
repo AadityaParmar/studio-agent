@@ -2,6 +2,8 @@
 
 ## How to talk
 
+For text humans read, in every skill (chat replies, Questionnaires). Agent-to-agent text (subagent prompts, hand-backs between skills) is exempt.
+
 - Simple English. No fancy words. Short.
 - Be extremely concise. Sacrifice grammar for concision.
 
