@@ -1,0 +1,62 @@
+{
+  "entity": "Sync record",
+  "roles": [
+    {"role": "Owner", "person": "Joseph", "reqs": ["SAP-02", "SAP-03", "SAP-06", "SAP-09", "SAP-11"]},
+    {"role": "Sales Supervisor", "person": "Mutale", "reqs": ["SAP-01", "SAP-10"]},
+    {"role": "IT Manager (Chanda Mwila)", "person": "Chanda", "reqs": ["SAP-07"]},
+    {"role": "Neome team", "person": "Asha", "reqs": ["SAP-07"]}
+  ],
+  "fields": [
+    {"entity": "Sync setting", "name": "Frequency", "reqs": ["SAP-06"]},
+    {"entity": "Sync setting", "name": "Direction", "reqs": ["SAP-04"]},
+    {"entity": "Sync setting", "name": "SAP connection", "reqs": ["SAP-07"]},
+    {"entity": "Sync record", "name": "Sync status", "reqs": ["SAP-09", "SAP-05"]},
+    {"entity": "Sync record", "name": "SAP message", "reqs": ["SAP-09"]},
+    {"entity": "Customer", "name": "Customer Code", "reqs": ["SAP-10"]}
+  ],
+  "transitions": [
+    {"from": "waiting-to-sync", "to": "synced", "action": "SAP accepts", "by": ["system"], "reqs": ["SAP-01", "SAP-02", "SAP-03", "SAP-05", "SAP-08"], "rules": ["Sync every 30 minutes", "Invoice at once", "New customer check", "Products and employees"]},
+    {"from": "waiting-to-sync", "to": "failed", "action": "SAP rejects", "by": ["system"], "notify": ["Owner"], "reqs": ["SAP-09"], "rules": ["Failed record"]},
+    {"from": "failed", "to": "synced", "action": "Retry succeeds", "by": ["system"], "reqs": ["SAP-09"], "rules": ["Failed record"]}
+  ],
+  "rules": [
+    {"rule": "System of record", "reqs": ["SAP-01", "SAP-02", "SAP-03"]},
+    {"rule": "Sync every 30 minutes", "reqs": ["SAP-01", "SAP-02", "SAP-03", "SAP-04", "SAP-08"]},
+    {"rule": "Invoice at once", "reqs": ["SAP-05"]},
+    {"rule": "New customer check", "reqs": ["SAP-01"]},
+    {"rule": "Products and employees", "reqs": ["SAP-02", "SAP-03"]},
+    {"rule": "Stock one way", "reqs": ["SAP-04"]},
+    {"rule": "Failed record", "reqs": ["SAP-09"]},
+    {"rule": "Temporary code", "reqs": ["SAP-10"]},
+    {"rule": "Frequency", "reqs": ["SAP-06"]}
+  ],
+  "reports": [
+    {"name": "Sync log", "reqs": ["SAP-11"]}
+  ],
+  "rows": [
+    {"id": "SYN-5001", "status": "waiting-to-sync", "values": {"Record": "Invoice INV-AG07-12", "Time": "2026-11-02 09:12"}, "log": [["09:12", "Plugin", "Invoice sent to SAP, waiting for reply"]]},
+    {"id": "SYN-5002", "status": "waiting-to-sync", "values": {"Record": "Customer Chilenje Shop (temp code)", "Time": "2026-11-02 09:20"}},
+    {"id": "SYN-5003", "status": "synced", "values": {"Record": "Product Mango Juice 1L", "Time": "2026-11-02 09:30"}},
+    {"id": "SYN-5004", "status": "synced", "values": {"Record": "Depot stock Nurtamilk 500ml", "Time": "2026-11-02 09:30"}},
+    {"id": "SYN-5005", "status": "failed", "values": {"Record": "Employee Bwalya M.", "SAP message": "Employee already exists in SAP", "Time": "2026-11-02 09:30"}, "log": [["09:30", "Plugin", "SAP rejected the record"]]}
+  ],
+  "scenarios": [
+    {"title": "Invoice reaches SAP", "summary": "A van sale invoice is pushed at once and SAP accepts it.", "steps": [
+      {"actor": "system", "action": "Plugin pushes the invoice at once; it shows Waiting to sync until SAP replies", "row": "SYN-5001", "screen": "record", "proves": ["SAP-05"]},
+      {"actor": "system", "action": "SAP accepts the invoice; it shows Synced", "row": "SYN-5001", "transition": {"from": "waiting-to-sync", "to": "synced"}, "proves": ["SAP-05"]}
+    ]},
+    {"title": "New customer made in neome", "summary": "A new customer waits for the Sales Supervisor, then goes to SAP and gets its CardCode.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Approve the Change Request for the new customer; it shows a temporary Customer Code until SAP returns the CardCode", "row": "SYN-5002", "screen": "record", "proves": ["SAP-01", "SAP-10"]},
+      {"actor": "system", "action": "SAP accepts the customer and returns the CardCode", "row": "SYN-5002", "transition": {"from": "waiting-to-sync", "to": "synced"}, "proves": ["SAP-01", "SAP-10"]}
+    ]},
+    {"title": "SAP rejects a record, retry works", "summary": "SAP rejects an employee; the Owner sees it; the next cycle succeeds.", "steps": [
+      {"actor": "system", "action": "SAP rejects the record; it shows Failed with the SAP message", "row": "SYN-5001", "transition": {"from": "waiting-to-sync", "to": "failed"}, "proves": ["SAP-09"]},
+      {"actor": "Owner", "action": "Open the dashboard: the Failed record and the SAP message are visible", "row": "SYN-5005", "screen": "record", "proves": ["SAP-09"]},
+      {"actor": "system", "action": "Next cycle: SAP accepts; the record shows Synced", "row": "SYN-5005", "transition": {"from": "failed", "to": "synced"}, "proves": ["SAP-09"]}
+    ]},
+    {"title": "Owner sets sync frequency and reads the log", "summary": "Owner changes the product sync, sees SAP-to-neome sync of stock, prices and masters.", "steps": [
+      {"actor": "Owner", "action": "Change the product sync frequency in the dashboard; the next sync follows it", "screen": "rules", "proves": ["SAP-06", "SAP-02", "SAP-03", "SAP-07"]},
+      {"actor": "Owner", "action": "Open the Sync log: record, time, Sync status; stock and prices come SAP to neome only", "screen": "report", "report": "Sync log", "proves": ["SAP-04", "SAP-08", "SAP-11"]}
+    ]}
+  ]
+}

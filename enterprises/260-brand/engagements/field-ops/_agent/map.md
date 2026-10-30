@@ -1,7 +1,5 @@
 # Map: Field Operations
 
-lock: Aditya Parmar · resolve-module · 2026-10-30T10:39Z
-
 ## Destination
 
 A signed-off BRD for Field Operations.
@@ -33,7 +31,7 @@ A signed-off BRD for Field Operations.
 | RPT | Reports and Dashboards | resolved |
 | COM | Communication | resolved |
 | AI | AI Features | resolved |
-| SAP | SAP Integration | claimed |
+| SAP | SAP Integration | resolved |
 
 ## Change log
 
@@ -84,3 +82,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: AI claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: AI resolved.
 - 2026-10-30: resolve-module: SAP claimed by Aditya Parmar.
+- 2026-10-30: resolve-module: SAP resolved.

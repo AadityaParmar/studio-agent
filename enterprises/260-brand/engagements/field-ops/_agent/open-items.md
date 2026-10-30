@@ -9,15 +9,15 @@
 | OI-05 | Is every Sales Agent and Tricycle Rider also an Employee (clock in/out, leave)? | All | Enterprise | Owner | | open | | |
 | OI-06 | How many users per role (Sales Agents, Tricycle Riders, Sales Supervisors, managers)? Volumes: customers, products, beats, visits and orders per day? | All | Enterprise | Owner | | open | | |
 | OI-07 | Must the app work offline in the field (no network), syncing later? | All | Enterprise | Sales Supervisor | | closed | | WS-5 |
-| OI-08 | Which SAP / ERP exactly (product, version), and what API access exists? RFP-1 says both "SAP" and "third-party ERP systems". | SAP | Enterprise | Owner | | open | | |
+| OI-08 | Which SAP / ERP exactly (product, version), and what API access exists? RFP-1 says both "SAP" and "third-party ERP systems". | SAP | Enterprise | Owner | | closed | | WS-14 |
 | OI-09 | Stock sync with ERP is in RFP-1 §8.3 but not in IN-1. Is stock sync in scope, both ways? | SAP, INV | Enterprise | Owner | | closed | | WS-4 |
-| OI-10 | Customers, products and employees can change in both SAP and neome. Which is the system of record per data type, and which change wins on a clash? | SAP, MST | Enterprise | Owner | SAP is system of record (proposed, to confirm) | open | | |
-| OI-11 | How often should each data type sync (customers, products, employees, stock)? Should invoices go to SAP at once? | SAP, INV, VB | Enterprise | Owner | | open | | |
-| OI-12 | Which existing SAP data loads at start (customers, products, employees, open balances, history), and how many records? | All, SAP | Enterprise | Owner | | open | | |
+| OI-10 | Customers, products and employees can change in both SAP and neome. Which is the system of record per data type, and which change wins on a clash? | SAP, MST | Enterprise | Owner | SAP is system of record (proposed, to confirm) | closed | | WS-14 |
+| OI-11 | How often should each data type sync (customers, products, employees, stock)? Should invoices go to SAP at once? | SAP, INV, VB | Enterprise | Owner | | closed | | WS-14 |
+| OI-12 | Which existing SAP data loads at start (customers, products, employees, open balances, history), and how many records? | All, SAP | Enterprise | Owner | | closed | | WS-14 |
 | OI-13 | What is "Change Requests" (RFP-1 scope item 31, Pending)? | All | Enterprise | Owner | | closed | | WS-6 |
 | OI-14 | Customer Category and Classification: what values? | MST | Enterprise | Sales Head | | open | | |
 | OI-15 | TPIN: confirm it is the tax ID, its format, and if it is required. | MST | Enterprise | Owner | | open | | |
-| OI-16 | Customer Code: made by neome, typed in, or taken from SAP? | MST, SAP | Enterprise | Owner | | open | | |
+| OI-16 | Customer Code: made by neome, typed in, or taken from SAP? | MST, SAP | Enterprise | Owner | | closed | | WS-14 |
 | OI-17 | Who adds and edits each master? Diagrams show only the Owner; IN-1 says customers, products and employees can also be created in neome. Can Sales Agents add customers? | MST | Enterprise | Owner | | open | | |
 | OI-18 | Product Price: one price per product, or prices by customer category or area? Tax on price? | MST, VB | Enterprise | Owner | | closed | | WS-5 |
 | OI-19 | Who maintains the Competitor Master? The "Competitor" diagram shows a Sales Agent: Add Visit → Add Products from Product Master. What does that flow mean? | MST, MT | Enterprise | Sales Supervisor | | closed | | WS-8 |
@@ -66,7 +66,7 @@
 | OI-62 | Ask Neome: what should users ask, and which roles get it? | AI | Enterprise | Owner | | closed | | WS-13 |
 | OI-63 | NLP form filling: which forms, voice or text, which languages? | AI | Enterprise | Owner | | closed | | WS-13 |
 | OI-64 | AI planogram suggestions: from what input (Modern Trade shelf images?), what output, who uses it? | AI, MT | Enterprise | Sales Head | | closed | | WS-8 |
-| OI-65 | Customers, products and employees made in neome push to SAP. Need any check or approval before they reach SAP? | SAP, MST | Enterprise | Owner | | open | | |
+| OI-65 | Customers, products and employees made in neome push to SAP. Need any check or approval before they reach SAP? | SAP, MST | Enterprise | Owner | | closed | | WS-14 |
 | OI-66 | Who in 260 Brands signs off this BRD? RFP-1 signature line is blank. | All | Enterprise | Owner | | open | | |
 | OI-67 | Which currency do orders, payments and invoices use? Which languages must the app support? No Source says. | All | Enterprise | Owner | | open | | |
 | OI-68 | Hosting: neome cloud is fine? Any data residency rule? Do users log in with mobile/password, or with company SSO? | All | Enterprise | Owner | | open | | |
@@ -75,7 +75,7 @@
 | OI-71 | Masters: what goes wrong today with the master lists, and which number shows success (KPI)? No Source says. | MST | Enterprise | Owner | | open | | |
 | OI-72 | Master records: do they get Active / Inactive status instead of delete? When a Beat is made inactive or moved to another Route, what happens to its Customers and Employees? | MST, BEAT | Enterprise | Owner | Active / Inactive; inactive hidden from pick lists, linked records keep history (proposed, to confirm) | open | | |
 | OI-73 | Which master lists or exports do you need (for example Customers by Beat)? | MST | Enterprise | Owner | Sheet per master, filter by Beat / Route / Category, export to Excel (proposed, to confirm) | open | | |
-| OI-74 | Who in 260 Brands owns SAP and the link to neome on your side? | MST, SAP | Enterprise | Owner | | open | | |
+| OI-74 | Who in 260 Brands owns SAP and the link to neome on your side? | MST, SAP | Enterprise | Owner | | closed | | WS-14 |
 | OI-75 | Confirm the proposed priority, Scope tag and acceptance criteria of: MST-01, MST-02, MST-03, MST-04, MST-05, MST-06, MST-07, MST-08 | All | Enterprise | Owner | As proposed in the BRD (proposed, to confirm) | open | | |
 | OI-76 | How long must visit, order and invoice records be kept? Enterprise did not know [WS-5]. | VB | Enterprise | Owner | | open | | |
 | OI-77 | How many Marketing Visits a day, and in peak season? Enterprise did not know [WS-7]. | MKT | Enterprise | Sales Head | | open | | |

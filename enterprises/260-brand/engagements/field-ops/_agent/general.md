@@ -52,14 +52,15 @@ Proposed: yes
 
 ### GEN-04 — Load existing SAP data
 
-Statement: Existing SAP data is synced to neome through the plugin. [RFP-1, IN-1]
+Statement: Existing SAP data is loaded to neome through the plugin at start: customers (about 4,000), products (about 120), employees (about 100) and open balances per customer; no order history. [RFP-1, IN-1, WS-14]
 Acceptance:
-- After first sync, the agreed SAP records are all in neome. (proposed, to confirm)
-Priority: TBC
-Scope: Open
-Sources: RFP-1, IN-1
+- After the first load, the customers, products, employees and open balances of SAP are all in neome. [WS-14]
+- No SAP order history is in neome. [WS-14]
+Priority: Must
+Scope: Neome
+Sources: RFP-1, IN-1, WS-14
 OIs: OI-12
-Proposed: yes
+Proposed: no
 
 ## Training
 

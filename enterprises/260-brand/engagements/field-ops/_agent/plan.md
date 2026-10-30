@@ -15,7 +15,7 @@ Skeleton from `review-draft`. All proposed. Weeks: Consultant only.
 
 | what | OIs | Modules | Source |
 |---|---|---|---|
-| Two-way SAP / ERP sync: masters, stock, invoices | OI-08, OI-09, OI-10 | SAP | (proposed, to confirm) |
+| SAP Integration as a Custom module | | SAP | (proposed, to confirm) |
 | WhatsApp messages to customers | OI-60 | COM | (proposed, to confirm) |
 | AI Features as a Custom module | | AI | (proposed, to confirm) |
 | Which "Completed" scope items are already live and need no rebuild | OI-01 | GEN | (proposed, to confirm) |

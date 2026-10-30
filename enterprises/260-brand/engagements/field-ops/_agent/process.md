@@ -13,7 +13,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | rider | Tricycle Rider | Tricycle Rider | person | OI-42 | RFP-1 |
 | quality | Quality Manager | Quality Manager | person | | WS-9 |
 | customer | Customer | Customer | external | | RFP-1 |
-| sap | SAP / ERP | SAP | external | OI-08 | RFP-1, IN-1 |
+| sap | SAP / ERP | SAP | external | | RFP-1, IN-1, WS-14 |
 
 ## MST — Masters
 
@@ -159,9 +159,12 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| sync-masters | sap | | Sync customers, products, employees | Both ways, via plugin | external | OI-10 | RFP-1, IN-1 |
-| sync-stock | sap | | Sync stock | Both ways | external | OI-09 | RFP-1 |
-| invoice-in-sap | sap | | Invoice visible in SAP | | external | OI-11 | RFP-1, IN-1 |
+| load-initial-data | sap | | Load existing SAP data | Customers, products, employees, open balances per customer; no order history | external | | IN-1, WS-14 |
+| sync-masters | sap | | Sync customers, products, employees | Via plugin; SAP to neome every 30 min; SAP wins a clash; new Customers only after Change Request approval | external | | RFP-1, IN-1, WS-14 |
+| sync-prices | sap | | Fetch price lists, credit limits, open balances | SAP to neome every 30 min, with customers and products | external | | WS-14 |
+| sync-stock | sap | | Sync stock | SAP to neome only, every 30 min; neome never writes stock | external | | RFP-1, WS-14 |
+| invoice-in-sap | sap | | Invoice visible in SAP | Retry on failure; shows Waiting to sync | external | | RFP-1, IN-1, WS-14 |
+| check-failed-sync | owner | SAP | Check Failed records | SAP message in the dashboard; retried each cycle; no other notification | step | | WS-14 |
 
 ## Edges
 
@@ -185,18 +188,22 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | cancel-order | reduce-inventory | quantity back | yes | WS-4, WS-5 |
 | invoice-in-sap | view-reports | | no | RFP-1, WS-11 |
 | send-invoice | send-whatsapp | invoice PDF | no | WS-5, WS-12 |
-| sync-masters | add-customer | SAP to neome | yes | RFP-1, IN-1 |
-| add-customer | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
-| sync-masters | add-product | SAP to neome | yes | RFP-1, IN-1 |
-| add-product | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
-| sync-masters | add-employee | SAP to neome | yes | RFP-1, IN-1 |
-| add-employee | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
+| sync-masters | add-customer | SAP to neome, every 30 min | yes | RFP-1, IN-1, WS-14 |
+| add-customer | sync-masters | neome to SAP, after Change Request approval | yes | RFP-1, IN-1, WS-14 |
+| sync-masters | add-product | SAP to neome, every 30 min | yes | RFP-1, IN-1, WS-14 |
+| add-product | sync-masters | neome to SAP, direct | yes | RFP-1, IN-1, WS-14 |
+| sync-masters | add-employee | SAP to neome, every 30 min | yes | RFP-1, IN-1, WS-14 |
+| add-employee | sync-masters | neome to SAP, direct | yes | RFP-1, IN-1, WS-14 |
+| load-initial-data | sync-masters | then every 30 min | no | IN-1, WS-14 |
+| sync-masters | sync-prices | with customers and products | no | WS-14 |
+| sync-masters | check-failed-sync | SAP rejects a record | yes | WS-14 |
+| invoice-in-sap | check-failed-sync | SAP rejects the invoice | yes | WS-14 |
 | add-category | add-product | | yes | RFP-1 |
 | add-category | add-competitor | | yes | RFP-1 |
 | add-customer | geo-tag-customer | | yes | IN-1 |
 | add-store | mt-check-in | | yes | RFP-1, WS-8 |
 | add-competitor | mt-record | competitor activities | yes | RFP-1, WS-8 |
-| sync-stock | view-depot-stock | SAP to neome, every 30 min | no | WS-4 |
+| sync-stock | view-depot-stock | SAP to neome, every 30 min | no | WS-4, WS-14 |
 | view-depot-stock | assign-inventory | | no | WS-4 |
 | assign-inventory | stock-return | unsold stock, end of day | yes | RFP-1, WS-4 |
 | place-order | reduce-inventory | order placed | no | WS-4 |
@@ -209,7 +216,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-lead | follow-up-lead | | no | WS-6 |
 | follow-up-lead | convert-lead | interested | no | WS-6 |
 | convert-lead | approve-lead-customer | Change Request | no | WS-6 |
-| approve-lead-customer | sync-masters | new Customer, neome to SAP | no | WS-6 |
+| approve-lead-customer | sync-masters | new Customer, neome to SAP | no | WS-6, WS-14 |
 | add-lead | view-leads | | yes | RFP-1, WS-6 |
 | add-complaint | investigate-complaint | | no | WS-9 |
 | investigate-complaint | resolve-complaint | | no | WS-9 |
