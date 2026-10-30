@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: MT
 name: Modern Trade
 blockedBy: [MST]
