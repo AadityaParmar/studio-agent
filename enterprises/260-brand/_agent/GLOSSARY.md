@@ -126,3 +126,7 @@ _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
 **Notice Board**:
 In-app board for notices.
 _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+
+**Weekly Beat Plan**:
+Which Beat an employee works on each weekday, Monday to Saturday, made by the Sales Supervisor.
+_Source_: WS-1 · _Status_: proposed · _Used in_: field-ops
