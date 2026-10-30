@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: MST
 name: Masters
 blockedBy: []
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # MST — Masters
