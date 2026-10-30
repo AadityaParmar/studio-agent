@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: BEAT
 name: Beat Planning
 blockedBy: [MST]

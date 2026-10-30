@@ -18,7 +18,7 @@ A signed-off BRD for Field Operations.
 | Prefix | Module | Status |
 |---|---|---|
 | MST | Masters | resolved |
-| BEAT | Beat Planning | needs-revisit |
+| BEAT | Beat Planning | claimed |
 | ATT | Attendance | resolved |
 | LEAVE | Leave Management | resolved |
 | INV | Inventory | resolved |
@@ -95,3 +95,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: ingest: COM needs revisit: OI-85 answered: estimate 10 notices/week [QA-1]
 - 2026-10-30: resolve-module: MST claimed by Aditya Parmar (revisit).
 - 2026-10-30: resolve-module: MST resolved (revisit).
+- 2026-10-30: resolve-module: BEAT claimed by Aditya Parmar (revisit).
