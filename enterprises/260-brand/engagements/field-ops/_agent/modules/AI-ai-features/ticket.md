@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: AI
 name: AI Features
 blockedBy: [MT]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # AI — AI Features
