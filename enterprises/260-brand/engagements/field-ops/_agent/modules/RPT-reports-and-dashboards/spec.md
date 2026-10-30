@@ -2,8 +2,8 @@
 
 Prefix: RPT
 Name: Reports and Dashboards
-Status: needs-revisit
-Sources: RFP-1, WS-11
+Status: resolved
+Sources: RFP-1, WS-11, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -101,7 +101,7 @@ Nothing goes to SAP. [WS-11]
 - Data read: about 1,200 visits and 700 orders a day, about 4,000 customers. [WS-11]
 - Neome figures show as soon as phones sync; SAP open balances up to 30 minutes old. [WS-11]
 - Reports need network; no offline. [WS-11]
-- OI-84: Report views per day.
+- Estimate 10 report users, each opening reports about 4 times per day. [QA-1]
 
 ## 11 Requirements
 
