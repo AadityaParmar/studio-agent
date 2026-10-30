@@ -1,0 +1,73 @@
+{
+ "entity": "Question",
+ "roles": [
+  {"role": "Sales Agent", "person": "Bwalya", "reqs": ["AI-01"]},
+  {"role": "Sales Supervisor", "person": "Mulenga", "reqs": ["AI-02"]},
+  {"role": "Owner", "person": "Mitesh", "reqs": ["AI-03"]},
+  {"role": "Sales Head", "person": "Ruth", "reqs": ["AI-03"]},
+  {"role": "Area Sales Manager", "person": "Joseph", "reqs": ["AI-03"]},
+  {"role": "Regional Sales Manager", "person": "Natasha", "reqs": ["AI-03"]}
+ ],
+ "fields": [
+  {"entity": "Voice entry", "name": "Language", "reqs": ["AI-01"]},
+  {"entity": "Voice entry", "name": "Filled fields", "reqs": ["AI-01"]},
+  {"entity": "Planogram suggestion", "name": "Suggested shelf share", "reqs": ["AI-02"]},
+  {"entity": "Planogram suggestion", "name": "Missing products", "reqs": ["AI-02"]},
+  {"entity": "Question", "name": "Asked by", "reqs": ["AI-03"]},
+  {"entity": "Question", "name": "Answer", "reqs": ["AI-03"]}
+ ],
+ "transitions": [],
+ "rules": [
+  {"rule": "Review before save", "reqs": ["AI-01"]},
+  {"rule": "Planogram", "reqs": ["AI-02"]},
+  {"rule": "Ask Neome reach", "reqs": ["AI-03"]},
+  {"rule": "Ask Neome read only", "reqs": ["AI-03"]},
+  {"rule": "Cannot answer", "reqs": ["AI-03"]}
+ ],
+ "reports": [],
+ "rows": [
+  {"id": "Q-201", "status": "", "values": {"Question text": "Top 5 agents this week", "Asked by": "Mitesh", "Answer": "Chanda, Bwalya, Mwape, Tembo, Lungu by invoiced sales value"}},
+  {"id": "Q-202", "status": "", "values": {"Question text": "Which agents were late this week in Copperbelt", "Asked by": "Joseph", "Answer": "Own area only: 3 late arrivals, all on Tuesday"}},
+  {"id": "Q-203", "status": "", "values": {"Question text": "Visits with no order in my region", "Asked by": "Natasha", "Answer": "Own region only: 112 visits"}},
+  {"id": "Q-204", "status": "", "values": {"Question text": "Change the price of milk 1L", "Asked by": "Ruth", "Answer": "I cannot do that; I only answer questions"}}
+ ],
+ "scenarios": [
+  {
+   "title": "Sales Agent fills an order by voice",
+   "summary": "Voice fills the form; the agent checks and saves.",
+   "steps": [
+    {"actor": "Sales Agent", "action": "Speaks an order in Nyanja; the Visit Book order form fills", "screen": "rules", "proves": ["AI-01"]},
+    {"actor": "Sales Agent", "action": "Checks the fields, fixes one, and saves; nothing saved before", "screen": "rules", "proves": ["AI-01"]}
+   ]
+  },
+  {
+   "title": "Sales Supervisor gets a planogram suggestion",
+   "summary": "Shelf photo in a Modern Trade update gives shelf share and missing products.",
+   "steps": [
+    {"actor": "Sales Supervisor", "action": "Opens a Modern Trade update with shelf photo and sees suggested shelf share and missing products; decides, no approval", "screen": "rules", "proves": ["AI-02"]}
+   ]
+  },
+  {
+   "title": "Owner asks Neome",
+   "summary": "Question about sales gets an answer.",
+   "steps": [
+    {"actor": "Owner", "action": "Asks: Top 5 agents this week", "row": "Q-201", "screen": "record", "proves": ["AI-03"]}
+   ]
+  },
+  {
+   "title": "Managers see only their own scope",
+   "summary": "Area and Regional Sales Manager answers cover own area or region.",
+   "steps": [
+    {"actor": "Area Sales Manager", "action": "Asks about late agents; answer covers own area only", "row": "Q-202", "screen": "record", "proves": ["AI-03"]},
+    {"actor": "Regional Sales Manager", "action": "Asks about visits with no order; answer covers own region only", "row": "Q-203", "screen": "record", "proves": ["AI-03"]}
+   ]
+  },
+  {
+   "title": "Ask Neome cannot answer or change data",
+   "summary": "Read only; says so when it cannot answer.",
+   "steps": [
+    {"actor": "Sales Head", "action": "Asks it to change a price; it says it cannot and changes nothing", "row": "Q-204", "screen": "record", "proves": ["AI-03"]}
+   ]
+  }
+ ]
+}

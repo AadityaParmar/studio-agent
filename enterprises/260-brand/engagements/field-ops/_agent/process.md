@@ -151,8 +151,9 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| planogram-suggest | supervisor | AI | Get planogram suggestion | From Modern Trade | step | OI-64 | (proposed, to confirm) |
-| ask-neome | owner | AI | Ask Neome | | step | OI-62 | RFP-1 |
+| voice-fill | agent | AI | Fill order or complaint form by voice | English or Nyanja; fills the Visit Book order or Complaint form; user checks and saves | step | | RFP-1, WS-13 |
+| planogram-suggest | supervisor | AI | Get planogram suggestion | From the Modern Trade shelf photo: shelf share and missing products; Sales Supervisor uses it, no approval | step | | WS-8, WS-13 |
+| ask-neome | owner | AI | Ask Neome | Owner, Sales Head, Area and Regional Sales Manager; read only; own region or area | step | | RFP-1, WS-13 |
 
 ## SAP — SAP Integration
 
@@ -238,7 +239,9 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | mt-record | mt-check-out | | no | RFP-1, WS-8 |
 | mt-check-out | mt-review | | no | RFP-1, WS-8 |
 | mt-review | mt-record | sent back with comment | yes | WS-8 |
-| mt-record | planogram-suggest | shelf images | yes | (proposed, to confirm) |
+| mt-record | planogram-suggest | shelf images | yes | WS-8, WS-13 |
+| voice-fill | place-order | fills order form | yes | WS-13 |
+| voice-fill | add-complaint | fills complaint form | yes | WS-13 |
 | assign-beats | plan-week | | no | WS-1 |
 | plan-week | see-todays-beat | | no | WS-1 |
 | see-todays-beat | add-visit | customer from Beat | no | RFP-1, WS-1 |

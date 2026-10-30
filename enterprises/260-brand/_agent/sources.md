@@ -16,3 +16,4 @@
 | WS-10 | session log | grill-module session FB | 2026-10-30 | inputs/WS-10-grill-module-session-fb.md | field-ops |  |
 | WS-11 | session log | grill-module session RPT | 2026-10-30 | inputs/WS-11-grill-module-session-rpt.md | field-ops |  |
 | WS-12 | session log | grill-module session COM | 2026-10-30 | inputs/WS-12-grill-module-session-com.md | field-ops |  |
+| WS-13 | session log | grill-module session AI | 2026-10-30 | inputs/WS-13-grill-module-session-ai.md | field-ops |  |

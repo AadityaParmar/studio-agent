@@ -63,8 +63,8 @@
 | OI-59 | Market Specific Communication: what is a "market", what is sent, by whom, through which channel? | COM | Enterprise | Sales Head | | closed | | WS-12 |
 | OI-60 | WhatsApp: which messages, to whom (customer, staff), which WhatsApp Business number and provider, who pays? | COM, VB, CMP | Enterprise | Owner | | closed | | WS-5 |
 | OI-61 | Push notifications and Notice Board: which events alert whom? Who posts notices, to whom? | COM | Enterprise | Owner | | closed | | WS-12 |
-| OI-62 | Ask Neome: what should users ask, and which roles get it? | AI | Enterprise | Owner | | open | | |
-| OI-63 | NLP form filling: which forms, voice or text, which languages? | AI | Enterprise | Owner | | open | | |
+| OI-62 | Ask Neome: what should users ask, and which roles get it? | AI | Enterprise | Owner | | closed | | WS-13 |
+| OI-63 | NLP form filling: which forms, voice or text, which languages? | AI | Enterprise | Owner | | closed | | WS-13 |
 | OI-64 | AI planogram suggestions: from what input (Modern Trade shelf images?), what output, who uses it? | AI, MT | Enterprise | Sales Head | | closed | | WS-8 |
 | OI-65 | Customers, products and employees made in neome push to SAP. Need any check or approval before they reach SAP? | SAP, MST | Enterprise | Owner | | open | | |
 | OI-66 | Who in 260 Brands signs off this BRD? RFP-1 signature line is blank. | All | Enterprise | Owner | | open | | |

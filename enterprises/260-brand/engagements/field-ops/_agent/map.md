@@ -30,7 +30,7 @@ A signed-off BRD for Field Operations.
 | FB | Feedback | resolved |
 | RPT | Reports and Dashboards | resolved |
 | COM | Communication | resolved |
-| AI | AI Features | claimed |
+| AI | AI Features | resolved |
 | SAP | SAP Integration | open |
 
 ## Change log
@@ -80,3 +80,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: COM claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: COM resolved.
 - 2026-10-30: resolve-module: AI claimed by Aditya Parmar.
+- 2026-10-30: resolve-module: AI resolved.

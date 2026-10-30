@@ -17,6 +17,6 @@ Skeleton from `review-draft`. All proposed. Weeks: Consultant only.
 |---|---|---|---|
 | Two-way SAP / ERP sync: masters, stock, invoices | OI-08, OI-09, OI-10 | SAP | (proposed, to confirm) |
 | WhatsApp messages to customers | OI-60 | COM | (proposed, to confirm) |
-| AI features: NLP form filling, planogram, Ask Neome | OI-62, OI-63, OI-64 | AI | (proposed, to confirm) |
+| AI Features as a Custom module | | AI | (proposed, to confirm) |
 | Which "Completed" scope items are already live and need no rebuild | OI-01 | GEN | (proposed, to confirm) |
 | Feedback as a Custom module | OI-81, OI-82, OI-83 | FB | (proposed, to confirm) |
