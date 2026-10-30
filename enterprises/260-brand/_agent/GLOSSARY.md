@@ -172,7 +172,7 @@ Reason a Sales Agent picks for a visit with no order: Shop closed, Stock enough,
 _Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
 
 **Invoice**:
-Made in neome for an order, numbered INV-<agent code>-<seq>, VAT 16% shown; PDF sent on WhatsApp, printable on a Bluetooth printer; pushed to SAP.
+Made in the app for an order, numbered INV-<agent code>-<seq>, VAT 16% shown; PDF sent on WhatsApp, printable on a Bluetooth printer; pushed to SAP.
 _Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
 
 **Mobile Money**:
