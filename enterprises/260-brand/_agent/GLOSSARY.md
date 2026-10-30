@@ -142,3 +142,15 @@ _Source_: WS-2 · _Status_: proposed · _Used in_: field-ops
 **Missed Clock-out**:
 Mark on a day the Employee did not clock out; the app clocks out at 23:59 and the Sales Supervisor fixes the time.
 _Source_: WS-2 · _Status_: proposed · _Used in_: field-ops
+
+**Leave Balance**:
+Days of Casual Leave or Sick Leave an Employee has left in the year. Casual 12 and Sick 10 days credited 1 January; Casual carries forward max 5.
+_Source_: RFP-1, WS-3 · _Status_: proposed · _Used in_: field-ops
+
+**Unpaid Leave**:
+Leave days beyond the Leave Balance; allowed.
+_Source_: WS-3 · _Status_: proposed · _Used in_: field-ops
+
+**Holiday List**:
+Yearly list of Zambian public holidays kept by the Owner; not counted in leave.
+_Source_: WS-3 · _Status_: proposed · _Used in_: field-ops
