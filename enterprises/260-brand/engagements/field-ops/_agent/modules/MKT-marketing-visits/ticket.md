@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: MKT
 name: Marketing Visits
 blockedBy: [MST]
