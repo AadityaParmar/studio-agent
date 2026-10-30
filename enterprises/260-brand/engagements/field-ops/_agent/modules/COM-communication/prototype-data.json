@@ -1,0 +1,273 @@
+{
+ "entity": "Notice",
+ "roles": [
+  {
+   "role": "Owner",
+   "person": "Mitesh",
+   "reqs": [
+    "COM-04"
+   ]
+  },
+  {
+   "role": "Sales Head",
+   "person": "Ruth",
+   "reqs": [
+    "COM-03",
+    "COM-04"
+   ],
+   "oi": "OI-85"
+  },
+  {
+   "role": "Sales Agent",
+   "person": "Bwalya",
+   "reqs": [
+    "COM-02",
+    "COM-05"
+   ]
+  },
+  {
+   "role": "Quality Manager",
+   "person": "Chipo",
+   "reqs": [
+    "COM-05"
+   ]
+  },
+  {
+   "role": "Customer",
+   "person": "Mary",
+   "reqs": [
+    "COM-01"
+   ]
+  }
+ ],
+ "fields": [
+  {
+   "entity": "Notice",
+   "name": "Audience",
+   "reqs": [
+    "COM-03",
+    "COM-04"
+   ]
+  },
+  {
+   "entity": "Notice",
+   "name": "Area",
+   "reqs": [
+    "COM-03"
+   ]
+  },
+  {
+   "entity": "Notice",
+   "name": "Posted by",
+   "reqs": [
+    "COM-04"
+   ]
+  }
+ ],
+ "transitions": [],
+ "rules": [
+  {
+   "rule": "Notice to audience",
+   "reqs": [
+    "COM-04"
+   ]
+  },
+  {
+   "rule": "Push events",
+   "reqs": [
+    "COM-02"
+   ]
+  },
+  {
+   "rule": "WhatsApp to customer",
+   "reqs": [
+    "COM-01"
+   ]
+  },
+  {
+   "rule": "No mobile number",
+   "reqs": [
+    "COM-01"
+   ]
+  },
+  {
+   "rule": "Retry WhatsApp",
+   "reqs": [
+    "COM-05"
+   ]
+  }
+ ],
+ "reports": [],
+ "rows": [
+  {
+   "id": "NT-101",
+   "status": "",
+   "values": {
+    "Title": "Nurtamilk promo week",
+    "Message": "Buy 10 cartons, get 1 free until Friday",
+    "Audience": "Area",
+    "Area": "Lusaka Central",
+    "Posted by": "Ruth",
+    "Date": "2026-11-02"
+   }
+  },
+  {
+   "id": "NT-102",
+   "status": "",
+   "values": {
+    "Title": "Public holiday",
+    "Message": "No beats on Monday",
+    "Audience": "All",
+    "Posted by": "Mitesh",
+    "Date": "2026-11-01"
+   }
+  },
+  {
+   "id": "NT-103",
+   "status": "",
+   "values": {
+    "Title": "New price list",
+    "Message": "Check the new prices after sync",
+    "Audience": "Role",
+    "Role": "Sales Agent",
+    "Posted by": "Mitesh",
+    "Date": "2026-10-30"
+   }
+  },
+  {
+   "id": "NT-104",
+   "status": "",
+   "values": {
+    "Title": "Copperbelt promo",
+    "Message": "Free sampling this weekend",
+    "Audience": "Area",
+    "Area": "Copperbelt",
+    "Posted by": "Ruth",
+    "Date": "2026-10-29"
+   }
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Sales Head sends a promo to one Area",
+   "summary": "Notice reaches only that Area, in the app and by push.",
+   "steps": [
+    {
+     "actor": "Sales Head",
+     "action": "Posts a promo notice with Audience Area, Lusaka Central",
+     "row": "NT-101",
+     "screen": "record",
+     "proves": [
+      "COM-03",
+      "COM-04"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Gets the push and sees the notice on the Notice Board; staff of other Areas do not",
+     "row": "NT-101",
+     "screen": "record",
+     "proves": [
+      "COM-02",
+      "COM-03"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Owner posts to all staff and edits it",
+   "summary": "No approval; poster can edit or remove.",
+   "steps": [
+    {
+     "actor": "Owner",
+     "action": "Posts a notice to All, then edits the message",
+     "row": "NT-102",
+     "screen": "record",
+     "proves": [
+      "COM-04"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Reads the synced notice offline",
+     "row": "NT-102",
+     "screen": "record",
+     "proves": [
+      "COM-04"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Customer gets the invoice on WhatsApp",
+   "summary": "Invoice PDF and Resolved message; none without a mobile number.",
+   "steps": [
+    {
+     "actor": "Customer",
+     "action": "Gets the invoice PDF on WhatsApp from the 260 Brands number",
+     "screen": "rules",
+     "proves": [
+      "COM-01"
+     ]
+    },
+    {
+     "actor": "Customer",
+     "action": "Has no mobile number; no message is sent",
+     "screen": "rules",
+     "proves": [
+      "COM-01"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "WhatsApp fails",
+   "summary": "Retried 3 times, then Failed and sent again by hand.",
+   "steps": [
+    {
+     "actor": "Quality Manager",
+     "action": "Sees a Resolved message shown Failed after 3 tries and sends it again",
+     "screen": "rules",
+     "proves": [
+      "COM-05"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Sends a Failed invoice message again",
+     "screen": "rules",
+     "proves": [
+      "COM-05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Push for system events",
+   "summary": "Order cancelled, Change Request decision, target set, leave decision.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Gets a push that an order was cancelled",
+     "screen": "rules",
+     "proves": [
+      "COM-02"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Notices per week",
+   "summary": "Volume not known.",
+   "steps": [
+    {
+     "actor": "Sales Head",
+     "action": "Posts notices; how many a week is not known",
+     "screen": "sheet",
+     "proves": [],
+     "oi": "OI-85"
+    }
+   ]
+  }
+ ]
+}

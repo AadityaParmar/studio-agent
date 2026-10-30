@@ -141,8 +141,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| send-whatsapp | customer | COM | Get WhatsApp message | Order, payment, complaint resolution | external | OI-60 | RFP-1 |
-| push-notify | owner | COM | Push notification / Notice Board | | step | OI-61 | RFP-1 |
+| send-whatsapp | customer | COM | Get WhatsApp message | Invoice PDF (the order confirmation); complaint Resolved message; retried 3 times, then Failed; none without a mobile number | external | | RFP-1, WS-12 |
+| resend-whatsapp | quality | COM | Send WhatsApp again | After Failed; Quality Manager or Sales Agent | step | | WS-12 |
+| post-notice | owner | COM | Post notice | Owner to All, Area or role; Sales Head to an Area; poster can edit or remove; no approval | step | | RFP-1, WS-12 |
+| get-notice | agent | COM | See notice on Notice Board | In app plus push to the audience; readable offline once synced | step | | WS-12 |
+| push-notify | agent | COM | Get push notification | Order cancelled, Change Request decision, target set, new notice; leave decision in LEAVE | step | | RFP-1, WS-12 |
 
 ## AI — AI Features
 
@@ -180,7 +183,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | place-order | cancel-order | before Invoiced | yes | WS-5 |
 | cancel-order | reduce-inventory | quantity back | yes | WS-4, WS-5 |
 | invoice-in-sap | view-reports | | no | RFP-1, WS-11 |
-| place-order | send-whatsapp | order confirmation | yes | RFP-1 |
+| send-invoice | send-whatsapp | invoice PDF | no | WS-5, WS-12 |
 | sync-masters | add-customer | SAP to neome | yes | RFP-1, IN-1 |
 | add-customer | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
 | sync-masters | add-product | SAP to neome | yes | RFP-1, IN-1 |
@@ -211,6 +214,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | investigate-complaint | resolve-complaint | | no | WS-9 |
 | resolve-complaint | send-whatsapp | resolution message | no | RFP-1, WS-9 |
 | send-whatsapp | close-complaint | customer told | no | WS-9 |
+| send-whatsapp | resend-whatsapp | Failed after 3 tries | yes | WS-12 |
+| post-notice | get-notice | in app plus push | no | WS-12 |
+| post-notice | push-notify | new notice | no | WS-12 |
+| cancel-order | push-notify | order cancelled | yes | WS-5, WS-12 |
+| set-targets | push-notify | target set | no | WS-11, WS-12 |
 | resolve-complaint | close-complaint | no mobile number | yes | WS-9 |
 | assign-beats | add-marketing-visit | | yes | RFP-1 |
 | add-marketing-visit | view-marketing-visits | | yes | WS-7 |

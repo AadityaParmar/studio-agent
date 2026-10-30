@@ -60,9 +60,9 @@
 | OI-56 | Incentive structure: what are the rules? | RPT | Enterprise | Owner | | closed | | WS-11 |
 | OI-57 | Debt VS Collection: where does customer debt come from (SAP outstanding, neome orders)? | RPT, SAP | Enterprise | Owner | | closed | | WS-11 |
 | OI-58 | Customer Master Heat Map: map of what (customer spread, sales, visits)? | RPT | Enterprise | Sales Head | | closed | | WS-11 |
-| OI-59 | Market Specific Communication: what is a "market", what is sent, by whom, through which channel? | COM | Enterprise | Sales Head | | open | | |
+| OI-59 | Market Specific Communication: what is a "market", what is sent, by whom, through which channel? | COM | Enterprise | Sales Head | | closed | | WS-12 |
 | OI-60 | WhatsApp: which messages, to whom (customer, staff), which WhatsApp Business number and provider, who pays? | COM, VB, CMP | Enterprise | Owner | | closed | | WS-5 |
-| OI-61 | Push notifications and Notice Board: which events alert whom? Who posts notices, to whom? | COM | Enterprise | Owner | | open | | |
+| OI-61 | Push notifications and Notice Board: which events alert whom? Who posts notices, to whom? | COM | Enterprise | Owner | | closed | | WS-12 |
 | OI-62 | Ask Neome: what should users ask, and which roles get it? | AI | Enterprise | Owner | | open | | |
 | OI-63 | NLP form filling: which forms, voice or text, which languages? | AI | Enterprise | Owner | | open | | |
 | OI-64 | AI planogram suggestions: from what input (Modern Trade shelf images?), what output, who uses it? | AI, MT | Enterprise | Sales Head | | closed | | WS-8 |
@@ -86,3 +86,4 @@
 | OI-82 | Should each feedback record which customer gave it? | FB | Enterprise | Sales Head | Yes, link the feedback to a Customer (proposed, to confirm) | open | | |
 | OI-83 | Is Feedback (question list, rating per question, no App entity) Configuration on the field sales App or a Custom module? Custom module proposed. | FB | Neomenta | Neomenta | Custom module (proposed, to confirm) | open | | |
 | OI-84 | How many people open reports a day, and how often? Enterprise did not know [WS-11]. | RPT | Enterprise | Sales Head | | open | | |
+| OI-85 | How many notices a week? Enterprise did not know [WS-12]. | COM | Enterprise | Sales Head | | open | | |
