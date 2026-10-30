@@ -8,3 +8,4 @@
 | WS-2 | session log | grill-module session ATT | 2026-10-30 | inputs/WS-2-grill-module-session-att.md | field-ops |  |
 | WS-3 | session log | grill-module session LEAVE | 2026-10-30 | inputs/WS-3-grill-module-session-leave.md | field-ops |  |
 | WS-4 | session log | grill-module session INV | 2026-10-30 | inputs/WS-4-grill-module-session-inv.md | field-ops |  |
+| WS-5 | session log | grill-module session VB | 2026-10-30 | inputs/WS-5-grill-module-session-vb.md | field-ops |  |

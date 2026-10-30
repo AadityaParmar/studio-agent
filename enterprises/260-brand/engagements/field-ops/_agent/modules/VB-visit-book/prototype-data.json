@@ -1,0 +1,103 @@
+{
+  "entity": "Order",
+  "roles": [
+    {"role": "Sales Agent", "person": "Bwalya", "reqs": ["VB-01", "VB-02", "VB-03", "VB-04", "VB-08", "VB-09", "VB-10", "VB-12"]},
+    {"role": "Sales Supervisor", "person": "Mutale", "reqs": ["VB-05", "VB-07"]},
+    {"role": "Area Sales Manager", "person": "Natasha", "reqs": ["VB-07"]},
+    {"role": "Regional Sales Manager", "person": "Kelvin", "reqs": ["VB-07"]},
+    {"role": "Sales Head", "person": "Ruth", "reqs": ["VB-07"]},
+    {"role": "Owner", "person": "Joseph", "reqs": ["VB-07"]}
+  ],
+  "fields": [
+    {"entity": "Visit", "name": "Location", "reqs": ["VB-01"]},
+    {"entity": "Visit", "name": "No-order reason", "reqs": ["VB-08"]},
+    {"entity": "Order", "name": "Order Status", "reqs": ["VB-05"]},
+    {"entity": "Order Item", "name": "Quantity", "reqs": ["VB-02"]},
+    {"entity": "Order Item", "name": "Price", "reqs": ["VB-10", "VB-11"]},
+    {"entity": "Payment", "name": "Payment Mode", "reqs": ["VB-04"]},
+    {"entity": "Payment", "name": "Change to be given", "reqs": ["VB-04"]},
+    {"entity": "Invoice", "name": "Invoice Number", "reqs": ["VB-09"]},
+    {"entity": "Invoice", "name": "SAP sync", "reqs": ["VB-06"], "oi": "OI-11"}
+  ],
+  "transitions": [
+    {"from": "placed", "to": "invoiced", "action": "Make invoice", "by": ["Sales Agent"], "notify": ["Sales Supervisor"], "reqs": ["VB-05", "VB-06", "VB-09"], "rules": ["Invoice number", "VAT", "Invoice to SAP", "Invoice delivery"]},
+    {"from": "invoiced", "to": "delivered", "action": "Mark Delivered", "by": ["Sales Agent"], "reqs": ["VB-05"], "rules": ["Closed order"]},
+    {"from": "placed", "to": "cancelled", "action": "Cancel order", "by": ["Sales Supervisor"], "notify": ["Sales Agent"], "reqs": ["VB-05"], "rules": ["Cancel order"]}
+  ],
+  "rules": [
+    {"rule": "Beat customers only", "reqs": ["VB-03"]},
+    {"rule": "Items from inventory", "reqs": ["VB-02", "VB-03"]},
+    {"rule": "Customer price", "reqs": ["VB-11"]},
+    {"rule": "VAT", "reqs": ["VB-09"]},
+    {"rule": "Credit", "reqs": ["VB-04"]},
+    {"rule": "Part payment", "reqs": ["VB-04"]},
+    {"rule": "Change to be given", "reqs": ["VB-04"]},
+    {"rule": "No-order reason", "reqs": ["VB-08"]},
+    {"rule": "Invoice number", "reqs": ["VB-09"]},
+    {"rule": "Invoice to SAP", "reqs": ["VB-06"]},
+    {"rule": "Invoice delivery", "reqs": ["VB-09"]},
+    {"rule": "Closed order", "reqs": ["VB-05"]},
+    {"rule": "Edit visit", "reqs": ["VB-01"]},
+    {"rule": "Cancel order", "reqs": ["VB-05"]}
+  ],
+  "reports": [
+    {"name": "Visit Sheet/Report", "reqs": ["VB-07"]},
+    {"name": "Order Sheet/Report", "reqs": ["VB-07"]},
+    {"name": "Payment Sheet", "reqs": ["VB-07"]}
+  ],
+  "rows": [
+    {"id": "ORD-3101", "status": "placed", "values": {"Visit": "V-2201 Chilenje Shop", "Total Amount": 1000}, "children": {"Order Item": [{"Product": "Nurtamilk 500ml", "Quantity": 20, "Price": 30}, {"Product": "Mango Juice 1L", "Quantity": 10, "Price": 40}]}, "log": [["09:10", "Bwalya M.", "Order placed on van"]]},
+    {"id": "ORD-3102", "status": "placed", "values": {"Visit": "V-2202 Kabwata Wholesale", "Total Amount": 600}, "children": {"Order Item": [{"Product": "Yoghurt 250ml", "Quantity": 30, "Price": 20}]}},
+    {"id": "ORD-3103", "status": "invoiced", "values": {"Visit": "V-2203 Matero Supermarket", "Total Amount": 1500}, "children": {"Order Item": [{"Product": "Nurtamilk 1L", "Quantity": 30, "Price": 50}], "Payment": [{"Payment Mode": "Mobile Money", "Change to be given": 0}], "Invoice": [{"Invoice Number": "INV-AG07-12", "SAP sync": "Waiting to sync"}]}, "log": [["10:05", "Bwalya M.", "Invoice INV-AG07-12 made"]]},
+    {"id": "ORD-3104", "status": "invoiced", "values": {"Visit": "V-2204 Woodlands School", "Total Amount": 1000}, "children": {"Order Item": [{"Product": "Mango Juice 1L", "Quantity": 25, "Price": 40}], "Payment": [{"Payment Mode": "Cash", "Change to be given": 200}], "Invoice": [{"Invoice Number": "INV-AG07-13", "SAP sync": "In SAP"}]}},
+    {"id": "ORD-3105", "status": "delivered", "values": {"Visit": "V-2205 Kalingalinga Shop", "Total Amount": 400}, "children": {"Order Item": [{"Product": "Nurtamilk 500ml", "Quantity": 20, "Price": 20}], "Payment": [{"Payment Mode": "Cash", "Change to be given": 0}], "Invoice": [{"Invoice Number": "INV-AG04-31", "SAP sync": "In SAP"}]}, "log": [["11:30", "Temwani K.", "Marked Delivered"]]},
+    {"id": "ORD-3106", "status": "cancelled", "values": {"Visit": "V-2206 Garden Shop", "Total Amount": 300}, "children": {"Order Item": [{"Product": "Yoghurt 250ml", "Quantity": 15, "Price": 20}]}, "log": [["12:00", "Mutale (Sales Supervisor)", "Cancelled before Invoiced"]]}
+  ],
+  "scenarios": [
+    {
+      "title": "Van sale: order, invoice, deliver in one visit",
+      "summary": "Agent visits a shop on the Beat, sells from the van, makes the invoice and hands over the goods.",
+      "steps": [
+        {"actor": "Sales Agent", "action": "Add Visit: pick a customer from today's Beat, GPS location saved; add products from the catalog (image, pack size, customer price, stock in hand)", "screen": "sheet", "proves": ["VB-01", "VB-02", "VB-03", "VB-10", "VB-11", "VB-12"]},
+        {"actor": "Sales Agent", "action": "Make the invoice: INV-AG07-12, VAT 16% added; PDF to the customer on WhatsApp", "row": "ORD-3101", "transition": {"from": "placed", "to": "invoiced"}, "proves": ["VB-05", "VB-09"]},
+        {"actor": "Sales Agent", "action": "Hand over the goods and mark Delivered", "row": "ORD-3101", "transition": {"from": "invoiced", "to": "delivered"}, "proves": ["VB-05"]}
+      ]
+    },
+    {
+      "title": "Supervisor cancels an order before Invoiced",
+      "summary": "Quantity goes back to the agent's stock and the agent gets a push.",
+      "steps": [
+        {"actor": "Sales Supervisor", "action": "Cancel a Placed order", "row": "ORD-3102", "transition": {"from": "placed", "to": "cancelled"}, "proves": ["VB-05", "VB-02"]}
+      ]
+    },
+    {
+      "title": "Payment: change, part payment and credit limit",
+      "summary": "Agent takes payment; ZMW 1,200 on ZMW 1,000 shows ZMW 200 change; Credit only for Category A and B within limit.",
+      "steps": [
+        {"actor": "Sales Agent", "action": "Take payment in cash on an invoiced order: change to be given shows", "row": "ORD-3104", "screen": "record", "proves": ["VB-04"]}
+      ]
+    },
+    {
+      "title": "Visit with no order",
+      "summary": "Agent finds the shop closed and must pick a reason.",
+      "steps": [
+        {"actor": "Sales Agent", "action": "Save a visit with no order: the reason Shop closed is required", "screen": "sheet", "proves": ["VB-08"]}
+      ]
+    },
+    {
+      "title": "Invoice cannot reach SAP",
+      "summary": "No link to SAP: invoice shows Waiting to sync, is retried and the agent carries on.",
+      "steps": [
+        {"actor": "Sales Agent", "action": "See an invoice marked Waiting to sync; the push is retried until SAP has it", "row": "ORD-3103", "screen": "record", "proves": ["VB-06"], "oi": "OI-11"}
+      ]
+    },
+    {
+      "title": "Sheets for supervisors",
+      "summary": "Supervisor opens the Order Sheet with filters and exports it.",
+      "steps": [
+        {"actor": "Sales Supervisor", "action": "Open the Order Sheet/Report for the day, filter by agent, export to Excel", "screen": "report", "report": "Order Sheet/Report", "proves": ["VB-07"]},
+        {"actor": "Sales Supervisor", "action": "Open the Visit Sheet/Report and Payment Sheet", "screen": "report", "report": "Visit Sheet/Report", "proves": ["VB-07"]}
+      ]
+    }
+  ]
+}

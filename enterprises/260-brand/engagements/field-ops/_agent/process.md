@@ -74,10 +74,14 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| add-visit | agent | VB | Add Visit | Customer from assigned Beat | step | OI-39 | RFP-1 |
-| place-order | agent | VB | Place Order | Items from assigned inventory | step | OI-35 | RFP-1 |
-| take-payment | agent | VB | Take Payment | Amount collected, change | step | OI-37 | RFP-1 |
-| generate-invoice | agent | VB | Generate invoice | In neome | step | OI-38 | RFP-1, IN-1 |
+| add-visit | agent | VB | Add Visit | Customer from own mapped Beats, today's Beat first; GPS location; works offline | step | | RFP-1, WS-5 |
+| record-no-order | agent | VB | Record no-order reason | Shop closed, Stock enough, No money, Owner not there, Other | step | | WS-5 |
+| place-order | agent | VB | Place Order | Items from Sales Agent Inventory with customer price; price list from SAP, without VAT; cannot exceed stock | step | | RFP-1, WS-4, WS-5 |
+| take-payment | agent | VB | Take Payment | Cash, Mobile Money, Bank Transfer, Cheque; Credit for Category A and B within limit; part payment; change | step | | RFP-1, WS-5 |
+| generate-invoice | agent | VB | Generate invoice | In neome, INV-<agent code>-<seq>, VAT 16%; Placed to Invoiced | step | | RFP-1, IN-1, WS-5 |
+| send-invoice | agent | VB | Send invoice to customer | PDF on WhatsApp; print on Bluetooth printer | step | | WS-5 |
+| deliver-order | agent | VB | Deliver order | Invoiced to Delivered; van sale: same visit | step | | WS-5 |
+| cancel-order | supervisor | VB | Cancel order | Only before Invoiced; quantity goes back to Sales Agent Inventory; push to agent | step | | WS-5 |
 
 ## LEAD — Leads
 
@@ -154,9 +158,14 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | assign-beats | assign-inventory | | no | RFP-1 |
 | assign-inventory | add-visit | | no | RFP-1 |
 | add-visit | place-order | order taken | no | RFP-1 |
+| add-visit | record-no-order | no order | yes | WS-5 |
 | place-order | take-payment | | no | RFP-1 |
-| take-payment | generate-invoice | | no | (proposed, to confirm) |
-| generate-invoice | invoice-in-sap | | no | RFP-1, IN-1 |
+| take-payment | generate-invoice | | no | WS-5 |
+| generate-invoice | invoice-in-sap | pushed at once, retry on failure | no | RFP-1, IN-1, WS-5 |
+| generate-invoice | send-invoice | | no | WS-5 |
+| generate-invoice | deliver-order | | no | WS-5 |
+| place-order | cancel-order | before Invoiced | yes | WS-5 |
+| cancel-order | reduce-inventory | quantity back | yes | WS-4, WS-5 |
 | invoice-in-sap | view-reports | | no | (proposed, to confirm) |
 | place-order | send-whatsapp | order confirmation | yes | RFP-1 |
 | sync-masters | add-customer | SAP to neome | yes | RFP-1, IN-1 |
