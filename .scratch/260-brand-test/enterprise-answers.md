@@ -1,0 +1,252 @@
+# 260 Brands — simulated Enterprise answers (TEST RUN)
+
+Test data. Made up by the Consultant's agent to exercise the full flow. Speaker: Mitesh (Owner, 260 Brands) + Sales Head on the call. Use as "what the Enterprise said" in live mode.
+
+Context: 260 Brands, Lusaka, Zambia. Dairy and juice products (brand Nurtamilk). Sells to small shops via Sales Agents on beats; Tricycle Riders promote and sell door to door.
+
+## Answers by Open Item
+
+- OI-01: "Completed" = built in an old pilot app we are dropping. BRD covers all 34 items; all built new in neome.
+- OI-02: Regional Sales Manager: view all data + reports for own region, approve leave escalations, no settings. Sales Head: view all + reports, set targets, no settings.
+- OI-03: Area Sales Manager = all modules for own area only; no settings, no user admin. Owner only has settings.
+- OI-04: Yes, Supervisor = Sales Supervisor; Admin = Owner.
+- OI-05: Yes. Every Sales Agent, Tricycle Rider and Sales Supervisor is an Employee (clock in/out, leave).
+- OI-06: 60 Sales Agents, 25 Tricycle Riders, 8 Sales Supervisors, 3 Area Sales Managers, 2 Regional Sales Managers, 1 Sales Head, 1 Owner. ~4,000 customers, ~120 products, ~90 beats, ~15 routes. ~1,200 visits/day, ~700 orders/day.
+- OI-07: Yes, offline needed for visits, orders, attendance; sync when online.
+- OI-08: SAP Business One 10.0 (HANA), Service Layer REST API available; our SAP partner gives credentials.
+- OI-09: Yes, stock sync in scope: SAP → neome only (warehouse stock), every 30 min. neome never writes stock to SAP.
+- OI-10: SAP is system of record for customers, products, prices, employees. Clash → SAP wins.
+- OI-11: Customers/products/employees SAP→neome every 30 min. Stock every 30 min. Invoices neome→SAP at once (near real time, retry on failure).
+- OI-12: Initial load from SAP: customers (~4,000), products (~120), employees (~100), open balances per customer. No order history.
+- OI-13: Change Requests = Sales Agent asks to change customer details (address, phone, GEO); Sales Supervisor approves; then pushed to SAP.
+- OI-14: Category: Retail Shop, Wholesaler, Supermarket, School, Institution. Classification: A (>ZMW 20,000/month), B (5,000–20,000), C (<5,000).
+- OI-15: TPIN = ZRA Taxpayer ID, 10 digits, required for Wholesaler and Supermarket, optional for others.
+- OI-16: Customer Code from SAP (CardCode). Customer added in neome gets temp code until SAP returns CardCode.
+- OI-17: Owner adds/edits all masters. Sales Agent can add a new customer (goes as Change Request, Sales Supervisor approves). Products and employees: Owner only, or from SAP.
+- OI-18: One price list per Customer Category (from SAP). Prices exclude VAT; VAT 16% added on invoice.
+- OI-19: Sales Supervisor maintains Competitor Master (competitor brand + product). Diagram means: in Modern Trade visit, agent records competitor products seen on shelf.
+- OI-20: Stores are also Customers (Category Supermarket), flagged "Modern Trade".
+- OI-21: Sales Agent captures GEO on first visit; only Sales Supervisor can change it after.
+- OI-22: Owner sets: Casual 12 days/year, Sick 10 days/year, credited 1 Jan. Casual carries forward max 5; Sick no carry forward.
+- OI-23: Both: Employee - Beat Mapping plus a weekly day-wise plan (which beat which weekday), made by Sales Supervisor.
+- OI-24: No. One beat → one Sales Agent at a time. A Sales Agent can have many beats.
+- OI-25: Start 08:00, grace 15 min, same for all. After 08:15 = Late.
+- OI-26: Selfie photo + GPS location on clock in/out. No face match.
+- OI-27: Overtime = hours after 17:00 weekdays or on Sunday. Employee requests; Sales Supervisor approves. Status: Pending, Approved, Rejected.
+- OI-28: Auto clock-out at 23:59 marked "Missed Clock-out"; Sales Supervisor fixes time.
+- OI-29: Employee's Sales Supervisor approves. Not acted in 48 h → escalates to Area Sales Manager.
+- OI-30: Half Day = 0.5 day. Beyond balance allowed as Unpaid Leave.
+- OI-31: Sundays and public holidays not counted. Owner keeps a yearly holiday list (Zambia public holidays).
+- OI-32: Yes, quantity per product; Total Amount = quantity × Price.
+- OI-33: Sales Agent returns unsold stock end of day; Sales Supervisor accepts (counts) at depot.
+- OI-34: Inventory item 33 = depot (warehouse) stock view, read from SAP. No warehouse transactions in neome.
+- OI-35: Yes, order reduces Sales Agent Inventory. Order cannot exceed assigned stock.
+- OI-36: Order Status: Placed → Invoiced → Delivered; Cancelled. Agent delivers from van at once for van sales (Placed→Invoiced→Delivered same visit). Supervisor can cancel before Invoiced.
+- OI-37: Cash, Mobile Money (Airtel/MTN), Bank Transfer, Cheque. Credit allowed for Category A/B only, up to credit limit from SAP. Part payment allowed.
+- OI-38: Invoice made in neome, number INV-<agent code>-<seq>, VAT 16% shown, PDF sent on WhatsApp and printable on Bluetooth printer. Pushed to SAP.
+- OI-39: No order needed. No-order visit must pick reason: Shop closed, Stock enough, No money, Owner not there, Other.
+- OI-40: Catalog shows product image, pack size, price for this customer, agent's stock in hand.
+- OI-41: Lead fields: shop name, owner name, phone, address, GEO, category, notes. Sales Agent follows up. Status: New, Contacted, Interested, Converted, Lost. Converted → becomes Customer via Change Request.
+- OI-42: Tricycle Riders do Marketing Visits; Sales Agents may too.
+- OI-43: Both: pick existing customer, or type new person (name, mobile, address, email optional). Visit type: School, Farm, Door to door, Shop activation.
+- OI-44: Tricycle Riders do all three. Goal: product sampling and brand awareness. "D2D - Nurtamilk" = door to door campaign for Nurtamilk brand.
+- OI-45: Visitor name = person visited. Gender: Male, Female, Prefer not to say.
+- OI-46: Sales Agent fills Modern Trade; Sales Supervisor reviews: Approve or Send back with comment.
+- OI-47: Check In/Out records time + GPS; must be within 200 m of the Store.
+- OI-48: Closing stock is report only; not sent to SAP.
+- OI-49: Quality team (Quality Manager) resolves. Status: Open, Under Investigation, Resolved, Closed. Target 72 h. Customer told by WhatsApp on Resolved.
+- OI-50: ComplaintId = neome auto ID. Customer Complaint Number not needed; drop it.
+- OI-51: Quality Manager fills Operator and Shift during investigation (plant side), not the agent.
+- OI-52: Customer gives feedback via Sales Agent. Owner sets questions (fixed list, can change). Response: 1–5 rating + optional comment.
+- OI-53: Reports: Daily Sales (by agent/beat/product; Supervisor+), Attendance (Supervisor+), Visit Productivity (Supervisor+), Stock in hand (Supervisor+), Debt vs Collection (ASM+), Target vs Achievement (all managers), Leave register (Supervisor+), Complaints aging (Owner, Sales Head), Marketing Visits (Sales Head). Filters: date, area, supervisor, agent, beat, product. Export Excel.
+- OI-54: Productive = visit with an order. Agreed.
+- OI-55: Sales Head sets monthly targets per Sales Agent, by value (ZMW) and by quantity per product group.
+- OI-56: Incentive: 2% of monthly sales value if target ≥100% achieved; 1% if 80–99%; none below 80%. Calculated in neome report; paid via payroll outside neome.
+- OI-57: Debt from SAP open balances + neome credit invoices minus collections.
+- OI-58: Map of customers coloured by last-30-days sales value.
+- OI-59: Market = Area. Sales Head sends notices/promos to all staff of an Area; in-app notice + push.
+- OI-60: WhatsApp to customers: invoice PDF, complaint resolved message. Number: 260 Brands WhatsApp Business +260 97 000 0000 via neome's provider; 260 Brands pays.
+- OI-61: Push: leave approve/reject, order cancelled, Change Request decision, new notice, target set. Notice Board: Owner and Sales Head post; to all or by Area/role.
+- OI-62: Ask Neome: managers ask about sales, visits, attendance ("top 5 agents this week"). Owner, Sales Head, ASM, RSM only.
+- OI-63: NLP form filling: voice in English and Nyanja for Visit Book order and Complaint form.
+- OI-64: Planogram: from Modern Trade shelf photo, suggest shelf share and missing products; Sales Supervisor uses it.
+- OI-65: Yes: new customers need Sales Supervisor approval before push to SAP; products/employees made in neome by Owner push direct.
+- OI-66: Signers: Mitesh (Owner, 260 Brands) and Khushal (Neomenta).
+- OI-67: Currency ZMW (Zambian Kwacha). App in English only (voice also Nyanja for NLP).
+- OI-68: neome cloud fine, no residency rule. Login mobile number + OTP.
+- OI-69: Field staff: on-site at Lusaka depot, 2 sessions; supervisors/managers: train-the-trainer; short videos. 1 week before go-live.
+- OI-70: Neomenta support Mon–Sat 08:00–18:00 CAT via WhatsApp + email; 260 Brands IT admin first line.
+- OI-71: Today masters in Excel, out of sync with SAP; wrong prices on orders. KPI: 0 price mismatches between neome and SAP; master sync <30 min.
+- OI-72: Yes, Active/Inactive, no delete. Inactive beat: its customers stay, Sales Supervisor moves them; employees unmapped.
+- OI-73: Yes as suggested: sheet per master, filters by Beat/Route/Category, Excel export.
+- OI-74: SAP owner: Chanda Mwila (IT Manager, 260 Brands).
+- OI-75 and any later "confirm priority, Scope tag and acceptance criteria" OI: yes to all as proposed.
+
+## Default rule for questions not above
+
+- Confirm the proposed answer (`(proposed, to confirm)` / catalog suggestion) unless it clashes with an answer above.
+- Goals/KPI per Module not given above → give a short plausible one (e.g. "time saved, fewer errors") and add it to the section below so later Modules stay consistent.
+- Bulk Requirement confirm (topic 11): "yes to all".
+- Module set changes: none. Keep all 15 Modules as they are.
+
+## Extra answers given during grilling (append here, one bullet each, `- <PREFIX>: <question> → <answer>`)
+- BEAT: goal/KPI → Every order and visit comes from the agent's own Beat; every active Beat has one Sales Agent; weekly plan ready before Monday.
+- BEAT: today's pain → Beats kept in Excel; two agents work the same Beat, some Beats have nobody.
+- BEAT: do Tricycle Riders get Beats too? → Yes, mapped like Sales Agents (Marketing Visit picks a Beat). One-agent-per-Beat rule is for Sales Agents; a rider may work a Beat that has a Sales Agent.
+- BEAT: who assigns/plans? → Sales Supervisor for own agents/riders; Area Sales Manager can too for own area. Owner makes Beats inactive.
+- BEAT: approval needed to assign or plan? → No approval. Supervisor assigns directly.
+- BEAT: notify agent on plan change? → No extra notification (only the push events in OI-61).
+- BEAT: weekdays in plan → Monday to Saturday; Sunday no planned Beat.
+- BEAT: Sales Agent sees which customers on order? → All customers of agent's mapped Beats; today's planned Beat shown first.
+- BEAT: offline? → Yes, agent sees mapping and today's plan offline.
+- BEAT: reports? → No separate report; a list of mapping and weekly plan (filters supervisor, agent, beat) for Supervisor and above. Beat coverage stays in Reports Module.
+- BEAT: Beat records live where? → neome only (not SAP), as IN-1 says.
+- ATT: goal/KPI → Every Employee clock in and out recorded with photo and GPS; no Missed Clock-out left unfixed.
+- ATT: today's pain → Attendance not tracked reliably; late arrivals and overtime hard to check.
+- ATT: who sees Attendance and Overtime reports → Sales Supervisor and above.
+- ATT: overtime approver away → same as leave: not acted in 48 h escalates to Area Sales Manager.
+- ATT: rejected overtime → Employee can add a new request; no reopen.
+- ATT: integrations → none; Employees come from SAP via Masters; attendance stays in neome, not sent to SAP.
+- ATT: notifications → no extra push for attendance or overtime (only OI-61 events).
+- ATT: volumes → about 93 Employees (60 Sales Agents, 25 Tricycle Riders, 8 Sales Supervisors); one clock in and one clock out each per day.
+- LEAVE: goal/KPI → Every leave request decided by the Sales Supervisor within 48 hours; leave balance always correct with no manual Excel.
+- LEAVE: today's pain → Leave tracked on paper and WhatsApp; balances wrong and approvals slow.
+- LEAVE: who sees the Leave register → Sales Supervisor and above (OI-53).
+- LEAVE: rejected leave → Employee can add a new request; no reopen.
+- LEAVE: can Employee cancel a Pending request? → Yes, own Pending request only; approved leave cannot be cancelled by the Employee.
+- LEAVE: integrations → none; Employees come from SAP via Masters; leave stays in neome, not sent to SAP.
+- LEAVE: offline? → No; applying and approving leave needs network.
+- LEAVE: volumes → about 93 Employees; a few leave requests a day.
+- LEAVE: approver away → same 48 h escalation to Area Sales Manager (OI-29).
+- LEAVE: notify → push on approve/reject only (OI-61); no extra.
+- INV: goal/KPI → Every Sales Agent starts the day with stock assigned and ends it with unsold stock returned and counted; no order above assigned stock; no manual Excel for stock in hand.
+- INV: today's pain → Stock given to agents on paper; no record of what an agent holds; returns not counted; agents sell what they do not have.
+- INV: who assigns? → Sales Supervisor, for own Sales Agents only; no approval needed.
+- INV: do Tricycle Riders get Sales Agent Inventory? → No; Sales Agents only.
+- INV: how often? → One assignment per Sales Agent per day (morning) and one return per day (end of day); about 60 each per day.
+- INV: Stock Return statuses → Pending (agent returned, not counted) → Accepted (Sales Supervisor counted).
+- INV: counted quantity differs from returned? → Sales Supervisor enters counted quantity; difference shown on the return; no extra approval.
+- INV: agent does not return stock? → Stock stays in the Sales Agent Inventory next day.
+- INV: order cancelled by Supervisor before Invoiced → quantity goes back into the Sales Agent Inventory.
+- INV: offline? → Agent sees own inventory offline and orders reduce it offline; assigning and accepting returns need network.
+- INV: who sees depot stock and Stock in hand? → Sales Supervisor and above (as OI-53).
+- INV: integrations → depot stock SAP → neome only (OI-09); Sales Agent Inventory stays in neome, not sent to SAP.
+- INV: notifications → none extra (only OI-61 events).
+- VB: goal/KPI → Every visit recorded on the Beat with GPS; every order has an invoice made in neome and in SAP within minutes; 0 price mismatches; no paper order books.
+- VB: today's pain → Orders and visits on paper; prices wrong on orders; invoices made late by hand in SAP; no proof the agent was at the shop.
+- VB: do Tricycle Riders use Visit Book? → No; Sales Agents only (riders use Marketing Visit).
+- VB: who moves Order Status? → Sales Agent makes the invoice (Placed→Invoiced) and marks Delivered; Sales Supervisor cancels before Invoiced.
+- VB: change to be given → shown when amount collected is more than the order total (default rule: proposed confirmed).
+- VB: who sees Visit Sheet, Order Sheet, Payment Sheet → Sales Agent own entries; Sales Supervisor and above all (default rule: proposed confirmed).
+- VB: can a Delivered or Cancelled order be changed? → No; final.
+- VB: Sales Agent edits a visit after saving? → Same day only, until the day ends (default rule).
+- VB: credit above limit → order cannot be placed on credit; agent takes payment or cuts the order.
+- VB: invoice push to SAP fails → retried until it works; agent not blocked; shown as "Waiting to sync".
+- VB: integrations → invoice neome→SAP (OI-11); WhatsApp invoice PDF via Business number (OI-60); no other.
+- VB: how long keep visit/order/invoice records → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- LEAD: goal/KPI → Every lead recorded with a Sales Agent and followed up; Leads converted to Customers counted every month; no leads kept in notebooks or WhatsApp.
+- LEAD: today's pain → Leads kept in notebooks and WhatsApp; no record of follow-up; nobody counts how many become customers.
+- LEAD: do Tricycle Riders add Leads? → No; Sales Agents only (default rule: proposed confirmed).
+- LEAD: who sees the Lead Sheet/Report? → Sales Agent own Leads; Sales Supervisor and above all (default rule, as VB).
+- LEAD: Category values → same list as Customer Category (Retail Shop, Wholesaler, Supermarket, School, Institution).
+- LEAD: final statuses and who moves them → Converted and Lost are final; Sales Agent moves Leads; a Lost Lead is not reopened, agent adds a new Lead.
+- LEAD: is Change Request needed on Convert? → Yes; Convert makes a Change Request (a new Customer); Sales Supervisor approves; then it goes to SAP (OI-13, OI-65).
+- LEAD: offline? → Yes; Sales Agent adds and updates Leads offline, sync when online.
+- LEAD: integrations → none of its own; a Converted Lead reaches SAP only as a new Customer through the Change Request.
+- LEAD: notifications → none extra; push on Change Request decision (OI-61).
+- LEAD: volumes → about 60 Sales Agents; about 20 new Leads a day in total.
+- MKT: goal/KPI → Every Marketing Visit recorded with GPS location and photo; Sales Head sees how many sampling visits each rider did; no paper sheets.
+- MKT: today's pain → Marketing visits on paper and WhatsApp; no proof the rider was there; no count of sampling work.
+- MKT: Beat for riders → Riders mapped to Beats; Marketing Visit picks a Beat (as BEAT).
+- MKT: who sees visits/sheet → Rider or Sales Agent own; Sales Supervisor and above all (default rule, as VB).
+- MKT: report → Marketing Visits report for Sales Head (OI-53); filters date, area, supervisor, rider, Beat, Visit type; Excel export.
+- MKT: edit after saving → Same day only (as VB).
+- MKT: statuses → None; a visit is a record only.
+- MKT: offline → Yes; sync when online.
+- MKT: integrations → none; not sent to SAP.
+- MKT: notifications → none extra.
+- MKT: volumes (visits per day) → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- MT: goal/KPI → Every Modern Trade visit recorded at the Store with GPS check in and out and shelf photos; every update reviewed by Sales Supervisor; Closing Stock per Store without paper.
+- MT: today's pain → Store shelf checks on paper and WhatsApp; no proof agent was at the Store; competitor activity not tracked.
+- MT: who sees → Sales Agent own; Sales Supervisor and above all.
+- MT: statuses → Submitted → Approved (final) or Sent back; after Sent back agent edits and submits again; comment needed to send back.
+- MT: Store pick → Customers flagged Modern Trade on the agent's Beats.
+- MT: edit after submit → No; only after Sent back.
+- MT: shelf images → up to 5.
+- MT: Tricycle Riders → No; Sales Agents only.
+- MT: offline → Yes; sync when online.
+- MT: integrations → none; not sent to SAP.
+- MT: notifications → none extra.
+- MT: report → Modern Trade Sheet and Closing Stock Inventory; filters date, Store, area, supervisor, agent, product; Excel export.
+- MT: volumes (updates per day, Stores) → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- CMP: goal/KPI → Every complaint recorded with batch and photo, resolved within 72 hours, customer told.
+- CMP: today's pain → Complaints by phone and WhatsApp; no record; no tracking of time; customers not told.
+- CMP: Quality Manager headcount → 1.
+- CMP: who sees → Sales Agent own; Quality Manager, Sales Supervisor and above all.
+- CMP: who closes / reopen → Quality Manager moves all stages, sets Closed after customer told; Closed final, no reopen; agent logs a new complaint.
+- CMP: Signature / Batch / Production / Expiry → Signature is customer's, on phone; Batch, dates read from pack by Sales Agent; Resolution note by Quality Manager.
+- CMP: no customer mobile → no WhatsApp; Quality Manager notes it.
+- CMP: push for new complaint → none; Quality Manager uses list of Open complaints.
+- CMP: offline → Yes for logging; investigation needs network.
+- CMP: reports → Complaint Sheet (date, area, supervisor, agent, product, status; Excel); Complaints aging for Owner and Sales Head.
+- CMP: integrations → WhatsApp to customer only; nothing to SAP.
+- CMP: volumes (complaints per day) → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- FB: goal/KPI → Every customer feedback recorded by the Sales Agent with a rating per question; Sales Head sees how customers rate us; no paper forms.
+- FB: today's pain → Feedback not recorded; only heard on visits and lost.
+- FB: who sees → Sales Agent own; Sales Supervisor and above all (default rule, as VB).
+- FB: edit after saving → Same day only (as VB).
+- FB: offline → Yes; sync when online.
+- FB: integrations → none; not sent to SAP.
+- FB: notifications → none extra.
+- FB: volumes (feedbacks per day) → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- RPT: goal/KPI → Managers get every report from neome in minutes, no Excel made by hand; targets set before the month starts; incentive worked out in neome with no disputes.
+- RPT: today's pain → Reports built by hand in Excel from paper and SAP; late; targets and incentives tracked on paper; no view of debt or where customers are.
+- RPT: Sales Agents and Tricycle Riders see reports? → No Reports; they see own entries in their module sheets only. Riders see no targets.
+- RPT: Target Achievement = ? → Sales value = Invoiced and Delivered orders of the agent in the month, before VAT; Cancelled not counted. Quantity target counted the same per product group (= Category from Category Master).
+- RPT: Non-Productive call → Visit with no order (reason from No-order reason list).
+- RPT: Incentive report shown to → Sales Head, Owner, Area/Regional Sales Manager for their people; Sales Agent sees own incentive (his own target and incentive only).
+- RPT: edit a target mid-month → Sales Head can change it until month end; month-end incentive uses the target as at month end.
+- RPT: new agent mid-month / no target → shows "No target"; no incentive.
+- RPT: Daily summaries → Daily Sales for yesterday shown at top of dashboard; no email, no push.
+- RPT: dashboards → Performance (sales vs target, incentive earned) and Efficiency (productive calls %, visits per agent per day) dashboards for Supervisor and above; same filters.
+- RPT: Customer Master Heat Map → customers without GEO not shown; click a customer shows name, Category, last-30-days sales; Sales Supervisor and above.
+- RPT: offline → No; reports need network.
+- RPT: how fresh → Neome data as soon as phones sync; SAP open balances up to 30 min old (OI-11).
+- RPT: integrations → read SAP open balances only (via sync, OI-11); nothing sent to SAP; Excel export only.
+- RPT: volumes (report views per day) → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- RPT: report scope → Regional Sales Manager own region, Area Sales Manager own area, Sales Supervisor own agents; Sales Head and Owner all.
+- COM: goal/KPI → Every notice and promo reaches the right staff in the app the same day; every customer gets the invoice PDF and the complaint-resolved message on WhatsApp; no WhatsApp groups used for company notices.
+- COM: today's pain → Notices and promos sent on WhatsApp groups; staff miss them; no way to send to one Area only.
+- COM: which WhatsApp messages? → Only two: invoice PDF (this is the order confirmation) and complaint Resolved message. No separate payment-update message.
+- COM: push recipients → The person concerned: leave decision to the Employee; order cancelled to the Sales Agent; Change Request decision to the Sales Agent who asked; target set to the Sales Agent; new notice to its audience.
+- COM: who posts notices → Owner and Sales Head. Sales Head posts to an Area (market); Owner to all, Area or role.
+- COM: Notice fields → Title, message, audience (All / Area / role), posted by, date. Posted notice can be edited or removed by the poster; no auto expiry; no approval.
+- COM: Notice statuses → None; a notice is a record only (posted or removed).
+- COM: notice sent → In-app on the Notice Board plus push to the audience; no WhatsApp for staff.
+- COM: staff offline → Notice Board and notices read offline once synced; push arrives when back online; posting needs network.
+- COM: WhatsApp send fails → Retried up to 3 times; then shown as Failed; Sales Agent or Quality Manager can send again.
+- COM: customer has no mobile number → no WhatsApp; (as CMP).
+- COM: reports → No report; Notice Board list only; no read tracking.
+- COM: who owns WhatsApp link → Owner owns the 260 Brands WhatsApp Business number; neome's provider runs the link; 260 Brands pays (OI-60).
+- COM: integrations → WhatsApp out only; nothing to SAP.
+- COM: volumes: WhatsApp = one invoice per order (~700 a day, OI-06) plus Resolved complaints; notices per week → NOT KNOWN; Enterprise to say (Don't know → Open Item).
+- AI: goal/KPI → Fill Visit Book order and Complaint forms by voice faster than typing; managers get answers in seconds, not from Excel; every Modern Trade update with shelf photo gets a planogram suggestion.
+- AI: today's pain → Orders and complaints typed by hand in the field; managers wait for Excel; shelf share judged by eye.
+- AI: Ask Neome data scope → same as Reports (RSM own region, ASM own area, Sales Head and Owner all). Read only; says so when it cannot answer.
+- AI: NLP saves by itself? → No; voice fills the form, user checks and saves. Users: Sales Agents.
+- AI: planogram statuses/approval → none; suggestion record only; Sales Supervisor decides.
+- AI: offline → No. Integrations → none. Reports → none.
+- AI: volumes → Ask Neome 7 users; voice for ~700 orders/day and complaints; planogram per Modern Trade update (no new number).
+- SAP: goal/KPI → Customers, products, employees, prices and depot stock in neome match SAP within 30 min; every invoice in SAP within minutes; 0 price mismatches (OI-71).
+- SAP: today's pain → Masters kept in Excel, out of sync with SAP; invoices keyed by hand in SAP, late (OI-71).
+- SAP: who sets sync frequency in dashboard? → Owner only (settings); Chanda Mwila (IT Manager) owns the SAP side and the link (OI-74).
+- SAP: customers neome→SAP checks? → New customer: Sales Supervisor approves the Change Request first (OI-13, OI-65); changes to address, phone, GEO go the same way. Products and employees by Owner go direct.
+- SAP: price lists, credit limits, open balances → come from SAP with the customer and product sync, every 30 min.
+- SAP: sync statuses → Waiting to sync, Synced, Failed. Failed is retried each cycle until Synced.
+- SAP: sync fails or SAP rejects a record → record shows Failed with the SAP message; Owner sees it in the dashboard; no other notification; neome keeps working.
+- SAP: SAP down → neome keeps working; changes and invoices wait and go when SAP is back; invoice shows "Waiting to sync".
+- SAP: reports → none; a sync log in the dashboard (record, time, status) for Owner.
+- SAP: volumes → ~4,000 customers, ~120 products, ~100 employees (OI-06); ~700 invoices/day.
+- SAP: temp Customer Code before SAP returns CardCode → shown as temporary; replaced by CardCode when SAP returns it.
+- SAP: priority → all Must, except sync log Should.
+- SAP: roles/headcount → Owner (1) sets plugin in dashboard; Sales Supervisors (8) approve new customers; Chanda Mwila (IT Manager) owns SAP side.
