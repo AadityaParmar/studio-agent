@@ -27,5 +27,5 @@ Claude Code plugin. Consultant drops Inputs, runs 6 skills, gets cited Module sp
 
 ## Source history (frozen, read-only)
 
-- [map.md](../../.scratch/neome-requirements-studio/map.md), [spec.md](../../.scratch/neome-requirements-studio/spec.md), [issues/](../../.scratch/neome-requirements-studio/issues/) 01–45.
-- Throwaway prototypes, research, UI tokens: `.scratch/neome-requirements-studio/{prototypes,research,ui-reference}/`.
+- [map.md](history/map.md), [spec.md](history/spec.md), [issues/](history/issues/) 01–45.
+- Throwaway prototypes, research, UI tokens: `history/{prototypes,research,ui-reference}/`.

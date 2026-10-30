@@ -2,7 +2,7 @@
 
 Label: wayfinder:map
 
-**Status: done — v1 (2026-10-30).** All tickets 01–45 resolved. Frozen. Wrap-up: [docs/v1/](../../docs/v1/README.md). Future changes: [docs/route.md](../../docs/route.md).
+**Status: done — v1 (2026-10-30).** All tickets 01–45 resolved. Frozen. Wrap-up: [docs/v1/](../README.md). Future changes: [docs/route.md](../../route.md).
 
 ## Destination
 
@@ -10,7 +10,7 @@ A written design for the Neome Requirements Studio skill pack, complete enough t
 
 ## Notes
 
-- Language: [GLOSSARY.md](../../GLOSSARY.md), [GLOSSARY-MAP.md](../../GLOSSARY-MAP.md). Use Enterprise, Engagement, Module, Requirement, Open Item, Source, Neome App, Delivery, BRD, Prototype exactly as defined.
+- Language: [GLOSSARY.md](../../../GLOSSARY.md), [GLOSSARY-MAP.md](../../../GLOSSARY-MAP.md). Use Enterprise, Engagement, Module, Requirement, Open Item, Source, Neome App, Delivery, BRD, Prototype exactly as defined.
 - Skills every session should consult: /grilling + /domain-modeling (default), /prototype for prototype tickets, /research for research tickets, /writing-for-agents for anything that drafts skill text.
 - Upstream: `skills-main/` (Matt Pocock skills, MIT). Copy and adapt into a new plugin; never edit upstream in place.
 - Reference examples in `example/`:

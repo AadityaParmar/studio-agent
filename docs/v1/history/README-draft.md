@@ -4,7 +4,7 @@
 
 A Claude Code plugin for Neome Consultants and ADG. It takes an Enterprise's raw Inputs and turns them into a Neome-mapped **BRD**, by way of Modules, grilling, specs and Prototypes. The BRD data file is the handoff to phase 2 (the Neome build).
 
-Terms (Enterprise, Engagement, Module, Requirement, Open Item, Source, Neome App, Delivery, BRD, Prototype) are used as defined in [GLOSSARY.md](../../GLOSSARY.md).
+Terms (Enterprise, Engagement, Module, Requirement, Open Item, Source, Neome App, Delivery, BRD, Prototype) are used as defined in [GLOSSARY.md](../../../GLOSSARY.md).
 
 ---
 

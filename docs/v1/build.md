@@ -1,6 +1,6 @@
 # v1 Build: Neome Requirements Studio
 
-What tickets 21–45 built, where it lives, key build-time calls, and what is not verified. Design reasons: [decisions.md](decisions.md). Full notes per ticket: [issues/](../../.scratch/neome-requirements-studio/issues/).
+What tickets 21–45 built, where it lives, key build-time calls, and what is not verified. Design reasons: [decisions.md](decisions.md). Full notes per ticket: [issues/](history/issues/).
 
 ## How to talk
 
@@ -98,4 +98,4 @@ Exact flags: header of each `engine/*.mjs`.
 - OI IDs inside SVG not clickable.
 - WhatsApp TXT paste on real phone; PDF/photo replies (text extraction left to agent).
 - Real Neome approval screens (Prototype guess).
-- Rollout step pending: one real Engagement shadowed by maintainer (`.scratch/260-brand-test/` = trial run).
+- Rollout step pending: one real Engagement shadowed by maintainer (`history/260-brand-trial/` = trial run).

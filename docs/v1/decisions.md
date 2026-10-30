@@ -2,7 +2,7 @@
 
 Final state of every design decision (tickets 01–20, 44). Later tickets already folded in (e.g. 13 moved paths of 03; 18 lost `petrostar-crm`). Terms per [GLOSSARY.md](../../GLOSSARY.md).
 
-Full history: [map.md](../../.scratch/neome-requirements-studio/map.md), [issues/](../../.scratch/neome-requirements-studio/issues/), [spec.md](../../.scratch/neome-requirements-studio/spec.md).
+Full history: [map.md](history/map.md), [issues/](history/issues/), [spec.md](history/spec.md).
 
 ## How to talk
 
@@ -23,7 +23,7 @@ Full history: [map.md](../../.scratch/neome-requirements-studio/map.md), [issues
 - Packaging: one private repo = plugin + `enterprises/<ent>/engagements/<slug>/`.
 - Out of scope: low-level Neome build mapping (phase 2), RFP-response genre, pricing, multi-language BRDs (English only).
 
-## D01 Neome App catalog ([01](../../.scratch/neome-requirements-studio/issues/01-neome-app-catalog-reference.md))
+## D01 Neome App catalog ([01](history/issues/01-neome-app-catalog-reference.md))
 
 - 30 unique public Apps (31 = sitemap dup). 28 self-serve, 2 licensed verticals (Vehicle & Driver, FMCG Field Sales).
 - Per App: entities + record codes, statuses, roles, automations, approvals, 3 reports.
@@ -32,7 +32,7 @@ Full history: [map.md](../../.scratch/neome-requirements-studio/map.md), [issues
 - Delivery heuristics (Standard / Configuration / Custom module) from 17 PetroStar mappings.
 - Shipped: `neome-studio/reference/neome-app-catalog.md` + `neome-app-catalog-slugs.json`.
 
-## D02 Skills and flow ([02](../../.scratch/neome-requirements-studio/issues/02-skill-inventory-and-flow.md))
+## D02 Skills and flow ([02](history/issues/02-skill-inventory-and-flow.md))
 
 Plugin `neome-studio`, 11 skills, `/neome-studio:<skill>`.
 
@@ -55,7 +55,7 @@ Plugin `neome-studio`, 11 skills, `/neome-studio:<skill>`.
 - Map logic (frontier, claim, close) = shared reference, no wayfinder clone.
 - Building blocks visible in slash menu; `studio` points only at the 6.
 
-## D03 + D13 Folder layout: facade ([03](../../.scratch/neome-requirements-studio/issues/03-enterprise-and-engagement-folder-layout.md), [13](../../.scratch/neome-requirements-studio/issues/13-facade-layout-human-vs-agent-files.md))
+## D03 + D13 Folder layout: facade ([03](history/issues/03-enterprise-and-engagement-folder-layout.md), [13](history/issues/13-facade-layout-human-vs-agent-files.md))
 
 ```
 enterprises/<ent>/
@@ -84,7 +84,7 @@ enterprises/<ent>/
 - `open-items.md` columns: ID | question | Module(s) | owner | ask to | suggested | status | asked in | answer Source (+ optional note, raised in).
 - Views follow Modules (rename → rename Prototype; merge → remove).
 
-## D04 Question bank ([04](../../.scratch/neome-requirements-studio/issues/04-module-elicitation-question-bank.md))
+## D04 Question bank ([04](history/issues/04-module-elicitation-question-bank.md))
 
 - Coverage list, not script. 11 topics: purpose/pain → roles → process (AS-IS/TO-BE) → records → statuses → rules → exceptions → reports → integrations → volumes/NFRs → priority + scope confirm.
 - Engagement-wide topics asked once in `review-draft` (access, localisation, hosting, migration, training, support). OIs Module = `All`.
@@ -95,7 +95,7 @@ enterprises/<ent>/
 - Acceptance + MoSCoW drafted by agent, one bulk confirm; unconfirmed → one Engagement OI.
 - Lives: `skills/grill-module/references/question-bank.md`.
 
-## D05 BRD page ([05](../../.scratch/neome-requirements-studio/issues/05-brd-page-structure-and-look.md))
+## D05 BRD page ([05](history/issues/05-brd-page-structure-and-look.md))
 
 - Module explorer: dark sidebar (Overview · Modules · Register). Single self-contained HTML.
 - Module view: eyebrow, name, In progress chip, purpose, mapping card (indicative), filters (All/Must/Open scope/Has OI), Requirement cards (folded acceptance, proposed chip, OI links), Module OI box.
@@ -105,7 +105,7 @@ enterprises/<ent>/
 - In-progress Modules always shown, marked.
 - Look: Vendorgate tokens (Schibsted Grotesk + JetBrains Mono, `#1877D5`, accent `#F47100`). Delivery: Standard green, Configuration blue, Custom orange, Open dashed orange.
 
-## D06 Diagrams ([06](../../.scratch/neome-requirements-studio/issues/06-process-diagram-rendering.md))
+## D06 Diagrams ([06](history/issues/06-process-diagram-rendering.md))
 
 - BRD data → Mermaid text (derived, never stored) → pinned `mmdc` → static SVG inline. No mermaid.js.
 - Process: `flowchart TB`, subgraph per lane, step tagged with Module prefix, diamonds, dotted alternates, externals grey.
@@ -113,7 +113,7 @@ enterprises/<ent>/
 - OI-dependent node: dashed orange + OI ID. Lanes = hint only.
 - Pin mermaid-cli (12.0.0). Missing/wrong version → clear error.
 
-## D07 Module spec ([07](../../.scratch/neome-requirements-studio/issues/07-module-spec-template.md))
+## D07 Module spec ([07](history/issues/07-module-spec-template.md))
 
 - Markdown, header (Prefix, Name, Status, Sources) + 13 fixed H2: 1 Purpose/KPIs · 2 Roles · 3 Process · 4 Records · 5 Statuses · 6 Rules · 7 Exceptions · 8 Reports · 9 Integrations · 10 Volumes/NFRs · 11 Requirements · 12 Neome mapping · 13 Open Items.
 - Unused = `N/A: <reason>`, never deleted. Tables for structured parts.
@@ -123,7 +123,7 @@ enterprises/<ent>/
 - Notes column: `Values: A / B / C`, `Links to: <entity>`.
 - Section 12 by `neome-mapping`; rest by `write-module-spec`. Done check before close.
 
-## D08 BRD data schema ([08](../../.scratch/neome-requirements-studio/issues/08-brd-data-schema.md))
+## D08 BRD data schema ([08](history/issues/08-brd-data-schema.md))
 
 - JSON built by engine from `_agent/` markdown; never hand-edited. Markdown = truth.
 - Live `_agent/brd/brd-data.json` + frozen `versions/v<N>.json`.
@@ -134,20 +134,20 @@ enterprises/<ent>/
 - `schemaVersion` semver (now `1.0.0`). Breaking = major bump; phase 2 refuses unknown major.
 - Schema: `skills/build-brd/references/brd-data.schema.json` + `brd-data-schema.md`.
 
-## D09 + D14 Prototype look ([09](../../.scratch/neome-requirements-studio/issues/09-collect-neome-ui-reference.md), [14](../../.scratch/neome-requirements-studio/issues/14-prototype-look-from-real-neome-screens.md))
+## D09 + D14 Prototype look ([09](history/issues/09-collect-neome-ui-reference.md), [14](history/issues/14-prototype-look-from-real-neome-screens.md))
 
-- Prototype = Neome product look (Roboto/Material, tile launcher, grey title bars, tinted kanban, right drawer, bot notifications, two-device scenarios). Tokens: `.scratch/.../ui-reference/tokens.md`.
+- Prototype = Neome product look (Roboto/Material, tile launcher, grey title bars, tinted kanban, right drawer, bot notifications, two-device scenarios). Tokens: [history/ui-reference/tokens.md](history/ui-reference/tokens.md).
 - BRD keeps Vendorgate look.
 - Approve-from-bot-chat = guessed (no real approval screens). Open: revisit when screenshots exist.
 
-## D10 Prototype shape ([10](../../.scratch/neome-requirements-studio/issues/10-module-prototype-shape.md))
+## D10 Prototype shape ([10](history/issues/10-module-prototype-shape.md))
 
 - One HTML per Module, 3 tabs: App (sheet, kanban, drawer, role switcher, actions per transition) · Scenarios (actor, step, what it proves, OI callout) · Mobile + trace.
 - Fixed template + data. No agent-written HTML. `prototype-data.json` = only what spec lacks (sample rows 4–8 over every status, scenarios, overlays).
 - In memory only, reset, no external JS.
 - Done: every Requirement in ≥1 tab, every transition in ≥1 scenario.
 
-## D11 Questionnaire loop ([11](../../.scratch/neome-requirements-studio/issues/11-async-questionnaire-loop.md))
+## D11 Questionnaire loop ([11](history/issues/11-async-questionnaire-loop.md))
 
 - Items = open Enterprise-owned OIs only. Item ID = OI ID.
 - Master `_agent/questionnaires/QN-<date>.md` → HTML (A4, no JS) + TXT (WhatsApp). No form.
@@ -156,7 +156,7 @@ enterprises/<ent>/
 - Reply → Source `QA-n`. `ingest` proposes match list; Consultant confirms before any write.
 - Yes → close OI, un-propose fact. Edit → close OI, Module needs-revisit. Don't know → stays open + note. New question → new OI.
 
-## D12 Versioning + Sign-off ([12](../../.scratch/neome-requirements-studio/issues/12-brd-versioning-and-sign-off.md))
+## D12 Versioning + Sign-off ([12](history/issues/12-brd-versioning-and-sign-off.md))
 
 - Preview = unnumbered "Working draft". Release = frozen integer `v<N>` (HTML + JSON).
 - Status: `draft-for-review` | `signed-off`. Superseded derived.
@@ -167,7 +167,7 @@ enterprises/<ent>/
 - Signed version frozen forever. Next build clears `proposed` on accepted, unchanged items.
 - Phase 2 takes latest signed-off snapshot.
 
-## D15 Onboarding + git ([15](../../.scratch/neome-requirements-studio/issues/15-consultant-onboarding.md))
+## D15 Onboarding + git ([15](history/issues/15-consultant-onboarding.md))
 
 - Claude Code only. Clone repo = plugin install (local marketplace in `.claude/settings.json`).
 - `npm ci` pins mmdc. `studio` checks setup every run.
@@ -175,14 +175,14 @@ enterprises/<ent>/
 - Concurrency: per-Module claim (push `claimed` + `claimedBy` first). `ingest`, `review-draft`, `build-brd` (+ shared edits in `resolve-module`) take Engagement lock (`lock:` line in `_agent/map.md`).
 - Root CLAUDE.md = rules; root README = Consultant guide; `neome-studio/README.md` = maintainer doc.
 
-## D16 Implementation plan ([16](../../.scratch/neome-requirements-studio/issues/16-delivery-plan-in-the-brd.md))
+## D16 Implementation plan ([16](history/issues/16-delivery-plan-in-the-brd.md))
 
 - Optional, indicative. `_agent/plan.md`. Phases on relative weeks + Not yet placed list.
 - Agent drafts 4-phase skeleton (masters, workflow, uat, go-live), places Modules. Only Consultant sets weeks.
 - No pricing, no dates. Phases never restate Requirements.
 - Release warns: phase without weeks/still proposed, resolved Module unplaced.
 
-## D17 Enterprise glossary ([17](../../.scratch/neome-requirements-studio/issues/17-enterprise-glossary-lifecycle.md))
+## D17 Enterprise glossary ([17](history/issues/17-enterprise-glossary-lifecycle.md))
 
 - One per Enterprise, shared by Engagements. Seeded from Inputs only (no catalog terms).
 - Entry: term, definition, _Avoid_, _Source_, _Status_ proposed|agreed, _Used in_.
@@ -190,7 +190,7 @@ enterprises/<ent>/
 - Agreed when Enterprise confirms (Questionnaire) or signs a BRD showing it.
 - BRD shows only this Engagement's terms. No Engagement lock; pull before write, commit right after.
 
-## D18 Testing ([18](../../.scratch/neome-requirements-studio/issues/18-testing-the-skills.md))
+## D18 Testing ([18](history/issues/18-testing-the-skills.md))
 
 - Layer 1 checks: `npm test` + GitHub Action. How-to-talk, front-matter, schema, cross-ref, render, trace, release rules, upstream pins.
 - Layer 2 evals: golden replay with simulated client (answers only from answer key). Cases: `anglo-gulf-crm` (full flow), `tiny-synthetic` (mechanics). `petrostar-crm` dropped 2026-10-30.
@@ -198,21 +198,21 @@ enterprises/<ent>/
 - Gate: skill text change → checks + evals + maintainer spot-check before merge to `main`.
 - Rollout: one real Engagement shadowed by maintainer before team use.
 
-## D19 Engagement-wide Requirements ([19](../../.scratch/neome-requirements-studio/issues/19-home-for-engagement-wide-requirements.md))
+## D19 Engagement-wide Requirements ([19](history/issues/19-home-for-engagement-wide-requirements.md))
 
 - Not a Module. `GEN-NN` (GEN reserved). Topic tag: access, localisation, hosting, migration, training, support, other.
 - `_agent/general.md`, H2 per topic. Only if no single Module owns it.
 - BRD section "Across all Modules". No mapping, not in fit table.
 - Sign-off needs every topic covered (Req, N/A, or `All` OI).
 
-## D20 Upstream skills-main ([20](../../.scratch/neome-requirements-studio/issues/20-pulling-upstream-skills-main-changes.md))
+## D20 Upstream skills-main ([20](history/issues/20-pulling-upstream-skills-main-changes.md))
 
 - Upstream = `github.com/mattpocock/skills`. Pin in SKILL.md front-matter: `upstream` + `upstreamVersion` (1.3.1).
 - No snapshot in repo. Maintainer-only `neome-studio/maintainer/upstream-check.mjs`, ~quarterly.
 - Agent proposes re-adapt keeping How-to-talk, terms, facade paths. Maintainer accepts per skill. Never auto-merge.
 - `upstreamDiverged: <reason>` = opt out. MIT notice `neome-studio/LICENSE-upstream`.
 
-## D44 Next-step handoff ([44](../../.scratch/neome-requirements-studio/issues/44-next-step-handoff-at-session-end.md))
+## D44 Next-step handoff ([44](history/issues/44-next-step-handoff-at-session-end.md))
 
 - All 6 user skills end (after push, also on early stop) with `Next session:` ≤3 runnable lines.
 - From engine `status` `step | <skill> | <args> | <why>`. Same logic as `studio`.

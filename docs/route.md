@@ -1,6 +1,6 @@
 # Route: how to change Neome Requirements Studio after v1
 
-Look up what you want to change → touch these files → run these checks → bump these versions. Baseline: [v1/](v1/README.md) (tag `v1`). Terms per [GLOSSARY.md](../GLOSSARY.md).
+Look up what you want to change → touch these files → run these checks → bump these versions. Baseline: [v1/](v1/README.md) (tag `v1`). Docs index: [README.md](README.md). Terms per [GLOSSARY.md](../GLOSSARY.md).
 
 ## How to talk
 
@@ -11,11 +11,11 @@ Look up what you want to change → touch these files → run these checks → b
 
 ## 1. Process for any change
 
-1. **New effort folder:** `.scratch/<effort-slug>/` with `map.md` + `issues/NN-<slug>.md` (see [docs/agents/issue-tracker.md](agents/issue-tracker.md)). Never reopen v1 tickets in `.scratch/neome-requirements-studio/` — it is frozen history.
+1. **New effort folder:** `.scratch/<effort-slug>/` with `map.md` + `issues/NN-<slug>.md` (see [agent-conventions.md](agent-conventions.md)). Never reopen v1 tickets in `docs/v1/history/`: frozen.
 2. **Decide first:** grilling ticket → `## Answer`. If it changes a v1 decision, name it (`supersedes D08`). Never edit `docs/v1/`; the next release writes `docs/v<N>/decisions.md` with the new final state.
 3. **Build:** one ticket per slice. Engine change → test first (`neome-studio/engine/test/`).
 4. **Gate** (D18): `npm test` green always. Skill text change → also evals (`node neome-studio/evals/run.mjs run anglo-gulf-crm tiny-synthetic`) + maintainer spot-check ~10 matches before merge to `main`.
-5. **Release:** bump versions (section 4), new `docs/v<N>/`, tag `v<N>`.
+5. **Release:** bump versions (section 4), new `docs/v<N>/`, move `.scratch/<effort-slug>/` → `docs/v<N>/history/`, tag `v<N>`.
 
 ## 2. Invariants (break only by explicit decision)
 
@@ -51,7 +51,7 @@ Paths under `neome-studio/` unless rooted.
 | **Sign-off rules** | `engine/brd/signoff.mjs` | D12, `skills/build-brd/SKILL.md` | `brd-signoff.test.mjs` |
 | **Across all Modules (GEN topics)** | `read-engagement.mjs`, `validate.mjs`, `signoff.mjs` (`uncoveredTopics`), `engine/ingest.mjs` (general.md template) | schema enum, D19 | `brd-general-plan.test.mjs` |
 | **Implementation plan** | `read-engagement.mjs`, `validate.mjs`, review-draft plan skeleton | D16 | `brd-general-plan.test.mjs` |
-| **Prototype look / tabs** | `engine/prototype/render.mjs`, `proto.css`, `proto.js` | `.scratch/neome-requirements-studio/ui-reference/tokens.md` | `build-prototype.test.mjs` + Chrome |
+| **Prototype look / tabs** | `engine/prototype/render.mjs`, `proto.css`, `proto.js` | `docs/v1/history/ui-reference/tokens.md` | `build-prototype.test.mjs` + Chrome |
 | **Prototype data shape** | `engine/prototype/model.mjs`, `skills/build-prototype/references/prototype-data.md` | — | `build-prototype.test.mjs` |
 | **Questionnaire format** | `engine/questionnaire.mjs`, `engine/questionnaire/render.mjs`, `qn.css`, `skills/questionnaire/references/questionnaire-shapes.md` | D11 | `questionnaire.test.mjs` |
 | **Reply loop rules** | `engine/reply.mjs`, `skills/ingest/references/reply-loop.md` | D11 | `reply.test.mjs` |

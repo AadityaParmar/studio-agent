@@ -12,18 +12,19 @@
 - Never assume. Gaps become Open Items.
 - One Module per session.
 - Unsure what next? Run `/neome-studio:studio`.
+- Changing the plugin itself? Start at `docs/README.md`.
 - Skills own git. Don't commit by hand mid-skill.
 
 ## Agent skills
 
 ### Issue tracker
 
-Local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+Local markdown under `.scratch/<effort>/`. See `docs/agent-conventions.md`.
 
 ### Triage labels
 
-Default five roles, set as `Status:` line in issue file. See `docs/agents/triage-labels.md`.
+Default five roles, set as `Status:` line in issue file. See `docs/agent-conventions.md`.
 
 ### Domain docs
 
-Multi-context: `GLOSSARY-MAP.md` → studio `GLOSSARY.md` + per-Enterprise glossaries. See `docs/agents/domain.md`.
+Multi-context: `GLOSSARY-MAP.md` → studio `GLOSSARY.md` + per-Enterprise glossaries. See `docs/agent-conventions.md`.

@@ -7,3 +7,7 @@ skills-main/
 example/
 .idea/
 .DS_Store
+
+# Tool-created empty skill dirs
+.agents/
+.gemini/

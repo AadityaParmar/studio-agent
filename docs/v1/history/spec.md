@@ -9,7 +9,7 @@ Source: [map.md](map.md) + resolved tickets 01–20 in [issues/](issues/)
 - Simple English. No fancy words. Short.
 - Be extremely concise. Sacrifice grammar for concision.
 
-Terms used exactly as in [GLOSSARY.md](../../GLOSSARY.md): Consultant, Enterprise, Engagement, Input, Source, Enterprise glossary, Module, Requirement, Engagement-wide Requirement, Acceptance criteria, Priority, Scope tag, Open Item, Neome App, Delivery, BRD, Module spec, Prototype, Questionnaire, BRD data file, BRD version, Sign-off, Eval case.
+Terms used exactly as in [GLOSSARY.md](../../../GLOSSARY.md): Consultant, Enterprise, Engagement, Input, Source, Enterprise glossary, Module, Requirement, Engagement-wide Requirement, Acceptance criteria, Priority, Scope tag, Open Item, Neome App, Delivery, BRD, Module spec, Prototype, Questionnaire, BRD data file, BRD version, Sign-off, Eval case.
 
 ## Problem Statement
 
