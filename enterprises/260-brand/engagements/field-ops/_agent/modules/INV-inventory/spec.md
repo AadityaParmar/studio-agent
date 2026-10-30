@@ -179,4 +179,4 @@ How: Sales Agent Inventory → Executive stock (assigned, sold, left) with Sales
 
 ## 13 Open Items
 
-- OI-11: Sync direction and timing per data (shared with SAP, VB); the stock part is answered [WS-4], the rest is open.
+N/A: no open Open Items.
