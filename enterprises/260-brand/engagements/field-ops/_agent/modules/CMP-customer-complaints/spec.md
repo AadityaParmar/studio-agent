@@ -2,8 +2,8 @@
 
 Prefix: CMP
 Name: Customer Complaints
-Status: needs-revisit
-Sources: RFP-1, WS-9
+Status: resolved
+Sources: RFP-1, WS-9, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -107,7 +107,7 @@ Nothing goes to SAP. [WS-9]
 
 - 60 Sales Agents may log complaints; 1 Quality Manager resolves them. [WS-9]
 - Logging works offline; syncs when online. [WS-9]
-- OI-79: Complaints per day.
+- Estimate 5 complaints per day. [QA-1]
 
 ## 11 Requirements
 

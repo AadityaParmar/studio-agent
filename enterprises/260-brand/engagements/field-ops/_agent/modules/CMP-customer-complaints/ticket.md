@@ -1,9 +1,9 @@
 ---
-status: claimed
+status: resolved
 prefix: CMP
 name: Customer Complaints
 blockedBy: [MST]
-revisitReason: "OI-79 answered: estimate 5 complaints/day [QA-1]"
+revisitReason:
 formerly:
 claimedBy: Aditya Parmar
 ---
