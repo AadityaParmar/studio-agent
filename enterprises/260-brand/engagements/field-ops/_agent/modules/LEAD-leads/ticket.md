@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: LEAD
 name: Leads
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # LEAD — Leads
