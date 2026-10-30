@@ -1,9 +1,9 @@
 ---
-status: claimed
+status: resolved
 prefix: BEAT
 name: Beat Planning
 blockedBy: [MST]
-revisitReason: "OI-72 answered: Active/Inactive status and linked records when a Beat is inactive [QA-1]"
+revisitReason:
 formerly:
 claimedBy: Aditya Parmar
 ---

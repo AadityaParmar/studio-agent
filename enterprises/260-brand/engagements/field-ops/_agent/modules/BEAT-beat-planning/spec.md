@@ -2,8 +2,8 @@
 
 Prefix: BEAT
 Name: Beat Planning
-Status: needs-revisit
-Sources: RFP-1, IN-1, WS-1
+Status: resolved
+Sources: RFP-1, IN-1, WS-1, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -55,7 +55,7 @@ Sources: RFP-1, IN-1, WS-1
 
 | from | to | trigger | Source |
 |---|---|---|---|
-| active | inactive | Owner makes the Beat inactive; its employees are unmapped | [WS-1] |
+| active | inactive | Owner makes the Beat inactive; its employees are unmapped; customers stay on it for the Sales Supervisor to move | [WS-1, QA-1] |
 | inactive | active | Owner makes the Beat active again | (proposed, to confirm) |
 
 ## 6 Rules and notifications
@@ -64,14 +64,13 @@ Sources: RFP-1, IN-1, WS-1
 |---|---|---|---|
 | One Beat, one Sales Agent | A Beat is mapped to a Sales Agent | A second Sales Agent cannot be mapped until the first is unmapped; a Sales Agent may have many Beats; a Tricycle Rider may share a Beat with a Sales Agent | [WS-1] |
 | Customers of assigned Beats only | Sales Agent places an order | Only customers of the Beats mapped to the agent can be picked; today's planned Beat shown first | [RFP-1, WS-1] |
-| Inactive Beat | Owner makes a Beat inactive | Its employees are unmapped; its customers stay on it; Sales Supervisor moves them | [WS-1] |
+| Inactive Beat | Owner makes a Beat inactive | Its employees are unmapped; its customers stay on it; Sales Supervisor moves them | [WS-1, QA-1] |
 | No approval | Sales Supervisor assigns Beats or makes the Weekly Beat Plan | Takes effect at once; no approval; no extra notification | [WS-1] |
 
 ## 7 Exceptions
 
-- Beat made inactive: employees unmapped, customers stay, Sales Supervisor moves them. [WS-1]
+- Beat made inactive: employees are unmapped, customers stay, Sales Supervisor moves them. [WS-1, QA-1]
 - Agent has no Beat mapped: cannot pick customers for an order. (proposed, to confirm)
-- OI-72: Beat moved to another Route: what happens to its customers and employees (Masters).
 
 ## 8 Reports
 
@@ -140,13 +139,13 @@ Proposed: no
 
 ### BEAT-05 — Inactive Beat
 
-Statement: When the Owner makes a Beat inactive, its employees are unmapped and its customers stay on it for the Sales Supervisor to move. [WS-1]
+Statement: When the Owner makes a Beat inactive, its employees are unmapped and its customers stay on it for the Sales Supervisor to move. [WS-1, QA-1]
 Acceptance:
-- After the Owner makes Beat A inactive, no employee is mapped to Beat A and its customers still show Beat A. [WS-1]
-- Supervisor moves those customers to another Beat. [WS-1]
+- After the Owner makes Beat A inactive, no employee is mapped to Beat A and its customers still show Beat A. [WS-1, QA-1]
+- Supervisor moves those customers to another Beat. [WS-1, QA-1]
 Priority: Should
 Scope: Neome
-Sources: WS-1
+Sources: WS-1, QA-1
 OIs: OI-72
 Proposed: no
 
