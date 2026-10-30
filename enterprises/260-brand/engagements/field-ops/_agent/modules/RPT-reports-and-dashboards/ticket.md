@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: RPT
 name: Reports and Dashboards
 blockedBy: [VB]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # RPT — Reports and Dashboards

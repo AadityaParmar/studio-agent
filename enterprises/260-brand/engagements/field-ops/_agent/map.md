@@ -28,7 +28,7 @@ A signed-off BRD for Field Operations.
 | MT | Modern Trade | resolved |
 | CMP | Customer Complaints | resolved |
 | FB | Feedback | resolved |
-| RPT | Reports and Dashboards | open |
+| RPT | Reports and Dashboards | claimed |
 | COM | Communication | open |
 | AI | AI Features | open |
 | SAP | SAP Integration | open |
@@ -75,3 +75,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: CMP resolved.
 - 2026-10-30: resolve-module: FB claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: FB resolved.
+- 2026-10-30: resolve-module: RPT claimed by Aditya Parmar.
