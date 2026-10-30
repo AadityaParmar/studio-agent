@@ -22,7 +22,7 @@ A signed-off BRD for Field Operations.
 | ATT | Attendance | resolved |
 | LEAVE | Leave Management | resolved |
 | INV | Inventory | resolved |
-| VB | Visit Book | needs-revisit |
+| VB | Visit Book | claimed |
 | LEAD | Leads | resolved |
 | MKT | Marketing Visits | needs-revisit |
 | MT | Modern Trade | needs-revisit |
@@ -97,3 +97,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: MST resolved (revisit).
 - 2026-10-30: resolve-module: BEAT claimed by Aditya Parmar (revisit).
 - 2026-10-30: resolve-module: BEAT resolved (revisit).
+- 2026-10-30: resolve-module: VB claimed by Aditya Parmar (revisit).

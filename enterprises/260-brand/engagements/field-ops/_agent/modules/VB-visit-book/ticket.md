@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: VB
 name: Visit Book
 blockedBy: [BEAT, INV]
