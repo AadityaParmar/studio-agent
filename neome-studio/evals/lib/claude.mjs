@@ -43,11 +43,13 @@ export function claudeCli({ bin = process.env.NEOME_EVAL_CLAUDE || "claude", mod
     },
     // A tool-less call with its own system prompt and a JSON Schema for the answer (simulated client, judge).
     ask({ cwd, system, prompt, schema, session, judge = false }) {
+      // `claude --json-schema` rejects the draft 2020-12 `$schema` URL; the shape is the same without it.
+      const { $schema, ...answerShape } = schema;
       const args = [
         ...common(judge ? judgeModel ?? model : model),
         "--tools", "",
         "--system-prompt", system,
-        "--json-schema", JSON.stringify(schema),
+        "--json-schema", JSON.stringify(answerShape),
         ...(session ? ["--resume", session] : []),
       ];
       const out = call(args, { cwd, input: prompt });

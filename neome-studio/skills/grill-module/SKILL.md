@@ -51,7 +51,7 @@ Record each answer:
 
 - **Enterprise said it** (on the call or relayed with who said it): fact citing the session log; log bullet with the speaker's name.
 - **Consultant's own view**: `(proposed, to confirm)` + an Open Item asking the Enterprise.
-- **Nobody knows / "Don't know"**: Open Item from the item, unchanged (question, `For:` → ask to, suggested).
+- **Nobody knows / "Don't know"**: Open Item from the item, unchanged (question, `For:` → ask to, suggested). A fact you then propose for it is `(proposed, to confirm)`, never cites the session log: a Don't know is not a Source.
 - **Challenge**: check every answer against the Sources and earlier answers. Clash → quote both with their Sources and ask which holds; still unclear → Open Item quoting both.
 - **Answers an open Open Item** → close it with the session log as answer Source.
 - **New Enterprise term** (record, role, status, rule name in their words) → note term, definition, Source.
