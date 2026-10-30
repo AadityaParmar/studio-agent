@@ -121,7 +121,7 @@ _Source_: RFP-1, WS-8 · _Status_: proposed · _Used in_: field-ops
 **Customer Complaint**:
 A customer's product quality complaint logged by an agent for resolution tracking.
 _Avoid_: Complain Ticket, Customer Quality Complaint
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+_Source_: RFP-1, WS-9 · _Status_: proposed · _Used in_: field-ops
 
 **Change Request**:
 A Sales Agent's request to change customer details (address, phone, GEO) or add a new Customer; the Sales Supervisor approves; then it is pushed to SAP.
@@ -190,3 +190,7 @@ _Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
 **Mobile Money**:
 Payment mode through Airtel or MTN.
 _Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
+
+**Quality Manager**:
+Quality team member who resolves customer complaints: investigates, fills Operator and Shift, writes the resolution note, sets the statuses.
+_Source_: WS-9 · _Status_: proposed · _Used in_: field-ops
