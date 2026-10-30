@@ -2,8 +2,8 @@
 
 Prefix: FB
 Name: Feedback
-Status: needs-revisit
-Sources: RFP-1, WS-10
+Status: resolved
+Sources: RFP-1, WS-10, QA-1
 
 ## 1 Purpose and KPIs
 
@@ -35,7 +35,7 @@ Sources: RFP-1, WS-10
 |---|---|---|---|---|---|
 | Feedback | Date | date | yes | | [RFP-1] |
 | Feedback | Entered By | person | yes | The Sales Agent | [RFP-1, WS-10] |
-| Feedback | Customer | link-to-entity | no | Links to: Customer. Which customer gave it (proposed, to confirm) OI-82 | |
+| Feedback | Customer | link-to-entity | yes | Each feedback record links to its Customer | [QA-1] |
 | Feedback answer | Question | link-to-entity | yes | Links to: Feedback question | [RFP-1, WS-10] |
 | Feedback answer | Rating | number | yes | Values: 1 / 2 / 3 / 4 / 5 | [WS-10] |
 | Feedback answer | Comment | text | no | Optional | [RFP-1, WS-10] |
@@ -73,7 +73,7 @@ N/A: no other system; feedback stays in neome and is not sent to SAP. [WS-10]
 
 - 60 Sales Agents record feedback; 1 Owner keeps the questions. [WS-10]
 - Recording works offline; syncs when online. [WS-10]
-- OI-81: Feedbacks per day.
+- Estimate 30 feedback records per day. [QA-1]
 
 ## 11 Requirements
 
@@ -87,8 +87,8 @@ Acceptance:
 - The Sales Agent can edit a feedback until the day ends. [WS-10]
 Priority: Must
 Scope: Neome
-Sources: RFP-1, WS-10
-OIs: OI-81, OI-82, OI-83
+Sources: RFP-1, WS-10, QA-1
+OIs: OI-83
 Proposed: no
 
 ### FB-02 — Feedback question list

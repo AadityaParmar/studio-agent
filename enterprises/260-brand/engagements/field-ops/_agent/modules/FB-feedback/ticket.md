@@ -1,9 +1,9 @@
 ---
-status: claimed
+status: resolved
 prefix: FB
 name: Feedback
 blockedBy: [MST]
-revisitReason: "OI-81 answered: estimate 30 feedback records/day; OI-82 confirms feedback links to a Customer [QA-1]"
+revisitReason:
 formerly:
 claimedBy: Aditya Parmar
 ---
