@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: MKT
 name: Marketing Visits
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # MKT — Marketing Visits
