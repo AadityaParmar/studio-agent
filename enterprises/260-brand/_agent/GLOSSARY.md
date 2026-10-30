@@ -130,3 +130,15 @@ _Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
 **Weekly Beat Plan**:
 Which Beat an employee works on each weekday, Monday to Saturday, made by the Sales Supervisor.
 _Source_: WS-1 · _Status_: proposed · _Used in_: field-ops
+
+**Arrival Status**:
+Marks a clock in as OnTime or Late. Start 08:00, grace 15 min; after 08:15 is Late.
+_Source_: RFP-1, WS-2 · _Status_: proposed · _Used in_: field-ops
+
+**Overtime**:
+Hours worked after 17:00 on weekdays or on Sunday. The Employee requests it; the Sales Supervisor approves.
+_Source_: WS-2 · _Status_: proposed · _Used in_: field-ops
+
+**Missed Clock-out**:
+Mark on a day the Employee did not clock out; the app clocks out at 23:59 and the Sales Supervisor fixes the time.
+_Source_: WS-2 · _Status_: proposed · _Used in_: field-ops
