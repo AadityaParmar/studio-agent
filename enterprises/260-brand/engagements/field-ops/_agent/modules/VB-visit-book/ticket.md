@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: VB
 name: Visit Book
 blockedBy: [BEAT, INV]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # VB — Visit Book
