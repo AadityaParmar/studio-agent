@@ -1,0 +1,54 @@
+{
+  "entity": "Customer",
+  "roles": [
+    {"role": "Owner", "person": "Chanda (Owner)", "reqs": ["MST-01", "MST-02", "MST-04", "MST-05", "MST-06", "MST-07", "MST-08"], "oi": "OI-17"},
+    {"role": "Sales Agent", "person": "Mwila (Sales Agent)", "reqs": ["MST-02", "MST-04"]},
+    {"role": "Sales Supervisor", "person": "Bwalya (Sales Supervisor)", "reqs": ["MST-01", "MST-05"]}
+  ],
+  "fields": [
+    {"entity": "Customer", "name": "Customer Code", "reqs": ["MST-02"], "oi": "OI-16"},
+    {"entity": "Customer", "name": "TPIN", "reqs": ["MST-02"], "oi": "OI-15"},
+    {"entity": "Customer", "name": "Beat", "reqs": ["MST-02", "MST-05"]},
+    {"entity": "Customer", "name": "Route", "reqs": ["MST-02", "MST-05"]},
+    {"entity": "Customer", "name": "Category", "reqs": ["MST-02"], "oi": "OI-14"},
+    {"entity": "Customer", "name": "Classification", "reqs": ["MST-02"], "oi": "OI-14"},
+    {"entity": "Customer", "name": "Location", "reqs": ["MST-03"], "oi": "OI-21"},
+    {"entity": "Employee", "name": "Beat", "reqs": ["MST-01"]},
+    {"entity": "Employee", "name": "Total Leave Balance", "reqs": ["MST-01"], "oi": "OI-22"},
+    {"entity": "Product", "name": "Category", "reqs": ["MST-04", "MST-07"]},
+    {"entity": "Product", "name": "Price", "reqs": ["MST-04"], "oi": "OI-18"},
+    {"entity": "Store", "name": "Store name", "reqs": ["MST-06"], "oi": "OI-20"},
+    {"entity": "Competitor", "name": "Competitor name", "reqs": ["MST-08"], "oi": "OI-19"},
+    {"entity": "Competitor", "name": "Category", "reqs": ["MST-07", "MST-08"]}
+  ],
+  "transitions": [],
+  "rules": [
+    {"rule": "Route auto fill", "reqs": ["MST-02", "MST-05"]},
+    {"rule": "Total Leave Balance", "reqs": ["MST-01"]}
+  ],
+  "reports": [],
+  "rows": [
+    {"id": "C-1001", "values": {"Customer Code": "C-1001", "Name": "Mutale Grocers", "Beat": "Kabwata East", "Route": "Route South", "Mobile Number": "0977 000 101", "Shop Owner": "Mutale B.", "Location": "-15.4300, 28.3100"}},
+    {"id": "C-1002", "values": {"Customer Code": "C-1002", "Name": "Lusaka Corner Shop", "Beat": "Kabwata East", "Route": "Route South", "Mobile Number": "0977 000 102", "Shop Owner": "Grace P."}},
+    {"id": "C-1003", "values": {"Customer Code": "C-1003", "Name": "Chilenje Mini Mart", "Beat": "Chilenje", "Route": "Route South", "Mobile Number": "0977 000 103", "Location": "-15.4500, 28.3200"}},
+    {"id": "C-1004", "values": {"Customer Code": "C-1004", "Name": "Matero Wholesale", "Beat": "Matero North", "Route": "Route West", "Mobile Number": "0977 000 104", "Shop Buyer": "Joseph K."}}
+  ],
+  "scenarios": [
+    {"title": "Set up a Route, Beat and Customer", "summary": "Owner builds the base lists; Route fills itself from the Beat.", "steps": [
+      {"actor": "Owner", "action": "Adds Route West, then Beat Matero North on Route West", "screen": "sheet", "proves": ["MST-05"], "oi": "OI-17"},
+      {"actor": "Owner", "action": "Adds customer Matero Wholesale, picks Beat Matero North; Route West fills in", "row": "C-1004", "proves": ["MST-02"], "oi": "OI-16"},
+      {"actor": "Sales Agent", "action": "Opens the customer list for the Beat and finds Matero Wholesale", "screen": "sheet", "proves": ["MST-02"]}
+    ]},
+    {"title": "GEO tag a customer", "summary": "Customer location recorded in the neome app.", "steps": [
+      {"actor": "Sales Agent", "action": "Opens Lusaka Corner Shop (no location yet) and tags its map location", "row": "C-1002", "proves": ["MST-03"], "oi": "OI-21"}
+    ]},
+    {"title": "Products, categories and competitors", "summary": "Category Master feeds Product and Competitor Masters.", "steps": [
+      {"actor": "Owner", "action": "Adds Category Dairy, then a product in Dairy with Case Size and Price", "screen": "sheet", "proves": ["MST-07", "MST-04"], "oi": "OI-18"},
+      {"actor": "Owner", "action": "Adds a Competitor with one product in Dairy", "screen": "sheet", "proves": ["MST-08"], "oi": "OI-19"},
+      {"actor": "Owner", "action": "Adds a Store with its supervisor and area", "screen": "sheet", "proves": ["MST-06"], "oi": "OI-20"}
+    ]},
+    {"title": "Add an Employee with Beats", "summary": "Employee gets many Beats; Total Leave Balance = Casual + Sick.", "steps": [
+      {"actor": "Owner", "action": "Adds employee Mwila, picks Beats Kabwata East and Chilenje, sets Casual 12 and Sick 6; Total shows 18", "screen": "rules", "proves": ["MST-01"], "oi": "OI-22"}
+    ]}
+  ]
+}

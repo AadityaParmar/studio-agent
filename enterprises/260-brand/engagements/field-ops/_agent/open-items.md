@@ -72,3 +72,8 @@
 | OI-68 | Hosting: neome cloud is fine? Any data residency rule? Do users log in with mobile/password, or with company SSO? | All | Enterprise | Owner | | open | | |
 | OI-69 | Training: who needs it (field staff, supervisors, owner), in what form (on-site, video, train-the-trainer), and when? | All | Enterprise | Owner | | open | | |
 | OI-70 | Support after go-live: who supports users, in which hours, through which channel? | All | Enterprise | Owner | | open | | |
+| OI-71 | Masters: what goes wrong today with the master lists, and which number shows success (KPI)? No Source says. | MST | Enterprise | Owner | | open | | |
+| OI-72 | Master records: do they get Active / Inactive status instead of delete? When a Beat is made inactive or moved to another Route, what happens to its Customers and Employees? | MST | Enterprise | Owner | Active / Inactive; inactive hidden from pick lists, linked records keep history (proposed, to confirm) | open | | |
+| OI-73 | Which master lists or exports do you need (for example Customers by Beat)? | MST | Enterprise | Owner | Sheet per master, filter by Beat / Route / Category, export to Excel (proposed, to confirm) | open | | |
+| OI-74 | Who in 260 Brands owns SAP and the link to neome on your side? | MST, SAP | Enterprise | Owner | | open | | |
+| OI-75 | Confirm the proposed priority, Scope tag and acceptance criteria of: MST-01, MST-02, MST-03, MST-04, MST-05, MST-06, MST-07, MST-08 | All | Enterprise | Owner | As proposed in the BRD (proposed, to confirm) | open | | |

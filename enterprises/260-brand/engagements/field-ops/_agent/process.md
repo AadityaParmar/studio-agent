@@ -22,7 +22,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-beat | owner | MST | Add Beat | Picks a Route | step | OI-17 | RFP-1 |
 | add-customer | owner | MST | Add Customer | Picks a Beat; Route fills | step | OI-17 | RFP-1 |
 | add-product | owner | MST | Add Product | Category from Category Master | step | OI-18 | RFP-1 |
-| add-employee | owner | MST | Add Employee | Picks Beats | step | OI-17 | RFP-1 |
+| add-employee | owner | MST | Add Employee | Picks Beats; leave balances | step | OI-17, OI-22 | RFP-1 |
+| add-category | owner | MST | Add Category | Feeds Product and Competitor Masters | step | OI-17 | RFP-1 |
+| geo-tag-customer | owner | MST | GEO tag Customer | Done in neome app; who and when open | step | OI-21 | RFP-1, IN-1 |
+| add-store | owner | MST | Add Store | Modern trade stores | step | OI-17, OI-20 | RFP-1 |
+| add-competitor | owner | MST | Add Competitor and its products | | step | OI-19 | RFP-1 |
 
 ## BEAT — Beat Planning
 
@@ -144,6 +148,15 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | place-order | send-whatsapp | order confirmation | yes | RFP-1 |
 | sync-masters | add-customer | SAP to neome | yes | RFP-1, IN-1 |
 | add-customer | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
+| sync-masters | add-product | SAP to neome | yes | RFP-1, IN-1 |
+| add-product | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
+| sync-masters | add-employee | SAP to neome | yes | RFP-1, IN-1 |
+| add-employee | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
+| add-category | add-product | | yes | RFP-1 |
+| add-category | add-competitor | | yes | RFP-1 |
+| add-customer | geo-tag-customer | | yes | IN-1 |
+| add-store | mt-check-in | | yes | RFP-1 |
+| add-competitor | mt-record | competitor activities | yes | RFP-1 |
 | sync-stock | assign-inventory | | yes | RFP-1 |
 | assign-inventory | stock-return | | yes | RFP-1 |
 | add-visit | add-complaint | complaint | yes | RFP-1 |
