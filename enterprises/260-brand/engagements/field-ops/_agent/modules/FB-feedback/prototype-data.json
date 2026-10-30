@@ -1,0 +1,51 @@
+{
+ "entity": "Feedback",
+ "roles": [
+  {"role": "Sales Agent", "person": "Mwansa", "reqs": ["FB-01"]},
+  {"role": "Owner", "person": "Mitesh", "reqs": ["FB-02"]},
+  {"role": "Sales Supervisor", "person": "Joyce", "reqs": ["FB-03"]}
+ ],
+ "fields": [
+  {"entity": "Feedback", "name": "Entered By", "reqs": ["FB-01"]},
+  {"entity": "Feedback", "name": "Customer", "reqs": ["FB-01"], "oi": "OI-82"},
+  {"entity": "Feedback answer", "name": "Question", "reqs": ["FB-02"]},
+  {"entity": "Feedback answer", "name": "Rating", "reqs": ["FB-01"]},
+  {"entity": "Feedback answer", "name": "Comment", "reqs": ["FB-01"]},
+  {"entity": "Feedback question", "name": "Question text", "reqs": ["FB-02"]}
+ ],
+ "transitions": [],
+ "rules": [
+  {"rule": "Fixed question list", "reqs": ["FB-02"]},
+  {"rule": "Edit same day", "reqs": ["FB-01"]}
+ ],
+ "reports": [
+  {"name": "Feedback Sheet", "reqs": ["FB-03"]}
+ ],
+ "rows": [
+  {"id": "FBK-201", "status": "", "values": {"Date": "2026-11-03", "Entered By": "Mwansa", "Customer": "Banda General Store"}, "children": {"Feedback answer": [
+    {"Question": "How is the quality of our products?", "Rating": 5, "Comment": "Customers like the taste"},
+    {"Question": "Is delivery on time?", "Rating": 4}]}},
+  {"id": "FBK-202", "status": "", "values": {"Date": "2026-11-03", "Entered By": "Chanda", "Customer": "Phiri Wholesalers"}, "children": {"Feedback answer": [
+    {"Question": "How is the quality of our products?", "Rating": 3, "Comment": "Some packs leak"},
+    {"Question": "Is delivery on time?", "Rating": 2, "Comment": "Late twice this month"}]}},
+  {"id": "FBK-203", "status": "", "values": {"Date": "2026-11-02", "Entered By": "Mwansa", "Customer": "Mulenga Mini Market"}, "children": {"Feedback answer": [
+    {"Question": "How is the quality of our products?", "Rating": 5},
+    {"Question": "Is delivery on time?", "Rating": 5}]}},
+  {"id": "FBK-204", "status": "", "values": {"Date": "2026-11-01", "Entered By": "Bupe", "Customer": "Zulu Supermarket"}, "children": {"Feedback answer": [
+    {"Question": "How is the quality of our products?", "Rating": 4, "Comment": "Good, wants bigger packs"},
+    {"Question": "Is delivery on time?", "Rating": 4}]}}
+ ],
+ "scenarios": [
+  {"title": "Sales Agent records feedback", "summary": "Happy path with a rating and comment per question.", "steps": [
+   {"actor": "Sales Agent", "action": "Opens the Owner's questions and records the customer's rating and an optional comment for each", "row": "FBK-201", "screen": "record", "proves": ["FB-01"], "oi": "OI-82"},
+   {"actor": "Sales Agent", "action": "Records feedback with no network; it shows after sync", "row": "FBK-203", "screen": "record", "proves": ["FB-01"], "oi": "OI-81"}
+  ]},
+  {"title": "Owner sets the questions", "summary": "Fixed list the Owner can change.", "steps": [
+   {"actor": "Owner", "action": "Adds and changes questions in the fixed list; Sales Agents cannot", "screen": "rules", "proves": ["FB-02"]}
+  ]},
+  {"title": "Supervisor reads the Feedback Sheet", "summary": "See all feedback and average rating per question.", "steps": [
+   {"actor": "Sales Supervisor", "action": "Opens the Feedback Sheet, filters by agent and sees the average rating per question", "screen": "report", "report": "Feedback Sheet", "proves": ["FB-03"]},
+   {"actor": "Sales Agent", "action": "Sees only own feedback in the Feedback Sheet", "screen": "report", "report": "Feedback Sheet", "proves": ["FB-03"]}
+  ]}
+ ]
+}

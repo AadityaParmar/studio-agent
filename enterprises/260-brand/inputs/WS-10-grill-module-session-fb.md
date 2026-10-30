@@ -1,0 +1,15 @@
+grill-module session, 260-brand/field-ops, Module FB, 2026-10-30. Consultant relaying. Present: Mitesh (Owner), Sales Head, 260 Brands; Aditya Parmar (Neomenta, Consultant).
+Only what the Enterprise said. Consultant's own views are proposals + Open Items, not recorded here.
+
+- Who gives feedback — Mitesh (Owner): The customer gives feedback, through the Sales Agent.
+- Questions — Mitesh (Owner): The Owner sets the questions. It is a fixed list and the Owner can change it.
+- Response — Mitesh (Owner): The response is a 1 to 5 rating and an optional comment.
+- Goal — Sales Head: Every customer feedback is recorded by the Sales Agent with a rating per question; the Sales Head sees how customers rate us; no paper forms.
+- Pain today — Sales Head: Customer feedback is not recorded; it is only heard on visits and lost.
+- Who sees — Sales Head: Sales Agent sees own feedback; Sales Supervisor and above see all.
+- Edit after saving — Sales Head: Same day only, until the day ends.
+- Offline — Sales Head: Yes, the Sales Agent records feedback offline; it syncs when online.
+- Integrations — Sales Head: None; feedback stays in neome, not sent to SAP.
+- Notifications — Sales Head: None extra.
+- Volumes — Sales Head: Not known; the Enterprise will say.
+- Requirements — Mitesh (Owner): Yes to all as proposed.

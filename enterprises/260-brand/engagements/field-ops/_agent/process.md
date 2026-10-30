@@ -125,7 +125,9 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| record-feedback | agent | FB | Record feedback | Question and Response | step | OI-52 | RFP-1 |
+| set-feedback-questions | owner | FB | Set feedback questions | Fixed list; Owner can change it | step | | WS-10 |
+| record-feedback | agent | FB | Record feedback | Customer gives it; rating 1 to 5 and optional comment per question; works offline; editable same day | step | OI-82 | RFP-1, WS-10 |
+| view-feedback | supervisor | FB | View Feedback Sheet | Sales Supervisor and above see all; average rating per question | step | | WS-10 |
 
 ## RPT — Reports and Dashboards
 
@@ -195,6 +197,8 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | stock-return | accept-return | | no | WS-4 |
 | add-visit | add-complaint | complaint | yes | RFP-1 |
 | add-visit | record-feedback | feedback | yes | RFP-1 |
+| set-feedback-questions | record-feedback | question list | no | WS-10 |
+| record-feedback | view-feedback | | no | WS-10 |
 | add-visit | add-lead | new lead | yes | RFP-1 |
 | add-lead | follow-up-lead | | no | WS-6 |
 | follow-up-lead | convert-lead | interested | no | WS-6 |

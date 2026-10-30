@@ -53,7 +53,7 @@
 | OI-49 | Customer complaint resolution: who resolves, what statuses, how fast, how is the customer told? | CMP | Enterprise | Owner | | closed | | WS-9 |
 | OI-50 | ComplaintId and Customer Complaint Number: why both? Who gives the Customer Complaint Number? | CMP | Enterprise | Owner | | closed | | WS-9 |
 | OI-51 | Complaint Operator and Shift (production fields): who fills them? Sales Agent in the field or the plant? | CMP | Enterprise | Owner | | closed | | WS-9 |
-| OI-52 | Feedback: who gives it (customer?), who sets the questions, fixed list or free? Response type (rating, text)? | FB | Enterprise | Sales Head | | open | | |
+| OI-52 | Feedback: who gives it (customer?), who sets the questions, fixed list or free? Response type (rating, text)? | FB | Enterprise | Sales Head | | closed | | WS-10 |
 | OI-53 | Reports: full list with audience, measures and filters. RFP-1 gives only names. | RPT | Enterprise | Owner | | open | | |
 | OI-54 | Productive vs Non-Productive call: definition? | RPT | Enterprise | Sales Head | Productive = visit with an order (proposed, to confirm) | open | | |
 | OI-55 | Targets: who sets them, per whom (agent, beat), per period, by value or quantity, per product? | RPT | Enterprise | Sales Head | | open | | |
@@ -82,3 +82,6 @@
 | OI-78 | How many Modern Trade updates a day, and how many Stores? Enterprise did not know [WS-8]. | MT | Enterprise | Sales Head | | open | | |
 | OI-79 | How many customer complaints a day? Enterprise did not know [WS-9]. | CMP | Enterprise | Owner | | open | | |
 | OI-80 | What access does the Quality Manager get? WS-9 names the role but not its access. | All | Enterprise | Owner | Complaints only: see all complaints and change their status; nothing else (proposed, to confirm) | open | | |
+| OI-81 | How many feedbacks a day? Enterprise did not know [WS-10]. | FB | Enterprise | Sales Head | | open | | |
+| OI-82 | Should each feedback record which customer gave it? | FB | Enterprise | Sales Head | Yes, link the feedback to a Customer (proposed, to confirm) | open | | |
+| OI-83 | Is Feedback (question list, rating per question, no App entity) Configuration on the field sales App or a Custom module? Custom module proposed. | FB | Neomenta | Neomenta | Custom module (proposed, to confirm) | open | | |
