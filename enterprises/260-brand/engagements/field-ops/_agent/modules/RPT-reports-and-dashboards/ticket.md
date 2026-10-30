@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: RPT
 name: Reports and Dashboards
 blockedBy: [VB]
