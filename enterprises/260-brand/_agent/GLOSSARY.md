@@ -137,7 +137,7 @@ _Source_: RFP-1, WS-11 · _Status_: proposed · _Used in_: field-ops
 
 **Notice Board**:
 In-app board for notices.
-_Source_: RFP-1 · _Status_: proposed · _Used in_: field-ops
+_Source_: RFP-1, WS-12 · _Status_: proposed · _Used in_: field-ops
 
 **Weekly Beat Plan**:
 Which Beat an employee works on each weekday, Monday to Saturday, made by the Sales Supervisor.
@@ -210,3 +210,12 @@ _Source_: RFP-1, WS-11 · _Status_: proposed · _Used in_: field-ops
 **Sales value**:
 Invoiced and Delivered orders of a Sales Agent in the month, before VAT; Cancelled not counted.
 _Source_: WS-11 · _Status_: proposed · _Used in_: field-ops
+
+**Area**:
+A market: a group of customers and staff. The Sales Head sends notices and promos to all staff of an Area.
+_Avoid_: Market
+_Source_: WS-12 · _Status_: proposed · _Used in_: field-ops
+
+**Notice**:
+A message the Owner or Sales Head posts on the Notice Board to All staff, an Area or a role; the poster can edit or remove it.
+_Source_: RFP-1, WS-12 · _Status_: proposed · _Used in_: field-ops
