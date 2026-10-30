@@ -27,7 +27,7 @@ A signed-off BRD for Field Operations.
 | MKT | Marketing Visits | resolved |
 | MT | Modern Trade | resolved |
 | CMP | Customer Complaints | resolved |
-| FB | Feedback | needs-revisit |
+| FB | Feedback | claimed |
 | RPT | Reports and Dashboards | needs-revisit |
 | COM | Communication | needs-revisit |
 | AI | AI Features | resolved |
@@ -105,3 +105,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: MT resolved (revisit).
 - 2026-10-30: resolve-module: CMP claimed by Aditya Parmar (revisit).
 - 2026-10-30: resolve-module: CMP resolved (revisit).
+- 2026-10-30: resolve-module: FB claimed by Aditya Parmar (revisit).

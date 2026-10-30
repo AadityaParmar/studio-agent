@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: FB
 name: Feedback
 blockedBy: [MST]
