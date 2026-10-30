@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: ATT
 name: Attendance
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # ATT — Attendance
