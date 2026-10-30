@@ -219,3 +219,15 @@ _Source_: WS-12 · _Status_: proposed · _Used in_: field-ops
 **Notice**:
 A message the Owner or Sales Head posts on the Notice Board to All staff, an Area or a role; the poster can edit or remove it.
 _Source_: RFP-1, WS-12 · _Status_: proposed · _Used in_: field-ops
+
+**Ask Neome**:
+Read-only questions about sales, visits and attendance that the Owner, Sales Head, Area Sales Manager and Regional Sales Manager ask and get answered from the data they may see.
+_Source_: RFP-1, WS-13 · _Status_: proposed · _Used in_: field-ops
+
+**NLP form filling**:
+Voice in English or Nyanja fills the Visit Book order or the Complaint form; the user checks and saves.
+_Source_: RFP-1, WS-13 · _Status_: proposed · _Used in_: field-ops
+
+**Planogram suggestion**:
+From a Modern Trade shelf photo, a suggested shelf share and missing products; the Sales Supervisor uses it.
+_Source_: RFP-1, WS-8, WS-13 · _Status_: proposed · _Used in_: field-ops
