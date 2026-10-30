@@ -21,7 +21,7 @@ A signed-off BRD for Field Operations.
 | BEAT | Beat Planning | resolved |
 | ATT | Attendance | resolved |
 | LEAVE | Leave Management | resolved |
-| INV | Inventory | resolved |
+| INV | Inventory | claimed |
 | VB | Visit Book | resolved |
 | LEAD | Leads | resolved |
 | MKT | Marketing Visits | resolved |
@@ -111,3 +111,5 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: RPT resolved (revisit).
 - 2026-10-30: resolve-module: COM claimed by Aditya Parmar (revisit).
 - 2026-10-30: resolve-module: COM resolved (revisit).
+- 2026-10-30: ingest: INV needs revisit: OI-11 already answered in SAP integration: customers, products, employees and stock sync every 30 minutes; invoices sent near real time [WS-14]
+- 2026-10-30: resolve-module: INV claimed by Aditya Parmar (revisit).
