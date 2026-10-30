@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="neome-studio build-prototype">
+<title>PROTOTYPE · 260 Brands · RPT Reports and Dashboards</title>
+<style>
+/* Prototype template look = Neome product (ui-reference tokens, ticket 14).
+   Requirement / OI / proposed / sample / guessed chips and the banner are a Studio overlay, not Neome UI. */
+:root{
+  --primary:#1976D2; --primary-dark:#1565C0; --primary-soft:#E3F2FD;
+  --frame:#466686; --label:#3F6A90; --text:#212121; --text-2:#5F6368; --text-3:#9E9E9E;
+  --bar:#E8E8E8; --panel:#F6F6F6; --page:#FCFCFC; --card:#FFFFFF; --line:#E0E0E0; --outline:#C4C4C4;
+  --tile-green:#E2F6E4; --icon-green:#2E7D32; --tile-blue:#E0F2FA; --icon-blue:#1565C0; --tile-grey:#E6ECEE; --icon-grey:#37474F;
+  --k-blue:#DEF0FA; --k-lav:#E6E0F2; --k-green:#E2F6E4; --k-pink:#F6E2E2; --k-amber:#FBEFD9;
+  --s-blue:#1565C0; --s-lav:#6A1B9A; --s-green:#2E7D32; --s-pink:#C62828; --s-amber:#A15C00;
+  --chat-bg:#E8E4DC; --bubble-out:#D4FECC; --bubble-in:#FFFFFF;
+  --oi:#F47100; --oi-soft:#FFF1E6;
+  --font:Roboto,'Helvetica Neue',Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.4}
+button,select,input{font-family:inherit}
+.noscript{padding:24px;font-size:16px}
+.small{font-size:12px;color:var(--text-2)}
+.chip{display:inline-block;font-size:10.5px;border:1px solid var(--outline);border-radius:999px;padding:0 6px;background:#fff;color:var(--text-2);white-space:nowrap;vertical-align:middle;line-height:16px;font-weight:400;letter-spacing:0;text-transform:none}
+.chip.req{border-color:var(--primary);color:var(--primary);background:var(--primary-soft);cursor:pointer}
+.chip.oi{border-color:var(--oi);color:var(--oi);background:var(--oi-soft)}
+.chip.prop{border-style:dashed}
+.chip.sample{border-color:#B0BEC5;color:#546E7A;background:#ECEFF1}
+.chip.guess{border-color:#8E24AA;color:#8E24AA;background:#F3E5F5;border-style:dashed}
+.reqtag{display:none} body.showtags .reqtag{display:inline-block}
+.hl{outline:2px solid var(--oi)!important;outline-offset:2px;border-radius:4px;background-color:var(--oi-soft)}
+.ico{display:inline-grid;place-items:center;width:22px;height:22px;color:#555;font-size:16px}
+.t-blue{color:var(--s-blue)} .t-lav{color:var(--s-lav)} .t-green{color:var(--s-green)} .t-pink{color:var(--s-pink)} .t-amber{color:var(--s-amber)}
+.k-blue{background:var(--k-blue)} .k-lav{background:var(--k-lav)} .k-green{background:var(--k-green)} .k-pink{background:var(--k-pink)} .k-amber{background:var(--k-amber)}
+
+/* ---------- Studio chrome (not Neome) ---------- */
+.banner{background:#1D1D1F;color:#ddd;padding:6px 16px;display:flex;gap:8px;align-items:center;font-size:12px;flex-wrap:wrap}
+.banner b{color:#fff;letter-spacing:.06em} .banner .chip{background:transparent;color:#ddd;border-color:#555}
+.banner .right{margin-left:auto;display:flex;gap:6px;align-items:center}
+.ptabs{display:flex;border-bottom:1px solid var(--line);background:#fff;padding:0 16px;align-items:center;flex-wrap:wrap}
+.ptabs > button{border:0;background:none;padding:12px 18px;font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2);cursor:pointer;border-bottom:2px solid transparent}
+.ptabs > button.on{color:var(--primary);border-color:var(--primary)}
+.ptabs .right{margin-left:auto;display:flex;gap:12px;align-items:center}
+.hlbar{background:var(--oi-soft);border-bottom:1px solid var(--oi);padding:6px 16px;font-size:13px;display:flex;gap:10px;align-items:center}
+.tbtn{border:0;background:none;color:var(--primary);font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:13px;cursor:pointer;padding:6px 8px;border-radius:4px}
+.tbtn:hover{background:var(--primary-soft)} .tbtn.red{color:var(--s-pink)} .tbtn:disabled{color:var(--text-3);cursor:not-allowed;background:none}
+
+/* ---------- device frame ---------- */
+.dev-wrap{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dev-title{display:flex;justify-content:space-between;align-items:center;color:var(--primary-dark);font-size:20px;gap:8px}
+.dev-title select{font-size:20px;color:var(--primary-dark);border:0;background:none;cursor:pointer;padding:0;max-width:100%}
+.dev-title.sm{font-size:15px}
+.dev{border:2px solid var(--frame);border-radius:6px;background:var(--card);overflow:hidden;display:flex;position:relative}
+
+/* left panel: launcher */
+.lp{width:290px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:auto}
+.bar{height:58px;background:var(--bar);display:flex;align-items:center;gap:12px;padding:0 14px;flex-shrink:0}
+.bar .t{font-size:16px} .bar .sub{font-size:13px;color:var(--text-2)}
+.avatar{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#666;font-size:15px;flex-shrink:0}
+.searchpill{margin:12px 14px;background:#fff;border-radius:22px;padding:9px 14px;color:var(--text-3);display:flex;gap:10px;align-items:center;font-size:14px;border:1px solid #EEE}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:4px 14px 14px}
+.tile{border-radius:6px;padding:10px 6px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:6px;border:2px solid transparent;font-size:12.5px;color:var(--text);word-break:break-word}
+.tile .g{font-size:28px;align-self:center;line-height:1;height:38px;display:grid;place-items:center}
+.tile.green{background:var(--tile-green)} .tile.green .g{color:var(--icon-green)}
+.tile.blue{background:var(--tile-blue)} .tile.blue .g{color:var(--icon-blue)}
+.tile.grey{background:var(--tile-grey)} .tile.grey .g{color:var(--icon-grey)}
+.tile.on{border-color:#90CAF9;background:#CFE6FA}
+.tile.off{opacity:.38;cursor:default}
+.notif{display:flex;gap:10px;padding:10px 14px;border-top:1px solid #EEE;background:#fff;font-size:13px;cursor:pointer}
+.notif .who{display:flex;justify-content:space-between;gap:6px} .notif .time{color:var(--text-3);font-size:12px}
+.notif .msg{color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.notif .msg b{color:var(--text)}
+
+/* main pane */
+.mp{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
+.mp .bar .ttl{display:flex;flex-direction:column} .mp .bar .acts{margin-left:auto;display:flex;gap:6px;align-items:center}
+.viewsw{display:flex;border:1px solid var(--outline);border-radius:4px;overflow:hidden}
+.viewsw button{border:0;background:#fff;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--text-2)}
+.viewsw button.on{background:var(--primary-soft);color:var(--primary-dark);font-weight:500}
+.searchrow{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.searchrow .searchpill{flex:1;margin:0}
+.body{flex:1;overflow:auto;position:relative}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{font-weight:500;text-align:left;padding:10px;border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;white-space:nowrap;color:var(--text)}
+th .f{color:var(--text-3);font-size:11px;margin-left:4px}
+td{padding:8px 10px;border-bottom:1px solid #F0F0F0;white-space:nowrap;color:var(--text)}
+tr.row:hover td{background:#F5F9FD;cursor:pointer}
+td.act{color:var(--text-3);letter-spacing:2px}
+td.wrap{white-space:normal}
+.pager{display:flex;justify-content:flex-end;gap:18px;padding:8px 14px;font-size:12px;color:var(--text-2);border-top:1px solid var(--line)}
+.kan{display:flex;min-height:100%}
+.kcol{flex:1;min-width:200px;padding:8px}
+.kcol h4{margin:4px 0 10px;text-align:center;font-weight:400;font-size:15px}
+.kcard{background:#fff;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.12);margin-bottom:8px;font-size:12.5px;cursor:pointer}
+.kcard .in{padding:8px 10px}
+.kv{line-height:1.6} .kv .k{color:var(--label);margin-right:5px} .kv .v{color:var(--text-2)}
+.kcard .ft{border-top:1px solid #EEE;padding:4px 10px;display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-2)}
+.fab{position:absolute;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--primary);color:#fff;border:0;font-size:26px;box-shadow:0 3px 8px rgba(0,0,0,.3);cursor:pointer;z-index:1}
+.report{padding:14px}
+.report h3{margin:0 0 4px;font-weight:400}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.kpi{background:var(--tile-blue);border-radius:6px;padding:10px 14px;min-width:110px}
+.kpi .n{font-size:24px;color:var(--icon-blue)}
+
+/* drawer: record detail */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.32);z-index:2}
+.drawer{position:absolute;top:0;right:0;bottom:0;width:410px;max-width:100%;background:#fff;z-index:3;display:flex;flex-direction:column;box-shadow:-2px 0 6px rgba(0,0,0,.15)}
+.drawer.static{position:static;width:100%;box-shadow:none}
+.drawer .bar{background:#fff;border-bottom:1px solid var(--line)}
+.dtabs{display:flex;border-bottom:1px solid var(--line)}
+.dtabs button{flex:1;border:0;background:none;padding:12px;font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--text-2);cursor:pointer;border-bottom:2px solid transparent}
+.dtabs button.on{color:var(--primary);border-color:var(--primary)}
+.dbody{flex:1;overflow:auto;padding:6px 16px 16px}
+.secdiv{display:flex;align-items:center;gap:10px;color:var(--text-2);font-size:13.5px;margin:16px 0 4px}
+.secdiv:before,.secdiv:after{content:"";flex:1;height:1px;background:var(--line)}
+.ofld{position:relative;border:1px solid var(--outline);border-radius:4px;padding:16px 12px 7px;margin-top:14px;font-size:15px;min-height:46px;display:flex;align-items:center;gap:8px}
+.ofld label{position:absolute;top:-8px;left:9px;background:#fff;padding:0 4px;font-size:12px;color:var(--text-2);white-space:nowrap;max-width:calc(100% - 18px);overflow:hidden;text-overflow:ellipsis}
+.ofld .val{flex:1;min-width:0;overflow-wrap:anywhere}
+.ofld input,.ofld select{border:0;font:inherit;width:100%;outline:none;padding:0;background:transparent}
+.ofld.ro{background:#FAFAFA} .ofld.ro label{background:linear-gradient(#fff 50%,#FAFAFA 50%)} .ofld.ro .val{color:var(--text-2)}
+.ofld .tr{color:var(--text-2);font-size:15px}
+.ofld a,.lnk{color:var(--primary);text-decoration:none}
+.helper{font-size:12px;color:var(--text-2);margin:3px 12px 0}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin:3px 2px 0}
+.sub-t{margin-top:8px} .sub-t td,.sub-t th{padding:6px 8px;font-size:12.5px}
+.dfoot{border-top:1px solid var(--line);background:var(--bar);padding:6px 12px;display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.dfoot .note{margin-right:auto;font-size:12px;color:var(--text-2)}
+.timeline div{padding:8px 0;border-bottom:1px solid #F0F0F0;font-size:13px}
+.timeline .when{color:var(--text-3);font-size:12px}
+.gate{font-size:12px;color:var(--text-2);background:#FAFAFA;border-radius:4px;padding:6px 10px;margin-top:6px}
+
+/* ---------- App tab ---------- */
+.A{padding:18px 24px}
+.A .dev{height:calc(100vh - 170px);min-height:540px}
+
+/* ---------- phone ---------- */
+.phone{width:310px;flex-shrink:0}
+.phone .dev{height:600px;flex-direction:column}
+.phone .scr{flex:1;overflow:auto;background:var(--panel);position:relative}
+.phone .scr.white{background:#fff;padding:0 14px 14px}
+.phone .notif .msg{max-width:190px}
+.chat{background:var(--chat-bg);flex:1;overflow:auto;padding:12px 10px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:88%;border-radius:6px;padding:6px 9px;font-size:13px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub.in{background:var(--bubble-in);align-self:flex-start} .bub.out{background:var(--bubble-out);align-self:flex-end}
+.bub .nm{color:var(--s-lav);font-size:12.5px;margin-bottom:2px} .bub .tm{color:var(--text-3);font-size:11px;text-align:right}
+.bub .card{border-left:3px solid var(--primary);background:#F4F8FC;padding:6px 8px;border-radius:3px;margin:4px 0}
+.bub .acts{display:flex;flex-wrap:wrap;gap:2px;border-top:1px solid #EEE;margin-top:6px;padding-top:4px}
+.datepill{align-self:center;background:#fff;border-radius:6px;padding:3px 10px;font-size:12px;color:var(--text-2)}
+.cbar{display:flex;gap:8px;align-items:center;padding:8px;background:var(--panel);border-top:1px solid var(--line)}
+.cbar .in{flex:1;background:#fff;border-radius:20px;padding:8px 12px;color:var(--text-3);font-size:13px}
+.cap{text-align:center;font-size:12px;color:var(--text-2);margin-top:6px}
+
+/* ---------- Scenarios tab ---------- */
+.B{display:grid;grid-template-columns:260px 1fr 310px;min-height:calc(100vh - 82px)}
+.B-list{background:var(--panel);border-right:1px solid var(--line);overflow:auto}
+.B-list .sc{padding:12px 14px;border-bottom:1px solid #EEE;cursor:pointer}
+.B-list .sc.on{background:#CFE6FA}
+.B-list .sc .t{font-weight:500}
+.B-stage{padding:18px 24px;overflow:auto;min-width:0}
+.prog{display:flex;gap:4px;margin:10px 0 14px} .prog span{flex:1;height:4px;border-radius:2px;background:var(--line)} .prog span.on{background:var(--primary)}
+.B-two{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.B-two .desk{flex:1;min-width:380px}
+.B-two .desk .dev{height:540px}
+.B-two .phone .dev{height:540px}
+.B-proof{background:#fff;border-left:1px solid var(--line);padding:16px;overflow:auto}
+h5{margin:0 0 8px;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+.acc{font-size:13px;padding:4px 0 4px 20px;position:relative} .acc:before{content:"✓";position:absolute;left:0;color:var(--s-green);font-weight:700}
+.callout{border-left:3px solid var(--oi);background:var(--oi-soft);padding:8px 12px;border-radius:4px;font-size:13px;margin-bottom:12px}
+.step{margin:0 0 12px;font-size:14.5px}
+
+/* ---------- Mobile + trace tab ---------- */
+.C{display:grid;grid-template-columns:1fr 350px;min-height:calc(100vh - 82px)}
+.C-main{padding:16px 20px;min-width:0}
+.rolesw{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.rolesw button{border:1px solid var(--outline);background:#fff;border-radius:16px;padding:5px 12px;cursor:pointer;font-size:13px;color:var(--text-2)}
+.rolesw button.on{background:var(--primary-soft);border-color:#90CAF9;color:var(--primary-dark)}
+.C-phones{display:flex;gap:24px;flex-wrap:wrap;align-content:flex-start}
+.C-trace{background:#fff;border-left:1px solid var(--line);padding:16px;overflow:auto}
+.C-trace .r{padding:8px 10px;border-radius:4px;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
+.C-trace .r:hover{background:var(--panel)} .C-trace .r.on{border-color:var(--oi);background:var(--oi-soft)}
+.C-trace .places{margin:4px 0 0 0;padding-left:16px;font-size:12px;color:var(--text-2)}
+.C-trace .places a{color:var(--primary);cursor:pointer}
+
+</style>
+</head>
+<body>
+<noscript><p class="noscript">PROTOTYPE · 260 Brands · RPT Reports and Dashboards: this Prototype is clickable and needs JavaScript (inline, nothing is downloaded). Turn it on and reload.</p></noscript>
+<div id="app"></div>
+<script type="application/json" id="proto-data">{"enterprise":"260 Brands","engagement":"Field Operations","prefix":"RPT","name":"Reports and Dashboards","app":"FMCG Field Sales & Distribution","delivery":"Configuration","entity":"Target","records":[{"entity":"Target","fields":[{"name":"Sales Agent","type":"link-to-entity","required":true,"notes":"Links to: Employee","choices":null,"linkTo":"Employee","proposed":false,"reqs":["RPT-07"],"oi":null},{"name":"Month","type":"date","required":true,"notes":"One target per Sales Agent per month","choices":null,"linkTo":null,"proposed":false,"reqs":["RPT-07"],"oi":null},{"name":"Target value","type":"money","required":true,"notes":"ZMW","choices":null,"linkTo":null,"proposed":false,"reqs":["RPT-04","RPT-07"],"oi":null},{"name":"Product group","type":"link-to-entity","required":false,"notes":"Quantity target per product group. Links to: Category","choices":null,"linkTo":"Category","proposed":false,"reqs":["RPT-07"],"oi":null},{"name":"Target quantity","type":"number","required":false,"notes":"Per product group","choices":null,"linkTo":null,"proposed":false,"reqs":["RPT-04","RPT-07"],"oi":null}]}],"roles":[{"role":"Owner","does":"Sees all reports and dashboards, all data","proposed":false,"person":"Mitesh","reqs":["RPT-09"],"oi":null,"key":true},{"role":"Sales Head","does":"Sees all reports; sets monthly targets; sees Marketing Visits and Complaints aging","proposed":false,"person":"Kelvin","reqs":["RPT-07","RPT-09"],"oi":null,"key":true},{"role":"Regional Sales Manager","does":"Sees reports for own region","proposed":false,"person":"Natasha","reqs":["RPT-09"],"oi":null,"key":true},{"role":"Area Sales Manager","does":"Sees reports for own area, incl. Debt vs Collection","proposed":false,"person":"Brian","reqs":["RPT-02","RPT-09"],"oi":null,"key":true},{"role":"Sales Supervisor","does":"Sees reports for own agents","proposed":false,"person":"Joyce","reqs":["RPT-01","RPT-09"],"oi":null,"key":true},{"role":"Sales Agent","does":"No reports; sees own entries in other Modules' sheets and own target and incentive","proposed":false,"person":"Mwansa","reqs":["RPT-08","RPT-09"],"oi":null,"key":true},{"role":"Tricycle Rider","does":"No reports, no targets","proposed":false,"person":"Tricycle Rider","reqs":[],"oi":null,"key":true}],"statuses":[],"transitions":[],"rules":[{"rule":"Productive call","when":"A visit has an order","action":"Counted productive; a visit with no order is non-productive, with its No-order reason","proposed":false,"reqs":["RPT-03"]},{"rule":"Incentive","when":"Month end, Sales Agent has a target","action":"2% of monthly sales value if target 100% or more achieved; 1% if 80 to 99%; none below 80%. Paid through payroll outside neome","proposed":false,"reqs":["RPT-08"]},{"rule":"No target","when":"Sales Agent has no target for the month","action":"Shows \"No target\"; no incentive","proposed":false,"reqs":["RPT-04","RPT-08"]},{"rule":"Target change","when":"Sales Head edits a target before month end","action":"Allowed; month-end incentive uses the target as at month end","proposed":false,"reqs":["RPT-07"]},{"rule":"Report scope","when":"A manager opens a report","action":"Regional Sales Manager sees own region, Area Sales Manager own area, Sales Supervisor own agents; Sales Head and Owner all","proposed":false,"reqs":["RPT-09"]},{"rule":"Target set","when":"Sales Head sets a target","action":"Push to the Sales Agent (the OI-61 event)","proposed":false,"reqs":["RPT-07"]},{"rule":"Daily summary","when":"A manager opens the dashboard","action":"Daily Sales for yesterday shows at the top; no email, no push","proposed":false,"reqs":["RPT-01"]}],"reports":[{"name":"Daily Sales","audience":"Sales Supervisor and above","measures":"Sales by agent, beat, product; filters date, area, supervisor, agent, beat, product; Excel export","proposed":false,"reqs":["RPT-01"]},{"name":"Attendance","audience":"Sales Supervisor and above","measures":"Attendance report; same filters; Excel export","proposed":false,"reqs":["RPT-01"]},{"name":"Visit Productivity","audience":"Sales Supervisor and above","measures":"Total vs Productive vs Non-Productive calls; Productive = visit with an order; same filters; Excel export","proposed":false,"reqs":["RPT-03"]},{"name":"Stock in hand","audience":"Sales Supervisor and above","measures":"Stock in hand per Sales Agent; same filters; Excel export","proposed":false,"reqs":["RPT-01"]},{"name":"Debt vs Collection","audience":"Area Sales Manager and above","measures":"Debt = SAP open balances + neome credit invoices - collections; same filters; Excel export","proposed":false,"reqs":["RPT-02"]},{"name":"Target vs Achievement","audience":"All managers","measures":"Target, achieved sales value and quantity per product group, gap, per Sales Agent per month; same filters; Excel export","proposed":false,"reqs":["RPT-04"]},{"name":"Incentive","audience":"Sales Head, Owner, Area and Regional Sales Managers for their people; Sales Agent own","measures":"Incentive earned per Sales Agent per month from target achieved; Excel export","proposed":false,"reqs":["RPT-08"]},{"name":"Leave register","audience":"Sales Supervisor and above","measures":"Leave register; same filters; Excel export","proposed":false,"reqs":["RPT-01"]},{"name":"Complaints aging","audience":"Owner, Sales Head","measures":"Open complaints by age against the 72 hour target","proposed":false,"reqs":["RPT-01"]},{"name":"Marketing Visits","audience":"Sales Head","measures":"Marketing Visits; same filters; Excel export","proposed":false,"reqs":["RPT-01"]},{"name":"Performance dashboard","audience":"Sales Supervisor and above","measures":"Sales vs target, incentive earned; same filters","proposed":false,"reqs":["RPT-05"]},{"name":"Efficiency dashboard","audience":"Sales Supervisor and above","measures":"Productive calls %, visits per agent per day; same filters","proposed":false,"reqs":["RPT-05"]},{"name":"Customer Master Heat Map","audience":"Sales Supervisor and above","measures":"Map of customers coloured by last-30-days sales value; click shows name, Category, sales","proposed":false,"reqs":["RPT-06"]}],"requirements":[{"id":"RPT-01","title":"Reports and daily summary","statement":"Permitted managers open the Daily Sales, Attendance, Visit Productivity, Stock in hand, Leave register, Complaints aging and Marketing Visits reports, filter by date, area, supervisor, agent, beat and product, and export to Excel; Daily Sales for yesterday shows at the top of the dashboard.","acceptance":["Each report opens only for its audience in section 8.","A report filters by date, area, supervisor, agent, beat and product and exports to Excel.","Daily Sales for yesterday shows on the dashboard; no email or push."],"priority":"Must","proposed":false,"ois":[]},{"id":"RPT-02","title":"Debt vs Collection","statement":"The Debt vs Collection report shows per customer debt as SAP open balances plus neome credit invoices minus collections, for Area Sales Manager and above.","acceptance":["The report shows per customer what is owed and what was collected in the period.","Sales Supervisor cannot open it."],"priority":"Must","proposed":false,"ois":[]},{"id":"RPT-03","title":"Total vs Productive vs Non-Productive calls","statement":"The Visit Productivity report counts each visit as productive (has an order) or non-productive (no order, with its No-order reason).","acceptance":["A visit with an order counts productive; a visit with no order counts non-productive.","Non-productive visits show their No-order reason."],"priority":"Must","proposed":false,"ois":[]},{"id":"RPT-04","title":"Target vs Achievement","statement":"The Target vs Achievement report shows, per Sales Agent per month, target and achieved sales value (Invoiced and Delivered orders before VAT) and quantity per product group, and the gap.","acceptance":["For an agent with a target, the report shows target, achieved and gap.","Cancelled orders are not counted.","An agent with no target shows \"No target\"."],"priority":"Must","proposed":false,"ois":[]},{"id":"RPT-05","title":"Performance and Efficiency dashboards","statement":"Performance (sales vs target, incentive earned) and Efficiency (productive calls %, visits per agent per day) dashboards for Sales Supervisor and above, with the same filters.","acceptance":["The Performance dashboard shows each agent's sales, target and incentive earned.","The Efficiency dashboard shows productive calls % and visits per agent per day."],"priority":"Should","proposed":false,"ois":[]},{"id":"RPT-06","title":"Customer Master Heat Map","statement":"A map of customers coloured by last-30-days sales value, for Sales Supervisor and above.","acceptance":["Customers with GEO show on the map coloured by last-30-days sales value.","Clicking a customer shows name, Category and last-30-days sales.","Customers without GEO are not shown."],"priority":"Could","proposed":false,"ois":[]},{"id":"RPT-07","title":"Monthly targets","statement":"The Sales Head sets a monthly target per Sales Agent, by value (ZMW) and by quantity per product group, and can change it until month end; the Sales Agent gets a push when it is set.","acceptance":["Only the Sales Head can set or change a target.","A target can be changed until month end.","The Sales Agent gets a push when a target is set."],"priority":"Must","proposed":false,"ois":[]},{"id":"RPT-08","title":"Incentive","statement":"The Incentive report works out per Sales Agent per month 2% of sales value if target 100% or more is achieved, 1% if 80 to 99%, none below 80%; payment is outside neome.","acceptance":["An agent at 100% or more of target shows 2% of monthly sales value.","An agent at 80 to 99% shows 1%; below 80% shows none.","An agent with no target shows no incentive."],"priority":"Must","proposed":false,"ois":[]},{"id":"RPT-09","title":"Report access scope","statement":"Regional Sales Manager sees reports for own region, Area Sales Manager for own area, Sales Supervisor for own agents; Sales Head and Owner see all; Sales Agents and Tricycle Riders see no reports.","acceptance":["An Area Sales Manager sees no data of another area.","A Sales Agent cannot open any report, only own target and incentive."],"priority":"Must","proposed":false,"ois":[]}],"ois":{"OI-84":"How many people open reports a day, and how often? Enterprise did not know [WS-11]."},"rows":[{"id":"TGT-101","status":null,"values":{"Sales Agent":"Mwansa Phiri","Month":"2026-11-01","Target value":120000,"Product group":"Milk","Target quantity":900},"children":{},"log":[]},{"id":"TGT-102","status":null,"values":{"Sales Agent":"Chanda Banda","Month":"2026-11-01","Target value":90000,"Product group":"Juice","Target quantity":700},"children":{},"log":[]},{"id":"TGT-103","status":null,"values":{"Sales Agent":"Bupe Zulu","Month":"2026-11-01","Target value":60000,"Product group":"Yoghurt","Target quantity":400},"children":{},"log":[]},{"id":"TGT-104","status":null,"values":{"Sales Agent":"Thandiwe Mulenga","Month":"2026-11-01","Target value":100000,"Product group":"Milk","Target quantity":750},"children":{},"log":[]}],"scenarios":[{"title":"Sales Head sets monthly targets","summary":"Happy path: target by value and by product group quantity; agent is told.","steps":[{"actor":"Sales Head","action":"Sets the November target for a Sales Agent by value and by quantity per product group","screen":"record","row":"TGT-101","report":null,"transition":null,"status":null,"notify":[],"proves":["RPT-07"],"oi":null},{"actor":"Sales Agent","action":"Gets a push that a target is set and sees own target only","screen":"sheet","row":null,"report":null,"transition":null,"status":null,"notify":[],"proves":["RPT-07","RPT-09"],"oi":null}]},{"title":"Manager reads Target vs Achievement","summary":"Achievement is Invoiced and Delivered orders before VAT; Cancelled not counted.","steps":[{"actor":"Area Sales Manager","action":"Opens Target vs Achievement for own area and exports to Excel","screen":"report","row":null,"report":"Target vs Achievement","transition":null,"status":null,"notify":[],"proves":["RPT-04","RPT-09"],"oi":null},{"actor":"Sales Supervisor","action":"Opens Visit Productivity: visits with an order are productive, others show the No-order reason","screen":"report","row":null,"report":"Visit Productivity","transition":null,"status":null,"notify":[],"proves":["RPT-03"],"oi":null}]},{"title":"Incentive at month end","summary":"2% at 100% or more of target, 1% at 80 to 99%, none below; no target gives no incentive.","steps":[{"actor":"Sales Head","action":"Opens the Incentive report: agent at 100% shows 2%, at 85% shows 1%, at 70% none, no target shows No target","screen":"report","row":null,"report":"Incentive","transition":null,"status":null,"notify":[],"proves":["RPT-08","RPT-04"],"oi":null},{"actor":"Owner","action":"Opens the Performance dashboard and the Efficiency dashboard","screen":"report","row":null,"report":"Performance dashboard","transition":null,"status":null,"notify":[],"proves":["RPT-05"],"oi":null}]},{"title":"Debt and daily summary","summary":"Debt is SAP open balances plus credit invoices minus collections; Supervisor cannot open it.","steps":[{"actor":"Area Sales Manager","action":"Opens Debt vs Collection; the SAP part can be 30 minutes old","screen":"report","row":null,"report":"Debt vs Collection","transition":null,"status":null,"notify":[],"proves":["RPT-02"],"oi":null},{"actor":"Sales Supervisor","action":"Sees Daily Sales for yesterday on top of the dashboard and filters by beat","screen":"report","row":null,"report":"Daily Sales","transition":null,"status":null,"notify":[],"proves":["RPT-01"],"oi":null}]},{"title":"Heat map with a customer without GEO","summary":"Exception: a customer without GEO is not on the map.","steps":[{"actor":"Sales Supervisor","action":"Opens the Customer Master Heat Map, clicks a customer for name, Category and last-30-days sales; a customer without GEO is missing","screen":"report","row":null,"report":"Customer Master Heat Map","transition":null,"status":null,"notify":[],"proves":["RPT-06"],"oi":null}]},{"title":"Report views per day unknown","summary":"Open Item: how many people open reports a day.","steps":[{"actor":"Owner","action":"Asked how often managers open reports","screen":"sheet","row":null,"report":null,"transition":null,"status":null,"notify":[],"proves":[],"oi":"OI-84"}]}],"others":["Masters","Beat Planning","Attendance","Leave Management","Inventory","Visit Book","Leads","Marketing Visits","Modern Trade","Customer Complaints","Feedback","Communication","AI Features","SAP Integration"],"trace":{"RPT-01":[{"tab":"app","what":"Role switcher: Sales Supervisor"},{"tab":"mob","what":"Phones: Sales Supervisor","role":"Sales Supervisor"},{"tab":"app","what":"Rules: Daily summary"},{"tab":"app","what":"Report: Daily Sales"},{"tab":"app","what":"Report: Attendance"},{"tab":"app","what":"Report: Stock in hand"},{"tab":"app","what":"Report: Leave register"},{"tab":"app","what":"Report: Complaints aging"},{"tab":"app","what":"Report: Marketing Visits"},{"tab":"scen","what":"Scenario 4. Debt and daily summary, step 2","sc":3,"step":1}],"RPT-02":[{"tab":"app","what":"Role switcher: Area Sales Manager"},{"tab":"mob","what":"Phones: Area Sales Manager","role":"Area Sales Manager"},{"tab":"app","what":"Report: Debt vs Collection"},{"tab":"scen","what":"Scenario 4. Debt and daily summary, step 1","sc":3,"step":0}],"RPT-03":[{"tab":"app","what":"Rules: Productive call"},{"tab":"app","what":"Report: Visit Productivity"},{"tab":"scen","what":"Scenario 2. Manager reads Target vs Achievement, step 2","sc":1,"step":1}],"RPT-04":[{"tab":"app","what":"Record: Target › Target value"},{"tab":"mob","what":"Phone record: Target value"},{"tab":"app","what":"Record: Target › Target quantity"},{"tab":"mob","what":"Phone record: Target quantity"},{"tab":"app","what":"Rules: No target"},{"tab":"app","what":"Report: Target vs Achievement"},{"tab":"scen","what":"Scenario 2. Manager reads Target vs Achievement, step 1","sc":1,"step":0},{"tab":"scen","what":"Scenario 3. Incentive at month end, step 1","sc":2,"step":0}],"RPT-05":[{"tab":"app","what":"Report: Performance dashboard"},{"tab":"app","what":"Report: Efficiency dashboard"},{"tab":"scen","what":"Scenario 3. Incentive at month end, step 2","sc":2,"step":1}],"RPT-06":[{"tab":"app","what":"Report: Customer Master Heat Map"},{"tab":"scen","what":"Scenario 5. Heat map with a customer without GEO, step 1","sc":4,"step":0}],"RPT-07":[{"tab":"app","what":"Role switcher: Sales Head"},{"tab":"mob","what":"Phones: Sales Head","role":"Sales Head"},{"tab":"app","what":"Record: Target › Sales Agent"},{"tab":"mob","what":"Phone record: Sales Agent"},{"tab":"app","what":"Record: Target › Month"},{"tab":"mob","what":"Phone record: Month"},{"tab":"app","what":"Record: Target › Target value"},{"tab":"mob","what":"Phone record: Target value"},{"tab":"app","what":"Record: Target › Product group"},{"tab":"mob","what":"Phone record: Product group"},{"tab":"app","what":"Record: Target › Target quantity"},{"tab":"mob","what":"Phone record: Target quantity"},{"tab":"app","what":"Rules: Target change"},{"tab":"app","what":"Rules: Target set"},{"tab":"scen","what":"Scenario 1. Sales Head sets monthly targets, step 1","sc":0,"step":0},{"tab":"scen","what":"Scenario 1. Sales Head sets monthly targets, step 2","sc":0,"step":1}],"RPT-08":[{"tab":"app","what":"Role switcher: Sales Agent"},{"tab":"mob","what":"Phones: Sales Agent","role":"Sales Agent"},{"tab":"app","what":"Rules: Incentive"},{"tab":"app","what":"Rules: No target"},{"tab":"app","what":"Report: Incentive"},{"tab":"scen","what":"Scenario 3. Incentive at month end, step 1","sc":2,"step":0}],"RPT-09":[{"tab":"app","what":"Role switcher: Owner"},{"tab":"app","what":"Role switcher: Sales Head"},{"tab":"app","what":"Role switcher: Regional Sales Manager"},{"tab":"app","what":"Role switcher: Area Sales Manager"},{"tab":"app","what":"Role switcher: Sales Supervisor"},{"tab":"app","what":"Role switcher: Sales Agent"},{"tab":"mob","what":"Phones: Owner","role":"Owner"},{"tab":"mob","what":"Phones: Sales Head","role":"Sales Head"},{"tab":"mob","what":"Phones: Regional Sales Manager","role":"Regional Sales Manager"},{"tab":"mob","what":"Phones: Area Sales Manager","role":"Area Sales Manager"},{"tab":"mob","what":"Phones: Sales Supervisor","role":"Sales Supervisor"},{"tab":"mob","what":"Phones: Sales Agent","role":"Sales Agent"},{"tab":"app","what":"Rules: Report scope"},{"tab":"scen","what":"Scenario 1. Sales Head sets monthly targets, step 2","sc":0,"step":1},{"tab":"scen","what":"Scenario 2. Manager reads Target vs Achievement, step 1","sc":1,"step":0}]}}</script>
+<script>
+// Prototype template script (ticket 33). Draws every screen from the embedded page model.
+// State lives in memory only; Reset puts the sample data back. No network, no storage.
+(function () {
+  "use strict";
+  var M = JSON.parse(document.getElementById("proto-data").textContent);
+  var clone = function (x) { return JSON.parse(JSON.stringify(x)); };
+  var S = null;
+
+  // ---------- lookups ----------
+  var main = M.records.filter(function (r) { return r.entity === M.entity; })[0] || { entity: M.entity, fields: [] };
+  var children = M.records.filter(function (r) { return r.entity !== M.entity; });
+  var statusById = {};
+  M.statuses.forEach(function (s) { statusById[s.id] = s; });
+  var roleByName = {};
+  M.roles.forEach(function (r) { roleByName[r.role] = r; });
+  var reqById = {};
+  M.requirements.forEach(function (r) { reqById[r.id] = r; });
+  var keyRoles = M.roles.filter(function (r) { return r.key; });
+  var starts = M.statuses.filter(function (s) { return s.start; }).map(function (s) { return s.id; });
+  var owners = uniq(M.transitions.filter(function (t) { return starts.indexOf(t.from) >= 0; })
+    .reduce(function (a, t) { return a.concat(t.by); }, []).filter(function (b) { return b !== "system"; }));
+
+  function fresh(keep) {
+    var s = {
+      rows: clone(M.rows), notifs: [], chat: {}, seq: 0,
+      tab: "app", role: M.roles[0] ? M.roles[0].role : "", view: M.statuses.length ? "kanban" : "sheet",
+      screen: "entity", open: null, dtab: "d", sc: 0, step: 0,
+      mrole: keyRoles[0] ? keyRoles[0].role : (M.roles[0] ? M.roles[0].role : ""), req: null, tags: false,
+    };
+    if (keep) ["tab", "role", "view", "sc", "step", "mrole", "req", "tags"].forEach(function (k) { s[k] = keep[k]; });
+    return s;
+  }
+
+  // ---------- text ----------
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  // Inline markdown from the spec: show the words, not the marks.
+  function plain(s) { return esc(String(s == null ? "" : s).replace(/\*\*([^*]+)\*\*/g, "$1").replace(/`([^`]+)`/g, "$1")); }
+  function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+  function attr(name, v) { return " data-" + name + '="' + esc(v) + '"'; }
+  function dr(ids) { return ids && ids.length ? attr("req", ids.join(" ")) : ""; }
+  function who(role) {
+    if (role === "system") return "System";
+    var r = roleByName[role];
+    return r ? r.person + " (" + r.role + ")" : role;
+  }
+  function label(id) { return statusById[id] ? statusById[id].label : id; }
+  function st(id) {
+    var s = statusById[id];
+    return s ? '<span class="t-' + s.tone + '">' + esc(s.label) + "</span>" + (s.oi ? " " + oiChip(s.oi) : "") + prop(s.proposed) : "";
+  }
+  function fmt(f, v) {
+    if (v === undefined || v === null || v === "") return "";
+    if ((f.type === "money" || f.type === "number") && typeof v === "number") return esc(v.toLocaleString("en"));
+    if (f.type === "link-to-entity") return '<a class="lnk" href="#" data-on="noop">' + esc(v) + "</a>";
+    if (f.type === "file") return "📄 " + esc(v);
+    return esc(v);
+  }
+  function isStatusField(f) { return /^status$/i.test(f.name) && M.statuses.length > 0; }
+
+  // ---------- chips (Studio overlay) ----------
+  function reqChips(ids) {
+    return (ids || []).map(function (id) {
+      return '<span class="chip req reqtag"' + attr("on", "trace") + attr("id", id) + ' title="' + esc(reqById[id] ? reqById[id].title : "") + '">' + esc(id) + "</span>";
+    }).join(" ");
+  }
+  function oiChip(id) { return id && M.ois[id] ? '<span class="chip oi" title="' + esc(id + ": " + M.ois[id]) + '">' + esc(id) + "</span>" : ""; }
+  function prop(p) { return p ? ' <span class="chip prop" title="Proposed by Neomenta, to confirm">proposed</span>' : ""; }
+  var SAMPLE = ' <span class="chip sample" title="Made-up sample record">sample</span>';
+  var GUESSED = ' <span class="chip guess" title="No real Neome approval screen seen yet; this layout is a guess">guessed</span>';
+
+  // ---------- behaviour ----------
+  function row(id) { return S.rows.filter(function (r) { return r.id === id; })[0]; }
+  function holds(g, values) {
+    var raw = values[g.field];
+    var num = typeof g.value === "number";
+    if (num && (raw === undefined || raw === null || raw === "" || isNaN(Number(raw)))) return false;
+    var a = num ? Number(raw) : String(raw == null ? "" : raw);
+    var b = g.value;
+    return g.op === "<" ? a < b : g.op === "<=" ? a <= b : g.op === ">" ? a > b : g.op === ">=" ? a >= b : g.op === "=" ? a === b : g.op === "!=" ? a !== b : false;
+  }
+  function blocked(t, r) {
+    var bad = t.guard.filter(function (g) { return !holds(g, r.values); });
+    return bad.length ? "Rule: needs " + bad.map(function (g) { return g.field + " " + g.op + " " + g.value; }).join(" and ") : "";
+  }
+  function outOf(r) { return M.transitions.filter(function (t) { return t.from === r.status; }); }
+  function mine(r, role) { return outOf(r).filter(function (t) { return t.by.indexOf(role) >= 0; }); }
+  function systemOut(r) { return outOf(r).filter(function (t) { return t.by[0] === "system"; }); }
+  function canEdit(r, role) { return (!M.statuses.length || starts.indexOf(r.status) >= 0) && (owners.indexOf(role) >= 0 || !owners.length); }
+  function tById(id) { return M.transitions.filter(function (t) { return t.id === id; })[0]; }
+
+  function act(rowId, tid, role) {
+    var r = row(rowId), t = tById(tid);
+    if (!r || !t || r.status !== t.from || blocked(t, r)) return;
+    S.seq += 1;
+    var when = "now · " + S.seq;
+    r.status = t.to;
+    r.log.push([when, who(role), t.action + " · " + label(t.from) + " → " + label(t.to)]);
+    t.notify.forEach(function (n) {
+      S.notifs.unshift({ to: n, when: when, row: r.id, title: label(t.to), text: r.id + ": " + t.action + " by " + who(role) });
+    });
+    (S.chat[role] = S.chat[role] || []).push({ row: r.id, text: "✓ " + t.action + " · " + r.id, when: when });
+  }
+
+  // ---------- shared Neome pieces ----------
+  function tile(kind, glyph, name, on, off, handler, extra) {
+    return '<div class="tile ' + kind + (on ? " on" : "") + (off ? " off" : "") + '"' + (handler || "") + (extra || "") + '><div class="g">' + glyph + "</div>" + esc(name) + "</div>";
+  }
+  function notifsFor(role) { return S.notifs.filter(function (n) { return n.to === role; }); }
+  function notifHTML(n, phone) {
+    return '<div class="notif"' + (n.row && !phone ? attr("on", "open") + attr("row", n.row) : "") + '><div class="avatar" style="background:#EEE">🤖</div><div style="flex:1;min-width:0"><div class="who"><span>' +
+      esc(M.name) + '</span><span class="time">' + esc(n.when) + '</span></div><div class="msg">✨ <b>' + esc(n.title) + "!</b> " + esc(n.text) + "</div></div></div>";
+  }
+  function launcher(role, phone, extraNotifs) {
+    var me = roleByName[role] || { reqs: [] };
+    var tiles = tile("green", "▤", M.entity, !phone && S.screen === "entity", false, phone ? "" : attr("on", "screen") + attr("screen", "entity"));
+    M.reports.forEach(function (r, i) {
+      tiles += tile("blue", "▦", r.name, !phone && S.screen === "report:" + i, false, phone ? "" : attr("on", "screen") + attr("screen", "report:" + i), dr(r.reqs));
+    });
+    if (M.rules.length) tiles += tile("grey", "⚙", "Rules", !phone && S.screen === "rules", false, phone ? "" : attr("on", "screen") + attr("screen", "rules"), dr(M.rules.reduce(function (a, r) { return a.concat(r.reqs); }, [])));
+    M.others.forEach(function (n) { tiles += tile("green", "▤", n, false, true, "", ' title="Another Module: not in this Prototype"'); });
+    var list = (extraNotifs || []).concat(notifsFor(role));
+    return '<div class="bar"' + dr(me.reqs) + '><div class="avatar">👤</div><div class="t">' + esc(who(role)) + '</div><span class="ico" style="margin-left:auto">🔔</span></div>' +
+      '<div class="searchpill">🔍 Search messages or data</div><div class="tiles">' + tiles + "</div>" +
+      list.map(function (n) { return notifHTML(n, phone); }).join("");
+  }
+
+  function fieldHTML(r, f, editable) {
+    var v;
+    if (isStatusField(f)) v = st(r.status);
+    else if (editable && f.type !== "file") {
+      var cur = r.values[f.name];
+      if (f.type === "choice" && f.choices) {
+        v = '<select' + attr("change", "field") + attr("row", r.id) + attr("field", f.name) + '><option value=""></option>' +
+          f.choices.map(function (c) { return "<option" + (c === cur ? " selected" : "") + ">" + esc(c) + "</option>"; }).join("") + "</select>";
+      } else {
+        v = '<input value="' + esc(cur == null ? "" : cur) + '"' + (f.type === "number" || f.type === "money" ? ' inputmode="decimal"' : "") +
+          attr("change", "field") + attr("row", r.id) + attr("field", f.name) + attr("type", f.type) + ">";
+      }
+    } else v = fmt(f, r.values[f.name]) || '<span class="small">—</span>';
+    var trail = !editable ? "" : f.type === "date" ? "📅" : f.type === "link-to-entity" ? "＋ ✕" : f.type === "person" ? "✕" : f.type === "file" ? "📎" : "";
+    return '<div' + dr(f.reqs) + '><div class="ofld' + (editable && !isStatusField(f) ? "" : " ro") + '"><label>' + esc(f.name) + (f.required ? " *" : "") + '</label><div class="val">' + v + "</div>" +
+      (trail ? '<span class="tr">' + trail + "</span>" : "") + "</div>" +
+      (f.oi || f.proposed || (f.reqs && f.reqs.length) ? '<div class="tags">' + oiChip(f.oi) + prop(f.proposed) + " " + reqChips(f.reqs) + "</div>" : "") +
+      (f.notes && !/^(Values|Links to):/i.test(f.notes) ? '<div class="helper">' + plain(f.notes) + "</div>" : "") + "</div>";
+  }
+
+  function childTable(r, rec) {
+    var rows = (r.children && r.children[rec.entity]) || [];
+    return '<div class="secdiv">' + esc(rec.entity) + '</div><table class="sub-t"><tr>' +
+      rec.fields.map(function (f) { return "<th" + dr(f.reqs) + ">" + esc(f.name) + (f.oi ? " " + oiChip(f.oi) : "") + prop(f.proposed) + " " + reqChips(f.reqs) + "</th>"; }).join("") + "</tr>" +
+      (rows.length ? rows.map(function (c) { return "<tr>" + rec.fields.map(function (f) { return "<td>" + fmt(f, c[f.name]) + "</td>"; }).join("") + "</tr>"; }).join("")
+        : '<tr><td colspan="' + rec.fields.length + '" class="small">Nothing here</td></tr>') + "</table>";
+  }
+
+  // The record drawer. opts.static = picture in a scenario (no clicks); opts.done = action just taken.
+  function drawer(r, role, opts) {
+    opts = opts || {};
+    var editable = !opts.static && canEdit(r, role);
+    var tab = opts.static ? "d" : S.dtab;
+    var acts = [], note = "";
+    var avail = outOf(r);
+    if (!opts.static) {
+      mine(r, role).forEach(function (t) {
+        var why = blocked(t, r);
+        acts.push('<button class="tbtn' + (/reject|lost|cancel/i.test(t.action) ? " red" : "") + '"' + (why ? " disabled" : "") + ' title="' + esc(why || t.trigger) + '"' +
+          attr("on", "act") + attr("row", r.id) + attr("t", t.id) + attr("role", role) + dr(t.reqs) + ">" + esc(t.action) + "</button>");
+      });
+      systemOut(r).forEach(function (t) {
+        acts.push('<button class="tbtn" title="' + esc(t.trigger) + '"' + attr("on", "act") + attr("row", r.id) + attr("t", t.id) + attr("role", "system") + dr(t.reqs) + ">⏱ " + esc(t.action) + " (system)</button>");
+      });
+      var others = uniq(avail.filter(function (t) { return t.by.indexOf(role) < 0 && t.by[0] !== "system"; }).reduce(function (a, t) { return a.concat(t.by); }, []));
+      if (!mine(r, role).length && others.length) note = "Waiting on " + others.join(", ");
+      else if (!avail.length && M.statuses.length) note = "No more steps";
+    } else if (opts.done) {
+      acts.push('<span class="tbtn"' + dr(opts.done.reqs) + ">✓ " + esc(opts.done.action) + "</span>");
+    }
+    var gates = avail.filter(function (t) { return t.rules.length || t.guard.length; }).map(function (t) {
+      return '<div class="gate"' + dr(t.reqs) + "><b>" + esc(t.action) + "</b>: " + t.rules.map(function (n) {
+        var rule = M.rules.filter(function (x) { return x.rule === n; })[0];
+        return rule ? esc(rule.rule) + " — " + plain(rule.when) + " → " + plain(rule.action) + prop(rule.proposed) : "";
+      }).concat(t.guard.map(function (g) { return "only when " + esc(g.field + " " + g.op + " " + g.value); })).join("; ") + "</div>";
+    }).join("");
+    var details = (M.statuses.length && !main.fields.some(isStatusField) ? '<div class="ofld ro"><label>Status</label><div class="val">' + st(r.status) + "</div></div>" : "") +
+      gates + '<div class="secdiv">' + esc(M.entity) + "</div>" + main.fields.map(function (f) { return fieldHTML(r, f, editable); }).join("") +
+      children.map(function (c) { return childTable(r, c); }).join("");
+    var activity = '<div class="timeline">' + (r.log.length ? r.log.slice().reverse().map(function (l) { return '<div><div class="when">' + esc(l[0]) + " · " + esc(l[1]) + "</div>" + esc(l[2]) + "</div>"; }).join("") : '<div class="small">Nothing here</div>') + "</div>";
+    return '<div class="drawer' + (opts.static ? " static" : "") + '"><div class="bar"><span class="ico"' + (opts.static ? "" : attr("on", "close")) + ' style="cursor:pointer">›</span><div class="t">' + esc(M.entity) + " · " + esc(r.id) + "</div>" + SAMPLE + '<span class="ico" style="margin-left:auto">🗑</span></div>' +
+      '<div class="dtabs"><button class="' + (tab === "d" ? "on" : "") + '"' + (opts.static ? "" : attr("on", "dtab") + attr("v", "d")) + ">DETAILS</button><button class=\"" + (tab === "a" ? "on" : "") + '"' + (opts.static ? "" : attr("on", "dtab") + attr("v", "a")) + ">ACTIVITY</button></div>" +
+      '<div class="dbody">' + (tab === "d" ? details : activity) + '</div><div class="dfoot"><span class="note">' + esc(note) + '</span><span class="ico">💬</span>' + acts.join("") + "</div></div>";
+  }
+
+  function cardFields() { return main.fields.filter(function (f) { return !isStatusField(f) && f.type !== "file"; }).slice(0, 4); }
+  function sheet(rows, clickable) {
+    return "<table><tr><th>Action</th><th>Sr No.</th>" + main.fields.map(function (f) { return "<th" + dr(f.reqs) + ">" + esc(f.name) + '<span class="f">▾ ⋮</span></th>'; }).join("") +
+      (M.statuses.length && !main.fields.some(isStatusField) ? "<th>Status</th>" : "") + "<th></th></tr>" +
+      rows.map(function (r, i) {
+        return '<tr class="row"' + (clickable ? attr("on", "open") + attr("row", r.id) : "") + '><td class="act">› ⋯</td><td>' + (i + 1) + "</td>" +
+          main.fields.map(function (f) { return "<td>" + (isStatusField(f) ? st(r.status) : fmt(f, r.values[f.name])) + "</td>"; }).join("") +
+          (M.statuses.length && !main.fields.some(isStatusField) ? "<td>" + st(r.status) + "</td>" : "") + "<td>" + SAMPLE + "</td></tr>";
+      }).join("") + "</table>";
+  }
+  function kanban(rows, clickable, focus) {
+    return '<div class="kan">' + M.statuses.map(function (s) {
+      var qs = rows.filter(function (r) { return r.status === s.id; });
+      return '<div class="kcol k-' + s.tone + '"><h4 class="t-' + s.tone + '">' + esc(s.label) + " (" + qs.length + ")" + (s.oi ? " " + oiChip(s.oi) : "") + prop(s.proposed) + "</h4>" +
+        qs.map(function (r) {
+          return '<div class="kcard' + (focus === r.id ? " hl-focus" : "") + '"' + (clickable ? attr("on", "open") + attr("row", r.id) : "") + (focus === r.id ? ' style="outline:2px solid var(--primary)"' : "") + '><div class="in">' +
+            '<div class="kv"><span class="k">ID:</span><span class="v">' + esc(r.id) + "</span></div>" +
+            cardFields().map(function (f) { return '<div class="kv"' + dr(f.reqs) + '><span class="k">' + esc(f.name) + ':</span><span class="v">' + fmt(f, r.values[f.name]) + "</span></div>"; }).join("") +
+            '<div class="kv"><span class="k">Status:</span>' + st(r.status) + "</div></div>" +
+            '<div class="ft"><span>💬</span>' + SAMPLE + "</div></div>";
+        }).join("") + "</div>";
+    }).join("") + "</div>";
+  }
+  function reportView(i, rows) {
+    var r = M.reports[i];
+    if (!r) return "";
+    return '<div class="bar"><span class="ico">≡</span><div class="ttl"><div class="t">' + esc(r.name) + '</div><div class="sub">Report · for ' + plain(r.audience) + "</div></div></div>" +
+      '<div class="report"' + dr(r.reqs) + '><div class="small">' + plain(r.measures) + prop(r.proposed) + " " + reqChips(r.reqs) + "</div>" +
+      '<div class="kpis">' + (M.statuses.length ? M.statuses.map(function (s) {
+        return '<div class="kpi"><div class="n">' + rows.filter(function (x) { return x.status === s.id; }).length + '</div><div class="small t-' + s.tone + '">' + esc(s.label) + "</div></div>";
+      }).join("") : '<div class="kpi"><div class="n">' + rows.length + '</div><div class="small">' + esc(M.entity) + "</div></div>") + "</div>" +
+      '<div class="small">Counts from the sample rows here, to show the idea. The real report is set up in the build.</div></div>';
+  }
+  function rulesView() {
+    return '<div class="bar"><span class="ico">≡</span><div class="ttl"><div class="t">Rules</div><div class="sub">Master data · Total rows: ' + M.rules.length + "</div></div></div>" +
+      "<table><tr><th>Sr No.</th><th>Rule</th><th>When</th><th>Action / notify whom</th></tr>" +
+      M.rules.map(function (r, i) {
+        return "<tr" + dr(r.reqs) + "><td>" + (i + 1) + '</td><td class="wrap">' + esc(r.rule) + prop(r.proposed) + " " + reqChips(r.reqs) + '</td><td class="wrap">' + plain(r.when) + '</td><td class="wrap">' + plain(r.action) + "</td></tr>";
+      }).join("") + "</table>";
+  }
+
+  // ---------- App tab ----------
+  function viewApp() {
+    var rows = S.rows, main_;
+    if (S.screen.indexOf("report:") === 0) main_ = reportView(Number(S.screen.slice(7)), rows);
+    else if (S.screen === "rules") main_ = rulesView();
+    else {
+      var open = S.open && row(S.open);
+      main_ = '<div class="bar"><span class="ico">≡</span><div class="ttl"><div class="t">' + esc(M.entity) + ' sheet</div><div class="sub">Total rows: ' + rows.length + "</div></div>" +
+        '<div class="acts">' + (M.statuses.length ? '<div class="viewsw">' + ["sheet", "kanban"].map(function (v) {
+          return '<button class="' + (S.view === v ? "on" : "") + '"' + attr("on", "view") + attr("v", v) + ">" + (v === "sheet" ? "Sheet" : "Kanban") + "</button>";
+        }).join("") + "</div>" : "") + '<span class="ico">⟳</span><span class="ico">⚲</span><span class="ico">⋮</span></div></div>' +
+        '<div class="searchrow"><div class="searchpill">🔍 Search</div><span class="ico">⚲</span></div>' +
+        '<div class="body">' + (S.view === "kanban" && M.statuses.length ? kanban(rows, true) : sheet(rows, true)) + "</div>" +
+        (S.view === "sheet" || !M.statuses.length ? '<div class="pager"><span>1–' + rows.length + " of " + rows.length + "</span><span>|‹ ‹ › ›|</span></div>" : "") +
+        (canEdit({ status: starts[0] }, S.role) ? '<button class="fab" title="New ' + esc(M.entity) + '"' + attr("on", "create") + ">+</button>" : "") +
+        (open ? '<div class="dim"' + attr("on", "close") + "></div>" + drawer(open, S.role) : "");
+    }
+    var me = roleByName[S.role] || {};
+    var allRoleReqs = uniq(M.roles.reduce(function (a, r) { return a.concat(r.reqs); }, []));
+    return '<div class="A"><div class="dev-wrap"><div class="dev-title"><span' + dr(allRoleReqs) + '><select title="View as"' + attr("change", "role") + ">" +
+      M.roles.map(function (r) { return '<option value="' + esc(r.role) + '"' + (S.role === r.role ? " selected" : "") + ">" + esc(r.person + " (" + r.role + (r.proposed ? ", proposed" : "") + ")") + "</option>"; }).join("") +
+      '</select></span><span style="font-size:12px">' + oiChip(me.oi) + prop(me.proposed) + " " + reqChips(me.reqs) + ' <span class="small">' + plain(me.does) + "</span></span></div>" +
+      '<div class="dev"><div class="lp">' + launcher(S.role, false) + '</div><div class="mp">' + main_ + "</div></div></div></div>";
+  }
+
+  // ---------- Scenarios tab ----------
+  // Rows as they stand after step k of the scenario (sample rows, then each step's new status).
+  function scenarioRows(sc, k) {
+    var rows = clone(M.rows);
+    sc.steps.slice(0, k + 1).forEach(function (s) {
+      rows.forEach(function (r) { if (r.id === s.row && s.status) r.status = s.status; });
+    });
+    return rows;
+  }
+  function phoneHome(role, notifs, cap) {
+    return '<div class="phone"><div class="dev-title sm">' + esc(who(role)) + '</div><div class="dev"><div class="scr">' + launcher(role, true, notifs) + "</div></div>" + (cap ? '<div class="cap">' + cap + "</div>" : "") + "</div>";
+  }
+  function chatPhone(role, r, opts) {
+    opts = opts || {};
+    var ts = r ? mine(r, role) : [];
+    var past = (S.chat[role] || []).filter(function (c) { return !opts.static; });
+    var card = r ? '<div class="card"><b>' + esc(r.id) + "</b>" + SAMPLE + "<br>" + cardFields().map(function (f) { return esc(f.name) + ": " + fmt(f, r.values[f.name]); }).join("<br>") + "<br>Status: " + st(r.status) + "</div>" : "";
+    var buttons = opts.static ? (opts.done ? '<div class="acts"><span class="tbtn">✓ ' + esc(opts.done.action) + "</span></div>" : "") :
+      ts.length ? '<div class="acts">' + ts.map(function (t) {
+        var why = blocked(t, r);
+        return '<button class="tbtn' + (/reject|lost|cancel/i.test(t.action) ? " red" : "") + '"' + (why ? " disabled" : "") + ' title="' + esc(why || t.trigger) + '"' + attr("on", "act") + attr("row", r.id) + attr("t", t.id) + attr("role", role) + dr(t.reqs) + ">" + esc(t.action) + "</button>";
+      }).join("") + "</div>" : "";
+    var reqs = uniq(ts.reduce(function (a, t) { return a.concat(t.reqs); }, []).concat(opts.done ? opts.done.reqs : []));
+    var head = r ? "Action needed" : "Nothing waits for you";
+    return '<div class="phone"><div class="dev-title sm">' + esc(who(role)) + GUESSED + '</div><div class="dev">' +
+      '<div class="bar"><span class="ico">‹</span><div class="avatar" style="width:28px;height:28px">🤖</div><div><div class="t" style="font-size:14px">' + esc(M.name) + '</div><div class="sub" style="font-size:12px">bot</div></div></div>' +
+      '<div class="chat"><div class="datepill">Today</div>' +
+      (r ? '<div class="bub in"' + dr(reqs) + '><div class="nm">' + esc(M.name) + "</div>✨ <b>" + esc(head) + "!</b>" + card + buttons + '<div class="tm">now</div></div>' : '<div class="bub in"><div class="nm">' + esc(M.name) + "</div>" + esc(head) + "</div>") +
+      past.map(function (c) { return '<div class="bub out">' + esc(c.text) + '<div class="tm">' + esc(c.when) + " ✓✓</div></div>"; }).join("") +
+      (opts.static && opts.done ? '<div class="bub out">✓ ' + esc(opts.done.action) + '<div class="tm">now ✓✓</div></div>' : "") +
+      '</div><div class="cbar"><div class="in">Message</div><span class="ico">➤</span></div></div>' +
+      '<div class="cap">Approve from bot chat · guessed: no real Neome approval screen seen yet</div></div>';
+  }
+  function viewScen() {
+    if (!M.scenarios.length) return "";
+    var sc = M.scenarios[S.sc] || M.scenarios[0], s = sc.steps[S.step] || sc.steps[0];
+    var rows = scenarioRows(sc, S.step);
+    var r = s.row ? rows.filter(function (x) { return x.id === s.row; })[0] : null;
+    var t = s.transition ? tById(s.transition) : null;
+    var desk;
+    // The chat shows the message the actor answered, so the record as it was before the step.
+    if (s.screen === "chat") desk = chatPhone(s.actor, r && t ? Object.assign(clone(r), { status: t.from }) : r, { static: true, done: t });
+    else {
+      var inner = s.screen === "record" ? drawer(r, s.actor, { static: true, done: t })
+        : s.screen === "kanban" ? '<div class="mp"><div class="body">' + kanban(rows, false, s.row) + "</div></div>"
+        : s.screen === "report" ? '<div class="mp">' + reportView(M.reports.map(function (x) { return x.name; }).indexOf(s.report), rows) + "</div>"
+        : s.screen === "rules" ? '<div class="mp">' + rulesView() + "</div>"
+        : '<div class="mp"><div class="body">' + sheet(rows, false) + "</div></div>";
+      desk = '<div class="desk dev-wrap"><div class="dev-title sm">' + esc(who(s.actor)) + '</div><div class="dev">' + inner + "</div></div>";
+    }
+    var phones = r && t ? s.notify.slice(0, 2).map(function (n) {
+      return phoneHome(n, [{ to: n, when: "now", row: r.id, title: label(t.to), text: r.id + ": " + t.action + " by " + who(s.actor) }], "Neome tells the next role (bot message)");
+    }).join("") : "";
+    var actor = roleByName[s.actor];
+    var covered = function (id) { return M.scenarios.some(function (x) { return x.steps.some(function (y) { return y.proves.indexOf(id) >= 0; }); }); };
+    var tCovered = function (id) { return M.scenarios.some(function (x) { return x.steps.some(function (y) { return y.transition === id; }); }); };
+    var last = S.step >= sc.steps.length - 1;
+    return '<div class="B"><div class="B-list">' + M.scenarios.map(function (x, k) {
+      return '<div class="sc' + (k === S.sc ? " on" : "") + '"' + attr("on", "scen") + attr("sc", k) + '><div class="t">' + (k + 1) + ". " + esc(x.title) + prop(true) + '</div><div class="small">' + esc(x.summary) + "</div></div>";
+    }).join("") + "</div>" +
+      '<div class="B-stage"><div class="small">Scenario ' + (S.sc + 1) + " · step " + (S.step + 1) + " of " + sc.steps.length + " · proposed by Neomenta, to confirm · sample data</div>" +
+      '<h2 style="margin:4px 0 0;font-weight:400">' + esc(sc.title) + "</h2>" +
+      '<div class="prog">' + sc.steps.map(function (_, k) { return '<span class="' + (k <= S.step ? "on" : "") + '"></span>'; }).join("") + "</div>" +
+      (s.oi ? '<div class="callout"><b>' + esc(s.oi) + " open:</b> " + esc(M.ois[s.oi]) + " The Enterprise must answer before this is final.</div>" : "") +
+      '<p class="step"' + dr(s.proves) + "><b>" + esc(who(s.actor)) + "</b>" + (actor ? prop(actor.proposed) : "") + " · " + esc(s.action) +
+      (t ? ' <span class="small">(' + esc(label(t.from)) + " → " + esc(label(t.to)) + ")</span>" : "") + "</p>" +
+      '<div class="B-two">' + desk + phones + "</div>" +
+      '<div style="display:flex;gap:8px;margin-top:14px"><button class="tbtn"' + (S.step === 0 ? " disabled" : "") + attr("on", "step") + attr("d", -1) + ">‹ Back</button>" +
+      '<button class="tbtn"' + attr("on", "step") + attr("d", 1) + ">" + (last ? "Next scenario ›" : "Next ›") + "</button></div></div>" +
+      '<div class="B-proof"><h5>This step proves</h5>' + (s.proves.length ? s.proves.map(function (id) {
+        var q = reqById[id];
+        return '<div style="margin:8px 0 14px"' + dr([id]) + '><span class="chip req"' + attr("on", "trace") + attr("id", id) + ">" + esc(id) + "</span> <b>" + esc(q.title) + '</b> <span class="small">' + esc(q.priority) + "</span>" + prop(q.proposed) +
+          q.acceptance.map(function (a) { return '<div class="acc">' + plain(a) + "</div>"; }).join("") + "</div>";
+      }).join("") : '<div class="small">No Requirement yet. See the Open Item.</div>') +
+      (s.oi ? '<h5 style="color:var(--oi);margin-top:16px">Open Item</h5><div>' + oiChip(s.oi) + " " + esc(M.ois[s.oi]) + "</div>" : "") +
+      '<h5 style="margin-top:20px">Requirements in scenarios</h5><div class="small">' + M.requirements.map(function (q) {
+        return "<div>" + (covered(q.id) ? "✓" : "✗") + " " + esc(q.id) + " " + esc(q.title) + "</div>";
+      }).join("") + '</div><h5 style="margin-top:16px">Transitions in scenarios</h5><div class="small">' + M.transitions.map(function (x) {
+        return "<div>" + (tCovered(x.id) ? "✓" : "✗") + " " + esc(label(x.from)) + " → " + esc(label(x.to)) + "</div>";
+      }).join("") + "</div></div></div>";
+  }
+
+  // ---------- Mobile + trace tab ----------
+  function viewMob() {
+    var role = S.mrole, me = roleByName[role] || { reqs: [] };
+    var r = S.rows.filter(function (x) { return mine(x, role).length; })[0] || null;
+    var shown = r || S.rows[0];
+    var waiting = r ? [{ to: role, when: "sample", row: r.id, title: "Action needed", text: r.id + " · " + label(r.status) + " waits for you" }] : [];
+    var home = '<div class="phone"' + dr(me.reqs) + '><div class="dev-title sm">' + esc(who(role)) + '</div><div class="dev"><div class="scr">' + launcher(role, true, waiting) + '</div></div><div class="cap">home · bot notifications</div></div>';
+    var rec = shown ? '<div class="phone"><div class="dev-title sm">' + esc(who(role)) + '</div><div class="dev">' +
+      '<div class="bar" style="background:#fff;border-bottom:1px solid var(--line)"><span class="ico">‹</span><div class="t">' + esc(M.entity) + " · " + esc(shown.id) + "</div>" + SAMPLE + "</div>" +
+      '<div class="scr white">' + (M.statuses.length && !main.fields.some(isStatusField) ? '<div class="ofld ro"><label>Status</label><div class="val">' + st(shown.status) + "</div></div>" : "") +
+      main.fields.map(function (f) { return fieldHTML(shown, f, false); }).join("") + "</div>" +
+      '<div class="dfoot">' + mine(shown, role).map(function (t) {
+        var why = blocked(t, shown);
+        return '<button class="tbtn"' + (why ? " disabled" : "") + ' title="' + esc(why || t.trigger) + '"' + attr("on", "act") + attr("row", shown.id) + attr("t", t.id) + attr("role", role) + dr(t.reqs) + ">" + esc(t.action) + "</button>";
+      }).join("") + '</div></div><div class="cap">record</div></div>' : "";
+    var chat = chatPhone(role, r);
+    var phones = keyRoles.length ? keyRoles : M.roles;
+    return '<div class="C"><div class="C-main"><div class="rolesw">' + phones.map(function (x) {
+      return '<button class="' + (x.role === role ? "on" : "") + '"' + attr("on", "mrole") + attr("role", x.role) + ">" + esc(who(x.role)) + "</button>";
+    }).join("") + '</div><div class="C-phones">' + home + rec + chat + "</div></div>" +
+      '<div class="C-trace"><h5>Requirement trace</h5><div class="small" style="margin-bottom:12px">Click a Requirement to light up where it shows, in every tab. Click a place to go there.</div>' +
+      M.requirements.map(function (q) {
+        var places = M.trace[q.id] || [];
+        return '<div class="r' + (S.req === q.id ? " on" : "") + '"' + attr("on", "trace") + attr("id", q.id) + '><span class="chip req">' + esc(q.id) + "</span> <b>" + esc(q.title) + "</b> " +
+          q.ois.map(oiChip).join(" ") + prop(q.proposed) + '<div class="small" style="margin-top:3px">' + esc(q.priority) + " · " + plain(q.statement) + "</div>" +
+          '<ul class="places">' + places.map(function (p, i) {
+            return "<li><a" + attr("on", "goto") + attr("id", q.id) + attr("i", i) + ">" + esc({ app: "App", scen: "Scenarios", mob: "Mobile" }[p.tab]) + "</a> · " + esc(p.what) + "</li>";
+          }).join("") + "</ul></div>";
+      }).join("") + "</div></div>";
+  }
+
+  // ---------- page ----------
+  var TABS = [["app", "App", viewApp], ["scen", "Scenarios", viewScen], ["mob", "Mobile + trace", viewMob]];
+  function render() {
+    var appLabel = M.app === undefined ? "Not mapped yet" : M.app === null ? "No catalog App (custom)" : "Neome App: " + M.app;
+    var banner = '<div class="banner"><b>PROTOTYPE</b> · ' + esc(M.enterprise) + ' · Module <span class="chip">' + esc(M.prefix) + "</span> " + esc(M.name) +
+      " · " + M.requirements.length + " Requirements · " + Object.keys(M.ois).length + ' Open Items · <span class="chip">sample data</span>' +
+      '<span class="right"><span class="chip">' + esc(appLabel) + "</span>" + (M.delivery ? '<span class="chip">' + esc(M.delivery) + " · indicative</span>" : "") + "</span></div>";
+    var tabs = '<div class="ptabs">' + TABS.map(function (t) { return '<button class="' + (S.tab === t[0] ? "on" : "") + '"' + attr("on", "tab") + attr("v", t[0]) + ">" + t[1] + "</button>"; }).join("") +
+      '<div class="right"><label class="small"><input type="checkbox"' + (S.tags ? " checked" : "") + attr("change", "tags") + "> show Requirement tags</label>" +
+      '<button class="tbtn"' + attr("on", "reset") + ' title="Put the sample data back">Reset</button></div></div>';
+    var q = S.req && reqById[S.req];
+    var hl = q ? '<div class="hlbar">Showing where <span class="chip req">' + esc(q.id) + "</span> <b>" + esc(q.title) + "</b> shows (" + (M.trace[q.id] || []).length + ' places) <button class="tbtn"' + attr("on", "clear") + ">Clear</button></div>" : "";
+    var view = TABS.filter(function (t) { return t[0] === S.tab; })[0] || TABS[0];
+    document.body.classList.toggle("showtags", S.tags);
+    document.getElementById("app").innerHTML = banner + tabs + hl + view[2]();
+    if (S.req) {
+      Array.prototype.forEach.call(document.querySelectorAll("#app [data-req]"), function (el) {
+        if (el.getAttribute("data-req").split(" ").indexOf(S.req) >= 0) el.classList.add("hl");
+      });
+    }
+  }
+
+  // ---------- events ----------
+  var ON = {
+    noop: function () {},
+    tab: function (d) { S.tab = d.v; },
+    view: function (d) { S.view = d.v; },
+    screen: function (d) { S.screen = d.screen; S.open = null; },
+    open: function (d) { S.tab = "app"; S.screen = "entity"; S.open = d.row; S.dtab = "d"; },
+    close: function () { S.open = null; },
+    dtab: function (d) { S.dtab = d.v; },
+    act: function (d) { act(d.row, d.t, d.role); },
+    create: function () {
+      S.seq += 1;
+      var id = M.prefix + "-NEW-" + S.seq;
+      S.rows.unshift({ id: id, status: starts[0] || null, values: {}, children: {}, log: [["now · " + S.seq, who(S.role), "Created"]] });
+      S.open = id; S.dtab = "d";
+    },
+    scen: function (d) { S.sc = Number(d.sc); S.step = 0; },
+    step: function (d) {
+      var sc = M.scenarios[S.sc];
+      if (Number(d.d) < 0) S.step = Math.max(0, S.step - 1);
+      else if (S.step < sc.steps.length - 1) S.step += 1;
+      else { S.sc = (S.sc + 1) % M.scenarios.length; S.step = 0; }
+    },
+    mrole: function (d) { S.mrole = d.role; },
+    trace: function (d) { S.req = S.req === d.id ? null : d.id; },
+    clear: function () { S.req = null; },
+    goto: function (d) {
+      var p = (M.trace[d.id] || [])[Number(d.i)];
+      S.req = d.id;
+      if (!p) return;
+      S.tab = p.tab;
+      if (p.tab === "scen") { S.sc = p.sc; S.step = p.step; }
+      if (p.tab === "mob" && p.role) S.mrole = p.role;
+      if (p.tab === "app") {
+        S.open = null;
+        var m = /^(Report|Rules): (.*)$/.exec(p.what);
+        if (m && m[1] === "Report") S.screen = "report:" + M.reports.map(function (x) { return x.name; }).indexOf(m[2]);
+        else if (m) S.screen = "rules";
+        else {
+          S.screen = "entity";
+          if (/^(Record|Action):/.test(p.what) && S.rows[0]) {
+            var t = /^Action:/.test(p.what) ? M.transitions.filter(function (x) { return p.what.indexOf("Action: " + x.action + " (") === 0; })[0] : null;
+            var target = t ? S.rows.filter(function (x) { return x.status === t.from; })[0] : S.rows[0];
+            if (t && t.by[0] !== "system") S.role = t.by[0];
+            S.open = (target || S.rows[0]).id;
+            S.dtab = "d";
+          }
+        }
+      }
+    },
+    reset: function () { S = fresh(S); },
+  };
+  var CHANGE = {
+    role: function (el) { S.role = el.value; S.open = null; },
+    tags: function (el) { S.tags = el.checked; },
+    field: function (el) {
+      var r = row(el.getAttribute("data-row"));
+      if (!r) return;
+      var type = el.getAttribute("data-type");
+      var v = el.value;
+      r.values[el.getAttribute("data-field")] = (type === "number" || type === "money") && v.trim() !== "" && !isNaN(Number(v)) ? Number(v) : v;
+    },
+  };
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-on]");
+    if (!el || el.disabled) return;
+    if (el.tagName === "A") e.preventDefault();
+    var fn = ON[el.getAttribute("data-on")];
+    if (!fn) return;
+    e.stopPropagation();
+    fn(el.dataset);
+    render();
+  });
+  document.addEventListener("change", function (e) {
+    var el = e.target.closest("[data-change]");
+    if (!el) return;
+    CHANGE[el.getAttribute("data-change")](el);
+    render();
+  });
+
+  S = fresh();
+  render();
+})();
+
+</script>
+</body>
+</html>

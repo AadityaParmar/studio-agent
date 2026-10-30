@@ -1,0 +1,73 @@
+{
+ "entity": "Target",
+ "roles": [
+  {"role": "Sales Head", "person": "Kelvin", "reqs": ["RPT-07", "RPT-09"]},
+  {"role": "Owner", "person": "Mitesh", "reqs": ["RPT-09"]},
+  {"role": "Regional Sales Manager", "person": "Natasha", "reqs": ["RPT-09"]},
+  {"role": "Area Sales Manager", "person": "Brian", "reqs": ["RPT-02", "RPT-09"]},
+  {"role": "Sales Supervisor", "person": "Joyce", "reqs": ["RPT-01", "RPT-09"]},
+  {"role": "Sales Agent", "person": "Mwansa", "reqs": ["RPT-08", "RPT-09"]}
+ ],
+ "fields": [
+  {"entity": "Target", "name": "Sales Agent", "reqs": ["RPT-07"]},
+  {"entity": "Target", "name": "Month", "reqs": ["RPT-07"]},
+  {"entity": "Target", "name": "Target value", "reqs": ["RPT-04", "RPT-07"]},
+  {"entity": "Target", "name": "Product group", "reqs": ["RPT-07"]},
+  {"entity": "Target", "name": "Target quantity", "reqs": ["RPT-04", "RPT-07"]}
+ ],
+ "transitions": [],
+ "rules": [
+  {"rule": "Productive call", "reqs": ["RPT-03"]},
+  {"rule": "Incentive", "reqs": ["RPT-08"]},
+  {"rule": "No target", "reqs": ["RPT-04", "RPT-08"]},
+  {"rule": "Target change", "reqs": ["RPT-07"]},
+  {"rule": "Report scope", "reqs": ["RPT-09"]},
+  {"rule": "Target set", "reqs": ["RPT-07"]},
+  {"rule": "Daily summary", "reqs": ["RPT-01"]}
+ ],
+ "reports": [
+  {"name": "Daily Sales", "reqs": ["RPT-01"]},
+  {"name": "Attendance", "reqs": ["RPT-01"]},
+  {"name": "Visit Productivity", "reqs": ["RPT-03"]},
+  {"name": "Stock in hand", "reqs": ["RPT-01"]},
+  {"name": "Debt vs Collection", "reqs": ["RPT-02"]},
+  {"name": "Target vs Achievement", "reqs": ["RPT-04"]},
+  {"name": "Incentive", "reqs": ["RPT-08"]},
+  {"name": "Leave register", "reqs": ["RPT-01"]},
+  {"name": "Complaints aging", "reqs": ["RPT-01"]},
+  {"name": "Marketing Visits", "reqs": ["RPT-01"]},
+  {"name": "Performance dashboard", "reqs": ["RPT-05"]},
+  {"name": "Efficiency dashboard", "reqs": ["RPT-05"]},
+  {"name": "Customer Master Heat Map", "reqs": ["RPT-06"]}
+ ],
+ "rows": [
+  {"id": "TGT-101", "status": "", "values": {"Sales Agent": "Mwansa Phiri", "Month": "2026-11-01", "Target value": 120000, "Product group": "Milk", "Target quantity": 900}},
+  {"id": "TGT-102", "status": "", "values": {"Sales Agent": "Chanda Banda", "Month": "2026-11-01", "Target value": 90000, "Product group": "Juice", "Target quantity": 700}},
+  {"id": "TGT-103", "status": "", "values": {"Sales Agent": "Bupe Zulu", "Month": "2026-11-01", "Target value": 60000, "Product group": "Yoghurt", "Target quantity": 400}},
+  {"id": "TGT-104", "status": "", "values": {"Sales Agent": "Thandiwe Mulenga", "Month": "2026-11-01", "Target value": 100000, "Product group": "Milk", "Target quantity": 750}}
+ ],
+ "scenarios": [
+  {"title": "Sales Head sets monthly targets", "summary": "Happy path: target by value and by product group quantity; agent is told.", "steps": [
+   {"actor": "Sales Head", "action": "Sets the November target for a Sales Agent by value and by quantity per product group", "row": "TGT-101", "screen": "record", "proves": ["RPT-07"]},
+   {"actor": "Sales Agent", "action": "Gets a push that a target is set and sees own target only", "screen": "sheet", "proves": ["RPT-07", "RPT-09"]}
+  ]},
+  {"title": "Manager reads Target vs Achievement", "summary": "Achievement is Invoiced and Delivered orders before VAT; Cancelled not counted.", "steps": [
+   {"actor": "Area Sales Manager", "action": "Opens Target vs Achievement for own area and exports to Excel", "screen": "report", "report": "Target vs Achievement", "proves": ["RPT-04", "RPT-09"]},
+   {"actor": "Sales Supervisor", "action": "Opens Visit Productivity: visits with an order are productive, others show the No-order reason", "screen": "report", "report": "Visit Productivity", "proves": ["RPT-03"]}
+  ]},
+  {"title": "Incentive at month end", "summary": "2% at 100% or more of target, 1% at 80 to 99%, none below; no target gives no incentive.", "steps": [
+   {"actor": "Sales Head", "action": "Opens the Incentive report: agent at 100% shows 2%, at 85% shows 1%, at 70% none, no target shows No target", "screen": "report", "report": "Incentive", "proves": ["RPT-08", "RPT-04"]},
+   {"actor": "Owner", "action": "Opens the Performance dashboard and the Efficiency dashboard", "screen": "report", "report": "Performance dashboard", "proves": ["RPT-05"]}
+  ]},
+  {"title": "Debt and daily summary", "summary": "Debt is SAP open balances plus credit invoices minus collections; Supervisor cannot open it.", "steps": [
+   {"actor": "Area Sales Manager", "action": "Opens Debt vs Collection; the SAP part can be 30 minutes old", "screen": "report", "report": "Debt vs Collection", "proves": ["RPT-02"]},
+   {"actor": "Sales Supervisor", "action": "Sees Daily Sales for yesterday on top of the dashboard and filters by beat", "screen": "report", "report": "Daily Sales", "proves": ["RPT-01"]}
+  ]},
+  {"title": "Heat map with a customer without GEO", "summary": "Exception: a customer without GEO is not on the map.", "steps": [
+   {"actor": "Sales Supervisor", "action": "Opens the Customer Master Heat Map, clicks a customer for name, Category and last-30-days sales; a customer without GEO is missing", "screen": "report", "report": "Customer Master Heat Map", "proves": ["RPT-06"]}
+  ]},
+  {"title": "Report views per day unknown", "summary": "Open Item: how many people open reports a day.", "steps": [
+   {"actor": "Owner", "action": "Asked how often managers open reports", "screen": "sheet", "proves": [], "oi": "OI-84"}
+  ]}
+ ]
+}

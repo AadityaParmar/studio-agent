@@ -54,12 +54,12 @@
 | OI-50 | ComplaintId and Customer Complaint Number: why both? Who gives the Customer Complaint Number? | CMP | Enterprise | Owner | | closed | | WS-9 |
 | OI-51 | Complaint Operator and Shift (production fields): who fills them? Sales Agent in the field or the plant? | CMP | Enterprise | Owner | | closed | | WS-9 |
 | OI-52 | Feedback: who gives it (customer?), who sets the questions, fixed list or free? Response type (rating, text)? | FB | Enterprise | Sales Head | | closed | | WS-10 |
-| OI-53 | Reports: full list with audience, measures and filters. RFP-1 gives only names. | RPT | Enterprise | Owner | | open | | |
-| OI-54 | Productive vs Non-Productive call: definition? | RPT | Enterprise | Sales Head | Productive = visit with an order (proposed, to confirm) | open | | |
-| OI-55 | Targets: who sets them, per whom (agent, beat), per period, by value or quantity, per product? | RPT | Enterprise | Sales Head | | open | | |
-| OI-56 | Incentive structure: what are the rules? | RPT | Enterprise | Owner | | open | | |
-| OI-57 | Debt VS Collection: where does customer debt come from (SAP outstanding, neome orders)? | RPT, SAP | Enterprise | Owner | | open | | |
-| OI-58 | Customer Master Heat Map: map of what (customer spread, sales, visits)? | RPT | Enterprise | Sales Head | | open | | |
+| OI-53 | Reports: full list with audience, measures and filters. RFP-1 gives only names. | RPT | Enterprise | Owner | | closed | | WS-11 |
+| OI-54 | Productive vs Non-Productive call: definition? | RPT | Enterprise | Sales Head | Productive = visit with an order (proposed, to confirm) | closed | | WS-11 |
+| OI-55 | Targets: who sets them, per whom (agent, beat), per period, by value or quantity, per product? | RPT | Enterprise | Sales Head | | closed | | WS-11 |
+| OI-56 | Incentive structure: what are the rules? | RPT | Enterprise | Owner | | closed | | WS-11 |
+| OI-57 | Debt VS Collection: where does customer debt come from (SAP outstanding, neome orders)? | RPT, SAP | Enterprise | Owner | | closed | | WS-11 |
+| OI-58 | Customer Master Heat Map: map of what (customer spread, sales, visits)? | RPT | Enterprise | Sales Head | | closed | | WS-11 |
 | OI-59 | Market Specific Communication: what is a "market", what is sent, by whom, through which channel? | COM | Enterprise | Sales Head | | open | | |
 | OI-60 | WhatsApp: which messages, to whom (customer, staff), which WhatsApp Business number and provider, who pays? | COM, VB, CMP | Enterprise | Owner | | closed | | WS-5 |
 | OI-61 | Push notifications and Notice Board: which events alert whom? Who posts notices, to whom? | COM | Enterprise | Owner | | open | | |
@@ -85,3 +85,4 @@
 | OI-81 | How many feedbacks a day? Enterprise did not know [WS-10]. | FB | Enterprise | Sales Head | | open | | |
 | OI-82 | Should each feedback record which customer gave it? | FB | Enterprise | Sales Head | Yes, link the feedback to a Customer (proposed, to confirm) | open | | |
 | OI-83 | Is Feedback (question list, rating per question, no App entity) Configuration on the field sales App or a Custom module? Custom module proposed. | FB | Neomenta | Neomenta | Custom module (proposed, to confirm) | open | | |
+| OI-84 | How many people open reports a day, and how often? Enterprise did not know [WS-11]. | RPT | Enterprise | Sales Head | | open | | |

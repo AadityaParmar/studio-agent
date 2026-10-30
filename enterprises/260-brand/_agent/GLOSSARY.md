@@ -204,7 +204,7 @@ Monthly goal the Sales Head sets per Sales Agent, by value (ZMW) and by quantity
 _Source_: RFP-1, WS-11 · _Status_: proposed · _Used in_: field-ops
 
 **Incentive**:
-Monthly pay-out worked out in a report: 2% of sales value if target 100% or more achieved, 1% if 80 to 99%, none below 80%. Paid through payroll outside neome.
+Monthly pay-out worked out in a report: 2% of sales value if target 100% or more achieved, 1% if 80 to 99%, none below 80%. Paid through payroll, not in the app.
 _Source_: RFP-1, WS-11 · _Status_: proposed · _Used in_: field-ops
 
 **Sales value**:

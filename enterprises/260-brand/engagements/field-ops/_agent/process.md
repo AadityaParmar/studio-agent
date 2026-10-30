@@ -133,7 +133,9 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| view-reports | owner | RPT | View reports | RFP-1 says "Admin" | step | OI-53 | RFP-1 |
+| set-targets | supervisor | RPT | Set monthly targets | Sales Head sets per Sales Agent, by value and quantity per product group; changeable until month end | step | | WS-11 |
+| view-reports | owner | RPT | View reports and dashboards | Owner and managers by scope; filters; Excel export (RFP-1 says "Admin") | step | | RFP-1, WS-11 |
+| view-incentive | owner | RPT | View Incentive | 2% at 100% or more of target, 1% at 80 to 99%, none below | step | | WS-11 |
 
 ## COM — Communication
 
@@ -177,7 +179,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | generate-invoice | deliver-order | | no | WS-5 |
 | place-order | cancel-order | before Invoiced | yes | WS-5 |
 | cancel-order | reduce-inventory | quantity back | yes | WS-4, WS-5 |
-| invoice-in-sap | view-reports | | no | (proposed, to confirm) |
+| invoice-in-sap | view-reports | | no | RFP-1, WS-11 |
 | place-order | send-whatsapp | order confirmation | yes | RFP-1 |
 | sync-masters | add-customer | SAP to neome | yes | RFP-1, IN-1 |
 | add-customer | sync-masters | neome to SAP | yes | RFP-1, IN-1 |
@@ -234,3 +236,5 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | see-todays-beat | add-visit | customer from Beat | no | RFP-1, WS-1 |
 | make-beat-inactive | move-customers | | yes | WS-1 |
 | move-customers | assign-beats | remap employees | yes | (proposed, to confirm) |
+| set-targets | view-reports | targets | no | WS-11 |
+| view-reports | view-incentive | month end | no | WS-11 |
