@@ -162,3 +162,19 @@ _Source_: WS-4 · _Status_: proposed · _Used in_: field-ops
 **Stock in hand**:
 Report of what each Sales Agent holds per product: assigned, sold, returned, in hand.
 _Source_: WS-4 · _Status_: proposed · _Used in_: field-ops
+
+**Van sale**:
+An order the Sales Agent delivers from the van at once: Placed, Invoiced and Delivered in the same visit.
+_Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
+
+**No-order reason**:
+Reason a Sales Agent picks for a visit with no order: Shop closed, Stock enough, No money, Owner not there, Other.
+_Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
+
+**Invoice**:
+Made in neome for an order, numbered INV-<agent code>-<seq>, VAT 16% shown; PDF sent on WhatsApp, printable on a Bluetooth printer; pushed to SAP.
+_Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
+
+**Mobile Money**:
+Payment mode through Airtel or MTN.
+_Source_: WS-5 · _Status_: proposed · _Used in_: field-ops
