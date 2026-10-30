@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: MT
 name: Modern Trade
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # MT — Modern Trade
