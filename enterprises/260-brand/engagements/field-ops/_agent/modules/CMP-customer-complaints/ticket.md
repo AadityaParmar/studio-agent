@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: CMP
 name: Customer Complaints
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # CMP — Customer Complaints
