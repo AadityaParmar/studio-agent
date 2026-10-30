@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: INV
 name: Inventory
 blockedBy: [MST]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # INV — Inventory
