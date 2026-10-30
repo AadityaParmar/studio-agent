@@ -42,9 +42,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| clock-in | employee | ATT | Clock in with photo | Arrival Status OnTime / Late | step | OI-25 | RFP-1 |
-| clock-out | employee | ATT | Clock out with photo | | step | OI-28 | RFP-1 |
-| add-overtime | employee | ATT | Add overtime | | step | OI-27 | RFP-1 |
+| clock-in | employee | ATT | Clock in with photo and GPS | Arrival Status OnTime / Late; works offline | step | | RFP-1, WS-2 |
+| clock-out | employee | ATT | Clock out with photo and GPS | | step | | RFP-1, WS-2 |
+| fix-clock-out | supervisor | ATT | Fix Missed Clock-out time | App clocks out at 23:59 and marks Missed Clock-out | step | | WS-2 |
+| add-overtime | employee | ATT | Request overtime | After 17:00 weekdays or Sunday; Status Pending | step | | RFP-1, WS-2 |
+| approve-overtime | supervisor | ATT | Approve overtime? | Pending → Approved / Rejected; 48 h then Area Sales Manager | decision | | WS-2 |
 
 ## LEAVE — Leave Management
 
@@ -171,6 +173,8 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | assign-beats | add-marketing-visit | | yes | RFP-1 |
 | clock-in | clock-out | | no | RFP-1 |
 | clock-out | add-overtime | | yes | RFP-1 |
+| clock-in | fix-clock-out | no clock out by 23:59 | yes | WS-2 |
+| add-overtime | approve-overtime | | no | WS-2 |
 | apply-leave | approve-leave | | no | RFP-1 |
 | approve-leave | update-leave-balance | approved | no | RFP-1 |
 | mt-check-in | mt-record | | no | RFP-1 |

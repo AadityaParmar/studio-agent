@@ -26,10 +26,10 @@
 | OI-22 | Casual and Sick Leave Balance: who sets them, yearly quota, accrual, carry forward? | MST, LEAVE | Enterprise | Owner | | open | | |
 | OI-23 | Beat Planning: only Employee - Beat Mapping (beats on the Employee), or a day-wise plan of which beat on which day? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
 | OI-24 | Can one Beat be assigned to many employees at once? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
-| OI-25 | Arrival Status On Time / Late: what start time and grace period? Same for all or per employee? | ATT | Enterprise | Owner | | open | | |
-| OI-26 | Camera verification on clock in/out: photo only, or face match? Is location captured too? | ATT | Enterprise | Owner | | open | | |
-| OI-27 | Overtime: RFP-1 describes it with the Attendance text ("Records clock-in/out times along with camera verification"). What is Overtime for, who approves it, what Status values? | ATT | Enterprise | Owner | | open | | |
-| OI-28 | What happens when an employee forgets to clock out? | ATT | Enterprise | Sales Supervisor | | open | | |
+| OI-25 | Arrival Status On Time / Late: what start time and grace period? Same for all or per employee? | ATT | Enterprise | Owner | | closed | | WS-2 |
+| OI-26 | Camera verification on clock in/out: photo only, or face match? Is location captured too? | ATT | Enterprise | Owner | | closed | | WS-2 |
+| OI-27 | Overtime: RFP-1 describes it with the Attendance text ("Records clock-in/out times along with camera verification"). What is Overtime for, who approves it, what Status values? | ATT | Enterprise | Owner | | closed | | WS-2 |
+| OI-28 | What happens when an employee forgets to clock out? | ATT | Enterprise | Sales Supervisor | | closed | | WS-2 |
 | OI-29 | Who approves leave: the employee's Sales Supervisor? Escalation if not acted on? | LEAVE | Enterprise | Owner | Employee's Sales Supervisor (proposed, to confirm) | open | | |
 | OI-30 | Half Day leave takes 0.5 day from balance? Leave beyond balance allowed (unpaid)? | LEAVE | Enterprise | Owner | | open | | |
 | OI-31 | Do leave days count weekly offs and holidays? Is there a holiday list? | LEAVE | Enterprise | Owner | | open | | |

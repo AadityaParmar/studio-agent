@@ -19,7 +19,7 @@ A signed-off BRD for Field Operations.
 |---|---|---|
 | MST | Masters | resolved |
 | BEAT | Beat Planning | resolved |
-| ATT | Attendance | claimed |
+| ATT | Attendance | resolved |
 | LEAVE | Leave Management | open |
 | INV | Inventory | open |
 | VB | Visit Book | open |
@@ -58,3 +58,4 @@ A signed-off BRD for Field Operations.
 - 2026-10-30: resolve-module: BEAT claimed by Aditya Parmar.
 - 2026-10-30: resolve-module: BEAT resolved.
 - 2026-10-30: resolve-module: ATT claimed by Aditya Parmar.
+- 2026-10-30: resolve-module: ATT resolved.

@@ -1,0 +1,72 @@
+{
+  "entity": "Overtime",
+  "roles": [
+    {"role": "Employee", "person": "Mwila (Sales Agent)", "reqs": ["ATT-01", "ATT-02", "ATT-03", "ATT-06"]},
+    {"role": "Sales Supervisor", "person": "Bwalya (Sales Supervisor)", "reqs": ["ATT-03", "ATT-04", "ATT-05"]},
+    {"role": "Area Sales Manager", "person": "Natasha (Area Sales Manager)", "reqs": ["ATT-03"]},
+    {"role": "Regional Sales Manager", "person": "Temba (Regional Sales Manager)", "reqs": ["ATT-04"]},
+    {"role": "Sales Head", "person": "Chola (Sales Head)", "reqs": ["ATT-04"]},
+    {"role": "Owner", "person": "Chanda (Owner)", "reqs": ["ATT-04"]}
+  ],
+  "fields": [
+    {"entity": "Attendance", "name": "In Camera", "reqs": ["ATT-01"]},
+    {"entity": "Attendance", "name": "In Location", "reqs": ["ATT-01"]},
+    {"entity": "Attendance", "name": "Out Camera", "reqs": ["ATT-01"]},
+    {"entity": "Attendance", "name": "Out Location", "reqs": ["ATT-01"]},
+    {"entity": "Attendance", "name": "Arrival Status", "reqs": ["ATT-02"]},
+    {"entity": "Attendance", "name": "Clock Out Mark", "reqs": ["ATT-05"]},
+    {"entity": "Overtime", "name": "Status", "reqs": ["ATT-03"]}
+  ],
+  "transitions": [
+    {"from": "pending", "to": "approved", "action": "Approve Overtime", "by": ["Sales Supervisor", "Area Sales Manager"], "reqs": ["ATT-03"], "rules": ["Overtime approval", "Overtime escalation"]},
+    {"from": "pending", "to": "rejected", "action": "Reject Overtime", "by": ["Sales Supervisor", "Area Sales Manager"], "reqs": ["ATT-03"], "rules": ["Overtime approval"]}
+  ],
+  "rules": [
+    {"rule": "Late", "reqs": ["ATT-02"]},
+    {"rule": "Photo and GPS", "reqs": ["ATT-01", "ATT-06"]},
+    {"rule": "Missed Clock-out", "reqs": ["ATT-05"]},
+    {"rule": "Overtime approval", "reqs": ["ATT-03"]},
+    {"rule": "Overtime escalation", "reqs": ["ATT-03"]}
+  ],
+  "reports": [
+    {"name": "Attedance Sheet/Report", "reqs": ["ATT-04"]},
+    {"name": "Overtime sheet/report", "reqs": ["ATT-04"]}
+  ],
+  "rows": [
+    {"id": "OT-01", "status": "pending", "values": {"Date": "2026-10-27", "Employee": "Mwila (Sales Agent)", "From Time": "17:00", "To Time": "19:30", "Remarks": "Late delivery at depot", "Status": "Pending"},
+     "children": {"Attendance": [{"Employee": "Mwila (Sales Agent)", "Clock In": "2026-10-27 07:58", "In Camera": "selfie-0727.jpg", "In Location": "Lusaka depot", "Clock Out": "2026-10-27 19:35", "Out Camera": "selfie-0727-out.jpg", "Out Location": "Lusaka depot", "Arrival Status": "OnTime", "Clock Out Mark": "Normal"}]},
+     "log": [["2026-10-27 19:40", "Mwila", "Requested Overtime"]]},
+    {"id": "OT-02", "status": "approved", "values": {"Date": "2026-10-25", "Employee": "Joyce (Sales Agent)", "From Time": "17:00", "To Time": "18:00", "Remarks": "Stock count", "Status": "Approved"},
+     "children": {"Attendance": [{"Employee": "Joyce (Sales Agent)", "Clock In": "2026-10-25 08:20", "In Camera": "selfie-1025.jpg", "In Location": "Kabwata", "Clock Out": "2026-10-25 18:05", "Out Camera": "selfie-1025-out.jpg", "Out Location": "Kabwata", "Arrival Status": "Late", "Clock Out Mark": "Normal"}]},
+     "log": [["2026-10-26 09:00", "Bwalya", "Approved Overtime"]]},
+    {"id": "OT-03", "status": "rejected", "values": {"Date": "2026-10-24", "Employee": "Kalu (Tricycle Rider)", "From Time": "17:00", "To Time": "21:00", "Remarks": "Extra door to door", "Status": "Rejected"},
+     "children": {"Attendance": [{"Employee": "Kalu (Tricycle Rider)", "Clock In": "2026-10-24 08:00", "In Camera": "selfie-1024.jpg", "In Location": "Chilenje", "Clock Out": "2026-10-24 23:59", "Arrival Status": "OnTime", "Clock Out Mark": "Missed Clock-out"}]},
+     "log": [["2026-10-25 08:30", "Bwalya", "Rejected Overtime"]]},
+    {"id": "OT-04", "status": "pending", "values": {"Date": "2026-10-26", "Employee": "Mulenga (Sales Agent)", "From Time": "08:00", "To Time": "12:00", "Remarks": "Sunday market day", "Status": "Pending"},
+     "children": {"Attendance": [{"Employee": "Mulenga (Sales Agent)", "Clock In": "2026-10-26 08:05", "In Camera": "selfie-1026.jpg", "In Location": "Matero", "Arrival Status": "OnTime", "Clock Out Mark": "Normal"}]},
+     "log": [["2026-10-26 12:10", "Mulenga", "Requested Overtime"], ["2026-10-28 12:15", "system", "48 hours passed, sent to Area Sales Manager"]]}
+  ],
+  "scenarios": [
+    {"title": "Clock in late, with photo and GPS", "summary": "Employee clocks in after 08:15; photo and GPS are taken; Arrival Status is Late.", "steps": [
+      {"actor": "Employee", "action": "Clocks in at 08:20: selfie and GPS taken, Arrival Status shows Late", "row": "OT-02", "screen": "record", "proves": ["ATT-01", "ATT-02"]},
+      {"actor": "Employee", "action": "Clocks in on a phone with no network; the record saves and syncs when online", "row": "OT-01", "screen": "rules", "proves": ["ATT-06"]}
+    ]},
+    {"title": "Overtime approved", "summary": "Employee requests Overtime; Sales Supervisor approves.", "steps": [
+      {"actor": "Employee", "action": "Requests Overtime 17:00 to 19:30 after a late delivery; Status Pending", "row": "OT-01", "screen": "record", "proves": ["ATT-03"]},
+      {"actor": "Sales Supervisor", "action": "Approves the Overtime", "row": "OT-01", "transition": {"from": "pending", "to": "approved"}, "proves": ["ATT-03"]}
+    ]},
+    {"title": "Overtime rejected", "summary": "Sales Supervisor rejects; the Employee adds a new request if needed.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Rejects a 2.5 hour Overtime of Mwila (not needed that day)", "row": "OT-01", "transition": {"from": "pending", "to": "rejected"}, "proves": ["ATT-03"]}
+    ]},
+    {"title": "Supervisor does not act in 48 hours", "summary": "Overtime goes to the Area Sales Manager.", "steps": [
+      {"actor": "Area Sales Manager", "action": "Gets the Overtime after 48 hours and approves it", "row": "OT-04", "transition": {"from": "pending", "to": "approved"}, "proves": ["ATT-03"]}
+    ]},
+    {"title": "Missed Clock-out", "summary": "App clocks out at 23:59; Supervisor fixes the time.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Sees Kalu's Clock Out 23:59 marked Missed Clock-out and changes it to the real time", "row": "OT-03", "screen": "record", "proves": ["ATT-05"]}
+    ]},
+    {"title": "Attendance and Overtime reports", "summary": "Supervisor and above check clock in/out and Overtime.", "steps": [
+      {"actor": "Sales Supervisor", "action": "Opens the Attendance sheet for a date, filters by agent, exports to Excel", "screen": "report", "report": "Attedance Sheet/Report", "proves": ["ATT-04"]},
+      {"actor": "Sales Head", "action": "Opens the Overtime report with Status", "screen": "report", "report": "Overtime sheet/report", "proves": ["ATT-04"]}
+    ]}
+  ]
+}
