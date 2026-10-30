@@ -67,6 +67,18 @@ a.src{text-decoration:none}
 /* Mermaid SVG keeps its own look: undo page rules whose selectors also match Mermaid class names or tags.
    Mermaid's own #id-scoped rules still win (higher specificity). A test keeps this list complete. */
 .diagram svg .label{font-family:inherit;font-size:inherit;letter-spacing:normal;text-transform:none;margin:0;color:inherit}
+/* Zoom (screen, script on): toolbar + scroll box; page.js sets the SVG width. */
+.diagram.zoomable{overflow:visible;padding:0;text-align:left}
+.diagram .zbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--line-subtle)}
+.diagram .zbar button{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line-strong);background:#fff;border-radius:999px;padding:4px 11px;cursor:pointer;color:var(--ink-700);min-width:30px}
+.diagram .zbar button:hover{border-color:var(--ink-900)}
+.diagram .zbar .zpct{font-family:var(--mono);font-size:11.5px;color:var(--ink-700);min-width:44px;text-align:center}
+.diagram .zbar .zhint{font-size:12px;color:var(--ink-400);margin-left:auto}
+.diagram .zview{overflow:auto;max-height:80vh;padding:16px;cursor:grab}
+.diagram .zview.drag{cursor:grabbing;user-select:none}
+.diagram .zview svg{display:block;margin:0 auto;max-width:none}
+.diagram.zoomable:fullscreen{background:#fff;display:flex;flex-direction:column}
+.diagram.zoomable:fullscreen .zview{max-height:none;flex:1}
 .empty{color:var(--ink-400);font-size:13.5px}
 .logo{display:flex;gap:10px;align-items:center;font-weight:600;font-size:20px;color:var(--ink-900)}
 .logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--neome),var(--neome-deep));display:block}
@@ -1221,19 +1233,21 @@ td.plan-weeks{font-family:var(--mono);font-size:12px;white-space:nowrap}
 <div class="signbox"><div class="card"><div class="label">For 260 Brands</div><div class="signline"><span class="label">Name</span><span class="line"></span></div><div class="signline"><span class="label">Role</span><span class="line"></span></div><div class="signline"><span class="label">Signature</span><span class="line"></span></div><div class="signline"><span class="label">Date</span><span class="line"></span></div></div><div class="card"><div class="label">For Neomenta</div><div class="signline"><span class="label">Name</span><span class="line"></span></div><div class="signline"><span class="label">Role</span><span class="line"></span></div><div class="signline"><span class="label">Signature</span><span class="line"></span></div><div class="signline"><span class="label">Date</span><span class="line"></span></div></div></div>
 </section></div>
 <script>
-// BRD page script: sidebar nav, in-page jumps and Requirement filters only.
+// BRD page script: sidebar nav, in-page jumps, Requirement filters and diagram zoom only.
 // All content is in the HTML; with script off every view shows one after another.
 (function () {
   var root = document.documentElement;
   root.classList.add("js");
   var views = document.querySelectorAll("#screen .view");
   var links = document.querySelectorAll("#screen aside a[data-view]");
+  var zooms = []; // diagram re-fit callbacks; a hidden view has no width until shown
 
   function show(id) {
     var found = false;
     views.forEach(function (v) { var on = v.id === id; v.classList.toggle("on", on); if (on) found = true; });
     if (!found && views.length) { views[0].classList.add("on"); id = views[0].id; }
     links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("data-view") === id); });
+    zooms.forEach(function (f) { f(); });
   }
 
   // Shows the view holding the target (a view, a register row, a Source) and scrolls to it.
@@ -1274,6 +1288,93 @@ td.plan-weeks{font-family:var(--mono);font-size:12px;white-space:nowrap}
       if (none) none.classList.toggle("on", shown === 0);
     });
   });
+
+  // Diagram zoom: buttons, Ctrl/⌘ + wheel (or pinch) around the pointer, drag to pan, full screen.
+  // Zoom 1 = the whole diagram fits the box; the SVG is redrawn at the new width, so text stays sharp.
+  document.querySelectorAll("#screen figure.diagram").forEach(function (fig) {
+    var svg = fig.querySelector("svg");
+    var vb = svg && svg.viewBox && svg.viewBox.baseVal;
+    if (!vb || !vb.width || !vb.height) return;
+    fig.classList.add("zoomable");
+    var bar = document.createElement("div");
+    bar.className = "zbar";
+    bar.innerHTML =
+      '<button type="button" data-z="out" title="Zoom out">−</button><span class="zpct"></span>' +
+      '<button type="button" data-z="in" title="Zoom in">+</button><button type="button" data-z="fit">Fit</button>' +
+      '<button type="button" data-z="full">Full screen</button><span class="zhint">Ctrl/⌘ + scroll to zoom · drag to move</span>';
+    var view = document.createElement("div");
+    view.className = "zview";
+    fig.insertBefore(bar, svg);
+    view.appendChild(svg);
+    fig.appendChild(view);
+    var pct = bar.querySelector(".zpct");
+    var z = 1, MIN = 0.5, MAX = 12;
+
+    function fitWidth() {
+      var cs = getComputedStyle(view);
+      var w = view.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var h = view.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var maxH = parseFloat(cs.maxHeight);
+      if (!document.fullscreenElement && maxH) h = maxH - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      return Math.max(50, Math.min(w, vb.width, (h * vb.width) / vb.height));
+    }
+    // ax, ay: point in the box (client px) that stays put while zooming.
+    function zoomTo(next, ax, ay) {
+      next = Math.min(MAX, Math.max(MIN, next));
+      if (!view.clientWidth) return;
+      var r = view.getBoundingClientRect();
+      if (ax == null) { ax = r.width / 2; ay = r.height / 2; }
+      var before = svg.getBoundingClientRect();
+      var px = (view.scrollLeft + ax - (before.left - r.left + view.scrollLeft)) / before.width;
+      var py = (view.scrollTop + ay - (before.top - r.top + view.scrollTop)) / before.height;
+      z = next;
+      svg.style.width = Math.round(fitWidth() * z) + "px";
+      svg.style.height = "auto";
+      var after = svg.getBoundingClientRect();
+      view.scrollLeft = after.left - r.left + view.scrollLeft + px * after.width - ax;
+      view.scrollTop = after.top - r.top + view.scrollTop + py * after.height - ay;
+      pct.textContent = Math.round(z * 100) + "%";
+    }
+    zoomTo(1);
+    zooms.push(function () { zoomTo(z); });
+
+    bar.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-z]");
+      if (!b) return;
+      var k = b.getAttribute("data-z");
+      if (k === "in") zoomTo(z * 1.25);
+      else if (k === "out") zoomTo(z / 1.25);
+      else if (k === "fit") { zoomTo(1); view.scrollLeft = 0; view.scrollTop = 0; }
+      else if (k === "full") {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (fig.requestFullscreen) fig.requestFullscreen();
+      }
+    });
+    view.addEventListener("wheel", function (e) {
+      if (!e.ctrlKey && !e.metaKey) return;
+      e.preventDefault();
+      var r = view.getBoundingClientRect();
+      zoomTo(z * Math.exp(-e.deltaY * 0.002), e.clientX - r.left, e.clientY - r.top);
+    }, { passive: false });
+    var drag = null;
+    view.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0 || e.target.closest("a")) return;
+      drag = { x: e.clientX, y: e.clientY, l: view.scrollLeft, t: view.scrollTop };
+      view.classList.add("drag");
+      view.setPointerCapture(e.pointerId);
+    });
+    view.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      view.scrollLeft = drag.l - (e.clientX - drag.x);
+      view.scrollTop = drag.t - (e.clientY - drag.y);
+    });
+    function stop() { drag = null; view.classList.remove("drag"); }
+    view.addEventListener("pointerup", stop);
+    view.addEventListener("pointercancel", stop);
+    document.addEventListener("fullscreenchange", function () { if (document.fullscreenElement === fig || !document.fullscreenElement) zoomTo(z); });
+  });
+
+  window.addEventListener("resize", function () { zooms.forEach(function (f) { f(); }); });
 
   jump(location.hash, false);
 })();

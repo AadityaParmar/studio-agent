@@ -1,7 +1,5 @@
 # Map: Field Operations
 
-lock: Aditya Parmar · build-brd · 2026-10-30T11:53Z
-
 ## Destination
 
 A signed-off BRD for Field Operations.
