@@ -20,8 +20,8 @@
 | OI-16 | Customer Code: made by neome, typed in, or taken from SAP? | MST, SAP | Enterprise | Owner | | open | | |
 | OI-17 | Who adds and edits each master? Diagrams show only the Owner; IN-1 says customers, products and employees can also be created in neome. Can Sales Agents add customers? | MST | Enterprise | Owner | | open | | |
 | OI-18 | Product Price: one price per product, or prices by customer category or area? Tax on price? | MST, VB | Enterprise | Owner | | closed | | WS-5 |
-| OI-19 | Who maintains the Competitor Master? The "Competitor" diagram shows a Sales Agent: Add Visit → Add Products from Product Master. What does that flow mean? | MST, MT | Enterprise | Sales Supervisor | | open | | |
-| OI-20 | Are Stores (modern trade) also Customers in the Customer Master, or a separate list only? | MST, MT | Enterprise | Sales Head | | open | | |
+| OI-19 | Who maintains the Competitor Master? The "Competitor" diagram shows a Sales Agent: Add Visit → Add Products from Product Master. What does that flow mean? | MST, MT | Enterprise | Sales Supervisor | | closed | | WS-8 |
+| OI-20 | Are Stores (modern trade) also Customers in the Customer Master, or a separate list only? | MST, MT | Enterprise | Sales Head | | closed | | WS-8 |
 | OI-21 | Customer GEO Tagging: who captures the location and when (on adding the customer, on first visit)? Who can change it? | MST | Enterprise | Sales Supervisor | | open | | |
 | OI-22 | Casual and Sick Leave Balance: who sets them, yearly quota, accrual, carry forward? | MST, LEAVE | Enterprise | Owner | | closed | | WS-3 |
 | OI-23 | Beat Planning: only Employee - Beat Mapping (beats on the Employee), or a day-wise plan of which beat on which day? | BEAT | Enterprise | Sales Supervisor | | closed | | WS-1 |
@@ -47,9 +47,9 @@
 | OI-43 | Marketing Visit: diagram picks a customer (Beat Master, Route Master); form types Customer name, mobile, address, email. Which? Visit type values? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
 | OI-44 | School, Farm and Door to door Visits: who does them, what is their goal, and what is "D2D - Nurtamilk"? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
 | OI-45 | Farm and Door to door Visit "Visitor name": is it the person visited? Gender values? | MKT | Enterprise | Sales Head | | closed | | WS-7 |
-| OI-46 | Who fills Modern Trade: Sales Agent (RFP-1 text and overall flow chart) or Supervisor (Modern Trade diagram)? What can Supervisor review do (approve, reject, comment)? | MT | Enterprise | Sales Head | | open | | |
-| OI-47 | Modern Trade Check In / Check Out: time and location? Must the user be at the Store? | MT | Enterprise | Sales Supervisor | | open | | |
-| OI-48 | Closing stock from Modern Trade: report only, or does it feed stock in SAP / ERP? | MT, SAP | Enterprise | Owner | | open | | |
+| OI-46 | Who fills Modern Trade: Sales Agent (RFP-1 text and overall flow chart) or Supervisor (Modern Trade diagram)? What can Supervisor review do (approve, reject, comment)? | MT | Enterprise | Sales Head | | closed | | WS-8 |
+| OI-47 | Modern Trade Check In / Check Out: time and location? Must the user be at the Store? | MT | Enterprise | Sales Supervisor | | closed | | WS-8 |
+| OI-48 | Closing stock from Modern Trade: report only, or does it feed stock in SAP / ERP? | MT, SAP | Enterprise | Owner | | closed | | WS-8 |
 | OI-49 | Customer complaint resolution: who resolves, what statuses, how fast, how is the customer told? | CMP | Enterprise | Owner | | open | | |
 | OI-50 | ComplaintId and Customer Complaint Number: why both? Who gives the Customer Complaint Number? | CMP | Enterprise | Owner | | open | | |
 | OI-51 | Complaint Operator and Shift (production fields): who fills them? Sales Agent in the field or the plant? | CMP | Enterprise | Owner | | open | | |
@@ -65,7 +65,7 @@
 | OI-61 | Push notifications and Notice Board: which events alert whom? Who posts notices, to whom? | COM | Enterprise | Owner | | open | | |
 | OI-62 | Ask Neome: what should users ask, and which roles get it? | AI | Enterprise | Owner | | open | | |
 | OI-63 | NLP form filling: which forms, voice or text, which languages? | AI | Enterprise | Owner | | open | | |
-| OI-64 | AI planogram suggestions: from what input (Modern Trade shelf images?), what output, who uses it? | AI, MT | Enterprise | Sales Head | | open | | |
+| OI-64 | AI planogram suggestions: from what input (Modern Trade shelf images?), what output, who uses it? | AI, MT | Enterprise | Sales Head | | closed | | WS-8 |
 | OI-65 | Customers, products and employees made in neome push to SAP. Need any check or approval before they reach SAP? | SAP, MST | Enterprise | Owner | | open | | |
 | OI-66 | Who in 260 Brands signs off this BRD? RFP-1 signature line is blank. | All | Enterprise | Owner | | open | | |
 | OI-67 | Which currency do orders, payments and invoices use? Which languages must the app support? No Source says. | All | Enterprise | Owner | | open | | |
@@ -79,3 +79,4 @@
 | OI-75 | Confirm the proposed priority, Scope tag and acceptance criteria of: MST-01, MST-02, MST-03, MST-04, MST-05, MST-06, MST-07, MST-08 | All | Enterprise | Owner | As proposed in the BRD (proposed, to confirm) | open | | |
 | OI-76 | How long must visit, order and invoice records be kept? Enterprise did not know [WS-5]. | VB | Enterprise | Owner | | open | | |
 | OI-77 | How many Marketing Visits a day, and in peak season? Enterprise did not know [WS-7]. | MKT | Enterprise | Sales Head | | open | | |
+| OI-78 | How many Modern Trade updates a day, and how many Stores? Enterprise did not know [WS-8]. | MT | Enterprise | Sales Head | | open | | |

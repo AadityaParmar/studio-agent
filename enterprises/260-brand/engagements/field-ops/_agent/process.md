@@ -106,10 +106,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| mt-check-in | agent | MT | Check In at Store | | step | OI-47 | RFP-1 |
-| mt-record | agent | MT | Shelf images, stock count, competitor activities | | step | OI-46 | RFP-1 |
-| mt-check-out | agent | MT | Check out | Summary | step | OI-47 | RFP-1 |
-| mt-review | supervisor | MT | Supervisor review | | step | OI-46 | RFP-1 |
+| mt-check-in | agent | MT | Check In at Store | Store = Customer flagged Modern Trade; GPS within 200 m | step | | RFP-1, WS-8 |
+| mt-record | agent | MT | Shelf images, stock count, competitor activities | Up to 5 images; offline | step | | RFP-1, WS-8 |
+| mt-check-out | agent | MT | Check out and submit | Summary; GPS within 200 m; status Submitted | step | | RFP-1, WS-8 |
+| mt-review | supervisor | MT | Supervisor review | Approve (final) or Send back with comment | step | | RFP-1, WS-8 |
 
 ## CMP — Customer Complaints
 
@@ -183,8 +183,8 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-category | add-product | | yes | RFP-1 |
 | add-category | add-competitor | | yes | RFP-1 |
 | add-customer | geo-tag-customer | | yes | IN-1 |
-| add-store | mt-check-in | | yes | RFP-1 |
-| add-competitor | mt-record | competitor activities | yes | RFP-1 |
+| add-store | mt-check-in | | yes | RFP-1, WS-8 |
+| add-competitor | mt-record | competitor activities | yes | RFP-1, WS-8 |
 | sync-stock | view-depot-stock | SAP to neome, every 30 min | no | WS-4 |
 | view-depot-stock | assign-inventory | | no | WS-4 |
 | assign-inventory | stock-return | unsold stock, end of day | yes | RFP-1, WS-4 |
@@ -214,9 +214,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | apply-leave | cancel-leave | | yes | WS-3 |
 | approve-leave | update-leave-balance | approved | no | RFP-1, WS-3 |
 | approve-leave | notify-leave-decision | approved or rejected | no | WS-3 |
-| mt-check-in | mt-record | | no | RFP-1 |
-| mt-record | mt-check-out | | no | RFP-1 |
-| mt-check-out | mt-review | | no | RFP-1 |
+| mt-check-in | mt-record | | no | RFP-1, WS-8 |
+| mt-record | mt-check-out | | no | RFP-1, WS-8 |
+| mt-check-out | mt-review | | no | RFP-1, WS-8 |
+| mt-review | mt-record | sent back with comment | yes | WS-8 |
 | mt-record | planogram-suggest | shelf images | yes | (proposed, to confirm) |
 | assign-beats | plan-week | | no | WS-1 |
 | plan-week | see-todays-beat | | no | WS-1 |

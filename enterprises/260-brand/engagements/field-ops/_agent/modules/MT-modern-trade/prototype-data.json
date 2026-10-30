@@ -1,0 +1,436 @@
+{
+ "entity": "Modern Trade",
+ "roles": [
+  {
+   "role": "Sales Agent",
+   "person": "Bwalya",
+   "reqs": [
+    "MT-01",
+    "MT-02",
+    "MT-03",
+    "MT-04",
+    "MT-06"
+   ],
+   "oi": "OI-78"
+  },
+  {
+   "role": "Sales Supervisor",
+   "person": "Mutale",
+   "reqs": [
+    "MT-04",
+    "MT-05",
+    "MT-06"
+   ]
+  },
+  {
+   "role": "Sales Head",
+   "person": "Ruth",
+   "reqs": [
+    "MT-06"
+   ]
+  }
+ ],
+ "fields": [
+  {
+   "entity": "Modern Trade",
+   "name": "Store",
+   "reqs": [
+    "MT-01"
+   ]
+  },
+  {
+   "entity": "Modern Trade",
+   "name": "Check In",
+   "reqs": [
+    "MT-01"
+   ]
+  },
+  {
+   "entity": "Modern Trade",
+   "name": "Shelf images",
+   "reqs": [
+    "MT-02"
+   ]
+  },
+  {
+   "entity": "Stock count",
+   "name": "Total Qty",
+   "reqs": [
+    "MT-03"
+   ]
+  },
+  {
+   "entity": "Competitor activity",
+   "name": "Product name",
+   "reqs": [
+    "MT-04"
+   ]
+  },
+  {
+   "entity": "Modern Trade",
+   "name": "Supervisor review",
+   "reqs": [
+    "MT-05"
+   ]
+  }
+ ],
+ "transitions": [
+  {
+   "from": "submitted",
+   "to": "approved",
+   "action": "Approve",
+   "by": [
+    "Sales Supervisor"
+   ],
+   "reqs": [
+    "MT-05"
+   ]
+  },
+  {
+   "from": "submitted",
+   "to": "sent-back",
+   "action": "Send back",
+   "by": [
+    "Sales Supervisor"
+   ],
+   "reqs": [
+    "MT-05"
+   ],
+   "rules": [
+    "Send back needs comment"
+   ]
+  },
+  {
+   "from": "sent-back",
+   "to": "submitted",
+   "action": "Submit again",
+   "by": [
+    "Sales Agent"
+   ],
+   "reqs": [
+    "MT-05"
+   ]
+  }
+ ],
+ "rules": [
+  {
+   "rule": "Near the Store",
+   "reqs": [
+    "MT-01"
+   ]
+  },
+  {
+   "rule": "Send back needs comment",
+   "reqs": [
+    "MT-05"
+   ]
+  },
+  {
+   "rule": "No change after submit",
+   "reqs": [
+    "MT-05"
+   ]
+  },
+  {
+   "rule": "Total Qty",
+   "reqs": [
+    "MT-03"
+   ]
+  },
+  {
+   "rule": "Competitor product",
+   "reqs": [
+    "MT-04"
+   ]
+  }
+ ],
+ "reports": [
+  {
+   "name": "Modern Trade Sheet",
+   "reqs": [
+    "MT-06"
+   ]
+  },
+  {
+   "name": "Closing Stock Inventory",
+   "reqs": [
+    "MT-06"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "id": "MTU-501",
+   "status": "submitted",
+   "values": {
+    "Date": "2026-11-02",
+    "Employee": "Bwalya",
+    "Store": "Shoprite Manda Hill",
+    "Check In": "2026-11-02 09:05",
+    "Check out": "2026-11-02 09:50",
+    "Summary": "Shelf OK, two gaps on Nurtamilk 1L",
+    "Supervisor name": "Mutale",
+    "Supervisor review": ""
+   },
+   "children": {
+    "Stock count": [
+     {
+      "Product code": "NM-1L",
+      "Shelf Stock Qty": 10,
+      "Backroom Qty": 5,
+      "Total Qty": 15,
+      "Expiry Date": "2026-12-10"
+     },
+     {
+      "Product code": "NJ-500",
+      "Shelf Stock Qty": 6,
+      "Backroom Qty": 0,
+      "Total Qty": 6,
+      "Expiry Date": "2026-11-30"
+     }
+    ],
+    "Competitor activity": [
+     {
+      "Competitor brand": "Lakeland",
+      "Product name": "Lakeland Milk 1L",
+      "Price": "Yes",
+      "Promo running": "No"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MTU-502",
+   "status": "submitted",
+   "values": {
+    "Date": "2026-11-02",
+    "Employee": "Bwalya",
+    "Store": "Pick n Pay Kabulonga",
+    "Check In": "2026-11-02 09:05",
+    "Check out": "2026-11-02 11:20",
+    "Summary": "Shelf OK, two gaps on Nurtamilk 1L",
+    "Supervisor name": "Mutale",
+    "Supervisor review": ""
+   },
+   "children": {
+    "Stock count": [
+     {
+      "Product code": "NM-1L",
+      "Shelf Stock Qty": 10,
+      "Backroom Qty": 5,
+      "Total Qty": 15,
+      "Expiry Date": "2026-12-10"
+     },
+     {
+      "Product code": "NJ-500",
+      "Shelf Stock Qty": 6,
+      "Backroom Qty": 0,
+      "Total Qty": 6,
+      "Expiry Date": "2026-11-30"
+     }
+    ],
+    "Competitor activity": [
+     {
+      "Competitor brand": "Lakeland",
+      "Product name": "Lakeland Milk 1L",
+      "Price": "Yes",
+      "Promo running": "No"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MTU-503",
+   "status": "sent-back",
+   "values": {
+    "Date": "2026-11-03",
+    "Employee": "Bwalya",
+    "Store": "Choppies Matero",
+    "Check In": "2026-11-03 09:05",
+    "Check out": "2026-11-03 10:40",
+    "Summary": "Shelf OK, two gaps on Nurtamilk 1L",
+    "Supervisor name": "Mutale",
+    "Supervisor review": "Add expiry dates for juice"
+   },
+   "children": {
+    "Stock count": [
+     {
+      "Product code": "NM-1L",
+      "Shelf Stock Qty": 10,
+      "Backroom Qty": 5,
+      "Total Qty": 15,
+      "Expiry Date": "2026-12-10"
+     },
+     {
+      "Product code": "NJ-500",
+      "Shelf Stock Qty": 6,
+      "Backroom Qty": 0,
+      "Total Qty": 6,
+      "Expiry Date": "2026-11-30"
+     }
+    ],
+    "Competitor activity": [
+     {
+      "Competitor brand": "Lakeland",
+      "Product name": "Lakeland Milk 1L",
+      "Price": "Yes",
+      "Promo running": "No"
+     }
+    ]
+   }
+  },
+  {
+   "id": "MTU-504",
+   "status": "approved",
+   "values": {
+    "Date": "2026-11-03",
+    "Employee": "Bwalya",
+    "Store": "Shoprite Cairo Road",
+    "Check In": "2026-11-03 09:05",
+    "Check out": "2026-11-03 14:15",
+    "Summary": "Shelf OK, two gaps on Nurtamilk 1L",
+    "Supervisor name": "Mutale",
+    "Supervisor review": "Good, approved"
+   },
+   "children": {
+    "Stock count": [
+     {
+      "Product code": "NM-1L",
+      "Shelf Stock Qty": 10,
+      "Backroom Qty": 5,
+      "Total Qty": 15,
+      "Expiry Date": "2026-12-10"
+     },
+     {
+      "Product code": "NJ-500",
+      "Shelf Stock Qty": 6,
+      "Backroom Qty": 0,
+      "Total Qty": 6,
+      "Expiry Date": "2026-11-30"
+     }
+    ],
+    "Competitor activity": [
+     {
+      "Competitor brand": "Lakeland",
+      "Product name": "Lakeland Milk 1L",
+      "Price": "Yes",
+      "Promo running": "No"
+     }
+    ]
+   }
+  }
+ ],
+ "scenarios": [
+  {
+   "title": "Update approved",
+   "summary": "Agent records a Store visit; Supervisor approves.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Check In at Shoprite Manda Hill within 200 m, add shelf images, stock count and a competitor price, check out and submit",
+     "row": "MTU-501",
+     "screen": "record",
+     "proves": [
+      "MT-01",
+      "MT-02",
+      "MT-03",
+      "MT-04"
+     ],
+     "oi": "OI-78"
+    },
+    {
+     "actor": "Sales Supervisor",
+     "action": "Review the update and approve it; it is final",
+     "row": "MTU-501",
+     "transition": {
+      "from": "submitted",
+      "to": "approved"
+     },
+     "proves": [
+      "MT-05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Update sent back",
+   "summary": "Supervisor sends back with a comment; agent fixes and submits again.",
+   "steps": [
+    {
+     "actor": "Sales Supervisor",
+     "action": "Send back with the comment 'Add expiry dates'; send back without a comment is refused",
+     "row": "MTU-502",
+     "transition": {
+      "from": "submitted",
+      "to": "sent-back"
+     },
+     "proves": [
+      "MT-05"
+     ]
+    },
+    {
+     "actor": "Sales Agent",
+     "action": "Edit the update and submit again",
+     "row": "MTU-502",
+     "transition": {
+      "from": "sent-back",
+      "to": "submitted"
+     },
+     "proves": [
+      "MT-05"
+     ]
+    },
+    {
+     "actor": "Sales Supervisor",
+     "action": "Approve the update",
+     "row": "MTU-502",
+     "transition": {
+      "from": "submitted",
+      "to": "approved"
+     },
+     "proves": [
+      "MT-05"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Too far from the Store",
+   "summary": "Check In is refused when the agent is over 200 m away.",
+   "steps": [
+    {
+     "actor": "Sales Agent",
+     "action": "Try to check in 350 m from the Store; refused",
+     "screen": "rules",
+     "proves": [
+      "MT-01"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Closing Stock Inventory",
+   "summary": "Supervisor reads stock per Store; nothing goes to SAP.",
+   "steps": [
+    {
+     "actor": "Sales Supervisor",
+     "action": "Open Closing Stock Inventory, filter by date and Store, export to Excel",
+     "screen": "report",
+     "report": "Closing Stock Inventory",
+     "proves": [
+      "MT-06"
+     ]
+    },
+    {
+     "actor": "Sales Head",
+     "action": "Open the Modern Trade Sheet, filter by area and agent",
+     "screen": "report",
+     "report": "Modern Trade Sheet",
+     "proves": [
+      "MT-06"
+     ]
+    }
+   ]
+  }
+ ]
+}
