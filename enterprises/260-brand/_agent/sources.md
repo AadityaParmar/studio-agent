@@ -12,3 +12,4 @@
 | WS-6 | session log | grill-module session LEAD | 2026-10-30 | inputs/WS-6-grill-module-session-lead.md | field-ops |  |
 | WS-7 | session log | grill-module session MKT | 2026-10-30 | inputs/WS-7-grill-module-session-mkt.md | field-ops |  |
 | WS-8 | session log | grill-module session MT | 2026-10-30 | inputs/WS-8-grill-module-session-mt.md | field-ops |  |
+| WS-9 | session log | grill-module session CMP | 2026-10-30 | inputs/WS-9-grill-module-session-cmp.md | field-ops |  |

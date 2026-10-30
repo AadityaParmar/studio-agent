@@ -1,0 +1,59 @@
+{
+ "entity": "Complaint",
+ "roles": [
+  {"role": "Sales Agent", "person": "Bwalya", "reqs": ["CMP-01"], "oi": "OI-79"},
+  {"role": "Quality Manager", "person": "Chipo", "reqs": ["CMP-02", "CMP-03", "CMP-05"]},
+  {"role": "Sales Head", "person": "Ruth", "reqs": ["CMP-04", "CMP-06"]}
+ ],
+ "fields": [
+  {"entity": "Complaint", "name": "ComplaintId", "reqs": ["CMP-01"]},
+  {"entity": "Complaint", "name": "Batch No", "reqs": ["CMP-01"]},
+  {"entity": "Complaint", "name": "Signature", "reqs": ["CMP-01"]},
+  {"entity": "Complaint", "name": "Status", "reqs": ["CMP-02"]},
+  {"entity": "Complaint", "name": "Operator", "reqs": ["CMP-03"]},
+  {"entity": "Complaint", "name": "Shift", "reqs": ["CMP-03"]},
+  {"entity": "Complaint", "name": "Resolution note", "reqs": ["CMP-03"]},
+  {"entity": "Complaint", "name": "Mobile Number", "reqs": ["CMP-05"]}
+ ],
+ "transitions": [
+  {"from": "open", "to": "under-investigation", "action": "Start investigation", "by": ["Quality Manager"], "reqs": ["CMP-02"]},
+  {"from": "under-investigation", "to": "resolved", "action": "Resolve", "by": ["Quality Manager"], "reqs": ["CMP-02", "CMP-05"], "rules": ["Tell the customer"]},
+  {"from": "resolved", "to": "closed", "action": "Close", "by": ["Quality Manager"], "reqs": ["CMP-02"], "rules": ["Closed is final"]}
+ ],
+ "rules": [
+  {"rule": "72 hour target", "reqs": ["CMP-04"]},
+  {"rule": "Tell the customer", "reqs": ["CMP-05"]},
+  {"rule": "Closed is final", "reqs": ["CMP-02"]}
+ ],
+ "reports": [
+  {"name": "Complaint Sheet", "reqs": ["CMP-06"]},
+  {"name": "Complaints aging", "reqs": ["CMP-04", "CMP-06"]}
+ ],
+ "rows": [
+  {"id": "CMP-1001", "status": "open", "values": {"ComplaintId": "CMP-1001", "Date": "2026-11-03", "Complainant Name": "Mary Banda", "Mobile Number": "+260 97 111 2233", "Product": "Nurtamilk 1L", "Batch No": "B-2417", "Expiry Date": "2026-11-20", "Nature Of Complaint": "Sour smell"}},
+  {"id": "CMP-1002", "status": "under-investigation", "values": {"ComplaintId": "CMP-1002", "Date": "2026-11-02", "Complainant Name": "Peter Phiri", "Mobile Number": "+260 96 444 5566", "Product": "Nurtamilk 500ml", "Batch No": "B-2409", "Operator": "Operator 3", "Shift": "Night", "Nature Of Complaint": "Leaking pack"}},
+  {"id": "CMP-1003", "status": "resolved", "values": {"ComplaintId": "CMP-1003", "Date": "2026-11-01", "Complainant Name": "Grace Mwansa", "Mobile Number": "+260 95 777 8899", "Product": "Nurtamilk Juice 1L", "Batch No": "B-2398", "Operator": "Operator 1", "Shift": "Day", "Resolution note": "Seal fault found; batch checked"}},
+  {"id": "CMP-1004", "status": "closed", "values": {"ComplaintId": "CMP-1004", "Date": "2026-10-28", "Complainant Name": "John Zulu", "Product": "Nurtamilk 1L", "Batch No": "B-2380", "Operator": "Operator 2", "Shift": "Day", "Resolution note": "No mobile number; customer not told, noted"}},
+  {"id": "CMP-1005", "status": "open", "values": {"ComplaintId": "CMP-1005", "Date": "2026-10-29", "Complainant Name": "Ruth Tembo", "Mobile Number": "+260 97 222 3344", "Product": "Nurtamilk 1L", "Batch No": "B-2371", "Nature Of Complaint": "Foreign object"}}
+ ],
+ "scenarios": [
+  {"title": "Complaint from log to Closed", "summary": "Quality Manager takes a complaint through all stages and the customer is told.", "steps": [
+   {"actor": "Sales Agent", "action": "Logs the complaint with batch, expiry and the customer's signature", "row": "CMP-1001", "screen": "record", "proves": ["CMP-01"]},
+   {"actor": "Quality Manager", "action": "Starts the investigation", "row": "CMP-1001", "transition": {"from": "open", "to": "under-investigation"}, "proves": ["CMP-02"]},
+   {"actor": "Quality Manager", "action": "Fills Operator, Shift and resolution note, sets Resolved; customer gets a WhatsApp message", "row": "CMP-1001", "transition": {"from": "under-investigation", "to": "resolved"}, "proves": ["CMP-03", "CMP-05"]},
+   {"actor": "Quality Manager", "action": "Sets Closed after the customer is told", "row": "CMP-1001", "transition": {"from": "resolved", "to": "closed"}, "proves": ["CMP-02"]}
+  ]},
+  {"title": "Complaint older than 72 hours", "summary": "Sales Head sees late complaints.", "steps": [
+   {"actor": "Sales Head", "action": "Opens Complaints aging and sees CMP-1005 past 72 hours", "screen": "report", "report": "Complaints aging", "proves": ["CMP-04", "CMP-06"]}
+  ]},
+  {"title": "No mobile number", "summary": "Resolved complaint without a mobile number sends no message.", "steps": [
+   {"actor": "Quality Manager", "action": "Resolves a complaint with no mobile number; no WhatsApp sent; notes it", "row": "CMP-1004", "screen": "record", "proves": ["CMP-05"]}
+  ]},
+  {"title": "Closed complaint is final", "summary": "No reopen.", "steps": [
+   {"actor": "Quality Manager", "action": "Tries to change Closed CMP-1004; refused, a new complaint is needed", "row": "CMP-1004", "screen": "record", "proves": ["CMP-02"]}
+  ]},
+  {"title": "Complaint sheet", "summary": "Who sees what.", "steps": [
+   {"actor": "Sales Agent", "action": "Sees own complaints only in the Complaint Sheet", "screen": "report", "report": "Complaint Sheet", "proves": ["CMP-06"], "oi": "OI-79"}
+  ]}
+ ]
+}

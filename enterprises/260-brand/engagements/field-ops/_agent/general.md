@@ -38,6 +38,7 @@ Proposed: yes
 - OI-03: Area Sales Manager vs Owner access.
 - OI-04: "Supervisor" = Sales Supervisor? "Admin" = Owner?
 - OI-05: Are Sales Agents and Tricycle Riders Employees?
+- OI-80: Access for Quality Manager.
 
 ## Localisation
 

@@ -11,6 +11,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | employee | Employee | Employee | person | OI-05 | RFP-1 |
 | agent | Sales Agent | Sales Agent | person | | RFP-1 |
 | rider | Tricycle Rider | Tricycle Rider | person | OI-42 | RFP-1 |
+| quality | Quality Manager | Quality Manager | person | | WS-9 |
 | customer | Customer | Customer | external | | RFP-1 |
 | sap | SAP / ERP | SAP | external | OI-08 | RFP-1, IN-1 |
 
@@ -115,8 +116,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| add-complaint | agent | CMP | Add complaint | Complaint Sheet/Report | step | OI-50 | RFP-1 |
-| resolve-complaint | owner | CMP | Resolve complaint | Who resolves unknown | step | OI-49 | (proposed, to confirm) |
+| add-complaint | agent | CMP | Add complaint | Complaint Sheet; ComplaintId from neome; works offline; status Open | step | | RFP-1, WS-9 |
+| investigate-complaint | quality | CMP | Investigate complaint | Under Investigation; fills Operator and Shift | step | | WS-9 |
+| resolve-complaint | quality | CMP | Resolve complaint | Resolved; resolution note; target 72 hours | step | | WS-9 |
+| close-complaint | quality | CMP | Close complaint | Closed after customer is told; final | step | | WS-9 |
 
 ## FB — Feedback
 
@@ -198,8 +201,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | convert-lead | approve-lead-customer | Change Request | no | WS-6 |
 | approve-lead-customer | sync-masters | new Customer, neome to SAP | no | WS-6 |
 | add-lead | view-leads | | yes | RFP-1, WS-6 |
-| add-complaint | resolve-complaint | | no | RFP-1 |
-| resolve-complaint | send-whatsapp | resolution message | yes | RFP-1 |
+| add-complaint | investigate-complaint | | no | WS-9 |
+| investigate-complaint | resolve-complaint | | no | WS-9 |
+| resolve-complaint | send-whatsapp | resolution message | no | RFP-1, WS-9 |
+| send-whatsapp | close-complaint | customer told | no | WS-9 |
+| resolve-complaint | close-complaint | no mobile number | yes | WS-9 |
 | assign-beats | add-marketing-visit | | yes | RFP-1 |
 | add-marketing-visit | view-marketing-visits | | yes | WS-7 |
 | agent-marketing-visit | view-marketing-visits | | yes | WS-7 |

@@ -50,9 +50,9 @@
 | OI-46 | Who fills Modern Trade: Sales Agent (RFP-1 text and overall flow chart) or Supervisor (Modern Trade diagram)? What can Supervisor review do (approve, reject, comment)? | MT | Enterprise | Sales Head | | closed | | WS-8 |
 | OI-47 | Modern Trade Check In / Check Out: time and location? Must the user be at the Store? | MT | Enterprise | Sales Supervisor | | closed | | WS-8 |
 | OI-48 | Closing stock from Modern Trade: report only, or does it feed stock in SAP / ERP? | MT, SAP | Enterprise | Owner | | closed | | WS-8 |
-| OI-49 | Customer complaint resolution: who resolves, what statuses, how fast, how is the customer told? | CMP | Enterprise | Owner | | open | | |
-| OI-50 | ComplaintId and Customer Complaint Number: why both? Who gives the Customer Complaint Number? | CMP | Enterprise | Owner | | open | | |
-| OI-51 | Complaint Operator and Shift (production fields): who fills them? Sales Agent in the field or the plant? | CMP | Enterprise | Owner | | open | | |
+| OI-49 | Customer complaint resolution: who resolves, what statuses, how fast, how is the customer told? | CMP | Enterprise | Owner | | closed | | WS-9 |
+| OI-50 | ComplaintId and Customer Complaint Number: why both? Who gives the Customer Complaint Number? | CMP | Enterprise | Owner | | closed | | WS-9 |
+| OI-51 | Complaint Operator and Shift (production fields): who fills them? Sales Agent in the field or the plant? | CMP | Enterprise | Owner | | closed | | WS-9 |
 | OI-52 | Feedback: who gives it (customer?), who sets the questions, fixed list or free? Response type (rating, text)? | FB | Enterprise | Sales Head | | open | | |
 | OI-53 | Reports: full list with audience, measures and filters. RFP-1 gives only names. | RPT | Enterprise | Owner | | open | | |
 | OI-54 | Productive vs Non-Productive call: definition? | RPT | Enterprise | Sales Head | Productive = visit with an order (proposed, to confirm) | open | | |
@@ -80,3 +80,5 @@
 | OI-76 | How long must visit, order and invoice records be kept? Enterprise did not know [WS-5]. | VB | Enterprise | Owner | | open | | |
 | OI-77 | How many Marketing Visits a day, and in peak season? Enterprise did not know [WS-7]. | MKT | Enterprise | Sales Head | | open | | |
 | OI-78 | How many Modern Trade updates a day, and how many Stores? Enterprise did not know [WS-8]. | MT | Enterprise | Sales Head | | open | | |
+| OI-79 | How many customer complaints a day? Enterprise did not know [WS-9]. | CMP | Enterprise | Owner | | open | | |
+| OI-80 | What access does the Quality Manager get? WS-9 names the role but not its access. | All | Enterprise | Owner | Complaints only: see all complaints and change their status; nothing else (proposed, to confirm) | open | | |
