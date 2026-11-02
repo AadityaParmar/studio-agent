@@ -15,7 +15,7 @@ A signed-off BRD for HOA Management.
 |---|---|---|
 | MEM | Member Directory / Member Management | resolved |
 | ANN | Announcements | resolved |
-| TKT | Tickets | open |
+| TKT | Tickets | claimed |
 | RPAY | Raise Payment | open |
 | PAY | Payment | open |
 | VEN | Vendors | open |
@@ -38,3 +38,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: resolve-module: MEM resolved.
 - 2026-11-02: resolve-module: ANN claimed by Aditya Parmar.
 - 2026-11-02: resolve-module: ANN resolved.
+- 2026-11-02: resolve-module: TKT claimed by Aditya Parmar.

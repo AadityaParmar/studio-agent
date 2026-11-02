@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: TKT
 name: Tickets
 blockedBy: [MEM]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # TKT — Tickets
