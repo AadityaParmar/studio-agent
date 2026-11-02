@@ -1,24 +1,26 @@
 ---
 status: open
 prefix: PAY
-name: Payments
-draft: true
-blockedBy: []
+name: Payment
+blockedBy: [RPAY]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
-# PAY — Payments
+# PAY — Payment
 
-Name: Payments
+Name: Payment
 
 ## 1 Purpose and KPIs
 
-- Purpose: Let Board Members manage HOA payment obligations and Members view their payment information. [RFP-1]
+- Purpose: Track one Payment entry per Member per raise: Members see their own and get reminders; Board Members see all and record payment. No online payment. [RFP-1, WS-1]
 
 ## 2 Roles
 
 | role | does what | headcount | Source |
 |---|---|---|---|
-| Board Member | Raise payment collections, view paid and pending payments for all members, track status |  | [RFP-1] |
+| Board Member | View paid and pending payments for all members, track status; record payment received (proposed, to confirm) |  | [RFP-1] |
 | Member | View own pending payments, upcoming payments and payment history; receive reminders |  | [RFP-1] |
 
 ## 6 Rules and notifications
@@ -71,11 +73,31 @@ Scope: Open
 Sources: RFP-1
 OIs: OI-18
 Proposed: no
+Withdrawn: Moved to RPAY-01
+
+### PAY-05 — Payment tracking only
+
+Statement: The system only tracks Payment entries; Members do not pay online and there is no payment gateway. [WS-1]
+Acceptance:
+- No Payment screen offers an online pay action. (proposed, to confirm)
+Priority: TBC
+Scope: Open
+Sources: WS-1
+Proposed: yes
+
+### PAY-06 — Board Member records payment received
+
+Statement: A Board Member marks a Member's Payment entry as paid when payment is received. (proposed, to confirm)
+Acceptance:
+- Once marked paid, the entry moves from pending to paid in the Member's payment history. (proposed, to confirm)
+Priority: TBC
+Scope: Open
+Sources: WS-1
+OIs: OI-28
+Proposed: yes
 
 ## 13 Open Items
 
-- OI-14: How will HOA payments actually be collected?
-- OI-15: Will Members pay online through the Neome platform, or will the system only track payment records?
 - OI-16: Should overdue payment reminders also be sent after the due date?
 - OI-17: Are new payment request, payment received confirmation, and overdue payment reminder notifications required?
-- OI-18: Which fields and payment categories apply to a payment collection?
+- OI-28: Who marks a Payment entry as paid, and how?

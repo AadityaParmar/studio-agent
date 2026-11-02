@@ -2,8 +2,10 @@
 status: open
 prefix: MEM
 name: Member Directory / Member Management
-draft: true
 blockedBy: []
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # MEM — Member Directory / Member Management

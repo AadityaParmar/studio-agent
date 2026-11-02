@@ -1,7 +1,5 @@
 # Map: HOA Management
 
-lock: Aditya Parmar · review-draft · 2026-11-02T06:33Z
-
 ## Destination
 
 A signed-off BRD for HOA Management.
@@ -15,13 +13,24 @@ A signed-off BRD for HOA Management.
 
 | Prefix | Module | Status |
 |---|---|---|
-| MEM | Member Directory / Member Management | draft |
-| ANN | Announcements | draft |
-| TKT | Tickets | draft |
-| PAY | Payments | draft |
-| VEN | Vendors | draft |
+| MEM | Member Directory / Member Management | open |
+| ANN | Announcements | open |
+| TKT | Tickets | open |
+| RPAY | Raise Payment | open |
+| PAY | Payment | open |
+| VEN | Vendors | open |
 
 ## Change log
 
 - 2026-10-30: Engagement created.
 - 2026-10-30: ingest: 1 Source, 5 Modules drafted.
+- 2026-11-02: review-draft: RPAY (Raise Payment) added as draft.
+- 2026-11-02: review-draft: PAY-04→RPAY-01 moved to RPAY.
+- 2026-11-02: review-draft: PAY renamed to Payment.
+- 2026-11-02: review-draft: MEM confirmed.
+- 2026-11-02: review-draft: ANN confirmed.
+- 2026-11-02: review-draft: TKT confirmed.
+- 2026-11-02: review-draft: RPAY confirmed.
+- 2026-11-02: review-draft: PAY confirmed.
+- 2026-11-02: review-draft: VEN confirmed.
+- 2026-11-02: review-draft: 6 Modules confirmed, process skeleton, topics, plan skeleton.

@@ -2,8 +2,10 @@
 status: open
 prefix: ANN
 name: Announcements
-draft: true
-blockedBy: []
+blockedBy: [MEM]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # ANN — Announcements

@@ -17,7 +17,11 @@ Proposed: yes
 
 ## Localisation
 
+- OI-29: Currency, language, date format (suggested USD, English, US).
+
 ## Hosting
+
+- OI-30: Hosting, data residency, SSO needs.
 
 ## Migration
 
@@ -25,7 +29,11 @@ Proposed: yes
 
 ## Training
 
+- OI-31: Who trains Board Members and Members.
+
 ## Support
+
+- OI-32: Support after go-live.
 
 ## Other
 

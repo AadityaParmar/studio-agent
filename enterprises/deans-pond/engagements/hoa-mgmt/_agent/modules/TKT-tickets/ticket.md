@@ -2,8 +2,10 @@
 status: open
 prefix: TKT
 name: Tickets
-draft: true
-blockedBy: []
+blockedBy: [MEM]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # TKT — Tickets

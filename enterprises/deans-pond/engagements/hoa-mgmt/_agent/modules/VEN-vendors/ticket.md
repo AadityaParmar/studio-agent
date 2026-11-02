@@ -2,8 +2,10 @@
 status: open
 prefix: VEN
 name: Vendors
-draft: true
-blockedBy: []
+blockedBy: [MEM]
+revisitReason:
+formerly:
+claimedBy:
 ---
 
 # VEN — Vendors
