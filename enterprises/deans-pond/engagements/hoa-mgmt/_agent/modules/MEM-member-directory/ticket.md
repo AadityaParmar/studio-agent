@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: MEM
 name: Member Directory / Member Management
 blockedBy: []
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # MEM — Member Directory / Member Management
