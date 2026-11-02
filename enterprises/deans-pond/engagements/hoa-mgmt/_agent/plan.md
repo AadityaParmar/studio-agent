@@ -18,4 +18,4 @@ Skeleton from `review-draft`. All proposed. Weeks: Consultant only.
 | Notification set-up: Neome app notification only; no email, SMS or WhatsApp | | GEN | QA-1 |
 | Board Member dashboard and reports | | GEN | QA-1 |
 | Raise Payment as a Custom module | | RPAY | (proposed, to confirm) |
-| Payment as a Custom module | OI-23, OI-38 | PAY | (proposed, to confirm) |
+| Payment as a Custom module | OI-38 | PAY | (proposed, to confirm) |

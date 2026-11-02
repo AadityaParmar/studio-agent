@@ -1,9 +1,9 @@
 ---
-status: claimed
+status: resolved
 prefix: PAY
 name: Payment
 blockedBy: [RPAY]
-revisitReason: "OI-23 answered: Neome app notification only, no email [QA-1]"
+revisitReason:
 formerly:
 claimedBy: Aditya Parmar
 ---

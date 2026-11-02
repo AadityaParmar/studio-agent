@@ -58,10 +58,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
 | view-pending-payment | member | PAY | View pending payment | Own entries only; status Pending | step |  | RFP-1, WS-3 |
-| send-payment-reminder | notify | PAY | Send reminder one month before due date | App notification and email | step |  | RFP-1, WS-3 |
-| send-overdue-reminder | notify | PAY | Mark Overdue and send weekly overdue reminder | Automatic after due date; weekly until Paid, Waived or Cancelled | step |  | WS-3 |
+| send-payment-reminder | notify | PAY | Send reminder one month before due date | Neome app notification only | step |  | RFP-1, WS-3, QA-1 |
+| send-overdue-reminder | notify | PAY | Mark Overdue and send weekly overdue reminder | Automatic after due date; weekly until Paid, Waived or Cancelled; Neome app notification only | step |  | WS-3, QA-1 |
 | record-payment | board | PAY | Record payment and mark Paid | Board Member only; paid date, method, reference; proof of payment doc optional; no online payment, no part payment | step |  | WS-1, WS-3, QA-1 |
-| notify-payment-received | notify | PAY | Notify Member payment received | App notification and email | step |  | WS-3 |
+| notify-payment-received | notify | PAY | Notify Member payment received | Neome app notification only | step |  | WS-3, QA-1 |
 | update-payment-history | member | PAY | Payment history updated | Status Paid | step |  | RFP-1, WS-3 |
 | download-invoice | member | PAY | Download invoice | PDF per entry | step |  | WS-3 |
 | waive-payment | board | PAY | Waive payment | Reason required; status Waived, final | step |  | WS-3 |
@@ -72,7 +72,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
 | add-vendor | board | VEN | Add vendor | Name, category, contact, Gov ID required; no approval | step |  | RFP-1, QA-1 |
-| store-vendor-documents | board | VEN | Store vendor info and Government ID Proof | Gov ID: one US photo ID; Board Members only | step | OI-21 | RFP-1, QA-1 |
+| store-vendor-documents | board | VEN | Store vendor info and Government ID Proof | Gov ID: one US photo ID; Board Members only; kept forever, secured in Neome | step |  | RFP-1, QA-1, QA-2 |
 | list-vendor | board | VEN | List vendor in directory | Status Active | step |  | RFP-1, QA-1 |
 | view-vendor | member | VEN | View vendor details | Read-only; Active vendors only; filter by category | step |  | RFP-1, QA-1 |
 | update-vendor | board | VEN | Update vendor information | New contact or ID document | step |  | RFP-1 |

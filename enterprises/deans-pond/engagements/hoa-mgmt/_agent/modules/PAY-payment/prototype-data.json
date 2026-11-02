@@ -51,9 +51,9 @@
   "scenarios": [
     {"title": "Member pays annual dues", "summary": "Happy path: Member sees the entry, gets the 1-month reminder, pays offline; Board records payment with proof; Member is told and downloads the invoice.", "steps": [
       {"actor": "Member", "action": "Opens My payments; sees only own entries; no pay online or status button", "screen": "report", "report": "My payments", "proves": ["PAY-01", "PAY-05", "PAY-07"]},
-      {"actor": "system", "action": "About one month before due date, sends payment reminder by app and email", "screen": "rules", "proves": ["PAY-02"]},
+      {"actor": "system", "action": "About one month before due date, sends payment reminder as a Neome app notification (no email)", "screen": "rules", "proves": ["PAY-02"]},
       {"actor": "Board Member", "action": "Gets the check; records payment: paid date, Check, reference, proof of payment doc", "row": "PAY-0101", "transition": {"from": "pending", "to": "paid"}, "proves": ["PAY-06", "PAY-08"]},
-      {"actor": "system", "action": "Tells Greg the payment is received, by app and email", "row": "PAY-0101", "proves": ["PAY-11"]},
+      {"actor": "system", "action": "Tells Greg the payment is received, as a Neome app notification (no email)", "row": "PAY-0101", "proves": ["PAY-11"]},
       {"actor": "Member", "action": "Opens the entry, sees proof of payment, downloads the invoice PDF with paid date and method", "row": "PAY-0101", "proves": ["PAY-09", "PAY-06"]}
     ]},
     {"title": "Payment goes overdue", "summary": "Due date passes unpaid: entry turns Overdue, weekly reminders, Board records late payment.", "steps": [

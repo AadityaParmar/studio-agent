@@ -2,7 +2,7 @@
 
 Prefix: PAY
 Name: Payment
-Status: claimed
+Status: resolved
 Sources: RFP-1, WS-1, WS-2, WS-3, QA-1, QA-2
 
 ## 1 Purpose and KPIs
@@ -74,12 +74,12 @@ Sources: RFP-1, WS-1, WS-2, WS-3, QA-1, QA-2
 | Board only status | Any status change | Only Board Members change Payment status | [WS-3] |
 | Tracking only | Always | No online payment, no payment gateway | [WS-1] |
 | No partial payment | Recording payment | Entry is paid in full or stays Pending / Overdue | [WS-3] |
-| Payment reminder | About one month before the due date | Member notified, Neome app notification and email | [RFP-1, WS-3] |
-| Overdue reminder | Weekly after the due date until Paid, Waived or Cancelled | Member notified, Neome app notification and email | [WS-3] |
-| Payment received | Entry marked Paid | Member notified, Neome app notification and email | [WS-3] |
+| Payment reminder | About one month before the due date | Member notified, Neome app notification only | [RFP-1, WS-3, QA-1] |
+| Overdue reminder | Weekly after the due date until Paid, Waived or Cancelled | Member notified, Neome app notification only | [WS-3, QA-1] |
+| Payment received | Entry marked Paid | Member notified, Neome app notification only | [WS-3, QA-1] |
 | Change log | Status changes | Each change kept with who, when and reason | [WS-3] |
 
-- OI-23: Notification channels for the other Modules still open; Payment uses Neome app notification and email. [WS-3]
+- Channel: Neome app notification only; no email, SMS or WhatsApp. [QA-1]
 
 ## 7 Exceptions
 
@@ -103,7 +103,7 @@ Sources: RFP-1, WS-1, WS-2, WS-3, QA-1, QA-2
 | Neome | in | Payment entries; Neome is the system of record | Deans Pond HOA | [WS-3] |
 
 - No payment gateway; no accounting software link. [WS-1, WS-3]
-- Notifications go by Neome app notification and email. [WS-3]
+- Notifications go by Neome app notification only; no email. [QA-1]
 
 ## 10 Volumes and NFRs
 
@@ -127,13 +127,12 @@ Proposed: no
 
 ### PAY-02 — Payment reminder
 
-Statement: Members receive a reminder for upcoming payments approximately one month before the payment due date, by Neome app notification and email. [RFP-1, WS-3]
+Statement: Members receive a reminder for upcoming payments approximately one month before the payment due date, by Neome app notification only. [RFP-1, WS-3, QA-1]
 Acceptance:
-- Members receive upcoming payment reminders about one month before the due date, in the app and by email. [RFP-1, WS-3]
+- Members receive upcoming payment reminders about one month before the due date, as a Neome app notification; no email is sent. [RFP-1, WS-3, QA-1]
 Priority: Must
 Scope: Neome
-Sources: RFP-1, WS-3
-OIs: OI-16, OI-23
+Sources: RFP-1, WS-3, QA-1
 Proposed: no
 
 ### PAY-03 — Board payment overview
@@ -227,10 +226,10 @@ Proposed: no
 
 Statement: A Member is notified when a Board Member marks their Payment entry Paid. [WS-3]
 Acceptance:
-- The Member gets an app notification and email when the entry is marked Paid. [WS-3]
+- The Member gets a Neome app notification when the entry is marked Paid; no email is sent. [WS-3, QA-1]
 Priority: Should
 Scope: Neome
-Sources: WS-3
+Sources: WS-3, QA-1
 Proposed: no
 
 ### PAY-12 — Board payment dashboard
@@ -268,7 +267,7 @@ Proposed: no
 
 Neome App: none
 Delivery: Custom module
-How: Payment → new record built on the Neome platform, created by the Raise Payment workflow, one per Member (Member Directory people, OI-38); fields incl. paid date, method master list, reference, proof of payment file; stages Pending / Overdue / Paid / Waived / Cancelled with Board-only actions and audit trail; reminder automations (one month before due, weekly overdue) and payment received notification by app and email (OI-23); invoice PDF per entry; Member sheet scoped to own entries, Board sheet and dashboard; no payment gateway (proposed, to confirm)
+How: Payment → new record built on the Neome platform, created by the Raise Payment workflow, one per Member (Member Directory people, OI-38); fields incl. paid date, method master list, reference, proof of payment file; stages Pending / Overdue / Paid / Waived / Cancelled with Board-only actions and audit trail; reminder automations (one month before due, weekly overdue) and payment received notification by Neome app notification only; invoice PDF per entry; Member sheet scoped to own entries, Board sheet and dashboard; no payment gateway (proposed, to confirm)
 
 ## 13 Open Items
 
