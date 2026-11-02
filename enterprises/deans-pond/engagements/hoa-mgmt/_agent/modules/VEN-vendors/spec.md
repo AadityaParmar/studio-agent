@@ -2,7 +2,7 @@
 
 Prefix: VEN
 Name: Vendors
-Status: claimed
+Status: resolved
 Sources: RFP-1, QA-1, QA-2
 
 ## 1 Purpose and KPIs
@@ -36,11 +36,12 @@ Sources: RFP-1, QA-1, QA-2
 | Vendor | Contact Number | text | yes |  | [RFP-1] |
 | Vendor | Email | text | no |  | [RFP-1] |
 | Vendor | Address | text | no |  | [RFP-1] |
-| Vendor | Government ID Proof | file | yes | sensitive personal information [RFP-1]; any one valid US photo ID: driver's license, state ID or passport; seen by Board Members only [QA-1]; see OI-21 | [RFP-1, QA-1] |
+| Vendor | Government ID Proof | file | yes | sensitive personal information [RFP-1]; any one valid US photo ID: driver's license, state ID or passport; seen by Board Members only [QA-1]; kept forever, secured in Neome [QA-2] | [RFP-1, QA-1, QA-2] |
 | Vendor | Additional Notes | text | no |  | [RFP-1] |
 | Vendor | Status | choice | yes | Values: Active / Inactive [QA-1] | [QA-1] |
 
 - Government ID Proof: any one valid US photo ID: driver's license, state ID or passport. [QA-1]
+- Government ID Proof is kept forever, secured in Neome. [QA-2]
 - Service Type / Category is a fixed list. [QA-1]
 - No vendor rating or feedback. [QA-1]
 
@@ -66,8 +67,7 @@ Sources: RFP-1, QA-1, QA-2
 | Government ID Proof restricted | Vendor record opened | Government ID Proof shown to Board Members only | [RFP-1, QA-1] |
 | No approval to add | Board Member saves a new vendor | Vendor listed at once; no second Board Member approval | [QA-1] |
 | Active vendors only | Member opens the vendor directory | Only Active vendors listed | [QA-1] |
-
-- OI-21: Retention and security of Government ID Proof.
+| Government ID Proof kept forever | Vendor set Inactive, or any time after upload | Government ID Proof never deleted; stays secured in Neome | [QA-2] |
 
 ## 7 Exceptions
 
@@ -95,7 +95,7 @@ Sources: RFP-1, QA-1, QA-2
 ## 10 Volumes and NFRs
 
 - No limit on vendors; all entries unlimited. [QA-2]
-- OI-21: How long Government ID Proof is kept, and its security needs.
+- Government ID Proof kept forever, secured in Neome. [QA-2]
 - OI-25: US privacy rules for vendor ID documents.
 
 ## 11 Requirements
@@ -139,10 +139,10 @@ Proposed: no
 Statement: Government ID Proof holds sensitive personal information and is shown to Board Members only. [RFP-1, QA-1]
 Acceptance:
 - A Member viewing a vendor does not see or download its Government ID Proof. [QA-1]
-- Government ID Proof is kept and secured per the agreed retention and security rules. [QA-1]
+- Government ID Proof is kept forever and stays secured in Neome. [QA-2]
 Priority: Must
 Scope: Neome TBC
-Sources: RFP-1, QA-1
+Sources: RFP-1, QA-1, QA-2
 OIs: OI-20, OI-21, OI-25, OI-37
 Proposed: no
 
@@ -184,7 +184,7 @@ Proposed: no
 
 Neome App: `purchase-management`
 Delivery: Configuration
-How: Vendor → Vendor (vendor master) only, no purchase requests or orders; Service Type / Category as a master list; Government ID Proof as a restricted document field seen by Board Members only; Active / Inactive stages; Members read-only with a category filter on Active vendors; HOA Members as people who are not employees (OI-38); hangs on OI-21, OI-58 (proposed, to confirm)
+How: Vendor → Vendor (vendor master) only, no purchase requests or orders; Service Type / Category as a master list; Government ID Proof as a restricted document field seen by Board Members only, kept forever (no delete; encryption at rest is platform standard); Active / Inactive stages; Members read-only with a category filter on Active vendors; HOA Members as people who are not employees (OI-38); hangs on OI-58 (proposed, to confirm)
 
 ## 13 Open Items
 

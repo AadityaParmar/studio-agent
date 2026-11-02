@@ -19,6 +19,7 @@
     {"rule": "Board-only edit", "reqs": ["VEN-03"]},
     {"rule": "Government ID Proof restricted", "reqs": ["VEN-04"]},
     {"rule": "No approval to add", "reqs": ["VEN-02"]},
+    {"rule": "Government ID Proof kept forever", "reqs": ["VEN-04"]},
     {"rule": "Active vendors only", "reqs": ["VEN-06"]}
   ],
   "reports": [
@@ -41,8 +42,9 @@
       {"actor": "Board Member", "action": "Opens Brightline Electric and views its Government ID Proof", "row": "V-103", "proves": ["VEN-04"]},
       {"actor": "Member", "action": "Opens Brightline Electric; Government ID Proof is hidden", "row": "V-103", "proves": ["VEN-04", "VEN-03"]}
     ]},
-    {"title": "HOA stops using a vendor", "summary": "Exception: Board Member sets a vendor Inactive; record kept; can set Active again.", "steps": [
+    {"title": "HOA stops using a vendor", "summary": "Exception: Board Member sets a vendor Inactive; record and Government ID Proof kept; can set Active again.", "steps": [
       {"actor": "Board Member", "action": "Sets Green Acre Lawn Care Inactive after the contract ends", "row": "V-101", "transition": {"from": "active", "to": "inactive"}, "proves": ["VEN-06"]},
+      {"actor": "Board Member", "action": "Opens Green Acre Lawn Care: its Government ID Proof is still there, secured in Neome, never deleted", "row": "V-101", "screen": "rules", "proves": ["VEN-04"]},
       {"actor": "Member", "action": "Green Acre Lawn Care no longer shows in the directory", "screen": "rules", "proves": ["VEN-06"]},
       {"actor": "Board Member", "action": "HOA hires Clear Water Pools again; sets it Active", "row": "V-105", "transition": {"from": "inactive", "to": "active"}, "proves": ["VEN-06"]}
     ]},

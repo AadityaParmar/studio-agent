@@ -18,7 +18,7 @@ A signed-off BRD for HOA Management.
 | TKT | Tickets | resolved |
 | RPAY | Raise Payment | resolved |
 | PAY | Payment | resolved |
-| VEN | Vendors | claimed |
+| VEN | Vendors | resolved |
 
 ## Change log
 
@@ -54,3 +54,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: resolve-module: VEN claimed by Aditya Parmar (revisit).
 - 2026-11-02: questionnaire: QN-2026-11-02-2 to HOA Board President, 2 Open Item(s).
 - 2026-11-02: resolve-module: PAY resolved (revisit).
+- 2026-11-02: resolve-module: VEN resolved (revisit).
