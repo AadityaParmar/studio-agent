@@ -47,9 +47,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| raise-payment | board | RPAY | Raise payment | Fields open | step | OI-18 | RFP-1, WS-1 |
-| pick-members | board | RPAY | Pick applicable Members |  | step |  | RFP-1, WS-1 |
-| create-payment-entries | board | RPAY | Create one Payment entry per Member | Automatic | step |  | WS-1 |
+| raise-payment | board | RPAY | Raise payment | Title, Amount, Due date, category; fields open; saved as Draft (proposed, to confirm) | step | OI-18, OI-50 | RFP-1, WS-1 |
+| pick-members | board | RPAY | Pick applicable Members | From member list, or all; no limit | step |  | RFP-1, WS-1, WS-2 |
+| create-payment-entries | board | RPAY | Create one Payment entry per Member | Automatic on save; no approval (proposed, to confirm); status Raised | step | OI-49 | WS-1 |
+| notify-new-payment-request | notify | RPAY | Notify Members of new payment request | Needs confirmation; channel open | step | OI-17, OI-23 | RFP-1 |
+| cancel-raise | board | RPAY | Cancel raise | Unpaid entries cancelled; raise again (proposed, to confirm) | step | OI-50 | (proposed, to confirm) |
 
 ## PAY — Payment
 
@@ -97,7 +99,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-to-directory | pick-members | Members to pick from | yes | WS-1 |
 | raise-payment | pick-members |  | no | RFP-1, WS-1 |
 | pick-members | create-payment-entries |  | no | WS-1 |
-| create-payment-entries | view-pending-payment |  | no | RFP-1, WS-1 |
+| create-payment-entries | notify-new-payment-request |  | no | RFP-1 |
+| notify-new-payment-request | view-pending-payment |  | no | RFP-1 |
+| create-payment-entries | view-pending-payment | Member opens payments | yes | RFP-1, WS-1 |
+| create-payment-entries | cancel-raise | Wrong amount or due date | yes | (proposed, to confirm) |
 | view-pending-payment | send-payment-reminder |  | no | RFP-1 |
 | send-payment-reminder | record-payment |  | no | WS-1 |
 | record-payment | update-payment-history |  | no | RFP-1 |

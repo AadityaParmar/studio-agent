@@ -1,7 +1,5 @@
 # Map: HOA Management
 
-lock: Aditya Parmar · resolve-module · 2026-11-02T09:26Z
-
 ## Destination
 
 A signed-off BRD for HOA Management.
@@ -18,7 +16,7 @@ A signed-off BRD for HOA Management.
 | MEM | Member Directory / Member Management | resolved |
 | ANN | Announcements | resolved |
 | TKT | Tickets | resolved |
-| RPAY | Raise Payment | claimed |
+| RPAY | Raise Payment | resolved |
 | PAY | Payment | open |
 | VEN | Vendors | open |
 
@@ -43,3 +41,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: resolve-module: TKT claimed by Aditya Parmar.
 - 2026-11-02: resolve-module: TKT resolved.
 - 2026-11-02: resolve-module: RPAY claimed by Aditya Parmar.
+- 2026-11-02: resolve-module: RPAY resolved.
