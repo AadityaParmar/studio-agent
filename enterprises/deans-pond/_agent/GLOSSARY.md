@@ -33,10 +33,14 @@ _Source_: RFP-1 · _Status_: proposed · _Used in_: hoa-mgmt
 A Member's report of an HOA-related concern or request, handled by Board Members.
 _Source_: RFP-1 · _Status_: proposed · _Used in_: hoa-mgmt
 
-**Payment Collection**:
-A payment request the Board raises for HOA members.
-_Avoid_: Payment request
-_Source_: RFP-1 · _Status_: proposed · _Used in_: hoa-mgmt
+**Raise Payment**:
+A payment request the Board raises for a list of HOA Members; each raise creates one Payment per listed Member.
+_Avoid_: Payment request, Payment Collection
+_Source_: RFP-1, WS-1 · _Status_: proposed · _Used in_: hoa-mgmt
+
+**Payment**:
+One Member's payment entry, created from a Raise Payment. Tracked only; Members do not pay online.
+_Source_: RFP-1, WS-1 · _Status_: proposed · _Used in_: hoa-mgmt
 
 **Payment Reminder**:
 A reminder a Member receives for an upcoming payment, approximately one month before the due date.
