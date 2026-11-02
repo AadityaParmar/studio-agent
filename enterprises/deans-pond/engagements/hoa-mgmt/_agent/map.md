@@ -14,7 +14,7 @@ A signed-off BRD for HOA Management.
 | Prefix | Module | Status |
 |---|---|---|
 | MEM | Member Directory / Member Management | resolved |
-| ANN | Announcements | open |
+| ANN | Announcements | claimed |
 | TKT | Tickets | open |
 | RPAY | Raise Payment | open |
 | PAY | Payment | open |
@@ -36,3 +36,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: review-draft: 6 Modules confirmed, process skeleton, topics, plan skeleton.
 - 2026-11-02: resolve-module: MEM claimed by Aditya Parmar.
 - 2026-11-02: resolve-module: MEM resolved.
+- 2026-11-02: resolve-module: ANN claimed by Aditya Parmar.

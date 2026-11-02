@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: ANN
 name: Announcements
 blockedBy: [MEM]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # ANN — Announcements
