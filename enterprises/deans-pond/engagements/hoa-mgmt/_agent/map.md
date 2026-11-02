@@ -1,5 +1,7 @@
 # Map: HOA Management
 
+lock: Aditya Parmar · resolve-module · 2026-11-02T09:40Z
+
 ## Destination
 
 A signed-off BRD for HOA Management.
