@@ -14,10 +14,12 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| register-member | board | MEM | Register member | Who registers is open | step | OI-04 | RFP-1 |
-| create-member-account | board | MEM | Create member account |  | step |  | RFP-1 |
-| add-to-directory | board | MEM | Add member to Member Directory |  | step |  | RFP-1 |
+| register-member | board | MEM | Register member | Board Member fills the registration form (proposed, to confirm) | step | OI-04 | RFP-1 |
+| create-member-account | board | MEM | Create member account | No approval step (proposed, to confirm) | step | OI-36 | RFP-1 |
+| add-to-directory | board | MEM | Add member to Member Directory | Status Active (proposed, to confirm) | step | OI-35 | RFP-1 |
+| send-login-invite | notify | MEM | Send login invite | Channel open (proposed, to confirm) | step | OI-23, OI-36 | (proposed, to confirm) |
 | member-gets-access | member | MEM | Member gets access to relevant modules |  | step |  | RFP-1 |
+| set-member-inactive | board | MEM | Set member Inactive | Moves out or sells; record kept, login stopped (proposed, to confirm) | step | OI-35 | (proposed, to confirm) |
 
 ## ANN — Announcements
 
@@ -69,7 +71,9 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 |---|---|---|---|---|
 | register-member | create-member-account |  | no | RFP-1 |
 | create-member-account | add-to-directory |  | no | RFP-1 |
-| add-to-directory | member-gets-access |  | no | RFP-1 |
+| add-to-directory | send-login-invite |  | no | (proposed, to confirm) |
+| send-login-invite | member-gets-access |  | no | (proposed, to confirm) |
+| member-gets-access | set-member-inactive | Member moves out or sells | yes | (proposed, to confirm) |
 | member-gets-access | view-announcement | Member can view | yes | RFP-1 |
 | create-announcement | publish-announcement |  | no | RFP-1 |
 | publish-announcement | view-announcement |  | no | RFP-1 |

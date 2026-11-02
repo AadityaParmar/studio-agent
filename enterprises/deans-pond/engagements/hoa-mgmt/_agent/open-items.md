@@ -5,7 +5,7 @@
 | OI-01 | Should Members be able to view the directory and contact information of other Members? Access Control Matrix row "View Member Directory" says Member = Yes; member access section says each member sees only their own account [RFP-1] | MEM | Enterprise |  |  | open |  |  |  |
 | OI-02 | Should family members have separate login accounts or only be recorded under the primary Member? [RFP-1] | MEM | Enterprise |  |  | open |  |  |  |
 | OI-03 | Which additional member information is in scope — family member details, property ownership details, emergency contacts, vehicle information? Marked TBC [RFP-1] | MEM | Enterprise |  |  | open |  |  |  |
-| OI-04 | Who registers a new member — Board Member or the member themselves? | MEM | Enterprise |  | Board Members add members (Manage Members is Board-only in the Access Control Matrix) (proposed, to confirm) | open |  |  |  |
+| OI-04 | Who registers a new member — Board Member or the member themselves? | MEM | Enterprise | Board Member | Board Members add members (Manage Members is Board-only in the Access Control Matrix) (proposed, to confirm) | open |  |  |  |
 | OI-05 | What is the "Number of Cards" field on the member registration form for? [RFP-1] | MEM | Enterprise |  |  | open |  |  |  |
 | OI-06 | What information is required for event / party announcements? Field list is "may include" [RFP-1] | ANN | Enterprise |  |  | open |  |  |  |
 | OI-07 | Is RSVP or event registration required? [RFP-1] | ANN | Enterprise |  |  | open |  |  |  |
@@ -34,3 +34,9 @@
 | OI-30 | Any hosting, data residency or single sign-on needs? | All | Enterprise |  | Not in scope: standard Neome hosting, Neome login (proposed, to confirm) | open |  |  |  |
 | OI-31 | Who trains Board Members and Members, and how? | All | Enterprise |  | Not in scope (proposed, to confirm) | open |  |  |  |
 | OI-32 | Who gives support after go-live, how and for how long? | All | Enterprise |  |  | open |  |  |  |
+| OI-33 | What must the Member Directory fix today, and which number shows it works (KPI)? | MEM | Enterprise | Board Member | One up-to-date member list; all Members registered within 1 month of go-live (proposed, to confirm) | open |  |  |  |
+| OI-34 | Where is the member list kept today, and will Neome be the master (system of record) after go-live? | MEM | Enterprise | Board Member | Spreadsheet today; Neome is master after go-live (proposed, to confirm) | open |  |  |  |
+| OI-35 | What stages does a member record have, and what happens when a Member moves out or sells? | MEM | Enterprise | Board Member | Active → Inactive; Board Member sets Inactive on move-out; record kept, login stopped (proposed, to confirm) | open |  |  |  |
+| OI-36 | Does a new member registration need approval, and is the Member told when their account is ready? | MEM | Enterprise | Board Member | No approval; Member gets a login invite (proposed, to confirm) | open |  |  |  |
+| OI-37 | Confirm the proposed priority, Scope tag and acceptance criteria of: MEM-01, MEM-02, MEM-03, MEM-04, MEM-05, MEM-06, MEM-07, MEM-08 | All | Enterprise | Board Member | As proposed in the BRD (proposed, to confirm) | open |  |  |  |
+| OI-38 | Can the Employee Directory App hold HOA Members (people who are not employees: address, family count, cards, own login) as set-up, or is a Custom module needed? | MEM | Neomenta | Neomenta product team | Configuration of Employee Directory (proposed, to confirm) | open |  |  |  |
