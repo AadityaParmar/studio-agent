@@ -1,0 +1,53 @@
+{
+  "entity": "Vendor",
+  "roles": [
+    {"role": "Board Member", "person": "Linda", "reqs": ["VEN-02"]},
+    {"role": "Member", "person": "Greg", "reqs": ["VEN-03"], "oi": "OI-20"}
+  ],
+  "fields": [
+    {"entity": "Vendor", "name": "Vendor Name", "reqs": ["VEN-01"]},
+    {"entity": "Vendor", "name": "Service Type / Category", "reqs": ["VEN-01", "VEN-05"], "oi": "OI-56"},
+    {"entity": "Vendor", "name": "Contact Number", "reqs": ["VEN-01"]},
+    {"entity": "Vendor", "name": "Government ID Proof", "reqs": ["VEN-01", "VEN-04"], "oi": "OI-19"},
+    {"entity": "Vendor", "name": "Status", "reqs": ["VEN-06"], "oi": "OI-55"}
+  ],
+  "transitions": [
+    {"from": "active", "to": "inactive", "action": "Set Inactive", "by": ["Board Member"], "notify": ["Board Member"], "reqs": ["VEN-06"], "oi": "OI-55"},
+    {"from": "inactive", "to": "active", "action": "Set Active", "by": ["Board Member"], "notify": ["Board Member"], "reqs": ["VEN-06"], "oi": "OI-55"}
+  ],
+  "rules": [
+    {"rule": "Board-only edit", "reqs": ["VEN-03"]},
+    {"rule": "Government ID Proof restricted", "reqs": ["VEN-04"]},
+    {"rule": "No approval to add", "reqs": ["VEN-02"]},
+    {"rule": "Active vendors only", "reqs": ["VEN-06"]}
+  ],
+  "reports": [
+    {"name": "Vendors by category", "reqs": ["VEN-07"]}
+  ],
+  "rows": [
+    {"id": "V-101", "status": "active", "values": {"Vendor Name": "Green Acre Lawn Care", "Service Type / Category": "Landscaping", "Contact Number": "(555) 201-3344", "Email": "office@greenacre.example", "Government ID Proof": "green-acre-id.pdf", "Additional Notes": "Mows common areas every Tuesday", "Status": "Active"}, "log": [["2026-09-02", "Linda (Board Member)", "Vendor added"]]},
+    {"id": "V-102", "status": "active", "values": {"Vendor Name": "Rapid Flow Plumbing", "Service Type / Category": "Plumber", "Contact Number": "(555) 410-7781", "Address": "18 Mill Rd", "Government ID Proof": "rapid-flow-id.pdf", "Status": "Active"}},
+    {"id": "V-103", "status": "active", "values": {"Vendor Name": "Brightline Electric", "Service Type / Category": "Electrician", "Contact Number": "(555) 322-0918", "Government ID Proof": "brightline-id.pdf", "Status": "Active"}},
+    {"id": "V-104", "status": "active", "values": {"Vendor Name": "Pondside Handyman", "Service Type / Category": "Maintenance", "Contact Number": "(555) 677-1203", "Government ID Proof": "pondside-id.pdf", "Additional Notes": "Fence and gate repairs", "Status": "Active"}},
+    {"id": "V-105", "status": "inactive", "values": {"Vendor Name": "Clear Water Pools", "Service Type / Category": "Other", "Contact Number": "(555) 845-6620", "Government ID Proof": "clear-water-id.pdf", "Status": "Inactive"}, "log": [["2026-08-30", "Linda (Board Member)", "Set Inactive: contract ended"]]}
+  ],
+  "scenarios": [
+    {"title": "Board Member adds a vendor", "summary": "Happy path: Board Member adds a vendor with required fields and Government ID Proof; listed at once; Members find it.", "steps": [
+      {"actor": "Board Member", "action": "Adds Rapid Flow Plumbing: name, category, contact number, Government ID Proof", "row": "V-102", "proves": ["VEN-01", "VEN-02", "VEN-05"], "oi": "OI-19"},
+      {"actor": "Board Member", "action": "Saves; vendor listed with no other Board Member's approval", "row": "V-102", "proves": ["VEN-02"], "oi": "OI-55"},
+      {"actor": "Member", "action": "Filters the directory by Plumber and opens Rapid Flow Plumbing; no add or edit button", "screen": "report", "report": "Vendors by category", "proves": ["VEN-03", "VEN-07"]}
+    ]},
+    {"title": "Government ID Proof kept private", "summary": "Rule: only Board Members see Government ID Proof.", "steps": [
+      {"actor": "Board Member", "action": "Opens Brightline Electric and views its Government ID Proof", "row": "V-103", "proves": ["VEN-04"], "oi": "OI-21"},
+      {"actor": "Member", "action": "Opens Brightline Electric; Government ID Proof is hidden", "row": "V-103", "proves": ["VEN-04", "VEN-03"], "oi": "OI-20"}
+    ]},
+    {"title": "HOA stops using a vendor", "summary": "Exception: Board Member sets a vendor Inactive; record kept; can set Active again.", "steps": [
+      {"actor": "Board Member", "action": "Sets Green Acre Lawn Care Inactive after the contract ends", "row": "V-101", "transition": {"from": "active", "to": "inactive"}, "proves": ["VEN-06"], "oi": "OI-55"},
+      {"actor": "Member", "action": "Green Acre Lawn Care no longer shows in the directory", "screen": "rules", "proves": ["VEN-06"]},
+      {"actor": "Board Member", "action": "HOA hires Clear Water Pools again; sets it Active", "row": "V-105", "transition": {"from": "inactive", "to": "active"}, "proves": ["VEN-06"]}
+    ]},
+    {"title": "Vendor rating", "summary": "Open: should Members rate vendors?", "steps": [
+      {"actor": "Member", "action": "Wants to rate Pondside Handyman after a repair", "row": "V-104", "proves": [], "oi": "OI-22"}
+    ]}
+  ]
+}

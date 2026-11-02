@@ -71,10 +71,12 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| add-vendor | board | VEN | Add vendor |  | step |  | RFP-1 |
-| store-vendor-documents | board | VEN | Store vendor info and Government ID Proof |  | step | OI-19, OI-21 | RFP-1 |
-| list-vendor | board | VEN | List vendor in directory |  | step |  | RFP-1 |
-| view-vendor | member | VEN | View vendor details | Gov ID visibility open | step | OI-20 | RFP-1 |
+| add-vendor | board | VEN | Add vendor | Name, category, contact, Gov ID required; no approval (proposed, to confirm) | step | OI-55, OI-56 | RFP-1 |
+| store-vendor-documents | board | VEN | Store vendor info and Government ID Proof | Gov ID Board-only (proposed, to confirm) | step | OI-19, OI-20, OI-21 | RFP-1 |
+| list-vendor | board | VEN | List vendor in directory | Status Active (proposed, to confirm) | step | OI-55 | RFP-1 |
+| view-vendor | member | VEN | View vendor details | Read-only; Active vendors only; filter by category (proposed, to confirm) | step | OI-20, OI-55 | RFP-1 |
+| update-vendor | board | VEN | Update vendor information | New contact or ID document | step |  | RFP-1 |
+| deactivate-vendor | board | VEN | Set vendor Inactive | HOA stops using vendor; record kept (proposed, to confirm) | step | OI-55 | (proposed, to confirm) |
 
 ## Edges
 
@@ -123,4 +125,7 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | add-vendor | store-vendor-documents |  | no | RFP-1 |
 | store-vendor-documents | list-vendor |  | no | RFP-1 |
 | list-vendor | view-vendor |  | no | RFP-1 |
+| list-vendor | update-vendor | Vendor details change | yes | RFP-1 |
+| update-vendor | list-vendor |  | no | RFP-1 |
+| list-vendor | deactivate-vendor | HOA stops using vendor | yes | (proposed, to confirm) |
 | member-gets-access | view-vendor | Member can view | yes | RFP-1 |
