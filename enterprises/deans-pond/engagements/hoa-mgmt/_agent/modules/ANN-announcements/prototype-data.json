@@ -1,0 +1,51 @@
+{
+  "entity": "General Announcement",
+  "roles": [
+    {"role": "Board Member", "person": "Linda", "reqs": ["ANN-01", "ANN-03"]},
+    {"role": "Member", "person": "Greg", "reqs": ["ANN-02"]}
+  ],
+  "fields": [
+    {"entity": "General Announcement", "name": "Title", "reqs": ["ANN-04"], "oi": "OI-40"},
+    {"entity": "General Announcement", "name": "Message", "reqs": ["ANN-04"], "oi": "OI-40"},
+    {"entity": "General Announcement", "name": "Attachment", "reqs": ["ANN-04"], "oi": "OI-40"},
+    {"entity": "General Announcement", "name": "Status", "reqs": ["ANN-05"], "oi": "OI-42"},
+    {"entity": "Event / Party Announcement", "name": "Event title", "reqs": ["ANN-03"], "oi": "OI-06"},
+    {"entity": "Event / Party Announcement", "name": "Event date", "reqs": ["ANN-03", "ANN-08"], "oi": "OI-06"}
+  ],
+  "transitions": [
+    {"from": "draft", "to": "published", "action": "Publish", "by": ["Board Member"], "notify": ["Member"], "reqs": ["ANN-01", "ANN-06", "ANN-07"], "rules": ["No publish approval", "New announcement notification"], "oi": "OI-41"},
+    {"from": "published", "to": "archived", "action": "Archive", "by": ["Board Member"], "reqs": ["ANN-05"], "oi": "OI-42"}
+  ],
+  "rules": [
+    {"rule": "No publish approval", "reqs": ["ANN-06"]},
+    {"rule": "Read-only for Members", "reqs": ["ANN-02"]},
+    {"rule": "New announcement notification", "reqs": ["ANN-07"]},
+    {"rule": "New event notification", "reqs": ["ANN-07"]}
+  ],
+  "reports": [
+    {"name": "Upcoming events", "reqs": ["ANN-08"]}
+  ],
+  "rows": [
+    {"id": "A-201", "status": "draft", "values": {"Title": "Pool opening weekend", "Message": "The pool opens Saturday 9 am. Bring your pool card.", "Publish date": "2026-11-10", "Status": "Draft"}},
+    {"id": "A-202", "status": "draft", "values": {"Title": "Fall leaf pickup", "Message": "Bag leaves at the curb by Friday.", "Publish date": "2026-11-12", "Status": "Draft"}},
+    {"id": "A-203", "status": "published", "values": {"Title": "Annual meeting notice", "Message": "Annual HOA meeting at the clubhouse, agenda attached.", "Attachment": "agenda.pdf", "Publish date": "2026-10-20", "Status": "Published"}, "log": [["2026-10-20", "Linda (Board Member)", "Published; Members notified"]]},
+    {"id": "A-204", "status": "published", "values": {"Title": "Holiday party", "Message": "Join us for the holiday party.", "Publish date": "2026-11-01", "Status": "Published"}, "children": {"Event / Party Announcement": [{"Event title": "Holiday party", "Event date": "2026-12-13", "Start time": "6:00 pm", "End time": "9:00 pm", "Venue / location": "Clubhouse", "Contact person": "Linda"}]}},
+    {"id": "A-205", "status": "archived", "values": {"Title": "Summer BBQ", "Message": "BBQ at the pond pavilion.", "Publish date": "2026-07-01", "Status": "Archived"}, "children": {"Event / Party Announcement": [{"Event title": "Summer BBQ", "Event date": "2026-07-19", "Venue / location": "Pond pavilion"}]}, "log": [["2026-07-20", "Linda (Board Member)", "Archived after event date"]]}
+  ],
+  "scenarios": [
+    {"title": "Board Member posts a General Announcement", "summary": "Happy path: Board Member drafts, publishes with no approval, Members are told and read it.", "steps": [
+      {"actor": "Board Member", "action": "Drafts 'Pool opening weekend' with Title and Message", "row": "A-201", "proves": ["ANN-01", "ANN-04"], "oi": "OI-40"},
+      {"actor": "Board Member", "action": "Presses Publish; no other Board Member must approve", "row": "A-201", "transition": {"from": "draft", "to": "published"}, "proves": ["ANN-06", "ANN-05"], "oi": "OI-41"},
+      {"actor": "system", "action": "Tells every Member about the new announcement", "screen": "rules", "proves": ["ANN-07"], "oi": "OI-08"},
+      {"actor": "Member", "action": "Opens the announcement; no edit or delete button", "row": "A-203", "proves": ["ANN-02"]}
+    ]},
+    {"title": "Board Member posts an event", "summary": "Event / Party Announcement on its own form; shows in Upcoming events.", "steps": [
+      {"actor": "Board Member", "action": "Fills the event form for the Holiday party: title, date, times, venue, contact", "row": "A-204", "proves": ["ANN-03"], "oi": "OI-06"},
+      {"actor": "Board Member", "action": "Checks Upcoming events", "screen": "report", "report": "Upcoming events", "proves": ["ANN-08"], "oi": "OI-26"},
+      {"actor": "Member", "action": "Wants to RSVP to the Holiday party", "row": "A-204", "proves": [], "oi": "OI-07"}
+    ]},
+    {"title": "Out-of-date announcement", "summary": "Exception: Board Member archives a notice; not deleted.", "steps": [
+      {"actor": "Board Member", "action": "Archives 'Annual meeting notice' after the meeting", "row": "A-203", "transition": {"from": "published", "to": "archived"}, "proves": ["ANN-05"], "oi": "OI-42"}
+    ]}
+  ]
+}

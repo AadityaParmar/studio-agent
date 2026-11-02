@@ -25,9 +25,11 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| create-announcement | board | ANN | Create announcement | General or Event / Party form | step | OI-06 | RFP-1 |
-| publish-announcement | board | ANN | Publish announcement |  | step | OI-08 | RFP-1 |
+| create-announcement | board | ANN | Create announcement | General or Event / Party form; saved as Draft (proposed, to confirm) | step | OI-06, OI-40, OI-42 | RFP-1 |
+| publish-announcement | board | ANN | Publish announcement | No approval step (proposed, to confirm) | step | OI-41 | RFP-1 |
+| notify-new-announcement | notify | ANN | Notify Members of new announcement or event | Needs confirmation; channel open | step | OI-08, OI-23 | RFP-1 |
 | view-announcement | member | ANN | View announcement | Read-only | step |  | RFP-1 |
+| archive-announcement | board | ANN | Archive announcement | Board Member archives; events archive after event date (proposed, to confirm) | step | OI-42 | (proposed, to confirm) |
 
 ## TKT — Tickets
 
@@ -76,7 +78,10 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | member-gets-access | set-member-inactive | Member moves out or sells | yes | (proposed, to confirm) |
 | member-gets-access | view-announcement | Member can view | yes | RFP-1 |
 | create-announcement | publish-announcement |  | no | RFP-1 |
-| publish-announcement | view-announcement |  | no | RFP-1 |
+| publish-announcement | notify-new-announcement |  | no | RFP-1 |
+| notify-new-announcement | view-announcement |  | no | RFP-1 |
+| publish-announcement | view-announcement | Member opens list | yes | RFP-1 |
+| view-announcement | archive-announcement | Out of date or event over | yes | (proposed, to confirm) |
 | member-gets-access | raise-ticket | Member can raise | yes | RFP-1 |
 | raise-ticket | review-ticket |  | no | RFP-1 |
 | review-ticket | update-ticket-status |  | no | RFP-1 |
