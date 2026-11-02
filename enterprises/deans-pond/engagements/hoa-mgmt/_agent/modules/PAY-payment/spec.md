@@ -2,7 +2,7 @@
 
 Prefix: PAY
 Name: Payment
-Status: needs-revisit
+Status: claimed
 Sources: RFP-1, WS-1, WS-2, WS-3, QA-1, QA-2
 
 ## 1 Purpose and KPIs

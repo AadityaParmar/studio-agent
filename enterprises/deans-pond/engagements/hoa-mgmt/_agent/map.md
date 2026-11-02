@@ -17,7 +17,7 @@ A signed-off BRD for HOA Management.
 | ANN | Announcements | resolved |
 | TKT | Tickets | resolved |
 | RPAY | Raise Payment | resolved |
-| PAY | Payment | needs-revisit |
+| PAY | Payment | claimed |
 | VEN | Vendors | needs-revisit |
 
 ## Change log
@@ -50,3 +50,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: ingest: PAY needs revisit: OI-23 answered: Neome app notification only, no email [QA-1]
 - 2026-11-02: ingest: VEN needs revisit: OI-21 answered: Government ID Proof kept forever, secured in Neome [QA-2]
 - 2026-11-02: ingest: QA-1, QA-2 (reply to QN-2026-11-02): 50 Open Items closed, 2 still open, 0 raised; PAY, VEN need revisit.
+- 2026-11-02: resolve-module: PAY claimed by Aditya Parmar (revisit).
