@@ -46,6 +46,18 @@ _Source_: RFP-1, WS-1 · _Status_: proposed · _Used in_: hoa-mgmt
 A reminder a Member receives for an upcoming payment, approximately one month before the due date.
 _Source_: RFP-1 · _Status_: proposed · _Used in_: hoa-mgmt
 
+**Overdue Reminder**:
+A weekly reminder a Member receives after the due date until the Payment is Paid, Waived or Cancelled.
+_Source_: WS-3 · _Status_: proposed · _Used in_: hoa-mgmt
+
+**Proof of payment**:
+A document a Board Member uploads when recording a Payment as Paid; seen by Board Members and the entry's own Member only.
+_Source_: WS-3 · _Status_: proposed · _Used in_: hoa-mgmt
+
+**Invoice**:
+A PDF a Member downloads for one Payment: HOA name, Member, title, amount, due date, status; once Paid it adds paid date and method.
+_Source_: WS-3 · _Status_: proposed · _Used in_: hoa-mgmt
+
 **Vendor**:
 A service provider used or recommended by the HOA, listed in the vendor directory (grass cutting / landscaping, plumber, electrician, maintenance and other HOA service providers).
 _Source_: RFP-1 · _Status_: proposed · _Used in_: hoa-mgmt
