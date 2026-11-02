@@ -52,3 +52,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: ingest: QA-1, QA-2 (reply to QN-2026-11-02): 50 Open Items closed, 2 still open, 0 raised; PAY, VEN need revisit.
 - 2026-11-02: resolve-module: PAY claimed by Aditya Parmar (revisit).
 - 2026-11-02: resolve-module: VEN claimed by Aditya Parmar (revisit).
+- 2026-11-02: questionnaire: QN-2026-11-02-2 to HOA Board President, 2 Open Item(s).
