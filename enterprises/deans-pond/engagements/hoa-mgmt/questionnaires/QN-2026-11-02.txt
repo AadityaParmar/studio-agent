@@ -1,0 +1,275 @@
+*Questionnaire QN-2026-11-02*
+To: HOA Board President (Board President)
+From: Aditya Parmar, Neomenta
+Deans Pond HOA · HOA Management · 2026-11-02
+52 questions.
+
+How to reply: Reply Yes if the suggested answer is right, Edit with the right answer, or Don't know. Keep the OI number with your reply. Pass a question to the person in "For" if they know better.
+
+*All · Across all Modules*
+
+1. OI-23 · For: Board Member
+Which notification channels should be used — Neome application notification, email, SMS, WhatsApp? Channels TBC
+Suggested: Neome app notification and email for all Modules, as for Payment; no SMS or WhatsApp
+Reply: Yes / Edit: ___ / Don't know
+
+2. OI-25 · For: Board Member
+Are there any specific US privacy, security, or HOA regulatory requirements that need to be considered?
+Reply: Answer: ___ / Don't know
+
+3. OI-37 · For: Board Member
+Confirm the proposed priority, Scope tag and acceptance criteria of: MEM-01, MEM-02, MEM-03, MEM-04, MEM-05, MEM-06, MEM-07, MEM-08, ANN-01, ANN-02, ANN-03, ANN-04, ANN-05, ANN-06, ANN-07, ANN-08, TKT-01, TKT-02, TKT-03, TKT-04, TKT-05, TKT-06, TKT-07, TKT-08, TKT-09, RPAY-01, RPAY-02, RPAY-03, RPAY-04, RPAY-05, RPAY-06, PAY-14, VEN-01, VEN-02, VEN-03, VEN-04, VEN-05, VEN-06, VEN-07
+Suggested: As proposed in the BRD
+Reply: Yes / Edit: ___ / Don't know
+
+4. OI-24 · For: Board Member
+Is there any existing member, payment, ticket, or vendor data that needs to be migrated?
+Reply: Answer: ___ / Don't know
+
+5. OI-26 · For: Board Member
+What are the reporting and dashboard requirements? "Not yet defined", to be finalized with the customer
+Suggested: Board dashboard: total Members; open tickets and tickets by status; payments due, collected, pending, overdue; upcoming events
+Reply: Yes / Edit: ___ / Don't know
+
+6. OI-27 · For: Board Member
+What volumes apply — how many Board Members, Members, vendors, tickets and payments per month?
+Reply: Answer: ___ / Don't know
+
+7. OI-29 · For: Board Member
+Which currency, language and date format apply?
+Suggested: USD, English, US date format
+Reply: Yes / Edit: ___ / Don't know
+
+8. OI-30 · For: Board Member
+Any hosting, data residency or single sign-on needs?
+Suggested: Not in scope: standard Neome hosting, Neome login
+Reply: Yes / Edit: ___ / Don't know
+
+9. OI-31 · For: Board Member
+Who trains Board Members and Members, and how?
+Suggested: Not in scope
+Reply: Yes / Edit: ___ / Don't know
+
+10. OI-32 · For: Board Member
+Who gives support after go-live, how and for how long?
+Reply: Answer: ___ / Don't know
+
+*MEM · Member Directory / Member Management*
+
+11. OI-01 · For: Board Member
+Should Members be able to view the directory and contact information of other Members? Access Control Matrix row "View Member Directory" says Member = Yes; member access section says each member sees only their own account
+Suggested: No; each Member sees only their own account; Board Members see the full directory
+Reply: Yes / Edit: ___ / Don't know
+
+12. OI-02 · For: Board Member
+Should family members have separate login accounts or only be recorded under the primary Member?
+Suggested: Recorded under the primary Member as Number of Family Members; no separate logins
+Reply: Yes / Edit: ___ / Don't know
+
+13. OI-03 · For: Board Member
+Which additional member information is in scope — family member details, property ownership details, emergency contacts, vehicle information? Marked TBC
+Suggested: None for now; only the fields on the registration form
+Reply: Yes / Edit: ___ / Don't know
+
+14. OI-04 · For: Board Member
+Who registers a new member — Board Member or the member themselves?
+Suggested: Board Members add members (Manage Members is Board-only in the Access Control Matrix)
+Reply: Yes / Edit: ___ / Don't know
+
+15. OI-05 · For: Board Member
+What is the "Number of Cards" field on the member registration form for?
+Reply: Answer: ___ / Don't know
+
+16. OI-33 · For: Board Member
+What must the Member Directory fix today, and which number shows it works (KPI)?
+Suggested: One up-to-date member list; all Members registered within 1 month of go-live
+Reply: Yes / Edit: ___ / Don't know
+
+17. OI-34 · For: Board Member
+Where is the member list kept today, and will Neome be the master (system of record) after go-live?
+Suggested: Spreadsheet today; Neome is master after go-live
+Reply: Yes / Edit: ___ / Don't know
+
+18. OI-35 · For: Board Member
+What stages does a member record have, and what happens when a Member moves out or sells?
+Suggested: Active → Inactive; Board Member sets Inactive on move-out; record kept, login stopped
+Reply: Yes / Edit: ___ / Don't know
+
+19. OI-36 · For: Board Member
+Does a new member registration need approval, and is the Member told when their account is ready?
+Suggested: No approval; Member gets a login invite
+Reply: Yes / Edit: ___ / Don't know
+
+*ANN · Announcements*
+
+20. OI-06 · For: Board Member
+What information is required for event / party announcements? Field list is "may include"
+Suggested: Event title and Event date required; Description, Start time, End time, Venue / location, Contact person optional
+Reply: Yes / Edit: ___ / Don't know
+
+21. OI-07 · For: Board Member
+Is RSVP or event registration required?
+Suggested: No RSVP; announcement only
+Reply: Yes / Edit: ___ / Don't know
+
+22. OI-40 · For: Board Member
+Which fields does a General Announcement hold?
+Suggested: Title, Message, Publish date required; Attachment optional
+Reply: Yes / Edit: ___ / Don't know
+
+23. OI-08 · For: Board Member
+Are new announcement and new event notifications required?
+Suggested: Yes; all Members notified when an announcement or event is published
+Reply: Yes / Edit: ___ / Don't know
+
+24. OI-39 · For: Board Member
+What goes wrong today with announcements, and which number shows it works (KPI)?
+Suggested: All Members see notices in one place; no notices missed
+Reply: Yes / Edit: ___ / Don't know
+
+25. OI-41 · For: Board Member
+Does an announcement need another Board Member's approval before it is published?
+Suggested: No; any Board Member publishes
+Reply: Yes / Edit: ___ / Don't know
+
+26. OI-42 · For: Board Member
+What stages does an announcement have, and can a published one be edited, removed or expire?
+Suggested: Draft → Published → Archived; Board Member can edit or archive; Event / Party Announcements archive after the event date
+Reply: Yes / Edit: ___ / Don't know
+
+27. OI-43 · For: Board Member
+How many announcements and events a month, and is Neome the only place they are posted (system of record)?
+Suggested: Neome only
+Reply: Yes / Edit: ___ / Don't know
+
+*TKT · Tickets*
+
+28. OI-09 · For: Board Member
+What fields are required for a ticket? Field list is "may include"
+Suggested: Ticket title, Category, Description required; Attachment / photo, Priority optional; Date set automatically
+Reply: Yes / Edit: ___ / Don't know
+
+29. OI-10 · For: Board Member
+What ticket categories and statuses are required?
+Suggested: Statuses Open / In Progress / Resolved / Closed; categories Maintenance / Landscaping / Security / Noise / Other
+Reply: Yes / Edit: ___ / Don't know
+
+30. OI-11 · For: Board Member
+Should Members be able to comment or respond on their tickets?
+Suggested: Yes; a Member can add comments on their own tickets
+Reply: Yes / Edit: ___ / Don't know
+
+31. OI-12 · For: Board Member
+Should ticket photos / documents be supported?
+Suggested: Yes; optional photo or document on a ticket
+Reply: Yes / Edit: ___ / Don't know
+
+32. OI-45 · For: Board Member
+Who closes a resolved ticket (Board Member, or after the Member confirms), and can a closed ticket be reopened?
+Suggested: Board Member closes; no reopen, Member raises a new ticket
+Reply: Yes / Edit: ___ / Don't know
+
+33. OI-13 · For: Board Member
+Are ticket status update and ticket response notifications required?
+Suggested: Yes; the Member is notified on each status change and Board response
+Reply: Yes / Edit: ___ / Don't know
+
+34. OI-44 · For: Board Member
+What goes wrong today with HOA concerns and requests, and which number shows the Tickets Module works (KPI)?
+Suggested: Every concern tracked in one place; every ticket gets a Board response
+Reply: Yes / Edit: ___ / Don't know
+
+35. OI-46 · For: Board Member
+Is a ticket assigned to one Board Member or shared by all, is there a response-time target, and does any ticket action need approval?
+Suggested: Shared by all Board Members; no target; no approval
+Reply: Yes / Edit: ___ / Don't know
+
+36. OI-47 · For: Board Member
+How many tickets a month, and is Neome the only place tickets are raised (system of record)?
+Suggested: Neome only
+Reply: Yes / Edit: ___ / Don't know
+
+*RPAY · Raise Payment*
+
+37. OI-18 · For: Board Member
+Which fields and payment categories apply to a Raise Payment? Field list is "may include"
+Suggested: Title, Amount, Due date, Applicable members required; Description optional; categories Annual dues / Special assessment / Other
+Reply: Yes / Edit: ___ / Don't know
+
+38. OI-17 · For: Board Member
+Are new payment request, payment received confirmation, and overdue payment reminder notifications required? Payment received and overdue answered for PAY; new payment request still open
+Suggested: Yes; each listed Member is notified when a new payment is raised
+Reply: Yes / Edit: ___ / Don't know
+
+39. OI-48 · For: Board Member
+What must Raise Payment fix today, and which number shows it works (KPI)?
+Suggested: Every raise reaches all listed Members; no Member missed
+Reply: Yes / Edit: ___ / Don't know
+
+40. OI-49 · For: Board Member
+Does a raise need another Board Member's approval before Payment entries are created?
+Suggested: No; any Board Member raises
+Reply: Yes / Edit: ___ / Don't know
+
+41. OI-50 · For: Board Member
+What stages does a raise have, and can it be changed or cancelled after Payment entries are created?
+Suggested: Draft → Raised → Cancelled; after Raised only Members can be added; cancel cancels unpaid entries
+Reply: Yes / Edit: ___ / Don't know
+
+*PAY · Payment*
+
+42. OI-53 · For: Board Member
+Is a proof of payment document required to mark an entry Paid?
+Suggested: Optional
+Reply: Yes / Edit: ___ / Don't know
+
+43. OI-51 · For: Board Member
+How are dues tracked today, and what goes wrong?
+Suggested: Spreadsheet; Board chases unpaid Members by hand, misses some
+Reply: Yes / Edit: ___ / Don't know
+
+44. OI-52 · For: Board Member
+Which devices do Members and Board Members use for payments?
+Suggested: Members mostly on phone; Board on phone or desk
+Reply: Yes / Edit: ___ / Don't know
+
+*VEN · Vendors*
+
+45. OI-19 · For: Board Member
+Which government ID proof should be collected for vendors?
+Suggested: Any one valid US photo ID: driver's license, state ID or passport
+Reply: Yes / Edit: ___ / Don't know
+
+46. OI-20 · For: Board Member
+Should Members be allowed to view vendor government ID documents, or should these remain accessible only to Board Members? Access Control Matrix row "View Vendor Government ID" says Member = Yes; §9.3 says access must be confirmed before implementation
+Suggested: No; Government ID Proof seen by Board Members only
+Reply: Yes / Edit: ___ / Don't know
+
+47. OI-21 · For: Board Member
+What are the document retention and security requirements for vendor government ID documents?
+Reply: Answer: ___ / Don't know
+
+48. OI-22 · For: Board Member
+Is vendor rating / feedback required?
+Suggested: No
+Reply: Yes / Edit: ___ / Don't know
+
+49. OI-54 · For: Board Member
+What goes wrong today when Members need a vendor, and which number shows the Vendors Module works (KPI)?
+Suggested: One trusted vendor list Members can find; directory kept up to date
+Reply: Yes / Edit: ___ / Don't know
+
+50. OI-55 · For: Board Member
+What stages does a vendor have, can a vendor be removed, and does adding a vendor need another Board Member's approval?
+Suggested: Active / Inactive; Board Member sets Inactive when the HOA stops using a vendor, not deleted; Members see Active only; no approval
+Reply: Yes / Edit: ___ / Don't know
+
+51. OI-56 · For: Board Member
+Is Service Type / Category a fixed list, and which values?
+Suggested: Landscaping / Plumber / Electrician / Maintenance / Other
+Reply: Yes / Edit: ___ / Don't know
+
+52. OI-57 · For: Board Member
+How many vendors, where is the vendor list kept today, and will Neome be the master (system of record) after go-live?
+Suggested: Neome is the master after go-live
+Reply: Yes / Edit: ___ / Don't know
