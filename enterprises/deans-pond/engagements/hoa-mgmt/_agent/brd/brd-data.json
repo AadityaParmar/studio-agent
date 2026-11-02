@@ -1,0 +1,5586 @@
+{
+  "schemaVersion": "1.0.0",
+  "enterprise": {
+    "id": "deans-pond",
+    "name": "Deans Pond HOA"
+  },
+  "engagement": {
+    "slug": "hoa-mgmt",
+    "title": "HOA Management",
+    "version": null,
+    "status": "working-draft",
+    "date": "2026-11-02"
+  },
+  "sources": [
+    {
+      "id": "RFP-1",
+      "type": "RFP",
+      "title": "Deans Pond HOA Business Requirement Document",
+      "date": "2026-10-30",
+      "file": "inputs/RFP-1-deans-pond-hoa-business-requirement.odt",
+      "engagements": [
+        "hoa-mgmt"
+      ],
+      "confidential": false
+    },
+    {
+      "id": "WS-1",
+      "type": "session log",
+      "title": "review-draft session",
+      "date": "2026-11-02",
+      "file": "inputs/WS-1-review-draft-session.md",
+      "engagements": [
+        "hoa-mgmt"
+      ],
+      "confidential": false
+    },
+    {
+      "id": "WS-2",
+      "type": "session log",
+      "title": "grill-module session RPAY",
+      "date": "2026-11-02",
+      "file": "inputs/WS-2-grill-module-session-rpay.md",
+      "engagements": [
+        "hoa-mgmt"
+      ],
+      "confidential": false
+    },
+    {
+      "id": "WS-3",
+      "type": "session log",
+      "title": "grill-module session PAY",
+      "date": "2026-11-02",
+      "file": "inputs/WS-3-grill-module-session-pay.md",
+      "engagements": [
+        "hoa-mgmt"
+      ],
+      "confidential": false
+    },
+    {
+      "id": "QA-1",
+      "type": "questionnaire reply",
+      "title": "HOA Board President reply to QN-2026-11-02",
+      "date": "2026-11-02",
+      "file": "inputs/QA-1-hoa-board-president-reply-to-qn-2026-11.md",
+      "engagements": [
+        "hoa-mgmt"
+      ],
+      "confidential": false
+    },
+    {
+      "id": "QA-2",
+      "type": "questionnaire reply",
+      "title": "Aditya Parmar chat answers to QN-2026-11-02",
+      "date": "2026-11-02",
+      "file": "inputs/QA-2-aditya-parmar-chat-answers-to-qn-2026-11.md",
+      "engagements": [
+        "hoa-mgmt"
+      ],
+      "confidential": false
+    }
+  ],
+  "glossary": [
+    {
+      "term": "HOA",
+      "definition": "The Homeowners Association in the USA whose Board Members and Members use the solution.",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Board Member",
+      "definition": "A HOA role with administrative access: manages announcements, tickets, payments, the vendor directory and member information.",
+      "avoid": [
+        "Admin"
+      ],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Member",
+      "definition": "A HOA role with limited access, based on their own account. The BRD also calls this role \"Society Member\".",
+      "avoid": [
+        "Society Member"
+      ],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Member Directory",
+      "definition": "The directory of HOA members.",
+      "avoid": [
+        "HOA Directory"
+      ],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "General Announcement",
+      "definition": "Information the Board publishes for Members (not event or party related).",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Event / Party Announcement",
+      "definition": "A separate announcement form the Board uses to publish party or event-related information.",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Ticket",
+      "definition": "A Member's report of an HOA-related concern or request, handled by Board Members.",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Raise Payment",
+      "definition": "A payment request the Board raises for a list of HOA Members; each raise creates one Payment per listed Member.",
+      "avoid": [
+        "Payment request",
+        "Payment Collection"
+      ],
+      "sources": [
+        "RFP-1",
+        "WS-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Payment",
+      "definition": "One Member's payment entry, created from a Raise Payment. Tracked only; Members do not pay online.",
+      "avoid": [],
+      "sources": [
+        "RFP-1",
+        "WS-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Payment Reminder",
+      "definition": "A reminder a Member receives for an upcoming payment, approximately one month before the due date.",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Overdue Reminder",
+      "definition": "A weekly reminder a Member receives after the due date until the Payment is Paid, Waived or Cancelled.",
+      "avoid": [],
+      "sources": [
+        "WS-3"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Proof of payment",
+      "definition": "A document a Board Member uploads when recording a Payment as Paid; seen by Board Members and the entry's own Member only.",
+      "avoid": [],
+      "sources": [
+        "WS-3"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Invoice",
+      "definition": "A PDF a Member downloads for one Payment: HOA name, Member, title, amount, due date, status; once Paid it adds paid date and method.",
+      "avoid": [],
+      "sources": [
+        "WS-3"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Vendor",
+      "definition": "A service provider used or recommended by the HOA, listed in the vendor directory (grass cutting / landscaping, plumber, electrician, maintenance and other HOA service providers).",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    },
+    {
+      "term": "Government ID Proof",
+      "definition": "A government identity document collected for each vendor; contains sensitive personal information.",
+      "avoid": [],
+      "sources": [
+        "RFP-1"
+      ],
+      "proposed": true
+    }
+  ],
+  "process": {
+    "lanes": [
+      {
+        "id": "board",
+        "name": "Board Members",
+        "who": "Board Member",
+        "kind": "person",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "member",
+        "name": "Members",
+        "who": "Member",
+        "kind": "person",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "notify",
+        "name": "Notifications",
+        "who": "Neome app notification",
+        "kind": "system",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      }
+    ],
+    "steps": [
+      {
+        "id": "register-member",
+        "lane": "board",
+        "module": "MEM",
+        "label": "Register member",
+        "note": "Board Member fills the registration form",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "create-member-account",
+        "lane": "board",
+        "module": "MEM",
+        "label": "Create member account",
+        "note": "No approval step",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "add-to-directory",
+        "lane": "board",
+        "module": "MEM",
+        "label": "Add member to Member Directory",
+        "note": "Status Active",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "send-login-invite",
+        "lane": "notify",
+        "module": "MEM",
+        "label": "Send login invite",
+        "note": "Neome app notification",
+        "kind": "step",
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "member-gets-access",
+        "lane": "member",
+        "module": "MEM",
+        "label": "Member gets access to relevant modules",
+        "note": "",
+        "kind": "step",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "set-member-inactive",
+        "lane": "board",
+        "module": "MEM",
+        "label": "Set member Inactive",
+        "note": "Moves out or sells; record kept, login stopped",
+        "kind": "step",
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "create-announcement",
+        "lane": "board",
+        "module": "ANN",
+        "label": "Create announcement",
+        "note": "General or Event / Party form; saved as Draft",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "publish-announcement",
+        "lane": "board",
+        "module": "ANN",
+        "label": "Publish announcement",
+        "note": "No approval step",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "notify-new-announcement",
+        "lane": "notify",
+        "module": "ANN",
+        "label": "Notify Members of new announcement or event",
+        "note": "All Members; Neome app notification",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "view-announcement",
+        "lane": "member",
+        "module": "ANN",
+        "label": "View announcement",
+        "note": "Read-only",
+        "kind": "step",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "archive-announcement",
+        "lane": "board",
+        "module": "ANN",
+        "label": "Archive announcement",
+        "note": "Board Member archives; events archive after event date",
+        "kind": "step",
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "raise-ticket",
+        "lane": "member",
+        "module": "TKT",
+        "label": "Raise ticket",
+        "note": "Title, Category, Description; optional photo or document; status Open",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "notify-new-ticket",
+        "lane": "notify",
+        "module": "TKT",
+        "label": "Notify Board Members of new ticket",
+        "note": "Neome app notification",
+        "kind": "step",
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": true
+      },
+      {
+        "id": "review-ticket",
+        "lane": "board",
+        "module": "TKT",
+        "label": "Review ticket and take action",
+        "note": "Any Board Member; no assignment, no approval; status In Progress",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "update-ticket-status",
+        "lane": "board",
+        "module": "TKT",
+        "label": "Update ticket status and add update",
+        "note": "Board Member only; status Resolved when done",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "notify-ticket-update",
+        "lane": "notify",
+        "module": "TKT",
+        "label": "Notify Member of status change or response",
+        "note": "Each status change and Board response; Neome app notification",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "view-ticket-update",
+        "lane": "member",
+        "module": "TKT",
+        "label": "View ticket update",
+        "note": "Member can add comments on own ticket",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "close-ticket",
+        "lane": "board",
+        "module": "TKT",
+        "label": "Close ticket",
+        "note": "Board Member closes; no reopen",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "raise-payment",
+        "lane": "board",
+        "module": "RPAY",
+        "label": "Raise payment",
+        "note": "Title, Amount, Due date, category; Description optional; saved as Draft",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "WS-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "pick-members",
+        "lane": "board",
+        "module": "RPAY",
+        "label": "Pick applicable Members",
+        "note": "From member list, or all; no limit",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "WS-1",
+          "WS-2"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "create-payment-entries",
+        "lane": "board",
+        "module": "RPAY",
+        "label": "Create one Payment entry per Member",
+        "note": "Automatic on save; no approval; status Raised",
+        "kind": "step",
+        "sources": [
+          "WS-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "notify-new-payment-request",
+        "lane": "notify",
+        "module": "RPAY",
+        "label": "Notify Members of new payment request",
+        "note": "Each listed Member; Neome app notification",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "cancel-raise",
+        "lane": "board",
+        "module": "RPAY",
+        "label": "Cancel raise",
+        "note": "Unpaid entries cancelled; raise again",
+        "kind": "step",
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": true
+      },
+      {
+        "id": "view-pending-payment",
+        "lane": "member",
+        "module": "PAY",
+        "label": "View pending payment",
+        "note": "Own entries only; status Pending",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "send-payment-reminder",
+        "lane": "notify",
+        "module": "PAY",
+        "label": "Send reminder one month before due date",
+        "note": "Neome app notification only",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "WS-3",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "send-overdue-reminder",
+        "lane": "notify",
+        "module": "PAY",
+        "label": "Mark Overdue and send weekly overdue reminder",
+        "note": "Automatic after due date; weekly until Paid, Waived or Cancelled; Neome app notification only",
+        "kind": "step",
+        "sources": [
+          "WS-3",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "record-payment",
+        "lane": "board",
+        "module": "PAY",
+        "label": "Record payment and mark Paid",
+        "note": "Board Member only; paid date, method, reference; proof of payment doc optional; no online payment, no part payment",
+        "kind": "step",
+        "sources": [
+          "WS-1",
+          "WS-3",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "notify-payment-received",
+        "lane": "notify",
+        "module": "PAY",
+        "label": "Notify Member payment received",
+        "note": "Neome app notification only",
+        "kind": "step",
+        "sources": [
+          "WS-3",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "update-payment-history",
+        "lane": "member",
+        "module": "PAY",
+        "label": "Payment history updated",
+        "note": "Status Paid",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "download-invoice",
+        "lane": "member",
+        "module": "PAY",
+        "label": "Download invoice",
+        "note": "PDF per entry",
+        "kind": "step",
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "waive-payment",
+        "lane": "board",
+        "module": "PAY",
+        "label": "Waive payment",
+        "note": "Reason required; status Waived, final",
+        "kind": "step",
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "undo-paid",
+        "lane": "board",
+        "module": "PAY",
+        "label": "Undo wrong Paid",
+        "note": "Back to Pending or Overdue with reason; change logged",
+        "kind": "step",
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "add-vendor",
+        "lane": "board",
+        "module": "VEN",
+        "label": "Add vendor",
+        "note": "Name, category, contact, Gov ID required; no approval",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "store-vendor-documents",
+        "lane": "board",
+        "module": "VEN",
+        "label": "Store vendor info and Government ID Proof",
+        "note": "Gov ID: one US photo ID; Board Members only; kept forever, secured in Neome",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1",
+          "QA-2"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "list-vendor",
+        "lane": "board",
+        "module": "VEN",
+        "label": "List vendor in directory",
+        "note": "Status Active",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "view-vendor",
+        "lane": "member",
+        "module": "VEN",
+        "label": "View vendor details",
+        "note": "Read-only; Active vendors only; filter by category",
+        "kind": "step",
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "update-vendor",
+        "lane": "board",
+        "module": "VEN",
+        "label": "Update vendor information",
+        "note": "New contact or ID document",
+        "kind": "step",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "id": "deactivate-vendor",
+        "lane": "board",
+        "module": "VEN",
+        "label": "Set vendor Inactive",
+        "note": "HOA stops using vendor; record kept",
+        "kind": "step",
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "register-member",
+        "to": "create-member-account",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "create-member-account",
+        "to": "add-to-directory",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "add-to-directory",
+        "to": "send-login-invite",
+        "label": "",
+        "alternate": false,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "send-login-invite",
+        "to": "member-gets-access",
+        "label": "",
+        "alternate": false,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "member-gets-access",
+        "to": "set-member-inactive",
+        "label": "Member moves out or sells",
+        "alternate": true,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "member-gets-access",
+        "to": "view-announcement",
+        "label": "Member can view",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "create-announcement",
+        "to": "publish-announcement",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "publish-announcement",
+        "to": "notify-new-announcement",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "notify-new-announcement",
+        "to": "view-announcement",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "publish-announcement",
+        "to": "view-announcement",
+        "label": "Member opens list",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "view-announcement",
+        "to": "archive-announcement",
+        "label": "Out of date or event over",
+        "alternate": true,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "member-gets-access",
+        "to": "raise-ticket",
+        "label": "Member can raise",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "raise-ticket",
+        "to": "notify-new-ticket",
+        "label": "",
+        "alternate": false,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "notify-new-ticket",
+        "to": "review-ticket",
+        "label": "",
+        "alternate": false,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "raise-ticket",
+        "to": "review-ticket",
+        "label": "Board Member opens list",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "review-ticket",
+        "to": "update-ticket-status",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "update-ticket-status",
+        "to": "notify-ticket-update",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "notify-ticket-update",
+        "to": "view-ticket-update",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "update-ticket-status",
+        "to": "view-ticket-update",
+        "label": "Member opens ticket",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "view-ticket-update",
+        "to": "close-ticket",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "review-ticket",
+        "to": "close-ticket",
+        "label": "Duplicate or raised by mistake",
+        "alternate": true,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "add-to-directory",
+        "to": "pick-members",
+        "label": "Members to pick from",
+        "alternate": true,
+        "sources": [
+          "WS-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "raise-payment",
+        "to": "pick-members",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1",
+          "WS-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "pick-members",
+        "to": "create-payment-entries",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "WS-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "create-payment-entries",
+        "to": "notify-new-payment-request",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "notify-new-payment-request",
+        "to": "view-pending-payment",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "create-payment-entries",
+        "to": "view-pending-payment",
+        "label": "Member opens payments",
+        "alternate": true,
+        "sources": [
+          "RFP-1",
+          "WS-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "create-payment-entries",
+        "to": "cancel-raise",
+        "label": "Wrong amount or due date",
+        "alternate": true,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "view-pending-payment",
+        "to": "send-payment-reminder",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "send-payment-reminder",
+        "to": "record-payment",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "WS-1",
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "send-payment-reminder",
+        "to": "send-overdue-reminder",
+        "label": "Due date passes, not paid",
+        "alternate": true,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "send-overdue-reminder",
+        "to": "record-payment",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "send-overdue-reminder",
+        "to": "waive-payment",
+        "label": "Member not liable",
+        "alternate": true,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "record-payment",
+        "to": "notify-payment-received",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "notify-payment-received",
+        "to": "update-payment-history",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "record-payment",
+        "to": "update-payment-history",
+        "label": "Member opens payments",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "record-payment",
+        "to": "undo-paid",
+        "label": "Marked Paid by mistake",
+        "alternate": true,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "undo-paid",
+        "to": "view-pending-payment",
+        "label": "Back to Pending or Overdue",
+        "alternate": false,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "view-pending-payment",
+        "to": "download-invoice",
+        "label": "Member downloads invoice",
+        "alternate": true,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "update-payment-history",
+        "to": "download-invoice",
+        "label": "Member downloads paid invoice",
+        "alternate": true,
+        "sources": [
+          "WS-3"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "add-vendor",
+        "to": "store-vendor-documents",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "store-vendor-documents",
+        "to": "list-vendor",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "list-vendor",
+        "to": "view-vendor",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "list-vendor",
+        "to": "update-vendor",
+        "label": "Vendor details change",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "update-vendor",
+        "to": "list-vendor",
+        "label": "",
+        "alternate": false,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      {
+        "from": "list-vendor",
+        "to": "deactivate-vendor",
+        "label": "HOA stops using vendor",
+        "alternate": true,
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "from": "member-gets-access",
+        "to": "view-vendor",
+        "label": "Member can view",
+        "alternate": true,
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      }
+    ]
+  },
+  "modules": [
+    {
+      "prefix": "MEM",
+      "name": "Member Directory / Member Management",
+      "status": "resolved",
+      "purpose": {
+        "text": "Maintain a directory of HOA members and manage member accounts.",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      "kpis": [
+        {
+          "text": "Fix: one up-to-date member list.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "All Members registered within 1 month of go-live.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "asIs": [
+        {
+          "text": "Today the member list is kept in a spreadsheet; there is no one up-to-date member list.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "roles": [
+        {
+          "role": "Board Member",
+          "does": "Register and manage member information, view the complete Member Directory",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "role": "Member",
+          "does": "Access the information associated with their own account",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "records": [
+        {
+          "entity": "Member",
+          "fields": [
+            {
+              "name": "Name",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Email",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Phone",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Address",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Number of Family Members",
+              "type": "number",
+              "required": false,
+              "notes": "recorded under the primary Member; family members get no separate logins",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Number of Cards",
+              "type": "number",
+              "required": false,
+              "notes": "purpose unclear, see OI-05",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Active / Inactive",
+              "choices": [
+                "Active",
+                "Inactive [QA-1]"
+              ],
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            }
+          ]
+        }
+      ],
+      "statuses": [
+        {
+          "id": "active",
+          "start": true,
+          "end": false,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "inactive",
+          "start": false,
+          "end": true,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "transitions": [
+        {
+          "from": "active",
+          "to": "inactive",
+          "trigger": "Board Member sets Inactive when the Member moves out or sells",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "rules": [
+        {
+          "rule": "No registration approval",
+          "when": "Board Member registers a Member",
+          "action": "Member is saved Active; no approval step",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Login invite",
+          "when": "Member account is created",
+          "action": "Member gets a login invite by Neome app notification",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Login stopped",
+          "when": "Member set Inactive",
+          "action": "Member can no longer log in; record kept",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "exceptions": [
+        {
+          "text": "Member moves out or sells: Board Member sets the Member Inactive; record kept, not deleted; login stopped.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "reports": [
+        {
+          "name": "Total number of members",
+          "audience": "Board Member",
+          "measures": "Count of Members (potential dashboard)",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "integrations": [
+        {
+          "system": "Neome",
+          "direction": "both",
+          "data": "Member records; spreadsheet today, Neome is the system of record after go-live",
+          "owner": "Board Member",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "volumes": [
+        {
+          "text": "Volumes: no limit; Members and Board Members are unlimited.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "requirements": [
+        {
+          "id": "MEM-01",
+          "title": "Member registration form",
+          "statement": "The member registration form captures Name, Phone and Address (required) and Email, Number of Family Members and Number of Cards (optional).",
+          "acceptance": [
+            "A registration cannot be saved without Name, Phone and Address."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-02",
+            "OI-03",
+            "OI-04",
+            "OI-05",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "MEM-02",
+          "title": "Member account scope",
+          "statement": "Each registered member has access only to the information associated with their own account.",
+          "acceptance": [
+            "A Member cannot open another Member's account information."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-01",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "MEM-03",
+          "title": "Complete directory for Board Members",
+          "statement": "Board Members can view the complete member directory.",
+          "acceptance": [
+            "Board Members see all registered members."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-01",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome",
+          "delivery": "standard"
+        },
+        {
+          "id": "MEM-04",
+          "title": "Member onboarding",
+          "statement": "A new member is registered, gets a member account, is added to the HOA directory, and then gets access to the relevant modules.",
+          "acceptance": [
+            "After registration, the member sees exactly the modules their role allows."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-04",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "MEM-05",
+          "title": "Manage member information",
+          "statement": "Board Members can manage member information (add and update members).",
+          "acceptance": [
+            "Board Members can manage HOA members.",
+            "Members cannot add or edit member records."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-03",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "MEM-06",
+          "title": "Member status",
+          "statement": "A Member is Active or Inactive; a Board Member sets a Member Inactive when they move out or sell, the record is kept and their login stops.",
+          "acceptance": [
+            "An Inactive Member cannot log in and still shows in the Board Members' directory with status Inactive.",
+            "A Member record cannot be deleted."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-35",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "MEM-07",
+          "title": "Login invite on registration",
+          "statement": "When a Board Member registers a Member, no approval is needed and the Member gets a login invite.",
+          "acceptance": [
+            "A newly registered Member receives a login invite without any approval step."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-23",
+            "OI-36",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "MEM-08",
+          "title": "Total number of members",
+          "statement": "Board Members see the total number of Members.",
+          "acceptance": [
+            "A Board Member sees the count of Members, split by Active and Inactive."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-26",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Could",
+          "scope": "neome",
+          "delivery": "standard"
+        }
+      ],
+      "mapping": {
+        "neomeApp": "employee-directory",
+        "delivery": "configuration",
+        "how": "Member → Employee record set up for HOA Members: Name, Phone, Address, Email, Number of Family Members, Number of Cards as fields; status Active / Inactive (exit as status change, record kept); Board Member and Member roles scoped so a Member sees only their own account; login invite as an automation; directory sheet and Headcount report for Board Members; fit for non-employee people to verify (OI-38); Member sees only own account, Board Members the full directory; family members recorded under the primary Member with no separate login; Number of Cards purpose open (OI-05)",
+        "indicative": true
+      },
+      "oiRefs": [
+        "OI-05",
+        "OI-25",
+        "OI-38"
+      ]
+    },
+    {
+      "prefix": "ANN",
+      "name": "Announcements",
+      "status": "resolved",
+      "purpose": {
+        "text": "Let the HOA Board communicate important information to Society Members.",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      "kpis": [
+        {
+          "text": "Fix: all Members see notices in one place.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "No notices missed.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "asIs": [
+        {
+          "text": "Today notices do not reach all Members in one place, so some are missed.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "TO-BE: Board Member creates announcement → announcement published → Members view announcement.",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "roles": [
+        {
+          "role": "Board Member",
+          "does": "Create, publish and view announcements; publish Event / Party Announcements",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "role": "Member",
+          "does": "View General and Event / Party Announcements (read-only)",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "records": [
+        {
+          "entity": "General Announcement",
+          "fields": [
+            {
+              "name": "Title",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Message",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Attachment",
+              "type": "file",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Publish date",
+              "type": "date",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Draft / Published / Archived",
+              "choices": [
+                "Draft",
+                "Published",
+                "Archived"
+              ],
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            }
+          ]
+        },
+        {
+          "entity": "Event / Party Announcement",
+          "fields": [
+            {
+              "name": "Event title",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Event description",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Event date",
+              "type": "date",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Start time",
+              "type": "text",
+              "required": false,
+              "notes": "time of day",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "End time",
+              "type": "text",
+              "required": false,
+              "notes": "time of day",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Venue / location",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Contact person",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Draft / Published / Archived",
+              "choices": [
+                "Draft",
+                "Published",
+                "Archived"
+              ],
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            }
+          ]
+        }
+      ],
+      "statuses": [
+        {
+          "id": "draft",
+          "start": true,
+          "end": false,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "published",
+          "start": false,
+          "end": false,
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "archived",
+          "start": false,
+          "end": true,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "transitions": [
+        {
+          "from": "draft",
+          "to": "published",
+          "trigger": "Board Member publishes",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "published",
+          "to": "archived",
+          "trigger": "Board Member archives; Event / Party Announcement archives after the event date",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "rules": [
+        {
+          "rule": "No publish approval",
+          "when": "Board Member publishes",
+          "action": "Any Board Member publishes; no approval step",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Read-only for Members",
+          "when": "Member opens an announcement",
+          "action": "No create, edit or delete action offered",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "New announcement notification",
+          "when": "Announcement published",
+          "action": "All Members notified by Neome app notification",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "New event notification",
+          "when": "Event / Party Announcement published",
+          "action": "All Members notified by Neome app notification",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "exceptions": [
+        {
+          "text": "Published announcement wrong or out of date: Board Member edits or archives it; not deleted.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Event / Party Announcement archives after its event date.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "reports": [
+        {
+          "name": "Upcoming events",
+          "audience": "Board Member",
+          "measures": "Event / Party Announcements with event date from today (potential dashboard)",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "integrations": [
+        {
+          "system": "Neome",
+          "direction": "out",
+          "data": "Announcements; Neome is the only place they are posted",
+          "owner": "Board Member",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "volumes": [
+        {
+          "text": "Volumes: no limit; announcements, events, Members and Board Members are unlimited.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "requirements": [
+        {
+          "id": "ANN-01",
+          "title": "General announcements",
+          "statement": "Board Members can create announcements, publish them, and view previously published announcements.",
+          "acceptance": [
+            "Board Members can create and publish announcements.",
+            "Members can view announcements but cannot modify them."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "ANN-02",
+          "title": "Member read-only access",
+          "statement": "Members have read-only access to announcements and cannot create, modify, or delete them.",
+          "acceptance": [
+            "A Member is offered no create, edit or delete action on any announcement."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "ANN-03",
+          "title": "Event and party announcements",
+          "statement": "Board Members can publish party or event-related announcements through a separate form.",
+          "acceptance": [
+            "The event / party form is separate from the general announcement form.",
+            "The form holds Event title, Event description, Event date, Start time, End time, Venue / location and Contact person; Event title and Event date are required."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-06",
+            "OI-07",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "ANN-04",
+          "title": "General announcement form",
+          "statement": "A General Announcement holds Title, Message and Publish date (required) and an optional Attachment.",
+          "acceptance": [
+            "A General Announcement cannot be published without Title and Message."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-40",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "ANN-05",
+          "title": "Announcement stages",
+          "statement": "An announcement moves Draft → Published → Archived; a Board Member can edit or archive a published announcement, and an Event / Party Announcement archives after its event date.",
+          "acceptance": [
+            "A Draft is not visible to Members.",
+            "An Archived announcement no longer shows in the Members' current list and is not deleted."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-42",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "ANN-06",
+          "title": "Publish without approval",
+          "statement": "Any Board Member can publish an announcement without another Board Member's approval.",
+          "acceptance": [
+            "A Board Member's publish makes the announcement visible to Members at once."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-41",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "ANN-07",
+          "title": "New announcement and event notifications",
+          "statement": "Members are notified when a new announcement or a new Event / Party Announcement is published.",
+          "acceptance": [
+            "On publish, every Member gets a Neome app notification."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-08",
+            "OI-23",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome-tbc"
+        },
+        {
+          "id": "ANN-08",
+          "title": "Upcoming events",
+          "statement": "Board Members see a list of upcoming events.",
+          "acceptance": [
+            "A Board Member sees Event / Party Announcements with an event date from today, soonest first."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-26",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Could",
+          "scope": "neome"
+        }
+      ],
+      "mapping": {
+        "neomeApp": "internal-community-forum",
+        "delivery": "configuration",
+        "how": "General Announcement → Forum post in an Announcements category; Event / Party Announcement → post in an Events category with event fields (no RSVP, so no Event Management ); only Board Members may post, Members read-only; no pre-publish approval; Draft / Published / Archived stages; new-post Neome app notification to Members; Upcoming events list for Board Members; HOA Members as people who are not employees (OI-38)",
+        "indicative": true
+      },
+      "oiRefs": [
+        "OI-25"
+      ]
+    },
+    {
+      "prefix": "TKT",
+      "name": "Tickets",
+      "status": "resolved",
+      "purpose": {
+        "text": "Let Members report HOA-related concerns or requests and let Board Members resolve them.",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      "kpis": [
+        {
+          "text": "Every concern tracked in one place; every ticket gets a Board response.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "asIs": [
+        {
+          "text": "AS-IS: concerns are not tracked in one place and some get no Board response.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "TO-BE: Member raises ticket → Board Member reviews ticket → Board Member takes action → ticket status updated → Member views update → ticket closed.",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "roles": [
+        {
+          "role": "Member",
+          "does": "Raise tickets, view and track their own tickets, view Board responses and updates",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "role": "Board Member",
+          "does": "Raise tickets; view all tickets; review, act on and update status; provide updates or comments",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "records": [
+        {
+          "entity": "Ticket",
+          "fields": [
+            {
+              "name": "Ticket number",
+              "type": "text",
+              "required": true,
+              "notes": "Auto-numbered, e.g. TKT-0001",
+              "sources": [],
+              "proposed": true
+            },
+            {
+              "name": "Ticket title",
+              "type": "text",
+              "required": true,
+              "notes": "Required",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Category",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Maintenance / Landscaping / Security / Noise / Other",
+              "choices": [
+                "Maintenance",
+                "Landscaping",
+                "Security",
+                "Noise",
+                "Other [QA-1]"
+              ],
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Description",
+              "type": "text",
+              "required": true,
+              "notes": "Required",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Attachment / photo",
+              "type": "file",
+              "required": false,
+              "notes": "Optional photo or document",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Date",
+              "type": "date",
+              "required": true,
+              "notes": "Date raised; set automatically",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Priority",
+              "type": "choice",
+              "required": false,
+              "notes": "Optional; values High / Normal",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": true
+            },
+            {
+              "name": "Raised by",
+              "type": "person",
+              "required": true,
+              "notes": "Links to: Member; set automatically",
+              "linkTo": "Member",
+              "sources": [],
+              "proposed": true
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Open / In Progress / Resolved / Closed",
+              "choices": [
+                "Open",
+                "In Progress",
+                "Resolved",
+                "Closed"
+              ],
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            }
+          ]
+        },
+        {
+          "entity": "Ticket update",
+          "fields": [
+            {
+              "name": "Ticket",
+              "type": "link-to-entity",
+              "required": true,
+              "notes": "Links to: Ticket",
+              "linkTo": "Ticket",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Comment",
+              "type": "text",
+              "required": true,
+              "notes": "Board Member's update or comment; Member can also comment on own ticket",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "By",
+              "type": "person",
+              "required": true,
+              "notes": "Links to: Member; set automatically",
+              "linkTo": "Member",
+              "sources": [],
+              "proposed": true
+            },
+            {
+              "name": "Date",
+              "type": "date",
+              "required": true,
+              "notes": "Set automatically",
+              "sources": [],
+              "proposed": true
+            }
+          ]
+        }
+      ],
+      "statuses": [
+        {
+          "id": "open",
+          "start": true,
+          "end": false,
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "in-progress",
+          "start": false,
+          "end": false,
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "resolved",
+          "start": false,
+          "end": false,
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "closed",
+          "start": false,
+          "end": true,
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "transitions": [
+        {
+          "from": "open",
+          "to": "in-progress",
+          "trigger": "Board Member takes action on the ticket",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "in-progress",
+          "to": "resolved",
+          "trigger": "Board Member marks the ticket resolved",
+          "sources": [],
+          "proposed": true
+        },
+        {
+          "from": "resolved",
+          "to": "closed",
+          "trigger": "Board Member closes the ticket",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "rules": [
+        {
+          "rule": "Own tickets only",
+          "when": "Member opens the ticket list",
+          "action": "Member sees only tickets they raised",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "All tickets for Board",
+          "when": "Board Member opens the ticket list",
+          "action": "Board Member sees all tickets",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Status update by Board only",
+          "when": "Ticket status changes",
+          "action": "Only a Board Member can change status",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Shared Board queue",
+          "when": "Ticket raised",
+          "action": "No assignment to one Board Member; any Board Member picks it up; no response-time target; no approval step",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Ticket status update notification",
+          "when": "Status changes",
+          "action": "Member who raised it notified, Neome app notification",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Ticket response notification",
+          "when": "Board Member adds an update or comment",
+          "action": "Member who raised it notified, Neome app notification",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "New ticket notification",
+          "when": "Ticket raised",
+          "action": "Board Members notified, Neome app notification",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": true
+        }
+      ],
+      "exceptions": [
+        {
+          "text": "Member not satisfied with a resolution: Member raises a new ticket; a closed ticket is not reopened.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Ticket raised by mistake or a duplicate: Board Member closes it with a comment.",
+          "sources": [],
+          "proposed": true
+        }
+      ],
+      "reports": [
+        {
+          "name": "Open tickets",
+          "audience": "Board Member",
+          "measures": "Count and list of tickets not Closed (Board dashboard)",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "name": "Tickets by status",
+          "audience": "Board Member",
+          "measures": "Count of tickets per status (Board dashboard)",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "integrations": [
+        {
+          "system": "Neome",
+          "direction": "in",
+          "data": "Tickets; Neome is the only place tickets are raised",
+          "owner": "HOA",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "volumes": [
+        {
+          "text": "No volume limits; all entries unlimited.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Members raise tickets from phone, with a photo when allowed.",
+          "sources": [],
+          "proposed": true
+        }
+      ],
+      "requirements": [
+        {
+          "id": "TKT-01",
+          "title": "Raise tickets",
+          "statement": "Members can create tickets related to community or HOA matters.",
+          "acceptance": [
+            "Members can raise HOA-related tickets.",
+            "A ticket cannot be saved without Ticket title, Category and Description."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-09",
+            "OI-12",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-02",
+          "title": "Member ticket view",
+          "statement": "A Member sees only the tickets they created, can track their status, and can view responses or updates provided by Board Members.",
+          "acceptance": [
+            "Members can view only their own tickets."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-11",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-03",
+          "title": "Board ticket handling",
+          "statement": "Board Members can view all tickets submitted by all members, review ticket details, act on tickets, update ticket status, and provide updates or comments.",
+          "acceptance": [
+            "Board Members can view and manage all tickets."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-04",
+          "title": "Ticket lifecycle",
+          "statement": "Ticket status moves through Open, In Progress, Resolved and Closed.",
+          "acceptance": [
+            "Every ticket is in exactly one of the four statuses at any time.",
+            "Only a Board Member can change a ticket's status."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-10",
+            "OI-45",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-05",
+          "title": "Ticket updates and comments",
+          "statement": "Board Members add updates or comments on a ticket, and the Member who raised it sees them on the ticket.",
+          "acceptance": [
+            "Each update shows who wrote it and when.",
+            "A Member sees every Board update on their own ticket."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-11",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-06",
+          "title": "Ticket notifications",
+          "statement": "The Member who raised a ticket is notified when its status changes or a Board Member responds.",
+          "acceptance": [
+            "On a status change or new Board update, the Member gets a notification on the agreed channel.",
+            "Board Members are notified when a new ticket is raised."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-13",
+            "OI-23",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome-tbc"
+        },
+        {
+          "id": "TKT-07",
+          "title": "Shared Board queue",
+          "statement": "Tickets are not assigned to one Board Member; any Board Member can pick up and act on any ticket, with no approval step.",
+          "acceptance": [
+            "Every Board Member sees every Open ticket and can move it to In Progress."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-46",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-08",
+          "title": "Close without reopen",
+          "statement": "A Board Member closes a resolved ticket; a closed ticket is not reopened, and a Member who is not satisfied raises a new ticket.",
+          "acceptance": [
+            "A Closed ticket offers no status change."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-45",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "TKT-09",
+          "title": "Ticket dashboard",
+          "statement": "Board Members see open tickets and tickets by status.",
+          "acceptance": [
+            "A Board Member sees the count of tickets per status and the list of tickets not Closed."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-26",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Could",
+          "scope": "neome"
+        }
+      ],
+      "mapping": {
+        "neomeApp": "ticketing-and-task-management",
+        "delivery": "configuration",
+        "how": "Ticket → Ticket with HOA categories (Maintenance / Landscaping / Security / Noise / Other) and fields Ticket title, Category, Description, Attachment / photo, Date, Priority; own stages Open / In Progress / Resolved / Closed; raiser = Member, who sees only own tickets; Board Members as one shared queue, no assignment, SLA or approval; Ticket update → ticket comments and status history; status-change, response and new-ticket notifications by Neome app notification only; Open tickets and Tickets by status reports; close without reopen; HOA Members as people who are not employees (OI-38)",
+        "indicative": true
+      },
+      "oiRefs": [
+        "OI-25",
+        "OI-38"
+      ]
+    },
+    {
+      "prefix": "RPAY",
+      "name": "Raise Payment",
+      "status": "resolved",
+      "purpose": {
+        "text": "Let Board Members raise a payment for a list of Members; each raise creates one Payment entry per listed Member.",
+        "sources": [
+          "RFP-1",
+          "WS-1"
+        ],
+        "proposed": false
+      },
+      "kpis": [
+        {
+          "text": "Every raise reaches all listed Members; no Member missed.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "asIs": [
+        {
+          "text": "AS-IS: some Members are missed when dues are raised.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "TO-BE: Board Member raises payment collection → payment assigned to applicable Members → Member views pending payment (Payment).",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "TO-BE: Board Member picks Members from the member list, or all Members; saving creates one Payment entry per listed Member.",
+          "sources": [
+            "WS-1",
+            "WS-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "roles": [
+        {
+          "role": "Board Member",
+          "does": "Raise payments and pick the Members each raise applies to",
+          "headcount": "",
+          "sources": [
+            "RFP-1",
+            "WS-1"
+          ],
+          "proposed": false
+        },
+        {
+          "role": "Member",
+          "does": "Cannot raise a payment; sees only the Payment entry created for them (in Payment)",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "records": [
+        {
+          "entity": "Raise Payment",
+          "fields": [
+            {
+              "name": "Raise number",
+              "type": "text",
+              "required": true,
+              "notes": "Auto-numbered, e.g. RPAY-0001",
+              "sources": [],
+              "proposed": true
+            },
+            {
+              "name": "Payment title",
+              "type": "text",
+              "required": true,
+              "notes": "Required",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Description",
+              "type": "text",
+              "required": false,
+              "notes": "Optional",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Amount",
+              "type": "money",
+              "required": true,
+              "notes": "Required; same amount for every listed Member",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": true
+            },
+            {
+              "name": "Due date",
+              "type": "date",
+              "required": true,
+              "notes": "Required",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Applicable members",
+              "type": "link-to-entity",
+              "required": true,
+              "notes": "Links to: Member. Picked from the member list; select all allowed; no limit. One Payment entry per Member",
+              "linkTo": "Member",
+              "sources": [
+                "RFP-1",
+                "WS-1",
+                "WS-2"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Payment category",
+              "type": "choice",
+              "required": false,
+              "notes": "Values: Annual dues / Special assessment / Other",
+              "choices": [
+                "Annual dues",
+                "Special assessment",
+                "Other [QA-1]"
+              ],
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Raised by",
+              "type": "person",
+              "required": true,
+              "notes": "Links to: Member (Board Member); set automatically",
+              "linkTo": "Member (Board Member)",
+              "sources": [],
+              "proposed": true
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Draft / Raised / Cancelled",
+              "choices": [
+                "Draft",
+                "Raised",
+                "Cancelled"
+              ],
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            }
+          ]
+        }
+      ],
+      "statuses": [
+        {
+          "id": "draft",
+          "start": true,
+          "end": false,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "raised",
+          "start": false,
+          "end": false,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "cancelled",
+          "start": false,
+          "end": true,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "transitions": [
+        {
+          "from": "draft",
+          "to": "raised",
+          "trigger": "Board Member saves the raise; one Payment entry per listed Member is created",
+          "sources": [
+            "WS-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "raised",
+          "to": "cancelled",
+          "trigger": "Board Member cancels the raise; unpaid Payment entries are cancelled",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "rules": [
+        {
+          "rule": "Board only",
+          "when": "Raise payment",
+          "action": "Only Board Members can raise a payment collection",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "One entry per Member",
+          "when": "Raise saved",
+          "action": "One Payment entry per listed Member, with the raise's amount and due date",
+          "sources": [
+            "WS-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Tracking only",
+          "when": "Always",
+          "action": "No online payment, no payment gateway",
+          "sources": [
+            "WS-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "No approval",
+          "when": "Raise saved",
+          "action": "No second Board Member approval; any Board Member raises",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "New payment request notification",
+          "when": "Raise saved",
+          "action": "Each listed Member notified, Neome app notification",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "exceptions": [
+        {
+          "text": "Wrong amount or due date after raising: Board Member cancels the raise and raises again.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Member missed from a raise: Board Member adds the Member to the raise; one more Payment entry is created.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "reports": [
+        {
+          "name": "Raises list",
+          "audience": "Board Member",
+          "measures": "Each raise with category, due date, Members count, total amount",
+          "sources": [],
+          "proposed": true
+        }
+      ],
+      "integrations": [
+        {
+          "system": "Neome",
+          "direction": "in",
+          "data": "Payment raises; Neome is the system of record",
+          "owner": "Deans Pond HOA",
+          "sources": [
+            "WS-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "volumes": [
+        {
+          "text": "No limit on raises or on Members per raise.",
+          "sources": [
+            "WS-2"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "No volume limits; all entries unlimited.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "requirements": [
+        {
+          "id": "RPAY-01",
+          "title": "Raise Payment",
+          "statement": "Board Members can create a payment request / collection for HOA members.",
+          "acceptance": [
+            "Board Members can raise payment collections.",
+            "A Member has no raise action.",
+            "A raise cannot be saved without Payment title, Amount, Due date and at least one Member."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-18",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "RPAY-02",
+          "title": "One Payment entry per listed Member",
+          "statement": "Each raise holds a list of Members and inserts one entry per listed Member into Payment.",
+          "acceptance": [
+            "Saving a raise for N Members creates N Payment entries, one per Member, with the raise's amount and due date."
+          ],
+          "sources": [
+            "WS-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "RPAY-03",
+          "title": "Pick Members, or all",
+          "statement": "The Board Member picks the Members for a raise from the member list, or picks all Members; there is no limit on Members per raise.",
+          "acceptance": [
+            "One action selects every Member.",
+            "Only Members in the Member Directory can be picked."
+          ],
+          "sources": [
+            "WS-2",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "RPAY-04",
+          "title": "Raise stages and cancel",
+          "statement": "A raise moves Draft → Raised with no second Board Member approval, and a Board Member can cancel it, which cancels its unpaid Payment entries.",
+          "acceptance": [
+            "A Draft raise creates no Payment entries.",
+            "Cancelling a raise cancels every unpaid entry; paid entries stay."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-50",
+            "OI-49",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "RPAY-05",
+          "title": "New payment request notification",
+          "statement": "Each listed Member is notified when a payment is raised for them.",
+          "acceptance": [
+            "On saving a raise, every listed Member gets a notification on the agreed channel."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-17",
+            "OI-23",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome-tbc"
+        },
+        {
+          "id": "RPAY-06",
+          "title": "Raises list",
+          "statement": "Board Members see a list of raises with category, due date, Members count and total amount.",
+          "acceptance": [
+            "A Board Member can filter raises by category and due date."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-26",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Could",
+          "scope": "neome"
+        }
+      ],
+      "mapping": {
+        "neomeApp": null,
+        "delivery": "custom",
+        "how": "Raise Payment → new record built on the Neome platform: form with Payment title, Description, Amount, Due date, Payment category master list (Annual dues / Special assessment / Other), Applicable members picked from the Member Directory with select all (Employee Directory people, OI-38); stages Draft / Raised / Cancelled, no approval; on save a workflow automation creates one Payment entry per Member and sends the new payment request notification by Neome app notification; raises list as a sheet with filters; no payment gateway",
+        "indicative": true
+      },
+      "oiRefs": [
+        "OI-25",
+        "OI-38"
+      ]
+    },
+    {
+      "prefix": "PAY",
+      "name": "Payment",
+      "status": "resolved",
+      "purpose": {
+        "text": "Track one Payment entry per Member per raise: Members see their own and get reminders; Board Members see all and record payment. No online payment.",
+        "sources": [
+          "RFP-1",
+          "WS-1"
+        ],
+        "proposed": false
+      },
+      "kpis": [
+        {
+          "text": "More Payment entries paid by the due date; no overdue entry left unchased.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "asIs": [
+        {
+          "text": "Pain: Members must get notification alerts for dues.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "AS-IS: dues tracked in a spreadsheet; Board chases unpaid Members by hand and misses some.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "TO-BE: Raise Payment creates Payment entry → Member views pending payment → reminder one month before due date → Board Member records payment with proof → payment history updated.",
+          "sources": [
+            "RFP-1",
+            "WS-1",
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "roles": [
+        {
+          "role": "Board Member",
+          "does": "View all Payment entries (paid, pending, overdue); record payment with proof; waive; undo a wrong Paid; only role that changes status",
+          "headcount": "",
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "role": "Member",
+          "does": "View own Payment entries and history; download invoice; see own proof of payment; receive reminders; no status action",
+          "headcount": "",
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "records": [
+        {
+          "entity": "Payment",
+          "fields": [
+            {
+              "name": "Payment number",
+              "type": "text",
+              "required": true,
+              "notes": "Auto-numbered, e.g. PAY-0001",
+              "sources": [],
+              "proposed": true
+            },
+            {
+              "name": "Raise Payment",
+              "type": "link-to-entity",
+              "required": true,
+              "notes": "Links to: Raise Payment. Set when the raise is saved",
+              "linkTo": "Raise Payment",
+              "sources": [
+                "WS-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Member",
+              "type": "link-to-entity",
+              "required": true,
+              "notes": "Links to: Member",
+              "linkTo": "Member",
+              "sources": [
+                "WS-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Payment title",
+              "type": "text",
+              "required": true,
+              "notes": "Copied from the raise",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": true
+            },
+            {
+              "name": "Amount",
+              "type": "money",
+              "required": true,
+              "notes": "Copied from the raise; no partial payment",
+              "sources": [
+                "RFP-1",
+                "WS-3"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Due date",
+              "type": "date",
+              "required": true,
+              "notes": "Copied from the raise",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Pending / Overdue / Paid / Waived / Cancelled",
+              "choices": [
+                "Pending",
+                "Overdue",
+                "Paid",
+                "Waived",
+                "Cancelled"
+              ],
+              "sources": [
+                "WS-3"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Paid date",
+              "type": "date",
+              "required": false,
+              "notes": "Required when marked Paid",
+              "sources": [
+                "WS-3"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Payment method",
+              "type": "choice",
+              "required": false,
+              "notes": "Values: Check / Bank transfer / Cash / Other. Required when marked Paid",
+              "choices": [
+                "Check",
+                "Bank transfer",
+                "Cash",
+                "Other"
+              ],
+              "sources": [
+                "WS-3"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Reference number",
+              "type": "text",
+              "required": false,
+              "notes": "Optional",
+              "sources": [
+                "WS-3"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Proof of payment",
+              "type": "file",
+              "required": false,
+              "notes": "Document upload by Board Member; seen by Board Members and own Member only; optional",
+              "sources": [
+                "WS-3",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Status reason",
+              "type": "text",
+              "required": false,
+              "notes": "Required on Waived and on undo of a wrong Paid",
+              "sources": [
+                "WS-3"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Recorded by",
+              "type": "person",
+              "required": false,
+              "notes": "Board Member who marked Paid; set automatically",
+              "sources": [],
+              "proposed": true
+            }
+          ]
+        },
+        {
+          "entity": "Invoice",
+          "fields": [
+            {
+              "name": "(PDF per Payment entry)",
+              "type": "file",
+              "required": false,
+              "notes": "Made by Neome: HOA name, Member, title, amount, due date, status; once Paid adds paid date and method",
+              "sources": [
+                "WS-3"
+              ],
+              "proposed": false
+            }
+          ]
+        }
+      ],
+      "statuses": [
+        {
+          "id": "pending",
+          "start": true,
+          "end": false,
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "overdue",
+          "start": false,
+          "end": false,
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "paid",
+          "start": false,
+          "end": true,
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "waived",
+          "start": false,
+          "end": true,
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "cancelled",
+          "start": false,
+          "end": true,
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "transitions": [
+        {
+          "from": "pending",
+          "to": "overdue",
+          "trigger": "Due date passes (automatic)",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "pending",
+          "to": "paid",
+          "trigger": "Board Member records payment",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "overdue",
+          "to": "paid",
+          "trigger": "Board Member records payment",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "pending",
+          "to": "waived",
+          "trigger": "Board Member waives with a reason",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "overdue",
+          "to": "waived",
+          "trigger": "Board Member waives with a reason",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "pending",
+          "to": "cancelled",
+          "trigger": "Raise is cancelled",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "overdue",
+          "to": "cancelled",
+          "trigger": "Raise is cancelled",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "paid",
+          "to": "pending",
+          "trigger": "Board Member undoes a wrong Paid with a reason, due date not passed",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "paid",
+          "to": "overdue",
+          "trigger": "Board Member undoes a wrong Paid with a reason, due date passed",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "rules": [
+        {
+          "rule": "Board only status",
+          "when": "Any status change",
+          "action": "Only Board Members change Payment status",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Tracking only",
+          "when": "Always",
+          "action": "No online payment, no payment gateway",
+          "sources": [
+            "WS-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "No partial payment",
+          "when": "Recording payment",
+          "action": "Entry is paid in full or stays Pending / Overdue",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Payment reminder",
+          "when": "About one month before the due date",
+          "action": "Member notified, Neome app notification only",
+          "sources": [
+            "RFP-1",
+            "WS-3",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Overdue reminder",
+          "when": "Weekly after the due date until Paid, Waived or Cancelled",
+          "action": "Member notified, Neome app notification only",
+          "sources": [
+            "WS-3",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Payment received",
+          "when": "Entry marked Paid",
+          "action": "Member notified, Neome app notification only",
+          "sources": [
+            "WS-3",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Change log",
+          "when": "Status changes",
+          "action": "Each change kept with who, when and reason",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "exceptions": [
+        {
+          "text": "Entry marked Paid by mistake: Board Member sets it back to Pending / Overdue with a reason; the change is logged.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Member not liable: Board Member sets Waived with a reason; final.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Raise cancelled: open entries become Cancelled.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Part payment: not allowed; entry stays Pending / Overdue until paid in full.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "reports": [
+        {
+          "name": "Payment dashboard",
+          "audience": "Board Member",
+          "measures": "Total due, collected, pending, overdue; by raise and by Member",
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "name": "Overdue list",
+          "audience": "Board Member",
+          "measures": "Overdue entries with Member, raise, due date, amount",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "name": "My payments",
+          "audience": "Member",
+          "measures": "Own pending, upcoming, history, amount, status",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "integrations": [
+        {
+          "system": "Neome",
+          "direction": "in",
+          "data": "Payment entries; Neome is the system of record",
+          "owner": "Deans Pond HOA",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        }
+      ],
+      "volumes": [
+        {
+          "text": "No limit on raises, so no limit on Payment entries.",
+          "sources": [
+            "WS-2",
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Retention: no limit; Payment entries kept.",
+          "sources": [
+            "WS-3"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Devices: Members mostly on phone; Board Members on phone or desk.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "No volume limits; all entries unlimited.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "requirements": [
+        {
+          "id": "PAY-01",
+          "title": "Member payment view",
+          "statement": "Each Member can view their current pending payments, upcoming payments, previous payment history, payment amount and payment status, for their own account only.",
+          "acceptance": [
+            "Members can view their pending payments and payment history.",
+            "A Member cannot see another Member's payment information."
+          ],
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-02",
+          "title": "Payment reminder",
+          "statement": "Members receive a reminder for upcoming payments approximately one month before the payment due date, by Neome app notification only.",
+          "acceptance": [
+            "Members receive upcoming payment reminders about one month before the due date, as a Neome app notification; no email is sent."
+          ],
+          "sources": [
+            "RFP-1",
+            "WS-3",
+            "QA-1"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-03",
+          "title": "Board payment overview",
+          "statement": "Board Members can view payments for all members, see paid, pending and overdue payments separately, and track payment status.",
+          "acceptance": [
+            "Board Members can monitor paid, pending and overdue payments."
+          ],
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-04",
+          "title": "Raise payment collection",
+          "statement": "Board Members can create a payment request / collection for HOA members.",
+          "acceptance": [
+            "Board Members can raise payment collections."
+          ],
+          "sources": [
+            "RFP-1"
+          ],
+          "ois": [
+            "OI-18"
+          ],
+          "proposed": false,
+          "priority": "TBC",
+          "scope": "open",
+          "withdrawn": "Moved to RPAY-01"
+        },
+        {
+          "id": "PAY-05",
+          "title": "Payment tracking only",
+          "statement": "The system only tracks Payment entries; Members do not pay online and there is no payment gateway.",
+          "acceptance": [
+            "No Payment screen offers an online pay action."
+          ],
+          "sources": [
+            "WS-1",
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-06",
+          "title": "Board Member records payment received",
+          "statement": "A Board Member marks a Member's Payment entry as Paid, recording paid date, payment method, an optional reference number and a proof of payment document.",
+          "acceptance": [
+            "Once marked Paid, the entry moves from pending to paid in the Member's payment history.",
+            "The proof of payment document is visible to Board Members and to the entry's own Member only."
+          ],
+          "sources": [
+            "WS-1",
+            "WS-3"
+          ],
+          "ois": [
+            "OI-28",
+            "OI-53"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-07",
+          "title": "Only Board changes status",
+          "statement": "Only Board Members can change a Payment entry's status.",
+          "acceptance": [
+            "A Member has no status action on any Payment entry."
+          ],
+          "sources": [
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-08",
+          "title": "Payment stages",
+          "statement": "A Payment entry moves Pending → Overdue automatically after the due date, and ends Paid, Waived (with a reason) or Cancelled (raise cancelled); part payment is not allowed.",
+          "acceptance": [
+            "An unpaid entry shows Overdue the day after its due date.",
+            "Waived needs a reason.",
+            "An entry cannot be marked paid for part of its amount."
+          ],
+          "sources": [
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-09",
+          "title": "Download invoice",
+          "statement": "A Member can download a PDF invoice for each of their Payment entries.",
+          "acceptance": [
+            "The invoice shows HOA name, Member, title, amount, due date and status; once Paid it adds paid date and method."
+          ],
+          "sources": [
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-10",
+          "title": "Overdue reminder",
+          "statement": "A Member receives an overdue reminder weekly after the due date until the entry is Paid, Waived or Cancelled.",
+          "acceptance": [
+            "Reminders stop once the entry is Paid, Waived or Cancelled."
+          ],
+          "sources": [
+            "WS-3"
+          ],
+          "ois": [
+            "OI-16"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-11",
+          "title": "Payment received notification",
+          "statement": "A Member is notified when a Board Member marks their Payment entry Paid.",
+          "acceptance": [
+            "The Member gets a Neome app notification when the entry is marked Paid; no email is sent."
+          ],
+          "sources": [
+            "WS-3",
+            "QA-1"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-12",
+          "title": "Board payment dashboard",
+          "statement": "Board Members see total due, collected, pending and overdue amounts, by raise and by Member, and an overdue list.",
+          "acceptance": [
+            "A Board Member can filter the dashboard by raise and by Member."
+          ],
+          "sources": [
+            "RFP-1",
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-13",
+          "title": "Undo wrong Paid",
+          "statement": "A Board Member can set a wrongly Paid entry back to Pending or Overdue with a reason; the change is logged.",
+          "acceptance": [
+            "The log shows who changed it, when and why."
+          ],
+          "sources": [
+            "WS-3"
+          ],
+          "ois": [],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "PAY-14",
+          "title": "Keep payment records",
+          "statement": "Payment entries, proof of payment documents and status changes are kept with no time limit.",
+          "acceptance": [
+            "A Board Member can open any past Payment entry with its proof and change log."
+          ],
+          "sources": [
+            "WS-3",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        }
+      ],
+      "mapping": {
+        "neomeApp": null,
+        "delivery": "custom",
+        "how": "Payment → new record built on the Neome platform, created by the Raise Payment workflow, one per Member (Member Directory people, OI-38); fields incl. paid date, method master list, reference, proof of payment file; stages Pending / Overdue / Paid / Waived / Cancelled with Board-only actions and audit trail; reminder automations (one month before due, weekly overdue) and payment received notification by Neome app notification only; invoice PDF per entry; Member sheet scoped to own entries, Board sheet and dashboard; no payment gateway",
+        "indicative": true
+      },
+      "oiRefs": [
+        "OI-25"
+      ]
+    },
+    {
+      "prefix": "VEN",
+      "name": "Vendors",
+      "status": "resolved",
+      "purpose": {
+        "text": "Maintain a directory of vendors used or recommended by the HOA.",
+        "sources": [
+          "RFP-1"
+        ],
+        "proposed": false
+      },
+      "kpis": [
+        {
+          "text": "One trusted vendor list Members can find; directory kept up to date.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "asIs": [
+        {
+          "text": "Pain: Members need one trusted vendor list they can find, kept up to date.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Neome is the master vendor list after go-live.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "TO-BE: Board Member adds vendor → vendor information and documents stored → vendor listed in directory → Members view vendor details.",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "roles": [
+        {
+          "role": "Board Member",
+          "does": "Add, view and update vendors; maintain vendor documents and identification details",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "role": "Member",
+          "does": "View the vendor directory (read-only)",
+          "headcount": "",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "records": [
+        {
+          "entity": "Vendor",
+          "fields": [
+            {
+              "name": "Vendor Name",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Service Type / Category",
+              "type": "choice",
+              "required": true,
+              "notes": "Fixed list: Landscaping / Plumber / Electrician / Maintenance / Other. Examples: grass cutting / landscaping, plumber, electrician, maintenance, other HOA service providers",
+              "sources": [
+                "RFP-1",
+                "QA-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Contact Number",
+              "type": "text",
+              "required": true,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Email",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Address",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Government ID Proof",
+              "type": "file",
+              "required": true,
+              "notes": "sensitive personal information; any one valid US photo ID: driver's license, state ID or passport; seen by Board Members only; kept forever, secured in Neome",
+              "sources": [
+                "RFP-1",
+                "QA-1",
+                "QA-2"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Additional Notes",
+              "type": "text",
+              "required": false,
+              "notes": "",
+              "sources": [
+                "RFP-1"
+              ],
+              "proposed": false
+            },
+            {
+              "name": "Status",
+              "type": "choice",
+              "required": true,
+              "notes": "Values: Active / Inactive",
+              "choices": [
+                "Active",
+                "Inactive [QA-1]"
+              ],
+              "sources": [
+                "QA-1"
+              ],
+              "proposed": false
+            }
+          ]
+        }
+      ],
+      "statuses": [
+        {
+          "id": "active",
+          "start": true,
+          "end": false,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "id": "inactive",
+          "start": false,
+          "end": true,
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "transitions": [
+        {
+          "from": "active",
+          "to": "inactive",
+          "trigger": "Board Member sets Inactive when the HOA stops using the vendor",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "from": "inactive",
+          "to": "active",
+          "trigger": "Board Member reactivates the vendor",
+          "sources": [],
+          "proposed": true
+        }
+      ],
+      "rules": [
+        {
+          "rule": "Board-only edit",
+          "when": "Member opens the vendor directory",
+          "action": "No add or edit action offered; read-only",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Government ID Proof restricted",
+          "when": "Vendor record opened",
+          "action": "Government ID Proof shown to Board Members only",
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "No approval to add",
+          "when": "Board Member saves a new vendor",
+          "action": "Vendor listed at once; no second Board Member approval",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Active vendors only",
+          "when": "Member opens the vendor directory",
+          "action": "Only Active vendors listed",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "rule": "Government ID Proof kept forever",
+          "when": "Vendor set Inactive, or any time after upload",
+          "action": "Government ID Proof never deleted; stays secured in Neome",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "exceptions": [
+        {
+          "text": "HOA stops using a vendor: Board Member sets the vendor Inactive; record and documents kept, not deleted.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Vendor details change (new number, new ID): Board Member updates the vendor record.",
+          "sources": [
+            "RFP-1"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "A vendor cannot be deleted; it is set Inactive.",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "reports": [
+        {
+          "name": "Vendors by category",
+          "audience": "Board Member, Member",
+          "measures": "Active vendors filtered by Service Type / Category",
+          "sources": [],
+          "proposed": true
+        }
+      ],
+      "integrations": [
+        {
+          "system": "Neome",
+          "direction": "in",
+          "data": "Vendor directory; Neome is the master after go-live",
+          "owner": "HOA",
+          "sources": [
+            "QA-1"
+          ],
+          "proposed": false
+        }
+      ],
+      "volumes": [
+        {
+          "text": "No limit on vendors; all entries unlimited.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        },
+        {
+          "text": "Government ID Proof kept forever, secured in Neome.",
+          "sources": [
+            "QA-2"
+          ],
+          "proposed": false
+        }
+      ],
+      "requirements": [
+        {
+          "id": "VEN-01",
+          "title": "Vendor directory fields",
+          "statement": "The vendor directory records Vendor Name, Service Type / Category, Contact Number and Government ID Proof (required) and Email, Address and Additional Notes (optional).",
+          "acceptance": [
+            "A vendor cannot be saved without Vendor Name, Service Type / Category, Contact Number and Government ID Proof."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-19",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "VEN-02",
+          "title": "Vendor management",
+          "statement": "Board Members can add vendors, view vendors, update vendor information, and maintain vendor documents and identification details.",
+          "acceptance": [
+            "Board Members can maintain the vendor directory."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "VEN-03",
+          "title": "Member read-only vendor directory",
+          "statement": "Members have read-only access to the vendor directory.",
+          "acceptance": [
+            "Members can access the approved vendor directory.",
+            "A Member is offered no add or edit action on any vendor."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-20",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome"
+        },
+        {
+          "id": "VEN-04",
+          "title": "Government ID Proof restricted",
+          "statement": "Government ID Proof holds sensitive personal information and is shown to Board Members only.",
+          "acceptance": [
+            "A Member viewing a vendor does not see or download its Government ID Proof.",
+            "Government ID Proof is kept forever and stays secured in Neome."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1",
+            "QA-2"
+          ],
+          "ois": [
+            "OI-20",
+            "OI-21",
+            "OI-25",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Must",
+          "scope": "neome-tbc"
+        },
+        {
+          "id": "VEN-05",
+          "title": "Service categories",
+          "statement": "Service Type / Category is picked from a fixed list: Landscaping, Plumber, Electrician, Maintenance, Other.",
+          "acceptance": [
+            "A Board Member picks one category per vendor from the list."
+          ],
+          "sources": [
+            "RFP-1",
+            "QA-1"
+          ],
+          "ois": [
+            "OI-56",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "VEN-06",
+          "title": "Vendor stages",
+          "statement": "A vendor is Active or Inactive; a Board Member sets a vendor Inactive when the HOA stops using it, and Members see Active vendors only.",
+          "acceptance": [
+            "An Inactive vendor does not show in the Members' directory and is not deleted.",
+            "A Board Member can set an Inactive vendor Active again."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-55",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Should",
+          "scope": "neome"
+        },
+        {
+          "id": "VEN-07",
+          "title": "Find vendors by category",
+          "statement": "Board Members and Members can filter the vendor directory by Service Type / Category.",
+          "acceptance": [
+            "Picking a category lists only Active vendors of that category."
+          ],
+          "sources": [
+            "QA-1"
+          ],
+          "ois": [
+            "OI-56",
+            "OI-37"
+          ],
+          "proposed": false,
+          "priority": "Could",
+          "scope": "neome"
+        }
+      ],
+      "mapping": {
+        "neomeApp": "purchase-management",
+        "delivery": "configuration",
+        "how": "Vendor → Vendor (vendor master) only, no purchase requests or orders; Service Type / Category as a master list; Government ID Proof as a restricted document field seen by Board Members only, kept forever (no delete; encryption at rest is platform standard); Active / Inactive stages; Members read-only with a category filter on Active vendors; HOA Members as people who are not employees (OI-38); hangs on OI-58",
+        "indicative": true
+      },
+      "oiRefs": [
+        "OI-25",
+        "OI-38",
+        "OI-58"
+      ]
+    }
+  ],
+  "general": {
+    "requirements": [
+      {
+        "id": "GEN-01",
+        "title": "Role-based access",
+        "statement": "Role-based access is implemented for Board Members and Members as per the Access Control Matrix.",
+        "acceptance": [
+          "Each function in the Access Control Matrix is allowed or denied per role exactly as listed.",
+          "A Member sees only their own account, not the Member Directory; Board Members see the full directory.",
+          "Vendor Government ID Proof is seen by Board Members only."
+        ],
+        "sources": [
+          "RFP-1",
+          "QA-1"
+        ],
+        "ois": [
+          "OI-01",
+          "OI-20"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "open",
+        "topic": "access"
+      },
+      {
+        "id": "GEN-02",
+        "title": "Currency, language and date format",
+        "statement": "The system uses USD, English and the US date format.",
+        "acceptance": [
+          "Amounts show in USD, screens in English, dates in US format (MM/DD/YYYY)."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-29"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "open",
+        "topic": "localisation"
+      },
+      {
+        "id": "GEN-03",
+        "title": "Support after go-live",
+        "statement": "Neome gives support after go-live for as long as the subscription runs.",
+        "acceptance": [
+          "Support is available to the HOA for the whole subscription period."
+        ],
+        "sources": [
+          "QA-2"
+        ],
+        "ois": [
+          "OI-32"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "open",
+        "topic": "support"
+      },
+      {
+        "id": "GEN-04",
+        "title": "Notification channel",
+        "statement": "All Modules, Payment included, notify by Neome app notification only; no email, SMS or WhatsApp.",
+        "acceptance": [
+          "Every notification in every Module is sent as a Neome app notification; none is sent by email, SMS or WhatsApp."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-23"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "open",
+        "topic": "other"
+      },
+      {
+        "id": "GEN-05",
+        "title": "Board dashboard",
+        "statement": "Board Members have a dashboard showing total Members; open tickets and tickets by status; payments due, collected, pending and overdue; upcoming events.",
+        "acceptance": [
+          "A Board Member sees each listed figure on one dashboard, matching the records."
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "ois": [
+          "OI-26"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "open",
+        "topic": "other"
+      },
+      {
+        "id": "GEN-06",
+        "title": "No volume limits",
+        "statement": "No volume limits apply; Members, vendors, tickets, payments and other entries are unlimited.",
+        "acceptance": [
+          "No Module caps the number of entries."
+        ],
+        "sources": [
+          "QA-2"
+        ],
+        "ois": [
+          "OI-27"
+        ],
+        "proposed": true,
+        "priority": "TBC",
+        "scope": "open",
+        "topic": "other"
+      }
+    ],
+    "na": [
+      {
+        "topic": "hosting",
+        "reason": "not in scope; standard Neome hosting and Neome login.",
+        "sources": [
+          "QA-1"
+        ]
+      },
+      {
+        "topic": "migration",
+        "reason": "fresh start; no existing data to migrate.",
+        "sources": [
+          "QA-2"
+        ]
+      },
+      {
+        "topic": "training",
+        "reason": "training not in scope.",
+        "sources": [
+          "QA-1"
+        ]
+      }
+    ],
+    "oiRefs": []
+  },
+  "plan": {
+    "phases": [
+      {
+        "id": "masters",
+        "name": "Masters and core set-up",
+        "covers": "Users, roles, Member Directory, vendor directory, core set-up",
+        "weekFrom": null,
+        "weekTo": null,
+        "modules": [
+          "MEM",
+          "VEN",
+          "GEN"
+        ],
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "id": "workflow",
+        "name": "Workflow and process set-up",
+        "covers": "Announcements, tickets, payment raise and entries, statuses, reminders",
+        "weekFrom": null,
+        "weekTo": null,
+        "modules": [
+          "ANN",
+          "TKT"
+        ],
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "id": "uat",
+        "name": "Testing and UAT",
+        "covers": "Testing with Board Members and Members",
+        "weekFrom": null,
+        "weekTo": null,
+        "modules": [
+          "MEM",
+          "ANN",
+          "TKT",
+          "VEN"
+        ],
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "id": "go-live",
+        "name": "Go-live and support",
+        "covers": "Hand-over, support",
+        "weekFrom": null,
+        "weekTo": null,
+        "modules": [
+          "GEN"
+        ],
+        "sources": [],
+        "proposed": true
+      }
+    ],
+    "notPlaced": [
+      {
+        "text": "Notification set-up: Neome app notification only; no email, SMS or WhatsApp",
+        "ois": [],
+        "modules": [
+          "GEN"
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "text": "Board Member dashboard and reports",
+        "ois": [],
+        "modules": [
+          "GEN"
+        ],
+        "sources": [
+          "QA-1"
+        ],
+        "proposed": false
+      },
+      {
+        "text": "Raise Payment as a Custom module",
+        "ois": [],
+        "modules": [
+          "RPAY"
+        ],
+        "sources": [],
+        "proposed": true
+      },
+      {
+        "text": "Payment as a Custom module",
+        "ois": [
+          "OI-38"
+        ],
+        "modules": [
+          "PAY"
+        ],
+        "sources": [],
+        "proposed": true
+      }
+    ]
+  },
+  "openItems": [
+    {
+      "id": "OI-01",
+      "question": "Should Members be able to view the directory and contact information of other Members? Access Control Matrix row \"View Member Directory\" says Member = Yes; member access section says each member sees only their own account [RFP-1]",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No; each Member sees only their own account; Board Members see the full directory",
+      "suggested": "No; each Member sees only their own account; Board Members see the full directory [RFP-1]",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-02",
+      "question": "Should family members have separate login accounts or only be recorded under the primary Member? [RFP-1]",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Recorded under the primary Member as Number of Family Members; no separate logins",
+      "suggested": "Recorded under the primary Member as Number of Family Members; no separate logins (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-03",
+      "question": "Which additional member information is in scope — family member details, property ownership details, emergency contacts, vehicle information? Marked TBC [RFP-1]",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "None for now; only the fields on the registration form",
+      "suggested": "None for now; only the fields on the registration form [RFP-1]",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-04",
+      "question": "Who registers a new member — Board Member or the member themselves?",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Board Members add members (Manage Members is Board-only in the Access Control Matrix)",
+      "suggested": "Board Members add members (Manage Members is Board-only in the Access Control Matrix) (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-05",
+      "question": "What is the \"Number of Cards\" field on the member registration form for? [RFP-1]",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "open",
+      "askedIn": [
+        "QN-2026-11-02",
+        "QN-2026-11-02-2"
+      ],
+      "askTo": "Board Member"
+    },
+    {
+      "id": "OI-06",
+      "question": "What information is required for event / party announcements? Field list is \"may include\" [RFP-1]",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Event title and Event date required; Description, Start time, End time, Venue / location, Contact person optional",
+      "suggested": "Event title and Event date required; Description, Start time, End time, Venue / location, Contact person optional (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-07",
+      "question": "Is RSVP or event registration required? [RFP-1]",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No RSVP; announcement only",
+      "suggested": "No RSVP; announcement only (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-08",
+      "question": "Are new announcement and new event notifications required? [RFP-1]",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Yes; all Members notified when an announcement or event is published",
+      "suggested": "Yes; all Members notified when an announcement or event is published (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-09",
+      "question": "What fields are required for a ticket? Field list is \"may include\" [RFP-1]",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Ticket title, Category, Description required; Attachment / photo, Priority optional; Date set automatically",
+      "suggested": "Ticket title, Category, Description required; Attachment / photo, Priority optional; Date set automatically (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-10",
+      "question": "What ticket categories and statuses are required? [RFP-1]",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Statuses Open / In Progress / Resolved / Closed; categories Maintenance / Landscaping / Security / Noise / Other",
+      "suggested": "Statuses Open / In Progress / Resolved / Closed [RFP-1]; categories Maintenance / Landscaping / Security / Noise / Other (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-11",
+      "question": "Should Members be able to comment or respond on their tickets? [RFP-1]",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Yes; a Member can add comments on their own tickets",
+      "suggested": "Yes; a Member can add comments on their own tickets (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-12",
+      "question": "Should ticket photos / documents be supported? [RFP-1]",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Yes; optional photo or document on a ticket",
+      "suggested": "Yes; optional photo or document on a ticket (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-13",
+      "question": "Are ticket status update and ticket response notifications required? [RFP-1]",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Yes; the Member is notified on each status change and Board response",
+      "suggested": "Yes; the Member is notified on each status change and Board response (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-14",
+      "question": "How will HOA payments actually be collected? [RFP-1]",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [],
+      "answer": "Not collected through the system; the system only tracks Payment entries.",
+      "answerSource": "WS-1"
+    },
+    {
+      "id": "OI-15",
+      "question": "Will Members make payments directly through the Neome platform, or will the system only track payment records? [RFP-1]",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [],
+      "answer": "No online payment; the system only tracks payment records.",
+      "answerSource": "WS-1"
+    },
+    {
+      "id": "OI-16",
+      "question": "Should overdue reminders also be sent after the due date? [RFP-1]",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [],
+      "answer": "Yes: weekly after the due date until Paid, Waived or Cancelled.",
+      "answerSource": "WS-3"
+    },
+    {
+      "id": "OI-17",
+      "question": "Are new payment request, payment received confirmation, and overdue payment reminder notifications required? [RFP-1] Payment received and overdue answered for PAY [WS-3]; new payment request still open",
+      "modules": [
+        "RPAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Yes; each listed Member is notified when a new payment is raised",
+      "suggested": "Yes; each listed Member is notified when a new payment is raised [WS-1]",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-18",
+      "question": "Which fields and payment categories apply to a Raise Payment? Field list is \"may include\" [RFP-1]",
+      "modules": [
+        "PAY",
+        "RPAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Title, Amount, Due date, Applicable members required; Description optional; categories Annual dues / Special assessment / Other",
+      "suggested": "Title, Amount, Due date, Applicable members required; Description optional; categories Annual dues / Special assessment / Other (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-19",
+      "question": "Which government ID proof should be collected for vendors? [RFP-1]",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Any one valid US photo ID: driver's license, state ID or passport",
+      "suggested": "Any one valid US photo ID: driver's license, state ID or passport (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-20",
+      "question": "Should Members be allowed to view vendor government ID documents, or should these remain accessible only to Board Members? Access Control Matrix row \"View Vendor Government ID\" says Member = Yes; §9.3 says access must be confirmed before implementation [RFP-1]",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No; Government ID Proof seen by Board Members only",
+      "suggested": "No; Government ID Proof seen by Board Members only (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-21",
+      "question": "What are the document retention and security requirements for vendor government ID documents? [RFP-1]",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Kept forever; secured in Neome",
+      "askTo": "Board Member",
+      "answerSource": "QA-2"
+    },
+    {
+      "id": "OI-22",
+      "question": "Is vendor rating / feedback required? [RFP-1]",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No",
+      "suggested": "No (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-23",
+      "question": "Which notification channels should be used — Neome application notification, email, SMS, WhatsApp? Channels TBC [RFP-1]",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Neome app notification only, for all Modules including Payment; no email, SMS or WhatsApp",
+      "suggested": "Neome app notification and email for all Modules, as for Payment [WS-3]; no SMS or WhatsApp (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-24",
+      "question": "Is there any existing member, payment, ticket, or vendor data that needs to be migrated? [RFP-1]",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No; fresh start, no data to migrate",
+      "askTo": "Board Member",
+      "answerSource": "QA-2"
+    },
+    {
+      "id": "OI-25",
+      "question": "Are there any specific US privacy, security, or HOA regulatory requirements that need to be considered? [RFP-1]",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "open",
+      "askedIn": [
+        "QN-2026-11-02",
+        "QN-2026-11-02-2"
+      ],
+      "askTo": "Board Member"
+    },
+    {
+      "id": "OI-26",
+      "question": "What are the reporting and dashboard requirements? \"Not yet defined\", to be finalized with the customer [RFP-1]",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Board dashboard: total Members; open tickets and tickets by status; payments due, collected, pending, overdue; upcoming events",
+      "suggested": "Board dashboard: total Members; open tickets and tickets by status; payments due, collected, pending, overdue [WS-3]; upcoming events (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-27",
+      "question": "What volumes apply — how many Board Members, Members, vendors, tickets and payments per month?",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No volume limits; all entries unlimited",
+      "askTo": "Board Member",
+      "answerSource": "QA-2"
+    },
+    {
+      "id": "OI-28",
+      "question": "Who marks a Payment entry as paid, and how (proof, date, method)?",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [],
+      "answer": "Only Board Members; paid date, method, optional reference, proof of payment document.",
+      "suggested": "Board Member records payment received on the entry (proposed, to confirm)",
+      "answerSource": "WS-3"
+    },
+    {
+      "id": "OI-29",
+      "question": "Which currency, language and date format apply?",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "USD, English, US date format",
+      "suggested": "USD, English, US date format (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-30",
+      "question": "Any hosting, data residency or single sign-on needs?",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Not in scope: standard Neome hosting, Neome login",
+      "suggested": "Not in scope: standard Neome hosting, Neome login (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-31",
+      "question": "Who trains Board Members and Members, and how?",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Not in scope",
+      "suggested": "Not in scope (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-32",
+      "question": "Who gives support after go-live, how and for how long?",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Neome gives support for as long as the subscription runs",
+      "askTo": "Board Member",
+      "answerSource": "QA-2"
+    },
+    {
+      "id": "OI-33",
+      "question": "What must the Member Directory fix today, and which number shows it works (KPI)?",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "One up-to-date member list; all Members registered within 1 month of go-live",
+      "suggested": "One up-to-date member list; all Members registered within 1 month of go-live (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-34",
+      "question": "Where is the member list kept today, and will Neome be the master (system of record) after go-live?",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Spreadsheet today; Neome is master after go-live",
+      "suggested": "Spreadsheet today; Neome is master after go-live (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-35",
+      "question": "What stages does a member record have, and what happens when a Member moves out or sells?",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Active → Inactive; Board Member sets Inactive on move-out; record kept, login stopped",
+      "suggested": "Active → Inactive; Board Member sets Inactive on move-out; record kept, login stopped (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-36",
+      "question": "Does a new member registration need approval, and is the Member told when their account is ready?",
+      "modules": [
+        "MEM"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No approval; Member gets a login invite",
+      "suggested": "No approval; Member gets a login invite (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-37",
+      "question": "Confirm the proposed priority, Scope tag and acceptance criteria of: MEM-01, MEM-02, MEM-03, MEM-04, MEM-05, MEM-06, MEM-07, MEM-08, ANN-01, ANN-02, ANN-03, ANN-04, ANN-05, ANN-06, ANN-07, ANN-08, TKT-01, TKT-02, TKT-03, TKT-04, TKT-05, TKT-06, TKT-07, TKT-08, TKT-09, RPAY-01, RPAY-02, RPAY-03, RPAY-04, RPAY-05, RPAY-06, PAY-14, VEN-01, VEN-02, VEN-03, VEN-04, VEN-05, VEN-06, VEN-07",
+      "modules": [
+        "All"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "As proposed in the BRD",
+      "suggested": "As proposed in the BRD (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-38",
+      "question": "Can the Employee Directory App hold HOA Members (people who are not employees: address, family count, cards, own login) as set-up, or is a Custom module needed?",
+      "modules": [
+        "MEM",
+        "TKT",
+        "RPAY",
+        "VEN"
+      ],
+      "owner": "neomenta",
+      "status": "open",
+      "askedIn": [],
+      "suggested": "Configuration of Employee Directory (proposed, to confirm)",
+      "askTo": "Neomenta product team"
+    },
+    {
+      "id": "OI-39",
+      "question": "What goes wrong today with announcements, and which number shows it works (KPI)?",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "All Members see notices in one place; no notices missed",
+      "suggested": "All Members see notices in one place; no notices missed (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-40",
+      "question": "Which fields does a General Announcement hold?",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Title, Message, Publish date required; Attachment optional",
+      "suggested": "Title, Message, Publish date required; Attachment optional (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-41",
+      "question": "Does an announcement need another Board Member's approval before it is published?",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No; any Board Member publishes",
+      "suggested": "No; any Board Member publishes (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-42",
+      "question": "What stages does an announcement have, and can a published one be edited, removed or expire?",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Draft → Published → Archived; Board Member can edit or archive; Event / Party Announcements archive after the event date",
+      "suggested": "Draft → Published → Archived; Board Member can edit or archive; Event / Party Announcements archive after the event date (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-43",
+      "question": "How many announcements and events a month, and is Neome the only place they are posted (system of record)?",
+      "modules": [
+        "ANN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Neome only",
+      "suggested": "Neome only (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-44",
+      "question": "What goes wrong today with HOA concerns and requests, and which number shows the Tickets Module works (KPI)?",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Every concern tracked in one place; every ticket gets a Board response",
+      "suggested": "Every concern tracked in one place; every ticket gets a Board response (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-45",
+      "question": "Who closes a resolved ticket (Board Member, or after the Member confirms), and can a closed ticket be reopened?",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Board Member closes; no reopen, Member raises a new ticket",
+      "suggested": "Board Member closes; no reopen, Member raises a new ticket (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-46",
+      "question": "Is a ticket assigned to one Board Member or shared by all, is there a response-time target, and does any ticket action need approval?",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Shared by all Board Members; no target; no approval",
+      "suggested": "Shared by all Board Members; no target; no approval (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-47",
+      "question": "How many tickets a month, and is Neome the only place tickets are raised (system of record)?",
+      "modules": [
+        "TKT"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Neome only",
+      "suggested": "Neome only (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-48",
+      "question": "What must Raise Payment fix today, and which number shows it works (KPI)?",
+      "modules": [
+        "RPAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Every raise reaches all listed Members; no Member missed",
+      "suggested": "Every raise reaches all listed Members; no Member missed (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-49",
+      "question": "Does a raise need another Board Member's approval before Payment entries are created?",
+      "modules": [
+        "RPAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "No; any Board Member raises",
+      "suggested": "No; any Board Member raises (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-50",
+      "question": "What stages does a raise have, and can it be changed or cancelled after Payment entries are created?",
+      "modules": [
+        "RPAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Draft → Raised → Cancelled; after Raised only Members can be added; cancel cancels unpaid entries",
+      "suggested": "Draft → Raised → Cancelled; after Raised only Members can be added; cancel cancels unpaid entries (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-51",
+      "question": "How are dues tracked today, and what goes wrong?",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Spreadsheet; Board chases unpaid Members by hand, misses some",
+      "suggested": "Spreadsheet; Board chases unpaid Members by hand, misses some (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-52",
+      "question": "Which devices do Members and Board Members use for payments?",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Members mostly on phone; Board on phone or desk",
+      "suggested": "Members mostly on phone; Board on phone or desk (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-53",
+      "question": "Is a proof of payment document required to mark an entry Paid?",
+      "modules": [
+        "PAY"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Optional",
+      "suggested": "Optional (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-54",
+      "question": "What goes wrong today when Members need a vendor, and which number shows the Vendors Module works (KPI)?",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "One trusted vendor list Members can find; directory kept up to date",
+      "suggested": "One trusted vendor list Members can find; directory kept up to date (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-55",
+      "question": "What stages does a vendor have, can a vendor be removed, and does adding a vendor need another Board Member's approval?",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Active / Inactive; Board Member sets Inactive when the HOA stops using a vendor, not deleted; Members see Active only; no approval",
+      "suggested": "Active / Inactive; Board Member sets Inactive when the HOA stops using a vendor, not deleted; Members see Active only; no approval (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-56",
+      "question": "Is Service Type / Category a fixed list, and which values?",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Landscaping / Plumber / Electrician / Maintenance / Other",
+      "suggested": "Landscaping / Plumber / Electrician / Maintenance / Other (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-57",
+      "question": "How many vendors, where is the vendor list kept today, and will Neome be the master (system of record) after go-live?",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "enterprise",
+      "status": "closed",
+      "askedIn": [
+        "QN-2026-11-02"
+      ],
+      "answer": "Neome is the master after go-live",
+      "suggested": "Neome is the master after go-live (proposed, to confirm)",
+      "askTo": "Board Member",
+      "answerSource": "QA-1"
+    },
+    {
+      "id": "OI-58",
+      "question": "Can the Purchase Management vendor master be used alone (no purchase requests or orders) as a vendor directory that Members read, with Government ID Proof restricted to Board Members, or is a Custom module needed?",
+      "modules": [
+        "VEN"
+      ],
+      "owner": "neomenta",
+      "status": "open",
+      "askedIn": [],
+      "suggested": "Configuration of Purchase Management vendor master (proposed, to confirm)",
+      "askTo": "Neomenta product team"
+    }
+  ],
+  "changelog": []
+}
