@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: VEN
 name: Vendors
 blockedBy: [MEM]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # VEN — Vendors
