@@ -1,5 +1,7 @@
 # Map: HOA Management
 
+lock: Aditya Parmar · review-draft · 2026-11-02T06:33Z
+
 ## Destination
 
 A signed-off BRD for HOA Management.
