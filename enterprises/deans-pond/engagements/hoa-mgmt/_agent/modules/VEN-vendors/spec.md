@@ -2,7 +2,7 @@
 
 Prefix: VEN
 Name: Vendors
-Status: needs-revisit
+Status: claimed
 Sources: RFP-1, QA-1, QA-2
 
 ## 1 Purpose and KPIs

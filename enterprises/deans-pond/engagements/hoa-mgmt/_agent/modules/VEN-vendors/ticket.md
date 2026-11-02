@@ -1,5 +1,5 @@
 ---
-status: needs-revisit
+status: claimed
 prefix: VEN
 name: Vendors
 blockedBy: [MEM]
