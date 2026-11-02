@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: RPAY
 name: Raise Payment
 blockedBy: [MEM]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # RPAY — Raise Payment
