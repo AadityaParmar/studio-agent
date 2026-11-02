@@ -17,8 +17,8 @@
 | OI-13 | Are ticket status update and ticket response notifications required? [RFP-1] | TKT | Enterprise |  |  | open |  |  |  |
 | OI-14 | How will HOA payments actually be collected? [RFP-1] | PAY | Enterprise |  |  | closed |  | WS-1 | Not collected through the system; the system only tracks Payment entries. |
 | OI-15 | Will Members make payments directly through the Neome platform, or will the system only track payment records? [RFP-1] | PAY | Enterprise |  |  | closed |  | WS-1 | No online payment; the system only tracks payment records. |
-| OI-16 | Should overdue reminders also be sent after the due date? [RFP-1] | PAY | Enterprise |  |  | open |  |  |  |
-| OI-17 | Are new payment request, payment received confirmation, and overdue payment reminder notifications required? [RFP-1] | PAY, RPAY | Enterprise |  |  | open |  |  |  |
+| OI-16 | Should overdue reminders also be sent after the due date? [RFP-1] | PAY | Enterprise |  |  | closed |  | WS-3 | Yes: weekly after the due date until Paid, Waived or Cancelled. |
+| OI-17 | Are new payment request, payment received confirmation, and overdue payment reminder notifications required? [RFP-1] Payment received and overdue answered for PAY [WS-3]; new payment request still open | RPAY | Enterprise |  |  | open |  |  |  |
 | OI-18 | Which fields and payment categories apply to a Raise Payment? Field list is "may include" [RFP-1] | PAY, RPAY | Enterprise | Board Member | Title, Amount, Due date, Applicable members required; Description optional; categories Annual dues / Special assessment / Other (proposed, to confirm) | open |  |  |  |
 | OI-19 | Which government ID proof should be collected for vendors? [RFP-1] | VEN | Enterprise |  |  | open |  |  |  |
 | OI-20 | Should Members be allowed to view vendor government ID documents, or should these remain accessible only to Board Members? Access Control Matrix row "View Vendor Government ID" says Member = Yes; §9.3 says access must be confirmed before implementation [RFP-1] | VEN | Enterprise |  |  | open |  |  |  |
@@ -29,7 +29,7 @@
 | OI-25 | Are there any specific US privacy, security, or HOA regulatory requirements that need to be considered? [RFP-1] | All | Enterprise |  |  | open |  |  |  |
 | OI-26 | What are the reporting and dashboard requirements? "Not yet defined", to be finalized with the customer [RFP-1] | All | Enterprise |  |  | open |  |  |  |
 | OI-27 | What volumes apply — how many Board Members, Members, vendors, tickets and payments per month? | All | Enterprise |  |  | open |  |  |  |
-| OI-28 | Who marks a Payment entry as paid, and how (proof, date, method)? | PAY | Enterprise |  | Board Member records payment received on the entry (proposed, to confirm) | open |  |  |  |
+| OI-28 | Who marks a Payment entry as paid, and how (proof, date, method)? | PAY | Enterprise |  | Board Member records payment received on the entry (proposed, to confirm) | closed |  | WS-3 | Only Board Members; paid date, method, optional reference, proof of payment document. |
 | OI-29 | Which currency, language and date format apply? | All | Enterprise |  | USD, English, US date format (proposed, to confirm) | open |  |  |  |
 | OI-30 | Any hosting, data residency or single sign-on needs? | All | Enterprise |  | Not in scope: standard Neome hosting, Neome login (proposed, to confirm) | open |  |  |  |
 | OI-31 | Who trains Board Members and Members, and how? | All | Enterprise |  | Not in scope (proposed, to confirm) | open |  |  |  |
@@ -38,7 +38,7 @@
 | OI-34 | Where is the member list kept today, and will Neome be the master (system of record) after go-live? | MEM | Enterprise | Board Member | Spreadsheet today; Neome is master after go-live (proposed, to confirm) | open |  |  |  |
 | OI-35 | What stages does a member record have, and what happens when a Member moves out or sells? | MEM | Enterprise | Board Member | Active → Inactive; Board Member sets Inactive on move-out; record kept, login stopped (proposed, to confirm) | open |  |  |  |
 | OI-36 | Does a new member registration need approval, and is the Member told when their account is ready? | MEM | Enterprise | Board Member | No approval; Member gets a login invite (proposed, to confirm) | open |  |  |  |
-| OI-37 | Confirm the proposed priority, Scope tag and acceptance criteria of: MEM-01, MEM-02, MEM-03, MEM-04, MEM-05, MEM-06, MEM-07, MEM-08, ANN-01, ANN-02, ANN-03, ANN-04, ANN-05, ANN-06, ANN-07, ANN-08, TKT-01, TKT-02, TKT-03, TKT-04, TKT-05, TKT-06, TKT-07, TKT-08, TKT-09, RPAY-01, RPAY-02, RPAY-03, RPAY-04, RPAY-05, RPAY-06 | All | Enterprise | Board Member | As proposed in the BRD (proposed, to confirm) | open |  |  |  |
+| OI-37 | Confirm the proposed priority, Scope tag and acceptance criteria of: MEM-01, MEM-02, MEM-03, MEM-04, MEM-05, MEM-06, MEM-07, MEM-08, ANN-01, ANN-02, ANN-03, ANN-04, ANN-05, ANN-06, ANN-07, ANN-08, TKT-01, TKT-02, TKT-03, TKT-04, TKT-05, TKT-06, TKT-07, TKT-08, TKT-09, RPAY-01, RPAY-02, RPAY-03, RPAY-04, RPAY-05, RPAY-06, PAY-14 | All | Enterprise | Board Member | As proposed in the BRD (proposed, to confirm) | open |  |  |  |
 | OI-38 | Can the Employee Directory App hold HOA Members (people who are not employees: address, family count, cards, own login) as set-up, or is a Custom module needed? | MEM, TKT, RPAY | Neomenta | Neomenta product team | Configuration of Employee Directory (proposed, to confirm) | open |  |  |  |
 | OI-39 | What goes wrong today with announcements, and which number shows it works (KPI)? | ANN | Enterprise | Board Member | All Members see notices in one place; no notices missed (proposed, to confirm) | open |  |  |  |
 | OI-40 | Which fields does a General Announcement hold? | ANN | Enterprise | Board Member | Title, Message, Publish date required; Attachment optional (proposed, to confirm) | open |  |  |  |
@@ -52,3 +52,6 @@
 | OI-48 | What must Raise Payment fix today, and which number shows it works (KPI)? | RPAY | Enterprise | Board Member | Every raise reaches all listed Members; no Member missed (proposed, to confirm) | open |  |  |  |
 | OI-49 | Does a raise need another Board Member's approval before Payment entries are created? | RPAY | Enterprise | Board Member | No; any Board Member raises (proposed, to confirm) | open |  |  |  |
 | OI-50 | What stages does a raise have, and can it be changed or cancelled after Payment entries are created? | RPAY | Enterprise | Board Member | Draft → Raised → Cancelled; after Raised only Members can be added; cancel cancels unpaid entries (proposed, to confirm) | open |  |  |  |
+| OI-51 | How are dues tracked today, and what goes wrong? | PAY | Enterprise | Board Member | Spreadsheet; Board chases unpaid Members by hand, misses some (proposed, to confirm) | open |  |  |  |
+| OI-52 | Which devices do Members and Board Members use for payments? | PAY | Enterprise | Board Member | Members mostly on phone; Board on phone or desk (proposed, to confirm) | open |  |  |  |
+| OI-53 | Is a proof of payment document required to mark an entry Paid? | PAY | Enterprise | Board Member | Optional (proposed, to confirm) | open |  |  |  |

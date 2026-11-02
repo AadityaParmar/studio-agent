@@ -57,10 +57,15 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| view-pending-payment | member | PAY | View pending payment |  | step |  | RFP-1 |
-| send-payment-reminder | notify | PAY | Send reminder one month before due date | Channel open | step | OI-23 | RFP-1 |
-| record-payment | board | PAY | Mark entry paid | No online payment | step | OI-28 | WS-1 |
-| update-payment-history | member | PAY | Payment history updated |  | step |  | RFP-1 |
+| view-pending-payment | member | PAY | View pending payment | Own entries only; status Pending | step |  | RFP-1, WS-3 |
+| send-payment-reminder | notify | PAY | Send reminder one month before due date | App notification and email | step |  | RFP-1, WS-3 |
+| send-overdue-reminder | notify | PAY | Mark Overdue and send weekly overdue reminder | Automatic after due date; weekly until Paid, Waived or Cancelled | step |  | WS-3 |
+| record-payment | board | PAY | Record payment and mark Paid | Board Member only; paid date, method, reference, proof of payment doc; no online payment, no part payment | step | OI-53 | WS-1, WS-3 |
+| notify-payment-received | notify | PAY | Notify Member payment received | App notification and email | step |  | WS-3 |
+| update-payment-history | member | PAY | Payment history updated | Status Paid | step |  | RFP-1, WS-3 |
+| download-invoice | member | PAY | Download invoice | PDF per entry | step |  | WS-3 |
+| waive-payment | board | PAY | Waive payment | Reason required; status Waived, final | step |  | WS-3 |
+| undo-paid | board | PAY | Undo wrong Paid | Back to Pending or Overdue with reason; change logged | step |  | WS-3 |
 
 ## VEN — Vendors
 
@@ -104,8 +109,17 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | create-payment-entries | view-pending-payment | Member opens payments | yes | RFP-1, WS-1 |
 | create-payment-entries | cancel-raise | Wrong amount or due date | yes | (proposed, to confirm) |
 | view-pending-payment | send-payment-reminder |  | no | RFP-1 |
-| send-payment-reminder | record-payment |  | no | WS-1 |
-| record-payment | update-payment-history |  | no | RFP-1 |
+| send-payment-reminder | record-payment |  | no | WS-1, WS-3 |
+| send-payment-reminder | send-overdue-reminder | Due date passes, not paid | yes | WS-3 |
+| send-overdue-reminder | record-payment |  | no | WS-3 |
+| send-overdue-reminder | waive-payment | Member not liable | yes | WS-3 |
+| record-payment | notify-payment-received |  | no | WS-3 |
+| notify-payment-received | update-payment-history |  | no | WS-3 |
+| record-payment | update-payment-history | Member opens payments | yes | RFP-1 |
+| record-payment | undo-paid | Marked Paid by mistake | yes | WS-3 |
+| undo-paid | view-pending-payment | Back to Pending or Overdue | no | WS-3 |
+| view-pending-payment | download-invoice | Member downloads invoice | yes | WS-3 |
+| update-payment-history | download-invoice | Member downloads paid invoice | yes | WS-3 |
 | add-vendor | store-vendor-documents |  | no | RFP-1 |
 | store-vendor-documents | list-vendor |  | no | RFP-1 |
 | list-vendor | view-vendor |  | no | RFP-1 |

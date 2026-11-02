@@ -1,0 +1,82 @@
+{
+  "entity": "Payment",
+  "roles": [
+    {"role": "Board Member", "person": "Linda", "reqs": ["PAY-03", "PAY-06", "PAY-07"]},
+    {"role": "Member", "person": "Greg", "reqs": ["PAY-01", "PAY-05", "PAY-09"]}
+  ],
+  "fields": [
+    {"entity": "Payment", "name": "Member", "reqs": ["PAY-01"], "oi": "OI-38"},
+    {"entity": "Payment", "name": "Amount", "reqs": ["PAY-01", "PAY-08"]},
+    {"entity": "Payment", "name": "Status", "reqs": ["PAY-07", "PAY-08"]},
+    {"entity": "Payment", "name": "Paid date", "reqs": ["PAY-06"]},
+    {"entity": "Payment", "name": "Payment method", "reqs": ["PAY-06"]},
+    {"entity": "Payment", "name": "Reference number", "reqs": ["PAY-06"]},
+    {"entity": "Payment", "name": "Proof of payment", "reqs": ["PAY-06", "PAY-14"], "oi": "OI-53"},
+    {"entity": "Payment", "name": "Status reason", "reqs": ["PAY-08", "PAY-13"]}
+  ],
+  "transitions": [
+    {"from": "pending", "to": "overdue", "action": "Mark Overdue (due date passed)", "by": ["system"], "notify": ["Member"], "reqs": ["PAY-08", "PAY-10"], "rules": ["Overdue reminder"]},
+    {"from": "pending", "to": "paid", "action": "Record payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-06", "PAY-07", "PAY-11"], "rules": ["Board only status", "No partial payment", "Payment received", "Change log"], "oi": "OI-53"},
+    {"from": "overdue", "to": "paid", "action": "Record payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-06", "PAY-07", "PAY-11"], "rules": ["Board only status", "No partial payment", "Payment received", "Change log"], "oi": "OI-53"},
+    {"from": "pending", "to": "waived", "action": "Waive", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-07", "PAY-08"], "rules": ["Board only status", "Change log"]},
+    {"from": "overdue", "to": "waived", "action": "Waive", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-07", "PAY-08"], "rules": ["Board only status", "Change log"]},
+    {"from": "pending", "to": "cancelled", "action": "Cancel (raise cancelled)", "by": ["system"], "notify": ["Member"], "reqs": ["PAY-08"]},
+    {"from": "overdue", "to": "cancelled", "action": "Cancel (raise cancelled)", "by": ["system"], "notify": ["Member"], "reqs": ["PAY-08"]},
+    {"from": "paid", "to": "pending", "action": "Undo Paid", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-13"], "rules": ["Board only status", "Change log"]},
+    {"from": "paid", "to": "overdue", "action": "Undo Paid", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-13"], "rules": ["Board only status", "Change log"]}
+  ],
+  "rules": [
+    {"rule": "Board only status", "reqs": ["PAY-07"]},
+    {"rule": "Tracking only", "reqs": ["PAY-05"]},
+    {"rule": "No partial payment", "reqs": ["PAY-08"]},
+    {"rule": "Payment reminder", "reqs": ["PAY-02"]},
+    {"rule": "Overdue reminder", "reqs": ["PAY-10"]},
+    {"rule": "Payment received", "reqs": ["PAY-11"]},
+    {"rule": "Change log", "reqs": ["PAY-13", "PAY-14"]}
+  ],
+  "reports": [
+    {"name": "Payment dashboard", "reqs": ["PAY-03", "PAY-12"]},
+    {"name": "Overdue list", "reqs": ["PAY-12"]},
+    {"name": "My payments", "reqs": ["PAY-01"]}
+  ],
+  "rows": [
+    {"id": "PAY-0101", "status": "pending", "values": {"Payment number": "PAY-0101", "Raise Payment": "RPAY-0012", "Member": "Greg", "Payment title": "2027 Annual dues", "Amount": 480, "Due date": "2027-01-31", "Status": "Pending"}},
+    {"id": "PAY-0102", "status": "pending", "values": {"Payment number": "PAY-0102", "Raise Payment": "RPAY-0011", "Member": "Maria", "Payment title": "Clubhouse key card replacement", "Amount": 25, "Due date": "2026-11-30", "Status": "Pending"}},
+    {"id": "PAY-0095", "status": "overdue", "values": {"Payment number": "PAY-0095", "Raise Payment": "RPAY-0008", "Member": "Priya", "Payment title": "Q4 2026 dues", "Amount": 120, "Due date": "2026-10-15", "Status": "Overdue"}, "log": [["2026-10-16", "system", "Marked Overdue; weekly overdue reminder started"]]},
+    {"id": "PAY-0096", "status": "overdue", "values": {"Payment number": "PAY-0096", "Raise Payment": "RPAY-0008", "Member": "Sam", "Payment title": "Q4 2026 dues", "Amount": 120, "Due date": "2026-10-15", "Status": "Overdue"}},
+    {"id": "PAY-0090", "status": "paid", "values": {"Payment number": "PAY-0090", "Raise Payment": "RPAY-0010", "Member": "Maria", "Payment title": "Pool resurfacing assessment", "Amount": 150, "Due date": "2026-12-01", "Status": "Paid", "Paid date": "2026-10-28", "Payment method": "Check", "Reference number": "CHK 2291", "Proof of payment": "check-2291.pdf", "Recorded by": "Linda"}, "log": [["2026-10-28", "Linda (Board Member)", "Recorded payment, Check, proof attached; Maria notified"]]},
+    {"id": "PAY-0091", "status": "waived", "values": {"Payment number": "PAY-0091", "Raise Payment": "RPAY-0010", "Member": "Dave", "Payment title": "Pool resurfacing assessment", "Amount": 150, "Due date": "2026-12-01", "Status": "Waived", "Status reason": "Home sold before assessment; Board agreed"}},
+    {"id": "PAY-0089", "status": "cancelled", "values": {"Payment number": "PAY-0089", "Raise Payment": "RPAY-0009", "Member": "Greg", "Payment title": "Pool resurfacing (wrong amount)", "Amount": 1500, "Due date": "2026-12-01", "Status": "Cancelled"}, "log": [["2026-10-19", "system", "Cancelled: raise RPAY-0009 cancelled"]]}
+  ],
+  "scenarios": [
+    {"title": "Member pays annual dues", "summary": "Happy path: Member sees the entry, gets the 1-month reminder, pays offline; Board records payment with proof; Member is told and downloads the invoice.", "steps": [
+      {"actor": "Member", "action": "Opens My payments; sees only own entries; no pay online or status button", "screen": "report", "report": "My payments", "proves": ["PAY-01", "PAY-05", "PAY-07"]},
+      {"actor": "system", "action": "About one month before due date, sends payment reminder by app and email", "screen": "rules", "proves": ["PAY-02"], "oi": "OI-23"},
+      {"actor": "Board Member", "action": "Gets the check; records payment: paid date, Check, reference, proof of payment doc", "row": "PAY-0101", "transition": {"from": "pending", "to": "paid"}, "proves": ["PAY-06", "PAY-08"], "oi": "OI-53"},
+      {"actor": "system", "action": "Tells Greg the payment is received, by app and email", "row": "PAY-0101", "proves": ["PAY-11"]},
+      {"actor": "Member", "action": "Opens the entry, sees proof of payment, downloads the invoice PDF with paid date and method", "row": "PAY-0101", "proves": ["PAY-09", "PAY-06"]}
+    ]},
+    {"title": "Payment goes overdue", "summary": "Due date passes unpaid: entry turns Overdue, weekly reminders, Board records late payment.", "steps": [
+      {"actor": "system", "action": "Day after the due date, marks Maria's entry Overdue and starts weekly overdue reminder", "row": "PAY-0102", "transition": {"from": "pending", "to": "overdue"}, "proves": ["PAY-08", "PAY-10"]},
+      {"actor": "Board Member", "action": "Priya pays in full by bank transfer; Board records payment; reminders stop", "row": "PAY-0095", "transition": {"from": "overdue", "to": "paid"}, "proves": ["PAY-06", "PAY-10"]}
+    ]},
+    {"title": "Board waives a payment", "summary": "Exception: Member not liable; Board waives with a reason.", "steps": [
+      {"actor": "Board Member", "action": "Waives Greg's entry with reason", "row": "PAY-0101", "transition": {"from": "pending", "to": "waived"}, "proves": ["PAY-08"]},
+      {"actor": "Board Member", "action": "Waives Sam's overdue entry with reason; reminders stop", "row": "PAY-0096", "transition": {"from": "overdue", "to": "waived"}, "proves": ["PAY-08"]}
+    ]},
+    {"title": "Raise cancelled", "summary": "Exception: the Board cancels the raise; open entries cancel.", "steps": [
+      {"actor": "system", "action": "Raise cancelled in Raise Payment; Maria's pending entry becomes Cancelled", "row": "PAY-0102", "transition": {"from": "pending", "to": "cancelled"}, "proves": ["PAY-08"]},
+      {"actor": "system", "action": "Priya's overdue entry for the same raise becomes Cancelled", "row": "PAY-0095", "transition": {"from": "overdue", "to": "cancelled"}, "proves": ["PAY-08"]}
+    ]},
+    {"title": "Paid marked by mistake", "summary": "Exception: Board undoes a wrong Paid with a reason; change logged.", "steps": [
+      {"actor": "Board Member", "action": "Maria's check bounced; sets entry back to Pending with reason (due date not passed)", "row": "PAY-0090", "transition": {"from": "paid", "to": "pending"}, "proves": ["PAY-13"]},
+      {"actor": "Board Member", "action": "Records Priya's payment on the wrong entry", "row": "PAY-0095", "transition": {"from": "overdue", "to": "paid"}, "proves": ["PAY-06"]},
+      {"actor": "Board Member", "action": "Spots the mistake; sets it back to Overdue with reason; log shows who, when, why", "row": "PAY-0095", "transition": {"from": "paid", "to": "overdue"}, "proves": ["PAY-13", "PAY-14"]}
+    ]},
+    {"title": "Board checks collections", "summary": "Board sees totals and overdue list.", "steps": [
+      {"actor": "Board Member", "action": "Opens Payment dashboard: total due, collected, pending, overdue; filters by raise", "screen": "report", "report": "Payment dashboard", "proves": ["PAY-03", "PAY-12"]},
+      {"actor": "Board Member", "action": "Opens Overdue list to chase Members", "screen": "report", "report": "Overdue list", "proves": ["PAY-12"]},
+      {"actor": "Board Member", "action": "Opens an old paid entry with its proof and change log", "row": "PAY-0090", "proves": ["PAY-14"], "oi": "OI-27"}
+    ]}
+  ]
+}
