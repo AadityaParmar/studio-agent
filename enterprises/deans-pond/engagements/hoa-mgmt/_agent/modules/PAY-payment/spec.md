@@ -2,8 +2,8 @@
 
 Prefix: PAY
 Name: Payment
-Status: resolved
-Sources: RFP-1, WS-1, WS-2, WS-3
+Status: needs-revisit
+Sources: RFP-1, WS-1, WS-2, WS-3, QA-1, QA-2
 
 ## 1 Purpose and KPIs
 
@@ -17,12 +17,12 @@ Sources: RFP-1, WS-1, WS-2, WS-3
 | Board Member | View all Payment entries (paid, pending, overdue); record payment with proof; waive; undo a wrong Paid; only role that changes status |  | [RFP-1, WS-3] |
 | Member | View own Payment entries and history; download invoice; see own proof of payment; receive reminders; no status action |  | [RFP-1, WS-3] |
 
-- OI-27: Headcount of Board Members and Members not stated.
+- Headcount: no limit on Board Members or Members; all entries unlimited. [QA-2]
 
 ## 3 Process
 
 - Pain: Members must get notification alerts for dues. [WS-3]
-- OI-51: How dues are tracked today, and what goes wrong, is not stated.
+- AS-IS: dues tracked in a spreadsheet; Board chases unpaid Members by hand and misses some. [QA-1]
 - TO-BE: Raise Payment creates Payment entry → Member views pending payment → reminder one month before due date → Board Member records payment with proof → payment history updated. [RFP-1, WS-1, WS-3]
 - TO-BE: see this Module's section of `process.md`.
 
@@ -40,7 +40,7 @@ Sources: RFP-1, WS-1, WS-2, WS-3
 | Payment | Paid date | date | no | Required when marked Paid | [WS-3] |
 | Payment | Payment method | choice | no | Values: Check / Bank transfer / Cash / Other. Required when marked Paid | [WS-3] |
 | Payment | Reference number | text | no | Optional | [WS-3] |
-| Payment | Proof of payment | file | no | Document upload by Board Member; seen by Board Members and own Member only; required-ness open, see OI-53 | [WS-3] |
+| Payment | Proof of payment | file | no | Document upload by Board Member; seen by Board Members and own Member only; optional [QA-1] | [WS-3] |
 | Payment | Status reason | text | no | Required on Waived and on undo of a wrong Paid | [WS-3] |
 | Payment | Recorded by | person | no | Board Member who marked Paid; set automatically (proposed, to confirm) |  |
 | Invoice | (PDF per Payment entry) | file | no | Made by Neome: HOA name, Member, title, amount, due date, status; once Paid adds paid date and method | [WS-3] |
@@ -109,8 +109,8 @@ Sources: RFP-1, WS-1, WS-2, WS-3
 
 - No limit on raises, so no limit on Payment entries. [WS-2, WS-3]
 - Retention: no limit; Payment entries kept. [WS-3]
-- OI-52: Devices: Members mostly on phone, Board on phone or desk (proposed, to confirm).
-- OI-27: Number of Members not stated.
+- Devices: Members mostly on phone; Board Members on phone or desk. [QA-1]
+- No volume limits; all entries unlimited. [QA-2]
 
 ## 11 Requirements
 
@@ -257,12 +257,12 @@ Proposed: no
 
 Statement: Payment entries, proof of payment documents and status changes are kept with no time limit. [WS-3]
 Acceptance:
-- A Board Member can open any past Payment entry with its proof and change log. (proposed, to confirm)
+- A Board Member can open any past Payment entry with its proof and change log. [QA-1]
 Priority: Must
 Scope: Neome
-Sources: WS-3
+Sources: WS-3, QA-1
 OIs: OI-37
-Proposed: yes
+Proposed: no
 
 ## 12 Neome mapping
 
@@ -272,17 +272,4 @@ How: Payment → new record built on the Neome platform, created by the Raise Pa
 
 ## 13 Open Items
 
-- OI-18: Which fields and payment categories apply to a Raise Payment?
-- OI-23: Which notification channels — Neome application notification, email, SMS, WhatsApp?
-- OI-24: Existing data may need migration.
 - OI-25: Which US privacy, security, or HOA regulatory requirements apply?
-- OI-26: Reporting and dashboard requirements not yet defined.
-- OI-27: Number of Board Members and Members not stated.
-- OI-29: Currency, language, date format.
-- OI-30: Hosting, data residency, SSO needs.
-- OI-31: Who trains Board Members and Members.
-- OI-32: Support after go-live.
-- OI-37: Confirm proposed priority, Scope tag and acceptance criteria.
-- OI-51: How are dues tracked today, and what goes wrong?
-- OI-52: Which devices do Members and Board Members use?
-- OI-53: Is a proof of payment document required to mark an entry Paid?

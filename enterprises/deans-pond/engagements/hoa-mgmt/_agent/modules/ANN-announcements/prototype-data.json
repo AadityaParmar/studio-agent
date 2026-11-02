@@ -5,16 +5,16 @@
     {"role": "Member", "person": "Greg", "reqs": ["ANN-02"]}
   ],
   "fields": [
-    {"entity": "General Announcement", "name": "Title", "reqs": ["ANN-04"], "oi": "OI-40"},
-    {"entity": "General Announcement", "name": "Message", "reqs": ["ANN-04"], "oi": "OI-40"},
-    {"entity": "General Announcement", "name": "Attachment", "reqs": ["ANN-04"], "oi": "OI-40"},
-    {"entity": "General Announcement", "name": "Status", "reqs": ["ANN-05"], "oi": "OI-42"},
-    {"entity": "Event / Party Announcement", "name": "Event title", "reqs": ["ANN-03"], "oi": "OI-06"},
-    {"entity": "Event / Party Announcement", "name": "Event date", "reqs": ["ANN-03", "ANN-08"], "oi": "OI-06"}
+    {"entity": "General Announcement", "name": "Title", "reqs": ["ANN-04"]},
+    {"entity": "General Announcement", "name": "Message", "reqs": ["ANN-04"]},
+    {"entity": "General Announcement", "name": "Attachment", "reqs": ["ANN-04"]},
+    {"entity": "General Announcement", "name": "Status", "reqs": ["ANN-05"]},
+    {"entity": "Event / Party Announcement", "name": "Event title", "reqs": ["ANN-03"]},
+    {"entity": "Event / Party Announcement", "name": "Event date", "reqs": ["ANN-03", "ANN-08"]}
   ],
   "transitions": [
-    {"from": "draft", "to": "published", "action": "Publish", "by": ["Board Member"], "notify": ["Member"], "reqs": ["ANN-01", "ANN-06", "ANN-07"], "rules": ["No publish approval", "New announcement notification"], "oi": "OI-41"},
-    {"from": "published", "to": "archived", "action": "Archive", "by": ["Board Member"], "reqs": ["ANN-05"], "oi": "OI-42"}
+    {"from": "draft", "to": "published", "action": "Publish", "by": ["Board Member"], "notify": ["Member"], "reqs": ["ANN-01", "ANN-06", "ANN-07"], "rules": ["No publish approval", "New announcement notification"]},
+    {"from": "published", "to": "archived", "action": "Archive", "by": ["Board Member"], "reqs": ["ANN-05"]}
   ],
   "rules": [
     {"rule": "No publish approval", "reqs": ["ANN-06"]},
@@ -34,18 +34,18 @@
   ],
   "scenarios": [
     {"title": "Board Member posts a General Announcement", "summary": "Happy path: Board Member drafts, publishes with no approval, Members are told and read it.", "steps": [
-      {"actor": "Board Member", "action": "Drafts 'Pool opening weekend' with Title and Message", "row": "A-201", "proves": ["ANN-01", "ANN-04"], "oi": "OI-40"},
-      {"actor": "Board Member", "action": "Presses Publish; no other Board Member must approve", "row": "A-201", "transition": {"from": "draft", "to": "published"}, "proves": ["ANN-06", "ANN-05"], "oi": "OI-41"},
-      {"actor": "system", "action": "Tells every Member about the new announcement", "screen": "rules", "proves": ["ANN-07"], "oi": "OI-08"},
+      {"actor": "Board Member", "action": "Drafts 'Pool opening weekend' with Title and Message", "row": "A-201", "proves": ["ANN-01", "ANN-04"]},
+      {"actor": "Board Member", "action": "Presses Publish; no other Board Member must approve", "row": "A-201", "transition": {"from": "draft", "to": "published"}, "proves": ["ANN-06", "ANN-05"]},
+      {"actor": "system", "action": "Tells every Member about the new announcement", "screen": "rules", "proves": ["ANN-07"]},
       {"actor": "Member", "action": "Opens the announcement; no edit or delete button", "row": "A-203", "proves": ["ANN-02"]}
     ]},
     {"title": "Board Member posts an event", "summary": "Event / Party Announcement on its own form; shows in Upcoming events.", "steps": [
-      {"actor": "Board Member", "action": "Fills the event form for the Holiday party: title, date, times, venue, contact", "row": "A-204", "proves": ["ANN-03"], "oi": "OI-06"},
-      {"actor": "Board Member", "action": "Checks Upcoming events", "screen": "report", "report": "Upcoming events", "proves": ["ANN-08"], "oi": "OI-26"},
-      {"actor": "Member", "action": "Wants to RSVP to the Holiday party", "row": "A-204", "proves": [], "oi": "OI-07"}
+      {"actor": "Board Member", "action": "Fills the event form for the Holiday party: title, date, times, venue, contact", "row": "A-204", "proves": ["ANN-03"]},
+      {"actor": "Board Member", "action": "Checks Upcoming events", "screen": "report", "report": "Upcoming events", "proves": ["ANN-08"]},
+      {"actor": "Member", "action": "Wants to RSVP to the Holiday party", "row": "A-204", "proves": []}
     ]},
     {"title": "Out-of-date announcement", "summary": "Exception: Board Member archives a notice; not deleted.", "steps": [
-      {"actor": "Board Member", "action": "Archives 'Annual meeting notice' after the meeting", "row": "A-203", "transition": {"from": "published", "to": "archived"}, "proves": ["ANN-05"], "oi": "OI-42"}
+      {"actor": "Board Member", "action": "Archives 'Annual meeting notice' after the meeting", "row": "A-203", "transition": {"from": "published", "to": "archived"}, "proves": ["ANN-05"]}
     ]}
   ]
 }

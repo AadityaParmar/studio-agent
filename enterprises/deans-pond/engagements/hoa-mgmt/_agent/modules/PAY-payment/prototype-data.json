@@ -11,13 +11,13 @@
     {"entity": "Payment", "name": "Paid date", "reqs": ["PAY-06"]},
     {"entity": "Payment", "name": "Payment method", "reqs": ["PAY-06"]},
     {"entity": "Payment", "name": "Reference number", "reqs": ["PAY-06"]},
-    {"entity": "Payment", "name": "Proof of payment", "reqs": ["PAY-06", "PAY-14"], "oi": "OI-53"},
+    {"entity": "Payment", "name": "Proof of payment", "reqs": ["PAY-06", "PAY-14"]},
     {"entity": "Payment", "name": "Status reason", "reqs": ["PAY-08", "PAY-13"]}
   ],
   "transitions": [
     {"from": "pending", "to": "overdue", "action": "Mark Overdue (due date passed)", "by": ["system"], "notify": ["Member"], "reqs": ["PAY-08", "PAY-10"], "rules": ["Overdue reminder"]},
-    {"from": "pending", "to": "paid", "action": "Record payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-06", "PAY-07", "PAY-11"], "rules": ["Board only status", "No partial payment", "Payment received", "Change log"], "oi": "OI-53"},
-    {"from": "overdue", "to": "paid", "action": "Record payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-06", "PAY-07", "PAY-11"], "rules": ["Board only status", "No partial payment", "Payment received", "Change log"], "oi": "OI-53"},
+    {"from": "pending", "to": "paid", "action": "Record payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-06", "PAY-07", "PAY-11"], "rules": ["Board only status", "No partial payment", "Payment received", "Change log"]},
+    {"from": "overdue", "to": "paid", "action": "Record payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-06", "PAY-07", "PAY-11"], "rules": ["Board only status", "No partial payment", "Payment received", "Change log"]},
     {"from": "pending", "to": "waived", "action": "Waive", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-07", "PAY-08"], "rules": ["Board only status", "Change log"]},
     {"from": "overdue", "to": "waived", "action": "Waive", "by": ["Board Member"], "notify": ["Member"], "reqs": ["PAY-07", "PAY-08"], "rules": ["Board only status", "Change log"]},
     {"from": "pending", "to": "cancelled", "action": "Cancel (raise cancelled)", "by": ["system"], "notify": ["Member"], "reqs": ["PAY-08"]},
@@ -51,8 +51,8 @@
   "scenarios": [
     {"title": "Member pays annual dues", "summary": "Happy path: Member sees the entry, gets the 1-month reminder, pays offline; Board records payment with proof; Member is told and downloads the invoice.", "steps": [
       {"actor": "Member", "action": "Opens My payments; sees only own entries; no pay online or status button", "screen": "report", "report": "My payments", "proves": ["PAY-01", "PAY-05", "PAY-07"]},
-      {"actor": "system", "action": "About one month before due date, sends payment reminder by app and email", "screen": "rules", "proves": ["PAY-02"], "oi": "OI-23"},
-      {"actor": "Board Member", "action": "Gets the check; records payment: paid date, Check, reference, proof of payment doc", "row": "PAY-0101", "transition": {"from": "pending", "to": "paid"}, "proves": ["PAY-06", "PAY-08"], "oi": "OI-53"},
+      {"actor": "system", "action": "About one month before due date, sends payment reminder by app and email", "screen": "rules", "proves": ["PAY-02"]},
+      {"actor": "Board Member", "action": "Gets the check; records payment: paid date, Check, reference, proof of payment doc", "row": "PAY-0101", "transition": {"from": "pending", "to": "paid"}, "proves": ["PAY-06", "PAY-08"]},
       {"actor": "system", "action": "Tells Greg the payment is received, by app and email", "row": "PAY-0101", "proves": ["PAY-11"]},
       {"actor": "Member", "action": "Opens the entry, sees proof of payment, downloads the invoice PDF with paid date and method", "row": "PAY-0101", "proves": ["PAY-09", "PAY-06"]}
     ]},
@@ -76,7 +76,7 @@
     {"title": "Board checks collections", "summary": "Board sees totals and overdue list.", "steps": [
       {"actor": "Board Member", "action": "Opens Payment dashboard: total due, collected, pending, overdue; filters by raise", "screen": "report", "report": "Payment dashboard", "proves": ["PAY-03", "PAY-12"]},
       {"actor": "Board Member", "action": "Opens Overdue list to chase Members", "screen": "report", "report": "Overdue list", "proves": ["PAY-12"]},
-      {"actor": "Board Member", "action": "Opens an old paid entry with its proof and change log", "row": "PAY-0090", "proves": ["PAY-14"], "oi": "OI-27"}
+      {"actor": "Board Member", "action": "Opens an old paid entry with its proof and change log", "row": "PAY-0090", "proves": ["PAY-14"]}
     ]}
   ]
 }

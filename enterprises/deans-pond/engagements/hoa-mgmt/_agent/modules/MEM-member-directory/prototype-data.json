@@ -1,19 +1,19 @@
 {
   "entity": "Member",
   "roles": [
-    {"role": "Board Member", "person": "Linda", "reqs": ["MEM-03", "MEM-05"], "oi": "OI-04"},
-    {"role": "Member", "person": "Greg", "reqs": ["MEM-02", "MEM-04"], "oi": "OI-01"}
+    {"role": "Board Member", "person": "Linda", "reqs": ["MEM-03", "MEM-05"]},
+    {"role": "Member", "person": "Greg", "reqs": ["MEM-02", "MEM-04"]}
   ],
   "fields": [
     {"entity": "Member", "name": "Name", "reqs": ["MEM-01"]},
     {"entity": "Member", "name": "Phone", "reqs": ["MEM-01"]},
     {"entity": "Member", "name": "Address", "reqs": ["MEM-01"]},
-    {"entity": "Member", "name": "Number of Family Members", "reqs": ["MEM-01"], "oi": "OI-02"},
+    {"entity": "Member", "name": "Number of Family Members", "reqs": ["MEM-01"]},
     {"entity": "Member", "name": "Number of Cards", "reqs": ["MEM-01"], "oi": "OI-05"},
-    {"entity": "Member", "name": "Status", "reqs": ["MEM-06"], "oi": "OI-35"}
+    {"entity": "Member", "name": "Status", "reqs": ["MEM-06"]}
   ],
   "transitions": [
-    {"from": "active", "to": "inactive", "action": "Set Inactive", "by": ["Board Member"], "notify": ["Member"], "reqs": ["MEM-06"], "rules": ["Login stopped"], "oi": "OI-35"}
+    {"from": "active", "to": "inactive", "action": "Set Inactive", "by": ["Board Member"], "notify": ["Member"], "reqs": ["MEM-06"], "rules": ["Login stopped"]}
   ],
   "rules": [
     {"rule": "No registration approval", "reqs": ["MEM-07"]},
@@ -32,19 +32,19 @@
   ],
   "scenarios": [
     {"title": "Board Member registers a new member", "summary": "Happy path: Board Member fills the form, member is Active, gets a login invite and sees only their own account.", "steps": [
-      {"actor": "Board Member", "action": "Opens the Member Directory and adds a member with Name, Phone and Address", "screen": "sheet", "proves": ["MEM-01", "MEM-03", "MEM-05"], "oi": "OI-04"},
-      {"actor": "system", "action": "Saves the member as Active with no approval and sends a login invite", "row": "M-101", "screen": "rules", "proves": ["MEM-07", "MEM-04"], "oi": "OI-36"},
-      {"actor": "Member", "action": "Logs in and opens their own account only", "row": "M-101", "proves": ["MEM-02"], "oi": "OI-01"}
+      {"actor": "Board Member", "action": "Opens the Member Directory and adds a member with Name, Phone and Address", "screen": "sheet", "proves": ["MEM-01", "MEM-03", "MEM-05"]},
+      {"actor": "system", "action": "Saves the member as Active with no approval and sends a login invite", "row": "M-101", "screen": "rules", "proves": ["MEM-07", "MEM-04"]},
+      {"actor": "Member", "action": "Logs in and opens their own account only", "row": "M-101", "proves": ["MEM-02"]}
     ]},
     {"title": "Member moves out", "summary": "Exception: home sold; Board Member sets the member Inactive, record kept, login stopped.", "steps": [
-      {"actor": "Board Member", "action": "Opens Doug Ferris and presses Set Inactive after the home is sold", "row": "M-104", "transition": {"from": "active", "to": "inactive"}, "proves": ["MEM-06"], "oi": "OI-35"},
-      {"actor": "Board Member", "action": "Checks the member count, split Active and Inactive", "screen": "report", "report": "Total number of members", "proves": ["MEM-08"], "oi": "OI-26"}
+      {"actor": "Board Member", "action": "Opens Doug Ferris and presses Set Inactive after the home is sold", "row": "M-104", "transition": {"from": "active", "to": "inactive"}, "proves": ["MEM-06"]},
+      {"actor": "Board Member", "action": "Checks the member count, split Active and Inactive", "screen": "report", "report": "Total number of members", "proves": ["MEM-08"]}
     ]},
     {"title": "Can Members see each other?", "summary": "Open Item: the Access Control Matrix says Members see the directory; the member access section says own account only.", "steps": [
-      {"actor": "Member", "action": "Tries to open the Member Directory", "screen": "sheet", "proves": ["MEM-02"], "oi": "OI-01"}
+      {"actor": "Member", "action": "Tries to open the Member Directory", "screen": "sheet", "proves": ["MEM-02"]}
     ]},
     {"title": "Family members", "summary": "Open Item: family members as separate logins or only a count on the primary Member.", "steps": [
-      {"actor": "Board Member", "action": "Enters Number of Family Members on Karen Whitfield's record", "row": "M-101", "proves": ["MEM-01"], "oi": "OI-02"}
+      {"actor": "Board Member", "action": "Enters Number of Family Members on Karen Whitfield's record", "row": "M-101", "proves": ["MEM-01"]}
     ]}
   ]
 }

@@ -1,7 +1,5 @@
 # Map: HOA Management
 
-lock: Aditya Parmar · ingest · 2026-11-02T10:02Z
-
 ## Destination
 
 A signed-off BRD for HOA Management.
@@ -19,8 +17,8 @@ A signed-off BRD for HOA Management.
 | ANN | Announcements | resolved |
 | TKT | Tickets | resolved |
 | RPAY | Raise Payment | resolved |
-| PAY | Payment | resolved |
-| VEN | Vendors | resolved |
+| PAY | Payment | needs-revisit |
+| VEN | Vendors | needs-revisit |
 
 ## Change log
 
@@ -49,3 +47,6 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: resolve-module: VEN claimed by Aditya Parmar.
 - 2026-11-02: resolve-module: VEN resolved.
 - 2026-11-02: questionnaire: QN-2026-11-02 to HOA Board President, 52 Open Item(s).
+- 2026-11-02: ingest: PAY needs revisit: OI-23 answered: Neome app notification only, no email [QA-1]
+- 2026-11-02: ingest: VEN needs revisit: OI-21 answered: Government ID Proof kept forever, secured in Neome [QA-2]
+- 2026-11-02: ingest: QA-1, QA-2 (reply to QN-2026-11-02): 50 Open Items closed, 2 still open, 0 raised; PAY, VEN need revisit.

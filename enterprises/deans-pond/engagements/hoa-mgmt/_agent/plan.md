@@ -9,14 +9,13 @@ Skeleton from `review-draft`. All proposed. Weeks: Consultant only.
 | masters | Masters and core set-up | | | Users, roles, Member Directory, vendor directory, core set-up | MEM, VEN, GEN | (proposed, to confirm) |
 | workflow | Workflow and process set-up | | | Announcements, tickets, payment raise and entries, statuses, reminders | ANN, TKT | (proposed, to confirm) |
 | uat | Testing and UAT | | | Testing with Board Members and Members | MEM, ANN, TKT, VEN | (proposed, to confirm) |
-| go-live | Go-live and training | | | Data migration, training, hand-over, support | GEN | (proposed, to confirm) |
+| go-live | Go-live and support | | | Hand-over, support | GEN | (proposed, to confirm) |
 
 ## Not yet placed
 
 | what | OIs | Modules | Source |
 |---|---|---|---|
-| Notification channels (email, SMS, WhatsApp integrations) | OI-23 | GEN | (proposed, to confirm) |
-| Board Member dashboards and reports | OI-26 | GEN | (proposed, to confirm) |
-| Existing data migration | OI-24 | GEN | (proposed, to confirm) |
-| Raise Payment as a Custom module | OI-18, OI-49, OI-50 | RPAY | (proposed, to confirm) |
-| Payment as a Custom module | OI-23, OI-38, OI-53 | PAY | (proposed, to confirm) |
+| Notification set-up: Neome app notification only; no email, SMS or WhatsApp | | GEN | QA-1 |
+| Board Member dashboard and reports | | GEN | QA-1 |
+| Raise Payment as a Custom module | | RPAY | (proposed, to confirm) |
+| Payment as a Custom module | OI-23, OI-38 | PAY | (proposed, to confirm) |

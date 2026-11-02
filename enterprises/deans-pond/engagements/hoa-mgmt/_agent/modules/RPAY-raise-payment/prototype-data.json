@@ -5,16 +5,16 @@
     {"role": "Member", "person": "Greg", "reqs": ["RPAY-05"]}
   ],
   "fields": [
-    {"entity": "Raise Payment", "name": "Payment title", "reqs": ["RPAY-01"], "oi": "OI-18"},
-    {"entity": "Raise Payment", "name": "Amount", "reqs": ["RPAY-01", "RPAY-02"], "oi": "OI-18"},
-    {"entity": "Raise Payment", "name": "Due date", "reqs": ["RPAY-01", "RPAY-02"], "oi": "OI-18"},
+    {"entity": "Raise Payment", "name": "Payment title", "reqs": ["RPAY-01"]},
+    {"entity": "Raise Payment", "name": "Amount", "reqs": ["RPAY-01", "RPAY-02"]},
+    {"entity": "Raise Payment", "name": "Due date", "reqs": ["RPAY-01", "RPAY-02"]},
     {"entity": "Raise Payment", "name": "Applicable members", "reqs": ["RPAY-02", "RPAY-03"], "oi": "OI-38"},
-    {"entity": "Raise Payment", "name": "Payment category", "reqs": ["RPAY-01"], "oi": "OI-18"},
-    {"entity": "Raise Payment", "name": "Status", "reqs": ["RPAY-04"], "oi": "OI-50"}
+    {"entity": "Raise Payment", "name": "Payment category", "reqs": ["RPAY-01"]},
+    {"entity": "Raise Payment", "name": "Status", "reqs": ["RPAY-04"]}
   ],
   "transitions": [
-    {"from": "draft", "to": "raised", "action": "Raise payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["RPAY-01", "RPAY-02", "RPAY-04", "RPAY-05"], "rules": ["Board only", "One entry per Member", "No approval", "New payment request notification"], "guard": [{"field": "Amount", "op": ">", "value": 0}], "oi": "OI-49"},
-    {"from": "raised", "to": "cancelled", "action": "Cancel raise", "by": ["Board Member"], "notify": ["Member"], "reqs": ["RPAY-04"], "rules": ["Board only"], "oi": "OI-50"}
+    {"from": "draft", "to": "raised", "action": "Raise payment", "by": ["Board Member"], "notify": ["Member"], "reqs": ["RPAY-01", "RPAY-02", "RPAY-04", "RPAY-05"], "rules": ["Board only", "One entry per Member", "No approval", "New payment request notification"], "guard": [{"field": "Amount", "op": ">", "value": 0}]},
+    {"from": "raised", "to": "cancelled", "action": "Cancel raise", "by": ["Board Member"], "notify": ["Member"], "reqs": ["RPAY-04"], "rules": ["Board only"]}
   ],
   "rules": [
     {"rule": "Board only", "reqs": ["RPAY-01"]},
@@ -34,20 +34,20 @@
   ],
   "scenarios": [
     {"title": "Board raises annual dues for all Members", "summary": "Happy path: Board Member fills the raise, picks all Members, raises; one Payment entry per Member; Members notified.", "steps": [
-      {"actor": "Board Member", "action": "Opens draft '2027 Annual dues', fills title, amount, due date, category", "row": "RPAY-0012", "proves": ["RPAY-01"], "oi": "OI-18"},
+      {"actor": "Board Member", "action": "Opens draft '2027 Annual dues', fills title, amount, due date, category", "row": "RPAY-0012", "proves": ["RPAY-01"]},
       {"actor": "Board Member", "action": "Picks all Members from the member list in one action", "row": "RPAY-0012", "proves": ["RPAY-03"], "oi": "OI-38"},
-      {"actor": "Board Member", "action": "Presses Raise payment; no second Board Member approval", "row": "RPAY-0012", "transition": {"from": "draft", "to": "raised"}, "proves": ["RPAY-02", "RPAY-04"], "oi": "OI-49"},
-      {"actor": "system", "action": "Creates one Payment entry per Member and tells each Member a new payment is raised", "screen": "rules", "proves": ["RPAY-02", "RPAY-05"], "oi": "OI-17"}
+      {"actor": "Board Member", "action": "Presses Raise payment; no second Board Member approval", "row": "RPAY-0012", "transition": {"from": "draft", "to": "raised"}, "proves": ["RPAY-02", "RPAY-04"]},
+      {"actor": "system", "action": "Creates one Payment entry per Member and tells each Member a new payment is raised", "screen": "rules", "proves": ["RPAY-02", "RPAY-05"]}
     ]},
     {"title": "Raise with no amount is blocked", "summary": "Gating: a raise cannot be raised without an amount.", "steps": [
-      {"actor": "Board Member", "action": "Opens 'Pond fence repair share' with amount 0; Raise payment is disabled", "row": "RPAY-0013", "proves": ["RPAY-01"], "oi": "OI-18"}
+      {"actor": "Board Member", "action": "Opens 'Pond fence repair share' with amount 0; Raise payment is disabled", "row": "RPAY-0013", "proves": ["RPAY-01"]}
     ]},
     {"title": "Wrong amount after raising", "summary": "Exception: Board Member cancels the raise and raises again.", "steps": [
-      {"actor": "Board Member", "action": "Sees 'Clubhouse key card replacement' has the wrong amount; presses Cancel raise; unpaid entries cancelled", "row": "RPAY-0011", "transition": {"from": "raised", "to": "cancelled"}, "proves": ["RPAY-04"], "oi": "OI-50"},
+      {"actor": "Board Member", "action": "Sees 'Clubhouse key card replacement' has the wrong amount; presses Cancel raise; unpaid entries cancelled", "row": "RPAY-0011", "transition": {"from": "raised", "to": "cancelled"}, "proves": ["RPAY-04"]},
       {"actor": "Board Member", "action": "Opens cancelled 'Pool resurfacing (wrong amount)' to see it was replaced by RPAY-0010", "row": "RPAY-0009", "proves": ["RPAY-04"]}
     ]},
     {"title": "Board checks raises", "summary": "Board Member views the raises list.", "steps": [
-      {"actor": "Board Member", "action": "Opens Raises list, filters by Special assessment", "screen": "report", "report": "Raises list", "proves": ["RPAY-06"], "oi": "OI-26"}
+      {"actor": "Board Member", "action": "Opens Raises list, filters by Special assessment", "screen": "report", "report": "Raises list", "proves": ["RPAY-06"]}
     ]}
   ]
 }

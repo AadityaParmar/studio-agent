@@ -1,9 +1,9 @@
 ---
-status: resolved
+status: needs-revisit
 prefix: VEN
 name: Vendors
 blockedBy: [MEM]
-revisitReason:
+revisitReason: "OI-21 answered: Government ID Proof kept forever, secured in Neome [QA-2]"
 formerly:
 claimedBy: Aditya Parmar
 ---
