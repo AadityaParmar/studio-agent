@@ -1,0 +1,64 @@
+{
+  "entity": "Ticket",
+  "roles": [
+    {"role": "Member", "person": "Greg", "reqs": ["TKT-01", "TKT-02"]},
+    {"role": "Board Member", "person": "Linda", "reqs": ["TKT-03", "TKT-07"], "oi": "OI-46"}
+  ],
+  "fields": [
+    {"entity": "Ticket", "name": "Ticket title", "reqs": ["TKT-01"], "oi": "OI-09"},
+    {"entity": "Ticket", "name": "Category", "reqs": ["TKT-01"], "oi": "OI-10"},
+    {"entity": "Ticket", "name": "Description", "reqs": ["TKT-01"], "oi": "OI-09"},
+    {"entity": "Ticket", "name": "Attachment / photo", "reqs": ["TKT-01"], "oi": "OI-12"},
+    {"entity": "Ticket", "name": "Status", "reqs": ["TKT-04"], "oi": "OI-10"},
+    {"entity": "Ticket update", "name": "Comment", "reqs": ["TKT-05"], "oi": "OI-11"}
+  ],
+  "transitions": [
+    {"from": "open", "to": "in-progress", "action": "Start work", "by": ["Board Member"], "notify": ["Member"], "reqs": ["TKT-03", "TKT-04", "TKT-06", "TKT-07"], "rules": ["Status update by Board only", "Shared Board queue", "Ticket status update notification"], "oi": "OI-46"},
+    {"from": "in-progress", "to": "resolved", "action": "Mark resolved", "by": ["Board Member"], "notify": ["Member"], "reqs": ["TKT-03", "TKT-04", "TKT-05", "TKT-06"], "rules": ["Status update by Board only", "Ticket status update notification"], "oi": "OI-13"},
+    {"from": "resolved", "to": "closed", "action": "Close ticket", "by": ["Board Member"], "notify": ["Member"], "reqs": ["TKT-04", "TKT-08"], "rules": ["Status update by Board only"], "oi": "OI-45"}
+  ],
+  "rules": [
+    {"rule": "Own tickets only", "reqs": ["TKT-02"]},
+    {"rule": "All tickets for Board", "reqs": ["TKT-03"]},
+    {"rule": "Status update by Board only", "reqs": ["TKT-04"]},
+    {"rule": "Shared Board queue", "reqs": ["TKT-07"]},
+    {"rule": "Ticket status update notification", "reqs": ["TKT-06"]},
+    {"rule": "Ticket response notification", "reqs": ["TKT-06"]},
+    {"rule": "New ticket notification", "reqs": ["TKT-06"]}
+  ],
+  "reports": [
+    {"name": "Open tickets", "reqs": ["TKT-09"]},
+    {"name": "Tickets by status", "reqs": ["TKT-09"]}
+  ],
+  "rows": [
+    {"id": "TKT-0101", "status": "open", "values": {"Ticket number": "TKT-0101", "Ticket title": "Streetlight out on Willow Ct", "Category": "Common areas", "Description": "The streetlight by house 14 has been out for a week.", "Attachment / photo": "streetlight.jpg", "Date": "2026-10-30", "Priority": "Normal", "Raised by": "Greg", "Status": "Open"}},
+    {"id": "TKT-0102", "status": "open", "values": {"Ticket number": "TKT-0102", "Ticket title": "Pool gate does not latch", "Category": "Pool", "Description": "Gate swings open; safety risk for kids.", "Date": "2026-11-01", "Priority": "High", "Raised by": "Maria", "Status": "Open"}},
+    {"id": "TKT-0098", "status": "in-progress", "values": {"Ticket number": "TKT-0098", "Ticket title": "Pond fountain stopped", "Category": "Common areas", "Description": "Fountain pump is silent since Monday.", "Date": "2026-10-26", "Priority": "Normal", "Raised by": "Greg", "Status": "In Progress"}, "children": {"Ticket update": [{"Comment": "Pump vendor called, visit on Thursday.", "By": "Linda", "Date": "2026-10-27"}]}, "log": [["2026-10-27", "Linda (Board Member)", "Started work; Greg notified"]]},
+    {"id": "TKT-0091", "status": "resolved", "values": {"Ticket number": "TKT-0091", "Ticket title": "Fallen tree on walking trail", "Category": "Landscaping", "Description": "Tree across the trail after the storm.", "Date": "2026-10-18", "Priority": "High", "Raised by": "Priya", "Status": "Resolved"}, "children": {"Ticket update": [{"Comment": "Crew removed the tree today.", "By": "Linda", "Date": "2026-10-21"}]}},
+    {"id": "TKT-0080", "status": "closed", "values": {"Ticket number": "TKT-0080", "Ticket title": "Clubhouse AC too loud", "Category": "Clubhouse", "Description": "AC unit rattles during events.", "Date": "2026-10-02", "Priority": "Normal", "Raised by": "Maria", "Status": "Closed"}, "children": {"Ticket update": [{"Comment": "Fan mount fixed by HVAC vendor.", "By": "Tom", "Date": "2026-10-09"}]}, "log": [["2026-10-12", "Tom (Board Member)", "Closed"]]},
+    {"id": "TKT-0079", "status": "closed", "values": {"Ticket number": "TKT-0079", "Ticket title": "Streetlight out (duplicate)", "Category": "Common areas", "Description": "Same as another ticket.", "Date": "2026-10-01", "Priority": "Normal", "Raised by": "Priya", "Status": "Closed"}, "children": {"Ticket update": [{"Comment": "Duplicate of TKT-0078; closing.", "By": "Tom", "Date": "2026-10-01"}]}}
+  ],
+  "scenarios": [
+    {"title": "Member reports a broken streetlight", "summary": "Happy path: Member raises, any Board Member works it, Member sees updates, Board closes.", "steps": [
+      {"actor": "Member", "action": "Raises 'Streetlight out on Willow Ct' with title, category, description and photo", "row": "TKT-0101", "proves": ["TKT-01"], "oi": "OI-12"},
+      {"actor": "system", "action": "Tells Board Members a new ticket came in", "screen": "rules", "proves": ["TKT-06"], "oi": "OI-23"},
+      {"actor": "Board Member", "action": "Sees all tickets; picks this one up with no assignment or approval and presses Start work", "row": "TKT-0101", "transition": {"from": "open", "to": "in-progress"}, "proves": ["TKT-03", "TKT-07"], "oi": "OI-46"},
+      {"actor": "Board Member", "action": "Adds an update and presses Mark resolved", "row": "TKT-0101", "transition": {"from": "in-progress", "to": "resolved"}, "proves": ["TKT-05", "TKT-04"]},
+      {"actor": "Member", "action": "Gets notified; opens the ticket and reads the update; sees only own tickets", "row": "TKT-0101", "proves": ["TKT-02", "TKT-06"], "oi": "OI-13"},
+      {"actor": "Board Member", "action": "Presses Close ticket; no reopen button afterwards", "row": "TKT-0101", "transition": {"from": "resolved", "to": "closed"}, "proves": ["TKT-08"], "oi": "OI-45"}
+    ]},
+    {"title": "Member wants to reply on a ticket", "summary": "Open question: can a Member comment back on their own ticket?", "steps": [
+      {"actor": "Member", "action": "Opens 'Pond fountain stopped' and wants to add a reply", "row": "TKT-0098", "proves": ["TKT-05"], "oi": "OI-11"}
+    ]},
+    {"title": "Member not happy after close", "summary": "Exception: closed ticket is not reopened; Member raises a new one.", "steps": [
+      {"actor": "Member", "action": "Opens closed 'Clubhouse AC too loud'; no reopen; raises a new ticket instead", "row": "TKT-0080", "proves": ["TKT-08"], "oi": "OI-45"}
+    ]},
+    {"title": "Duplicate ticket", "summary": "Exception: Board Member closes a duplicate with a comment.", "steps": [
+      {"actor": "Board Member", "action": "Sees 'Streetlight out (duplicate)' closed with a comment pointing to the original", "row": "TKT-0079", "proves": ["TKT-05"]}
+    ]},
+    {"title": "Board checks the ticket load", "summary": "Board Member views open tickets and tickets by status.", "steps": [
+      {"actor": "Board Member", "action": "Opens Open tickets", "screen": "report", "report": "Open tickets", "proves": ["TKT-09"], "oi": "OI-26"},
+      {"actor": "Board Member", "action": "Opens Tickets by status", "screen": "report", "report": "Tickets by status", "proves": ["TKT-09"]}
+    ]}
+  ]
+}

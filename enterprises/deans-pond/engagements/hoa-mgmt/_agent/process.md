@@ -35,11 +35,13 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 
 | id | lane | Module | label | note | kind | OI | Source |
 |---|---|---|---|---|---|---|---|
-| raise-ticket | member | TKT | Raise ticket |  | step | OI-09 | RFP-1 |
-| review-ticket | board | TKT | Review ticket and take action |  | step |  | RFP-1 |
-| update-ticket-status | board | TKT | Update ticket status |  | step | OI-10 | RFP-1 |
-| view-ticket-update | member | TKT | View ticket update |  | step | OI-11 | RFP-1 |
-| close-ticket | board | TKT | Close ticket |  | step |  | RFP-1 |
+| raise-ticket | member | TKT | Raise ticket | Title, Category, Description; photo open; status Open | step | OI-09, OI-10, OI-12 | RFP-1 |
+| notify-new-ticket | notify | TKT | Notify Board Members of new ticket | (proposed, to confirm); channel open | step | OI-13, OI-23 | (proposed, to confirm) |
+| review-ticket | board | TKT | Review ticket and take action | Any Board Member; no assignment, no approval (proposed, to confirm); status In Progress | step | OI-46 | RFP-1 |
+| update-ticket-status | board | TKT | Update ticket status and add update | Board Member only; status Resolved when done | step | OI-10 | RFP-1 |
+| notify-ticket-update | notify | TKT | Notify Member of status change or response | Needs confirmation; channel open | step | OI-13, OI-23 | RFP-1 |
+| view-ticket-update | member | TKT | View ticket update | Member reply open | step | OI-11 | RFP-1 |
+| close-ticket | board | TKT | Close ticket | Board Member closes; no reopen (proposed, to confirm) | step | OI-45 | RFP-1 |
 
 ## RPAY — Raise Payment
 
@@ -83,10 +85,15 @@ Skeleton from `review-draft`. Each `resolve-module` refines its Module's section
 | publish-announcement | view-announcement | Member opens list | yes | RFP-1 |
 | view-announcement | archive-announcement | Out of date or event over | yes | (proposed, to confirm) |
 | member-gets-access | raise-ticket | Member can raise | yes | RFP-1 |
-| raise-ticket | review-ticket |  | no | RFP-1 |
+| raise-ticket | notify-new-ticket |  | no | (proposed, to confirm) |
+| notify-new-ticket | review-ticket |  | no | (proposed, to confirm) |
+| raise-ticket | review-ticket | Board Member opens list | yes | RFP-1 |
 | review-ticket | update-ticket-status |  | no | RFP-1 |
-| update-ticket-status | view-ticket-update |  | no | RFP-1 |
+| update-ticket-status | notify-ticket-update |  | no | RFP-1 |
+| notify-ticket-update | view-ticket-update |  | no | RFP-1 |
+| update-ticket-status | view-ticket-update | Member opens ticket | yes | RFP-1 |
 | view-ticket-update | close-ticket |  | no | RFP-1 |
+| review-ticket | close-ticket | Duplicate or raised by mistake | yes | (proposed, to confirm) |
 | add-to-directory | pick-members | Members to pick from | yes | WS-1 |
 | raise-payment | pick-members |  | no | RFP-1, WS-1 |
 | pick-members | create-payment-entries |  | no | WS-1 |
