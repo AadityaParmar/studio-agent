@@ -1,11 +1,11 @@
 ---
-status: open
+status: claimed
 prefix: PAY
 name: Payment
 blockedBy: [RPAY]
 revisitReason:
 formerly:
-claimedBy:
+claimedBy: Aditya Parmar
 ---
 
 # PAY — Payment

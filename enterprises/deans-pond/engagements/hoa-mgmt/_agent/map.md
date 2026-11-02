@@ -17,7 +17,7 @@ A signed-off BRD for HOA Management.
 | ANN | Announcements | resolved |
 | TKT | Tickets | resolved |
 | RPAY | Raise Payment | resolved |
-| PAY | Payment | open |
+| PAY | Payment | claimed |
 | VEN | Vendors | open |
 
 ## Change log
@@ -42,3 +42,4 @@ A signed-off BRD for HOA Management.
 - 2026-11-02: resolve-module: TKT resolved.
 - 2026-11-02: resolve-module: RPAY claimed by Aditya Parmar.
 - 2026-11-02: resolve-module: RPAY resolved.
+- 2026-11-02: resolve-module: PAY claimed by Aditya Parmar.
