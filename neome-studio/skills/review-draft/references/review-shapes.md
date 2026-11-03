@@ -17,7 +17,7 @@ Consultant relays what the Enterprise said; Consultant's own views are proposals
 - <Topic> (<who>, relaying <Enterprise person, role>, <where/when said>): <what they said>.
 ```
 
-One bullet per relayed answer, speaker named. Facts from it cite `[WS-n]`.
+One bullet per relayed answer, speaker named. Facts from it cite `[WS-n]`. Person or when not given → `relaying <Enterprise name> (person not named)` and leave out where/when; never ask for them, and no Open Item for it.
 
 ## Process skeleton `_agent/process.md`
 
