@@ -89,6 +89,7 @@ Not skills. `studio` never shows them.
 | `upstream-check` | Tell Claude: "follow `neome-studio/maintainer/upstream-check.md`". Script: `node neome-studio/maintainer/upstream-check.mjs diff neome-studio [--to <version>]` / `pin …` | On demand: about quarterly, or when upstream releases. Needs network. Works on branch `upstream-<to>`; you accept or reject each re-adapt; unchanged or rejected → pin-only bump; never auto-merges |
 | Eval runner | `node neome-studio/evals/run.mjs run --all`, or tell Claude: "follow `neome-studio/evals/eval.md`". Needs `claude` logged in; costs tokens; never in `npm test`/CI. Scorecard + thresholds: [evals/README.md](evals/README.md). Writes `neome-studio/evals/results/` | Skill text change, before merge to `main` |
 | Eyeball checklist | [evals/README.md](evals/README.md) | Any change to a BRD, Prototype or Questionnaire template |
+| Template bank digest + scrub | [maintainer/template-bank/README.md](maintainer/template-bank/README.md). Scripts, no model: `node neome-studio/maintainer/template-bank/digest.mjs`, then `scrub.mjs` | New or updated Neome Build JSON in the gitignored raw dir |
 
 Pending: upstream release 1.3.2 is out and waits for an `upstream-check` run (`grill-module` changed upstream).
 
