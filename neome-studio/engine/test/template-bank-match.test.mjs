@@ -40,12 +40,13 @@ test("index: one line per entry with ID, name, aliases, business type, seenIn co
   const r = run("template-bank", "index", "--bank", BANK);
   assert.equal(r.code, 0, r.out);
   assert.deepEqual(lines(r.stdout), [
-    "index | 2 Template(s), 2 Template module(s), 1 Pattern(s)",
+    "index | 2 Template(s), 2 Template module(s), 1 Pattern(s), 1 App baseline(s)",
     "TPL-garden-club | Garden club office | business type: Members club with bookings | seen in 1 Build(s)",
     "TPL-tile-trade | Tile trading desk | business type: Small tile and stone trader | seen in 2 Build(s)",
     "TMOD-enquiry-desk | Enquiry desk | aliases: Enquiries, Leads | seen in 3 Build(s)",
-    "TMOD-quotes | Quotes | aliases: Quotations, Estimates | seen in 1 Build(s)",
+    "TMOD-quotes | Quotes | aliases: Quotations, Estimates | App baseline: APP-quotation-and-order-flow | seen in 1 Build(s)",
     "PAT-approval-by-flag | Approval by flag | seen in 2 Build(s)",
+    "APP-quotation-and-order-flow | Quotation & Order Flow | App baseline of quotation-and-order-flow",
   ]);
   assert.deepEqual(bankIndex(BANK), lines(r.stdout));
 });
@@ -53,7 +54,7 @@ test("index: one line per entry with ID, name, aliases, business type, seenIn co
 test("index: empty or missing Template bank prints a zero header, exit 0", () => {
   const r = run("template-bank", "index", "--bank", join(tmpdir(), "no-such-template-bank"));
   assert.equal(r.code, 0, r.out);
-  assert.deepEqual(lines(r.stdout), ["index | 0 Template(s), 0 Template module(s), 0 Pattern(s)"]);
+  assert.deepEqual(lines(r.stdout), ["index | 0 Template(s), 0 Template module(s), 0 Pattern(s), 0 App baseline(s)"]);
 });
 
 // ---- fields: none vs missing ----

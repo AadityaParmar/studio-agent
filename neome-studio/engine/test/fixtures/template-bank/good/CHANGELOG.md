@@ -16,3 +16,4 @@ Test fixture.
 - 2026-01-06 | retire | PAT-dusty | seenIn hit zero
 - 2026-01-06 | enhance | TMOD-widgets | more usual needs | with a pipe
 - 2026-01-07 | rename | PAT-flag-sign-off -> PAT-sign-off-by-flag | clearer name
+- 2026-01-08 | add | APP-widget-desk | App baseline NA-widget-desk

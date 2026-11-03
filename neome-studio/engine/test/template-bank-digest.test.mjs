@@ -7,7 +7,7 @@ import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFil
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { assignCodes, digestBuild, parseBuild, pickBuilds, unknownKinds } from "../../maintainer/template-bank/digest.mjs";
+import { AREA_CAP, assignCodes, digestBuild, parseBuild, pickBuilds, unknownKinds } from "../../maintainer/template-bank/digest.mjs";
 import { assignAreas, ORPHANS } from "../../maintainer/template-bank/areas.mjs";
 import { buildIndex } from "../../maintainer/template-bank/build-json.mjs";
 import { extractKinds } from "../../maintainer/template-bank/extract-kinds.mjs";
@@ -78,6 +78,9 @@ test("digest: file set, overview, sizes", () => {
   assert.doesNotMatch(Object.values(d.files).join("\n"), /legacy|automation/i, "automations dropped");
   assert.deepEqual(d.meta, { entId: "ent-acme01", version: 7, name: "Acme Widgets", about: load().details.about });
   assert.equal(d.stats.areas, 3);
+  assert.equal(AREA_CAP, 25 * 1024);
+  assert.deepEqual(d.stats.overCap, []);
+  assert.deepEqual(digestBuild(load(), { cap: 100 }).stats.overCap.map((o) => o.file).sort(), ["orphans-maybe-dead.md", "quotes.md", "sales.md"]);
   assert.equal(d.stats.orphanSheets, 1);
   assert.equal(d.stats.sheets, 6);
 });

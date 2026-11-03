@@ -4,7 +4,7 @@ kind: template-module
 name: Quotes
 aliases: [Quotations, Estimates]
 patterns: [PAT-approval-by-flag]
-neomeApp: none
+neomeApp: quotation-and-order-flow
 delivery: configuration
 seenIn:
   - {build: NB-92, area: Quote}

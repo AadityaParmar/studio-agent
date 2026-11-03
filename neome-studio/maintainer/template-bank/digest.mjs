@@ -3,6 +3,7 @@
 // Maintainer only, no model. Neome Build JSON → per Build, in <raw>/digests/<NB-NN>/:
 //   overview.md            about, counts, roles, Build areas (size each), chat-only Groups, cross-area refs, option lists
 //   <area>.md              one per Build area: actions, sheets + fields + logic, reports, other forms, workflows
+//                          (cap 25 KB, AREA_CAP: bigger areas still written, flagged `over | …` for the maintainer)
 //   build.mmd              Mermaid: Build areas + cross-area ref counts
 //   <area>.refs.mmd        Mermaid: sheet refs of the area, outside targets marked
 //   <area>.wf.mmd          Mermaid: one flowchart per workflow (from workflow.edgeMap)
@@ -14,6 +15,7 @@
 //   node neome-studio/maintainer/template-bank/digest.mjs [--raw <dir>] [<build.json> …]
 //     <dir> default .scratch/template-bank/raw (must be gitignored); inputs default <dir>/*.json.
 //     stdout: skip | <file> | <reason>   ·   digest | NB-NN | <sizes>   ·   kinds | NB-NN | unknown: …
+//             over | NB-NN | <area file> | <n> KB > 25 KB cap
 //     Exit 0 = done, 1 = no input / unreadable JSON, 2 = bad arguments or raw dir not gitignored.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
@@ -29,12 +31,14 @@ export { parseBuild, pickBuilds, unknownKinds };
 const here = dirname(fileURLToPath(import.meta.url));
 export const KINDS = JSON.parse(readFileSync(join(here, "kinds.json"), "utf8"));
 const USE = "Usage: digest.mjs [--raw <dir>] [<build.json> …]";
+/** Build area digest size cap (chars). Spec §10: 25 KB for every Build (was 17 KB). */
+export const AREA_CAP = 25 * 1024;
 
 /**
  * One Build → {files: {name: text}, meta, stats}. Pure: no disk.
- * stats: {overview, areas, maxArea, totalArea (chars), modules, sheets, orphanSheets}.
+ * stats: {overview, areas, maxArea, totalArea (chars), modules, sheets, orphanSheets, overCap: [{file, size}]}.
  */
-export function digestBuild(ent) {
+export function digestBuild(ent, { cap = AREA_CAP } = {}) {
   const ix = buildIndex(ent);
   const ar = assignAreas(ent, ix);
   const files = {};
@@ -69,6 +73,7 @@ export function digestBuild(ent) {
       modules: ix.modules.length,
       sheets: ix.sheets.length,
       orphanSheets: ar.areas.get(UN)?.sheets.size || 0,
+      overCap: ar.list.filter((a) => sizes.get(a.key) > cap).map((a) => ({ file: areaFiles.get(a.key), size: sizes.get(a.key) })),
     },
   };
 }
@@ -133,6 +138,7 @@ export async function main(argv) {
     writeInside(raw, join("digests", code, "meta.json"), JSON.stringify({ code, ...d.meta }, null, 2) + "\n");
     const s = d.stats, k = (n) => (n / 1024).toFixed(1);
     console.log(`digest | ${code} | ${(statSync(path).size / 1024).toFixed(0)} KB json → overview ${k(s.overview)} KB + ${s.areas} areas (max ${k(s.maxArea)} KB, total ${(s.totalArea / 1024).toFixed(0)} KB) · modules ${s.modules} · orphan sheets ${s.orphanSheets}/${s.sheets}`);
+    for (const o of s.overCap) console.log(`over | ${code} | ${o.file} | ${k(o.size)} KB > ${AREA_CAP / 1024} KB cap`);
     const unknown = unknownKinds(ent, KINDS);
     if (unknown.length) console.log(`kinds | ${code} | unknown: ${unknown.join(", ")} (docs/studio-ai-docs behind? re-run extract-kinds.mjs)`);
   }

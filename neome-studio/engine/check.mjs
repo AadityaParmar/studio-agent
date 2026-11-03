@@ -44,7 +44,7 @@ function bankCheck(pluginDir) {
   if (existsSync(scrubDir)) scrubWords = readScrubWords(scrubDir);
   else if (envDir) pre.push(`NEOME_SCRUB_DIR not found: ${envDir}`);
   const r = checkBank(bankDir, { catalogSlugsPath: join(pluginDir, "reference", "neome-app-catalog-slugs.json"), scrubWords });
-  const entries = ["patterns", "template-modules", "templates"]
+  const entries = ["patterns", "template-modules", "templates", "apps"]
     .map((d) => join(bankDir, d))
     .filter(existsSync)
     .reduce((n, d) => n + readdirSync(d).filter((f) => f.endsWith(".md")).length, 0);

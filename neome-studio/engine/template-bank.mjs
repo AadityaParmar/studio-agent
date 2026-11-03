@@ -29,12 +29,22 @@ const KINDS = {
     keys: ["id", "kind", "name", "businessType", "modules", "seenIn"],
     sections: ["Modules", "Links between modules", "Flowchart"],
   },
+  // App baseline: what one Neome App gives out of the box, learnt from its Neome App Build (NA-<slug>).
+  app: {
+    folder: "apps",
+    prefix: "APP",
+    keys: ["id", "kind", "name", "seenIn"],
+    sections: ["Gives", "Sheets, key fields, roles", "Workflows", "Flowchart"],
+  },
 };
 const DELIVERY = ["standard", "configuration", "custom"]; // = BRD data schema delivery enum
 const CHANGES = ["add", "enhance", "split", "merge", "rename", "retire"];
-const ANY_ID = /^(PAT|TMOD|TPL)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
+const ANY_ID = /^(PAT|TMOD|TPL|APP)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 const idPattern = (prefix) => new RegExp(`^${prefix}-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$`);
-const BUILD = /^NB-\d{2,}$/;
+const SLUG = "[a-z][a-z0-9]*(?:-[a-z0-9]+)*";
+// Build codes: NB-NN = client Neome Build; NA-<catalog slug> = Neome App Build (App baseline).
+export const BUILD_CODE = new RegExp(`^(?:NB-\\d{2,}|NA-${SLUG})$`);
+export const appSlugOf = (id) => String(id).replace(/^(APP|NA)-/, "");
 
 // Raw read: every *.md in the three kind folders + parsed CHANGELOG, with problems found on the way.
 function readBank(bankDir) {
@@ -107,6 +117,13 @@ export function loadBank(bankDir = BANK_DIR) {
   return { entries, changelog: changelog.map(({ line, ...row }) => row) };
 }
 
+// Linked App baseline of a Template module (neomeApp slug → APP-<slug> on file), or null.
+export function appFor(entries, tmod) {
+  const slug = tmod?.fm?.neomeApp;
+  if (!slug || slug === "none") return null;
+  return entries.find((e) => e.kind === "app" && e.id === `APP-${slug}`) ?? null;
+}
+
 // Direct new IDs from the last ID-changing CHANGELOG line for `id`: [] = retired, null = never replaced.
 export function replacedBy(bankDir = BANK_DIR, id) {
   return lastReplace(loadBank(bankDir).changelog, id)?.replacedBy.slice() ?? null;
@@ -150,7 +167,7 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
   errors.push(...problems);
 
   let slugs = null;
-  const needSlugs = files.some((f) => f.kind === "template-module" && isEntry(f));
+  const needSlugs = files.some((f) => isEntry(f) && (f.kind === "template-module" || f.kind === "app" || (Array.isArray(f.fm.seenIn) && f.fm.seenIn.some((r) => String(r?.build ?? "").startsWith("NA-")))));
   if (needSlugs) {
     try {
       slugs = new Set(JSON.parse(readFileSync(catalogSlugsPath, "utf8")).apps.map((a) => a.slug));
@@ -181,7 +198,7 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
     else if (fm.kind !== kind) err(`kind "${fm.kind}" does not match folder ${folder}`);
     for (const k of Object.keys(fm)) if (!spec.keys.includes(k)) err(`unknown front matter key ${k}`);
     if (!nonEmptyText(fm.name)) err("name missing");
-    checkSeenIn(fm.seenIn, err);
+    checkSeenIn(fm.seenIn, err, slugs, kind === "app" ? `NA-${appSlugOf(id)}` : null);
 
     if (kind === "pattern") {
       if (typeof fm.workaround !== "boolean") err("workaround must be true or false");
@@ -194,6 +211,7 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
       else if (fm.neomeApp !== "none" && slugs && !slugs.has(fm.neomeApp)) err(`neomeApp "${fm.neomeApp}" not in Neome App catalog slugs`);
       if (!DELIVERY.includes(fm.delivery)) err(`delivery must be one of ${DELIVERY.join(", ")}`);
     }
+    if (kind === "app" && idPattern("APP").test(id) && slugs && !slugs.has(appSlugOf(id))) err(`${appSlugOf(id)} not in Neome App catalog slugs (APP-<catalog slug>)`);
     if (kind === "template") {
       if (!nonEmptyText(fm.businessType)) err("businessType missing");
       const m = fm.modules;
@@ -216,6 +234,12 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
 
   for (const [id, fs] of byId) {
     if (fs.length > 1) errors.push(`${id}: id used by more than one file (${fs.map((f) => `${f.folder}/${f.name}`).join(", ")})`);
+  }
+
+  // App baseline with no Template module pointing at it: fine, but say so (TMOD neomeApp is the only link).
+  const linked = new Set(files.filter((f) => isEntry(f) && f.kind === "template-module").map((f) => f.fm.neomeApp));
+  for (const id of byId.keys()) {
+    if (kindOf(id) === "app" && !linked.has(appSlugOf(id))) warnings.push(`${id}: no Template module has neomeApp: ${appSlugOf(id)}`);
   }
 
   // IDs never reused: an ID retired or replaced in CHANGELOG must not be on file.
@@ -242,14 +266,18 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
 const nonEmptyText = (v) => typeof v === "string" && v.trim() !== "";
 const isTextList = (v) => Array.isArray(v) && v.every(nonEmptyText);
 
-function checkSeenIn(rows, err) {
+// own = the one Build code an App baseline may name (its NA-<slug>); null = any NB-NN / NA-<catalog slug>.
+function checkSeenIn(rows, err, slugs, own) {
   if (!Array.isArray(rows) || !rows.length) return err("seenIn must be a non-empty list of {build: NB-NN, area}");
   rows.forEach((row, i) => {
     const at = `seenIn row ${i + 1}`;
     if (!row || typeof row !== "object" || Array.isArray(row)) return err(`${at}: must be {build: NB-NN, area}`);
     for (const k of Object.keys(row)) if (!["build", "area"].includes(k)) err(`${at}: unknown key ${k}`);
-    if (row.build === undefined) err(`${at}: build missing`);
-    else if (!BUILD.test(String(row.build))) err(`${at}: build "${row.build}" must look like NB-NN`);
+    const b = row.build === undefined ? undefined : String(row.build);
+    if (b === undefined) err(`${at}: build missing`);
+    else if (own && b !== own) err(`${at}: build must be ${own}`);
+    else if (!BUILD_CODE.test(b)) err(`${at}: build "${row.build}" must look like NB-NN or NA-<catalog slug>`);
+    else if (b.startsWith("NA-") && slugs && !slugs.has(appSlugOf(b))) err(`${at}: ${b} not in Neome App catalog slugs`);
     if (row.area === undefined || row.area === null || String(row.area).trim() === "") err(`${at}: area missing`);
   });
 }

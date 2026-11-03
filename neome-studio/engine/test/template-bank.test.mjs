@@ -5,7 +5,7 @@ import { cpSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync, ex
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { BANK_DIR, loadBank, checkBank, replacedBy, checkTemplateRef } from "../template-bank.mjs";
+import { BANK_DIR, loadBank, checkBank, replacedBy, checkTemplateRef, appFor } from "../template-bank.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const FIX = join(here, "fixtures", "template-bank");
@@ -24,6 +24,7 @@ const check = (dir, opts = {}) => checkBank(dir, { catalogSlugsPath: SLUGS, ...o
 const TMOD = "template-modules/TMOD-widgets.md";
 const PAT = "patterns/PAT-sign-off-by-flag.md";
 const TPL = "templates/TPL-widget-shop.md";
+const APP = "apps/APP-widget-desk.md";
 
 function assertError(r, re) {
   assert.ok(r.errors.some((e) => re.test(e)), `no error matching ${re}; got:\n${r.errors.join("\n")}`);
@@ -38,7 +39,7 @@ test("BANK_DIR points at the plugin's reference/template-bank", () => {
 test("loadBank reads every entry with kind, front matter, body, file", () => {
   const { entries } = loadBank(GOOD);
   const ids = entries.map((e) => e.id).sort();
-  assert.deepEqual(ids, ["PAT-sign-off-by-flag", "TMOD-gizmos", "TMOD-widgets", "TPL-widget-shop"]);
+  assert.deepEqual(ids, ["APP-widget-desk", "PAT-sign-off-by-flag", "TMOD-gizmos", "TMOD-widgets", "TPL-widget-shop"]);
   const tmod = entries.find((e) => e.id === "TMOD-widgets");
   assert.equal(tmod.kind, "template-module");
   assert.equal(tmod.fm.neomeApp, "widget-desk");
@@ -46,11 +47,13 @@ test("loadBank reads every entry with kind, front matter, body, file", () => {
   assert.equal(tmod.file, join(GOOD, TMOD));
   assert.equal(entries.find((e) => e.id === "PAT-sign-off-by-flag").kind, "pattern");
   assert.equal(entries.find((e) => e.id === "TPL-widget-shop").kind, "template");
+  assert.equal(entries.find((e) => e.id === "APP-widget-desk").kind, "app");
 });
 
 test("loadBank parses CHANGELOG lines, skips text and fenced blocks", () => {
   const { changelog } = loadBank(GOOD);
-  assert.equal(changelog.length, 10);
+  assert.equal(changelog.length, 11);
+  assert.deepEqual(changelog.at(-1).ids, ["APP-widget-desk"]);
   assert.deepEqual(changelog[0], { date: "2026-01-01", change: "add", ids: ["PAT-sign-off-by-flag"], replacedBy: null, reason: "seen in NB-90, NB-91" });
   assert.deepEqual(changelog[1].ids, ["TMOD-widget-requests", "TMOD-widgets"]);
   const split = changelog.find((c) => c.change === "split");
@@ -64,7 +67,7 @@ test("loadBank parses CHANGELOG lines, skips text and fenced blocks", () => {
 test("loadBank on a missing or empty Template bank gives empty lists", () => {
   const dir = mkdtempSync(join(tmpdir(), "neome-bank-"));
   assert.deepEqual(loadBank(join(dir, "nope")), { entries: [], changelog: [] });
-  for (const d of ["patterns", "template-modules", "templates"]) mkdirSync(join(dir, d));
+  for (const d of ["patterns", "template-modules", "templates", "apps"]) mkdirSync(join(dir, d));
   writeFileSync(join(dir, "patterns", ".gitkeep"), "");
   assert.deepEqual(loadBank(dir), { entries: [], changelog: [] });
 });
@@ -239,6 +242,65 @@ test("replacedBy target that is not in Template bank and not replaced again warn
   assert.ok(r.warnings.some((w) => /TMOD-zed-two/.test(w)), r.warnings.join("\n"));
 });
 
+// --- App baseline (APP-, NA- Build codes) ---
+
+test("APP entry: front matter keys, body sections, mermaid", () => {
+  const dir = bankCopy();
+  edit(dir, APP, (t) => t.replace("name: Widget Desk\n", "name: Widget Desk\nneomeApp: widget-desk\n").replace("## Gives\n", "## Offers\n").replace(/```mermaid[\s\S]*?```\n/, "x\n"));
+  const r = check(dir);
+  assertError(r, /APP-widget-desk: unknown front matter key neomeApp/);
+  assertError(r, /APP-widget-desk: body section "## Gives" missing/);
+  assertError(r, /APP-widget-desk: Flowchart has no mermaid block/);
+});
+
+test("APP id slug must be a Neome App catalog slug", () => {
+  const dir = bankCopy();
+  rmSync(join(dir, APP));
+  writeFileSync(join(dir, "apps", "APP-widget-palace.md"), readFileSync(join(GOOD, APP), "utf8").replace("id: APP-widget-desk", "id: APP-widget-palace").replaceAll("NA-widget-desk", "NA-widget-palace"));
+  const r = check(dir);
+  assertError(r, /APP-widget-palace: widget-palace not in Neome App catalog slugs/);
+});
+
+test("APP seenIn rows must be its own NA- code", () => {
+  const dir = bankCopy();
+  edit(dir, APP, (t) => t.replace("{build: NA-widget-desk, area: Widget Desk}", "{build: NA-gizmo-flow, area: Gizmo Flow}\n  - {build: NB-90, area: Widgets}"));
+  const r = check(dir);
+  assertError(r, /APP-widget-desk: seenIn row 1: build must be NA-widget-desk/);
+  assertError(r, /APP-widget-desk: seenIn row 2: build must be NA-widget-desk/);
+});
+
+test("seenIn NA- rows: slug must be in the catalog; any other code fails", () => {
+  const dir = bankCopy();
+  edit(dir, PAT, (t) => t.replace("{build: NA-widget-desk, area: Widget Desk}", "{build: NA-widget-palace, area: Widget Desk}\n  - {build: NA-Bad_Slug, area: X}"));
+  const r = check(dir);
+  assertError(r, /PAT-sign-off-by-flag: seenIn row 3: NA-widget-palace not in Neome App catalog slugs/);
+  assertError(r, /PAT-sign-off-by-flag: seenIn row 4: build "NA-Bad_Slug" must look like NB-NN or NA-<catalog slug>/);
+});
+
+test("APP no Template module links to → warning only", () => {
+  const dir = bankCopy();
+  edit(dir, TMOD, (t) => t.replace("neomeApp: widget-desk", "neomeApp: gizmo-flow"));
+  const r = check(dir);
+  assert.deepEqual(r.errors, []);
+  assert.ok(r.warnings.some((w) => /APP-widget-desk: no Template module has neomeApp: widget-desk/.test(w)), r.warnings.join("\n"));
+});
+
+test("APP IDs are CHANGELOG IDs; APP cannot be listed as a Pattern or Template module", () => {
+  const dir = bankCopy();
+  edit(dir, "CHANGELOG.md", (t) => t + "- 2026-01-09 | enhance | APP-widget-desk | new App version\n");
+  edit(dir, TMOD, (t) => t.replace("patterns: [PAT-sign-off-by-flag]", "patterns: [PAT-sign-off-by-flag, APP-widget-desk]"));
+  const r = check(dir);
+  assert.ok(!r.errors.some((e) => /CHANGELOG/.test(e)), r.errors.join("\n"));
+  assertError(r, /TMOD-widgets: patterns: APP-widget-desk is not a Pattern/);
+});
+
+test("appFor: linked APP of a Template module, or null", () => {
+  const { entries } = loadBank(GOOD);
+  const tmod = entries.find((e) => e.id === "TMOD-widgets");
+  assert.equal(appFor(entries, tmod)?.id, "APP-widget-desk");
+  assert.equal(appFor(entries, entries.find((e) => e.id === "TMOD-gizmos")), null);
+});
+
 // --- replacedBy ---
 
 test("replacedBy gives direct new IDs, [] for retired, null when never replaced", () => {
@@ -309,7 +371,7 @@ test("cli check runs Template bank checks and fails on errors", () => {
 test("cli check passes on a good Template bank and without one", () => {
   const ok = cliCheck(pluginWithBank(GOOD));
   assert.equal(ok.code, 0, ok.out);
-  assert.match(ok.out, /Template bank 4 entries OK/);
+  assert.match(ok.out, /Template bank 5 entries OK/);
   assert.equal(cliCheck(pluginWithBank(null)).code, 0);
 });
 

@@ -15,7 +15,7 @@ import { join, resolve } from "node:path";
 import { frontMatter } from "./markdown.mjs";
 import { parse, usage } from "./ingest.mjs";
 import { frontierReport } from "./modules.mjs";
-import { BANK_DIR, loadBank, checkTemplateRef } from "./template-bank.mjs";
+import { BANK_DIR, loadBank, checkTemplateRef, appFor, appSlugOf } from "./template-bank.mjs";
 
 const USE = [
   "template-bank index [--bank <dir>]",
@@ -24,7 +24,7 @@ const USE = [
   "template-bank set <engagement-dir> <PREFIX> --template-module <TMOD-…|none> [--bank <dir>]",
 ].join("\n       ");
 const ID = /^(TPL|TMOD|PAT)-[a-z0-9]+(-[a-z0-9]+)*$/;
-const KIND_ORDER = ["template", "template-module", "pattern"];
+const KIND_ORDER = ["template", "template-module", "pattern", "app"];
 
 export function templateBank(args) {
   const [action, ...rest] = args;
@@ -56,19 +56,23 @@ const plural = (n, word) => `${n} ${word}(s)`;
 const builds = (fm) => new Set((Array.isArray(fm.seenIn) ? fm.seenIn : []).map((s) => s?.build).filter(Boolean)).size;
 const listOf = (v) => (Array.isArray(v) ? v : v ? [v] : []).map(String);
 
-// One line per entry: ID | name | aliases / business type | seen in N Build(s). Templates, then Template modules, then Patterns.
+// One line per entry: ID | name | aliases / business type / linked App baseline | seen in N Build(s).
+// Templates, then Template modules, then Patterns, then App baselines (APP-, linked from a TMOD's neomeApp).
 export function bankIndex(bankDir = BANK_DIR) {
   const { entries } = loadBank(bankDir);
   const sorted = [...entries].sort((a, b) => KIND_ORDER.indexOf(a.kind) - KIND_ORDER.indexOf(b.kind) || a.id.localeCompare(b.id));
   const count = (k) => entries.filter((e) => e.kind === k).length;
-  const out = [`index | ${plural(count("template"), "Template")}, ${plural(count("template-module"), "Template module")}, ${plural(count("pattern"), "Pattern")}`];
+  const out = [`index | ${plural(count("template"), "Template")}, ${plural(count("template-module"), "Template module")}, ${plural(count("pattern"), "Pattern")}, ${plural(count("app"), "App baseline")}`];
   for (const e of sorted) {
+    if (e.kind === "app") { out.push(`${e.id} | ${e.fm.name ?? "(no name)"} | App baseline of ${appSlugOf(e.id)}`); continue; }
     const aliases = listOf(e.fm.aliases);
+    const app = e.kind === "template-module" ? appFor(entries, e) : null;
     out.push([
       e.id,
       e.fm.name ?? "(no name)",
       e.kind === "template" && e.fm.businessType ? `business type: ${e.fm.businessType}` : null,
       aliases.length ? `aliases: ${aliases.join(", ")}` : null,
+      app ? `App baseline: ${app.id}` : null,
       `seen in ${plural(builds(e.fm), "Build")}`,
     ].filter(Boolean).join(" | "));
   }

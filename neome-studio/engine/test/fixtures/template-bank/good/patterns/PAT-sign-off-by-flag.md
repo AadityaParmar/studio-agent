@@ -6,6 +6,7 @@ workaround: true
 seenIn:
   - {build: NB-90, area: Widgets}
   - {build: NB-91, area: Widgets}
+  - {build: NA-widget-desk, area: Widget Desk}
 ---
 
 # Sign-off by flag
