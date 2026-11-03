@@ -7,6 +7,8 @@ seenIn:
   - {build: NB-03, area: QuotationAndOrderFlow}
   - {build: NB-06, area: RequestMaterial}
   - {build: NB-07, area: Service Desk}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-crm, area: CRM}
 ---
 
 # Forward a row to another role

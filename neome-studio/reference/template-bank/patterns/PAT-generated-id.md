@@ -9,6 +9,9 @@ seenIn:
   - {build: NB-06, area: Quotation}
   - {build: NB-06, area: RequestMaterial}
   - {build: NB-06, area: ProductionMasterData}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
 ---
 
 # Readable ID made after insert

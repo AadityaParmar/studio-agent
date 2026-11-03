@@ -13,6 +13,7 @@ seenIn:
   - {build: NB-04, area: MasterData}
   - {build: NB-05, area: MasterData}
   - {build: NB-06, area: ProductionMasterData}
+  - {build: NA-crm, area: MasterData}
 ---
 
 # Master data lists

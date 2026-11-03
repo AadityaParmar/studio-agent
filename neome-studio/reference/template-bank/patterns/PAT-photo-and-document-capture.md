@@ -12,6 +12,8 @@ seenIn:
   - {build: NB-06, area: QualityChecking}
   - {build: NB-06, area: Payment}
   - {build: NB-07, area: HRCentral}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
 ---
 
 # Photo, document and signature capture

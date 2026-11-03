@@ -8,6 +8,8 @@ seenIn:
   - {build: NB-06, area: Dispatch}
   - {build: NB-06, area: FinishGood}
   - {build: NB-06, area: SalesOrder}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
 ---
 
 # Stop a save by workflow check

@@ -9,6 +9,17 @@ seenIn:
   - {build: NB-03, area: Inventory}
   - {build: NB-03, area: Manufacturing}
   - {build: NB-03, area: QuotationAndOrderFlow}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-product-lifecycle-management, area: ProductLifecycleManagement}
+  - {build: NA-purchase-management, area: PurchaseManagement}
 ---
 
 # Lock fields until saved or closed

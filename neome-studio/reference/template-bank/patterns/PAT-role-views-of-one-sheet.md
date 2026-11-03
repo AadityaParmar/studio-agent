@@ -20,6 +20,7 @@ seenIn:
   - {build: NB-07, area: ADGCentral}
   - {build: NB-07, area: DevCentral}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-knowledge-library, area: KnowledgeLibrary}
 ---
 
 # Role views of one sheet

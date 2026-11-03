@@ -9,6 +9,12 @@ seenIn:
   - {build: NB-03, area: Manufacturing}
   - {build: NB-06, area: QualityChecking}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-purchase-management, area: PurchaseManagement}
 ---
 
 # Error field check on the form

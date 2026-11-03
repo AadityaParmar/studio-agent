@@ -6,6 +6,14 @@ workaround: false
 seenIn:
   - {build: NB-01, area: CustomerMaster}
   - {build: NB-06, area: SalesOrder}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Per-row scheduler

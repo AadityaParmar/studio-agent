@@ -18,6 +18,13 @@ seenIn:
   - {build: NB-06, area: Payment}
   - {build: NB-06, area: ProductionMasterData}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-knowledge-library, area: KnowledgeLibrary}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-purchase-management, area: PurchaseManagement}
 ---
 
 # Running total in a log number field

@@ -18,6 +18,20 @@ seenIn:
   - {build: NB-06, area: Return}
   - {build: NB-07, area: HRCentral}
   - {build: NB-07, area: DevCentral}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-employee-directory, area: EmployeeDirectory}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
+  - {build: NA-knowledge-library, area: KnowledgeLibrary}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-product-lifecycle-management, area: ProductLifecycleManagement}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-quality-control, area: QualityControl}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Show or hide fields by value

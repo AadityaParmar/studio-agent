@@ -5,7 +5,7 @@ name: Small manufacturer with trade orders
 businessType: "Buys material, makes goods and sells them by quotation, order and dispatch, keeping stock per warehouse."
 modules:
   core: [TMOD-quotation, TMOD-sales-order, TMOD-dispatch, TMOD-inventory, TMOD-master-data]
-  optional: [TMOD-manufacturing, TMOD-purchase-orders, TMOD-goods-inward, TMOD-incoming-quality-check, TMOD-vendor-return, TMOD-material-request, TMOD-customer-payments, TMOD-customer-master, TMOD-employee-master, TMOD-management-reports]
+  optional: [TMOD-manufacturing, TMOD-purchase-orders, TMOD-goods-inward, TMOD-quality-check, TMOD-vendor-return, TMOD-material-request, TMOD-customer-payments, TMOD-customer-master, TMOD-employee-master, TMOD-management-reports]
 seenIn:
   - {build: NB-03, area: "*"}
   - {build: NB-06, area: "*"}
@@ -28,7 +28,7 @@ Optional:
 - TMOD-manufacturing (Manufacturing)
 - TMOD-purchase-orders (Purchase orders)
 - TMOD-goods-inward (Goods inward)
-- TMOD-incoming-quality-check (Incoming quality check)
+- TMOD-quality-check (Quality check)
 - TMOD-vendor-return (Return to vendor)
 - TMOD-material-request (Material request and issue)
 - TMOD-customer-payments (Customer payments)

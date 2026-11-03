@@ -7,6 +7,7 @@ seenIn:
   - {build: NB-07, area: ADGCentral}
   - {build: NB-07, area: DevCentral}
   - {build: NB-07, area: HRCentral}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
 ---
 
 # Sheet history action

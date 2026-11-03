@@ -22,6 +22,12 @@ seenIn:
   - {build: NB-06, area: Inward}
   - {build: NB-06, area: RequestMaterialNotification}
   - {build: NB-07, area: Orphans (maybe dead)}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-purchase-management, area: PurchaseManagement}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # Line items grid with totals

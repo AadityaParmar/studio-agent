@@ -11,6 +11,9 @@ seenIn:
   - {build: NB-04, area: Quotation}
   - {build: NB-04, area: ProductDevelopmentRequest}
   - {build: NB-05, area: Payroll}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-purchase-management, area: PurchaseManagement}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # PDF from a report

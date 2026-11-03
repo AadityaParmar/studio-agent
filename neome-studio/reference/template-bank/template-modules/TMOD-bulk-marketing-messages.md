@@ -3,7 +3,7 @@ id: TMOD-bulk-marketing-messages
 kind: template-module
 name: Bulk marketing messages
 aliases: []
-patterns: [PAT-bulk-message-loop, PAT-read-document-into-form]
+patterns: [PAT-bulk-message-loop, PAT-ai-reads-into-form]
 neomeApp: none
 delivery: configuration
 seenIn:

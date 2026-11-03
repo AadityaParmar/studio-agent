@@ -13,6 +13,19 @@ seenIn:
   - {build: NB-04, area: Quotation}
   - {build: NB-04, area: SalesExecutives}
   - {build: NB-05, area: Expenses}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-employee-directory, area: EmployeeDirectory}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-purchase-management, area: PurchaseManagement}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Act on status or field change

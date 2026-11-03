@@ -28,6 +28,22 @@ seenIn:
   - {build: NB-06, area: SalesOrder}
   - {build: NB-07, area: ADGCentral}
   - {build: NB-07, area: DevCentral}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-purchase-management, area: PurchaseManagement}
+  - {build: NA-quality-control, area: QualityControl}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Query report with filter form

@@ -3,7 +3,7 @@ id: TMOD-leave
 kind: template-module
 name: Leave
 aliases: [Leave management, Leave application]
-patterns: [PAT-approval-by-status, PAT-two-level-approval, PAT-running-total-by-log-field, PAT-fan-out-rows-from-report, PAT-error-field-check, PAT-undo-on-cancel, PAT-update-linked-rows, PAT-scheduled-job-over-rows, PAT-role-views-of-one-sheet, PAT-admin-kept-pick-list, PAT-message-on-event, PAT-calculated-field]
+patterns: [PAT-approval-by-status, PAT-multi-level-approval, PAT-running-total-by-log-field, PAT-fan-out-rows-from-report, PAT-error-field-check, PAT-undo-on-cancel, PAT-update-linked-rows, PAT-scheduled-job-over-rows, PAT-role-views-of-one-sheet, PAT-admin-kept-pick-list, PAT-message-on-event, PAT-calculated-field]
 neomeApp: attendance-and-leave
 delivery: configuration
 seenIn:

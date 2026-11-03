@@ -10,6 +10,7 @@ seenIn:
   - {build: NB-02, area: Attendance}
   - {build: NB-04, area: Attendance}
   - {build: NB-05, area: Attendence}
+  - {build: NA-field-visit-management, area: VisitManagement}
 ---
 
 # Attendance

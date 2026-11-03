@@ -19,6 +19,21 @@ seenIn:
   - {build: NB-06, area: QualityChecking}
   - {build: NB-07, area: ADGCentral}
   - {build: NB-07, area: HRCentral}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
+  - {build: NA-knowledge-library, area: KnowledgeLibrary}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-product-lifecycle-management, area: ProductLifecycleManagement}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-quality-control, area: QualityControl}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Calculated field by formula

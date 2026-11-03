@@ -3,7 +3,7 @@ id: TMOD-customer-master
 kind: template-module
 name: Customer master
 aliases: []
-patterns: [PAT-copy-fields-from-ref, PAT-customer-price-list, PAT-read-document-into-form, PAT-running-total-by-log-field, PAT-scheduled-job-over-rows, PAT-chained-place-lists, PAT-generated-id, PAT-role-views-of-one-sheet]
+patterns: [PAT-copy-fields-from-ref, PAT-customer-price-list, PAT-ai-reads-into-form, PAT-running-total-by-log-field, PAT-scheduled-job-over-rows, PAT-chained-place-lists, PAT-generated-id, PAT-role-views-of-one-sheet]
 neomeApp: crm
 delivery: configuration
 seenIn:
@@ -11,6 +11,7 @@ seenIn:
   - {build: NB-04, area: MyCustomers}
   - {build: NB-05, area: MasterData}
   - {build: NB-06, area: ProductionMasterData}
+  - {build: NA-crm, area: CRM}
 ---
 
 # Customer master

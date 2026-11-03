@@ -11,6 +11,7 @@ seenIn:
   - {build: NB-04, area: Order}
   - {build: NB-05, area: Quotation}
   - {build: NB-06, area: SalesOrder}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # Sales order

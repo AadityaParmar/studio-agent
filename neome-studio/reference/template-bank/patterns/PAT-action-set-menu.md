@@ -6,6 +6,7 @@ workaround: false
 seenIn:
   - {build: NB-01, area: MasterData}
   - {build: NB-01, area: VehicleMaster}
+  - {build: NA-crm, area: MasterData}
 ---
 
 # Menu by action set

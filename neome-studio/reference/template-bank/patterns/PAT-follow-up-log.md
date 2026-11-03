@@ -6,6 +6,7 @@ workaround: false
 seenIn:
   - {build: NB-05, area: Lead}
   - {build: NB-07, area: Orphans (maybe dead)}
+  - {build: NA-lead-management, area: Lead}
 ---
 
 # Follow-up log on a record

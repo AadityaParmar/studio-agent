@@ -8,6 +8,14 @@ seenIn:
   - {build: NB-04, area: AdminReports}
   - {build: NB-04, area: AllReporting}
   - {build: NB-04, area: ManagerReports}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # Menu by button form

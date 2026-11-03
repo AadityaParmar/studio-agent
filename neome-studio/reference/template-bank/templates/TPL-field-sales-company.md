@@ -5,7 +5,7 @@ name: Field sales company
 businessType: "Runs a field sales team that visits dealers, sites and customers; tracks attendance, leave, claims and location, and often leads, quotes and orders."
 modules:
   core: [TMOD-attendance, TMOD-leave, TMOD-expense-claims, TMOD-field-visits, TMOD-employee-master, TMOD-master-data]
-  optional: [TMOD-visit-planning, TMOD-location-tracking, TMOD-lead-management, TMOD-quotation, TMOD-sales-order, TMOD-customer-master, TMOD-customer-complaints, TMOD-my-profile, TMOD-management-reports, TMOD-office-petty-cash, TMOD-samples, TMOD-new-product-request, TMOD-credit-note-request, TMOD-dealer-stock-count, TMOD-weekly-update, TMOD-sales-library, TMOD-bulk-marketing-messages, TMOD-site-project-pipeline, TMOD-contact-meet-log, TMOD-support-tools, TMOD-inventory, TMOD-ticket-tracker]
+  optional: [TMOD-visit-planning, TMOD-location-tracking, TMOD-lead-management, TMOD-quotation, TMOD-sales-order, TMOD-customer-master, TMOD-customer-complaints, TMOD-my-profile, TMOD-management-reports, TMOD-office-petty-cash, TMOD-samples, TMOD-new-product-request, TMOD-credit-note-request, TMOD-dealer-stock-count, TMOD-weekly-update, TMOD-knowledge-library, TMOD-bulk-marketing-messages, TMOD-site-project-pipeline, TMOD-contact-meet-log, TMOD-support-tools, TMOD-inventory, TMOD-ticket-tracker]
 seenIn:
   - {build: NB-02, area: "*"}
   - {build: NB-04, area: "*"}
@@ -41,7 +41,7 @@ Optional:
 - TMOD-credit-note-request (Credit note request)
 - TMOD-dealer-stock-count (Dealer stock count)
 - TMOD-weekly-update (Weekly update note)
-- TMOD-sales-library (Sales material library)
+- TMOD-knowledge-library (Knowledge library)
 - TMOD-bulk-marketing-messages (Bulk marketing messages)
 - TMOD-site-project-pipeline (Site project pipeline)
 - TMOD-contact-meet-log (Contact meet log)

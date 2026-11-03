@@ -8,6 +8,7 @@ seenIn:
   - {build: NB-06, area: Dispatch}
   - {build: NB-06, area: RequestMaterialNotification}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
 ---
 
 # Button runs a workflow

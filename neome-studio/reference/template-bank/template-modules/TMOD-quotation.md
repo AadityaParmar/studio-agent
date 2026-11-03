@@ -3,7 +3,7 @@ id: TMOD-quotation
 kind: template-module
 name: Quotation
 aliases: [Quotations]
-patterns: [PAT-approval-by-status, PAT-line-items-grid-with-totals, PAT-pdf-from-report, PAT-message-on-event, PAT-copy-fields-from-ref, PAT-generated-id, PAT-pick-from-report-ref, PAT-composite-report, PAT-act-on-status-change, PAT-order-from-quote-or-direct]
+patterns: [PAT-approval-by-status, PAT-line-items-grid-with-totals, PAT-pdf-from-report, PAT-message-on-event, PAT-copy-fields-from-ref, PAT-generated-id, PAT-pick-from-report-ref, PAT-composite-report, PAT-act-on-status-change, PAT-order-from-quote-or-direct, PAT-calculated-field, PAT-query-report-with-filter]
 neomeApp: quotation-and-order-flow
 delivery: configuration
 seenIn:
@@ -11,6 +11,7 @@ seenIn:
   - {build: NB-04, area: Quotation}
   - {build: NB-05, area: Quotation}
   - {build: NB-06, area: Quotation}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # Quotation
@@ -19,11 +20,13 @@ seenIn:
 
 - Usually has to raise a quotation for a customer, from a lead or without one.
 - Usually has to list products with quantity, price, discount, tax and totals.
+- Usually has to pick shipping method and payment terms from lists.
 - Usually has to let a manager approve before it goes out.
 - Usually has to make a PDF and send it to the customer by WhatsApp or email.
 - Usually has to track status: sent, accepted, order taken, lost.
 - Usually has to show whether an order was made from it.
 - Usually has to tell the manager when totals change after entry.
+- Usually has to show quotation counts and value for a date range.
 
 ## Process steps
 
@@ -35,7 +38,8 @@ seenIn:
 
 ## Usual sheets, key fields, roles
 
-- Quotation: QuotationId, Date, Customer, lead ref, products grid (Item, Price, Discount, Tax, Quantity, Total), totals, ApprovalStatus, Status, PDF, OrderCreated {Yes|No}
+- Quotation: QuotationId, Date, Customer, lead ref, ShippingMethod, PaymentTerms, products grid (Item, Price, Discount, Tax, Quantity, Total), totals, ApprovalStatus, Status, PDF, OrderCreated {Yes|No}
+- Shipping method and payment terms lists
 - Roles: Sales rep or coordinator, Sales manager, Accounts.
 
 ## Neome App / Delivery hint

@@ -16,6 +16,10 @@ seenIn:
   - {build: NB-06, area: Return}
   - {build: NB-06, area: Quotation}
   - {build: NB-06, area: SalesOrder}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-quality-control, area: QualityControl}
 ---
 
 # Pick rows from a report ref

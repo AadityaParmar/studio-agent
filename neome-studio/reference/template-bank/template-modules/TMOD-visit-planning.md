@@ -10,6 +10,7 @@ seenIn:
   - {build: NB-04, area: MyVisitPlanner}
   - {build: NB-04, area: TeamVisitPlanner}
   - {build: NB-04, area: AllVisitPlanning}
+  - {build: NA-field-visit-management, area: VisitManagement}
 ---
 
 # Visit planning

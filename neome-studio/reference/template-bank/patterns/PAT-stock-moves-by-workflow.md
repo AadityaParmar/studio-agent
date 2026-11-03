@@ -17,6 +17,7 @@ seenIn:
   - {build: NB-06, area: Return}
   - {build: NB-06, area: SalesOrder}
   - {build: NB-06, area: ProductionMasterData}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
 ---
 
 # Stock moves by workflow

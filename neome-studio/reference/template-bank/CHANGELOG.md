@@ -136,3 +136,90 @@ Example:
 - 2026-11-03 | add | TPL-small-manufacturer | Make-and-sell businesses with quote, order, dispatch and stock seen in NB-03 and NB-06.
 - 2026-11-03 | add | TPL-trading-company-with-hr | Trading sales plus full HR and payroll seen in NB-05.
 - 2026-11-03 | add | TPL-software-product-company | Software firm with lead pipeline, tickets and HR seen in NB-07.
+- 2026-11-03 | rename | PAT-two-level-approval -> PAT-multi-level-approval | Approval Workflows App runs any number of levels from an approval matrix; two levels is one case.
+- 2026-11-03 | rename | PAT-read-document-into-form -> PAT-ai-reads-into-form | CRM App reads both uploaded documents and chat text into a lead; wider name fits.
+- 2026-11-03 | add | PAT-chat-bot-by-message-class | New: chat message classified by AI, then a lead is made or a report is sent back; seen in NA-crm.
+- 2026-11-03 | enhance | PAT-act-on-status-change | Seen in 13 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-action-set-menu | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-admin-kept-pick-list | Seen in 10 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-approval-by-status | Seen in 5 Neome App Builds; limits now point to multi-level approval.
+- 2026-11-03 | enhance | PAT-button-runs-workflow | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-calculated-field | Seen in 15 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-clock-in-out-with-photo | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-composite-report | Seen in 18 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-copy-fields-from-ref | Seen in 20 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-deeplink-to-form | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-error-field-check | Seen in 6 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-follow-up-log | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-forward-row | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-generated-id | Seen in 3 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-insert-row-in-other-sheet | Seen in 4 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-line-items-grid-with-totals | Seen in 6 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-lock-fields-by-visibility | Seen in 11 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-low-stock-alert | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-menu-by-button-form | Seen in 8 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-message-on-event | Seen in 10 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-order-from-quote-or-direct | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-pdf-from-report | Seen in 3 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-per-row-scheduler | Seen in 8 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-photo-and-document-capture | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-pick-from-report-ref | Seen in 4 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-query-report-with-filter | Seen in 16 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-role-views-of-one-sheet | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-running-total-by-log-field | Seen in 7 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-scheduled-job-over-rows | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-scheduled-reminder-message | Seen in 5 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-shared-sub-workflow | Seen in 4 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-sheet-history-action | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-sheet-row-drives-app-user | Seen in 20 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-show-field-by-value | Seen in 14 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-soft-disable-by-status | Neome Apps switch the app user off by employee status instead of deleting it; seen in 7 Apps.
+- 2026-11-03 | enhance | PAT-stock-moves-by-workflow | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-stop-save-by-workflow-check | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-update-linked-rows | Seen in 12 Neome App Build(s) of this run.
+- 2026-11-03 | add | TMOD-amc-contracts | New: AMC contract per asset with planned technician visits; seen in NA-amc-and-service-management.
+- 2026-11-03 | add | TMOD-appointment-booking | New: book a service slot with reminders and reschedule link; seen in NA-appointment-booking.
+- 2026-11-03 | add | TMOD-approval-requests | New: general approval request routed by a level matrix; seen in NA-approval-workflows.
+- 2026-11-03 | add | TMOD-gate-pass | New: gate pass with entry and exit log at the gate; seen in NA-gate-pass-management.
+- 2026-11-03 | add | TMOD-machine-maintenance | New: machine register, preventive maintenance, breakdowns and spare parts; seen in NA-machine-tools-maintenance.
+- 2026-11-03 | add | TMOD-product-catalog | New: product master with price revision approval and customer inquiry; seen in NA-product-catalog.
+- 2026-11-03 | add | TMOD-product-versions | New: product versions and change requests; seen in NA-product-lifecycle-management.
+- 2026-11-03 | add | TMOD-project-management | New: delivery projects with team, phases, tasks, time and expenses; seen in NA-project-management.
+- 2026-11-03 | enhance | TMOD-lead-management | CRM and Lead Management Apps add lead scoring, conversion to account and opportunity, and follow-up reminders.
+- 2026-11-03 | enhance | TMOD-employee-master | Employee Directory App adds department and designation lists, joining and exit checklists, directory dashboard.
+- 2026-11-03 | enhance | TMOD-service-job-work | Field Service App adds service request with SLA escalation and technician visit with proof; links to field-service App.
+- 2026-11-03 | enhance | TMOD-field-visits | Field Visit Management App adds planned visits, distance check, visit expenses and visit dashboard.
+- 2026-11-03 | enhance | TMOD-inventory | Inventory App adds GRN, outward with over-stock block, safety stock and stock ledger.
+- 2026-11-03 | enhance | TMOD-manufacturing | Manufacturing App confirms BOM, work order and production flow; adds product and unit masters and delay value.
+- 2026-11-03 | enhance | TMOD-purchase-orders | Purchase Management App adds purchase request, department budget check, vendor invoice and payment.
+- 2026-11-03 | enhance | TMOD-quotation | Quotation and Order Flow App adds shipping and payment terms masters and a quotation dashboard.
+- 2026-11-03 | enhance | TMOD-ticket-tracker | Ticketing App adds customer support tickets with SLA due time, escalation and tasks under a ticket.
+- 2026-11-03 | enhance | TMOD-customer-master | CRM App keeps accounts and contact persons made from converted leads.
+- 2026-11-03 | enhance | TMOD-master-data | CRM App opens master lists from one Master menu.
+- 2026-11-03 | enhance | TMOD-visit-planning | Field Visit Management App plans visits for an executive and marks the plan complete.
+- 2026-11-03 | enhance | TMOD-attendance | Field Visit Management App has daily clock in and out with photo, km and place.
+- 2026-11-03 | enhance | TMOD-sales-order | Quotation and Order Flow App raises an order from a quotation or direct, with approval and PDF.
+- 2026-11-03 | rename | TMOD-incoming-quality-check -> TMOD-quality-check | Quality Control App checks both incoming goods and production by checklist; wider name fits.
+- 2026-11-03 | rename | TMOD-sales-library -> TMOD-knowledge-library | Knowledge Library App keeps articles by category with approval and ratings; sales library is one case.
+- 2026-11-03 | enhance | TPL-small-manufacturer | Module list text follows rename of incoming quality check to quality check.
+- 2026-11-03 | enhance | TPL-field-sales-company | Module list text follows rename of sales library to knowledge library.
+- 2026-11-03 | add | APP-amc-and-service-management | App baseline of NA-amc-and-service-management.
+- 2026-11-03 | add | APP-appointment-booking | App baseline of NA-appointment-booking.
+- 2026-11-03 | add | APP-approval-workflows | App baseline of NA-approval-workflows.
+- 2026-11-03 | add | APP-crm | App baseline of NA-crm.
+- 2026-11-03 | add | APP-employee-directory | App baseline of NA-employee-directory.
+- 2026-11-03 | add | APP-field-service | App baseline of NA-field-service.
+- 2026-11-03 | add | APP-field-visit-management | App baseline of NA-field-visit-management.
+- 2026-11-03 | add | APP-gate-pass-management | App baseline of NA-gate-pass-management.
+- 2026-11-03 | add | APP-inventory-and-stock-management | App baseline of NA-inventory-and-stock-management.
+- 2026-11-03 | add | APP-knowledge-library | App baseline of NA-knowledge-library.
+- 2026-11-03 | add | APP-lead-management | App baseline of NA-lead-management.
+- 2026-11-03 | add | APP-machine-tools-maintenance | App baseline of NA-machine-tools-maintenance.
+- 2026-11-03 | add | APP-manufacturing | App baseline of NA-manufacturing.
+- 2026-11-03 | add | APP-product-catalog | App baseline of NA-product-catalog.
+- 2026-11-03 | add | APP-product-lifecycle-management | App baseline of NA-product-lifecycle-management.
+- 2026-11-03 | add | APP-project-management | App baseline of NA-project-management.
+- 2026-11-03 | add | APP-purchase-management | App baseline of NA-purchase-management.
+- 2026-11-03 | add | APP-quality-control | App baseline of NA-quality-control.
+- 2026-11-03 | add | APP-quotation-and-order-flow | App baseline of NA-quotation-and-order-flow.
+- 2026-11-03 | add | APP-ticketing-and-task-management | App baseline of NA-ticketing-and-task-management.

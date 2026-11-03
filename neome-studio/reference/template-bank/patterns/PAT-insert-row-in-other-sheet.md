@@ -10,6 +10,10 @@ seenIn:
   - {build: NB-04, area: Order}
   - {build: NB-04, area: MyVisitPlanner}
   - {build: NB-06, area: Inward}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
 ---
 
 # Insert a row in another sheet on event

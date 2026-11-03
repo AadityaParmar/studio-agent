@@ -3,7 +3,7 @@ id: TMOD-employee-master
 kind: template-module
 name: Employee master
 aliases: [Field staff master]
-patterns: [PAT-sheet-row-drives-app-user, PAT-admin-kept-pick-list, PAT-calculated-field, PAT-fan-out-rows-from-report, PAT-lock-fields-by-visibility, PAT-shared-sub-workflow, PAT-device-location-trail]
+patterns: [PAT-sheet-row-drives-app-user, PAT-admin-kept-pick-list, PAT-calculated-field, PAT-fan-out-rows-from-report, PAT-lock-fields-by-visibility, PAT-shared-sub-workflow, PAT-device-location-trail, PAT-act-on-status-change, PAT-soft-disable-by-status, PAT-copy-fields-from-ref, PAT-composite-report]
 neomeApp: employee-directory
 delivery: configuration
 seenIn:
@@ -12,18 +12,21 @@ seenIn:
   - {build: NB-04, area: SalesExecutives}
   - {build: NB-05, area: MasterData}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-employee-directory, area: EmployeeDirectory}
 ---
 
 # Employee master
 
 ## Usual needs
 
-- Usually has to keep each employee with roles, manager, team or zone, designation, branch and documents.
+- Usually has to keep each employee with roles, manager, team or zone, department, designation, branch and documents.
 - Usually has to create, update and remove the app user from the employee row.
-- Usually has to set an employee active or inactive.
+- Usually has to set an employee active or inactive; inactive turns the user off.
+- Usually has to keep department and designation lists.
 - Usually has to keep working hours, targets and travel rates used by other modules.
 - Usually has to sometimes keep job, bank and pay details for payroll.
 - Usually has to create leave balance rows for a new employee.
+- Usually has to sometimes keep joining and exit checklists.
 
 ## Process steps
 
@@ -35,8 +38,9 @@ seenIn:
 
 ## Usual sheets, key fields, roles
 
-- Employee: Name, user (pickUser), Handle, Roles, Manager, team or zone, designation, working hours, rates, Status {Active|Inactive}
-- Roles: Admin, HR.
+- Employee: Name, user (pickUser), Handle, Roles, Manager, Department, Designation, team or zone, working hours, rates, DateOfJoining, Status {Active|Inactive}
+- Department and Designation lists
+- Roles: Admin, HR, Manager.
 
 ## Neome App / Delivery hint
 

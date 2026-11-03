@@ -7,6 +7,7 @@ seenIn:
   - {build: NB-04, area: VisitBook}
   - {build: NB-04, area: Sampling}
   - {build: NB-05, area: Payroll}
+  - {build: NA-appointment-booking, area: AppointmentBooking}
 ---
 
 # Deep link opens a form or row

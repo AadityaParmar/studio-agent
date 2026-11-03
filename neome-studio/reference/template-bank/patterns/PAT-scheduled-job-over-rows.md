@@ -10,6 +10,8 @@ seenIn:
   - {build: NB-05, area: Attendence}
   - {build: NB-06, area: ProductionMasterData}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-purchase-management, area: PurchaseManagement}
 ---
 
 # Scheduled job over rows

@@ -9,6 +9,10 @@ seenIn:
   - {build: NB-04, area: Order}
   - {build: NB-05, area: MasterData}
   - {build: NB-06, area: Dispatch}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Shared sub workflow

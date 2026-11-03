@@ -24,6 +24,11 @@ seenIn:
   - {build: NB-06, area: Quotation}
   - {build: NB-06, area: SalesOrder}
   - {build: NB-07, area: HR Desk}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-knowledge-library, area: KnowledgeLibrary}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-purchase-management, area: PurchaseManagement}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # Approval by status
@@ -49,7 +54,7 @@ Yes. Neome has no approval step; a status list, role rights and a workflow branc
 
 - No built-in approver routing or escalation; the approver is a role or a pickUser field.
 - Changing the status back does not undo effects unless a reverse branch is built.
-- Two-level approval needs a second status field (see PAT-two-level-approval).
+- More than one level needs a status per level or a level log (see PAT-multi-level-approval).
 
 ## Flowchart
 

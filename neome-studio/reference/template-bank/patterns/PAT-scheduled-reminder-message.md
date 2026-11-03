@@ -10,6 +10,11 @@ seenIn:
   - {build: NB-06, area: PurchaseOrder}
   - {build: NB-07, area: Monitoring}
   - {build: NB-07, area: Service Desk}
+  - {build: NA-amc-and-service-management, area: AmcServiceManagment}
+  - {build: NA-approval-workflows, area: ApprovalWorkflow}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-field-visit-management, area: VisitManagement}
 ---
 
 # Scheduled reminder message

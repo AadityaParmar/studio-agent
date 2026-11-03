@@ -7,6 +7,8 @@ seenIn:
   - {build: NB-03, area: Inventory}
   - {build: NB-06, area: ProductionMasterData}
   - {build: NB-06, area: Inventory}
+  - {build: NA-inventory-and-stock-management, area: Inventory}
+  - {build: NA-machine-tools-maintenance, area: MachineAndToolMaintenance}
 ---
 
 # Low stock alert

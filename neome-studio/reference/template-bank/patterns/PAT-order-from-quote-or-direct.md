@@ -9,6 +9,7 @@ seenIn:
   - {build: NB-05, area: Quotation}
   - {build: NB-06, area: SalesOrder}
   - {build: NB-06, area: Quotation}
+  - {build: NA-quotation-and-order-flow, area: QuotationAndOrderFlow}
 ---
 
 # Order from a quotation or direct

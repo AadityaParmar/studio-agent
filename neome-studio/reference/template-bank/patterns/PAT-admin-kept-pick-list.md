@@ -20,6 +20,16 @@ seenIn:
   - {build: NB-07, area: ADGCentral}
   - {build: NB-07, area: HR Desk}
   - {build: NB-07, area: Service Desk}
+  - {build: NA-crm, area: CRM}
+  - {build: NA-employee-directory, area: EmployeeDirectory}
+  - {build: NA-field-service, area: FieldService}
+  - {build: NA-field-visit-management, area: VisitManagement}
+  - {build: NA-gate-pass-management, area: GatePassManagement}
+  - {build: NA-lead-management, area: Lead}
+  - {build: NA-manufacturing, area: Manufacturing}
+  - {build: NA-product-catalog, area: ProductCatalogAndInquiry}
+  - {build: NA-project-management, area: ProjectManagement}
+  - {build: NA-ticketing-and-task-management, area: TaskManagement}
 ---
 
 # Pick list kept by admin
