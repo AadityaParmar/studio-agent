@@ -27,7 +27,7 @@ Body sections (`## `, this order): `Task`, `How` (Neome parts), `Workaround` (ye
 
 ## Template module
 
-Front matter: + `aliases` (list, may be empty), `patterns` (list of `PAT-` IDs, may be empty), `neomeApp` (slug in `reference/neome-app-catalog-slugs.json`, or `none`), `delivery` (`Standard` | `Configuration` | `Custom module`).
+Front matter: + `aliases` (list, may be empty), `patterns` (list of `PAT-` IDs, may be empty), `neomeApp` (slug in `reference/neome-app-catalog-slugs.json`, or `none`), `delivery` (`standard` | `configuration` | `custom`, same enum as BRD data `delivery`).
 
 Body sections: `Usual needs`, `Process steps`, `Usual sheets, key fields, roles`, `Neome App / Delivery hint`, `Flowchart`.
 

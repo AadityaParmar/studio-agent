@@ -5,7 +5,7 @@ name: Widgets
 aliases: [Widgets, WidgetRequests]
 patterns: [PAT-sign-off-by-flag]
 neomeApp: widget-desk
-delivery: Configuration
+delivery: configuration
 seenIn:
   - {build: NB-90, area: Widgets}
   - {build: NB-91, area: Widgets}

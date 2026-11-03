@@ -220,24 +220,20 @@ test("golden schema: forbidden needs id + statement; absent needs paths + patter
 
 // ---------- the case ----------
 
-test("check: template-hr-small is a valid case; bank checks run, or skip with a note while slice 1 is unmerged", () => {
+test("check: template-hr-small is a valid case; bank checks run", () => {
   const r = run(["check", "template-hr-small"]);
   assert.equal(r.code, 0, r.out);
   assert.ok(r.lines.includes("case | template-hr-small | ok"), r.out);
-  const note = r.lines.find((l) => l.startsWith("note | template-hr-small | Template bank checks skipped"));
-  if (existsSync(BANK_MODULE)) assert.equal(note, undefined, r.out);
-  else assert.match(note ?? "", /engine\/template-bank\.mjs not found/, r.out);
+  assert.ok(!r.out.includes("note |"), r.out);
   // Cases without a fixture Template bank print no note.
   assert.ok(!run(["check", "tiny-synthetic"]).out.includes("note |"));
 });
 
-test("bankChecks: missing module → skipped; errors → problems; warnings kept; no checkBank export → problem", async () => {
+test("bankChecks: missing module → throws; errors → problems; warnings kept; no checkBank export → problem", async () => {
   const kase = loadCase(caseDir("template-hr-small"));
   assert.ok(kase.bankDir?.endsWith(join("template-hr-small", "template-bank")));
   const notFound = Object.assign(new Error(`Cannot find module '${BANK_MODULE}'`), { code: "ERR_MODULE_NOT_FOUND" });
-  const s = await bankChecks(kase, { load: async () => { throw notFound; } });
-  assert.match(s.skipped, /engine\/template-bank\.mjs not found/);
-  assert.deepEqual([s.errors, s.warnings], [[], []]);
+  await assert.rejects(bankChecks(kase, { load: async () => { throw notFound; } }), /Cannot find module/);
 
   let seen;
   const fake = {

@@ -30,7 +30,7 @@ const KINDS = {
     sections: ["Modules", "Links between modules", "Flowchart"],
   },
 };
-const DELIVERY = ["Standard", "Configuration", "Custom module"];
+const DELIVERY = ["standard", "configuration", "custom"]; // = BRD data schema delivery enum
 const CHANGES = ["add", "enhance", "split", "merge", "rename", "retire"];
 const ANY_ID = /^(PAT|TMOD|TPL)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 const idPattern = (prefix) => new RegExp(`^${prefix}-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$`);

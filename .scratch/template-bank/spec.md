@@ -39,7 +39,7 @@ Detail: [Bank format](issues/05-bank-format.md). Samples: `.scratch/template-ban
 - Evidence `seenIn: [{build: NB-NN, area: <Build area>}]`. No threshold; readers weigh count.
 - Mermaid inline.
 - **Pattern:** name, task, how (Neome parts), workaround yes/no + why, limits, flowchart, seenIn.
-- **Template module:** name, aliases, usual needs, process steps, Patterns (IDs), usual sheets + key fields + roles, `neomeApp` (catalog slug or `none`), `delivery` hint, flowchart, seenIn.
+- **Template module:** name, aliases, usual needs, process steps, Patterns (IDs), usual sheets + key fields + roles, `neomeApp` (catalog slug or `none`), `delivery` hint (`standard|configuration|custom`, BRD data enum), flowchart, seenIn.
 - **Template:** name, business type, Template modules (core / optional), links between them, flowchart, seenIn.
 - Bank `CHANGELOG.md`: one line per applied change; `replacedBy` for retired / split / merged IDs.
 

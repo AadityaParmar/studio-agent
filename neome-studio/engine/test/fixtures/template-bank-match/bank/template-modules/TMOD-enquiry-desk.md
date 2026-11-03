@@ -5,7 +5,7 @@ name: Enquiry desk
 aliases: [Enquiries, Leads]
 patterns: [PAT-approval-by-flag]
 neomeApp: none
-delivery: Configuration
+delivery: configuration
 seenIn:
   - {build: NB-91, area: Enquiry}
   - {build: NB-91, area: Leads}

@@ -5,7 +5,7 @@ name: Gizmos
 aliases: []
 patterns: []
 neomeApp: none
-delivery: Custom module
+delivery: custom
 seenIn:
   - {build: NB-90, area: Gizmos}
 ---

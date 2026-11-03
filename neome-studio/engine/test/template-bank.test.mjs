@@ -101,19 +101,19 @@ test("front matter missing or not YAML", () => {
 test("required front matter fields per kind", () => {
   const dir = bankCopy();
   edit(dir, PAT, (t) => t.replace("workaround: true\n", "").replace("name: Sign-off by flag\n", ""));
-  edit(dir, TMOD, (t) => t.replace("aliases: [Widgets, WidgetRequests]\n", "").replace("delivery: Configuration\n", ""));
+  edit(dir, TMOD, (t) => t.replace("aliases: [Widgets, WidgetRequests]\n", "").replace("delivery: configuration\n", ""));
   edit(dir, TPL, (t) => t.replace("businessType: Small shop that hands out widgets\n", ""));
   const r = check(dir);
   assertError(r, /PAT-sign-off-by-flag: name missing/);
   assertError(r, /PAT-sign-off-by-flag: workaround must be true or false/);
   assertError(r, /TMOD-widgets: aliases must be a list/);
-  assertError(r, /TMOD-widgets: delivery must be one of Standard, Configuration, Custom module/);
+  assertError(r, /TMOD-widgets: delivery must be one of standard, configuration, custom/);
   assertError(r, /TPL-widget-shop: businessType missing/);
 });
 
 test("wrong-typed fields fail", () => {
   const dir = bankCopy();
-  edit(dir, TMOD, (t) => t.replace("patterns: [PAT-sign-off-by-flag]", "patterns: PAT-sign-off-by-flag").replace("delivery: Configuration", "delivery: Bespoke"));
+  edit(dir, TMOD, (t) => t.replace("patterns: [PAT-sign-off-by-flag]", "patterns: PAT-sign-off-by-flag").replace("delivery: configuration", "delivery: Bespoke"));
   edit(dir, TPL, (t) => t.replace("  core: [TMOD-widgets]\n", "  core: []\n").replace("  optional: [TMOD-gizmos]", "  optional: TMOD-gizmos"));
   const r = check(dir);
   assertError(r, /TMOD-widgets: patterns must be a list/);

@@ -5,7 +5,7 @@ name: Quotes
 aliases: [Quotations, Estimates]
 patterns: [PAT-approval-by-flag]
 neomeApp: none
-delivery: Configuration
+delivery: configuration
 seenIn:
   - {build: NB-92, area: Quote}
 ---

@@ -145,21 +145,12 @@ export function goldenRequirements(golden) {
 // Template bank checks on the case's fixture (ticket 10: `run.mjs check` runs the npm test bank checks on it).
 // checkBank lives in engine/template-bank.mjs, owned by Template bank build slice 1:
 //   checkBank(bankDir, { catalogSlugsPath, scrubWords }) → { errors, warnings }
-// TODO(S1 merge): drop the "not found" skip once engine/template-bank.mjs is on main; a missing module is then a bug.
 // scrubWords = the case Enterprise's name and folder: the fixture must never hold the case's own answers.
 // Returns { skipped: <why> | null, errors: string[], warnings: string[] }. `load` is for tests.
 export async function bankChecks(kase, { load = () => import(BANK_MODULE) } = {}) {
   const none = { skipped: null, errors: [], warnings: [] };
   if (!kase.bankDir) return none;
-  let mod;
-  try {
-    mod = await load();
-  } catch (e) {
-    if (e?.code === "ERR_MODULE_NOT_FOUND" && String(e.message).includes("template-bank.mjs")) {
-      return { ...none, skipped: "engine/template-bank.mjs not found (Template bank slice 1 not merged yet)" };
-    }
-    throw e;
-  }
+  const mod = await load();
   if (typeof mod?.checkBank !== "function") return { ...none, errors: ["engine/template-bank.mjs has no checkBank export"] };
   const words = [kase.golden?.enterprise?.name, kase.golden?.enterprise?.id].filter(Boolean);
   const r = (await mod.checkBank(kase.bankDir, { catalogSlugsPath: CATALOG_SLUGS, scrubWords: words })) ?? {};

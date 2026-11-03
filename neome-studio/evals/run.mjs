@@ -72,7 +72,6 @@ function usage(msg) {
 }
 
 // Case + its fixture Template bank checks (problems, warnings, or a note when the checks are skipped).
-// TODO(S1 merge): bankChecks skips while engine/template-bank.mjs (slice 1) is not on main; see lib/case.mjs.
 async function checked(name) {
   const k = loadCase(caseDir(name));
   const b = await bankChecks(k);
