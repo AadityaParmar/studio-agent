@@ -60,8 +60,13 @@ function writeBank(dir, entries, log = []) {
   writeFileSync(join(dir, "CHANGELOG.md"), `# Template bank changelog\n\n## Changes\n\n${log.map((l) => `${l}\n`).join("")}`);
   return dir;
 }
+// Empty Template bank: shipped README + CHANGELOG header only (never the real entries, change lines or reports).
 const emptyBank = (dir) => {
-  cpSync(join(plugin, "reference", "template-bank"), dir, { recursive: true });
+  const src = join(plugin, "reference", "template-bank");
+  mkdirSync(dir, { recursive: true });
+  cpSync(join(src, "README.md"), join(dir, "README.md"));
+  const log = readFileSync(join(src, "CHANGELOG.md"), "utf8").split("\n").filter((l) => !/^- \d{4}-\d{2}-\d{2} \|/.test(l)).join("\n");
+  writeFileSync(join(dir, "CHANGELOG.md"), log);
   for (const f of Object.values(FOLDER)) mkdirSync(join(dir, f), { recursive: true });
   return dir;
 };
