@@ -2,9 +2,11 @@
 // cloned skills pin their upstream, and the upstream licence ships while any do;
 // every user skill (`disable-model-invocation: true`) ends with the Next session step (ticket 45):
 // a `## <n>. Next session` heading that links reference/next-session.md.
+// Also the Template bank format check (reference/template-bank/, if present).
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
+import { checkBank } from "./template-bank.mjs";
 
 export function check(pluginDir) {
   if (!pluginDir) {
@@ -20,10 +22,41 @@ export function check(pluginDir) {
   if (results.some((r) => r.cloned) && !existsSync(join(pluginDir, "LICENSE-upstream"))) {
     errors.push("LICENSE-upstream missing: required while any skill has upstream");
   }
+  const bank = bankCheck(pluginDir);
+  errors.push(...bank.errors.map((e) => `template-bank: ${e}`));
+  for (const w of bank.warnings) console.error(`template-bank: warning: ${w}`);
   for (const e of errors) console.error(e);
   if (errors.length) return 1;
-  console.log(`check: ${skills.length} skills OK`);
+  const bankNote = bank.entries === null ? "" : `, Template bank ${bank.entries} entries OK`;
+  console.log(`check: ${skills.length} skills OK${bankNote}`);
   return 0;
+}
+
+// Template bank check. Scrub words: *.txt (one per line, # comments) in NEOME_SCRUB_DIR,
+// else the gitignored raw/scrub folder when present (maintainer machine only).
+function bankCheck(pluginDir) {
+  const bankDir = join(pluginDir, "reference", "template-bank");
+  if (!existsSync(bankDir)) return { errors: [], warnings: [], entries: null };
+  const envDir = process.env.NEOME_SCRUB_DIR;
+  const scrubDir = envDir || join(pluginDir, "..", ".scratch", "template-bank", "raw", "scrub");
+  const pre = [];
+  let scrubWords = [];
+  if (existsSync(scrubDir)) scrubWords = readScrubWords(scrubDir);
+  else if (envDir) pre.push(`NEOME_SCRUB_DIR not found: ${envDir}`);
+  const r = checkBank(bankDir, { catalogSlugsPath: join(pluginDir, "reference", "neome-app-catalog-slugs.json"), scrubWords });
+  const entries = ["patterns", "template-modules", "templates"]
+    .map((d) => join(bankDir, d))
+    .filter(existsSync)
+    .reduce((n, d) => n + readdirSync(d).filter((f) => f.endsWith(".md")).length, 0);
+  return { errors: [...pre, ...r.errors], warnings: r.warnings, entries };
+}
+
+function readScrubWords(dir) {
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".txt"))
+    .flatMap((f) => readFileSync(join(dir, f), "utf8").split(/\r?\n/))
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith("#"));
 }
 
 // Returns { errors, cloned } for one skill folder.

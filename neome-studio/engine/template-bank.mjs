@@ -1,0 +1,264 @@
+// Template bank: read entries + CHANGELOG, check the format, and the "ID gone" warning.
+// Format: reference/template-bank/README.md. CHANGELOG line shape: reference/template-bank/CHANGELOG.md.
+// Shared contract for readers (index, ID check) and the maintainer refine tool: keep exports stable.
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { join, dirname, basename } from "node:path";
+import { fileURLToPath } from "node:url";
+import { frontMatter, sections } from "./markdown.mjs";
+
+const pluginDir = join(dirname(fileURLToPath(import.meta.url)), "..");
+export const BANK_DIR = join(pluginDir, "reference", "template-bank");
+const CATALOG_SLUGS = join(pluginDir, "reference", "neome-app-catalog-slugs.json");
+
+const KINDS = {
+  pattern: {
+    folder: "patterns",
+    prefix: "PAT",
+    keys: ["id", "kind", "name", "workaround", "seenIn"],
+    sections: ["Task", "How", "Workaround", "Limits", "Flowchart"],
+  },
+  "template-module": {
+    folder: "template-modules",
+    prefix: "TMOD",
+    keys: ["id", "kind", "name", "aliases", "patterns", "neomeApp", "delivery", "seenIn"],
+    sections: ["Usual needs", "Process steps", "Usual sheets, key fields, roles", "Neome App / Delivery hint", "Flowchart"],
+  },
+  template: {
+    folder: "templates",
+    prefix: "TPL",
+    keys: ["id", "kind", "name", "businessType", "modules", "seenIn"],
+    sections: ["Modules", "Links between modules", "Flowchart"],
+  },
+};
+const DELIVERY = ["Standard", "Configuration", "Custom module"];
+const CHANGES = ["add", "enhance", "split", "merge", "rename", "retire"];
+const ANY_ID = /^(PAT|TMOD|TPL)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
+const idPattern = (prefix) => new RegExp(`^${prefix}-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$`);
+const BUILD = /^NB-\d{2,}$/;
+
+// Raw read: every *.md in the three kind folders + parsed CHANGELOG, with problems found on the way.
+function readBank(bankDir) {
+  const files = [];
+  for (const [kind, { folder }] of Object.entries(KINDS)) {
+    const dir = join(bankDir, folder);
+    if (!existsSync(dir)) continue;
+    for (const name of readdirSync(dir).filter((n) => n.endsWith(".md")).sort()) {
+      const file = join(dir, name);
+      const text = readFileSync(file, "utf8");
+      let fm = null, body = text, yamlError = false;
+      try {
+        ({ fm, body } = frontMatter(text));
+      } catch {
+        yamlError = true;
+      }
+      files.push({ kind, folder, name, file, text, fm, body, yamlError });
+    }
+  }
+  const logFile = join(bankDir, "CHANGELOG.md");
+  const logText = existsSync(logFile) ? readFileSync(logFile, "utf8") : "";
+  return { files, logText, ...parseChangelog(logText) };
+}
+
+const isEntry = (f) => f.fm && typeof f.fm === "object" && !Array.isArray(f.fm);
+const entryId = (f) => (typeof f.fm?.id === "string" ? f.fm.id : basename(f.name, ".md"));
+
+// "- <date> | <change> | <old IDs> [-> <new IDs>] | <reason>", outside ``` fences.
+function parseChangelog(text) {
+  const changelog = [];
+  const problems = [];
+  let fenced = false;
+  text.split(/\r?\n/).forEach((line, i) => {
+    if (/^\s*```/.test(line)) fenced = !fenced;
+    if (fenced || !line.startsWith("- ")) return;
+    const bad = (msg) => problems.push(`CHANGELOG.md line ${i + 1}: ${msg}`);
+    const parts = line.slice(2).split(/\s*\|\s*/);
+    if (parts.length < 3) return bad('must be "- <date> | <change> | <IDs> | <reason>"');
+    const [date, change, idField] = parts.map((p) => p.trim());
+    const reason = parts.slice(3).join(" | ").trim();
+    const before = problems.length;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) bad("date must be YYYY-MM-DD");
+    if (!CHANGES.includes(change)) bad(`change "${change}" must be one of ${CHANGES.join(", ")}`);
+    const [left, right, ...extra] = idField.split("->");
+    const ids = splitIds(left);
+    const arrow = right !== undefined;
+    const news = arrow ? splitIds(right) : [];
+    if (extra.length) bad('only one "->" allowed');
+    for (const id of [...ids, ...news]) if (!ANY_ID.test(id)) bad(`"${id}" is not a Template bank ID`);
+    if (!ids.length) bad("IDs missing");
+    if (["split", "merge", "rename"].includes(change)) {
+      if (!arrow || !news.length) bad(`${change} needs "old -> new"`);
+      else if (change === "rename" && (ids.length !== 1 || news.length !== 1)) bad("rename is one old -> one new");
+      else if (change === "merge" && news.length !== 1) bad("merge keeps one ID: old -> kept");
+      else if (change === "split" && (ids.length !== 1 || news.length < 2)) bad("split is one old -> two or more new");
+    } else if (arrow) bad(`${change} takes no "->"`);
+    if (!reason) bad("reason missing");
+    if (problems.length > before) return;
+    const replaced = change === "retire" ? [] : arrow ? news : null;
+    changelog.push({ date, change, ids, replacedBy: replaced, reason, line: i + 1 });
+  });
+  return { changelog, problems };
+}
+const splitIds = (s) => String(s ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+
+// Entries with parsed front matter + CHANGELOG rows. Tolerant: bad files / lines are left out (checkBank names them).
+export function loadBank(bankDir = BANK_DIR) {
+  const { files, changelog } = readBank(bankDir);
+  const entries = files.filter(isEntry).map((f) => ({ id: entryId(f), kind: f.kind, fm: f.fm, body: f.body, file: f.file }));
+  return { entries, changelog: changelog.map(({ line, ...row }) => row) };
+}
+
+// Direct new IDs from the last ID-changing CHANGELOG line for `id`: [] = retired, null = never replaced.
+export function replacedBy(bankDir = BANK_DIR, id) {
+  return lastReplace(loadBank(bankDir).changelog, id)?.replacedBy.slice() ?? null;
+}
+const lastReplace = (changelog, id) => changelog.findLast((c) => c.replacedBy && c.ids.includes(id));
+
+// "ID gone" check for a `template:` / `templateModule:` value. Missing ID = warning, never error.
+export function checkTemplateRef(bankDir = BANK_DIR, id) {
+  if (id === "none") return { ok: true };
+  const { entries, changelog } = loadBank(bankDir);
+  const live = new Set(entries.map((e) => e.id));
+  if (live.has(id)) return { ok: true };
+  const suggest = liveSuccessors(id, live, changelog);
+  const last = lastReplace(changelog, id);
+  const message = !last
+    ? `${id} not in Template bank. Re-match.`
+    : suggest.length
+      ? `${id} gone from Template bank (${last.change}). Maybe ${suggest.join(", ")}. Re-match.`
+      : `${id} gone from Template bank (${last.change}), nothing replaces it. Re-match.`;
+  return { ok: false, level: "warning", message, suggest };
+}
+
+// Follows replacedBy chains to IDs still on file. Order kept, no repeats, cycle safe.
+function liveSuccessors(id, live, changelog, seen = new Set()) {
+  if (seen.has(id)) return [];
+  seen.add(id);
+  if (live.has(id)) return [id];
+  const out = [];
+  for (const next of lastReplace(changelog, id)?.replacedBy ?? []) {
+    for (const x of liveSuccessors(next, live, changelog, seen)) if (!out.includes(x)) out.push(x);
+  }
+  return out;
+}
+
+// Format check for one Template bank folder. Errors fail `npm test`; warnings do not.
+export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS, scrubWords = [] } = {}) {
+  const errors = [];
+  const warnings = [];
+  if (!existsSync(bankDir)) return { errors, warnings };
+  const { files, logText, changelog, problems } = readBank(bankDir);
+  errors.push(...problems);
+
+  let slugs = null;
+  const needSlugs = files.some((f) => f.kind === "template-module" && isEntry(f));
+  if (needSlugs) {
+    try {
+      slugs = new Set(JSON.parse(readFileSync(catalogSlugsPath, "utf8")).apps.map((a) => a.slug));
+    } catch {
+      errors.push(`Neome App catalog slugs unreadable: ${catalogSlugsPath}`);
+    }
+  }
+
+  const byId = new Map();
+  for (const f of files) {
+    if (f.yamlError) { errors.push(`${f.name}: front matter is not valid YAML`); continue; }
+    if (!isEntry(f)) { errors.push(`${f.name}: front matter missing`); continue; }
+    const id = entryId(f);
+    byId.set(id, [...(byId.get(id) ?? []), f]);
+  }
+  const kindOf = (id) => byId.get(id)?.[0].kind;
+
+  for (const f of files.filter(isEntry)) {
+    const { fm, kind, folder, name, body } = f;
+    const spec = KINDS[kind];
+    const id = entryId(f);
+    const err = (msg) => errors.push(`${id}: ${msg}`);
+
+    if (typeof fm.id !== "string" || !fm.id) err("id missing");
+    else if (fm.id !== basename(name, ".md")) errors.push(`${name}: id "${fm.id}" does not match file name`);
+    if (!idPattern(spec.prefix).test(id)) err(`id must look like ${spec.prefix}-<slug> in ${folder} (lowercase words joined by -)`);
+    if (fm.kind === undefined) err("kind missing");
+    else if (fm.kind !== kind) err(`kind "${fm.kind}" does not match folder ${folder}`);
+    for (const k of Object.keys(fm)) if (!spec.keys.includes(k)) err(`unknown front matter key ${k}`);
+    if (!nonEmptyText(fm.name)) err("name missing");
+    checkSeenIn(fm.seenIn, err);
+
+    if (kind === "pattern") {
+      if (typeof fm.workaround !== "boolean") err("workaround must be true or false");
+    }
+    if (kind === "template-module") {
+      if (!isTextList(fm.aliases)) err("aliases must be a list (may be empty)");
+      if (!isTextList(fm.patterns)) err("patterns must be a list (may be empty)");
+      else checkRefs(fm.patterns, "pattern", "patterns", kindOf, err);
+      if (!nonEmptyText(fm.neomeApp)) err("neomeApp must be a catalog slug or none");
+      else if (fm.neomeApp !== "none" && slugs && !slugs.has(fm.neomeApp)) err(`neomeApp "${fm.neomeApp}" not in Neome App catalog slugs`);
+      if (!DELIVERY.includes(fm.delivery)) err(`delivery must be one of ${DELIVERY.join(", ")}`);
+    }
+    if (kind === "template") {
+      if (!nonEmptyText(fm.businessType)) err("businessType missing");
+      const m = fm.modules;
+      if (!m || typeof m !== "object" || Array.isArray(m)) err("modules must have core and optional lists");
+      else {
+        for (const k of Object.keys(m)) if (!["core", "optional"].includes(k)) err(`modules: unknown key ${k}`);
+        if (!isTextList(m.core) || !m.core.length) err("modules.core must be a non-empty list");
+        else checkRefs(m.core, "template-module", "modules.core", kindOf, err);
+        if (m.optional !== undefined && !isTextList(m.optional)) err("modules.optional must be a list");
+        else checkRefs(m.optional ?? [], "template-module", "modules.optional", kindOf, err);
+      }
+    }
+
+    const found = new Map(sections(body, 2).map((s) => [s.title, s.body]));
+    for (const title of spec.sections) {
+      if (!found.has(title)) err(`body section "## ${title}" missing`);
+    }
+    if (found.has("Flowchart") && !/^```mermaid\s*$/m.test(found.get("Flowchart"))) err("Flowchart has no mermaid block");
+  }
+
+  for (const [id, fs] of byId) {
+    if (fs.length > 1) errors.push(`${id}: id used by more than one file (${fs.map((f) => `${f.folder}/${f.name}`).join(", ")})`);
+  }
+
+  // IDs never reused: an ID retired or replaced in CHANGELOG must not be on file.
+  for (const id of byId.keys()) {
+    if (lastReplace(changelog, id)) errors.push(`${id}: retired or replaced in CHANGELOG.md but file still there`);
+  }
+  for (const c of changelog) {
+    for (const next of c.replacedBy ?? []) {
+      if (!byId.has(next) && !lastReplace(changelog, next)) {
+        warnings.push(`CHANGELOG.md line ${c.line}: ${next} not in Template bank and not replaced later`);
+      }
+    }
+  }
+
+  const words = scrubWords.map((w) => String(w ?? "").trim()).filter(Boolean);
+  const scan = [...files.map((f) => [basename(f.name, ".md"), f.text]), ["CHANGELOG.md", logText]];
+  for (const [label, text] of scan) {
+    const lower = text.toLowerCase();
+    for (const w of words) if (lower.includes(w.toLowerCase())) errors.push(`${label}: scrub word "${w}" found`);
+  }
+  return { errors, warnings };
+}
+
+const nonEmptyText = (v) => typeof v === "string" && v.trim() !== "";
+const isTextList = (v) => Array.isArray(v) && v.every(nonEmptyText);
+
+function checkSeenIn(rows, err) {
+  if (!Array.isArray(rows) || !rows.length) return err("seenIn must be a non-empty list of {build: NB-NN, area}");
+  rows.forEach((row, i) => {
+    const at = `seenIn row ${i + 1}`;
+    if (!row || typeof row !== "object" || Array.isArray(row)) return err(`${at}: must be {build: NB-NN, area}`);
+    for (const k of Object.keys(row)) if (!["build", "area"].includes(k)) err(`${at}: unknown key ${k}`);
+    if (row.build === undefined) err(`${at}: build missing`);
+    else if (!BUILD.test(String(row.build))) err(`${at}: build "${row.build}" must look like NB-NN`);
+    if (row.area === undefined || row.area === null || String(row.area).trim() === "") err(`${at}: area missing`);
+  });
+}
+
+const KIND_NAME = { pattern: "Pattern", "template-module": "Template module" };
+function checkRefs(ids, want, field, kindOf, err) {
+  for (const ref of ids) {
+    const k = kindOf(ref);
+    if (!k) err(`${field}: ${ref} not in Template bank`);
+    else if (k !== want) err(`${field}: ${ref} is not a ${KIND_NAME[want]}`);
+  }
+}

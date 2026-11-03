@@ -1,0 +1,7 @@
+{
+  "description": "Made-up catalog slugs for Template bank tests.",
+  "apps": [
+    { "slug": "widget-desk", "name": "Widget Desk" },
+    { "slug": "gizmo-flow", "name": "Gizmo Flow" }
+  ]
+}
