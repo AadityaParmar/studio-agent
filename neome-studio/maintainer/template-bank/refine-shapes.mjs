@@ -111,9 +111,11 @@ export function validateTags(raw, code, bankDir, words = []) {
       const at = `patterns ${i + 1}: `;
       if (!isObj(p)) return err(`${at}must be a map`);
       unknownKeys(p, ["name", "id", "task", "how", "workaround", "why", "proof"], at, err);
-      for (const k of ["name", "task", "how", "why"]) if (!text(p[k])) err(`${at}${k} missing`);
+      for (const k of ["name", "task", "how"]) if (!text(p[k])) err(`${at}${k} missing`);
       checkGuessId(p.id, "PAT", live, at, err);
       if (typeof p.workaround !== "boolean") err(`${at}workaround must be true or false`);
+      if (p.workaround === true && !text(p.why)) err(`${at}why missing (needed when workaround: true)`);
+      if (p.workaround === false && p.why !== undefined && p.why !== null && p.why !== "" && !text(p.why)) err(`${at}why must be text`);
       checkProofList(p.proof, source, at, err);
     });
   }

@@ -32,7 +32,7 @@ patterns:                     # may be empty
     task: Manager approves an order.
     how: Status pickText + workflow branch on Status + message to the asker.   # Neome parts
     workaround: true          # true = Neome has no direct feature; this is a way round it
-    why: No approval step; status list + branch stand in.
+    why: No approval step; status list + branch stand in.   # needed when workaround: true; leave out when false
     proof:                    # non-empty; lines from the area file
       - '- branchIfElse "Approved?" [if Curr.Status equalTo "Approved"]'
 ```

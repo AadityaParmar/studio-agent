@@ -232,6 +232,10 @@ function acmeTags(raw) {
     patterns: [{
       name: "Approval by status", id: "new", task: "Manager approves an order.", how: "Status pickText + branch.", workaround: true,
       why: "No approval step.", proof: ['- branchIfElse "Approved?" [if Curr.Status equalTo "Approved"]'],
+    }, {
+      // workaround: false needs no why
+      name: "Branch on status", id: "new", task: "Flow splits on status.", how: "Workflow branch on Status.", workaround: false,
+      proof: ['- branchIfElse "Approved?" [if Curr.Status equalTo "Approved"]'],
     }],
   });
   y("quotes.yaml", { build: "NB-01", area: "Quotes", file: "quotes.md", weight: "normal", templateModule: null, patterns: [] });
