@@ -118,10 +118,11 @@ test("plugin README: engine commands exist, maintainer tools and eyeball checkli
   assert.deepEqual([...named].sort(), [...known].sort(), "engine table must list every cli.mjs command, and only those");
 
   const tools = section(maintainer, "Maintainer tools");
-  for (const s of ["npm test", "upstream-check", "neome-studio/maintainer/upstream-check.md", "Eval runner", "### Eyeball checklist", "### Gate"]) {
+  for (const s of ["npm test", "upstream-check", "neome-studio/maintainer/upstream-check.md", "refine-template-bank", "neome-studio/maintainer/refine-template-bank.md", "Eval runner", "### Eyeball checklist", "### Gate"]) {
     assert.ok(tools.includes(s), `Maintainer tools lacks ${s}`);
   }
   assert.ok(existsSync(join(plugin, "maintainer", "upstream-check.mjs")));
+  assert.ok(existsSync(join(plugin, "maintainer", "refine-template-bank.mjs")));
   for (const h of ["### BRD look", "### Questionnaire look", "### Prototype look"]) {
     const name = h.slice(4);
     assert.ok(readFileSync(join(plugin, "evals", "README.md"), "utf8").includes(h), `evals/README.md lacks ${h}`);

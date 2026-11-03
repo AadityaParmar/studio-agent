@@ -43,10 +43,10 @@ const bounded = (s, flags = "giu") => new RegExp(`(?<![\\p{L}\\p{N}])${esc(s)}(?
 const TOKEN = /«(?:build|about|name|email|phone|msg)»/g; // our own placeholders never count as leaks
 const usable = (s) => typeof s === "string" && s.trim().length >= 3 && s.trim() !== "—";
 
-const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
-const PHONE = /\+?\(?\d[\d ().-]{6,}\d/g;
+export const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
+export const PHONE = /\+?\(?\d[\d ().-]{6,}\d/g;
 // Phone: 8–15 digits with + or separators, or 10–12 bare digits. Keeps dates, 86400000-style constants, epoch ms.
-const isPhone = (m) => {
+export const isPhone = (m) => {
   const n = (m.match(/\d/g) || []).length;
   if (/^\d{4}-\d\d-\d\d/.test(m)) return false;
   return /^\d+$/.test(m) ? n >= 10 && n <= 12 : n >= 8 && n <= 15;
