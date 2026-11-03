@@ -9,3 +9,4 @@ Eval fixture for the `template-hr-small` Eval case. Made up; never mined from a 
 - 2026-11-03 | add | TMOD-expenses | fixture
 - 2026-11-03 | add | TPL-hr-small | fixture
 - 2026-11-03 | add | TPL-sales-crm | fixture (decoy)
+- 2026-11-03 | add | APP-attendance-and-leave | fixture (App baseline linked from TMOD-leave)

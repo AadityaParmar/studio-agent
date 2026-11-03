@@ -43,7 +43,8 @@ const files = (dir, base = "") =>
 // ---------- mechanic `absent` ----------
 
 const actualOk = { missing: false, ois: [], reqs: [], modules: [], versions: {} };
-const BANK_RE = "TPL-|TMOD-|PAT-|NB-\\d|[Ss]een in";
+// Same pattern as golden template-hr-small `no-bank-ids-in-views` (kept in step by the test below).
+const BANK_RE = "TPL-|TMOD-|PAT-|\\bAPP-|\\bNA-[a-z]|NB-\\d|[Ss]een in";
 const absent = { id: "no-bank-ids", what: "No Template bank IDs in views", type: "absent", paths: ["brd/**", "prototypes/**", "questionnaires/**"], pattern: BANK_RE };
 
 test("absent: passes when no file under the paths matches; names the scanned count", () => {
@@ -67,6 +68,20 @@ test("absent: any match in any path fails and names file and hit; nested folders
   assert.equal(r.pass, false);
   for (const s of ["brd/preview.html: seen in", "prototypes/LV-leave.html: TMOD-", "questionnaires/sub/QN-1.txt: NB-0"]) assert.ok(r.detail.includes(s), r.detail);
   assert.ok(!r.detail.includes("brd/v1.html"), r.detail);
+});
+
+test("absent: App baseline IDs and NA- Build codes fail; look-alike words pass", () => {
+  const eng = box();
+  write(eng, "brd/preview.html", "<p>Leave via the Attendance & Leave app (WHATSAPP-ready, N/A today).</p>");
+  write(eng, "questionnaires/QN-1.txt", "Usual leave flow");
+  assert.equal(runMechanics([absent], { engDir: eng, actual: actualOk, clone: eng })[0].pass, true);
+  write(eng, "prototypes/LV-leave.html", "<div>APP-attendance-and-leave</div>");
+  write(eng, "brd/v1.html", "<p>from NA-attendance-and-leave</p>");
+  const [r] = runMechanics([absent], { engDir: eng, actual: actualOk, clone: eng });
+  assert.equal(r.pass, false);
+  for (const s of ["prototypes/LV-leave.html: APP-", "brd/v1.html: NA-a"]) assert.ok(r.detail.includes(s), r.detail);
+  const golden = JSON.parse(readFileSync(join(here, "..", "..", "evals", "template-hr-small", "golden.json"), "utf8"));
+  assert.equal(golden.mechanics.find((m) => m.id === "no-bank-ids-in-views").pattern, BANK_RE, "golden and test use one pattern");
 });
 
 test("absent: nothing to scan fails (a missing view must not pass by default)", () => {
@@ -280,6 +295,7 @@ test("template-hr-small: fixture entries, traps, replay and mechanics per ticket
   const bank = join(CASE, "template-bank");
   assert.deepEqual(files(bank), [
     "CHANGELOG.md",
+    "apps/APP-attendance-and-leave.md",
     "patterns/PAT-approval-by-status.md",
     "template-modules/TMOD-attendance.md",
     "template-modules/TMOD-employee-master.md",
@@ -293,6 +309,8 @@ test("template-hr-small: fixture entries, traps, replay and mechanics per ticket
   const leave = fm("template-modules/TMOD-leave.md");
   assert.equal(leave.delivery, "standard", "Delivery hint must mismatch the payroll link in the Inputs");
   assert.equal(leave.neomeApp, "attendance-and-leave");
+  const app = readFileSync(join(bank, "apps", "APP-attendance-and-leave.md"), "utf8");
+  assert.doesNotMatch(app.split("## Gives")[1].split("##")[0], /payroll|half|team is told|check in|attendance/i, "APP gives: no payroll link (backs the mismatch), no refused usual need, no attendance (FB-07)");
   assert.deepEqual(fm("templates/TPL-hr-small.md").modules, {
     core: ["TMOD-employee-master", "TMOD-attendance", "TMOD-leave"],
     optional: ["TMOD-expenses"],

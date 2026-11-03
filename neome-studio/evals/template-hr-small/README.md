@@ -14,7 +14,7 @@ Run: `node neome-studio/evals/run.mjs run template-hr-small` (see [../README.md]
 | `answer-key.md` | Facts K-NN: yes / no to Leave usual needs, Employee master yes, Attendance no, payroll, Engagement-wide; Consultant choices |
 | `golden.json` | Expected Modules, Requirements, Open Items, mapping, `forbidden` statements, `mechanics` |
 | `replay.yaml` | 6 steps: ingest → review-draft → resolve-module Leave (live) → resolve-module Expenses (from Inputs) → build-brd preview → questionnaire. No release, no Sign-off |
-| `template-bank/` | Fixture Template bank, locked format: `TPL-hr-small` (core Employee master, Attendance, Leave; optional Expenses), decoy `TPL-sales-crm`, `TMOD-leave`, `TMOD-expenses`, `TMOD-attendance`, `TMOD-employee-master`, `PAT-approval-by-status`, `CHANGELOG.md`. Build codes NB-81..86 are fake |
+| `template-bank/` | Fixture Template bank, locked format: `TPL-hr-small` (core Employee master, Attendance, Leave; optional Expenses), decoy `TPL-sales-crm`, `TMOD-leave`, `TMOD-expenses`, `TMOD-attendance`, `TMOD-employee-master`, `PAT-approval-by-status`, App baseline `APP-attendance-and-leave` (linked from `TMOD-leave` by `neomeApp`; gives no payroll link, so it backs the Delivery mismatch), `CHANGELOG.md`. Build codes NB-81..86 and NA-attendance-and-leave are fake |
 
 ## What it covers
 
@@ -26,7 +26,7 @@ Run: `node neome-studio/evals/run.mjs run template-hr-small` (see [../README.md]
 | Usual needs, live | Leave: balance (K-03) and day count (K-04) yes → Requirements; half day (K-05) and team told (K-06) no → never Requirements; carry forward not in the key → Don't know → Open Item | golden LV-07, LV-08, OI-01; forbidden FB-01..03; Don't know gate |
 | Usual needs, from Inputs | Expenses: category limits, mileage, project tag → Open Items with suggested answers, never Requirements | golden OI-04..06; forbidden FB-04..06 |
 | Delivery mismatch | `TMOD-leave` hint `standard`; Inputs need unpaid days sent to an outside payroll company (never Standard) → higher grade + Open Item, owner Neomenta | mechanic `delivery-mismatch-oi`, golden OI-02, mapping LV `configuration` |
-| No Template bank IDs in client-facing views | BRD preview, Prototypes, Questionnaire | mechanic `no-bank-ids-in-views` (`absent`: `TPL-\|TMOD-\|PAT-\|NB-\d\|seen in`) |
+| No Template bank IDs in client-facing views | BRD preview, Prototypes, Questionnaire | mechanic `no-bank-ids-in-views` (`absent`: `TPL-\|TMOD-\|PAT-\|APP-\|NA-\|NB-\d\|seen in`) |
 
 Soft metrics: all four. No merge or split trap.
 

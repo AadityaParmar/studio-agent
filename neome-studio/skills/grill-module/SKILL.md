@@ -26,13 +26,13 @@ Done when mode, Module and topic list are fixed.
 
 ## 2. Read and pre-answer
 
-Read whole: the Module's `spec.md` (else `ticket.md`), `map.md` and the other Modules' `## 1` and `## 3` (hand-offs; their `spec.md`, else `ticket.md`), `open-items.md`, this Module's section of `process.md`, the Enterprise `GLOSSARY.md`, and the text copy (`enterprises/<ent>/_agent/sources/<ID>.md`) of every Source whose register row lists `<slug>`. `templateModule` a `TMOD-` ID → read its entry whole and each Pattern it lists (`reference/template-bank/`). Read the catalog App section(s) the question bank points at.
+Read whole: the Module's `spec.md` (else `ticket.md`), `map.md` and the other Modules' `## 1` and `## 3` (hand-offs; their `spec.md`, else `ticket.md`), `open-items.md`, this Module's section of `process.md`, the Enterprise `GLOSSARY.md`, and the text copy (`enterprises/<ent>/_agent/sources/<ID>.md`) of every Source whose register row lists `<slug>`. `templateModule` a `TMOD-` ID → read its entry whole and each Pattern it lists (`reference/template-bank/`), and its App baseline `apps/APP-<neomeApp>.md` when that file exists. Read the catalog App section(s) the question bank points at.
 
 Sort each topic into a tier:
 
 1. **From Inputs**: state it, cite it. Ask only if Sources conflict, are thin, or it is an always-ask fact (then it is the suggested answer).
-2. **From the Template bank** (only with a Template module): its process steps and Patterns → suggested answers for process topics (3 Process, 5 Statuses, 6 Rules) the Inputs leave open. Each usual need no Source holds → one round item, the usual need as its suggested answer. Both `(proposed, to confirm)`, in the Enterprise's words.
-3. **From the catalog**: offer it as the suggested answer, `(proposed, to confirm)`.
+2. **From the Template bank** (only with a Template module, and its App baseline when there is one): its process steps and Patterns → suggested answers for process topics (3 Process, 5 Statuses, 6 Rules) the Inputs leave open. Each usual need no Source holds → one round item, the usual need as its suggested answer. Each App baseline `## Gives` line no Source or usual need already covers → one round item, the line as its suggested answer. All `(proposed, to confirm)`, in the Enterprise's words.
+3. **From the catalog** (the App page; only what the App baseline does not already say): offer it as the suggested answer, `(proposed, to confirm)`.
 4. **Always ask** (question bank `Always ask:` lines): goals and KPIs, roles and headcount, approval thresholds and approvers, final status list, volumes, system of record, integration ownership, priority. Never settled by the Template bank, the catalog or the Consultant's view; an Enterprise statement in an Input counts (cite it), and live you still confirm it.
 
 Show the Consultant a coverage table: topic · tier · what you already have [Sources] · what you will ask; the Template module's ID and seen in N Builds may show here. Done when every topic on the list has a tier and every Source conflict is listed.
@@ -47,7 +47,7 @@ Record each answer:
 
 - **Enterprise said it** (on the call or relayed with who said it): fact citing the session log; log bullet with the speaker's name.
 - **Consultant's own view**: `(proposed, to confirm)` + an Open Item asking the Enterprise.
-- **Template bank suggestion** (usual need, process step, Pattern): live Enterprise yes → fact or Requirement citing the session log. Enterprise no → **dropped**: no Requirement, Open Item, spec line or log bullet. Don't know → Open Item, suggested = the suggestion. From-Inputs mode → Open Item with the suggestion as suggested answer; never a Requirement, not even proposed.
+- **Template bank suggestion** (usual need, process step, Pattern, App baseline "gives" line): live Enterprise yes → fact or Requirement citing the session log. Enterprise no → **dropped**: no Requirement, Open Item, spec line or log bullet. Don't know → Open Item, suggested = the suggestion. From-Inputs mode → Open Item with the suggestion as suggested answer; never a Requirement, not even proposed.
 - **Nobody knows / "Don't know"**: Open Item from the item, unchanged (question, `For:` → ask to, suggested). A fact you then propose for it is `(proposed, to confirm)`, never cites the session log: a Don't know is not a Source.
 - **Challenge**: check every answer against the Sources and earlier answers. Clash → quote both with their Sources and ask which holds; still unclear → Open Item quoting both.
 - **Answers an open Open Item** → close it with the session log as answer Source.

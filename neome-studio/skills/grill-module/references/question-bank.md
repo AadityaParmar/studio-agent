@@ -12,7 +12,7 @@ Per topic:
 
 **App hints.** Read the App(s) this Module resembles in [`reference/neome-app-catalog.md`](../../../reference/neome-app-catalog.md), live, every run: its `## App:` section (entities, key fields, statuses, roles, automations, approvals, reports) and section 1 building blocks. Catalog-based answers are always `(proposed, to confirm)`; Neome App names and catalog words stay out of questions and answers (say it in the Enterprise's words).
 
-**Template bank hints.** With a Template module (`templateModule`), its process steps and Patterns pre-fill process topics and its usual needs become items, after the Inputs and before the catalog (`grill-module` tier 2). Always `(proposed, to confirm)`, in the Enterprise's words; Template bank IDs and Build codes stay out of questions and answers.
+**Template bank hints.** With a Template module (`templateModule`), its process steps and Patterns pre-fill process topics and its usual needs become items, after the Inputs and before the catalog (`grill-module` tier 2). Its App baseline (`apps/APP-<neomeApp>.md`, when there) adds its `## Gives` lines as items too. Always `(proposed, to confirm)`, in the Enterprise's words; Template bank IDs and Build codes stay out of questions and answers.
 
 Engagement-wide topics (access and permission matrix, currencies, languages, hosting, SSO, migration, training, support) are `review-draft`'s; here only note an ask no single Module owns and hand it back.
 

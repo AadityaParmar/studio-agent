@@ -69,6 +69,6 @@
     { "id": "delivery-mismatch-oi", "what": "TMOD-leave Delivery hint vs heuristics mismatch raised as an Open Item, owner Neomenta", "type": "oi", "where": { "questionIncludes": "standard", "owner": "neomenta" } },
     { "id": "brd-preview", "what": "BRD working preview built", "type": "file", "path": "brd/preview.html" },
     { "id": "questionnaire-sent", "what": "Questionnaire master written", "type": "file", "path": "_agent/questionnaires/QN-*.md" },
-    { "id": "no-bank-ids-in-views", "what": "No Template bank IDs, Build codes or seenIn in BRD, Prototypes, Questionnaires", "type": "absent", "paths": ["brd/**", "prototypes/**", "questionnaires/**"], "pattern": "TPL-|TMOD-|PAT-|NB-\\d|[Ss]een in" }
+    { "id": "no-bank-ids-in-views", "what": "No Template bank IDs (incl. App baseline APP-), Build codes (NB-, NA-) or seenIn in BRD, Prototypes, Questionnaires", "type": "absent", "paths": ["brd/**", "prototypes/**", "questionnaires/**"], "pattern": "TPL-|TMOD-|PAT-|\\bAPP-|\\bNA-[a-z]|NB-\\d|[Ss]een in" }
   ]
 }
