@@ -16,23 +16,24 @@ Or tell Claude: "follow `neome-studio/evals/eval.md`" (runs it, then walks you t
 
 ## Cases
 
-One folder per Eval case: `inputs/` (anonymised raw Inputs), `answer-key.md` (facts K-NN the simulated client may give, Consultant choices), `golden.json` (expected Modules, Requirements, Open Items, mapping; shape [lib/golden.schema.json](lib/golden.schema.json); optional `mechanics` checks on the end state; optional `score` lists the soft metrics the case scores, the rest show n/a), `replay.yaml` (steps; shape [lib/replay.schema.json](lib/replay.schema.json)), `README.md` (what it covers).
+One folder per Eval case: `inputs/` (anonymised raw Inputs), `answer-key.md` (facts K-NN the simulated client may give, Consultant choices), `golden.json` (expected Modules, Requirements, Open Items, mapping; shape [lib/golden.schema.json](lib/golden.schema.json); optional `mechanics` checks on the end state; optional `forbidden` statements that must not become Requirements; optional `score` lists the soft metrics the case scores, the rest show n/a), `replay.yaml` (steps; shape [lib/replay.schema.json](lib/replay.schema.json)), `README.md` (what it covers). Optional `template-bank/` (same layout as `reference/template-bank/`): the case's own fixture Template bank, see [Template bank](#template-bank).
 
 | Case | Covers |
 |---|---|
 | [tiny-synthetic](tiny-synthetic/README.md) | Flow mechanics: Questionnaire loop, glossary conflict, GEN, release + Sign-off + change log, claim/lock |
 | [anglo-gulf-crm](anglo-gulf-crm/README.md) | Full flow on a real CRM BRD (56 Requirements, 28 Open Items). Inputs reconstructed from the golden BRD: recall reads high |
+| [template-hr-small](template-hr-small/README.md) | Template bank use: ingest match, review-draft missing-Module suggestion, grill-module usual needs (yes / no / Don't know), neome-mapping Delivery mismatch, no Template bank IDs in views. Own fixture Template bank |
 
 ## How a run works
 
-1. **prepare**: temp folder with a local bare remote and two Consultant clones (`a`, `b`) of this repo, the plugin without `evals/` and `engine/test/` (no skill can read a golden file or key), the case Inputs in clone `a`. The real repo is never touched.
+1. **prepare**: temp folder with a local bare remote and two Consultant clones (`a`, `b`) of this repo, the plugin without `evals/` and `engine/test/` (no skill can read a golden file or key), the case Inputs in clone `a`. The real repo is never touched. Template bank: the case's `template-bank/` fixture, or none.
 2. **replay**: each `replay.yaml` step. Skill steps run `/neome-studio:<skill>` headless (`claude -p`, plugin loaded, permissions bypassed) in a clone. Every skill message goes to the **simulated client** ([prompts/simulated-client.md](prompts/simulated-client.md) + the answer key, no tools): it answers as the Enterprise from the key only (anything else → Don't know) and makes Consultant choices per the step brief. Engine steps act as a Consultant without a skill (Ben's claim and lock). Enterprise steps write an Input (Questionnaire reply, signed copy). `status` snapshot after each step. Log: `run/log.jsonl`, readable `run/transcript.md`.
 3. **judge**: one tool-less call ([prompts/judge.md](prompts/judge.md)) gets golden, the replay's BRD data, the cited Source text copies and every Don't know; it matches by meaning only → `run/judge.json`.
 4. **score**: deterministic. Rejects judge output that skips or repeats an item. Writes `results/<date>-<case>.md`.
 
 ## Scorecard
 
-Hard gates: BRD data (live build + every `v<N>.json`) passes schema + cross-ref; no fact `proposed: false` with empty `sources`; no invented fact (judge reads each Requirement's cited Source); every Don't know ended as an Open Item; every `mechanics` check passes; no replay problem (turn limit, engine step failed, unusable client answer).
+Hard gates: BRD data (live build + every `v<N>.json`) passes schema + cross-ref; no fact `proposed: false` with empty `sources`; no invented fact (judge reads each Requirement's cited Source); every Don't know ended as an Open Item; no golden `forbidden` statement became a Requirement (proposed or not; judge matches by meaning); every `mechanics` check passes; no replay problem (turn limit, engine step failed, unusable client answer).
 
 Soft: Requirement recall (golden Requirements matched), Open Items caught (golden Open Items asked, or answered correctly in a Requirement), Module set (merge/split allowed), mapping (matched Modules carry the golden Delivery class; n/a when golden has no mapping). Extra Requirements are listed and tagged plausible / noise, never failed.
 
@@ -48,6 +49,7 @@ Starting values from ticket 18; first runs calibrate them. The runner reads this
 | Uncited non-proposed facts | `uncited` | hard, max | 0 | ticket 18 |
 | Invented facts | `invented` | hard, max | 0 | ticket 18 |
 | Don't know without an Open Item | `dontKnow` | hard, max | 0 | ticket 18: a Don't know must end as an Open Item |
+| Forbidden Requirements | `forbidden` | hard, max | 0 | template-bank ticket 10: a usual need the Enterprise refused (or never confirmed) must not become a Requirement, not even a proposed one; one is already a wrong BRD line |
 | Case mechanics failed | `mechanics` | hard, max | 0 | ticket 41: tiny-synthetic smoke |
 | Replay problems | `replay` | hard, max | 0 | ticket 41: a broken replay scores nothing real |
 | Requirement recall % | `recall` | soft, min | 80 | ticket 18 |
@@ -56,9 +58,17 @@ Starting values from ticket 18; first runs calibrate them. The runner reads this
 | Mapping Delivery class % | `mapping` | soft, min | 70 | ticket 18 |
 | Regression: max drop in pts vs last `main` | `regression` | max | 5 | ticket 18 |
 
+## Mechanics
+
+`golden.mechanics`: deterministic checks on the replay's end state, paths relative to the Engagement folder. Types: `file` (≥ `min` files match a name glob), `text` (file matches a regex; a glob path passes when any matching file does), `absent` (regex matches in no file under `paths`, globs with `**`; nothing to scan fails, so a missing view never passes), `oi` (Open Items by status, question text, answer / raised-in Source, `owner`), `gen`, `version`, `changes`, `modules`, `git`. Shapes: [lib/golden.schema.json](lib/golden.schema.json).
+
+## Template bank
+
+Real Template bank (`reference/template-bank/`) never reaches an eval clone: its content changes with every refine and would move baselines. A case that tests Template bank use ships its own fixture in `<case>/template-bank/` (made up, locked format); `prepare` copies it into the clones' `neome-studio/reference/template-bank/`. Other cases get no Template bank. `run.mjs check` runs the bank checks (`checkBank` in `engine/template-bank.mjs`) on each fixture, with the case Enterprise's name as a scrub word; until that module is merged it prints a `note` and skips them.
+
 ## Results
 
-`results/<date>-<case>.md` (a second run that day gets `-2`, `-3`): verdict and failures, gates, soft metrics with last-`main` baseline and drop, mechanics, one match table each for Requirements, Open Items, Modules + mapping, extras, invented facts, Don't know → Open Item, problems, the spot-check box, and a `## Data` JSON block the next run reads for regression. Commit the result with the change it judged.
+`results/<date>-<case>.md` (a second run that day gets `-2`, `-3`): verdict and failures, gates, soft metrics with last-`main` baseline and drop, mechanics, one match table each for Requirements, Open Items, Modules + mapping, forbidden (when golden has any), extras, invented facts, Don't know → Open Item, problems, the spot-check box, and a `## Data` JSON block the next run reads for regression. Commit the result with the change it judged.
 
 ## Gate
 

@@ -6,7 +6,8 @@
 //   client (system prompt is the simulated client): "Report: done" → end; else answers, one Don't know.
 //     FAKE_CLIENT_BAD=1 → answer that breaks the client schema.
 //   judge (system prompt "# Eval judge"): matches golden to replay items with the same ID.
-//     FAKE_JUDGE_SKIP=1 drops the first requirements entry; FAKE_INVENTED=<id>; FAKE_DK_NULL=1.
+//     FAKE_JUDGE_SKIP=1 drops the first requirements entry; FAKE_INVENTED=<id>; FAKE_DK_NULL=1;
+//     FAKE_FORBIDDEN=<req id> → every golden forbidden statement matched by that Requirement.
 import { appendFileSync, cpSync, readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -68,5 +69,6 @@ function judge(text) {
     extras: reqIds.filter((id) => !matched.has(id)).map((id) => ({ id, tag: id.startsWith("GEN") ? "plausible" : "noise", note: "fake" })),
     sourceCheck: reqIds.map((id) => ({ id, verdict: id === process.env.FAKE_INVENTED ? "invented" : "supported", note: id === process.env.FAKE_INVENTED ? "fake: not in Source" : "" })),
     dontKnow: dk.map((d) => ({ n: d.n, oi: process.env.FAKE_DK_NULL ? null : ois[0], note: "" })),
+    forbidden: (golden.forbidden ?? []).map((f) => ({ golden: f.id, matchedBy: process.env.FAKE_FORBIDDEN ? [process.env.FAKE_FORBIDDEN] : [], note: "" })),
   };
 }

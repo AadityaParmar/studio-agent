@@ -3,6 +3,8 @@
 //   <work>/a, <work>/b  two Consultant clones (replay.yaml consultants a, b), node_modules symlinked
 //   <work>/run/         case.json, log.jsonl, transcript.md, judge input/output (outside both clones)
 // The clones get the plugin without evals/ and engine/test/, so no skill session can read a golden file or answer key.
+// Template bank (ticket 10): the real one never reaches a clone. A case with its own template-bank/ fixture gets that
+// as neome-studio/reference/template-bank/; any other case gets none.
 import { spawnSync } from "node:child_process";
 import { appendFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, symlinkSync, writeFileSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,7 +23,8 @@ const COPY = [
   "package.json",
   "package-lock.json",
 ];
-const SKIP = ["neome-studio/evals", "neome-studio/engine/test"];
+const BANK = "neome-studio/reference/template-bank";
+const SKIP = ["neome-studio/evals", "neome-studio/engine/test", BANK];
 
 export function git(cwd, args, env = process.env) {
   const r = spawnSync("git", args, { cwd, encoding: "utf8", env });
@@ -61,6 +64,7 @@ export function prepareWorkspace({ repoRoot, kase, work, date, branch = "unknown
       },
     });
   }
+  if (kase.bankDir) cpSync(kase.bankDir, join(a, ...BANK.split("/")), { recursive: true, filter: (src) => !src.endsWith(".DS_Store") });
   const inputs = join(a, "enterprises", replay.enterprise, "inputs");
   mkdirSync(inputs, { recursive: true });
   for (const f of kase.inputs) cpSync(join(kase.dir, "inputs", f), join(inputs, f));

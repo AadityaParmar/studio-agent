@@ -31,6 +31,9 @@
     { "id": "OI-03", "question": "Tally link?", "modules": ["QUO"] },
     { "id": "OI-99", "question": "Never asked.", "modules": ["All"] }
   ],
+  "forbidden": [
+    { "id": "FB-01", "statement": "Quotations go out without any approval.", "modules": ["QUO"] }
+  ],
   "mechanics": [
     { "id": "qn", "what": "Questionnaire master", "type": "file", "path": "_agent/questionnaires/QN-*.md" },
     { "id": "qa-closed", "what": "Reply closed an OI", "type": "oi", "where": { "status": "closed", "answerSourcePrefix": "QA" } },
