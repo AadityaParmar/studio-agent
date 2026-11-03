@@ -20,6 +20,7 @@ const COMMANDS = {
   reply: lazy("./reply.mjs", "reply"),
   "setup-check": lazy("./setup-check.mjs", "setupCheck"),
   status: lazy("./status.mjs", "status"),
+  "template-bank": lazy("./template-bank-match.mjs", "templateBank"),
 };
 
 const [name, ...args] = process.argv.slice(2);
