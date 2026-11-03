@@ -43,7 +43,7 @@ Neome App Build (`NA-` code) area sheets add one key; client Build sheets must n
 
 ```yaml
 gives:                        # what the App does out of the box, one short line each, from the area file only
-  - Rep raises an order; manager approves or rejects.   # non-empty unless weight: low
+  - Rep raises an order; manager approves or rejects.   # non-empty; with weight: low it may be empty or left out
 ```
 
 ## Build tag sheet: `tags/<NB-NN>/_build.yaml` (one per Build, from `overview.md`)

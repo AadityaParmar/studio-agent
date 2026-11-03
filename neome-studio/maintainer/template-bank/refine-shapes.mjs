@@ -94,7 +94,7 @@ export function validateTags(raw, code, bankDir, words = []) {
     }
     const area = areas.find((a) => a.sheet === s.sheet);
     unknownKeys(d, ["build", "area", "file", "weight", "templateModule", "patterns", ...(isApp(code) ? ["gives"] : [])], "", err);
-    if (isApp(code)) {
+    if (isApp(code) && !(d.weight === "low" && d.gives === undefined)) {
       if (!textList(d.gives)) err("gives must be a list of text (Neome App Build: what the App gives out of the box)");
       else if (!d.gives.length && d.weight !== "low") err("gives must not be empty (Neome App Build area)");
     }

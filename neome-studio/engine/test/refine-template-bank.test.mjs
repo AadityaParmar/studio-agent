@@ -607,7 +607,7 @@ test("CLI: Neome App Build run: app-slugs map, no word list, gives, APP entry li
   const add = (f, gives) => writeFileSync(join(t, f), readFileSync(join(t, f), "utf8") + stringify({ gives }));
   add("sales.yaml", ["Rep raises an order; manager approves or rejects."]);
   add("quotes.yaml", []);
-  add("orphans-maybe-dead.yaml", []);
+  // orphans-maybe-dead.yaml (weight: low) left without `gives`: allowed
   r = T("validate-tags");
   assert.equal(r.code, 1);
   assert.match(r.out, /^error \| NA-widget-desk \| quotes\.yaml: gives must not be empty/m);
