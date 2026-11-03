@@ -124,7 +124,11 @@ export function judgeProblems(judge, golden, actual, log) {
   exactlyOnce("extras", judge.extras.map((x) => x.id), reqIds.filter((id) => !matched.has(id)));
   exactlyOnce("sourceCheck", judge.sourceCheck.map((x) => x.id), reqIds);
   exactlyOnce("dontKnow", judge.dontKnow.map((x) => String(x.n)), dontKnows(log).map((a) => String(a.n)));
-  for (const x of judge.dontKnow) if (x.oi !== null) known(`dontKnow ${x.n}`, [x.oi], oiIds);
+  const cited = [...new Set([...actual.reqs, ...actual.ois].flatMap((x) => x.sources ?? []))];
+  for (const x of judge.dontKnow) {
+    if (x.oi !== null) known(`dontKnow ${x.n}`, [x.oi], oiIds);
+    if (x.source) known(`dontKnow ${x.n}`, [x.source], cited);
+  }
   const fb = judge.forbidden ?? [];
   exactlyOnce("forbidden", fb.map((x) => x.golden), (golden.forbidden ?? []).map((f) => f.id));
   for (const x of fb) known(`forbidden ${x.golden}`, x.matchedBy, reqIds);
@@ -281,7 +285,7 @@ export function computeMetrics({ golden, actual, judge, log, mechanics, replayPr
       valid: actual.errors.length,
       uncited: actual.uncited.length,
       invented: invented.length,
-      dontKnow: dk.filter((x) => x.j.oi === null).length,
+      dontKnow: dk.filter((x) => x.j.oi === null && !x.j.source).length,
       forbidden: fbRows.filter((r) => r.m.matchedBy.length > 0).length,
       mechanics: failedMech.length,
       replay: replayProblems.length,
@@ -418,7 +422,7 @@ export function renderResult({ info, kase, actual, judge, metrics, mechanics, ve
   p("## Don't know → Open Item", "");
   if (rows.dk.length) {
     p("| # | Step | Question | Open Item | Judge note |", "|---|---|---|---|---|");
-    for (const { a, j } of rows.dk) p(`| A${a.n} | ${a.step} | ${cell(a.question)} | ${j.oi ?? "**none**"} | ${cell(j.note)} |`);
+    for (const { a, j } of rows.dk) p(`| A${a.n} | ${a.step} | ${cell(a.question)} | ${j.oi ?? (j.source ? `Source ${j.source}` : "**none**")} | ${cell(j.note)} |`);
   } else p("The simulated client said Don't know to nothing.");
   p("", "## Problems", "");
   const probs = [...actual.errors.map((e) => `validation ${e}`), ...actual.uncited.map((u) => `uncited ${u}`), ...replayProblems.map((r) => `replay ${r}`)];

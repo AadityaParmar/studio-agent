@@ -47,15 +47,15 @@
       }
     },
     "dontKnow": {
-      "description": "Every client log answer marked dontKnow once (by its n). oi = the actual Open Item that holds the question; null = none",
+      "description": "Every client log answer marked dontKnow once (by its n). oi = the actual Open Item that holds the question; null = none. source = a Source ID the replay cites that already states the answer the client did not know (the replay kept it citing that Source); null otherwise",
       "type": "array",
       "items": {
-        "type": "object", "additionalProperties": false, "required": ["n", "oi", "note"],
-        "properties": { "n": { "type": "integer" }, "oi": { "type": ["string", "null"] }, "note": { "type": "string" } }
+        "type": "object", "additionalProperties": false, "required": ["n", "oi", "source", "note"],
+        "properties": { "n": { "type": "integer" }, "oi": { "type": ["string", "null"] }, "source": { "type": ["string", "null"] }, "note": { "type": "string" } }
       }
     },
     "forbidden": {
-      "description": "Every golden forbidden statement once. matchedBy = replay Requirement IDs (proposed or not) that state it; empty = it did not become a Requirement",
+      "description": "Every golden forbidden statement once, golden = its id (FB-NN). matchedBy = replay Requirement IDs (proposed or not) that state it; empty = it did not become a Requirement",
       "type": "array",
       "items": {
         "type": "object", "additionalProperties": false, "required": ["golden", "matchedBy", "note"],

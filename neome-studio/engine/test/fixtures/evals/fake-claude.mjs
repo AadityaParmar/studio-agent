@@ -68,7 +68,7 @@ function judge(text) {
     modules: golden.modules.map((g) => ({ golden: g.prefix, matchedBy: replay.modules.some((m) => m.prefix === g.prefix) ? [g.prefix] : [], note: "" })),
     extras: reqIds.filter((id) => !matched.has(id)).map((id) => ({ id, tag: id.startsWith("GEN") ? "plausible" : "noise", note: "fake" })),
     sourceCheck: reqIds.map((id) => ({ id, verdict: id === process.env.FAKE_INVENTED ? "invented" : "supported", note: id === process.env.FAKE_INVENTED ? "fake: not in Source" : "" })),
-    dontKnow: dk.map((d) => ({ n: d.n, oi: process.env.FAKE_DK_NULL ? null : ois[0], note: "" })),
+    dontKnow: dk.map((d) => ({ n: d.n, oi: process.env.FAKE_DK_NULL ? null : ois[0], source: process.env.FAKE_DK_SOURCE ?? null, note: "" })),
     forbidden: (golden.forbidden ?? []).map((f) => ({ golden: f.id, matchedBy: process.env.FAKE_FORBIDDEN ? [process.env.FAKE_FORBIDDEN] : [], note: "" })),
   };
 }

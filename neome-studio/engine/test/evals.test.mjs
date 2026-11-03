@@ -293,6 +293,19 @@ test("score: invented fact and Don't know with no Open Item fail the hard gates"
   assert.match(text, /\| A2 \| ingest-first \| How many showrooms\? \| \*\*none\*\* \|/);
 });
 
+test("score: Don't know about a fact a cited Source already states passes without an Open Item", () => {
+  const { s, results } = rescore({ FAKE_DK_NULL: "1", FAKE_DK_SOURCE: "CE-2" });
+  assert.ok(!s.lines.some((l) => l.includes("Don't know without an Open Item")), s.out);
+  const text = readFileSync(join(results, readdirSync(results)[0]), "utf8");
+  assert.match(text, /\| A2 \| ingest-first \| How many showrooms\? \| Source CE-2 \|/);
+});
+
+test("score: Don't know pointing at a Source the replay never cites is a judge problem", () => {
+  const { s } = rescore({ FAKE_DK_NULL: "1", FAKE_DK_SOURCE: "XX-9" });
+  assert.equal(s.code, 1);
+  assert.match(s.out, /dontKnow \d+: XX-9/);
+});
+
 test("score: a forbidden statement that became a Requirement fails the forbidden gate and shows in the result", () => {
   const { s, results } = rescore({ FAKE_FORBIDDEN: "QUO-03" });
   assert.equal(s.code, 1);

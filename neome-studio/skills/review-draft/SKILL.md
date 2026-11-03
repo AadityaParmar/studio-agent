@@ -46,7 +46,7 @@ Grilling rounds: up to 5 numbered items per round, each with your **suggested an
 
 How to record each answer:
 
-- Consultant relays what the Enterprise said → fact for the session log, with speaker, role and when said as far as the Consultant gives them. Never ask a separate question for who said it or when: not given → log it as said by the Enterprise, person not named (review-shapes). Ask only when unclear whether an answer is the Enterprise's word or the Consultant's own view.
+- Consultant relays what the Enterprise said → fact for the session log, with speaker, role and when said as far as the Consultant gives them. Never ask a separate question for who said it or when: not given → log it as said by the Enterprise, person not named (review-shapes). Ask only when unclear whether an answer is the Enterprise's word or the Consultant's own view, and ask just that: "Enterprise's word or your view?", with no who or when in it.
 - Consultant's own view → `(proposed, to confirm)` + an Open Item (owner Enterprise).
 - Nobody knows → Open Item; suggested answer only if you can defend it. Engagement-wide topic OIs: Module(s) `All`.
 - Answer clashes with a Source → say so, quote both; still unclear → Open Item.
