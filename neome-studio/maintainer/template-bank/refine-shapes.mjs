@@ -6,11 +6,14 @@ import { parse } from "yaml";
 import { frontMatter } from "../../engine/markdown.mjs";
 import { loadBank } from "../../engine/template-bank.mjs";
 import { EMAIL, isPhone, PHONE } from "./scrub.mjs";
+import { isApp } from "./apps.mjs";
 import { areaFiles, BUILD_SHEET, CODE, scrubbedDir, scrubHit, tagSheets } from "./refine-state.mjs";
 
 export const CHANGE_KINDS = ["add", "enhance", "split", "merge", "rename", "retire"];
 export const AUTO_KINDS = ["add", "enhance", "rename"]; // may be auto-applied; split / merge / retire always ask
-const ID = /^(PAT|TMOD|TPL)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
+const ID = /^(PAT|TMOD|TPL|APP)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
+// App baseline IDs are fixed by the catalog slug: never renamed, split or merged.
+export const APP_KINDS = ["add", "enhance", "retire"];
 export const prefixOf = (id) => String(id).split("-")[0];
 
 const text = (v) => typeof v === "string" && v.trim() !== "";
@@ -90,7 +93,11 @@ export function validateTags(raw, code, bankDir, words = []) {
       continue;
     }
     const area = areas.find((a) => a.sheet === s.sheet);
-    unknownKeys(d, ["build", "area", "file", "weight", "templateModule", "patterns"], "", err);
+    unknownKeys(d, ["build", "area", "file", "weight", "templateModule", "patterns", ...(isApp(code) ? ["gives"] : [])], "", err);
+    if (isApp(code)) {
+      if (!textList(d.gives)) err("gives must be a list of text (Neome App Build: what the App gives out of the box)");
+      else if (!d.gives.length && d.weight !== "low") err("gives must not be empty (Neome App Build area)");
+    }
     if (d.area !== area.area) err(`area must be "${area.area}"`);
     if (d.file !== area.file) err(`file must be ${area.file}`);
     if (!["normal", "low"].includes(d.weight)) err("weight must be normal or low");
@@ -220,7 +227,12 @@ export function validateChanges(changes, { raw, bankDir, dir, builds, words = []
     for (const id of creates) if (ID.test(id ?? "") && everUsed.has(id)) err(`${id} already used in Template bank or CHANGELOG.md; IDs never reused`);
     for (const id of [...removes, ...keeps]) if (ID.test(id ?? "") && !live.has(id)) err(`${id} not in Template bank`);
     const kinds = new Set([...creates, ...removes, ...keeps].filter((x) => ID.test(x ?? "")).map(prefixOf));
-    if (kinds.size > 1) err("all IDs of one change must be the same kind (PAT / TMOD / TPL)");
+    if (kinds.size > 1) err("all IDs of one change must be the same kind (PAT / TMOD / TPL / APP)");
+    if (kinds.has("APP") && !APP_KINDS.includes(c.change)) err("App baseline IDs are fixed (APP-<catalog slug>): add, enhance or retire only");
+    if (kinds.has("APP") && ["add", "enhance"].includes(c.change) && Array.isArray(c.seenIn)) {
+      const own = `NA-${String(c.id).slice(4)}`;
+      c.seenIn.forEach((r, k) => { if (isObj(r) && r.build !== own) err(`seenIn row ${k + 1}: an App baseline is seen only in its own Neome App Build ${own}`); });
+    }
     if (c.change === "merge" && (!Array.isArray(c.from) || !c.from.length)) err("from must be a non-empty list of IDs");
     if (c.change === "merge" && Array.isArray(c.from) && c.from.includes(c.into)) err("into must not be in from");
     if (c.change === "split" && (!Array.isArray(c.into) || c.into.length < 2)) err("into must list two or more {id, seenIn}");
@@ -231,7 +243,7 @@ export function validateChanges(changes, { raw, bankDir, dir, builds, words = []
     if (!Array.isArray(proof) || (c.change !== "retire" && !proof.length)) err("proof must be a non-empty list of {build, area, line}");
     else proof.forEach((p, j) => {
       const at = `proof ${j + 1}: `;
-      if (!isObj(p) || !CODE.test(String(p.build)) || !text(p.area) || !oneLine(p.line)) return err(`${at}must be {build: NB-NN, area, line}`);
+      if (!isObj(p) || !CODE.test(String(p.build)) || !text(p.area) || !oneLine(p.line)) return err(`${at}must be {build: NB-NN|NA-<slug>, area, line}`);
       const sheet = tagsOf(p.build).get(p.area);
       if (sheet === undefined) err(`${at}no tag sheet for ${p.build} / ${p.area}`);
       else if (!sheet.includes(p.line.trim())) err(`${at}line not found in tag sheet ${p.build} / ${p.area}`);
@@ -247,7 +259,7 @@ export function validateChanges(changes, { raw, bankDir, dir, builds, words = []
       if (c.change === "split" && !rows.length) err(`${at}seenIn must not be empty`);
       rows.forEach((r, k) => {
         const where = `${at}seenIn row ${k + 1}: `;
-        if (!isObj(r) || !CODE.test(String(r.build)) || !text(String(r.area ?? ""))) return err(`${where}must be {build: NB-NN, area}`);
+        if (!isObj(r) || !CODE.test(String(r.build)) || !text(String(r.area ?? ""))) return err(`${where}must be {build: NB-NN|NA-<slug>, area}`);
         if (!builds.includes(r.build) && !own.has(r.build)) return err(`${where}${r.build} not in this run's tag sheets`);
         if (own.has(r.build) && !builds.includes(r.build)) return;
         if (!tagsOf(r.build).has(String(r.area))) err(`${where}${r.build} has no Build area "${r.area}"`);

@@ -3,9 +3,10 @@
 //
 // <raw>/ (gitignored, client data; never committed)
 //   *.json                       Neome Build JSON (dropped by the maintainer)
+//   neome-template/*.json        Neome App Build JSON + app-slugs.txt (apps.mjs); code NA-<catalog slug>
 //   builds.json                  Build code → {entId, name}            (digest.mjs)
 //   digests/<NB-NN>/             unscrubbed digest + meta.json          (digest.mjs; never shown to a model)
-//   scrub/<NB-NN>.txt            scrub word list                        (scrub.mjs seeds, maintainer adds)
+//   scrub/<NB-NN>.txt            scrub word list                        (scrub.mjs seeds, maintainer adds; none for NA-)
 //   scrubbed/<NB-NN>/            scrubbed digest                        (scrub.mjs; the only digest a model reads)
 //   tags/<NB-NN>/<area>.yaml     tag sheet per Build area, _build.yaml for the overview (tag child; kept for good)
 //   tags/<NB-NN>/sheets.json     {code, version, sheets} written by validate-tags: sheets ready, not yet applied
@@ -22,9 +23,11 @@ import { basename, join } from "node:path";
 import { parse } from "yaml";
 import { parseBuild, pickBuilds, versionId } from "./build-json.mjs";
 import { parseWordList } from "./scrub.mjs";
-import { loadBank } from "../../engine/template-bank.mjs";
+import { BUILD_CODE, loadBank } from "../../engine/template-bank.mjs";
+import { appBuilds } from "./apps.mjs";
 
-export const CODE = /^NB-\d{2,}$/;
+/** Build code: NB-NN (client Neome Build) or NA-<catalog slug> (Neome App Build). */
+export const CODE = BUILD_CODE;
 export const BUILD_SHEET = "_build.yaml";
 export const ORPHANS = "Orphans (maybe dead)";
 
@@ -65,8 +68,10 @@ export function bankBuilds(bankDir) {
  *   updated  JSON version differs from the tagged version
  *   current  tagged at the JSON version
  *   removed  tagged or in Template bank seenIn, but no JSON in raw any more
+ * Neome App Builds (<raw>/neome-template/) get rows too, code NA-<slug> from app-slugs.txt. `problems` (unknown
+ * App name, bad app-slugs.txt line) = hard stop for the caller; those Builds get no row.
  */
-export function buildStatus(raw, bankDir) {
+export function buildStatus(raw, bankDir, catalogPath) {
   const reg = readJson(join(raw, "builds.json"), {});
   const codeOf = new Map(Object.entries(reg).map(([c, v]) => [v.entId, c]));
   const { builds, unreadable } = rawBuilds(raw);
@@ -79,11 +84,19 @@ export function buildStatus(raw, bankDir) {
     const state = !t ? "new" : String(t.version) !== b.version ? "updated" : "current";
     rows.push({ code, state, version: b.version, taggedVersion: t ? String(t.version) : null, file: b.file });
   }
+  const apps = appBuilds(raw, ...(catalogPath ? [catalogPath] : []));
+  for (const b of apps.builds) {
+    seen.add(b.code);
+    const t = tagged(raw, b.code);
+    const state = !t ? "new" : String(t.version) !== b.version ? "updated" : "current";
+    rows.push({ code: b.code, state, version: b.version, taggedVersion: t ? String(t.version) : null, file: b.file, app: true });
+  }
+  unreadable.push(...apps.unreadable);
   const gone = new Set([...dirs(join(raw, "tags"), CODE).filter((c) => tagged(raw, c)), ...bankBuilds(bankDir)]);
   for (const code of [...gone].sort()) {
-    if (!seen.has(code)) rows.push({ code, state: "removed", version: null, taggedVersion: tagged(raw, code)?.version ?? null, file: null });
+    if (!seen.has(code)) rows.push({ code, state: "removed", version: null, taggedVersion: tagged(raw, code)?.version ?? null, file: null, app: code.startsWith("NA-") });
   }
-  return { rows, unreadable };
+  return { rows, unreadable, problems: apps.problems };
 }
 
 /** Area files of a scrubbed Build: [{file, area, sheet}] (overview excluded). Area name from "# Build area: <name>". */

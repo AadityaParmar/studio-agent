@@ -2,6 +2,8 @@
 
 Driver prompt for the plugin maintainer's main Claude Code session (in T3 Code). Builds and refines the Template bank (`neome-studio/reference/template-bank/`) from Neome Build JSON. Same tool for the first mining run (empty Template bank) and every later refine. Not a Consultant skill; `studio` never names it. Run by hand when the maintainer drops new or updated Neome Build JSON into the raw dir. Spec: Template bank §3, §7 (`.scratch/template-bank/spec.md`, later `docs/v2/history/`). Terms per `GLOSSARY.md` § Template bank.
 
+Two kinds of source, same stages: client Neome Builds (`<raw>/*.json`, code `NB-NN`, scrub word list each) and Neome App Builds (`<raw>/neome-template/*.json`, code `NA-<catalog slug>`, Neomenta's own App JSON, no word list; spec §10). A Neome App Build makes an App baseline entry (`APP-<slug>`) and merges its evidence into existing Patterns, Template modules and Templates.
+
 `TOOL` = `node neome-studio/maintainer/refine-template-bank.mjs`, from the repo root. Its header lists every command and output line. Raw dir = `.scratch/template-bank/raw/` (gitignored; `--raw` to change; layout in `template-bank/refine-state.mjs`). YAML shapes: `template-bank/prompts/shapes.md`. Child prompts: `template-bank/prompts/{tag,cluster,review}.md`, filled by `TOOL prompt`.
 
 Stages: status → prepare (digest + scrub) → tag → cluster → review → decide → apply → report → commit. You (main session) run the script steps and launch the model stages as `delegate_task` children.
@@ -23,7 +25,9 @@ Done when on an up-to-date `main` with providers known.
 
 ## 1. Status
 
-`TOOL status`. One `build` line per Build: `new`, `updated` (JSON version differs from the tagged one), `current`, `removed` (no JSON any more). Nothing new, updated or removed → tell the maintainer; stop unless they ask for a full re-cluster (`--full`).
+`TOOL status`. One `build` line per Build (`NB-NN` and `NA-<slug>`): `new`, `updated` (JSON version differs from the tagged one), `current`, `removed` (no JSON any more).
+
+Exit 1 with `stop | …` lines = Neome App Build problem: `app-slugs.txt` missing, a bad line, or an App JSON whose name is not in it. Show the lines; the maintainer adds `<catalog slug> | <App name as in the JSON>` to `<raw>/neome-template/app-slugs.txt` (slug from `neome-studio/reference/neome-app-catalog-slugs.json`). Never guess a slug, never write the file yourself. Re-run status. Nothing new, updated or removed → tell the maintainer; stop unless they ask for a full re-cluster (`--full`).
 
 `removed` → ask the maintainer to confirm: its `seenIn` rows go, and entries left with none retire. No → they put the JSON back; stop.
 
@@ -31,6 +35,7 @@ Done when on an up-to-date `main` with providers known.
 
 `TOOL prepare` (`--full` when the maintainer asks to re-cluster from all tag sheets).
 
+- `NA-` Builds never stop for word lists (no list; the email / phone / message leak check still runs). `over | <code> | <area file> | … KB` = an area above the 25 KB cap: note it for the report, go on.
 - Exit 3, `words | NB-NN | <path> | seeded`: first run for that Build. Ask the maintainer to open the list, add client, people and place names, save. Then re-run prepare. You never read or write the list.
 - Exit 3, `words | NB-NN | <path> | not checked`: the list has no `# checked` line. Ask the maintainer to finish the list and add a line `# checked`. Then re-run prepare.
 - Exit 1, `leak` / `stop` lines: hard stop. Show the lines (they name a word by number, never the word). The maintainer fixes the word list or digest; re-run prepare.
@@ -47,7 +52,7 @@ delegate_task(task: <prompt output>, title: "Template bank tag NB-NN", role: "ge
   target: {providerInstanceId: "claudeAgent_claude_sales", model: "claude-sonnet-5-5", options: {effort: "medium"}})
 ```
 
-`isolation: "shared"` always: children must see the gitignored raw dir. Follow each child's `next`; do not poll. When one is done: `TOOL validate-tags NB-NN --run <run>`. Errors → send the error lines to a new tag child for that Build with the same prompt plus "Fix these: …"; repeat until `ok`. Then log tokens (section 8).
+`isolation: "shared"` always: children must see the gitignored raw dir. `NA-` Builds: same prompt command (`TOOL prompt tag NA-<slug>`); the prompt adds the App rules (`gives` per area). Follow each child's `next`; do not poll. When one is done: `TOOL validate-tags NB-NN --run <run>`. Errors → send the error lines to a new tag child for that Build with the same prompt plus "Fix these: …"; repeat until `ok`. Then log tokens (section 8).
 
 Done when `TOOL validate-tags --run <run>` prints `ok` for every Build of the run.
 

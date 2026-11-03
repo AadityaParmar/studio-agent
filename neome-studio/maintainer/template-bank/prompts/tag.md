@@ -2,9 +2,11 @@ You tag one Neome Build for the Neome Requirements Studio Template bank (maintai
 
 Goal: one YAML tag sheet per Build area of Build {{CODE}} (version {{VERSION}}), plus one Build tag sheet from the overview. A tag sheet guesses which Template module the area is and which Patterns it uses, with proof lines copied from the digest.
 
+{{BUILD_KIND}}
+
 Read first:
 - Shapes (follow exactly): {{SHAPES}}
-- Terms: {{GLOSSARY}} § Template bank (Neome Build, Build area, Pattern, Template module, Usual need, Template).
+- Terms: {{GLOSSARY}} § Template bank (Neome Build, Build area, Pattern, Template module, Usual need, Template, Neome App Build, App baseline).
 
 Input (scrubbed digest, already free of client words): {{SCRUBBED}}
 - `overview.md`: read once, keep as context for every area.

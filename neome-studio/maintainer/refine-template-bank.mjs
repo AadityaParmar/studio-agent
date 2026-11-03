@@ -6,13 +6,17 @@
 //
 // Options: --raw <dir> (default .scratch/template-bank/raw, must be gitignored) · --bank <dir> (default
 // neome-studio/reference/template-bank) · --run <id> (default latest run) · --catalog <slugs.json>.
-// Output never holds a raw file name, a Build name or a scrub word: Build codes and counts only.
+// Output never holds a raw file name, a Build name or a scrub word: Build codes and counts only. Exception: Neome App
+// Builds (<raw>/neome-template/, code NA-<catalog slug>, template-bank/apps.mjs) are Neome-owned, so a `stop` line may
+// name an App JSON file or App name (unknown App name = hard stop until the maintainer adds it to app-slugs.txt).
 //
-//   status                     build | NB-NN | new|updated|current|removed | v<n> [tagged v<m>]  ·  run | <id> | <stage>
+//   status                     build | NB-NN|NA-<slug> | new|updated|current|removed | v<n> [tagged v<m>]  ·  run | <id> | <stage>
+//                              stop | <app-slugs problem>   (exit 1)
 //                              done | <n> new, <n> updated, <n> current, <n> removed
 //   prepare [--full] [--date YYYY-MM-DD]
 //                              digest + scrub of new / updated Builds, then a new run (runs/<id>/run.json).
-//                              digest | NB-NN | …  ·  scrub | NB-NN | <n> files clean  ·  leak | NB-NN | <file>:<line> | <what>
+//                              digest | NB-NN | …  ·  over | NB-NN | <area file> | <n> KB > 25 KB cap  ·  scrub | NB-NN | <n> files clean
+//                              leak | NB-NN | <file>:<line> | <what>   ·   NA- Builds: no word list, same leak check
 //                              words | NB-NN | <list path> | seeded … | not checked …   (exit 3: maintainer adds names + `# checked`, re-run)
 //                              tag | NB-NN | new|updated | <n> areas | <tags dir> [| sheets ready]
 //                              removed | NB-NN | its seenIn rows will be dropped  ·  run | <id> | <mode> | <run dir>
@@ -40,6 +44,9 @@ import { fileURLToPath } from "node:url";
 import { BANK_DIR, checkBank, loadBank } from "../engine/template-bank.mjs";
 import { bankIndex } from "../engine/template-bank-match.mjs";
 import { DEFAULT_RAW, rawDirProblem } from "./template-bank/raw-dir.mjs";
+import { isApp } from "./template-bank/apps.mjs";
+import { parseBuild } from "./template-bank/build-json.mjs";
+import { writeDigest } from "./template-bank/digest.mjs";
 import {
   areaFiles, bankBuilds, buildStatus, clusterBuilds, CODE, loadRun, nextRun, refreshBuilds, runDir, runs, runTargets,
   scrubbedDir, scrubWords, sheetsReady, tagDir, tagSheets, tagged,
@@ -85,6 +92,7 @@ export async function main(argv) {
     pos: p.pos,
   };
   ctx.checkOpts = p.flags.catalog ? { catalogSlugsPath: resolve(p.flags.catalog) } : {};
+  ctx.catalog = p.flags.catalog ? resolve(p.flags.catalog) : undefined;
   const problem = rawDirProblem(ctx.raw);
   if (problem) { console.error(`refine-template-bank: ${problem}`); return 2; }
   const cmds = { status, prepare, prompt, "validate-tags": validateTagsCmd, "validate-changes": validateChangesCmd, decide: decideCmd, answer, apply, tokens, report, check, commit };
@@ -118,8 +126,9 @@ function stageOf(dir) {
 }
 
 function status(ctx) {
-  const { rows, unreadable } = buildStatus(ctx.raw, ctx.bank);
+  const { rows, unreadable, problems } = buildStatus(ctx.raw, ctx.bank, ctx.catalog);
   if (unreadable.length) out("skip", `${unreadable.length} raw file(s)`, "not Neome Build JSON");
+  if (problems.length) { for (const p of problems) out("stop", p); return 1; }
   const n = { new: 0, updated: 0, current: 0, removed: 0 };
   for (const r of rows) {
     n[r.state]++;
@@ -143,18 +152,27 @@ function prepare(ctx) {
   const date = ctx.flags.date ?? today();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return usage("--date must be YYYY-MM-DD");
   const full = Boolean(ctx.flags.full);
-  const { rows, unreadable } = buildStatus(ctx.raw, ctx.bank);
+  const { rows, unreadable, problems } = buildStatus(ctx.raw, ctx.bank, ctx.catalog);
   if (unreadable.length) out("skip", `${unreadable.length} raw file(s)`, "not Neome Build JSON");
+  if (problems.length) { for (const p of problems) out("stop", p); return 1; }
   const targets = rows.filter((r) => r.state === "new" || r.state === "updated");
   const removed = rows.filter((r) => r.state === "removed");
   if (!targets.length && !removed.length && !full) { out("nothing", "no new, updated or removed Builds (use --full to re-cluster)"); return 0; }
 
   let codes = [];
   if (targets.length) {
-    const d = node("digest.mjs", ["--raw", ctx.raw, ...targets.map((t) => join(ctx.raw, t.file))]);
-    for (const l of d.lines) if (/^(digest|kinds) \| /.test(l)) console.log(l);
-    if (d.code !== 0) { out("error", "digest", `exit ${d.code}`); return 1; }
-    const fresh = buildStatus(ctx.raw, ctx.bank).rows;
+    const nb = targets.filter((t) => !t.app);
+    if (nb.length) {
+      const d = node("digest.mjs", ["--raw", ctx.raw, ...nb.map((t) => join(ctx.raw, t.file))]);
+      for (const l of d.lines) if (/^(digest|kinds|over) \| /.test(l)) console.log(l);
+      if (d.code !== 0) { out("error", "digest", `exit ${d.code}`); return 1; }
+    }
+    // Neome App Builds: code fixed by app-slugs.txt, never in builds.json (client map).
+    for (const t of targets.filter((x) => x.app)) {
+      const path = join(ctx.raw, t.file);
+      for (const l of writeDigest(ctx.raw, t.code, parseBuild(readFileSync(path, "utf8")), statSync(path).size)) console.log(l);
+    }
+    const fresh = buildStatus(ctx.raw, ctx.bank, ctx.catalog).rows;
     codes = targets.map((t) => fresh.find((f) => f.file === t.file)?.code).filter(Boolean);
     const s = node("scrub.mjs", ["--raw", ctx.raw, ...codes]);
     const seeded = [];
@@ -168,14 +186,14 @@ function prepare(ctx) {
       for (const [c, path] of seeded) out("words", c, path, "seeded: add client, people and place names, then re-run prepare");
       return 3;
     }
-    const unchecked = codes.filter((c) => !listChecked(ctx.raw, c));
+    const unchecked = codes.filter((c) => !isApp(c) && !listChecked(ctx.raw, c));
     if (unchecked.length) {
       for (const c of unchecked) out("words", c, join(ctx.raw, "scrub", `${c}.txt`), "not checked: add client, people and place names, then a line `# checked`, then re-run prepare");
       return 3;
     }
   }
 
-  const fresh = buildStatus(ctx.raw, ctx.bank).rows;
+  const fresh = buildStatus(ctx.raw, ctx.bank, ctx.catalog).rows;
   const builds = [];
   for (const t of targets) {
     const row = fresh.find((f) => f.file === t.file);
@@ -241,6 +259,7 @@ function prompt(ctx) {
     if (!b) { out("error", `${code ?? "(none)"} is not tagged in run ${r.run.run}`); return 1; }
     Object.assign(vars, {
       CODE: code, VERSION: String(b.version), SCRUBBED: scrubbedDir(ctx.raw, code), TAGS: tagDir(ctx.raw, code),
+      BUILD_KIND: isApp(code) ? appNote(code) : CLIENT_NOTE,
       AREAS: list(areaFiles(ctx.raw, code).map((a) => `\`${a.file}\` → \`${a.sheet}\` (area: ${a.area})`)),
     });
   } else {
@@ -251,6 +270,7 @@ function prompt(ctx) {
       TAG_SHEETS: list(codes.flatMap((c) => tagSheets(ctx.raw, c).map((s) => s.path))),
       USED_IDS: usedIds(ctx.bank).join(", ") || "(none)",
       SCRUBBED_DIRS: list(codes.map((c) => scrubbedDir(ctx.raw, c))),
+      APP_BUILDS: codes.filter(isApp).map((c) => `${c} → APP-${c.slice(3)}`).join(", ") || "(none)",
     });
   }
   const tpl = readFileSync(join(PROMPTS, `${stage}.md`), "utf8");
@@ -260,6 +280,15 @@ function prompt(ctx) {
   process.stdout.write(text.endsWith("\n") ? text : `${text}\n`);
   return 0;
 }
+
+const CLIENT_NOTE = "This is a client Neome Build (code NB-NN). Area sheets have no `gives` key.";
+const appNote = (code) => [
+  `This is a Neome App Build: Neomenta's own out-of-box build of the catalog Neome App \`${code.slice(3)}\` (code ${code}), not a client Build.`,
+  "It is the App baseline: what the App gives before any configuration.",
+  "- Every area sheet also has `gives:` (shape file): what the App does out of the box, one short line each, from the area file only. Non-empty unless `weight: low`.",
+  "- Reuse Template bank names and IDs hard: this App's Patterns and Module shape should land on existing entries when they fit; `new` only when nothing fits.",
+  "- `_build.yaml`: an App is one Module, so `template: null` unless the overview clearly shows a small enterprise.",
+].join("\n");
 
 // ---------- validate ----------
 
@@ -376,7 +405,7 @@ function apply(ctx) {
   if (missing.length) { out("error", `changes.yaml changed after decide (${missing.map(refOf).join(", ")}): run decide again`); return 1; }
   const approved = c.changes.filter((x) => byRef.get(refOf(x)).decision === "apply");
   const { words, lists } = scrubWords(ctx.raw);
-  const noList = runTargets(r.run).filter((code) => !lists.has(code));
+  const noList = runTargets(r.run).filter((code) => !isApp(code) && !lists.has(code));
   if (noList.length) { out("error", `no scrub word list for ${noList.join(", ")}`); return 1; }
   if (r.run.mode === "full" && !ctx.flags["confirm-retire"]) {
     const dry = applyChanges({ bankDir: ctx.bank, changes: approved, drafts: draftsOf(r.dir, approved), refresh: refreshBuilds(r.run), date: r.run.date, scrubWords: words, dryRun: true, ...ctx.checkOpts });
@@ -434,7 +463,7 @@ function estimate(ctx, r, stage, build) {
     return { in: t(inChars), out: t(dirSize(tagDir(ctx.raw, build), /\.yaml$/)) };
   }
   const sheets = clusterBuilds(ctx.raw, r.run).reduce((n, c) => n + dirSize(tagDir(ctx.raw, c), /\.yaml$/), 0);
-  const bank = ["patterns", "template-modules", "templates"].reduce((n, f) => n + dirSize(join(ctx.bank, f)), 0) + size(join(ctx.bank, "README.md"));
+  const bank = ["patterns", "template-modules", "templates", "apps"].reduce((n, f) => n + dirSize(join(ctx.bank, f)), 0) + size(join(ctx.bank, "README.md"));
   const changes = size(join(r.dir, "changes.yaml")) + dirSize(join(r.dir, "drafts"));
   if (stage === "cluster") return { in: t(prompt + sheets + bank), out: t(changes) };
   return { in: t(prompt + sheets + changes + bank), out: t(size(join(r.dir, "verdicts.yaml"))) };
@@ -471,7 +500,7 @@ function bankCheck(ctx) {
   const { words, lists } = scrubWords(ctx.raw);
   const r = checkBank(ctx.bank, { scrubWords: words, ...ctx.checkOpts });
   const errors = [...r.errors];
-  const builds = bankBuilds(ctx.bank);
+  const builds = new Set([...bankBuilds(ctx.bank)].filter((b) => !isApp(b))); // NA-: Neome-owned, no word list
   if (builds.size && !lists.size) errors.unshift(`no scrub word lists in ${join(ctx.raw, "scrub")}`);
   for (const b of [...builds].sort()) if (lists.size && !lists.has(b)) errors.push(`no scrub word list for ${b}`);
   return { errors, warnings: r.warnings, entries: loadBank(ctx.bank).entries.length };

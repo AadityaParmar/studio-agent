@@ -130,19 +130,25 @@ export async function main(argv) {
   writeInside(raw, "builds.json", JSON.stringify(reg, null, 2) + "\n");
   const codeOf = new Map(Object.entries(reg).map(([c, v]) => [v.entId, c]));
 
-  for (const { path, ent } of builds) {
-    const code = codeOf.get(ent.entId);
-    const d = digestBuild(ent);
-    resetInside(raw, join("digests", code));
-    for (const [name, body] of Object.entries(d.files)) writeInside(raw, join("digests", code, name), body);
-    writeInside(raw, join("digests", code, "meta.json"), JSON.stringify({ code, ...d.meta }, null, 2) + "\n");
-    const s = d.stats, k = (n) => (n / 1024).toFixed(1);
-    console.log(`digest | ${code} | ${(statSync(path).size / 1024).toFixed(0)} KB json → overview ${k(s.overview)} KB + ${s.areas} areas (max ${k(s.maxArea)} KB, total ${(s.totalArea / 1024).toFixed(0)} KB) · modules ${s.modules} · orphan sheets ${s.orphanSheets}/${s.sheets}`);
-    for (const o of s.overCap) console.log(`over | ${code} | ${o.file} | ${k(o.size)} KB > ${AREA_CAP / 1024} KB cap`);
-    const unknown = unknownKinds(ent, KINDS);
-    if (unknown.length) console.log(`kinds | ${code} | unknown: ${unknown.join(", ")} (docs/studio-ai-docs behind? re-run extract-kinds.mjs)`);
-  }
+  for (const { path, ent } of builds) for (const l of writeDigest(raw, codeOf.get(ent.entId), ent, statSync(path).size)) console.log(l);
   return 0;
+}
+
+/**
+ * Digest one Build into <raw>/digests/<code>/ (code = NB-NN or NA-<slug>). Returns the stdout lines
+ * (digest | over | kinds). Used by main and by the refine tool for Neome App Builds (no builds.json entry).
+ */
+export function writeDigest(raw, code, ent, jsonBytes = 0) {
+  const d = digestBuild(ent);
+  resetInside(raw, join("digests", code));
+  for (const [name, body] of Object.entries(d.files)) writeInside(raw, join("digests", code, name), body);
+  writeInside(raw, join("digests", code, "meta.json"), JSON.stringify({ code, ...d.meta }, null, 2) + "\n");
+  const s = d.stats, k = (n) => (n / 1024).toFixed(1);
+  const lines = [`digest | ${code} | ${(jsonBytes / 1024).toFixed(0)} KB json → overview ${k(s.overview)} KB + ${s.areas} areas (max ${k(s.maxArea)} KB, total ${(s.totalArea / 1024).toFixed(0)} KB) · modules ${s.modules} · orphan sheets ${s.orphanSheets}/${s.sheets}`];
+  for (const o of s.overCap) lines.push(`over | ${code} | ${o.file} | ${k(o.size)} KB > ${AREA_CAP / 1024} KB cap`);
+  const unknown = unknownKinds(ent, KINDS);
+  if (unknown.length) lines.push(`kinds | ${code} | unknown: ${unknown.join(", ")} (docs/studio-ai-docs behind? re-run extract-kinds.mjs)`);
+  return lines;
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

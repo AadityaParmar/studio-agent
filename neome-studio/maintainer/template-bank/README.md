@@ -2,7 +2,7 @@
 
 Maintainer only. Scripts, no model. Spec: Template bank §2 Build digest, §3 Scrub. Terms per `GLOSSARY.md` § Template bank.
 
-Raw dir (`--raw`, default `.scratch/template-bank/raw/`) holds client data. Must be gitignored; scripts refuse otherwise and write nowhere else. Never commit anything from it. Build codes only as `NB-NN`.
+Raw dir (`--raw`, default `.scratch/template-bank/raw/`) holds client data. Must be gitignored; scripts refuse otherwise and write nowhere else. Never commit anything from it. Build codes only as `NB-NN` (client) or `NA-<catalog slug>` (Neome App Build in `<raw>/neome-template/`, no word list).
 
 ## Run
 
@@ -29,6 +29,7 @@ Docs changed? `node neome-studio/maintainer/template-bank/extract-kinds.mjs` reb
 | `mermaid.mjs` | `build.mmd`, `<area>.refs.mmd`, `<area>.wf.mmd` |
 | `scrub.mjs` | CLI + `seedWordList`, `parseWordList`, `scrubText`, `scrubFiles`, `findLeaks`, `termsFor` |
 | `raw-dir.mjs` | raw dir guard (gitignored, writes inside only) |
+| `apps.mjs` | Neome App Builds: `<raw>/neome-template/*.json` + `app-slugs.txt` → codes `NA-<catalog slug>`; unknown App name = hard stop |
 | `extract-kinds.mjs`, `kinds.json` | parser dictionary from `docs/studio-ai-docs/` headings |
 | `refine-state.mjs` | refine tool: raw dir layout, Build status (new / updated / current / removed), runs, scrub words |
 | `refine-shapes.mjs` | refine tool: tag sheet, change list, verdict checks; review rule (`decide`) |

@@ -6,10 +6,12 @@ All text: plain English, short, no client words. Never copy a name that looks li
 
 **Proof line** = one line copied exactly from the source file (a scrubbed digest for tag sheets, a tag sheet for change lists). Part of a line is fine; never two lines, never your own words. The script looks each one up and fails the file when it is not found.
 
+Build codes: `NB-NN` = client Neome Build; `NA-<catalog slug>` = Neome App Build (Neomenta's own out-of-box App, the App baseline). Wherever a shape says `NB-NN`, an `NA-` code works the same way.
+
 ## Tag sheet: `tags/<NB-NN>/<area>.yaml` (one per Build area)
 
 ```yaml
-build: NB-01                  # the Build code
+build: NB-01                  # the Build code (NB-NN or NA-<slug>)
 area: Sales                   # Build area name, exactly as in the digest heading "# Build area: <name>"
 file: sales.md                # the scrubbed area file it was made from
 weight: normal                # normal | low ("Orphans (maybe dead)" area = low)
@@ -35,6 +37,13 @@ patterns:                     # may be empty
     why: No approval step; status list + branch stand in.   # needed when workaround: true; leave out when false
     proof:                    # non-empty; lines from the area file
       - '- branchIfElse "Approved?" [if Curr.Status equalTo "Approved"]'
+```
+
+Neome App Build (`NA-` code) area sheets add one key; client Build sheets must not have it:
+
+```yaml
+gives:                        # what the App does out of the box, one short line each, from the area file only
+  - Rep raises an order; manager approves or rejects.   # non-empty unless weight: low
 ```
 
 ## Build tag sheet: `tags/<NB-NN>/_build.yaml` (one per Build, from `overview.md`)
@@ -92,13 +101,19 @@ changes:                      # may be empty; applied in this order
   - change: retire            # entry goes, nothing replaces it; proof optional
     id: PAT-dusty
     reason: …
+  - change: add               # App baseline: one per Neome App Build; draft required (format: README § App baseline)
+    id: APP-sales-desk        # APP-<catalog slug of the NA- code>
+    seenIn: [{build: NA-sales-desk, area: Sales Desk}]   # only its own NA- code
+    reason: App baseline of NA-sales-desk.
+    proof: [{build: NA-sales-desk, area: Sales Desk, line: "- Rep raises an order; manager approves or rejects."}]
 ```
 
 Rules the script checks:
 
 - `seenIn` rows: Builds of this run's tag sheets only (`split` parts may also keep the old entry's rows of other Builds). `area` = a Build area name of that Build's tag sheets, or `"*"` (whole Build, from `_build.yaml`).
 - `proof` rows: `{build, area, line}`; `line` found in the tag sheet of that Build + area (`area: "*"` = `_build.yaml`).
-- IDs: `PAT-` / `TMOD-` / `TPL-` + lowercase words joined by `-`, no numbers as sequence. New IDs (`add`, `rename` to, `split` into) never used before (not live, not in `CHANGELOG.md`). One change per ID. All IDs of one change are the same kind.
+- `APP-` IDs: `add`, `enhance` or `retire` only (ID fixed by catalog slug); seenIn rows only its own `NA-<slug>`; slug must be in the Neome App catalog (dry-run check).
+- IDs: `PAT-` / `TMOD-` / `TPL-` / `APP-` + lowercase words joined by `-`, no numbers as sequence. New IDs (`add`, `rename` to, `split` into) never used before (not live, not in `CHANGELOG.md`). One change per ID. All IDs of one change are the same kind.
 - `reason`: one line, no client words. It becomes the `CHANGELOG.md` line.
 - Drafts: `runs/<run>/drafts/<ID>.md`, a full entry in the Template bank format (front matter + body sections + Mermaid flowchart). The script sets `id`, `kind` and `seenIn`; merge adds the merged names to `aliases`; rename of a Template module adds the old name to `aliases`.
 

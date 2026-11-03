@@ -9,7 +9,10 @@
 // HARD FAIL: if a listed word, the Build name, the about, a message body, an email or a phone survives in any
 // output file (checked accent- and case-blind), the Build's scrubbed dir is removed and the exit code is 1.
 //
-//   node neome-studio/maintainer/template-bank/scrub.mjs [--raw <dir>] [NB-NN …]
+// Neome App Builds (NA-<slug>, Neome-owned): no word list, Build name and about kept; message bodies, email and
+// phone are still scrubbed and leak-checked.
+//
+//   node neome-studio/maintainer/template-bank/scrub.mjs [--raw <dir>] [NB-NN | NA-<slug> …]
 //     reads <raw>/digests/<NB-NN>/ (all Builds by default), writes <raw>/scrubbed/<NB-NN>/.
 //     stdout: seeded | NB-NN | <word list> | …   ·   scrub | NB-NN | <n> files clean
 //             leak | NB-NN | <file>:<line> | Build name|about|word #<n>|message body|email|phone   (line 0 = file name)
@@ -22,7 +25,8 @@ import { inside, parseArgs, rawDirProblem, resetInside, writeInside } from "./ra
 import { slugify } from "./render.mjs";
 
 export const MSG = "«msg»";
-const USE = "Usage: scrub.mjs [--raw <dir>] [NB-NN …]";
+const USE = "Usage: scrub.mjs [--raw <dir>] [NB-NN | NA-<slug> …]";
+const CODE = /^(?:NB-\d+|NA-[a-z][a-z0-9]*(?:-[a-z0-9]+)*)$/;
 const DIGEST_FILE = /\.(md|mmd)$/;
 
 // Generic words never seeded (they name sheets and fields, not clients). The maintainer can still list them.
@@ -128,8 +132,9 @@ export function findLeaks(files, { name, about, words = [] }) {
 export const readDigestDir = (dir) =>
   Object.fromEntries(readdirSync(dir).filter((f) => DIGEST_FILE.test(f)).sort().map((f) => [f, readFileSync(join(dir, f), "utf8")]));
 
-/** Terms for one Build from <raw>: meta.json of its digest + its word list (seeded if missing). */
+/** Terms for one Build from <raw>: meta.json of its digest + its word list (seeded if missing). NA-: no list. */
 export function termsFor(raw, code) {
+  if (code.startsWith("NA-")) return { terms: { name: "", about: "", words: [] }, listPath: null, seeded: false };
   const meta = JSON.parse(readFileSync(join(raw, "digests", code, "meta.json"), "utf8"));
   const listPath = inside(raw, "scrub", `${code}.txt`);
   let seeded = false;
@@ -140,12 +145,12 @@ export function termsFor(raw, code) {
 export async function main(argv) {
   const args = parseArgs(argv);
   if (args.error) { console.error(`scrub: ${args.error}\n${USE}`); return 2; }
-  if (args.rest.some((c) => !/^NB-\d+$/.test(c))) { console.error(`scrub: Build codes look like NB-01\n${USE}`); return 2; }
+  if (args.rest.some((c) => !CODE.test(c))) { console.error(`scrub: Build codes look like NB-01 or NA-<slug>\n${USE}`); return 2; }
   const { raw } = args;
   const problem = rawDirProblem(raw);
   if (problem) { console.error(`scrub: ${problem}`); return 2; }
   const digests = join(raw, "digests");
-  const codes = args.rest.length ? args.rest : existsSync(digests) ? readdirSync(digests).filter((c) => /^NB-\d+$/.test(c)).sort() : [];
+  const codes = args.rest.length ? args.rest : existsSync(digests) ? readdirSync(digests).filter((c) => CODE.test(c)).sort() : [];
   if (!codes.length) { console.error(`scrub: no digests in ${digests}; run digest.mjs first`); return 1; }
   let failed = false;
   for (const code of codes) {

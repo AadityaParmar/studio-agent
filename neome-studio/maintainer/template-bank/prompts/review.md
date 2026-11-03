@@ -21,6 +21,7 @@ For each change:
 1. Do the proof lines really show what the reason and the draft say? (`backed`)
 2. Is this the right change? Would you have made the same one (same kind, same IDs, same grouping)? (`agrees`)
 3. Draft check: usual needs, Patterns, steps, sheets and flowchart follow from the tag sheets; nothing invented; no client words; `neomeApp` / `delivery` fit.
+   Neome App Builds (`NA-`): `APP-` draft `Gives` backed by that App's tag sheets only; a new PAT / TMOD / TPL `add` from an App when an existing entry already covers it = `agrees: false` (should be `enhance` / `merge`); the matching Template module links via `neomeApp: <slug>`.
 4. Verdict: `apply` (right and backed), `ask` (unsure: say what the maintainer must decide), `drop` (wrong or not backed).
 
 Write {{VERDICTS}}. `ref` = `<change> <ID>` (ID = id for add / enhance / retire, from for rename / split, into for merge). Give a one-line `question` for every `ask`, `drop`, `backed: false` or `agrees: false`: a yes / no question the maintainer can answer without opening files.

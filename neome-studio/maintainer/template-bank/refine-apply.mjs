@@ -4,19 +4,20 @@
 // Order: drop old seenIn rows of this run's Builds (updated / removed; all rows with --full) → each change in list
 // order → swap references to IDs that changed (rename / merge → new ID, split → all parts, retire → removed) →
 // retire every entry whose seenIn hit zero → CHANGELOG lines (shape: reference/template-bank/CHANGELOG.md).
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, unlinkSync, writeFileSync, appendFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, unlinkSync, writeFileSync, appendFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { stringify } from "yaml";
 import { checkBank, loadBank } from "../../engine/template-bank.mjs";
 import { idsOf, prefixOf, refOf } from "./refine-shapes.mjs";
 
-const FOLDER = { PAT: "patterns", TMOD: "template-modules", TPL: "templates" };
-const KIND = { PAT: "pattern", TMOD: "template-module", TPL: "template" };
+const FOLDER = { PAT: "patterns", TMOD: "template-modules", TPL: "templates", APP: "apps" };
+const KIND = { PAT: "pattern", TMOD: "template-module", TPL: "template", APP: "app" };
 const ORDER = {
   pattern: ["id", "kind", "name", "workaround", "seenIn"],
   "template-module": ["id", "kind", "name", "aliases", "patterns", "neomeApp", "delivery", "seenIn"],
   template: ["id", "kind", "name", "businessType", "modules", "seenIn"],
+  app: ["id", "kind", "name", "seenIn"],
 };
 const FLOW = { collectionStyle: "flow", flowCollectionPadding: false, lineWidth: 0 };
 const y = (v) => stringify(v, FLOW).trimEnd();
@@ -38,7 +39,9 @@ export function entryText(fm, body) {
 }
 
 const rowKey = (r) => `${r.build}\u0000${r.area}`;
-const num = (code) => Number(String(code).slice(3));
+// Sort key: client Builds NB-NN by number first, then Neome App Builds NA-<slug> by slug.
+const codeKey = (code) => (String(code).startsWith("NB-") ? [0, Number(String(code).slice(3)), ""] : [1, 0, String(code)]);
+const byCode = (a, b) => { const [x, y] = [codeKey(a), codeKey(b)]; return x[0] - y[0] || x[1] - y[1] || x[2].localeCompare(y[2]); };
 /** Union of seenIn rows, no repeats, sorted by Build code (row order inside a Build kept). */
 export function unionRows(...lists) {
   const out = [];
@@ -48,7 +51,7 @@ export function unionRows(...lists) {
     seen.add(rowKey(r));
     out.push({ build: String(r.build), area: String(r.area) });
   }
-  return out.map((r, i) => [r, i]).sort((a, b) => num(a[0].build) - num(b[0].build) || a[1] - b[1]).map(([r]) => r);
+  return out.map((r, i) => [r, i]).sort((a, b) => byCode(a[0].build, b[0].build) || a[1] - b[1]).map(([r]) => r);
 }
 
 const clean = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
@@ -222,6 +225,7 @@ export function writePlan(bankDir, plan) {
   }
   for (const [id, e] of plan.entries) {
     if (!e.dirty) continue;
+    mkdirSync(join(bankDir, FOLDER[prefixOf(id)]), { recursive: true });
     writeFileSync(join(bankDir, FOLDER[prefixOf(id)], `${id}.md`), entryText(e.fm, e.body));
   }
   if (plan.log.length) {

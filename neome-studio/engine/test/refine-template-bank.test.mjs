@@ -4,13 +4,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { stringify } from "yaml";
 import { checkBank, checkTemplateRef, loadBank, replacedBy } from "../template-bank.mjs";
-import { applyChanges, entryText, planApply } from "../../maintainer/template-bank/refine-apply.mjs";
+import { applyChanges, entryText, planApply, unionRows } from "../../maintainer/template-bank/refine-apply.mjs";
+import { bankIndex } from "../template-bank-match.mjs";
 import { decide, refOf, validateChanges } from "../../maintainer/template-bank/refine-shapes.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -531,4 +532,126 @@ test("apply --full: entries the cluster did not re-list would retire → refused
   r = T("apply", "--confirm-retire");
   assert.equal(r.code, 0, r.out + r.err);
   assert.equal(loadBank(bank).entries.length, 0);
+});
+
+// ---------- Neome App Builds (NA-<slug>, App baseline; spec §10, ticket 12) ----------
+
+test("unionRows: client Builds by number, then Neome App Builds by slug", () => {
+  assert.deepEqual(unionRows([row("NA-widget-desk", "W"), row("NB-10", "A"), row("NA-gizmo-flow", "G"), row("NB-02", "B")]).map((r) => r.build),
+    ["NB-02", "NB-10", "NA-gizmo-flow", "NA-widget-desk"]);
+});
+
+test("CLI: Neome App Build run: app-slugs map, no word list, gives, APP entry linked from a Template module", () => {
+  const root = box();
+  const env = gitEnv(root);
+  const repo = join(root, "repo");
+  const bank = emptyBank(join(repo, "neome-studio", "reference", "template-bank"));
+  git(repo, env, "init", "-q");
+  git(repo, env, "add", "-A");
+  git(repo, env, "commit", "-q", "-m", "start");
+  const raw = join(root, "raw");
+  const apps = join(raw, "neome-template");
+  mkdirSync(apps, { recursive: true });
+  const ent = JSON.parse(readFileSync(acme, "utf8"));
+  Object.assign(ent.payload.studioEnt, { entId: "app-widget-desk" });
+  Object.assign(ent.payload.studioEnt.details, { name: "Widget Desk", about: "Template: Widget Desk" });
+  writeFileSync(join(apps, "Widget Desk.json"), JSON.stringify(ent));
+  const T = (...a) => run([...a, "--raw", raw, "--bank", bank, "--catalog", CATALOG], { env });
+
+  let r = T("status");
+  assert.equal(r.code, 1, "no app-slugs.txt = stop");
+  assert.match(r.out, /^stop \| .*app-slugs\.txt missing/m);
+  writeFileSync(join(apps, "app-slugs.txt"), "# slug | App name\nwidget-palace | Widget Desk\n");
+  r = T("status");
+  assert.equal(r.code, 1);
+  assert.match(r.out, /^stop \| app-slugs\.txt line 2: widget-palace not in Neome App catalog slugs$/m);
+  writeFileSync(join(apps, "app-slugs.txt"), "gizmo-flow | Gizmo Flow\n");
+  r = T("status");
+  assert.equal(r.code, 1, "unknown App name = hard stop, never guessed");
+  assert.match(r.out, /^stop \| unknown App name "Widget Desk"/m);
+  writeFileSync(join(apps, "app-slugs.txt"), "gizmo-flow | Gizmo Flow\nwidget-desk | Widget Desk\n");
+  r = T("status");
+  assert.equal(r.code, 0, r.out + r.err);
+  assert.match(r.out, /^build \| NA-widget-desk \| new \| v7$/m);
+
+  r = T("prepare", "--date", "2026-11-04");
+  assert.equal(r.code, 0, `no word list step for a Neome App Build: ${r.out}${r.err}`);
+  assert.match(r.out, /^digest \| NA-widget-desk \| /m);
+  assert.match(r.out, /^scrub \| NA-widget-desk \| \d+ files clean$/m);
+  assert.match(r.out, /^tag \| NA-widget-desk \| new \| 3 areas \| /m);
+  assert.equal(existsSync(join(raw, "scrub", "NA-widget-desk.txt")), false);
+  assert.equal(existsSync(join(raw, "builds.json")) ? /widget/i.test(readFileSync(join(raw, "builds.json"), "utf8")) : false, false, "NA never in the client code map");
+  const scrubbed = readdirSync(join(raw, "scrubbed", "NA-widget-desk")).map((f) => readFileSync(join(raw, "scrubbed", "NA-widget-desk", f), "utf8")).join("\n");
+  assert.doesNotMatch(scrubbed, /ops@|555-/, "email / phone still scrubbed");
+  const dir = join(raw, "runs", "2026-11-04");
+
+  r = T("prompt", "tag", "NA-widget-desk");
+  assert.equal(r.code, 0, r.out + r.err);
+  assert.match(r.out, /Neome App Build/);
+  assert.match(r.out, /`gives:`/);
+  assert.doesNotMatch(r.out, /\{\{/);
+  assert.match(T("prompt", "tag", "NA-widget-desk").out, /widget-desk/);
+
+  // tag child (played here): App area sheets need `gives`.
+  mkdirSync(join(raw, "tags", "NB-01"), { recursive: true });
+  acmeTags(raw);
+  const t = join(raw, "tags", "NA-widget-desk");
+  mkdirSync(t, { recursive: true });
+  for (const f of readdirSync(join(raw, "tags", "NB-01"))) {
+    writeFileSync(join(t, f), readFileSync(join(raw, "tags", "NB-01", f), "utf8").replaceAll("NB-01", "NA-widget-desk"));
+  }
+  rmSync(join(raw, "tags", "NB-01"), { recursive: true });
+  r = T("validate-tags");
+  assert.equal(r.code, 1);
+  assert.match(r.out, /^error \| NA-widget-desk \| sales\.yaml: gives must be a list of text/m);
+  const add = (f, gives) => writeFileSync(join(t, f), readFileSync(join(t, f), "utf8") + stringify({ gives }));
+  add("sales.yaml", ["Rep raises an order; manager approves or rejects."]);
+  add("quotes.yaml", []);
+  add("orphans-maybe-dead.yaml", []);
+  r = T("validate-tags");
+  assert.equal(r.code, 1);
+  assert.match(r.out, /^error \| NA-widget-desk \| quotes\.yaml: gives must not be empty/m);
+  assert.doesNotMatch(r.out, /orphans-maybe-dead\.yaml/, "weight: low may give nothing");
+  writeFileSync(join(t, "quotes.yaml"), readFileSync(join(t, "quotes.yaml"), "utf8").replace("gives: []", "gives:\n  - Rep drafts a quote."));
+  r = T("validate-tags");
+  assert.equal(r.code, 0, r.out);
+
+  r = T("prompt", "cluster");
+  assert.match(r.out, /NA-widget-desk → APP-widget-desk/);
+  assert.match(r.out, /Merge into what exists/);
+
+  // cluster child (played here): bad APP changes refused, then the right ones.
+  const proof = (area, line) => ({ build: "NA-widget-desk", area, line });
+  const appChange = { change: "add", id: "APP-widget-desk", seenIn: [row("NA-widget-desk", "Sales")], reason: "App baseline of NA-widget-desk.", proof: [proof("Sales", "- Rep raises an order; manager approves or rejects.")] };
+  const tmodChange = { change: "add", id: "TMOD-sales-orders", seenIn: [row("NA-widget-desk", "Sales")], reason: "Order flow of the App.", proof: [proof("Sales", "name: Sales orders")] };
+  writeFileSync(join(dir, "changes.yaml"), stringify({ changes: [
+    { ...appChange, seenIn: [row("NB-01", "Sales")] },
+    { change: "rename", from: "APP-widget-desk", to: "APP-widget-desk-two", reason: "x", proof: [proof("Sales", "name: Sales orders")] },
+  ] }));
+  r = T("validate-changes");
+  assert.equal(r.code, 1);
+  assert.match(r.out, /add APP-widget-desk\): seenIn row 1: an App baseline is seen only in its own Neome App Build NA-widget-desk/);
+  assert.match(r.out, /rename APP-widget-desk\): App baseline IDs are fixed/);
+
+  writeFileSync(join(dir, "changes.yaml"), stringify({ changes: [appChange, tmodChange] }));
+  draft(dir, { fm: { id: "APP-widget-desk", kind: "app", name: "Widget Desk", seenIn: [] }, body: "\n# Widget Desk\n\n## Gives\n\n- Rep raises an order.\n\n## Sheets, key fields, roles\n\n- Order.\n\n## Workflows\n\n- Approve.\n\n## Flowchart\n\n```mermaid\nflowchart LR\n  A --> B\n```\n" });
+  draft(dir, TMOD("TMOD-sales-orders", "Sales orders", [], { neomeApp: "widget-desk" }));
+  r = T("validate-changes");
+  assert.equal(r.code, 0, r.out);
+  writeFileSync(join(dir, "verdicts.yaml"), stringify({ verdicts: [
+    { ref: "add APP-widget-desk", verdict: "apply", backed: true, agrees: true, note: "Gives shown." },
+    { ref: "add TMOD-sales-orders", verdict: "apply", backed: true, agrees: true, note: "Order sheet shown." },
+  ] }));
+  r = T("decide");
+  assert.match(r.out, /^auto \| add APP-widget-desk$/m);
+  r = T("apply");
+  assert.equal(r.code, 0, r.out + r.err);
+  assert.ok(existsSync(join(bank, "apps", "APP-widget-desk.md")));
+  const { entries } = loadBank(bank);
+  assert.deepEqual(entries.find((e) => e.id === "APP-widget-desk").fm.seenIn, [{ build: "NA-widget-desk", area: "Sales" }]);
+  assert.ok(bankIndex(bank).includes("TMOD-sales-orders | Sales orders | App baseline: APP-widget-desk | seen in 1 Build(s)"), bankIndex(bank).join("\n"));
+  r = T("check");
+  assert.equal(r.code, 0, `no word list needed for NA- rows: ${r.out}`);
+  r = T("status");
+  assert.match(r.out, /^build \| NA-widget-desk \| current \| v7$/m);
 });
