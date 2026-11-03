@@ -6,7 +6,7 @@ Locked plugin enhancement spec, proven on 1–2 sample Neome Builds: Build diges
 
 ## Spec
 
-Route clear. Combined spec: [spec.md](spec.md) (gists all decisions + build slices).
+Combined spec: [spec.md](spec.md) (gists all decisions + build slices). Route clear again 2026-11-03 after [Neome App Builds as a source](issues/12-neome-app-builds.md) (spec §10 + slices 9–11).
 
 ## Notes
 
@@ -33,6 +33,7 @@ Route clear. Combined spec: [spec.md](spec.md) (gists all decisions + build slic
 - [Skill integration](issues/08-skill-integration.md) — 4 readers; `template:` on map, `templateModule:` on Module ticket (`none` = checked); ingest proposes, review-draft confirms; grill tier Inputs → Template bank → catalog; mismatch = Open Item (Neomenta); IDs never cited or client-facing
 - [Bank refine skill](issues/09-bank-refine-skill.md) — maintainer-only tool, also does first mining; incremental (`--full` optional); 6 change kinds; Opus review auto-applies, human asked only when unsure or split/merge/retire; branch + report; CHANGELOG `replacedBy`; npm test + evals gate
 - [Template matching evals](issues/10-template-matching-evals.md) — new case `template-hr-small` with own fixture Template bank; 6-step replay; new hard gate `forbidden` (refused usual need) + mechanic `absent` (no IDs in views); refine gate = `npm test` only
+- [Neome App Builds as a source](issues/12-neome-app-builds.md) — App JSON = App baseline, code `NA-<slug>`, new `APP-` entry kind; JSON beats catalog page; mining merges into existing PAT/TMOD/TPL; cap 25 KB; APP = 2nd Delivery cross-check
 
 ## Not yet specified
 

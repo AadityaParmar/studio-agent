@@ -97,6 +97,18 @@ Detail: [Template matching evals](issues/10-template-matching-evals.md).
 - No Capability map.
 - Raw JSON never read by a model.
 
+## 10. Neome App Builds (App baseline)
+
+Detail: [Neome App Builds as a source](issues/12-neome-app-builds.md). Amends §2–§8 where they clash; ticket wins.
+
+- Source: Neome App JSON in `raw/neome-template/` (gitignored), code `NA-<catalog slug>` via hand-kept `app-slugs` map; unknown name = stop. No scrub word list; email / phone check kept.
+- New entry kind `APP-<slug>` in `reference/template-bank/apps/`: out-of-box sheets, key fields, roles, workflows + Mermaid, "gives" list. TMOD `neomeApp` slug links to it. `npm test`: APP slug in catalog, TMOD → APP link resolves.
+- APP entry wins on what the App has; catalog page fallback. Bank wins on usual Delivery.
+- Refine tool: NA Builds through same stages; tag sheet adds draft "gives"; cluster / review build / update APP. App evidence merges into existing PAT / TMOD / TPL; new only when no match.
+- Area cap 25 KB (was 17 KB).
+- neome-mapping: APP "gives" = second Delivery cross-check; mismatch → higher grade + Open Item (Neomenta); never lowers alone. grill-module: TMOD + linked APP tier; "gives" → suggested-answer questions.
+- Evals: `absent` regex + `APP-|NA-`; fixture `APP-attendance-and-leave` linked from `TMOD-leave`.
+
 ---
 
 ## Build slices (suggested order)
@@ -110,7 +122,10 @@ Each = one ticket in a new build effort, gate per `docs/route.md` §1.
 5. **Engine reader support:** index command, `template:` / `templateModule:` fields + ID check, `route.md` rows.
 6. **Eval case `template-hr-small`:** fixture, `forbidden` gate, `absent` mechanic. Lands before slice 7 so skill changes are gated.
 7. **Skill text:** ingest, review-draft, resolve-module, grill-module, neome-mapping per §6. Gate `npm test` + `run --all`.
-8. **Release v2:** plugin version bump, `docs/v2/decisions.md` (new D-numbers for this spec), move effort to `docs/v2/history/`, tag `v2`.
+9. **App baseline format + checks:** `apps/` folder, APP front matter shape, slug + TMOD→APP link checks, cap 25 KB. Test first.
+10. **Refine tool NA support:** `app-slugs` map, NA codes, skip word list, tag / cluster / review prompts for "gives" + merge-into-existing. Then re-run refine on the 20 App Builds (execution).
+11. **Readers + eval:** neome-mapping / grill-module text per §10; `absent` regex; fixture APP entry. Gate `npm test` + `run --all`.
+8. **Release v2** (after 9–11): plugin version bump, `docs/v2/decisions.md` (new D-numbers for this spec), move effort to `docs/v2/history/`, tag `v2`.
 
 ## Builder's choices (not decisions, pick in slice)
 
