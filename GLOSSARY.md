@@ -70,6 +70,36 @@ _Avoid_: Module (for catalog products), product
 How Neome meets a Requirement, indicative until the build phase: Standard (catalog app with field set-up), Configuration (custom fields, stages, workflows), or Custom module (built by Neomenta on the platform).
 _Avoid_: Fit, build type
 
+## Template bank
+
+**Template bank**:
+The set of Patterns, Template modules and Templates learnt from Neome Builds. Sits beside the Neome App catalog: the catalog says what a Neome App can do; the bank says how Neomenta usually builds it.
+_Avoid_: Catalog (for the bank), library, "bank" alone (clashes with question bank)
+
+**Neome Build**:
+One app built on Neome for a past client, already running (its enterprise JSON). Source of Patterns and Templates.
+_Avoid_: Enterprise (for a built app), app, instance
+
+**Build area**:
+A grouping of forms, sheets and workflows inside a Neome Build, taken from the builder's Module tags or Groups.
+_Avoid_: Module (for the builder's grouping)
+
+**Pattern**:
+A reusable way Neome Builds do one task, including workarounds (for example approval by a status list, a workflow branch and a role). Seen in at least one Neome Build.
+_Avoid_: Recipe, best practice, feature
+
+**Template module**:
+A Module shape seen across Neome Builds: its usual needs, Patterns and process steps. Suggested to an Enterprise, never assumed.
+_Avoid_: Standard module, Neome App
+
+**Usual need**:
+One thing a Template module usually has to do, seen in Neome Builds. Not a Requirement: it has no Source, priority or acceptance criteria until grilling with the Enterprise turns it into one.
+_Avoid_: Requirement (for bank entries), feature
+
+**Template**:
+A set of Template modules that runs as a small enterprise (for example a trading company: CRM, Quotation, Order, Invoice).
+_Avoid_: Blueprint, starter kit, package
+
 ## Outputs
 
 **BRD**:

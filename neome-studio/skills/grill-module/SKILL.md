@@ -10,11 +10,6 @@ upstreamVersion: 1.3.1
 
 # grill-module
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Grill one Module until every one of the 11 topics in the [question bank](references/question-bank.md) is **answered** with a Source, **N/A** with a reason, or an **Open Item**. Find facts in the Sources yourself; put decisions to the Enterprise. Every fact cites a Source or is `(proposed, to confirm)`; never fill a gap with a guess.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Shapes: [grill-shapes.md](references/grill-shapes.md). Runs no git: the caller (`resolve-module`) commits. `enterprise-glossary` commits only `GLOSSARY.md`, as its skill says.

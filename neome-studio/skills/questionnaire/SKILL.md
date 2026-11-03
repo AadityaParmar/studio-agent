@@ -9,11 +9,6 @@ upstreamVersion: 1.3.1
 
 # questionnaire
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Send the Enterprise its open Open Items as one Questionnaire, addressed to one named contact, so answers come back async. **Grill the send, not the subject**: ask the Consultant only who it goes to and which Modules; the Open Items already hold the questions. Each item carries a suggested answer the contact can say Yes to, or none when you cannot defend one.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git: [git-protocol.md](../../reference/git-protocol.md) (no Engagement lock). Item, order, master and views: [questionnaire-shapes.md](references/questionnaire-shapes.md). Next session: [next-session.md](../../reference/next-session.md).

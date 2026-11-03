@@ -1,16 +1,10 @@
-// Pack lint: every skill keeps the How to talk block verbatim and valid front-matter;
+// Pack lint: valid front-matter, no own How to talk block (root CLAUDE.md is its one home);
 // cloned skills pin their upstream, and the upstream licence ships while any do;
 // every user skill (`disable-model-invocation: true`) ends with the Next session step (ticket 45):
 // a `## <n>. Next session` heading that links reference/next-session.md.
 import { readFileSync, readdirSync, existsSync } from "node:fs";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { parse } from "yaml";
-
-const HOW_TO_TALK = readFileSync(
-  join(dirname(fileURLToPath(import.meta.url)), "..", "reference", "how-to-talk.md"),
-  "utf8",
-).trim();
 
 export function check(pluginDir) {
   if (!pluginDir) {
@@ -39,7 +33,7 @@ function checkSkill(dir, name) {
   if (!existsSync(file)) return fail(["SKILL.md missing"]);
   const text = readFileSync(file, "utf8");
   const errors = [];
-  if (!text.includes(HOW_TO_TALK)) errors.push("How to talk block missing or changed");
+  if (/^## How to talk$/m.test(text)) errors.push("How to talk block duplicates root CLAUDE.md: remove it");
 
   const match = text.match(/^---\n([\s\S]*?)\n---\n/);
   if (!match) return fail([...errors, "front-matter missing"]);

@@ -1,10 +1,5 @@
 # upstream-check (maintainer only)
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Driver prompt for the plugin maintainer. Bring upstream changes (`github.com/mattpocock/skills`) into the cloned skills, one skill at a time, each re-adapt **accepted** by the maintainer. Not a Consultant skill; `studio` never names it. Run on demand: roughly quarterly, or when an upstream release is noticed.
 
 `TOOL` = `node neome-studio/maintainer/upstream-check.mjs`, from the repo root. Its header lists every output line and file. `<to>` = the upstream version to move to.
@@ -53,7 +48,7 @@ For each upstream hunk, decide **take** or **leave**:
 
 Every taken edit keeps the pack contract:
 
-- the How to talk block verbatim;
+- no How to talk block (root `CLAUDE.md` owns it);
 - studio terms exactly as in `GLOSSARY.md`, never their _Avoid_ words (Enterprise, Consultant, Module, Requirement, Open Item, Input, Source…);
 - facade paths: humans touch only `enterprises/<ent>/inputs/` and `confidential/`; agent files under `_agent/`; views (`brd/`, `prototypes/`, `questionnaires/`) rebuilt by the engine, never edited;
 - engine calls, git ownership (building blocks run no git) and the step numbering the other skills link to.

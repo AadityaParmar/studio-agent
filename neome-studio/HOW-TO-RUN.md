@@ -2,13 +2,34 @@
 
 Zero to Sign-off, step by step. Terms per [GLOSSARY.md](../GLOSSARY.md). Full detail: [README.md](../README.md).
 
-```
- Inputs ─▶ ingest ─▶ review-draft ─▶ resolve-module ×N ─▶ build-brd ─▶ Sign-off ─▶ phase 2
-              ▲                           │    ▲
-              │                           ▼    │ (Module needs revisit)
-              └──── ingest ◀── Enterprise answers ◀── Questionnaire / Prototype feedback
+You run 6 skills. They call 5 building blocks. The engine (`node neome-studio/engine/cli.mjs`) does every check, structured write and render. Every skill ends by printing "Next session": up to 3 next steps.
 
- /neome-studio:studio  ← between every step: "what's next?"
+```
+ Inputs ─▶ inputs/ (+ confidential/)
+             │
+             ▼
+ /studio ◀── any time: "what next?"  (read-only; may clear a stale lock)
+             │
+             ▼
+ /ingest ─────────▶ Sources + draft Modules, Requirements, Open Items ──▶ enterprise-glossary
+             │ (new session)
+             ▼
+ /review-draft ───▶ confirmed Modules, process, roles, topics, plan ─────▶ enterprise-glossary
+             │
+             ▼
+ /resolve-module <PREFIX>   (×N, one Module per session)
+   claim ─▶ grill-module ─▶ process ─▶ write-module-spec ─▶ neome-mapping (§12)
+         ─▶ build-prototype ─▶ shared edits ─▶ close
+             │                                   │ Enterprise Open Items
+             │                                   ▼
+             │                            /questionnaire ─▶ QN-n .html / .txt
+             │                                   │ reply
+             │                                   ▼
+             │◀── needs revisit ◀──── /ingest (reads reply, closes Open Items)
+             ▼
+ /build-brd ──────▶ preview ─▶ release v<N> ─▶ sign-off v<N> ─────────────▶ enterprise-glossary (agree)
+             │ comments / signed copy / Prototype feedback
+             └──────▶ inputs/ ─▶ /ingest  (loop)  ─▶ … ─▶ phase 2
 ```
 
 ---
@@ -21,117 +42,98 @@ Zero to Sign-off, step by step. Terms per [GLOSSARY.md](../GLOSSARY.md). Full de
 2. **Node 20+**: `node --version`.
 3. **Git name**: `git config --global user.name "Your Name"` (claims and locks show it).
 4. **Packages**: `npm ci` in the repo root.
-5. **Open Claude Code** from the repo root: `claude`. Trust the folder.
-6. **Check**: type `/neome-studio:` and the skills show. Not there? Install the plugin by hand, inside Claude Code:
+5. **Open Claude Code** from the repo root: `claude`. Trust the folder. Allow `node neome-studio/engine/cli.mjs …` when asked.
+6. **Check**: type `/neome-studio:` and the skills show. Not there? Inside Claude Code:
    ```
    /plugin marketplace add "<repo-root-path>"
    /plugin install neome-studio@neome
    /reload-plugins
    ```
-   Or type `/plugin` → Marketplaces → add the repo root path → pick `neome-studio` → Install.
-7. **Run `/neome-studio:studio`**. All setup lines should be `ok`. It names the fix for any `miss`.
-
-Claude Code may ask to run `node neome-studio/engine/cli.mjs …`. Allow it.
+7. **Run `/neome-studio:studio`**. All setup lines `ok`. It names the fix for any `miss`.
 
 ### Other AI tools (Codex, Gemini CLI, Cursor, Copilot, OpenCode…)
 
-Skills are plain `SKILL.md` folders. Engine is plain Node. Any agent that reads Agent Skills can run them. Do steps 1–4 above, then from repo root:
+Skills are plain `SKILL.md` folders; the engine is plain Node. Do steps 1–4, then from repo root:
 
-1. **Link the skills** where your tool looks. One link, not a copy, so `git pull` updates it.
-   ```
-   ln -s ../neome-studio/skills .agents/skills      # Codex, Gemini CLI, Cursor, Copilot, OpenCode
-   ```
-   Tool only reads its own folder? Link that instead:
-
-   | Tool | Folder |
-   |---|---|
-   | Gemini CLI | `.gemini/skills` |
-   | Cursor | `.cursor/skills` |
-   | GitHub Copilot | `.github/skills` |
-   | OpenCode | `.opencode/skills` |
-   | Windsurf | `.windsurf/skills` |
-
-   Folder already there (even empty)? Remove it first: `rmdir .agents/skills`. Windows: `mklink /D .agents\skills ..\neome-studio\skills` (admin or Developer Mode).
-2. **Give it the rules.** Tools read `AGENTS.md` (Gemini: `GEMINI.md`), not `CLAUDE.md`: `ln -s CLAUDE.md AGENTS.md`.
-3. **Open the tool from repo root.** Skills run `node neome-studio/engine/cli.mjs …` from there. Allow it.
-4. **Run skills by name**, no `neome-studio:` prefix: `studio`, `ingest`, `review-draft`, `resolve-module`, `questionnaire`, `build-brd`. Type `/studio` (Codex: `$studio`), or say "run the studio skill". Everywhere below, `/neome-studio:<skill>` = that skill.
-5. **Start yourself.** Some tools ignore "user-run only" and may auto-start a skill. Always call the six above by hand.
-6. **Check**: run `studio`. All setup lines `ok`.
-
-Tool has no skill support? Point it at the file: "read `neome-studio/skills/studio/SKILL.md` and follow it".
+1. **Link the skills** (a link, not a copy, so `git pull` updates it): `ln -s ../neome-studio/skills .agents/skills`. Tool reads only its own folder → link that instead: Gemini `.gemini/skills`, Cursor `.cursor/skills`, Copilot `.github/skills`, OpenCode `.opencode/skills`, Windsurf `.windsurf/skills`. Folder already there → `rmdir` it first. Windows: `mklink /D .agents\skills ..\neome-studio\skills`.
+2. **Give it the rules**: `ln -s CLAUDE.md AGENTS.md` (Gemini: `GEMINI.md`).
+3. **Run skills by name**, no prefix: `/studio` (Codex: `$studio`). Below, `/neome-studio:<skill>` = that skill. Always start the six by hand; some tools auto-start skills.
+4. **Check**: run `studio`. No skill support at all → "read `neome-studio/skills/studio/SKILL.md` and follow it".
 
 ---
 
 ## 1. Drop Inputs
 
-- Pick an Enterprise folder name, kebab-case: `harbor-tiles`.
-- Put Inputs in `enterprises/harbor-tiles/inputs/`. Any file name: deck, RFP, call notes, transcript, WhatsApp export, spreadsheet.
-- Confidential Inputs go in `enterprises/harbor-tiles/confidential/` (never pushed).
+- Enterprise folder, kebab-case: `enterprises/harbor-tiles/inputs/`. Any file: deck, RFP, call notes, transcript, WhatsApp export, spreadsheet.
+- Confidential → `enterprises/harbor-tiles/confidential/` (never pushed).
 
 ## 2. `/neome-studio:ingest`
 
-- Give: Enterprise folder name + Engagement slug (kebab-case, no dates): `crm`.
-- Creates: Enterprise glossary, Engagement map, one Source per Input (renamed `<SOURCE-ID>-<slug>.<ext>`).
-- Drafts Modules, Requirements, Open Items. Every fact cites a Source or says "proposed, to confirm".
-- Pushes.
+- Give: Enterprise folder + Engagement slug (kebab-case, no dates): `crm`. First run creates the Enterprise glossary and Engagement.
+- Each new Input → Source: ID by type (CE, RFP, DK, SS, WA, FRM, PF, QA, SO…), file renamed `<ID>-<slug>.<ext>`, text copy in `_agent/sources/`.
+- Drafts from Inputs only, exhaustively:
+  - Modules, in the Enterprise's words
+  - Requirements (Priority `TBC`, Scope `Open`)
+  - Engagement-wide Requirements in `general.md`
+  - an Open Item for every gap or conflict
+- Terms → Enterprise glossary.
+- Later runs draft only into Modules still in draft. New facts about confirmed Modules → Open Items.
 
 ## 3. New session → `/neome-studio:review-draft`
 
-- Quizzes you on the draft, with a suggested answer each time:
-  - confirm, merge, split or rename Modules
-  - process and roles
-  - Module order
-  - Engagement-wide topics: Access, Localisation, Hosting, Migration, Training, Support, Other
-  - plan skeleton
-- Writes one confirmed Module ticket per Module.
+Quizzes you in rounds of up to 5, each item with a suggested answer:
 
-## 4. `/neome-studio:studio`
+1. Module set: confirm, rename, merge, split, missing
+2. Process and roles
+3. Module order (blocked by)
+4. Engagement-wide topics: Access, Localisation, Hosting, Migration, Training, Support, Other
+5. Plan skeleton (never weeks)
 
-Shows where things stand. Names the next Module.
+Done when no Module is left in draft.
 
-## 5. `/neome-studio:resolve-module` (repeat per Module)
+## 4. `/neome-studio:resolve-module` (repeat per Module)
 
-**One Module per session.** Live with the Enterprise if you can, or from Inputs.
+**One Module per session.** Mode: live with the Enterprise, or from Inputs. `/neome-studio:studio` names the next Module (revisits first).
 
-1. Claims the Module (pushed, so colleagues see it).
-2. Grills it until every topic is answered, N/A or an Open Item.
-3. Writes the Module spec (13 sections, indicative Neome App + Delivery).
-4. Builds the Prototype: `engagements/<slug>/prototypes/<PREFIX>-<slug>.html`.
-5. Closes the Module. Open Items may stay open.
+1. **Claim** the Module (pushed, so colleagues see it).
+2. **Grill** (`grill-module`): 11 topics, each answered, N/A or an Open Item. Facts from Inputs first, catalog as the suggested answer, then always-ask items (KPIs, roles, approvers, statuses, volumes, integrations, priority). Requirements are confirmed in one table at the end.
+3. **Process**: this Module's steps in `process.md`.
+4. **Spec** (`write-module-spec`): 13 sections. Anything that needs Sign-off becomes a Requirement. Section 12 comes from `neome-mapping`: indicative Neome App and Delivery (Standard / Configuration / Custom module).
+5. **Prototype** (`build-prototype`): `engagements/<slug>/prototypes/<PREFIX>-<slug>.html`, with sample rows and scenarios.
+6. **Shared edits** (under lock): Engagement-wide Requirements, plan, other Modules' process, rename / merge / split.
+7. **Close**. Open Items may stay open.
 
-Back to step 4 for the next Module.
+Stopped early → work is pushed and the claim kept. Run it again to resume.
 
-## 6. Open Items left? `/neome-studio:questionnaire`
+## 5. Open Items left? `/neome-studio:questionnaire`
 
-- Asks: one named contact, which Modules.
-- Writes `engagements/<slug>/questionnaires/QN-<date>.html` (print) and `.txt` (paste into WhatsApp / email).
-- Send it to the Enterprise.
+- Asks: one named contact + role, and which Modules.
+- Writes `engagements/<slug>/questionnaires/QN-<date>.html` (print) and `.txt` (WhatsApp / email). Send it.
 
-## 7. Reply comes back → `inputs/` → `/neome-studio:ingest`
+## 6. Reply or feedback → `inputs/` → `/neome-studio:ingest`
 
-- Drop the reply (any form) in `inputs/`, or paste it in the chat.
-- Shows how it reads each answer, Open Item by Open Item. Nothing changes before you confirm.
-- Answered Open Items close. Changed Modules get marked needs revisit.
-- Run `resolve-module` on those (shorter pass, only what changed).
+- Drop the reply (any form) in `inputs/`, or paste it in the chat. Prototype feedback works the same way.
+- It shows how it reads each answer, Open Item by Open Item. Nothing changes until you confirm.
+- Answered Open Items close. Affected Modules are marked needs revisit → `resolve-module` again (a shorter pass, only what changed).
 
-Repeat steps 5–7 until the Open Items are cleared. Prototype feedback follows the same path.
+Repeat steps 4–6 until the Open Items are cleared.
 
-## 8. `/neome-studio:build-brd`
+## 7. `/neome-studio:build-brd`
 
 | Mode | When | Writes |
 |---|---|---|
-| preview (default) | Any time | `brd/preview.html`. Working draft, not for circulation. Unresolved Modules show "In progress". |
-| release | Ready for Enterprise review | `brd/v<N>.html` + change log. Asks one summary line. Sets plan weeks if not set. |
-| sign-off | After signed copy ingested | Stamps latest version as signed. Frozen after. |
+| preview (default) | Any time | `brd/preview.html`. Working draft; unresolved Modules show "In progress". |
+| release | Ready for Enterprise review | `brd/v<N>.html` + change log. Asks one summary line; weeks only if you give them. |
+| sign-off | Signed copy ingested | Stamps latest `v<N>` with two signers + evidence. Frozen after. Glossary terms shown become agreed. |
 
-## 9. Sign-off
+## 8. Sign-off
 
 1. Enterprise signs `brd/v<N>.html` (or approves in writing).
-2. Drop the signed copy in `inputs/` → `/neome-studio:ingest` (becomes `SO-n` Source).
-3. `/neome-studio:build-brd` → sign-off. Suggests the two signers; asks what it can't see.
-4. Later changes → new release.
+2. Signed copy → `inputs/` → `/neome-studio:ingest` (becomes the `SO-n` Source).
+3. `/neome-studio:build-brd` sign-off. It suggests the two signers and asks for what it can't see.
+4. Later changes → a new release.
 
-## 10. Phase 2
+## 9. Phase 2
 
 The BRD data file in `engagements/<slug>/_agent/` is the handoff to the Neome build.
 
@@ -143,20 +145,20 @@ The BRD data file in `engagements/<slug>/_agent/` is the handoff to the Neome bu
 enterprises/<ent>/
   inputs/              DROP Inputs here
   confidential/        DROP confidential Inputs here (never pushed)
-  _agent/              skills only
+  _agent/              skills only (Sources, GLOSSARY.md)
   engagements/<slug>/
     brd/               VIEW: preview.html, v<N>.html
     prototypes/        VIEW: one per Module
     questionnaires/    VIEW: QN-<date>.html / .txt
-    _agent/            skills only
+    _agent/            skills only (map, Modules, Open Items, process, plan)
 ```
 
 ## Rules
 
 - Unsure → `/neome-studio:studio`.
 - Touch only `inputs/` and `confidential/`. Never edit `_agent/` or views; skills rebuild them.
-- One Module per session. `review-draft` wants a new session too.
-- Never guess. A gap becomes an Open Item.
+- One Module per session. `review-draft` needs a new session too.
+- Never guess. Every fact cites a Source or says "proposed, to confirm". A gap becomes an Open Item.
 - Don't run git by hand while a skill runs.
 - Neome App and Delivery are indicative only.
 
@@ -164,9 +166,10 @@ enterprises/<ent>/
 
 | Problem | Fix |
 |---|---|
-| Mermaid CLI missing / `node_modules` out of date | `npm ci`, run skill again |
-| `mmdc-failed` | Run `build-brd` again. Twice → tell maintainer |
-| Push rejected | Skill retries once. Still failing → fix network/access, or ask maintainer on conflict. Never force-push |
-| Stale lock or claim | `/neome-studio:studio`, say yes to clear. Tell holder to pull |
-| Skills not in slash menu | Open repo root, trust it, check `/plugin`, then `/reload-plugins` |
-| Prototype missing for resolved Module | Next `resolve-module` pass rebuilds it |
+| Mermaid CLI missing / `node_modules` out of date | `npm ci`, run the skill again |
+| `mmdc-failed` | Run `build-brd` again. Fails twice → tell the maintainer |
+| Push rejected | The skill retries once. Still failing → fix network/access, or ask the maintainer about the conflict. Never force-push |
+| Lock held by someone else | `ingest`, `review-draft`, `build-brd` wait for it; `resolve-module`, `questionnaire` can run |
+| Stale lock or claim | `/neome-studio:studio`, say yes to clear. Tell the holder to pull |
+| Skills not in slash menu | Open the repo root, trust it, check `/plugin`, then `/reload-plugins` |
+| Prototype missing for a resolved Module | The next `resolve-module` pass rebuilds it |

@@ -13,7 +13,6 @@ const pluginRoot = join(here, "..", "..");
 const tool = join(pluginRoot, "maintainer", "upstream-check.mjs");
 const driver = join(pluginRoot, "maintainer", "upstream-check.md");
 const cli = join(pluginRoot, "engine", "cli.mjs");
-const HOW_TO_TALK = readFileSync(join(pluginRoot, "reference", "how-to-talk.md"), "utf8");
 
 const box = () => mkdtempSync(join(tmpdir(), "neome-upstream-test-"));
 const gitEnv = (dir) => {
@@ -95,7 +94,7 @@ function makeUpstream(dir, { tags = true } = {}) {
 // ---------- fixture plugin ----------
 
 const skill = (name, extra = "") =>
-  `---\nname: ${name}\ndescription: "Test skill ${name}."\n${extra}---\n\n# ${name}\n\n${HOW_TO_TALK}\nBody of ${name}.\n`;
+  `---\nname: ${name}\ndescription: "Test skill ${name}."\n${extra}---\n\n# ${name}\n\nBody of ${name}.\n`;
 
 function makePlugin(dir, more = {}) {
   const root = join(dir, "plugin");
@@ -310,9 +309,8 @@ test("maintainer-only: not a skill, not an engine command, not named by studio o
   assert.match(r.stderr, /Unknown command: upstream-check/);
 });
 
-test("driver prompt: How to talk verbatim, both commands, accept per skill, gate", () => {
+test("driver prompt: both commands, accept per skill, gate", () => {
   const text = readFileSync(driver, "utf8");
-  assert.ok(text.includes(HOW_TO_TALK.trim()));
   assert.match(text, /`TOOL` = `node neome-studio\/maintainer\/upstream-check\.mjs`/);
   assert.match(text, /`TOOL diff neome-studio \[--to <to>\]`/);
   assert.match(text, /`TOOL pin neome-studio <skill> <to>`/);

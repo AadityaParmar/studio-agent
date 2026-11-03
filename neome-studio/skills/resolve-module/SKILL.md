@@ -6,11 +6,6 @@ disable-model-invocation: true
 
 # resolve-module
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Take one Module from the frontier to `resolved` in this session: claim it, grill it, write its Module spec and Neome mapping, build its Prototype, close the ticket. Open Items may stay open; a gap is an Open Item, never a guess. A **revisit** (Module `needs-revisit`) is the same path, narrowed to what its `revisitReason` names.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier, claim, close, moves: [map-logic.md](../../reference/map-logic.md). Shapes of `process.md` and `general.md`: [review-shapes.md](../review-draft/references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md). The building blocks run no git; you commit what they hand back.

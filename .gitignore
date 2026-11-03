@@ -11,3 +11,8 @@ example/
 # Tool-created empty skill dirs
 .agents/
 .gemini/
+
+# Template bank: raw Neome Build JSON (client data)
+.scratch/template-bank/raw/
+/.zcode/
+/.claude/

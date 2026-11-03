@@ -282,7 +282,7 @@ test("module rename moves the Prototype view; merge removes it", () => {
 
 // ---- skill + reference ----
 
-test("skill: How to talk, writes data only, calls the engine; reference documents every key and the done check", () => {
+test("skill: writes data only, calls the engine; reference documents every key and the done check", () => {
   const skill = readFileSync(join(plugin, "skills", "build-prototype", "SKILL.md"), "utf8");
   assert.doesNotMatch(skill, /Stub\./);
   assert.match(skill, /ENGINE build-prototype <eng> <PREFIX>/);

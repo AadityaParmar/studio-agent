@@ -8,7 +8,7 @@ The Claude Code plugin behind the Neome Requirements Studio. Consultants read th
 neome-studio/
   .claude-plugin/plugin.json    plugin manifest (marketplace: ../.claude-plugin/marketplace.json)
   skills/<skill>/SKILL.md       11 skills (+ references/ per skill)
-  reference/                    shared: How to talk, git protocol + lock, map logic, next session, Neome App catalog, fonts
+  reference/                    shared: git protocol + lock, map logic, next session, Neome App catalog, fonts
   engine/                       deterministic CLI the skills call; tests + fixtures in engine/test/
   maintainer/                   upstream-check (script + driver prompt)
   evals/                        eval runner (run.mjs + driver eval.md), Eval cases, results/, eyeball checklist
@@ -55,7 +55,7 @@ The pin lives only in each cloned skill's front-matter: `upstream` (path or list
 
 ### Changing a skill
 
-- Keep the How to talk block verbatim ([reference/how-to-talk.md](reference/how-to-talk.md)) and valid front-matter. `check` fails otherwise.
+- Keep valid front-matter. How to talk lives only in root `CLAUDE.md` (loads every session); a skill carrying its own copy fails `check`.
 - Use terms exactly as in GLOSSARY.md. Keep the facade: humans touch only `inputs/` and `confidential/`; agent files under `_agent/`; views rebuilt by the engine.
 - Git order and the Engagement lock: [reference/git-protocol.md](reference/git-protocol.md).
 - Run `npm test`. Skill text change → also evals + your approval before merge to `main` (see [Gate](#gate)).

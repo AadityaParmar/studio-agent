@@ -8,11 +8,6 @@ upstreamVersion: 1.3.1
 
 # write-module-spec
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Turn one Module's grilling output into its Module spec. Synthesis, no interview: everything you write is already in the grilling output or a Source. A gap is an Open Item, never a guess.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Module folder = `<eng>/_agent/modules/<PREFIX>-<slug>/`. Shapes and rules: [spec-template.md](references/spec-template.md); filled sample: [spec-example.md](references/spec-example.md) (Harbor Tiles QUO, made up). Runs no git: the caller (`resolve-module`) commits.

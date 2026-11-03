@@ -6,11 +6,6 @@ disable-model-invocation: true
 
 # review-draft
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Turn the `ingest` draft into a confirmed Module set the team can work from: one confirmed ticket per Module, a process skeleton with roles, every Engagement-wide topic covered, and a plan skeleton. The Consultant decides; you propose. Every fact cites a Source or is `(proposed, to confirm)`; every unknown becomes an Open Item.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Ticket fields and moves: [map-logic.md](../../reference/map-logic.md). File shapes: [review-shapes.md](references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md).

@@ -5,11 +5,6 @@ description: "Building block for resolve-module. Write Module spec section 12: i
 
 # neome-mapping
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Propose how Neome meets one Module: one Neome App (or none), one Delivery for the Module, and a per-Requirement Delivery only where it differs. Always **indicative**: Neomenta's proposal until the build phase.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Catalog: [neome-app-catalog.md](../../reference/neome-app-catalog.md) (the only source for what an App does); valid slugs: [neome-app-catalog-slugs.json](../../reference/neome-app-catalog-slugs.json). Section 12 shape: [spec-template.md](../write-module-spec/references/spec-template.md). Runs no git: the caller commits.

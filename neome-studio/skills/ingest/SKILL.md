@@ -6,11 +6,6 @@ disable-model-invocation: true
 
 # ingest
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Turn Inputs dropped in `enterprises/<ent>/inputs/` and `confidential/` into Sources and a cited draft, and read Questionnaire replies back into the record. Every fact cites a Source or is `(proposed, to confirm)`. Every gap becomes an Open Item.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Draft file shapes: [draft-shapes.md](references/draft-shapes.md). Ticket fields: [map-logic.md](../../reference/map-logic.md). Questionnaire replies: [reply-loop.md](references/reply-loop.md). Next session: [next-session.md](../../reference/next-session.md).

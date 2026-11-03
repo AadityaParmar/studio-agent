@@ -8,11 +8,6 @@ upstreamVersion: 1.3.1
 
 # build-prototype
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Build one Module's Prototype: a throwaway, clickable page in Neome's look that lets the Enterprise react to behaviour. You write data only, `prototype-data.json`; the engine draws the page from its fixed template and the Module spec. Sample rows and scenarios are proposals, never facts.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Module folder = `<eng>/_agent/modules/<PREFIX>-<slug>/`. Data shape and engine rules: [prototype-data.md](references/prototype-data.md). Runs no git: the caller (`resolve-module`) commits.

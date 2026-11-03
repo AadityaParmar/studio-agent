@@ -8,11 +8,6 @@ upstreamVersion: 1.3.1
 
 # enterprise-glossary
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Keeps `enterprises/<ent>/_agent/GLOSSARY.md`: the one list of the Enterprise's own terms, shared by all its Engagements. One term, one meaning per Enterprise. Called by `ingest` (new Inputs, Questionnaire replies), grilling (`grill-module`, `resolve-module`) and `build-brd` (after Sign-off).
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. Every `ENGINE glossary …` command edits only `GLOSSARY.md`; exit 1 = refused (message says why; nothing written), exit 2 = bad arguments.

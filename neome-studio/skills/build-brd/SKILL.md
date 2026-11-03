@@ -6,11 +6,6 @@ disable-model-invocation: true
 
 # build-brd
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Build the BRD with the engine, under the Engagement lock, and relay what it says in plain words with a next step. The engine is the only writer of the BRD data file, snapshots and pages: your writes are limited to the lock, the map change-log line, and plan weeks the Consultant gives. A BRD problem is fixed in the `_agent/` markdown by the skill that owns it, then the BRD is rebuilt.
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). What each engine message means and its next step: [problems.md](references/problems.md). Data file, release and sign-off rules: [brd-data-schema.md](references/brd-data-schema.md). Next session: [next-session.md](../../reference/next-session.md).

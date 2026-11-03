@@ -17,6 +17,15 @@ For text humans read, in every skill (chat replies, Questionnaires). Agent-to-ag
 - Changing the plugin itself? Start at `docs/README.md`.
 - Skills own git. Don't commit by hand mid-skill.
 
+## Neome Studio MCP
+
+`neome-studio` MCP (`mcp__neome-studio__*`) reads and edits live Neome Enterprises (forms, spreadsheets, roles, actions, workflows, deploy). The server's own instructions and `schema` tool cover usage.
+
+- Read freely: `list_enterprises`, `list`, `describe`, `schema`, `validate`, `diff_enterprise`, `status`.
+- Writes hit the live Enterprise draft. Confirm with user before `add`, `set`, `remove`, `switch_enterprise`, `revert_enterprise`, `deploy_enterprise`.
+- Pass `entId` on every call. Omit only after `switch_enterprise`.
+- Setup: local scope (`~/.claude.json`), API key in `X-API-Key` header. Keep the key out of git; never write it to `.mcp.json` or repo files. Add with `claude mcp add-json --scope local neome-studio '<config>'`.
+
 ## Agent skills
 
 ### Issue tracker

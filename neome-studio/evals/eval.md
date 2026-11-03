@@ -1,10 +1,5 @@
 # eval (maintainer only)
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Driver prompt for the plugin maintainer. Run the Eval cases on the current branch, then help the maintainer judge the judge. Not a Consultant skill; `studio` never names it. Run before merging any skill text change to `main`, and on demand.
 
 `TOOL` = `node neome-studio/evals/run.mjs`, from the repo root. Its header lists every command and output line; [README.md](README.md) has the scorecard and the Thresholds table.

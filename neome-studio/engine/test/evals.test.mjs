@@ -19,7 +19,6 @@ const tool = join(evals, "run.mjs");
 const fixtures = join(here, "fixtures");
 const mini = join(fixtures, "evals", "mini-case");
 const fake = join(fixtures, "evals", "fake-claude.mjs");
-const HOW_TO_TALK = readFileSync(join(plugin, "reference", "how-to-talk.md"), "utf8");
 
 const box = () => mkdtempSync(join(tmpdir(), "neome-eval-test-"));
 function gitEnv(dir) {
@@ -398,7 +397,6 @@ test("maintainer-only: not a skill, not an engine command, named by no skill, ne
 
 test("driver prompt, client and judge prompts, READMEs", () => {
   const driver = readFileSync(join(evals, "eval.md"), "utf8");
-  assert.ok(driver.includes(HOW_TO_TALK.trim()));
   assert.match(driver, /`TOOL` = `node neome-studio\/evals\/run\.mjs`/);
   for (const s of ["`TOOL run --all`", "`TOOL check`", "`TOOL judge <work>`", "`TOOL score <work>`", "npm test", "spot-check", "main"]) assert.ok(driver.includes(s), `driver lacks ${s}`);
   const client = readFileSync(join(evals, "prompts", "simulated-client.md"), "utf8");

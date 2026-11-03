@@ -10,11 +10,6 @@ upstreamDiverged: "Routes the 6 Neome Studio user skills from engine state (setu
 
 # studio
 
-## How to talk
-
-- Simple English. No fancy words. Short.
-- Be extremely concise. Sacrifice grammar for concision.
-
 Tell the Consultant where things stand and the next step. Read-only: the engine reads the files; you relay. The one write is clearing a stale lock or claim, after the Consultant says yes (step 5).
 
 `ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier and claims: [map-logic.md](../../reference/map-logic.md). Next step format: [next-session.md](../../reference/next-session.md).
