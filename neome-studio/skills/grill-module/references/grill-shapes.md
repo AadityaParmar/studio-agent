@@ -15,7 +15,7 @@ Reply: Yes / Edit / Don't know
 
 - Number = item in this round. Once it becomes an Open Item, the ID is the OI ID.
 - `For:` = the role that knows (Enterprise's words).
-- One question, one line. Suggested = from a Source (`15 days [CE-2]`), from the catalog (`… (proposed, to confirm)`), or empty if you cannot defend one.
+- One question, one line. Suggested = from a Source (`15 days [CE-2]`), from the Template bank or the catalog (`… (proposed, to confirm)`), or empty if you cannot defend one.
 - A pre-answer from Inputs that needs no question is shown as a statement, not an item: `Quotation valid 15 days [CE-2].`
 
 ## Session log Source (WS-n)

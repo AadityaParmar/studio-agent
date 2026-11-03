@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Take one Module from the frontier to `resolved` in this session: claim it, grill it, write its Module spec and Neome mapping, build its Prototype, close the ticket. Open Items may stay open; a gap is an Open Item, never a guess. A **revisit** (Module `needs-revisit`) is the same path, narrowed to what its `revisitReason` names.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier, claim, close, moves: [map-logic.md](../../reference/map-logic.md). Shapes of `process.md` and `general.md`: [review-shapes.md](../review-draft/references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md). The building blocks run no git; you commit what they hand back.
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. `<who>` = `git config user.name`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Frontier, claim, close, moves, Template bank fields: [map-logic.md](../../reference/map-logic.md). Shapes of `process.md` and `general.md`: [review-shapes.md](../review-draft/references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md). The building blocks run no git; you commit what they hand back.
 
 ## 1. Scope
 
@@ -38,7 +38,9 @@ Done when the claim push succeeds.
 
 ## 3. Grill
 
-Run the `grill-module` skill with `<ent>`, `<slug>`, `<PREFIX>`, the mode, and on a revisit the `revisitReason`. Keep its hand-back: TO-BE process, asks no single Module owns, Module set changes the Enterprise asked for, terms, files written.
+First the Template module (map-logic Template bank fields): `ENGINE template-bank fields <eng>`. This Module `not checked`, or a `warning` names it (ID gone) → re-match: `ENGINE template-bank index` (empty → skip), propose the Template module that fits or `none` (name, seen in N Builds, why; for an ID gone, its `maybe` IDs first), Consultant accepts or edits, `ENGINE template-bank set <eng> <PREFIX> --template-module <…>`. Else keep the field as it is.
+
+Run the `grill-module` skill with `<ent>`, `<slug>`, `<PREFIX>`, the mode, `templateModule`, and on a revisit the `revisitReason`. Keep its hand-back: TO-BE process, asks no single Module owns, Module set changes the Enterprise asked for, terms, files written.
 
 Done when grill-module hands back with `build-brd --check` at exit 0.
 
@@ -54,7 +56,7 @@ New lanes, other Modules' steps, edges between other Modules → **shared edits*
 
 ## 5. Spec
 
-Run the `write-module-spec` skill (`<ent>`, `<slug>`, `<PREFIX>`, revisit: `revisitReason`). It writes `spec.md` (revisit: edits it in place), runs `neome-mapping` and `ENGINE spec-check`. Keep its hand-back: Module Delivery, Open Items, files written.
+Run the `write-module-spec` skill (`<ent>`, `<slug>`, `<PREFIX>`, `templateModule` for `neome-mapping`, revisit: `revisitReason`). It writes `spec.md` (revisit: edits it in place), runs `neome-mapping` and `ENGINE spec-check`. Keep its hand-back: Module Delivery, Open Items, files written.
 
 Done when `ENGINE spec-check <eng> <PREFIX>` exits 0.
 

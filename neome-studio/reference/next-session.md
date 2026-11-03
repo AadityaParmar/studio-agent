@@ -17,6 +17,7 @@ Read only these lines (`|`-separated, 4 cells on a `step` line):
 - `step | <skill> | <args> | <why>`, most urgent first. `<args>` = Engagement path, + Module prefix for `resolve-module`; empty → no args.
 - `lock | <holder> | …` without `yours` = held by someone else.
 - `done | v<N> signed off; …`.
+- `template | warning | <where> | <message>` = a Template bank ID gone (map-logic Template bank fields).
 
 ## Print
 
@@ -32,6 +33,7 @@ Next session:
 - Lock held by someone else → append ` (waits for <holder>'s lock)` to `ingest`, `review-draft`, `build-brd` lines.
 - Pull or push failed this run → first line `Next session (from local copy):`.
 - No `step` line and a `done` line → `Nothing next: BRD v<N> signed off.` With `step` lines too → print them, then `BRD v<N> signed off.`
+- Each `template | warning` line → after the block, `Template bank: <where>: <message>`.
 - `status` itself fails (exit not 0, e.g. `node_modules` missing) → `Next session: fix the above, then /neome-studio:studio`.
 
 Copy `<args>` and `<why>` as printed; never invent a step. Done when the block is shown.

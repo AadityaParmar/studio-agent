@@ -7,10 +7,12 @@ Per topic:
 - **Aim**: what the topic must settle.
 - **Ask**: sample questions in simple English. Reword in the Enterprise's terms (Enterprise `GLOSSARY.md`).
 - **Pre-fill**: where a suggested answer can come from before asking.
-- **Always ask**: facts the Enterprise must state itself, even when a Source or the catalog suggests one. Pre-fill becomes the suggested answer; only the Enterprise's reply settles it.
+- **Always ask**: facts the Enterprise must state itself, even when a Source, the Template bank or the catalog suggests one. Pre-fill becomes the suggested answer; only the Enterprise's reply settles it.
 - **Feeds**: the spec section (`write-module-spec`) and ticket section it lands in.
 
 **App hints.** Read the App(s) this Module resembles in [`reference/neome-app-catalog.md`](../../../reference/neome-app-catalog.md), live, every run: its `## App:` section (entities, key fields, statuses, roles, automations, approvals, reports) and section 1 building blocks. Catalog-based answers are always `(proposed, to confirm)`; Neome App names and catalog words stay out of questions and answers (say it in the Enterprise's words).
+
+**Template bank hints.** With a Template module (`templateModule`), its process steps and Patterns pre-fill process topics and its usual needs become items, after the Inputs and before the catalog (`grill-module` tier 2). Always `(proposed, to confirm)`, in the Enterprise's words; Template bank IDs and Build codes stay out of questions and answers.
 
 Engagement-wide topics (access and permission matrix, currencies, languages, hosting, SSO, migration, training, support) are `review-draft`'s; here only note an ask no single Module owns and hand it back.
 

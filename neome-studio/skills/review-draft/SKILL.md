@@ -1,6 +1,6 @@
 ---
 name: review-draft
-description: "Quiz the Consultant on the ingest draft: confirm, merge, split or rename Modules; process skeleton; roles; Engagement-wide topics; one Module ticket each; plan skeleton. Re-run after a later ingest adds Modules. Run in a fresh session."
+description: "Quiz the Consultant on the ingest draft: confirm, merge, split or rename Modules; Template bank matches; process skeleton; roles; Engagement-wide topics; one Module ticket each; plan skeleton. Re-run after a later ingest adds Modules. Run in a fresh session."
 disable-model-invocation: true
 ---
 
@@ -8,15 +8,16 @@ disable-model-invocation: true
 
 Turn the `ingest` draft into a confirmed Module set the team can work from: one confirmed ticket per Module, a process skeleton with roles, every Engagement-wide topic covered, and a plan skeleton. The Consultant decides; you propose. Every fact cites a Source or is `(proposed, to confirm)`; every unknown becomes an Open Item.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Ticket fields and moves: [map-logic.md](../../reference/map-logic.md). File shapes: [review-shapes.md](references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. `<eng>` = `enterprises/<ent>/engagements/<slug>`. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Ticket fields, moves and Template bank fields: [map-logic.md](../../reference/map-logic.md). File shapes: [review-shapes.md](references/review-shapes.md). Next session: [next-session.md](../../reference/next-session.md).
 
 ## 1. Scope
 
 This conversation already ran `ingest` → ask the Consultant to start a new session and run `/neome-studio:review-draft` there; stop.
 
-Args: `<eng>` (`<ent> <slug>` also fine); ask if not given. Run `ENGINE module list <eng>` and read `_agent/general.md`, `process.md`, `plan.md`. The **work list**:
+Args: `<eng>` (`<ent> <slug>` also fine); ask if not given. Run `ENGINE module list <eng>`, `ENGINE template-bank fields <eng>` and read `_agent/general.md`, `process.md`, `plan.md`. The **work list**:
 
 - Modules shown `draft` (first run: all; re-run: only those a later `ingest` added).
+- Template bank: `template` not checked or with a `warning` (ID gone), and the matches of draft Modules.
 - Topics in `general.md` not yet covered (no GEN Requirement, no `N/A`, no `- OI-NN` bullet).
 - Process sections and plan placement missing for any draft Module (or no `process.md` tables / no `plan.md` yet).
 
@@ -28,13 +29,16 @@ Pull, then take the Engagement lock with `--skill review-draft` and push it (git
 
 ## 3. Read
 
-Read whole: `map.md`, every ticket on the work list, `open-items.md`, `general.md`, `process.md`, `plan.md` (if any), the Enterprise `GLOSSARY.md`, and the text copy (`_agent/sources/<ID>.md`) of every Source whose register row lists `<slug>`. Re-run: also skim confirmed tickets, so new Modules fit beside them. Done when you can say, per draft Module, what it covers and which Sources back it.
+Read whole: `map.md`, every ticket on the work list, `open-items.md`, `general.md`, `process.md`, `plan.md` (if any), the Enterprise `GLOSSARY.md`, and the text copy (`_agent/sources/<ID>.md`) of every Source whose register row lists `<slug>`. Re-run: also skim confirmed tickets, so new Modules fit beside them. Template bank (map-logic Template bank fields): `ENGINE template-bank index`, then whole the matched Template, its Template modules and the draft Modules' Template modules; index empty → skip every Template bank part below. Done when you can say, per draft Module, what it covers and which Sources back it.
 
 ## 4. Quiz
 
 Grilling rounds: up to 5 numbered items per round, each with your **suggested answer**, so the Consultant mostly says yes or edits. One round per group, in this order; skip a group with nothing on the work list.
 
-1. **Module set.** Per draft Module: confirm, rename (prefix and/or name, in the Enterprise's words), merge into another, or split into parts. Say why you suggest it, citing Sources. Also ask if a Module is missing.
+1. **Module set.** Per draft Module: confirm, rename (prefix and/or name, in the Enterprise's words), merge into another, or split into parts. Say why you suggest it, citing Sources. Also ask if a Module is missing. Template bank, in the same group:
+   - **Matches.** Confirm or change the Engagement Template and each draft Module's Template module (or `none`): name, seen in N Builds, why it fits.
+   - **Suggested Modules.** Each Template module of the Template that no Module covers → one item: add it as a Module, `(proposed, to confirm)`, with its purpose in the Enterprise's words. Yes → new Module. No → dropped: no Module, Open Item, note or session-log line.
+   - **Merge / split.** A draft Module whose needs span two Template modules → suggest a split; two draft Modules on one Template module → suggest a merge. Sources still decide; the Template bank only prompts the question.
 2. **Process and roles.** Lanes (roles, systems, other parties), each Module's main steps in order, hand-offs between Modules. Roles per Module with what they do; headcount only if a Source has it.
 3. **Order.** Per Module, which Modules must be resolved first (`blockedBy`); suggest from the process order.
 4. **Engagement-wide topics**, once, each uncovered one: Access (users, roles, permission matrix) · Localisation (currencies, languages) · Hosting (hosting, data residency, SSO) · Migration · Training · Support · Other (anything else no single Module owns). Pre-answer from Sources with the citation; ask only what they leave open.
@@ -58,7 +62,8 @@ In this order:
    - Rename: `ENGINE module rename <eng> <PREFIX> [--to <NEW>] [--name "<Name>"]`. Requirement IDs keep the old prefix; `formerly` is recorded.
    - Merge: `ENGINE module merge <eng> <FROM> --into <TO>`. Old folder kept, `merged-into <TO>`; live Requirements copied to TO with new IDs, old ones withdrawn. It prints `fold in by hand` sections: merge those into TO's ticket yourself (cited lines move as they are).
    - Split: `ENGINE module new <eng> <PREFIX> --name "<Name>" --after <PREFIX>` per new part; `ENGINE module move <eng> <REQ-ID>... --to <PREFIX>` per part; then `module merge` the old Module into its main part (old folder kept, `merged-into`). Move other sections by hand.
-   - Missing Module: `module new`, then draft its ticket sections from Sources (draft-shapes Module ticket).
+   - Missing Module: `module new`, then draft its ticket sections from Sources (draft-shapes Module ticket). A suggested Template module the Consultant accepted: `module new` too; its purpose is `(proposed, to confirm)` or cites what they relayed [WS-n]; every other section is an Open Item or left for `grill-module`; never its usual needs.
+   - **Template bank fields** (map-logic): `ENGINE template-bank set` for `template:` and every Module whose match the quiz confirmed or changed. Re-match after the moves: renamed Modules, merge targets and split parts each get the Template module that fits them now (or `none`); an accepted suggested Module gets its own.
    - Confirm each kept Module last: `ENGINE module confirm <eng> <PREFIX> [--blocked-by "A, B"]`.
    Exit 1 → read the message, fix the cause, run again.
 3. **Roles** into each Module's `## 2 Roles`; **process skeleton** into `process.md` (review-shapes). Re-run: add sections for new Modules only.
@@ -66,7 +71,7 @@ In this order:
 5. **Plan** into `plan.md` (review-shapes). Re-run: place new Modules only.
 6. **Glossary.** A new Enterprise word from the quiz (renamed Module, role, record) → hand it with its Source to the `enterprise-glossary` skill.
 
-Done when `ENGINE module list <eng>` shows no `draft` and every write above is made.
+Done when `ENGINE module list <eng>` shows no `draft`, `ENGINE template-bank fields <eng>` (Template bank not empty) shows `template` and every work-list Module checked, no `warning` on `template`, and every write above is made.
 
 ## 6. Check
 
@@ -81,6 +86,7 @@ Errors → fix your markdown, run again. Done at exit 0. Completeness warnings f
 Tell the Consultant, short:
 
 - Modules: prefix · name · blockedBy; merged / renamed / split ones with what happened.
+- Template bank: Engagement Template, each Module's Template module or `none`, suggested Modules added.
 - Process: lanes, steps count. Topics: each covered by Requirement, N/A or OI.
 - Plan: Modules per phase; Not yet placed. Weeks are theirs to set.
 - New Open Items (top 5 questions).
