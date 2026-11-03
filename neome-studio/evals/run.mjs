@@ -5,7 +5,8 @@
 //   run.mjs run <case>... | --all [--model <m>] [--judge-model <m>] [--budget <usd>] [--results <dir>] [--branch <b>]
 //     prepare + replay + judge + score, per case. The one command before merging a skill text change to main.
 //   run.mjs list                               case | <name> | ok | <n> problem(s)
-//   run.mjs check [<case>...]                  case layout + golden/replay shape (no LLM). Exit 1 on any problem
+//   run.mjs check [<case>...]                  case layout + golden/replay shape + fixture Template bank checks (no LLM).
+//                                              Exit 1 on any problem
 //   run.mjs prepare <case> [--work <dir>] [--date YYYY-MM-DD] [--branch <b>]
 //     temp workspace: bare remote + clones a, b (plugin without evals/), case Inputs in clone a. Prints `work | <dir>`
 //   run.mjs replay <work> [--from <step-id>] [--model <m>] [--budget <usd>]
@@ -13,13 +14,13 @@
 //   run.mjs judge <work> [--judge-model <m>]   writes run/judge.json (LLM)
 //   run.mjs score <work> [--results <dir>]     deterministic: gates, metrics, regression → results/<date>-<case>.md
 //
-// Lines: `case | …`, `problem | <case> | <text>`, `work | <dir>`, `step | <id> | …`, `result | <case> | pass|fail | <file>`,
+// Lines: `case | …`, `problem | <case> | <text>`, `warning | <case> | <text>`, `note | <case> | <text>`, `work | <dir>`, `step | <id> | …`, `result | <case> | pass|fail | <file>`,
 // `fail | <case> | <failure>`, `done | <n> pass, <n> fail`. Exit 0 = all pass, 1 = any fail or error, 2 = bad arguments.
 // LLM calls go through `claude` (Claude Code CLI, logged in) or NEOME_EVAL_CLAUDE. `npm test` never runs this.
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { EVALS_DIR, caseDir, listCases, loadCase } from "./lib/case.mjs";
+import { EVALS_DIR, bankChecks, caseDir, listCases, loadCase } from "./lib/case.mjs";
 import { prepareWorkspace, readWorkspace, git } from "./lib/workspace.mjs";
 import { replayCase, readLog } from "./lib/replay.mjs";
 import { runJudge } from "./lib/judge.mjs";
@@ -70,8 +71,19 @@ function usage(msg) {
   return 2;
 }
 
-function loaded(name) {
+// Case + its fixture Template bank checks (problems, warnings, or a note when the checks are skipped).
+// TODO(S1 merge): bankChecks skips while engine/template-bank.mjs (slice 1) is not on main; see lib/case.mjs.
+async function checked(name) {
   const k = loadCase(caseDir(name));
+  const b = await bankChecks(k);
+  if (b.skipped) console.log(`note | ${k.name} | Template bank checks skipped: ${b.skipped}`);
+  for (const w of b.warnings) console.log(`warning | ${k.name} | template-bank: ${w}`);
+  k.problems.push(...b.errors.map((e) => `template-bank: ${e}`));
+  return k;
+}
+
+async function loaded(name) {
+  const k = await checked(name);
   for (const p of k.problems) console.log(`problem | ${k.name} | ${p}`);
   return k.problems.length ? null : k;
 }
@@ -121,7 +133,7 @@ function score(info, kase, opts) {
   return r.verdict.pass;
 }
 
-function withWork(opts) {
+async function withWork(opts) {
   if (opts.pos.length !== 1) return { problem: "give one <work> folder" };
   let info;
   try {
@@ -129,7 +141,7 @@ function withWork(opts) {
   } catch (e) {
     return { problem: e.message };
   }
-  const kase = loaded(info.caseDir);
+  const kase = await loaded(info.caseDir);
   return kase ? { info, kase } : { failed: true };
 }
 
@@ -142,7 +154,7 @@ export async function main(argv) {
     const names = cmd === "check" && opts.pos.length ? opts.pos : listCases();
     let bad = 0;
     for (const n of names) {
-      const k = loadCase(caseDir(n));
+      const k = await checked(n);
       if (cmd === "check") for (const p of k.problems) console.log(`problem | ${k.name} | ${p}`);
       console.log(`case | ${k.name} | ${k.problems.length ? `${k.problems.length} problem(s)` : "ok"}`);
       if (k.problems.length) bad++;
@@ -152,14 +164,14 @@ export async function main(argv) {
 
   if (cmd === "prepare") {
     if (opts.pos.length !== 1) return usage("give one <case>");
-    const kase = loaded(opts.pos[0]);
+    const kase = await loaded(opts.pos[0]);
     if (!kase) return 1;
     prepare(kase, opts);
     return 0;
   }
 
   if (cmd === "replay" || cmd === "judge" || cmd === "score") {
-    const w = withWork(opts);
+    const w = await withWork(opts);
     if (w.problem) return usage(w.problem);
     if (w.failed) return 1;
     try {
@@ -183,7 +195,7 @@ export async function main(argv) {
     let pass = 0;
     let fail = 0;
     for (const n of names) {
-      const kase = loaded(n);
+      const kase = await loaded(n);
       let ok = false;
       if (kase) {
         try {

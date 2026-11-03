@@ -1,6 +1,7 @@
 // Eval case: load and check one case folder (neome-studio/evals/<case>/).
 // Layout (ticket 18): inputs/ (anonymised raw Inputs), answer-key.md, golden.json, README.md, plus replay.yaml
-// (the steps the runner replays). Deterministic; no LLM.
+// (the steps the runner replays). Optional template-bank/ (Template bank effort, ticket 10): the case's own
+// fixture Template bank; prepare swaps it into the clones. Deterministic; no LLM.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -23,6 +24,11 @@ const CATALOG = new Set(
   JSON.parse(readFileSync(join(PLUGIN_DIR, "reference", "neome-app-catalog-slugs.json"), "utf8")).apps.map((a) => a.slug),
 );
 export const CASE_FILES = ["README.md", "answer-key.md", "golden.json", "replay.yaml"];
+export const BANK_DIR = "template-bank";
+const BANK_PARTS = ["CHANGELOG.md", "patterns", "template-modules", "templates"];
+const CATALOG_SLUGS = join(PLUGIN_DIR, "reference", "neome-app-catalog-slugs.json");
+// Owned by Template bank build slice 1 (not this slice). Imported only when present.
+const BANK_MODULE = join(PLUGIN_DIR, "engine", "template-bank.mjs");
 
 // Shape errors as "<where> <what>" strings; [] when valid.
 export function shapeErrors(kind, value) {
@@ -55,6 +61,9 @@ export function loadCase(dir) {
   const inputsDir = join(dir, "inputs");
   if (existsSync(inputsDir)) kase.inputs = readdirSync(inputsDir).filter((f) => !f.startsWith(".")).sort();
   if (!kase.inputs.length) problems.push("inputs/ is missing or empty");
+  const bankDir = join(dir, BANK_DIR);
+  kase.bankDir = existsSync(bankDir) ? bankDir : null;
+  if (kase.bankDir) for (const f of BANK_PARTS) if (!existsSync(join(bankDir, f))) problems.push(`${BANK_DIR}/ lacks ${f}`);
   const read = (f) => (existsSync(join(dir, f)) ? readFileSync(join(dir, f), "utf8") : null);
   kase.readme = read("README.md");
   kase.answerKey = read("answer-key.md");
@@ -117,6 +126,11 @@ function goldenRefErrors(golden, inputs, answerKey) {
     for (const p of oi.modules ?? []) if (p !== "All" && !prefixes.has(p)) out.push(`golden ${oi.id}: unknown Module ${p}`);
   }
   for (const m of golden.mechanics ?? []) once(m.id, "mechanic");
+  for (const f of golden.forbidden ?? []) {
+    once(f.id, "forbidden");
+    sources(f);
+    for (const p of f.modules ?? []) if (p !== "All" && !prefixes.has(p)) out.push(`golden ${f.id}: unknown Module ${p}`);
+  }
   return out;
 }
 
@@ -126,4 +140,29 @@ export function goldenRequirements(golden) {
     ...golden.modules.flatMap((m) => m.requirements.map((r) => ({ ...r, module: m.prefix }))),
     ...golden.general.requirements.map((r) => ({ ...r, module: "GEN" })),
   ];
+}
+
+// Template bank checks on the case's fixture (ticket 10: `run.mjs check` runs the npm test bank checks on it).
+// checkBank lives in engine/template-bank.mjs, owned by Template bank build slice 1:
+//   checkBank(bankDir, { catalogSlugsPath, scrubWords }) → { errors, warnings }
+// TODO(S1 merge): drop the "not found" skip once engine/template-bank.mjs is on main; a missing module is then a bug.
+// scrubWords = the case Enterprise's name and folder: the fixture must never hold the case's own answers.
+// Returns { skipped: <why> | null, errors: string[], warnings: string[] }. `load` is for tests.
+export async function bankChecks(kase, { load = () => import(BANK_MODULE) } = {}) {
+  const none = { skipped: null, errors: [], warnings: [] };
+  if (!kase.bankDir) return none;
+  let mod;
+  try {
+    mod = await load();
+  } catch (e) {
+    if (e?.code === "ERR_MODULE_NOT_FOUND" && String(e.message).includes("template-bank.mjs")) {
+      return { ...none, skipped: "engine/template-bank.mjs not found (Template bank slice 1 not merged yet)" };
+    }
+    throw e;
+  }
+  if (typeof mod?.checkBank !== "function") return { ...none, errors: ["engine/template-bank.mjs has no checkBank export"] };
+  const words = [kase.golden?.enterprise?.name, kase.golden?.enterprise?.id].filter(Boolean);
+  const r = (await mod.checkBank(kase.bankDir, { catalogSlugsPath: CATALOG_SLUGS, scrubWords: words })) ?? {};
+  const text = (x) => (typeof x === "string" ? x : (x?.msg ?? x?.message ?? JSON.stringify(x)));
+  return { skipped: null, errors: (r.errors ?? []).map(text), warnings: (r.warnings ?? []).map(text) };
 }

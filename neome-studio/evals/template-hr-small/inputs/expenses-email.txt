@@ -1,0 +1,23 @@
+From: Clara Osei <clara@fernbrook.example>
+To: Asha Rao <asha.rao@neomenta.example>
+Date: 2026-10-21
+Subject: Expense claims - how we want it
+
+Hi Asha,
+
+As promised after Monday's call, here is how expense claims should work. I handle Accounts at Fernbrook.
+
+Today staff fill in a paper form and put the receipts in an envelope on my desk. Receipts get lost and I chase people every month.
+
+What we want:
+
+1. Staff submit a claim from their phone: date, category (Travel, Meals or Site materials), amount in euro, a short description and a photo of the receipt.
+2. Their line manager approves or rejects the claim. The claimant is told either way.
+3. Every Friday I pay the approved claims by bank transfer from the bank's website, then mark them Paid in the new system. The bank stays as it is; I do the transfers myself.
+4. We do not accept claims for spending more than 60 days old. The system should refuse them.
+5. Maya and I want a report each month of spend by category.
+
+Staff should see only their own claims. I see all of them.
+
+Thanks,
+Clara
