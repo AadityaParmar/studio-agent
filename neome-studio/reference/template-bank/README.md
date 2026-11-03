@@ -48,3 +48,5 @@ Errors: front matter shape, body sections, file name = ID, prefix matches folder
 Warning: `replacedBy` target not in Template bank and not replaced later.
 
 "ID gone" (`checkTemplateRef`): a `template:` / `templateModule:` ID not in Template bank = warning, never error; suggests live IDs found by following `replacedBy`.
+
+`reports/<run>.md`: refine run report (each change + reason + who decided), committed by the refine tool. Not read by skills.

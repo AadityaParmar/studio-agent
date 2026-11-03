@@ -32,6 +32,7 @@ Done when on an up-to-date `main` with providers known.
 `TOOL prepare` (`--full` when the maintainer asks to re-cluster from all tag sheets).
 
 - Exit 3, `words | NB-NN | <path> | seeded`: first run for that Build. Ask the maintainer to open the list, add client, people and place names, save. Then re-run prepare. You never read or write the list.
+- Exit 3, `words | NB-NN | <path> | not checked`: the list has no `# checked` line. Ask the maintainer to finish the list and add a line `# checked`. Then re-run prepare.
 - Exit 1, `leak` / `stop` lines: hard stop. Show the lines (they name a word by number, never the word). The maintainer fixes the word list or digest; re-run prepare.
 - Exit 0: note the `run` id and the `tag` lines.
 
@@ -72,7 +73,7 @@ Done when `decide` / `answer` leave no `ask`.
 
 ## 7. Apply
 
-`TOOL apply --run <run>`. It drops old `seenIn` rows of this run's Builds, applies approved changes, follows references, retires entries at zero `seenIn`, appends `CHANGELOG.md` lines (with `replacedBy` for split / merge / rename), then runs the Template bank check with the scrub words, all on a copy. The real Template bank changes only when the copy passes.
+`TOOL apply --run <run>`. It drops old `seenIn` rows of this run's Builds, applies approved changes, follows references, retires entries at zero `seenIn`, appends `CHANGELOG.md` lines (with `replacedBy` for split / merge / rename), then runs the Template bank check with the scrub words, all on a copy. The real Template bank changes only when the copy passes. `--full` run: if entries would retire because the cluster did not list them again, apply prints `retire? | <ID>` lines and stops; show the maintainer the list, and only on their yes re-run with `--confirm-retire`.
 
 `error` lines → Template bank unchanged. A broken reference or empty Template `core` after a dropped change → tell the maintainer; either answer the linked change differently (`answer`) or re-run cluster with the error. Never patch files.
 
@@ -83,7 +84,7 @@ Done when `decide` / `answer` leave no `ask`.
 ## 9. Report and commit
 
 1. `TOOL report --run <run>` → `runs/<run>/report.md`: each applied change + reason + who decided, retired at zero, `seenIn` rows replaced, not applied, tokens.
-2. `TOOL commit --run <run>`: runs `check` (scrub words from `<raw>/scrub/*.txt`) and the leak check on report and commit message; any fail → nothing committed (fix, re-run). Then creates branch `template-bank-refine-<run>`, stages the Template bank folder only, commits `template-bank: refine <run> (<n> changes)`.
+2. `TOOL commit --run <run>`: runs `check` (scrub words from `<raw>/scrub/*.txt`) and the leak check on report and commit message; any fail → nothing committed (fix, re-run). Then creates branch `template-bank-refine-<run>`, copies the report to `reference/template-bank/reports/<run>.md`, stages the Template bank folder only, commits `template-bank: refine <run> (<n> changes)`.
 3. `npm test` on the branch must pass. `TOOL check` runs the same Template bank check with the scrub words any time.
 
 Tell the maintainer: branch, commit, counts per change kind, asks and their answers, retired at zero, tokens total, test result, and the report path. They skim the report and merge. Revert = git.

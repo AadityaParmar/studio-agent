@@ -13,7 +13,7 @@
 //   prepare [--full] [--date YYYY-MM-DD]
 //                              digest + scrub of new / updated Builds, then a new run (runs/<id>/run.json).
 //                              digest | NB-NN | …  ·  scrub | NB-NN | <n> files clean  ·  leak | NB-NN | <file>:<line> | <what>
-//                              words | NB-NN | <list path> | seeded …   (exit 3: maintainer adds names, re-run)
+//                              words | NB-NN | <list path> | seeded … | not checked …   (exit 3: maintainer adds names + `# checked`, re-run)
 //                              tag | NB-NN | new|updated | <n> areas | <tags dir> [| sheets ready]
 //                              removed | NB-NN | its seenIn rows will be dropped  ·  run | <id> | <mode> | <run dir>
 //                              nothing | …   (no new, updated or removed Builds and no --full)
@@ -53,7 +53,7 @@ const PROMPTS = join(TB, "prompts");
 const repoRoot = resolve(here, "..", "..");
 const USE = `Usage: refine-template-bank.mjs <status|prepare|prompt|validate-tags|validate-changes|decide|answer|apply|tokens|report|check|commit> [args] [--raw <dir>] [--bank <dir>] [--run <id>]`;
 const FLAGS = ["raw", "bank", "run", "date", "in", "out", "provider", "model", "note", "catalog"];
-const BOOL = ["full"];
+const BOOL = ["full", "confirm-retire"];
 
 const out = (...parts) => console.log(parts.join(" | "));
 const today = () => new Date().toISOString().slice(0, 10);
@@ -168,6 +168,11 @@ function prepare(ctx) {
       for (const [c, path] of seeded) out("words", c, path, "seeded: add client, people and place names, then re-run prepare");
       return 3;
     }
+    const unchecked = codes.filter((c) => !listChecked(ctx.raw, c));
+    if (unchecked.length) {
+      for (const c of unchecked) out("words", c, join(ctx.raw, "scrub", `${c}.txt`), "not checked: add client, people and place names, then a line `# checked`, then re-run prepare");
+      return 3;
+    }
   }
 
   const fresh = buildStatus(ctx.raw, ctx.bank).rows;
@@ -202,6 +207,12 @@ function prepare(ctx) {
   writeJson(join(dir, "run.json"), { run: id, date, mode: full ? "full" : "incremental", builds });
   out("run", id, full ? "full" : "incremental", dir);
   return 0;
+}
+
+// Word list reviewed by the maintainer: a line `# checked` (seeded lists never have it).
+function listChecked(raw, code) {
+  const p = join(raw, "scrub", `${code}.txt`);
+  return existsSync(p) && readFileSync(p, "utf8").split("\n").some((l) => /^#\s*checked\b/i.test(l.trim()));
 }
 
 // ---------- prompt ----------
@@ -367,6 +378,15 @@ function apply(ctx) {
   const { words, lists } = scrubWords(ctx.raw);
   const noList = runTargets(r.run).filter((code) => !lists.has(code));
   if (noList.length) { out("error", `no scrub word list for ${noList.join(", ")}`); return 1; }
+  if (r.run.mode === "full" && !ctx.flags["confirm-retire"]) {
+    const dry = applyChanges({ bankDir: ctx.bank, changes: approved, drafts: draftsOf(r.dir, approved), refresh: refreshBuilds(r.run), date: r.run.date, scrubWords: words, dryRun: true, ...ctx.checkOpts });
+    const gone = dry.plan?.autoRetired ?? [];
+    if (gone.length) {
+      for (const id of gone) out("retire?", id, "--full: not re-listed by the cluster, seenIn hits zero");
+      out("error", `${gone.length} entr(ies) would retire in a --full run: check them, then re-run apply --confirm-retire`);
+      return 1;
+    }
+  }
   const res = applyChanges({ bankDir: ctx.bank, changes: approved, drafts: draftsOf(r.dir, approved), refresh: refreshBuilds(r.run), date: r.run.date, scrubWords: words, ...ctx.checkOpts });
   if (res.errors.length) { for (const e of res.errors) out("error", e); out("stop", "Template bank unchanged"); return 1; }
   for (const w of res.warnings) out("warning", w);
@@ -504,6 +524,9 @@ function commit(ctx) {
   const bad = [...leaks(text, words).map((l) => `report: ${l}`), ...leaks(msg, words).map((l) => `commit message: ${l}`)];
   if (bad.length) { for (const l of bad) out("error", l); out("stop", "scrub check failed: nothing committed"); return 1; }
   writeFileSync(join(r.dir, "report.md"), text);
+  // The report ships with the commit (scrub-checked above): reports/<run>.md inside the Template bank folder.
+  mkdirSync(join(ctx.bank, "reports"), { recursive: true });
+  writeFileSync(join(ctx.bank, "reports", `${r.run.run}.md`), text);
 
   const top = git(ctx.bank, "rev-parse", "--show-toplevel");
   if (top.code !== 0) { out("error", "Template bank folder is not in a git repo"); return 1; }

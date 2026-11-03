@@ -283,6 +283,11 @@ test("CLI: first mining run end to end on the synthetic Acme Build; output never
   assert.equal(r.code, 3, "first prepare seeds the word list and stops");
   assert.match(r.out, /^words \| NB-01 \| .*scrub\/NB-01\.txt \| seeded/m);
   assert.equal(existsSync(join(raw, "runs")), false, "no run before the maintainer checked the word list");
+  const wl = join(raw, "scrub", "NB-01.txt");
+  r = T("prepare", "--date", "2026-11-03");
+  assert.equal(r.code, 3, "word list without `# checked` still stops");
+  assert.match(r.out, /^words \| NB-01 \| .* \| not checked/m);
+  writeFileSync(wl, readFileSync(wl, "utf8") + "# checked\n");
 
   r = T("prepare", "--date", "2026-11-03");
   assert.equal(r.code, 0, r.out + r.err);
@@ -391,6 +396,7 @@ test("CLI: first mining run end to end on the synthetic Acme Build; output never
   assert.equal(git(repo, env, "log", "-1", "--format=%s"), "template-bank: refine 2026-11-03 (3 changes)");
   const files = git(repo, env, "show", "--name-only", "--format=", "HEAD").split("\n");
   assert.ok(files.every((f) => f.startsWith("neome-studio/reference/template-bank/")), files.join(", "));
+  assert.ok(files.includes("neome-studio/reference/template-bank/reports/2026-11-03.md"), "report committed with the changes");
   assert.equal(git(repo, env, "rev-parse", "main"), git(repo, env, "rev-parse", "HEAD~1"), "main not moved: no merge");
   assert.equal(git(repo, env, "remote"), "", "no push target touched");
   assert.ok(existsSync(join(repo, "stray.txt")), "other work left alone");
@@ -495,4 +501,24 @@ test("docs: driver names every command and stage; README lists the tool; studio 
   assert.match(readme, /neome-studio\/maintainer\/refine-template-bank\.md/);
   assert.ok(!readFileSync(join(plugin, "skills", "studio", "SKILL.md"), "utf8").includes("refine-template-bank"), "studio never names the refine tool");
   for (const f of ["tag", "cluster", "review", "shapes"]) assert.ok(existsSync(join(plugin, "maintainer", "template-bank", "prompts", `${f}.md`)));
+});
+
+test("apply --full: entries the cluster did not re-list would retire → refused until --confirm-retire", () => {
+  const root = box();
+  const raw = join(root, "raw");
+  const bank = writeBank(join(root, "template-bank"), START(), START_LOG);
+  const dir = join(raw, "runs", "2026-11-04");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "run.json"), JSON.stringify({ run: "2026-11-04", date: "2026-11-04", mode: "full", builds: [] }));
+  writeFileSync(join(dir, "changes.yaml"), stringify({ changes: [] }));
+  writeFileSync(join(dir, "decisions.json"), "[]");
+  const T = (...a) => run([...a, "--raw", raw, "--bank", bank, "--catalog", CATALOG, "--run", "2026-11-04"]);
+  let r = T("apply");
+  assert.equal(r.code, 1, r.out + r.err);
+  assert.match(r.out, /^retire\? \| TMOD-widgets \| --full/m);
+  assert.match(r.out, /re-run apply --confirm-retire/);
+  assert.equal(loadBank(bank).entries.length, START().length, "Template bank unchanged");
+  r = T("apply", "--confirm-retire");
+  assert.equal(r.code, 0, r.out + r.err);
+  assert.equal(loadBank(bank).entries.length, 0);
 });

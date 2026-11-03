@@ -71,7 +71,7 @@ export function seedWordList({ name, about }) {
   return [
     "# Scrub word list. One word or phrase per line; # starts a comment.",
     "# Matched case-insensitive, also inside longer names (\"Acme\" hits \"AcmeOrders\"). Keep generic words out.",
-    "# Seeded from Build name + about. Add client, people and place names, then re-run scrub.",
+    "# Seeded from Build name + about. Add client, people and place names, then a line `# checked`, then re-run.",
     ...words,
     "",
   ].join("\n");
