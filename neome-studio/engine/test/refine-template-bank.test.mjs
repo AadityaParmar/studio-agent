@@ -295,7 +295,7 @@ test("CLI: first mining run end to end on the synthetic Acme Build; output never
   assert.match(r.out, /^tag \| NB-01 \| new \| 3 areas \| /m);
   assert.match(r.out, /^run \| 2026-11-03 \| incremental \| /m);
   const dir = join(raw, "runs", "2026-11-03");
-  assert.deepEqual(JSON.parse(readFileSync(join(dir, "run.json"), "utf8")), { run: "2026-11-03", date: "2026-11-03", mode: "incremental", builds: [{ code: "NB-01", state: "new", version: 7, areas: 3 }] });
+  assert.deepEqual(JSON.parse(readFileSync(join(dir, "run.json"), "utf8")), { run: "2026-11-03", date: "2026-11-03", mode: "incremental", builds: [{ code: "NB-01", state: "new", version: "7", areas: 3 }] });
 
   r = T("prompt", "tag", "NB-01");
   assert.equal(r.code, 0, r.out + r.err);
@@ -403,10 +403,11 @@ test("CLI: first mining run end to end on the synthetic Acme Build; output never
 
   // Updated Build: same NB code, old tag sheets kept aside, re-tag needed.
   const ent = JSON.parse(readFileSync(acme, "utf8"));
-  ent.payload.studioEnt.version = 8;
+  ent.payload.studioEnt.version = "xxy30tipDBW0IhSS0ve";
+  ent.payload.studioEnt.versionCode = 8;
   writeFileSync(join(raw, "client-export.json"), JSON.stringify(ent));
   r = T("status");
-  assert.match(r.out, /^build \| NB-01 \| updated \| v8 \(tagged v7\)$/m);
+  assert.match(r.out, /^build \| NB-01 \| updated \| vxxy30tipDBW0IhSS0ve \(tagged v7\)$/m);
   r = T("prepare", "--date", "2026-11-03");
   assert.equal(r.code, 0, r.out + r.err);
   assert.match(r.out, /^tag \| NB-01 \| updated \| 3 areas \| /m);

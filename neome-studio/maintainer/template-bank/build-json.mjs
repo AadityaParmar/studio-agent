@@ -17,6 +17,11 @@ export function parseBuild(text) {
   return ent;
 }
 
+/** Build version ID as text (real exports: opaque string ID; old fixtures: number). */
+export const versionId = (ent) => String(ent.version);
+/** Number for newest-first ordering: versionCode when present, else numeric version, else 0. */
+const versionOrder = (ent) => (Number.isFinite(Number(ent.versionCode)) && ent.versionCode != null ? Number(ent.versionCode) : Number.isFinite(Number(ent.version)) ? Number(ent.version) : 0);
+
 /**
  * Dedupe [{file, ent}] by entId + version; of several versions of one entId keep the newest
  * (a Build keeps one Build code). Returns {builds, skipped:[{file, reason}]}, input order kept.
@@ -27,7 +32,8 @@ export function pickBuilds(entries) {
   for (const e of entries) {
     const cur = best.get(e.ent.entId);
     if (!cur) { best.set(e.ent.entId, e); continue; }
-    const [a, b] = [Number(e.ent.version), Number(cur.ent.version)];
+    if (String(e.ent.version) === String(cur.ent.version)) { skipped.push({ file: e.file, reason: `duplicate of ${cur.file}` }); continue; }
+    const [a, b] = [versionOrder(e.ent), versionOrder(cur.ent)];
     if (a === b) skipped.push({ file: e.file, reason: `duplicate of ${cur.file}` });
     else if (a < b) skipped.push({ file: e.file, reason: `older version than ${cur.file}` });
     else { skipped.push({ file: cur.file, reason: `older version than ${e.file}` }); best.set(e.ent.entId, e); }

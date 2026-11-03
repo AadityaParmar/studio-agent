@@ -182,7 +182,7 @@ function prepare(ctx) {
     const code = row.code;
     const ready = sheetsReady(ctx.raw, code);
     const dir = tagDir(ctx.raw, code);
-    if (!(ready && Number(ready.version) === row.version) && existsSync(dir)) {
+    if (!(ready && String(ready.version) === row.version) && existsSync(dir)) {
       const old = tagged(ctx.raw, code);
       if (old) {
         let dest = join(ctx.raw, "tags-old", `${code}-v${old.version}`);
@@ -193,7 +193,7 @@ function prepare(ctx) {
     }
     mkdirSync(dir, { recursive: true });
     const areas = areaFiles(ctx.raw, code);
-    const isReady = ready && Number(ready.version) === row.version;
+    const isReady = ready && String(ready.version) === row.version;
     builds.push({ code, state: t.state, version: row.version, areas: areas.length });
     out("tag", code, t.state, `${areas.length} areas`, dir, ...(isReady ? ["sheets ready"] : []));
   }

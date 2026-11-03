@@ -20,7 +20,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { parse } from "yaml";
-import { parseBuild, pickBuilds } from "./build-json.mjs";
+import { parseBuild, pickBuilds, versionId } from "./build-json.mjs";
 import { parseWordList } from "./scrub.mjs";
 import { loadBank } from "../../engine/template-bank.mjs";
 
@@ -46,7 +46,7 @@ export function rawBuilds(raw) {
     catch { unreadable.push(file); }
   }
   const { builds } = pickBuilds(entries);
-  return { builds: builds.map((b) => ({ file: b.file, entId: b.ent.entId, version: Number(b.ent.version) })), unreadable };
+  return { builds: builds.map((b) => ({ file: b.file, entId: b.ent.entId, version: versionId(b.ent) })), unreadable };
 }
 
 /** {code, version, sheets} of the last validated tagging, or null. */
@@ -76,8 +76,8 @@ export function buildStatus(raw, bankDir) {
     const code = codeOf.get(b.entId) ?? null;
     if (code) seen.add(code);
     const t = code ? tagged(raw, code) : null;
-    const state = !t ? "new" : Number(t.version) !== b.version ? "updated" : "current";
-    rows.push({ code, state, version: b.version, taggedVersion: t ? Number(t.version) : null, file: b.file });
+    const state = !t ? "new" : String(t.version) !== b.version ? "updated" : "current";
+    rows.push({ code, state, version: b.version, taggedVersion: t ? String(t.version) : null, file: b.file });
   }
   const gone = new Set([...dirs(join(raw, "tags"), CODE).filter((c) => tagged(raw, c)), ...bankBuilds(bankDir)]);
   for (const code of [...gone].sort()) {

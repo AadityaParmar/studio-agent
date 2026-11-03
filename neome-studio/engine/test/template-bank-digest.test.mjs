@@ -162,6 +162,16 @@ test("dedupe by entId + version; older version of same entId skipped", () => {
   assert.deepEqual(r2.builds.map((x) => x.file), ["a.json"], "newer version wins whatever the order");
 });
 
+test("real exports: version is a string ID, versionCode orders; same ID = duplicate", () => {
+  const a = load(), b = load(), old = load();
+  a.version = "RebpBQwnImW4kLcNjrv"; a.versionCode = 5;
+  b.version = "RebpBQwnImW4kLcNjrv"; b.versionCode = 5;
+  old.version = "sU85XXPpNanZmlpWpux"; old.versionCode = 1;
+  const r = pickBuilds([{ file: "old.json", ent: old }, { file: "a.json", ent: a }, { file: "b.json", ent: b }]);
+  assert.deepEqual(r.builds.map((x) => x.file), ["a.json"]);
+  assert.deepEqual(r.skipped, [{ file: "old.json", reason: "older version than a.json" }, { file: "b.json", reason: "duplicate of a.json" }]);
+});
+
 test("Build codes: stable per entId, seeded from NB map by name, next free number", () => {
   const ents = [{ entId: "e1", details: { name: "One" } }, { entId: "e2", details: { name: "Two Co" } }, { entId: "e3", details: { name: "Three" } }];
   const reg = assignCodes(ents, { "NB-01": { entId: "e1", name: "One" } }, "NB-04 Two Co (file: x)\nNB-02 Other\n");
