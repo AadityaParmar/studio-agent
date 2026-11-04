@@ -8,6 +8,8 @@ Locked spec for plugin v3: the studio runs end to end, Inputs → resolved Modul
 
 Combined spec: [spec.md](spec.md) (all decisions + 10 build slices). Route clear 2026-11-04; only [Check the build](issues/07-check-build.md) on hold.
 
+**Handed off 2026-11-04:** slices 1–2 built (`55fa224`, `e4040f2`); slices 3–10 continue as [Implementation v3 build map](../implementation-v3/map.md).
+
 ## Notes
 
 - Plugin change: follow `docs/route.md`. Gate `npm test` + evals. Terms per `GLOSSARY.md`.
