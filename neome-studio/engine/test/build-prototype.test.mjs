@@ -90,7 +90,7 @@ test("offline: no external JS, CSS, fonts or requests; system font fallback; in 
   assert.match(html, />Reset</);
 });
 
-test("banner: PROTOTYPE, Enterprise, prefix, Requirement and Open Item counts, indicative Neome App + Delivery", () => {
+test("header: Module, Enterprise, not-live tag; counts and indicative Neome App + Delivery only in Consultant mode", () => {
   const { eng } = copy();
   build(eng);
   const m = modelOf(readFileSync(view(eng), "utf8"));
@@ -103,7 +103,8 @@ test("banner: PROTOTYPE, Enterprise, prefix, Requirement and Open Item counts, i
   assert.equal(m.app, "Quotation & Order Flow");
   assert.equal(m.delivery, "Configuration");
   const js = readFileSync(join(plugin, "engine", "prototype", "proto.js"), "utf8");
-  for (const s of ["<b>PROTOTYPE</b>", "Requirements · ", "Open Items · ", "indicative", "Neome App: "]) assert.ok(js.includes(s), s);
+  for (const s of ["Prototype · not the live app", "how it will work in Neome", "All names and records are made-up examples", "our suggestion, please confirm", "Requirements · ", "Open Items · ", "indicative", "Neome App: "]) assert.ok(js.includes(s), s);
+  assert.match(js, /cinfo c-only/);
 });
 
 test("App data: sheet + kanban by status, roles for the switcher, an action per transition, bot notification to the next role", () => {
@@ -137,11 +138,11 @@ test("chips: proposed fields, roles, statuses and transitions from the spec; OI 
   // QUO-02 has OIs OI-01 (closed) and OI-10 (open): only the open one gets a chip.
   assert.deepEqual(m.requirements.find((r) => r.id === "QUO-02").ois, ["OI-10"]);
   const js = readFileSync(join(plugin, "engine", "prototype", "proto.js"), "utf8");
-  assert.match(js, /chip prop[^]*proposed/);
-  assert.match(js, /chip oi/);
-  assert.match(js, /chip sample[^]*>sample</);
-  assert.match(js, /chip guess[^]*>guessed</);
-  assert.match(js, /Approve from bot chat · guessed/);
+  // Proposed = dotted underline; open question = "?" (OI id only in Consultant mode); chat layout marked guessed.
+  assert.match(js, /class="sug" title="Our suggestion, please confirm"/);
+  assert.match(js, /class="qmark"[^]*chip oi c-only/);
+  assert.match(js, /layout guessed/);
+  assert.doesNotMatch(js, /chip sample/);
 });
 
 test("scenarios: guided steps with actor, action, screen and what each step proves; all proposed", () => {
@@ -154,8 +155,7 @@ test("scenarios: guided steps with actor, action, screen and what each step prov
     { actor: "Sales head", screen: "chat", transition: "waiting-approval>sent", status: "sent", proves: ["QUO-02"], oi: "OI-10" });
   assert.deepEqual(s.notify, ["Sales exec"]);
   const js = readFileSync(join(plugin, "engine", "prototype", "proto.js"), "utf8");
-  assert.match(js, /proposed by Neomenta, to confirm/);
-  assert.match(js, /This step proves/);
+  for (const s of ["What this shows", "Behind the scenes", "Who gets a message", "Does this look right?", "Question for you", "Next story ›"]) assert.ok(js.includes(s), s);
 });
 
 test("done check: every Requirement shows in at least one tab; every transition is in at least one scenario", () => {
@@ -164,12 +164,88 @@ test("done check: every Requirement shows in at least one tab; every transition 
   const m = modelOf(readFileSync(view(eng), "utf8"));
   for (const r of m.requirements) {
     assert.ok(m.trace[r.id].length >= 1, `${r.id} traced`);
-    for (const p of m.trace[r.id]) assert.ok(["app", "scen", "mob"].includes(p.tab));
+    for (const p of m.trace[r.id]) assert.ok(["how", "try"].includes(p.tab));
   }
   const inScenario = new Set(m.scenarios.flatMap((sc) => sc.steps.map((s) => s.transition)));
   for (const t of m.transitions) assert.ok(inScenario.has(t.id), `${t.id} in a scenario`);
   // Mobile + trace: phones for every key role (acts on or is told about a transition).
   assert.deepEqual(m.roles.filter((r) => r.key).map((r) => r.role), ["Sales exec", "Sales head", "Accounts"]);
+});
+
+// Builds after a data edit and returns the page model.
+function modelAfter(fn = () => {}) {
+  const { eng } = copy();
+  editData(eng, fn);
+  const r = build(eng);
+  assert.equal(r.code, 0, r.out);
+  return modelOf(readFileSync(view(eng), "utf8"));
+}
+
+test("steps: label defaults to the button name, else first 4 words; explicit label kept", () => {
+  let m = modelAfter();
+  assert.equal(m.scenarios[0].steps[0].label, "Send PDF");
+  assert.equal(m.scenarios[2].steps[1].label, "Arjun sees Q-1040 back…");
+  assert.equal(m.scenarios[6].steps[0].label, "Meera opens Quotations to…");
+  m = modelAfter((d) => { d.scenarios[0].steps[0].label = "Send it"; });
+  assert.equal(m.scenarios[0].steps[0].label, "Send it");
+});
+
+test("steps: label over 40 chars refused", () => {
+  refused((d) => { d.scenarios[0].steps[0].label = "x".repeat(41); }, /label is 41 chars \(max 40\)/);
+});
+
+test("steps: behind and notify optional; derived when missing; notify must be roles", () => {
+  let m = modelAfter();
+  const submit = m.scenarios[1].steps[0];
+  assert.deepEqual(submit.behind, [
+    "Discount above 8% → Waits for the sales head; sales head told",
+    "Contractor has an invoice overdue over 60 days → Waits for accounts OK",
+  ]);
+  assert.deepEqual(submit.notify, ["Sales head", "Accounts"]);
+  assert.deepEqual(m.scenarios[2].steps[1].behind, []);
+  assert.deepEqual(m.scenarios[2].steps[1].notify, []);
+  m = modelAfter((d) => { d.scenarios[2].steps[1].behind = ["A"]; d.scenarios[2].steps[1].notify = ["Accounts"]; });
+  assert.deepEqual(m.scenarios[2].steps[1].behind, ["A"]);
+  assert.deepEqual(m.scenarios[2].steps[1].notify, ["Accounts"]);
+  refused((d) => { d.scenarios[0].steps[0].notify = ["Boss"]; }, /notify "Boss" is not a role in section 2/);
+  refused((d) => { d.scenarios[0].steps[0].behind = "x"; }, /behind must be a list/);
+});
+
+test("steps: create step = first touch of a start-status row by its owner, no transition", () => {
+  const m = modelAfter((d) => {
+    d.scenarios[1].steps.unshift({ actor: "Sales exec", action: "Makes Q-1044 at 12%", row: "Q-1044", proves: [] });
+    d.scenarios[1].steps.push({ actor: "Sales exec", action: "Looks at Q-1044 again", row: "Q-1044", proves: [] });
+  });
+  const [make, submit, , again] = m.scenarios[1].steps;
+  assert.equal(make.create, true);
+  assert.equal(make.from, null);
+  assert.equal(make.status, "draft");
+  assert.deepEqual(make.behind, ["Number is filled in by Neome"]);
+  assert.equal(submit.create, false);
+  assert.equal(submit.from, "draft");
+  assert.equal(again.create, false);
+  // A step by a role that does not own the start status is never a create step.
+  assert.equal(m.scenarios[2].steps[1].create, false);
+});
+
+test("scenarios: kind, lanes and proposed steps", () => {
+  const m = modelAfter();
+  assert.deepEqual(m.scenarios.map((s) => s.kind),
+    ["normal flow", "open question", "other case", "other case", "open question", "open question", "report"]);
+  assert.deepEqual(m.scenarios[1].lanes, ["Sales exec", "Sales head"]);
+  assert.deepEqual(m.scenarios[2].lanes, ["Sales exec", "Accounts"]);
+  assert.deepEqual(m.scenarios[4].lanes, ["system"]);
+  // waiting-approval → draft is "(proposed, to confirm)" in the spec.
+  assert.equal(m.scenarios[2].steps[0].proposed, true);
+  assert.equal(m.scenarios[1].steps[0].proposed, false);
+});
+
+test("trace: places are in How it works or Try it (phone places marked)", () => {
+  const m = modelAfter();
+  const all = Object.values(m.trace).flat();
+  assert.ok(all.some((p) => p.tab === "how" && Number.isInteger(p.sc) && Number.isInteger(p.step)));
+  assert.ok(all.some((p) => p.tab === "try" && p.phone === true && p.role));
+  assert.ok(all.some((p) => p.tab === "try" && !p.phone));
 });
 
 test("done check fails: a Requirement in no tab", () => {
@@ -305,69 +381,124 @@ try {
   // No Chrome here: the eyeball checklist covers it.
 }
 
-test("headless Chrome: tabs render, actions work, every Requirement lights up somewhere, reset, no errors or requests", { skip: !puppeteer && "puppeteer not installed" }, async () => {
+test("headless Chrome: how it works, try it, by role, questions, consultant mode, no errors or requests", { skip: !puppeteer && "puppeteer not installed" }, async () => {
   const { eng } = copy();
   assert.equal(build(eng).code, 0);
+  const m = modelOf(readFileSync(view(eng), "utf8"));
   const browser = await puppeteer.launch({ headless: true, args: process.platform === "linux" ? ["--no-sandbox"] : [] });
   try {
     const page = await browser.newPage();
     const problems = [];
     page.on("pageerror", (e) => problems.push(`pageerror ${e.message}`));
-    page.on("console", (m) => m.type() === "error" && problems.push(`console ${m.text()}`));
+    page.on("console", (msg) => msg.type() === "error" && problems.push(`console ${msg.text()}`));
     page.on("request", (q) => !q.url().startsWith("file:") && problems.push(`request ${q.url()}`));
     await page.setViewport({ width: 1440, height: 900 });
     await page.goto(pathToFileURL(view(eng)).href);
     const text = () => page.evaluate(() => document.body.innerText);
     const click = async (sel) => { await page.click(sel); };
 
-    // Banner + App: kanban by status, record drawer, working action, bot notification to the next role.
+    // Header + How it works: flow map of scenario 1, step 1, hotspot on the button pressed.
     let t = await text();
-    for (const s of ["PROTOTYPE", "Harbor Tiles", "QUO", "7 Requirements", "5 Open Items", "Quotation & Order Flow", "Configuration · indicative", "Draft (2)", "Waiting approval (1)"]) assert.ok(t.includes(s), s);
-    await click('[data-on="open"][data-row="Q-1044"]');
+    for (const s of ["Quotations", "Harbor Tiles", "Prototype · not the live app", "How it works", "Questions for you", "Step 1 of 2"]) assert.ok(t.includes(s), s);
+    assert.match(t, /who gets a message/i);
+    assert.equal((await page.$$(".box")).length, m.scenarios[0].steps.length);
+    assert.equal((await page.$$(".hot")).length, 1, "hotspot on Send PDF");
+    assert.ok(t.includes("Arjun presses Send PDF"));
+    // Customer view: no studio words, no OI ids.
+    assert.doesNotMatch(t, /\bOI-\d|Requirement|transition|\bQUO-0\d/);
+    // Click a flow box; the step moves.
+    await click('[data-on="scen"][data-sc="1"]');
+    await click('.box[data-i="1"]');
     t = await text();
-    assert.ok(t.includes("DETAILS") && t.includes("ACTIVITY") && t.includes("Green Villa Interiors"));
+    assert.ok(t.includes("Step 2 of 2") && /question for you/i.test(t) && t.includes("When the sales head is away"));
+    assert.ok(t.includes("Meera presses Approve and send"), "hotspot in the bot chat");
+    // Next walks every step of every scenario and wraps to the start.
+    await click('[data-on="scen"][data-sc="0"]');
+    const total = m.scenarios.reduce((a, sc) => a + sc.steps.length, 0);
+    for (let i = 0; i < total; i++) await click('[data-on="step"][data-d="1"]');
+    t = await text();
+    assert.ok(t.includes("Step 1 of 2") && t.includes("Small discount"), "wrapped to story 1");
+    // Step feedback.
+    await click('[data-on="fb"][data-v="change"]');
+    await page.type('textarea[data-change="note"]', "PDF needs GST");
+
+    // Try it: role chips, kanban, guarded action, working action, bot message to the next role, phone, reset.
+    await click('[data-on="tab"][data-v="try"]');
+    t = await text();
+    assert.ok(t.includes("Draft (2)") && t.includes("Waiting approval (1)") && t.includes("Arjun can:"));
+    await click('[data-on="open"][data-row="Q-1044"]');
     assert.ok(await page.$('button[data-on="act"][data-t="draft>sent"][disabled]'), "Send PDF blocked by the 8% rule");
     await click('button[data-on="act"][data-t="draft>waiting-approval"]');
     t = await text();
-    assert.ok(t.includes("Waiting approval (2)") && t.includes("Waiting on Sales head, Accounts"));
-    await page.select('[data-change="role"]', "Sales head");
+    assert.ok(t.includes("Waiting approval (2)") && t.includes("Waiting on Meera, Joel"));
+    await click('[data-on="role"][data-role="Sales head"]');
     t = await text();
-    assert.ok(/Waiting approval!\s*Q-1044: Submit for approval by Arjun \(Sales exec\)/.test(t), "bot notification to the next role");
-    // Sample marks.
-    assert.ok((await page.$$(".chip.sample")).length >= 8);
+    assert.ok(/Waiting approval!\s*Q-1044: Submit for approval by Arjun \(Sales exec\)/.test(t), "bot message to the next role");
+    await click('[data-on="device"][data-v="phone"]');
+    assert.equal((await page.$$(".phone")).length, 3);
+    await click('[data-on="reset"]');
+    await click('[data-on="device"][data-v="desk"]');
+    t = await text();
+    assert.ok(t.includes("Draft (2)") && t.includes("Waiting approval (1)"));
 
-    // Scenarios: steps, proof, coverage, OI callout, next role's phone.
-    await click('[data-on="tab"][data-v="scen"]');
-    await click('[data-on="scen"][data-sc="1"]');
-    await click('[data-on="step"][data-d="1"]');
+    // By role: each role's buttons; See it as → Try it.
+    await click('[data-on="tab"][data-v="role"]');
     t = await text();
-    for (const s of ["THIS STEP PROVES", "OI-10 open:", "Approve and send", "Neome tells the next role", "guessed"]) assert.ok(t.includes(s), s);
-    assert.ok(!t.includes("✗"), "coverage lists show no gaps");
+    for (const s of ["Submit for approval", "Approve and send", "See it as Joel"]) assert.ok(t.includes(s), s);
+    assert.match(t, /gets a message when/i);
+    await click('[data-on="seeas"][data-role="Accounts"]');
+    assert.ok((await text()).includes("Joel can:"));
 
-    // Mobile + trace: phones per key role; each Requirement's places light up at least one element.
-    await click('[data-on="tab"][data-v="mob"]');
+    // Questions: answer, copy as text for a PF Input.
+    await click('[data-on="tab"][data-v="q"]');
+    await page.type('textarea[data-change="answer"][data-key="OI-10"]', "Kochi manager");
+    await click('[data-on="copy"]');
+    const out = await page.$eval("#copy-out", (el) => el.value);
+    assert.match(out, /^Prototype feedback · Harbor Tiles · QUO Quotations/);
+    assert.match(out, /Q OI-10: When the sales head is away[^\n]*\nA: Kochi manager/);
+    assert.match(out, /Q OI-03: [^\n]*\nA: \(no answer\)/);
+    assert.match(out, /step 1 \(Arjun \(Sales exec\): [^)]*\): Needs change: PDF needs GST/);
+
+    // Consultant mode: IDs + coverage + trace; every Requirement lights up somewhere.
+    await click('[data-change="consult"]');
     t = await text();
-    assert.ok(t.includes("REQUIREMENT TRACE") && t.includes("home · bot notifications") && t.includes("record"));
-    const ids = await page.$$eval('.C-trace .r[data-on="trace"]', (els) => els.map((e) => e.dataset.id));
+    assert.ok(t.includes("7 Requirements") && t.includes("Configuration · indicative") && /requirement trace/i.test(t));
+    assert.ok(!t.includes("✗"), "every status change is in a story");
+    const ids = await page.$$eval('.trace .r[data-on="trace"]', (els) => els.map((e) => e.dataset.id));
     assert.equal(ids.length, 7);
     for (const id of ids) {
-      await click('[data-on="tab"][data-v="mob"]');
-      const n = await page.$$eval(`.C-trace a[data-on="goto"][data-id="${id}"]`, (els) => els.length);
+      const n = await page.$$eval(`.trace a[data-on="goto"][data-id="${id}"]`, (els) => els.length);
       let lit = 0;
       for (let i = 0; i < n && !lit; i++) {
-        await click('[data-on="tab"][data-v="mob"]');
-        await click(`.C-trace a[data-on="goto"][data-id="${id}"][data-i="${i}"]`);
+        await click(`.trace a[data-on="goto"][data-id="${id}"][data-i="${i}"]`);
         lit = (await page.$$(".hl")).length;
       }
       assert.ok(lit > 0, `${id} lights up somewhere`);
     }
+    assert.deepEqual(problems, []);
+  } finally {
+    await browser.close();
+  }
+});
 
-    // Reset puts the sample data back.
-    await click('[data-on="reset"]');
-    await click('[data-on="tab"][data-v="app"]');
-    await click('[data-on="clear"]');
-    t = await text();
-    assert.ok(t.includes("Draft (2)") && t.includes("Waiting approval (1)"));
+test("headless Chrome: a sheet-only Module (no statuses) renders every tab", { skip: !puppeteer && "puppeteer not installed" }, async () => {
+  const { eng } = copy();
+  assert.equal(build(eng).code, 0);
+  const m = modelOf(readFileSync(view(eng), "utf8"));
+  m.statuses = [];
+  m.transitions = [];
+  for (const r of m.rows) r.status = null;
+  for (const sc of m.scenarios) for (const s of sc.steps) { s.transition = null; s.status = null; s.from = null; s.notify = []; }
+  const { renderPrototypeHtml } = await import(pathToFileURL(join(plugin, "engine", "prototype", "render.mjs")).href);
+  const browser = await puppeteer.launch({ headless: true, args: process.platform === "linux" ? ["--no-sandbox"] : [] });
+  try {
+    const page = await browser.newPage();
+    const problems = [];
+    page.on("pageerror", (e) => problems.push(e.message));
+    await page.setContent(renderPrototypeHtml(m));
+    for (const v of ["try", "role", "q", "how"]) await page.click(`[data-on="tab"][data-v="${v}"]`);
+    await page.click('[data-on="tab"][data-v="try"]');
+    assert.ok((await page.evaluate(() => document.body.innerText)).includes("8 records"));
     assert.deepEqual(problems, []);
   } finally {
     await browser.close();

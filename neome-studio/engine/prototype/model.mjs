@@ -6,6 +6,9 @@
 const KEYS = ["entity", "roles", "fields", "transitions", "rules", "reports", "rows", "scenarios"];
 const SCREENS = ["record", "sheet", "kanban", "chat", "report", "rules"];
 const OPS = ["<", "<=", ">", ">=", "=", "!="];
+const MAX_LABEL = 40;
+// Field notes that mean the system fills the field in (shown on a create step).
+const AUTO_FIELD = /\b(auto[- ]?\w*|automatic(ally)?|(given|set|filled( in)?) by (the )?system|set automatically)\b/i;
 const TONES = ["blue", "lav", "green", "pink", "amber"];
 const DELIVERY = { standard: "Standard", configuration: "Configuration", custom: "Custom module" };
 export const MIN_ROWS = 4;
@@ -75,7 +78,8 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
     entity: r.entity,
     fields: r.fields.map((f) => ({
       name: f.name, type: f.type, required: f.required, notes: f.notes ?? "", choices: f.choices ?? null,
-      linkTo: f.linkTo ?? null, proposed: f.proposed, reqs: [], oi: null, ...overlay.get(`${r.entity}|${f.name}`),
+      linkTo: f.linkTo ?? null, proposed: f.proposed, auto: AUTO_FIELD.test(f.notes ?? ""), reqs: [], oi: null,
+      ...overlay.get(`${r.entity}|${f.name}`),
     })),
   }));
 
@@ -205,8 +209,14 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
   // ---- scenarios ----
   const scIn = list(pd.scenarios, "scenarios", "scenarios");
   if (!scIn.length) err("scenarios: write at least one");
+  const startIds = new Set(statuses.filter((s) => s.start).map((s) => s.id));
+  const ruleByName = new Map(rules.map((r) => [r.rule, r]));
+  const autoFields = (records.find((r) => r.entity === entity)?.fields ?? []).filter((f) => f.auto).map((f) => `${f.name} is filled in by Neome`);
+  const statusProposed = new Map(statuses.map((s) => [s.id, s.proposed]));
+  const roleProposed = new Map(roles.map((r) => [r.role, r.proposed]));
   const scenarios = scIn.map((sc, i) => {
     const where = `scenarios[${i}]`;
+    const touched = new Set();
     if (!text(sc?.title).trim()) err(`${where}: "title" missing`);
     const stepsIn = list(sc?.steps, where, "steps");
     if (!stepsIn.length) err(`${where}: needs at least one step`);
@@ -222,6 +232,7 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
       const row = s?.row ?? null;
       if (row !== null && !rowIds.has(row)) err(`${w}: unknown row "${row}"`);
       if (row === null && ["record", "chat"].includes(screen)) err(`${w}: screen ${screen} needs a "row"`);
+      const from = row !== null ? state.get(row) ?? null : null;
       let t = null;
       if (s?.transition !== undefined) {
         t = tById.get(tid(s.transition?.from, s.transition?.to)) ?? null;
@@ -235,13 +246,39 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
           state.set(row, t.to);
         }
       }
+      // Create step: the first time this scenario touches a row still in a start status, by a role that acts
+      // on that status, with no transition. The page shows it as a New form with a Save button.
+      const create = row !== null && !t && !touched.has(row) && startIds.has(from) && actors(from).includes(actor);
+      if (row !== null) touched.add(row);
+      const label = s?.label !== undefined ? text(s.label).trim() : t ? t.action : shortLabel(text(s?.action));
+      if (label.length > MAX_LABEL) err(`${w}: label is ${label.length} chars (max ${MAX_LABEL})`);
+      let behind;
+      if (s?.behind !== undefined) behind = list(s.behind, w, "behind").map(text);
+      else if (t) {
+        behind = [
+          ...t.rules.map((n) => ruleByName.get(n)).filter(Boolean).map((r) => `${plainText(r.when)} → ${plainText(r.action)}`),
+          ...t.guard.map((g) => `Only when ${g.field} ${g.op} ${g.value}`),
+        ];
+      } else behind = create ? autoFields : [];
+      let notify = t?.notify ?? [];
+      if (s?.notify !== undefined) {
+        notify = list(s.notify, w, "notify");
+        for (const n of notify) if (!roleNames.has(n)) err(`${w}: notify "${n}" is not a role in section 2`);
+      }
+      const proposed = Boolean((t && t.proposed) || roleProposed.get(actor) || (t && statusProposed.get(t.to)));
       return {
-        actor, action: text(s?.action), screen, row, report: s?.report ?? null,
-        transition: t?.id ?? null, status: row !== null ? state.get(row) : null, notify: t?.notify ?? [],
-        proves: reqs(s?.proves, w), oi: oi(s?.oi, w),
+        actor, action: text(s?.action), label, screen, row, report: s?.report ?? null,
+        transition: t?.id ?? null, from: t ? t.from : create ? null : from, status: row !== null ? state.get(row) : null, notify,
+        behind, create, proposed, proves: reqs(s?.proves, w), oi: oi(s?.oi, w),
       };
     });
-    return { title: text(sc?.title), summary: text(sc?.summary), steps };
+    const acting = new Set(steps.map((s) => s.actor));
+    const lanes = [...roles.map((r) => r.role).filter((r) => acting.has(r)), ...(acting.has("system") ? ["system"] : [])];
+    const kind = i === 0 ? "normal flow"
+      : steps.some((s) => s.oi) ? "open question"
+      : steps.every((s) => !s.transition) && steps.some((s) => s.screen === "report") ? "report"
+      : "other case";
+    return { title: text(sc?.title), summary: text(sc?.summary), kind, lanes, steps };
   });
 
   // ---- done check ----
@@ -249,20 +286,21 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
   for (const t of transitions) if (!inScenario.has(t.id)) err(`done check: transition ${t.from} → ${t.to} is in no scenario`);
   const trace = Object.fromEntries(live.map((r) => [r.id, []]));
   const place = (ids, where) => ids.forEach((id) => trace[id]?.push(where));
-  for (const r of roles) place(r.reqs, { tab: "app", what: `Role switcher: ${r.role}` });
-  for (const r of roles.filter((x) => x.key)) place(r.reqs, { tab: "mob", what: `Phones: ${r.role}`, role: r.role });
+  // Places: "how" = How it works (scenario step), "try" = Try it (desktop, or phone: true).
+  for (const r of roles) place(r.reqs, { tab: "try", what: `Role switcher: ${r.role}` });
+  for (const r of roles.filter((x) => x.key)) place(r.reqs, { tab: "try", phone: true, what: `Phones: ${r.role}`, role: r.role });
   for (const rec of records) for (const f of rec.fields) {
-    place(f.reqs, { tab: "app", what: `Record: ${rec.entity} › ${f.name}` });
-    if (rec.entity === entity) place(f.reqs, { tab: "mob", what: `Phone record: ${f.name}` });
+    place(f.reqs, { tab: "try", what: `Record: ${rec.entity} › ${f.name}` });
+    if (rec.entity === entity) place(f.reqs, { tab: "try", phone: true, what: `Phone record: ${f.name}` });
   }
   for (const t of transitions) {
-    place(t.reqs, { tab: "app", what: `Action: ${t.action} (${sentence(t.from)} → ${sentence(t.to)})` });
+    place(t.reqs, { tab: "try", what: `Action: ${t.action} (${sentence(t.from)} → ${sentence(t.to)})` });
     const chatRole = t.by.find((b) => b !== "system");
-    if (chatRole) place(t.reqs, { tab: "mob", what: `Bot chat: ${t.action} (${chatRole})`, role: chatRole });
+    if (chatRole) place(t.reqs, { tab: "try", phone: true, what: `Bot chat: ${t.action} (${chatRole})`, role: chatRole });
   }
-  for (const r of rules) place(r.reqs, { tab: "app", what: `Rules: ${r.rule}` });
-  for (const r of reports) place(r.reqs, { tab: "app", what: `Report: ${r.name}` });
-  scenarios.forEach((sc, i) => sc.steps.forEach((s, k) => place(s.proves, { tab: "scen", what: `Scenario ${i + 1}. ${sc.title}, step ${k + 1}`, sc: i, step: k })));
+  for (const r of rules) place(r.reqs, { tab: "try", what: `Rules: ${r.rule}` });
+  for (const r of reports) place(r.reqs, { tab: "try", what: `Report: ${r.name}` });
+  scenarios.forEach((sc, i) => sc.steps.forEach((s, k) => place(s.proves, { tab: "how", what: `Scenario ${i + 1}. ${sc.title}, step ${k + 1}`, sc: i, step: k })));
   for (const [id, where] of Object.entries(trace)) if (!where.length) err(`done check: ${id} shows in no tab (add it to a field, role, action, rule, report or scenario step)`);
 
   // ---- Open Items shown ----
@@ -299,6 +337,18 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
     trace,
   };
   return { model, errors, warnings };
+}
+
+// Flow-box label from a step's action: first 4 words, "…" when cut.
+function shortLabel(action) {
+  const words = action.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 4) return words.join(" ");
+  return words.slice(0, 4).join(" ").replace(/[.,;:!?]+$/, "") + "…";
+}
+
+// Spec inline markdown → plain words.
+function plainText(s) {
+  return String(s ?? "").replace(/\*\*([^*]+)\*\*/g, "$1").replace(/`([^`]+)`/g, "$1");
 }
 
 // "waiting-approval" → "Waiting approval" (same rule as the BRD status diagrams).

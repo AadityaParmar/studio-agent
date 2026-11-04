@@ -19,13 +19,17 @@ Only these 8 keys. `reqs` = live Requirement IDs of this Module; `oi` = one open
 | `rows` | `[{id, status, values, children, log}]` | **4–8 sample rows, at least one in every status** (more statuses than 8 → one per status). `id` unique ("Q-1041"). `values` = main-entity field name → value (numbers as numbers). `children` = `{"<other entity>": [{field: value}]}`. `log` optional = `[[when, who, what]]` for the ACTIVITY tab. All made up; the page marks each row sample. |
 | `scenarios` | `[{title, summary, steps}]` | See below. All shown as proposed. |
 
-Step: `{actor, action, row, transition, screen, report, proves, oi}`.
+Step: `{actor, action, label, row, transition, screen, report, behind, notify, proves, oi}`.
 
 - `actor` = role or `"system"`; `action` = one line, what they do, in the Enterprise's words.
 - `transition` optional = `{from, to}`; needs `row`. The engine replays each scenario from the sample rows: the row must be in `from` at that step, `actor` must be in the transition's `by`, guards must hold.
 - `screen` = `record` (default with a row) · `sheet` (default without) · `kanban` · `chat` (approve from bot chat, marked guessed) · `report` (+ `report` = section 8 name) · `rules`.
 - `proves` = Requirement IDs the step shows; the page lists their acceptance criteria. `[]` is fine on a step that only shows an Open Item.
 - `oi` = an open Open Item the step hits; the page shows the question as a callout.
+- `label` optional = short text for the step's box in the flow map, max 40 chars. Default: the transition's button label, else the first 4 words of `action`.
+- `behind` optional = list of short lines for "Behind the scenes" ("Gives it a number"). Default: the transition's rules and guards; on a create step, fields the spec says the system fills in.
+- `notify` optional = section 2 roles the bot tells at this step. Default: the transition's `notify`, else nobody. Use it on steps with no status change (a system step that tells someone, a comment that pings).
+- Create step (engine, no key): the first step of a scenario on a row in a start status, by a role that acts on it, with no `transition`. The page shows a New form and a Save button.
 
 ## Done check (engine)
 

@@ -33,7 +33,7 @@ Shape in `prototype-data.md`. Work through it in this order:
 1. **Transitions**: one entry per section 5 transition. `by` from the trigger text and section 2/6; a trigger with no person (validity ends, a timer) is `system`. Who presses it is unclear → the likeliest role (the scenario shows it as proposed) and say so in the hand-back.
 2. **Overlay**: put every live Requirement on the elements that show it (`reqs` on fields, roles, transitions, rules, reports). Open Items that hang on an element → its `oi`.
 3. **Sample rows**: 4–8, every status covered, values that fit the field types, `Values:` lists and gating rules (one row on each side of a threshold). Made-up names in the Enterprise's style, never real people or customers from the Sources.
-4. **Scenarios**: from transitions, rules and exceptions (section 7). Happy path first, then one per gating rule, one per exception, one per open Open Item that changes the flow. Every transition in at least one step; every step names who, what, and what it proves. Use the glossary's words.
+4. **Scenarios**: from transitions, rules and exceptions (section 7). Happy path first, then one per gating rule, one per exception, one per open Open Item that changes the flow. Every transition in at least one step; every step names who, what, and what it proves. Use the glossary's words. Long `action` → add a short `label`. Step with no status change where the spec says what Neome does or who is told → add `behind` / `notify`.
 
 Done when every section 5 transition has an entry and a scenario step, and every live Requirement sits in some `reqs` or `proves`.
 

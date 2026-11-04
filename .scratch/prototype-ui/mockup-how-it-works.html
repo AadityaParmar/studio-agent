@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOCKUP · Tickets · How it works</title>
+<style>
+:root{--p:#1565c0;--pl:#e3f0fd;--ink:#1d2433;--mute:#6b7385;--line:#e3e6ec;--bg:#f6f7f9;
+--blue:#1e6fd9;--blueb:#e4efff;--lav:#7a4fc9;--lavb:#efe7ff;--green:#2e7d32;--greenb:#e3f4e4;--pink:#c62853;--pinkb:#fde6ec;
+--m:#0b7a75;--mb:#dff4f2;--b:#b5590b;--bb:#fdf0e1;--s:#5b6476;--sb:#eceef3;--prop:#b26a00}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 Roboto,-apple-system,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+button{font:inherit;cursor:pointer}
+/* header */
+.top{background:#fff;border-bottom:1px solid var(--line);padding:14px 28px 0}
+.top h1{margin:0;font-size:20px;font-weight:500}
+.top h1 small{font-weight:400;color:var(--mute);font-size:14px;margin-left:8px}
+.note{display:flex;gap:18px;align-items:center;margin:6px 0 10px;color:var(--mute);font-size:13px}
+.note .sug{border-bottom:2px dotted var(--prop);color:var(--ink)}
+.tabs{display:flex;gap:4px;align-items:flex-end}
+.tabs button{border:0;background:none;padding:10px 16px;color:var(--mute);border-bottom:3px solid transparent;font-weight:500}
+.tabs button.on{color:var(--p);border-color:var(--p)}
+.tabs .count{background:#f57c00;color:#fff;border-radius:10px;padding:0 7px;font-size:12px;margin-left:4px}
+.tabs .right{margin-left:auto;padding:10px 0;font-size:13px;color:var(--mute)}
+main{max-width:1280px;margin:0 auto;padding:20px 28px 40px}
+/* scenario picker */
+.pick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pick button{border:1px solid var(--line);background:#fff;border-radius:18px;padding:6px 14px;color:var(--ink)}
+.pick button.on{background:var(--p);border-color:var(--p);color:#fff}
+.pick .kind{font-size:11px;opacity:.75;margin-left:6px}
+/* swimlane */
+.card{background:#fff;border:1px solid var(--line);border-radius:12px}
+.flow{padding:14px 16px 10px;position:relative}
+.flow h3,.stage h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:500}
+.lanes{display:grid;grid-template-columns:150px repeat(6,1fr);position:relative}
+.lanes>div{min-height:64px;display:flex;align-items:center;justify-content:center;padding:6px}
+.lname{justify-content:flex-start!important;gap:10px;font-weight:500;border-right:1px solid var(--line)}
+.ava{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;color:#fff;flex:none}
+.lname small{display:block;font-weight:400;color:var(--mute);font-size:12px}
+.lane-m{background:var(--mb)}.lane-b{background:var(--bb)}.lane-s{background:var(--sb)}
+.ava.m{background:var(--m)}.ava.b{background:var(--b)}.ava.s{background:var(--s)}
+.box{position:relative;z-index:2;background:#fff;border:1.5px solid #c9ced8;border-radius:10px;padding:6px 10px;font-size:12.5px;width:100%;max-width:170px;text-align:left;transition:.15s}
+.box b{display:block;font-size:11px;color:var(--mute);font-weight:500}
+.box:hover{border-color:var(--p)}
+.box.done{opacity:.6}
+.box.cur{border-color:var(--p);box-shadow:0 0 0 4px rgba(21,101,192,.18);opacity:1}
+.box.sugg{border-style:dashed;border-color:var(--prop)}
+.statusrow>div{min-height:34px!important}
+.pill{display:inline-block;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:500}
+.t-open{background:var(--blueb);color:var(--blue)}.t-in-progress{background:var(--lavb);color:var(--lav)}
+.t-resolved{background:var(--greenb);color:var(--green)}.t-closed{background:var(--pinkb);color:var(--pink)}
+.t-none{color:var(--mute);font-size:12px}
+.arrow{transition:.15s}
+svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+/* stage */
+.stagewrap{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+.stage{padding:18px 20px}
+.headline{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.headline .n{font-size:13px;color:var(--mute)}
+.say{font-size:19px;margin:2px 0 14px}
+.say .who{font-weight:600}
+.change{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:13px;color:var(--mute)}
+/* Neome screen mock */
+.screen{border:1px solid #cfd5df;border-radius:10px;overflow:hidden;background:#fff;max-width:620px}
+.sbar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f1f3f6;border-bottom:1px solid var(--line);font-size:15px}
+.sbar .ava{width:24px;height:24px;font-size:11px}
+.sbar .r{margin-left:auto;font-size:12px;color:var(--mute)}
+.sbody{padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.fld{border:1px solid #d5d9e1;border-radius:6px;padding:4px 10px 6px;position:relative}
+.fld label{font-size:11px;color:var(--mute)}
+.fld .v{font-size:14px}
+.fld.wide{grid-column:1/-1}
+.fld.auto{background:#fafbfc}
+.fld.auto label:after{content:" · filled by Neome";color:var(--s)}
+.update{grid-column:1/-1;background:#f7f9fc;border-left:3px solid var(--b);padding:8px 10px;font-size:13px;border-radius:4px}
+.sfoot{display:flex;gap:10px;align-items:center;justify-content:flex-end;padding:10px 14px;border-top:1px solid var(--line);background:#fafbfc}
+.sfoot .wait{margin-right:auto;font-size:12px;color:var(--mute)}
+.btn{border:1px solid var(--p);color:var(--p);background:#fff;border-radius:6px;padding:7px 14px;font-weight:500;position:relative}
+.btn.solid{background:var(--p);color:#fff}
+.btn.ghost{border-color:#ccd2dc;color:#99a1b0}
+.hot{animation:none}
+.hot:before{content:"";position:absolute;inset:-6px;border-radius:10px;border:2px solid #f57c00;animation:pulse 1.4s infinite}
+.tip{position:absolute;bottom:calc(100% + 12px);right:-6px;background:#24292f;color:#fff;font-size:12px;font-weight:400;padding:6px 10px;border-radius:6px;white-space:nowrap}
+.tip:after{content:"";position:absolute;top:100%;right:22px;border:6px solid transparent;border-top-color:#24292f}
+@keyframes pulse{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
+.list{width:100%;border-collapse:collapse;font-size:13px}
+.list th{text-align:left;color:var(--mute);font-weight:500;padding:8px 12px;border-bottom:1px solid var(--line)}
+.list td{padding:8px 12px;border-bottom:1px solid var(--line)}
+.list tr.me td{background:#fff8e6}
+/* side: behind the scenes + who is told */
+.side .card{padding:14px 16px;margin-bottom:14px}
+.side h4{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:500}
+.bs li{margin:0 0 6px}
+.bs{margin:0;padding-left:18px}
+.phone{border:1px solid #cfd5df;border-radius:16px;background:#ece5dd;padding:10px}
+.phone .ph{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mute);margin-bottom:8px}
+.bub{background:#fff;border-radius:8px;padding:8px 10px;font-size:13px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.bub .nm{font-size:11px;color:var(--p);font-weight:500}
+.nobody{color:var(--mute);font-size:13px}
+.q{background:#fff4e5;border:1px solid #ffd59a;border-radius:8px;padding:10px 12px;font-size:13px}
+.q b{color:#a35a00}
+.q textarea{width:100%;margin-top:8px;border:1px solid #e6c48a;border-radius:6px;padding:6px;font:inherit;min-height:48px}
+.nav{display:flex;gap:10px;margin-top:16px;align-items:center}
+.nav .k{font-size:12px;color:var(--mute);margin-left:8px}
+.nav .btn.solid:disabled{opacity:.4}
+.sug-u{border-bottom:2px dotted var(--prop)}
+.why{font-size:12px;color:var(--prop)}
+.consult .req{display:inline}
+.req{display:none;font-size:11px;background:var(--pl);color:var(--p);border-radius:8px;padding:0 6px;margin-left:4px}
+@media(max-width:900px){.stagewrap{grid-template-columns:1fr}.lanes{grid-template-columns:96px repeat(6,1fr)}.lname small{display:none}.box{font-size:11px;padding:4px 6px}main{padding:14px 10px}.top{padding:12px 10px 0}.tabs button{padding:8px 8px}.tabs .right{display:none}}
+.mocktag{position:fixed;bottom:12px;right:12px;background:#24292f;color:#fff;font-size:12px;padding:6px 10px;border-radius:6px;opacity:.85}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Tickets <small>Deans Pond HOA · how it will work in Neome</small></h1>
+  <div class="note"><span>👀 All names and tickets are made-up examples.</span><span><span class="sug">Dotted</span> = our suggestion, please confirm.</span></div>
+  <div class="tabs">
+    <button class="on">How it works</button><button>Try it yourself</button><button>By role</button><button>Questions for you <span class="count">2</span></button>
+    <label class="right"><input type="checkbox" id="cm"> Consultant mode (show Requirement IDs)</label>
+  </div>
+</div>
+<main>
+  <div class="pick">
+    <button class="on">1 · Broken streetlight<span class="kind">normal flow</span></button>
+    <button>2 · Member wants to reply<span class="kind">open question</span></button>
+    <button>3 · Not happy after close<span class="kind">exception</span></button>
+    <button>4 · Duplicate ticket<span class="kind">exception</span></button>
+    <button>5 · Board checks the load<span class="kind">report</span></button>
+  </div>
+
+  <div class="card flow">
+    <h3>The flow · who does what · click any step</h3>
+    <div class="lanes" id="lanes"></div>
+  </div>
+
+  <div class="stagewrap">
+    <div class="card stage" id="stage"></div>
+    <div class="side" id="side"></div>
+  </div>
+</main>
+<div class="mocktag">MOCKUP · not built yet</div>
+
+<script>
+var LANES=[{k:"m",role:"Member",person:"Greg",does:"raises & tracks own tickets"},{k:"b",role:"Board Member",person:"Linda",does:"works all tickets"},{k:"s",role:"Neome",person:"",does:"automatic"}];
+var ST={open:"Open","in-progress":"In progress",resolved:"Resolved",closed:"Closed"};
+var STEPS=[
+ {lane:"m",short:"Raises a ticket",say:"raises a ticket: streetlight out on Willow Ct, with a photo.",from:null,to:"open",screen:"new",btn:"Save",
+  behind:["Gives it a number: TKT-0101","Sets the date to today","Saves Greg as 'Raised by'"],tell:{who:"b",text:"New ticket TKT-0101: Streetlight out on Willow Ct",sugg:true},req:["TKT-01"]},
+ {lane:"s",short:"Tells the Board",say:"tells every Board Member a new ticket came in.",from:"open",to:"open",screen:"bot",
+  behind:["No one is assigned. Any Board Member can pick it up.","No time limit, no approval step."],tell:null,req:["TKT-06","TKT-07"],sugg:true},
+ {lane:"b",short:"Start work",say:"opens the ticket and presses Start work.",from:"open",to:"in-progress",screen:"rec",btn:"Start work",
+  behind:["Only Board Members see this button","Status changes to In progress"],tell:{who:"m",text:"TKT-0101 is now In progress. Linda is on it."},req:["TKT-03","TKT-04"]},
+ {lane:"b",short:"Adds update, marks resolved",say:"writes an update and presses Mark resolved.",from:"in-progress",to:"resolved",screen:"rec",btn:"Mark resolved",sugg:true,
+  behind:["Update is saved on the ticket's history","Status changes to Resolved"],tell:{who:"m",text:"TKT-0101 Resolved: 'Bulb replaced by city crew on Monday.'"},req:["TKT-05","TKT-04"]},
+ {lane:"m",short:"Reads the update",say:"gets the message and opens his ticket to read the update.",from:"resolved",to:"resolved",screen:"list",
+  behind:["Greg sees only tickets he raised","He can't change the status"],tell:null,req:["TKT-02","TKT-06"]},
+ {lane:"b",short:"Closes ticket",say:"presses Close ticket. It can't be opened again.",from:"resolved",to:"closed",screen:"rec",btn:"Close ticket",
+  behind:["No reopen button after this","If Greg is not happy, he raises a new ticket"],tell:{who:"m",text:"TKT-0101 Closed."},req:["TKT-08"]}
+];
+var cur=0;
+function lane(k){return LANES.filter(function(l){return l.k===k})[0]}
+function who(k){var l=lane(k);return l.person?l.person+" ("+l.role+")":"Neome"}
+function pill(s){return s?'<span class="pill t-'+s+'">'+ST[s]+'</span>':'<span class="t-none">—</span>'}
+function reqs(a){return (a||[]).map(function(r){return '<span class="req">'+r+'</span>'}).join("")}
+
+function drawLanes(){
+  var h='<div class="lname" style="font-size:12px;color:var(--mute);font-weight:400">Ticket status</div>';
+  STEPS.forEach(function(s,i){h+='<div class="statusrow">'+pill(s.to)+'</div>'});
+  LANES.forEach(function(l){
+    h+='<div class="lname lane-'+l.k+'"><span class="ava '+l.k+'">'+(l.person?l.person[0]:"⚙")+'</span><span>'+(l.person||"Neome")+'<small>'+(l.person?l.role+" · ":"")+l.does+'</small></span></div>';
+    STEPS.forEach(function(s,i){
+      h+='<div class="lane-'+l.k+'">'+(s.lane===l.k?'<button class="box'+(i===cur?" cur":i<cur?" done":"")+(s.sugg?" sugg":"")+'" data-i="'+i+'" id="bx'+i+'"><b>Step '+(i+1)+'</b>'+s.short+'</button>':'')+'</div>';
+    });
+  });
+  h+='<svg class="wires" id="wires"></svg>';
+  document.getElementById("lanes").innerHTML=h;
+  requestAnimationFrame(wires);
+}
+function wires(){
+  var svg=document.getElementById("wires"),o=document.getElementById("lanes").getBoundingClientRect(),p="";
+  p+='<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#9aa3b2"/></marker><marker id="ahc" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1565c0"/></marker></defs>';
+  for(var i=0;i<STEPS.length-1;i++){
+    var a=document.getElementById("bx"+i).getBoundingClientRect(),b=document.getElementById("bx"+(i+1)).getBoundingClientRect();
+    var x1=a.right-o.left,y1=a.top+a.height/2-o.top,x2=b.left-o.left,y2=b.top+b.height/2-o.top,mx=(x1+x2)/2;
+    var on=i<cur;
+    p+='<path d="M'+x1+','+y1+' C'+mx+','+y1+' '+mx+','+y2+' '+(x2-2)+','+y2+'" fill="none" stroke="'+(on?"#1565c0":"#9aa3b2")+'" stroke-width="'+(on?2:1.5)+'" marker-end="url(#'+(on?"ahc":"ah")+')"/>';
+  }
+  svg.innerHTML=p;
+}
+
+function fields(st,extra){
+  return '<div class="fld"><label>Ticket number</label><div class="v">TKT-0101</div></div>'+
+   '<div class="fld"><label>Status</label><div class="v">'+pill(st)+'</div></div>'+
+   '<div class="fld wide"><label>Ticket title</label><div class="v">Streetlight out on Willow Ct</div></div>'+
+   '<div class="fld"><label>Category</label><div class="v">Common areas</div></div>'+
+   '<div class="fld"><label>Raised by</label><div class="v">Greg</div></div>'+(extra||"");
+}
+function hotBtn(label,tipText,cls){return '<button class="btn solid hot '+(cls||"")+'">'+label+'<span class="tip">'+tipText+'</span></button>'}
+function screen(s){
+  var l=lane(s.lane), bar=function(t,r){return '<div class="sbar"><span class="ava '+s.lane+'">'+(l.person?l.person[0]:"⚙")+'</span>'+t+'<span class="r">'+(r||"")+'</span></div>'};
+  if(s.screen==="new") return '<div class="screen">'+bar("New ticket","Greg's view")+'<div class="sbody">'+
+    '<div class="fld auto"><label>Ticket number</label><div class="v" style="color:var(--mute)">TKT-0101</div></div>'+
+    '<div class="fld auto"><label>Date</label><div class="v" style="color:var(--mute)">2026-10-30</div></div>'+
+    '<div class="fld wide"><label>Ticket title *</label><div class="v">Streetlight out on Willow Ct</div></div>'+
+    '<div class="fld"><label>Category *</label><div class="v">Common areas ▾</div></div>'+
+    '<div class="fld"><label>Photo</label><div class="v">📎 streetlight.jpg</div></div>'+
+    '<div class="fld wide"><label>Description *</label><div class="v">The streetlight by house 14 has been out for a week.</div></div></div>'+
+    '<div class="sfoot"><span class="wait">* must fill before saving</span><button class="btn">Cancel</button>'+hotBtn("Save","Greg presses Save")+'</div></div>';
+  if(s.screen==="bot") return '<div class="screen">'+bar("Neome bot → Linda's phone","automatic")+
+    '<div style="padding:16px;background:#ece5dd"><div class="bub" style="max-width:380px"><div class="nm">Tickets bot</div>✨ <b>New ticket!</b><br>TKT-0101 · Streetlight out on Willow Ct<br><span style="color:var(--mute)">Raised by Greg · Common areas</span><div style="margin-top:8px"><button class="btn hot" style="padding:4px 10px">Open ticket<span class="tip">Any Board Member can open it</span></button></div></div></div></div>';
+  if(s.screen==="list") return '<div class="screen">'+bar("My tickets","Greg's view · 2 of 6 tickets")+
+    '<table class="list"><tr><th>Ticket</th><th>Title</th><th>Status</th></tr>'+
+    '<tr class="me"><td>TKT-0101</td><td>Streetlight out on Willow Ct</td><td>'+pill("resolved")+'</td></tr>'+
+    '<tr><td>TKT-0079</td><td>Streetlight out (duplicate)</td><td>'+pill("closed")+'</td></tr></table>'+
+    '<div style="padding:10px 14px;font-size:12px;color:var(--mute)">4 other members\' tickets are hidden from Greg.</div>'+
+    '<div class="sfoot"><span class="wait">No status buttons: only Board can change status</span><button class="btn hot">Open<span class="tip">Greg opens his ticket</span></button></div></div>';
+  var extra = cur>=3?'<div class="update"><b>Update from Linda</b> · Bulb replaced by city crew on Monday.</div>':"";
+  var other = s.btn==="Start work"?"":'<button class="btn">Add update</button>';
+  return '<div class="screen">'+bar("Ticket · TKT-0101","Linda's view")+'<div class="sbody">'+fields(s.from,extra)+'</div>'+
+    '<div class="sfoot"><span class="wait">💬 Comments · History</span>'+other+hotBtn(s.btn,"Linda presses "+s.btn,s.sugg?"sugg-u":"")+'</div></div>';
+}
+function drawStage(){
+  var s=STEPS[cur];
+  var change = s.from===s.to||!s.from ? (s.from?'Status stays '+pill(s.to):'New ticket → '+pill(s.to)) : pill(s.from)+' <span>→</span> '+pill(s.to);
+  document.getElementById("stage").innerHTML=
+    '<div class="headline"><span class="n">Step '+(cur+1)+' of '+STEPS.length+'</span>'+reqs(s.req)+'</div>'+
+    '<div class="say"><span class="who">'+who(s.lane)+'</span> '+s.say+(s.sugg?' <span class="why">· our suggestion</span>':'')+'</div>'+
+    '<div class="change">Status: '+change+'</div>'+screen(s)+
+    '<div class="nav"><button class="btn" id="back"'+(cur?'':' disabled')+'>‹ Back</button><button class="btn solid" id="next">'+(cur<STEPS.length-1?"Next step ›":"Next story ›")+'</button><span class="k">or use ← → keys</span></div>';
+  var t=s.tell, side='<div class="card"><h4>Behind the scenes</h4><ul class="bs">'+s.behind.map(function(b){return "<li>"+b+"</li>"}).join("")+'</ul></div>';
+  side+='<div class="card"><h4>Who gets a message</h4>'+(t?'<div class="phone"><div class="ph"><span class="ava '+t.who+'" style="width:22px;height:22px;font-size:10px">'+lane(t.who).person[0]+'</span>'+who(t.who)+'\'s phone</div><div class="bub"><div class="nm">Tickets bot</div>'+t.text+'</div></div>'+(t.sugg?'<div class="why" style="margin-top:6px">Our suggestion: confirm Board wants this message</div>':''):'<div class="nobody">Nobody. Nothing is sent at this step.</div>')+'</div>';
+  if(cur===4) side+='<div class="q"><b>Question for you · OI</b><br>Can Greg reply on his own ticket (e.g. "still not fixed")?<textarea placeholder="Your answer (optional)"></textarea></div>';
+  else side+='<div class="card"><h4>Does this look right?</h4><div style="display:flex;gap:8px"><button class="btn">👍 Yes</button><button class="btn">✏️ Needs change</button></div></div>';
+  document.getElementById("side").innerHTML=side;
+}
+function go(i){cur=Math.max(0,Math.min(STEPS.length-1,i));drawLanes();drawStage()}
+document.addEventListener("click",function(e){
+  var b=e.target.closest(".box");if(b)return go(+b.dataset.i);
+  if(e.target.closest("#next"))return go(cur+1);
+  if(e.target.closest("#back"))return go(cur-1);
+});
+document.addEventListener("keydown",function(e){if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+document.getElementById("cm").addEventListener("change",function(e){document.body.classList.toggle("consult",e.target.checked)});
+window.addEventListener("resize",wires);
+go(0);
+</script>
+</body>
+</html>
