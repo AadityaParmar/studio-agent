@@ -16,6 +16,8 @@
 //   release | ready | … / release | blocked | … / release | error | [cls] msg
 //   signoff | v<N> | ready / blocked | <why>      (latest released, unsigned)
 //   signoff | next | ready / blocked | <why>      (current markdown: what a release now would carry)
+//   implement | ready | …  or  implement | blocked | <n> blocker(s) + up to 5 `implement | blocker | <why>`
+//                                                 (Implementation gate, implementation/gate.mjs; only when the release check passes)
 //   step | <skill> | <args> | <why>               (next steps, most urgent first; only the six user skills)
 //     Always 4 cells: split on ` | `. <args> = what to type after `/neome-studio:<skill>`: the repo-relative
 //     Engagement path `enterprises/<ent>/engagements/<slug>` (forward slashes), + ` <PREFIX>` for resolve-module.
@@ -30,6 +32,7 @@ import { frontierReport } from "./modules.mjs";
 import { validateEngagement, versionsOf } from "./build-brd.mjs";
 import { changeLog } from "./brd/changelog.mjs";
 import { signOffBlockers } from "./brd/signoff.mjs";
+import { implementationBlockers } from "./implementation/gate.mjs";
 import { templateWarnings } from "./template-bank-match.mjs";
 import { BANK_DIR } from "./template-bank.mjs";
 
@@ -244,8 +247,19 @@ function readiness(ctx, dir) {
     blockers = signOffBlockers(r.data);
     if (!blockers.length) line(ctx, "signoff", "next", "ready");
     for (const b of blockers) line(ctx, "signoff", "next", "blocked", b.msg);
+    implementGate(ctx, r.data);
   }
   return { latest, latestBlockers, errors: r.errors.length, changes, blockers, n };
+}
+
+// Implementation gate: every Module resolved, every Requirement cleared. Info only until the implement skill exists.
+function implementGate(ctx, data) {
+  if (!data.modules.length) return;
+  const b = implementationBlockers(data);
+  if (!b.length) return line(ctx, "implement", "ready", "every Module resolved, every Requirement cleared");
+  line(ctx, "implement", "blocked", `${b.length} blocker(s)`);
+  for (const x of b.slice(0, MAX_ERRORS)) line(ctx, "implement", "blocker", x.msg);
+  if (b.length > MAX_ERRORS) line(ctx, "implement", "blocker", `${b.length - MAX_ERRORS} more`);
 }
 
 // Next steps, most urgent first. Only the six user skills.
