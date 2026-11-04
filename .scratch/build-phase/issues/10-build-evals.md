@@ -12,7 +12,7 @@ How to test build skills without a live Enterprise each run: MCP mock, record/re
 
 User, 2026-11-04, yes to all:
 
-1. Engine tests (`npm test`, no MCP): fixture frozen copy → expected step files.
+1. Engine tests (`npm test`, no MCP): fixture Frozen copy → expected step files.
 2. Live eval Enterprise: ent103 `e-qMihNWulraS4gYKTspkfbygWZ`, never deployed by evals; reset before each run with `revert_enterprise`.
 3. Live run gates: `validate` ok; counts per kind = step files; every cleared Requirement covered by ≥1 step; no text field for people / choices / links; 0 writes without a yes.
 4. Live evals only when build skill text changes (like today's eval gate).

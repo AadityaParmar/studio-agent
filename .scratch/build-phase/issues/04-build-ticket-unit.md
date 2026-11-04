@@ -16,7 +16,7 @@ User, 2026-11-04, yes to Q1–Q5, C on Q6:
 2. Cap ~40 MCP writes per file; big layer splits by Module. One file = one session.
 3. Strict line: `NN-<layer>-<module>.md`, each needs all before it.
 4. File: header (Modules, Requirement IDs, needs), numbered MCP calls (kind, name, key props), human checklist steps (run stops for "done"), `validate` at end, `Status:` open/done/failed + run log.
-5. Folder `<eng>/_agent/build/`: `snapshot.json` (frozen `brd-data.json`), `names.md` (Enterprise term → Studio name), `target.md` (`entId`, name), `steps/NN-….md`.
+5. Folder `<eng>/_agent/implementation/`: `frozen-brd-data.json` (frozen `brd-data.json`), `names.md` (Enterprise term → Studio name), `target.md` (`entId`, name), `steps/NN-….md`.
 6. Standard Delivery (Module maps to a Neome App): Consultant picks per Module at build start. **A** install the App by hand in Studio first (file `00` = human step, run waits for "done", agent checks with `list`; later files add only gaps vs App baseline `Gives`), or **B** build from scratch from the App baseline Execute (no hand step). Choice recorded in `target.md`.
 
 ## Comments

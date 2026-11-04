@@ -1,35 +1,37 @@
-# Spec: Build phase (plugin v3)
+# Spec: Implementation (plugin v3)
 
 Gists every decision of [map.md](map.md); detail lives in each ticket. Terms per `GLOSSARY.md`. Change process: `docs/route.md`.
 
-Supersedes **D12** in part: build does not wait for Sign-off ("Phase 2 takes latest signed-off snapshot" gone); Sign-off happens when the user asks. Extends D00 scope: build in Neome Studio is now in scope.
+Supersedes **D12** in part: Implementation does not wait for Sign-off ("Phase 2 takes latest signed-off snapshot" gone); Sign-off happens when the user asks. Extends D00 scope: Implementation in Neome Studio is now in scope.
+
+Terms (draft for `GLOSSARY.md`, slice 9): [glossary-draft.md](glossary-draft.md). **Implementation** = building the Studio Enterprise; never "build" (taken by Neome Build, `build-brd`, `build-prototype`).
 
 ## 1. What it adds
 
-The Consultant goes on in the same repo and Engagement from resolved Modules to an Enterprise built, deployed and changed in Neome Studio via the `neome-studio` MCP ([02](issues/02-who-builds.md)). New user skills: `build` (plan | run), `change`, `resolve-open-items`. `check-build` on hold ([07](issues/07-check-build.md)).
+The Consultant goes on in the same repo and Engagement from resolved Modules to a Studio Enterprise built, deployed and changed via the `neome-studio` MCP ([02](issues/02-who-builds.md)). New user skills: `implement` (plan | run), `change`, `resolve-open-items`. `check-build` on hold ([07](issues/07-check-build.md)).
 
-## 2. Build gate ([02](issues/02-who-builds.md), [03](issues/03-build-input-contract.md))
+## 2. Implementation gate ([02](issues/02-who-builds.md), [03](issues/03-build-input-contract.md))
 
-- Build may start when every Module is `resolved` and every Requirement is **cleared**: no open Open Item on it, not `(proposed, to confirm)`. All priorities, Engagement-wide Requirements too.
-- Engine checks it; `status` prints a `build` step line; `studio` routes there.
+- Implementation may start when every Module is `resolved` and every Requirement is **cleared**: no open Open Item on it, not `(proposed, to confirm)`. All priorities, Engagement-wide Requirements too.
+- Engine checks it; `status` prints a `implement` step line; `studio` routes there.
 - Exception, `change` only: an unclear change item (Open Item) blocks only itself ([11](issues/11-final-skill-set.md)).
 
-## 3. Build files ([03](issues/03-build-input-contract.md), [04](issues/04-build-ticket-unit.md))
+## 3. Implementation files ([03](issues/03-build-input-contract.md), [04](issues/04-build-ticket-unit.md))
 
-Folder `<eng>/_agent/build/`:
+Folder `<eng>/_agent/implementation/`:
 
-- `snapshot.json`: frozen copy of `brd-data.json` taken at `build plan`. Build reads only this.
+- `frozen-brd-data.json`: Frozen copy of `brd-data.json` taken at `implement plan`. Build reads only this.
 - `names.md`: Enterprise term → Studio name, plus option keys (`keyActive`) ([06](issues/06-dry-run-one-module.md)).
-- `target.md`: `entId`, Enterprise name, per-Module Neome App choice (A install by hand / B build from scratch).
+- `target.md`: Studio Enterprise `entId` and name, per-Module Neome App choice (A install by hand / B build from scratch).
 - `steps/NN-<layer>-<module>.md`: run in a strict line, each needs all before it.
 
 Cut: by layer, then Module in layer: roles + vars → master sheets → transaction forms/sheets → formulas + form events → actions + groups → workflows → reports. ~40 MCP writes per file; big layer splits by Module.
 
 Step file: header (Modules, Requirement IDs, needs), numbered MCP calls (kind, name, key props), `- [ ] HUMAN: <what> — <where in Studio>` lines, `validate` checkpoints, `Status: open|done|failed`, run log.
 
-Spec type → Studio type table in `build plan` ([06](issues/06-dry-run-one-module.md)): choice → pickText + setOfText var; file → document (+ permissionMatrix); phone → mobileNumber; long text → paragraph; person → pickUser; link → ref.
+Spec type → Studio type table in `implement plan` ([06](issues/06-dry-run-one-module.md)): choice → pickText + setOfText var; file → document (+ permissionMatrix); phone → mobileNumber; long text → paragraph; person → pickUser; link → ref.
 
-Revisit mid-build: that Module's step files pause; after it, new frozen copy, rebuild the difference only.
+Revisit during Implementation: that Module's step files pause; after it, new Frozen copy, rebuild the difference only.
 
 ## 4. Running a step file ([05](issues/05-write-confirm-and-lock.md), [06](issues/06-dry-run-one-module.md))
 
@@ -57,11 +59,11 @@ Last file `NN-deploy.md`: `validate` 0 errors → change summary → explicit ye
 
 User tells the agent feedback or changes directly.
 
-1. Note: `change-NN.md`, one per session, items verbatim, who, date; Source type `CH`.
+1. Note: `CR-NN.md`, one per session, items verbatim, who, date; Source type `CR`.
 2. Sort + impact: built wrong / need changed / new need / unclear (→ Open Item); show Modules, Requirements, step files, other Modules touched; Consultant confirms.
-3. Update Module files: small → edit `spec.md` citing `CH-n`, withdraw never delete, `spec-check`, rebuild Prototype. Big (adds a Module, changes the flow, > 3 Requirements in a Module) → needs-revisit → `resolve-module`.
+3. Update Module files: small → edit `spec.md` citing `CR-n`, withdraw never delete, `spec-check`, rebuild Prototype. Big (adds a Module, changes the flow, > 3 Requirements in a Module) → needs-revisit → `resolve-module`.
 4. BRD: preview always; released version touched → todo "release BRD v<N+1>".
-5. Build: `build plan` new frozen copy → difference step files appended (rework files for built wrong); done files never edited. `build run`, yes per file, deploy on yes.
+5. Build: `implement plan` new Frozen copy → difference step files appended (rework files for built wrong); done files never edited. `implement run`, yes per file, deploy on yes.
 6. Close when every item is built, withdrawn or an Open Item.
 
 ## 8. `resolve-open-items` ([09](issues/09-neomenta-open-items.md))
@@ -70,7 +72,7 @@ Closes Neomenta-owned Open Items from catalog, Template bank, `docs/studio-ai-do
 
 ## 9. Skill set ([11](issues/11-final-skill-set.md))
 
-- User (9): `studio`, `ingest`, `review-draft`, `resolve-module`, `questionnaire`, `build-brd`, `resolve-open-items`, `build`, `change`.
+- User (9): `studio`, `ingest`, `review-draft`, `resolve-module`, `questionnaire`, `build-brd`, `resolve-open-items`, `implement`, `change`.
 - Building blocks (4, `user-invocable: false`): `grill-module`, `write-module-spec` (absorbs `neome-mapping`), `build-prototype`, `enterprise-glossary`.
 - `build-brd`: new views-only rebuild mode (BRD + Prototypes). Sign-off mode runs when the user asks.
 - `resolve-module`: grilling with the Consultant; spec, mapping, Prototype as a fresh background agent (eval-gated).
@@ -79,24 +81,24 @@ Closes Neomenta-owned Open Items from catalog, Template bank, `docs/studio-ai-do
 
 ## 10. Evals ([10](issues/10-build-evals.md))
 
-- `npm test`: fixture frozen copy → expected step files; gate + step file lint.
-- Live eval on ent103 `e-qMihNWulraS4gYKTspkfbygWZ` (baseline: VEN deployed), only when build skill text changes. Gates: `validate` ok; counts per kind = step files; every cleared Requirement covered; no text field for people / choices / links; 0 writes without a yes.
+- `npm test`: fixture Frozen copy → expected step files; gate + step file lint.
+- Live eval on ent103 `e-qMihNWulraS4gYKTspkfbygWZ` (baseline: VEN deployed), only when `implement` skill text changes. Gates: `validate` ok; counts per kind = step files; every cleared Requirement covered; no text field for people / choices / links; 0 writes without a yes.
 - Reset: revert works only back to last deploy; a human deploy moves the baseline. Pick remove-all + deploy, or a protected eval Enterprise, when building.
 
 ## 11. Out of scope
 
 `check-build` (on hold), data import, go-live detail, plugin build, pricing, RFP-response genre.
 
-## Build slices (suggested order)
+## Build slices (plugin work, suggested order)
 
 | # | Slice | Main files |
 |---|---|---|
-| 1 | Engine gate: cleared rule, `status` build step line | `engine/status.mjs`, new `engine/build/gate.mjs`, tests |
-| 2 | Engine build files: snapshot, names, target, step file format + lint, type table | new `engine/build/*.mjs`, fixtures, tests |
+| 1 | Engine gate: cleared rule, `status` `implement` step line | `engine/status.mjs`, new `engine/implementation/gate.mjs`, tests |
+| 2 | Engine Implementation files: Frozen copy, names, target, step file format + lint, type table | new `engine/implementation/*.mjs`, fixtures, tests |
 | 3 | execute-guide fixes from dry run (list `categoryFields` rejects pickText; option keys; schema size) | `reference/template-bank/execute-guide/` |
-| 4 | Skill `build` plan mode | `skills/build/SKILL.md` + `references/` |
-| 5 | Skill `build` run mode (MCP, yes per file, human steps, resume, deploy file) + CLAUDE.md MCP line | `skills/build/`, `CLAUDE.md` |
-| 6 | Skill `change` + Source type `CH` | `skills/change/`, `engine/ingest.mjs` prefixes, schema Source regex |
+| 4 | Skill `implement` plan mode | `skills/implement/SKILL.md` + `references/` |
+| 5 | Skill `implement` run mode (MCP, yes per file, human steps, resume, deploy file) + CLAUDE.md MCP line | `skills/implement/`, `CLAUDE.md` |
+| 6 | Skill `change` + Source type `CR` | `skills/change/`, `engine/ingest.mjs` prefixes, schema Source regex |
 | 7 | Skill `resolve-open-items` + Source type `NR` | `skills/resolve-open-items/` |
 | 8 | Skill set cleanup: merge `neome-mapping`, hide building blocks, `build-brd` views mode, `resolve-module` background agent | skills, `engine/check.mjs`, evals |
 | 9 | Router + docs: `studio`, `next-session.md`, READMEs, HOW-TO-RUN, `GLOSSARY.md`, `docs/v3/decisions.md` (supersedes D12 part), `route.md` rows | docs |
