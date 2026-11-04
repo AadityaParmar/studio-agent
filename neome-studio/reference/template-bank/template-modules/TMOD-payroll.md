@@ -38,7 +38,7 @@ seenIn:
 
 ## Neome App / Delivery hint
 
-Neome App: none in the catalog. Delivery: custom (pay rules are client-specific formulas). Hint only; grilling decides.
+Neome App: none in the catalog. Delivery: custom (pay rules are per-Enterprise formulas). Hint only; grilling decides.
 
 ## Flowchart
 
@@ -54,3 +54,21 @@ flowchart TD
   C --> D
   D --> E
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: PayrollRequest, Payroll, roles HR, Owner. Needs first: Employee sheet with pay fields (TMOD-employee-master).
+
+1. Roles + vars: `add kind=role` HR, Owner; `add kind=var kind=setOfText name=PayrollStatusList deploy=fixedOnDeploy` keys Generated, Released.
+2. Request form: `add kind=form name=PayrollRequest` → `kind=composite type=section` → fields `type=number` Year, `type=month` Month, `type=number` Days → `add kind=spreadsheet name=PayrollRequestSheet form=PayrollRequest insertRoles=[HR]` → `kind=spreadsheetLayout kind=table`.
+3. Payroll form: section → `type=month` Month, `type=number` Year, `type=ref` Employee (`spreadsheet=EmployeeSheet`, list layout), `type=decimal` earnings, deductions, LOPDays, NetPay, `type=text` AmountInWords, `type=document` Payslip, `type=pickText source=PayrollStatusList` PayrollStatus → `PayrollSheet` (`updateRoles=[HR]`) → table layout.
+4. Pay math: `apply PAT-calculated-field Execute` (formFormula on NetPay); worker rule = second formFormula with `condition{cond,negation}`. Defaults: `apply PAT-default-value-on-form Execute`.
+5. Fan out: `apply PAT-fan-out-rows-from-report Execute` (workflow `eventSsInsertAfter spreadsheet=PayrollRequestSheet` → `executeReport` → iterate → `rowInsert spreadsheet=PayrollSheet` → `sendMessageToGroups`).
+6. Payslip: `apply PAT-pdf-from-report Execute` (`generatePdf outputField=Payslip`). Optional link: `apply PAT-deeplink-to-form Execute`.
+7. Actions + group: `add kind=action kind=rowInsert spreadsheet=PayrollRequestSheet`; `kind=spreadsheetEditor spreadsheet=PayrollSheet layoutSpreadsheet=PayrollTable` → `set kind=group actionPermissionMap` (HR, Owner).
+8. Optional salary level sheet by year: form + `SalaryLevelSheet` + table layout.
+9. `validate` till ok=true. `describe kind=workflow` to confirm edges.
+
+Gaps: pay rules are per-Enterprise formulas (Open Item); report output iterate node (`branchIterateGrid` vs Array) (verify: describe); edgeMap entry keys unverified.

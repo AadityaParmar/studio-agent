@@ -45,3 +45,18 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: MasterSheet, VarActive, Status, ActiveCond, PersonSheet. Needs first: MasterSheet; for employees, apply PAT-sheet-row-drives-app-user Execute.
+
+1. Flag: `add kind=var kind=setOfText name=VarActive deploy=fixedOnDeploy value={"Active":{},"Inactive":{}}` → `add kind=field type=pickText name=Status source=VarActive defaultOption=…` (verify: describe) (or `type=bool Disabled`).
+2. `set kind=spreadsheet ref=MasterSheet queryables=[Status,…]`.
+3. Filter: `add kind=var kind=condition name=ActiveCond` (Status equalTo keyActive) (verify: describe for `value.node`).
+4. Use it: every `type=ref` field and `spreadsheetEditor` action / spreadsheet `report` → `filterCondition={cond:ActiveCond,negation:false}`.
+5. Employee: workflow `eventSsUpdateAfter spreadsheet=PersonSheet` → `branchIfElse` Status `hasChanged` → `branchSwitchCase field=Status` → VALUE keyActive / keyInactive → `userUpdate userIdField userActivateField=<B true|false>`.
+6. `set kind=workflow edgeMap`. `validate` till ok=true.
+
+Gaps: `filterCondition.cond` as condition var name unconfirmed; `userActivateField` shape; edgeMap entry keys unverified.

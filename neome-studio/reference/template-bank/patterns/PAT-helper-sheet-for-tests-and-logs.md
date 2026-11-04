@@ -39,3 +39,18 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: Support, Developer, ApiTestSheet, DebugLogSheet. Needs first: the plugin (import only).
+
+1. Roles: `add kind=role name=Support`, `add kind=role name=Developer`.
+2. Test form: `add kind=form ApiTestForm` → `type=section` → `type=text` inputs, `type=paragraph Result`, `type=button buttonKind=normal targetType=invokePlugin pluginApi.metaIdPlugin pluginInputMapping pluginOutputMapping` → `kind=spreadsheet ApiTestSheet` → `spreadsheetLayout kind=table`.
+3. Log form: `DebugLogForm` → `type=text EventName`, `type=paragraph KeyValues`, `type=dateTime LoggedAt` → `DebugLogSheet` → `spreadsheetLayout kind=table`.
+4. Logging: in each workflow, `kind=paramUpdate option=Mapping` → `kind=rowInsert spreadsheet=DebugLogSheet` (apply PAT-insert-row-in-other-sheet Execute).
+5. Fix tool: `kind=action kind=spreadsheetEditor spreadsheet=<LiveSheet> layoutSpreadsheet=<table>` per live sheet + both helper sheets → `set kind=group actionPermissionMap` roles [Support, Developer] only.
+6. `validate` till ok=true.
+
+Gaps: plugin create is import only; button plugin mapping shapes unverified (describe).

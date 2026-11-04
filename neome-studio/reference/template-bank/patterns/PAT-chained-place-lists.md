@@ -45,3 +45,19 @@ flowchart TD
   C --> D
   D --> E
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: forms `Country` / `State` / `City`, sheets `CountrySheet` / `StateSheet` / `CitySheet`, picking form `Thing`. Needs first: PAT-admin-kept-pick-list Execute for the top level (`Country`, `CountrySheet`, list layout `CountryPickList`).
+
+1. State form: `add kind=form name=State` → section → `type=text name=StateName`, `type=text name=CountryName disabled=true` → `type=ref name=Country spreadsheet=CountrySheet layoutSpreadsheet=CountryPickList copyFieldMap=<CountryName>` (verify: describe).
+2. State sheet: `add kind=spreadsheet name=StateSheet form=State insertRoles=["Admin"] updateRoles=["Admin"] queryables=["StateName"]` → `spreadsheetLayout kind=table` + `kind=list name=StatePickList`.
+3. City: same shape; `ref name=State spreadsheet=StateSheet layoutSpreadsheet=StatePickList copyFieldMap=<StateName, CountryName>` (copies both levels).
+4. On `Thing`: text fields `CityName`, `StateName`, `CountryName` (`disabled=true`) → `type=ref name=City spreadsheet=CitySheet layoutSpreadsheet=CityPickList copyFieldMap=<all three>`.
+5. Zone with cities: zone form `type=refSet name=Cities spreadsheet=CitySheet displayField=CityName`.
+6. Light form: city sheet with `type=pickText name=State source=<setOfText var>` instead of a state sheet.
+7. Keeper actions + group map: as in PAT-admin-kept-pick-list. `validate` till ok=true.
+
+Gaps: `copyFieldMap` shape unconfirmed.

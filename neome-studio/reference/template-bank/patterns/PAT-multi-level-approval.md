@@ -45,3 +45,20 @@ flowchart TD
   C --> D
   C --> E
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: ApprovalStatus, RequestSheet, MatrixSheet, ApprovalLogSheet. Needs first: roles per level; PAT-insert-row-in-other-sheet, PAT-forward-row, PAT-message-on-event (steps 5, 7).
+
+1. Var: `add kind=var kind=setOfText name=ApprovalStatus deploy=fixedOnDeploy value={Pending:{}, Approved:{}, Rejected:{}}`.
+2. Fixed levels: request fields `type=pickText source=ApprovalStatus` ManagerStatus, HrStatus, Status; limit each by `permissionMatrix` / `disabledRoles`.
+3. Fixed workflow: `kind=eventSsUpdateAfter spreadsheet=RequestSheet` → `kind=branchSwitchCase field{param:$Curr, field:ManagerStatus}` → keyRejected: `kind=rowUpdate` Status=Rejected; keyApproved: `branchSwitchCase` on HrStatus → keyApproved: `rowUpdate` Status=Approved + effects.
+4. Matrix sheets: MatrixSheet (`ref` Department, `type=number Level`, `type=pickUser Approver roleIdDataSource`); ApprovalLogSheet (`ref` Request, Level, Approver, `pickText LogStatus`, `type=bool LastApprover`).
+5. Matrix insert workflow: `eventSsInsertAfter spreadsheet=RequestSheet` → `kind=ssExecuteQuery outputForm spreadsheets=[MatrixSheet] neoQL` → `kind=branchIterateGrid` → paramUpdate + rowInsert ApprovalLogSheet (apply PAT-insert-row-in-other-sheet Execute) → `kind=rowForward toUsers` (apply PAT-forward-row Execute).
+6. Log workflow: `eventSsUpdateAfter spreadsheet=ApprovalLogSheet` → `branchIfElse` LogStatus=Rejected → `rowUpdate` request Rejected; else `branchIfElse` LastApprover → `rowUpdate` request Approved.
+7. Each decision: `kind=sendMessageToUsers` to the asker (apply PAT-message-on-event Execute).
+8. `set kind=workflow edgeMap` per workflow (VALUE/TRUE/FALSE/ITERATE/NEXT) → `validate` till ok=true.
+
+Gaps: rowIdPointer from the log's request ref unverified; NeoQL by hand; level order not enforced by the sheet.

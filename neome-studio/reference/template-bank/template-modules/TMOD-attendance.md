@@ -62,3 +62,22 @@ flowchart TD
   D --> E
   E --> F
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: AttendanceSheet, HolidaySheet, RegularisationSheet, VarAttendanceStatus, VarRequestKind, VarApprovalStatus. Needs first: if Neome App attendance-and-leave is installed, reuse it; else none.
+
+1. Roles + vars: `add kind=role` Employee, Manager, HR, Admin; `add kind=var kind=setOfText` VarAttendanceStatus (On Duty, Present, Half Day, On Leave, Absent), VarRequestKind, VarApprovalStatus; `kind=var kind=time` shift start.
+2. Attendance: `add kind=form` → `kind=composite type=section` → Date `type=date`, ClockIn, ClockOut `type=dateTime`, InPhoto, OutPhoto `type=camera`, InPoint, OutPoint `type=location`, StartKm, EndKm, Hours `type=decimal`, Status `type=pickText` → `add kind=spreadsheet` → `kind=spreadsheetLayout kind=table` + `kind=calendar`. Clock buttons: apply PAT-clock-in-out-with-photo Execute; defaults: PAT-default-value-on-form.
+3. Hours, late, status: apply PAT-calculated-field Execute (`formFormula assignToField=Hours`, `assignToField=Status`).
+4. Holiday: Date `type=date`, Name `type=text`, Type `type=pickText`, State `type=text` → sheet; kept by HR: PAT-admin-kept-pick-list.
+5. Regularisation: Date `type=date`, FromTime, ToTime `type=time`, Kind `type=pickText source=VarRequestKind`, Reason `type=paragraph`, Status `type=pickText` → sheet. Approve + update attendance or balance: apply PAT-approval-by-status Execute.
+6. Schedules: PAT-scheduled-job-over-rows (day-end marks missing days), PAT-scheduled-reminder-message (not clocked in / out). Field staff: PAT-device-location-trail.
+7. Reports: PAT-composite-report (monthly per employee; admin by team or zone).
+8. Device punch sync, only if asked: PAT-outside-service-by-plugin.
+9. Actions + group: `kind=rowInsert` Attendance, Regularisation (Employee); `kind=spreadsheetEditor` + `kind=report` (Manager, HR, Admin) → `set kind=group actionPermissionMap`.
+10. `validate` till ok=true. `describe` sheets + workflows.
+
+Gaps: one row per employee per day via `partitionMap` (verify: describe); device punch plugin is import only (custom work).

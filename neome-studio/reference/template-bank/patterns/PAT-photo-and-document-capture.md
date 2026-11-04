@@ -48,3 +48,18 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: field names below. Needs first: the form and its sheet.
+
+1. Photos: `type=camera SitePhoto allowPickImage mediaCompressionQuality=balanced captureLocation captureTime`; `type=image` for picked photos.
+2. Files: `type=document ReceiptDoc fileTypeSet maxSize`; `type=setOfDocument Docs`.
+3. Place: `type=location Place captureMode=onInsert`.
+4. Sign: `type=pickUser Approver roleIdDataSource=[Role]` → `type=signature ApproverSign captureUser captureTime`; limit by `permissionMatrix` or `disabledRoles`.
+5. Add fields to the sheet layout `showComps` / card `item.mediaFields`.
+6. `validate` till ok=true.
+
+Gaps: `maxSize` untyped (check variant schema); permissionMatrix shape (`schema kind=permissionMatrix`).

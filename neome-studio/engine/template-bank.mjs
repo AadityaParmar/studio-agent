@@ -37,11 +37,14 @@ const KINDS = {
     sections: ["Gives", "Sheets, key fields, roles", "Workflows", "Flowchart"],
   },
 };
+// Optional "## Execute" section (MCP build steps) must open with this line.
+export const EXECUTE_GUARD = "Only use this to apply this into a Studio Enterprise via MCP.";
 const DELIVERY = ["standard", "configuration", "custom"]; // = BRD data schema delivery enum
 const CHANGES = ["add", "enhance", "split", "merge", "rename", "retire"];
 const ANY_ID = /^(PAT|TMOD|TPL|APP)-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 const idPattern = (prefix) => new RegExp(`^${prefix}-[a-z][a-z0-9]*(?:-[a-z0-9]+)*$`);
-const SLUG = "[a-z][a-z0-9]*(?:-[a-z0-9]+)*";
+export const SLUG = "[a-z][a-z0-9]*(?:-[a-z0-9]+)*";
+const REF_IN_TEXT = new RegExp(`\\b(?:PAT|TMOD|TPL|APP)-${SLUG}`, "g");
 // Build codes: NB-NN = client Neome Build; NA-<catalog slug> = Neome App Build (App baseline).
 export const BUILD_CODE = new RegExp(`^(?:NB-\\d{2,}|NA-${SLUG})$`);
 export const appSlugOf = (id) => String(id).replace(/^(APP|NA)-/, "");
@@ -184,6 +187,7 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
     byId.set(id, [...(byId.get(id) ?? []), f]);
   }
   const kindOf = (id) => byId.get(id)?.[0].kind;
+  const execRefs = [];
 
   for (const f of files.filter(isEntry)) {
     const { fm, kind, folder, name, body } = f;
@@ -225,11 +229,23 @@ export function checkBank(bankDir = BANK_DIR, { catalogSlugsPath = CATALOG_SLUGS
       }
     }
 
-    const found = new Map(sections(body, 2).map((s) => [s.title, s.body]));
+    const secs = sections(body, 2);
+    const found = new Map(secs.map((s) => [s.title, s.body]));
     for (const title of spec.sections) {
       if (!found.has(title)) err(`body section "## ${title}" missing`);
     }
     if (found.has("Flowchart") && !/^```mermaid\s*$/m.test(found.get("Flowchart"))) err("Flowchart has no mermaid block");
+    if (found.has("Execute")) {
+      const exec = found.get("Execute");
+      if (exec.split(/\r?\n/).find((l) => l.trim()) !== EXECUTE_GUARD) err(`Execute must start with "${EXECUTE_GUARD}"`);
+      if (secs.at(-1).title !== "Execute") err('"## Execute" must be the last section');
+      execRefs.push([id, exec]);
+    }
+  }
+
+  // Bank IDs named inside Execute steps must be on file.
+  for (const [id, exec] of execRefs) {
+    for (const ref of new Set(exec.match(REF_IN_TEXT) ?? [])) if (!byId.has(ref)) errors.push(`${id}: Execute: ${ref} not in Template bank`);
   }
 
   for (const [id, fs] of byId) {

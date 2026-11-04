@@ -38,3 +38,16 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: Sheet, SheetHistory, Role. Needs first: Sheet.
+
+1. Sheet: `set kind=spreadsheet ref=Sheet historys=[…]` (fields in the summary line; full before/after always kept), `auditTrailFormRoles=[Role]`.
+2. Action: `add kind=action kind=spreadsheetHistory name=SheetHistory spreadsheet=Sheet`.
+3. `set kind=group actionPermissionMap={"SheetHistory":{"roles":[Role]}}`.
+4. `validate` till ok=true.
+
+Gaps: whether `auditTrailFormRoles` is needed for the history action unconfirmed (verify: describe).

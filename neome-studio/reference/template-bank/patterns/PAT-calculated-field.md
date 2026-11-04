@@ -67,3 +67,18 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: form `Thing`, inputs `Paid` / `Used`, target `Refund`. Needs first: the form and input fields.
+
+1. Target: `add kind=field parent=Thing type=decimal name=Refund disabled=true`.
+2. Formula: `add kind=formFormula parent=Thing name=RefundCalc assignToField=Refund formula={value:"${f:Paid} - ${f:Used}"}`. Grid total: `SUM(${f:Lines.Amount})`. Optional `condition={cond:<var>,negation:false}`.
+3. Live update: `set kind=form ref=Thing calculateFormulaMode=automatic`.
+4. If it must run on events: `add kind=formEventAction kind=executeFormula name=RunRefund formula={value:"..."}` → `add kind=formEvent kind=onInitAndOnChange name=OnRefundInputs eventComps=["Paid","Used"] actions=[{action:"RunRefund"}]`.
+5. Rows changed by workflows: add `applyFormula assignToField={param:"$Curr",field:"Refund"}` in that workflow.
+6. `validate` till ok=true.
+
+Gaps: whether formFormula alone re-runs on change (vs needing step 4) unconfirmed.

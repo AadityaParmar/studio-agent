@@ -49,3 +49,21 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: SourceSheet, TargetSheet, TargetForm, InsertWf, Pipe. Needs first: both sheets.
+
+1. Workflow: `add kind=workflow name=InsertWf` (4 maps `{}`).
+2. Event: `kind=eventSsInsertAfter` or `eventSsUpdateAfter spreadsheet=SourceSheet pipelineVarMap{Pipe:{variableForm:TargetForm}}` (verify: describe).
+3. Branch: `kind=branchIfElse option=Condition condition{statement{lhs, operator:equalTo|hasValue|hasChanged, rhs}}`.
+4. Map: `kind=paramUpdate option=Mapping pipelineParam=Pipe outputMapping{fromForm, toForm:TargetForm, fieldMappingMap}`.
+5. Insert: `kind=rowInsert spreadsheet=TargetSheet outputParam=Pipe`.
+6. Link back (optional): `kind=rowUpdate rowIdPointer{spreadsheet:SourceSheet, row}` writes the new rowId.
+7. `set kind=workflow edgeMap`: event → branch NEXT; TRUE → paramUpdate; paramUpdate → rowInsert NEXT + outputPipelineParamId=Pipe.
+8. Copy variant: TargetSheet = SourceSheet; mapping sets the second user field.
+9. `validate` till ok=true.
+
+Gaps: pipelineVarMap entry shape; edgeMap keys; where rowInsert puts the new rowId unverified.

@@ -44,3 +44,17 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: <Plugin>, OpsGroup, SyncWf. Needs first: the plugin (import only; `list` to find it).
+
+1. Call: `add kind=node kind=executePlugin plugin=<Plugin> timeoutSeconds terminateKind=stopOrErrorBranch outputParamName=Res` → NEXT: `kind=rowUpdate` or `kind=paramUpdate` with the result.
+2. Error: ERROR edge → `kind=sendMessageToGroups toGroups=[OpsGroup] message`.
+3. Live view: output form + grid + gridLayout + content formLayout → `add kind=report kind=plugin pluginApi{metaIdPlugin} outputFormMapping` → `action kind=report` → `set kind=group actionPermissionMap`.
+4. Sync: `add kind=workflow name=SyncWf` → `kind=eventSchedule scheduler{startDateTime, timeZone, repeatSetting{frequency, repeatFrequencyKind=hours}}` → executePlugin → `kind=branchIterateArray|branchIterateGrid` → rowInsert or rowUpdate (apply PAT-insert-row-in-other-sheet Execute).
+5. `set kind=workflow edgeMap`: NEXT, ERROR, ITERATE → `validate` till ok=true.
+
+Gaps: plugin create is import only; executePlugin API pick and input mapping not in schema (verify: describe); plugin report API id unclear.

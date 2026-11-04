@@ -42,3 +42,19 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: `Attendance` form, `AttendanceSheet`, `Staff` role, `AttendanceCalcWf`. Needs first: role.
+
+1. Form: `add kind=form name=Attendance` → section → `type=bool name=ClockIn captureTime=true captureLocation=true captureUser=true`, `type=camera name=InPhoto`, `type=number name=StartKm`; same for `ClockOut`, `OutPhoto`, `EndKm`; `type=geoPoint name=Place`.
+2. Outputs: `type=decimal name=Hours disabled=true`, `type=pickText name=DayStatus source=<setOfText var> disabled=true`, `type=text name=Address disabled=true`.
+3. Sheet: `add kind=spreadsheet name=AttendanceSheet form=Attendance insertRoles=["Staff"] updateRoles=["Staff"] partitionMap={Day:{assignPartitionField:<text day key>,formula:...}}` (one row per staff per day; verify: describe).
+4. Formulas: `add kind=formFormula assignToField=Hours formula={value:"..."}`; same for DayStatus (late or on time).
+5. Or workflow: `add kind=workflow name=AttendanceCalcWf` → `kind=eventSsInsertBefore spreadsheet=AttendanceSheet` and `kind=eventSsUpdateBefore` → `kind=applyFormula assignToField={param:"$Curr",field:"Hours"} javascriptFormula={value:"..."}`; edges NEXT.
+6. Action: `add kind=action kind=rowInsert spreadsheet=AttendanceSheet chatBubbleHeader={title,subTitle}` (needed with partitionMap) → `set kind=group actionPermissionMap` Staff.
+7. `validate` till ok=true.
+
+Gaps: captured time / place value paths in formulas, `partitionMap.formula` shape unconfirmed; missed clock out needs a day-end job (not built here).

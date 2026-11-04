@@ -52,3 +52,21 @@ flowchart TD
   C --> D
   D --> E
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Only if Neome App quotation-and-order-flow is not installed (check `list` first): rebuild what Gives lists. If installed, reuse it and build only gaps. Placeholders: ProductCategory, UnitOfMeasurement, Product, Customer, ShippingMethod, PaymentTerms, Quotation, Order, Employee, roles SalesExecutive, SalesManager, Finance, OrganizationAdmin. Needs first: none.
+
+1. Roles + vars: `add kind=role` x4; `add kind=var kind=setOfText` Status {Pending|Approved|Rejected}, OrderGiven {Yes|No}, OrderType {Quotation|Direct Order}.
+2. Masters: ProductCategory, UnitOfMeasurement, ShippingMethod, PaymentTerms: `apply PAT-admin-kept-pick-list Execute`; Customer (CompanyName, ContactPerson, ContactNumber, GSTIN, BillingAddress, ShippingAddress) and Product (ProductName, `type=decimal` Price, GST, `type=ref` Category, `type=ref` Unit) → sheets with list layouts.
+3. Masters menu: `apply PAT-action-set-menu Execute`.
+4. Quotation: `type=ref` Customer, ShippingMethod, PaymentTerms (`copyFieldMap`), `type=pickText` Status, OrderGiven; `kind=composite type=grid` Products → `type=ref` Product + Qty, Rate, Discount, Tax, Amount (`apply PAT-line-items-grid-with-totals Execute`) → `QuotationSheet` (insert [SalesExecutive], update [SalesManager, Finance]) → table layout. Approved → PDF + message to creator: `apply PAT-approval-by-status Execute` + `apply PAT-pdf-from-report Execute` + `apply PAT-message-on-event Execute`.
+5. Order: `type=pickText` OrderType, `type=ref` Quotation, `type=ref` Customer, same grid + totals → `OrderSheet` → table layout. From a quotation: `apply PAT-order-from-quote-or-direct Execute`; direct order skips the quote ref.
+6. Order approval: same approve → PDF + message pattern on OrderSheet.
+7. Employee: form + sheet with Employee user, Manager, Roles, Status → `apply PAT-sheet-row-drives-app-user Execute`.
+8. Quotation dashboard: `apply PAT-query-report-with-filter Execute` (dateRange input) + `apply PAT-composite-report Execute`.
+9. Actions + group: per-sheet actions + `kind=report` → `set kind=group actionPermissionMap` (roles on every entry). `validate` till ok=true.
+
+Gaps: quote grid → order grid fill (verify: describe); totals mapping across forms; edgeMap entry keys unverified.

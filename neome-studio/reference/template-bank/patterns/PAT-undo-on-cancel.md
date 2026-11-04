@@ -41,3 +41,18 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: Sheet, Cancelled, MasterSheet, Balance, TxnSheet, LinkedSheet, UndoWf. Needs first: the forward workflow whose effects are undone.
+
+1. Flag: `type=bool Cancelled` (or existing Status pickText).
+2. Workflow: `add kind=workflow name=UndoWf` (4 maps `{}`) → `eventSsUpdateAfter spreadsheet=Sheet`.
+3. Check: `branchIfElse option=Condition condition=…` Cancelled `hasChanged` and equalTo true (or Status was keyApproved on `$Prior`, now not).
+4. Reverse each effect: `rowUpdateFieldLogNumber outputLogNumberField=Balance operation=<opposite of forward>`; `rowRemove rowIdPointer={spreadsheet:TxnSheet,row:…}`; `rowGet` linked row → `fieldRemove field=…` → `rowUpdate`.
+5. Delete variant: `eventSsRemoveBefore spreadsheet=Sheet` → same reverse nodes.
+6. `set kind=workflow edgeMap` (NEXT, TRUE). `validate` till ok=true.
+
+Gaps: andOr condition shape and `$Prior` binder unconfirmed (verify: describe). edgeMap entry keys unverified.

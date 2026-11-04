@@ -67,3 +67,20 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: `ListType` form, `ListTypeSheet`, `Admin`, `Staff`, picking form `Thing`. Needs first: none.
+
+1. Roles: `add kind=role name=Admin`, `name=Staff` (reuse if they exist).
+2. Form: `add kind=form name=ListType` → `kind=composite type=section name=Details fieldMap={}` → `kind=field type=text name=Title required=true`.
+3. Sheet: `add kind=spreadsheet name=ListTypeSheet form=ListType insertRoles=["Admin"] updateRoles=["Admin"] removeRoles=["Admin"] queryables=["Title"]` → `kind=spreadsheetLayout kind=table name=ListTypeTable showComps=["Title"]` → `kind=spreadsheetLayout kind=list name=ListTypePickList`.
+4. Action: `add kind=action kind=spreadsheetEditor name=ListTypeEditor spreadsheet=ListTypeSheet layoutSpreadsheet=ListTypeTable` → `set kind=group actionPermissionMap` `{"ListTypeEditor":{"roles":["Admin"]}}`.
+5. Picker on `Thing`: `kind=field type=text name=TypeTitle disabled=true` → `kind=field type=ref name=Type spreadsheet=ListTypeSheet layoutSpreadsheet=ListTypePickList copyFieldMap=<Title → TypeTitle>` (verify: describe).
+6. Two-level: sub list form gets its own `ref` to `ListTypeSheet`; its picker uses `filterCondition={cond:<condition var on parent>,negation:false}` (verify: describe).
+7. Many lists: apply PAT-action-set-menu Execute.
+8. `validate` till ok=true.
+
+Gaps: `copyFieldMap` shape and ref `filterCondition` var shape unconfirmed.

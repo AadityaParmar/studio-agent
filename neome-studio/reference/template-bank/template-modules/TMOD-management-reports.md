@@ -52,3 +52,19 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: <Report>FilterForm, <Report>OutForm, <Report>Report, ReportsMenu. Needs first: the source modules' sheets (no own sheets here).
+
+1. Roles: reuse Admin, Owner, HR, Manager (`list kind=role`; `add kind=role` only if missing).
+2. Each report: `apply PAT-query-report-with-filter Execute` (filter `inputForm` with date range, zone, team, user → output form + `composite type=grid` → `gridLayout kind=table` → `formLayout type=content rootLayout=true` → `report kind=query` or `kind=spreadsheet` → `action kind=report`).
+3. Dashboards: `apply PAT-composite-report Execute` (`report kind=composite mergeReports=[…]`).
+4. Manager copy: `apply PAT-role-copy-of-report Execute` (same report, team filter).
+5. Menu: `apply PAT-menu-by-button-form Execute` (button `targetType=callReport`) or `action kind=actionsSet actions=[…]`.
+6. Group: `set kind=group actionPermissionMap` (each report action, roles).
+7. `validate` till ok=true. `describe` each report to confirm.
+
+Gaps: planning figures (how much to produce) need source sheets named by grilling (Open Item).

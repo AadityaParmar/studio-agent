@@ -121,6 +121,8 @@ test("set: refuses unknown or wrong-kind IDs and bad arguments; writes nothing",
   // Wrong kind for the field.
   assert.equal(set(eng, "QUO", "--template-module", "TPL-tile-trade").code, 2);
   assert.equal(set(eng, "--template", "TMOD-quotes").code, 2);
+  // Digit-first slug: not a Template bank ID shape.
+  assert.match(set(eng, "QUO", "--template-module", "TMOD-01").out, /must be TMOD-<slug>/);
   // No such Module; both or neither flag.
   assert.equal(set(eng, "XYZ", "--template-module", "TMOD-quotes").code, 1);
   assert.equal(set(eng, "QUO", "--template", "TPL-tile-trade").code, 2);

@@ -91,3 +91,21 @@ flowchart LR
   T -.-> O20["Inventory and stock"]
   T -.-> O21["Ticket tracker"]
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: shared roles Admin, Employee, Manager; one Execute per Template module. Needs first: confirm the module list with the user; `list` first and reuse any Neome App already installed (for example attendance-and-leave).
+
+1. Roles: `add kind=role` Admin, Employee, Manager (modules add their own).
+2. `apply TMOD-master-data Execute` — every module refs its lists.
+3. `apply TMOD-employee-master Execute` — manager pickers for leave, claims and visits.
+4. `apply TMOD-attendance Execute` → `apply TMOD-leave Execute` → `apply TMOD-expense-claims Execute`.
+5. Visits ref customers: `apply TMOD-customer-master Execute` (optional) before `apply TMOD-field-visits Execute`.
+6. Each chosen optional module: `apply TMOD-<id> Execute` in this order — TMOD-visit-planning, TMOD-location-tracking, TMOD-lead-management, TMOD-quotation, TMOD-sales-order, TMOD-office-petty-cash, TMOD-samples; the rest only when asked.
+7. Links between modules, after both sides exist: leads, expenses and visits pick master data lists; visits ref planned visits and follow-ups add new plans; quotation refs customer, order refs quotation and visit; clock and visit events feed the location trail.
+8. Reports last: `apply TMOD-management-reports Execute` → `add kind=action kind=report` → `set kind=group actionPermissionMap`.
+9. `validate` till ok=true after each module and at the end. `describe` key sheets and workflows.
+
+Gaps: none here; each module Execute carries its own.

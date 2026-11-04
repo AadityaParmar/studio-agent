@@ -48,3 +48,20 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: VendorReturn, roles StoreManager. Needs first: Vendor sheet (TMOD-master-data), QualityCheckSheet with rejected lines (TMOD-quality-check). If Neome App purchase-management is installed, `list` and reuse it; build only gaps.
+
+1. Roles: `add kind=role` StoreManager.
+2. VendorReturn form: section → `type=date` ReturnDate, `type=ref` Vendor, `type=text` Transport, VehicleNo, `type=decimal` TransportCost, LabourCost, `type=document` Document; grid Lines (rejected ref, units, `type=decimal` RejectedQty, ReturnQty) → `VendorReturnSheet` → table layout.
+3. Pick rejected lines: `apply PAT-pick-from-report-ref Execute` (report of rejected minus returned); pick units: `apply PAT-pick-many-rows Execute`.
+4. Logic: `apply PAT-show-field-by-value Execute`.
+5. Update units: `apply PAT-update-linked-rows Execute` (`eventSsInsertAfter spreadsheet=VendorReturnSheet` → `branchIterateGrid` → `rowUpdate`).
+6. Tell vendor: `apply PAT-message-on-event Execute` (`sendEmail` or `sendWhatsappMessage`).
+7. Actions + group: `kind=rowInsert` / `kind=spreadsheetEditor` VendorReturnSheet → `set kind=group actionPermissionMap` (StoreManager).
+8. `validate` till ok=true.
+
+Gaps: vendor is not an app user; message target shape (verify: describe).

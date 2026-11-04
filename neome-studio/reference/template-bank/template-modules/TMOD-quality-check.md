@@ -54,3 +54,22 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: QualityCheck, Checklist, Inspection, Lab, roles QualityInspector, StoreManager, Admin. Needs first: PurchaseOrderSheet (TMOD-purchase-orders), stock sheet (TMOD-inventory). If Neome App quality-control is installed, `list` and reuse it; build only gaps.
+
+1. Roles + vars: `add kind=role` x3; `add kind=var kind=setOfText` InspectionType {GRN|Production}, Result {Pass|Fail}, RejectedReason.
+2. QualityCheck form: section → `type=ref` Order (`spreadsheet=PurchaseOrderSheet`, list layout), `type=ref` Lab, `type=date` ReceivedDate, `type=document` LabDocument, `type=image` Image; grid Lines (`type=text` Material, `type=decimal` ApprovedQty, RejectedQty, RejectedPercentage, `type=pickText` RejectedReason, `type=error` Error) → `QualityCheckSheet` → table layout.
+3. Pull received lines: `apply PAT-pick-from-report-ref Execute`; pick units: `apply PAT-pick-many-rows Execute`; `apply PAT-copy-fields-from-ref Execute`.
+4. Math + blocks: `apply PAT-calculated-field Execute` (RejectedPercentage), `apply PAT-error-field-check Execute` (approved + rejected > received), `apply PAT-show-field-by-value Execute` (reason only when rejected).
+5. Files: `apply PAT-photo-and-document-capture Execute`.
+6. Optional Checklist form: section Name; grid Parameters (`type=text` ParameterName, ToleranceRange) → `ChecklistSheet` + list layout. Inspection form: `type=pickText` InspectionType, `type=ref` Checklist, grid Result per parameter, `type=number` PassCount, FailedCount → `InspectionSheet`.
+7. Update order + stock: `apply PAT-update-linked-rows Execute` (`eventSsInsertAfter spreadsheet=QualityCheckSheet` → `rowUpdate` order lines, stock rows).
+8. Counts: `apply PAT-query-report-with-filter Execute` + `apply PAT-composite-report Execute`.
+9. Actions + group: `kind=rowInsert` / `kind=spreadsheetEditor` per sheet, `kind=report` → `set kind=group actionPermissionMap` (roles on every entry).
+10. `validate` till ok=true.
+
+Gaps: grid of checklist parameters copied into Inspection grid (mapping `gridMappingMap`) (verify: describe).

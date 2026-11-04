@@ -142,6 +142,49 @@ test("required body sections and mermaid flowchart", () => {
   assertError(r, /TPL-widget-shop: body section "## Links between modules" missing/);
 });
 
+test("optional Execute section must open with the guard line", () => {
+  const dir = bankCopy();
+  edit(dir, PAT, (t) => t + "\n## Execute\n\nOnly use this to apply this into a Studio Enterprise via MCP.\n\n1. `add kind=var`.\n");
+  edit(dir, TMOD, (t) => t + "\n## Execute\n\n1. `add kind=form`.\n");
+  const r = check(dir);
+  assert.ok(!r.errors.some((e) => e.startsWith("PAT-sign-off-by-flag: Execute")), r.errors.join("\n"));
+  assertError(r, /TMOD-widgets: Execute must start with "Only use this to apply this into a Studio Enterprise via MCP\."/);
+});
+
+test("Execute guard: exact first line, heading match exact, any kind", () => {
+  const dir = bankCopy();
+  const G = "Only use this to apply this into a Studio Enterprise via MCP.";
+  edit(dir, PAT, (t) => t + "\n## Execution\n\nnotes\n");
+  edit(dir, TMOD, (t) => t + "\n## Execute\n");
+  edit(dir, TPL, (t) => t + `\n## Execute\n\n${G} Then go.\n`);
+  edit(dir, APP, (t) => t + "\n## Execute\n\n1. `add kind=form`.\n");
+  const r = check(dir);
+  assert.ok(!r.errors.some((e) => e.startsWith("PAT-sign-off-by-flag: Execute")), r.errors.join("\n"));
+  assertError(r, /TMOD-widgets: Execute must start with/);
+  assertError(r, /TPL-widget-shop: Execute must start with/);
+  assertError(r, /APP-widget-desk: Execute must start with/);
+});
+
+test("Execute must be the last section", () => {
+  const dir = bankCopy();
+  const G = "Only use this to apply this into a Studio Enterprise via MCP.";
+  edit(dir, PAT, (t) => t.replace("## Limits\n", `## Execute\n\n${G}\n\n## Limits\n`));
+  edit(dir, TMOD, (t) => t + `\n## Execute\n\n${G}\n`);
+  const r = check(dir);
+  assertError(r, /PAT-sign-off-by-flag: "## Execute" must be the last section/);
+  assert.ok(!r.errors.some((e) => e.startsWith("TMOD-widgets:")), r.errors.join("\n"));
+});
+
+test("Execute: bank IDs named in steps must be on file; fenced headings ignored", () => {
+  const dir = bankCopy();
+  const G = "Only use this to apply this into a Studio Enterprise via MCP.";
+  edit(dir, TMOD, (t) => t + `\n## Execute\n\n${G}\n\n1. apply PAT-sign-off-by-flag Execute.\n2. apply PAT-ghost Execute; per TMOD-<id>.\n`);
+  edit(dir, PAT, (t) => t.replace("## Limits\n", "## Limits\n\n```md\n## Execute\n\njunk\n```\n"));
+  const r = check(dir);
+  assertError(r, /TMOD-widgets: Execute: PAT-ghost not in Template bank/);
+  assert.ok(!r.errors.some((e) => /PAT-sign-off-by-flag not in|TMOD- not in|PAT-sign-off-by-flag: (Execute|"## Execute")/.test(e)), r.errors.join("\n"));
+});
+
 test("file name must equal id", () => {
   const dir = bankCopy();
   edit(dir, TMOD, (t) => t.replace("id: TMOD-widgets", "id: TMOD-widget"));

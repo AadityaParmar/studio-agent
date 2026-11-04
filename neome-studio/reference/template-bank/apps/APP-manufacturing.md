@@ -59,3 +59,23 @@ flowchart TD
   D --> E
   E --> F
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Only if Neome App manufacturing is not installed (check `list` first): rebuild what Gives lists. If installed, reuse it and build only gaps.
+
+Placeholders: BomSheet, WorkOrderSheet, ProductionSheet, VarWoStatus, VarProdStatus. Needs first: none.
+
+1. Roles: `add kind=role name=ProductionExecutive|QualityInspector|OperationsManager|OrganizationAdmin details={}`.
+2. Vars: `add kind=var kind=setOfText deploy=fixedOnDeploy` VarWoStatus {Draft|Released|In Progress|On Hold|Quality Check|Completed|Closed|Cancelled}, VarProdStatus {Draft|Submitted|Approved|Sent to QC|Rejected|Rework|Closed}.
+3. Masters (`apply PAT-admin-kept-pick-list Execute`): ProductCategory, UnitOfMeasurement, Product (refs), RawMaterial (`type=ref UnitOfMeasurement`), WorkCenter (+ `type=number Capacity`); Employee via `apply PAT-sheet-row-drives-app-user Execute`.
+4. BOMForm → BOMSheet: `type=ref Product`, `type=text Version`, `type=bool IsActive showAsCheckbox`; Lines `type=grid` (ref RawMaterial + `type=number RequiredQty`) via `apply PAT-line-items-grid-with-totals Execute`.
+5. WorkOrderForm → WorkOrderSheet: `type=ref BOM`, `type=ref WorkCenter`, `type=number PlannedQty`, `type=date StartDate`, `type=date EndDate`, `type=pickText Status source=VarWoStatus` (option keys Draft, Released, InProgress, OnHold, QualityCheck, Completed, Closed, Cancelled); `set kind=spreadsheet ref=WorkOrderSheet queryables` add Status.
+6. ProductionForm → ProductionSheet: `type=ref WorkCenter`, `type=ref WorkOrder`, `type=pickText Status source=VarProdStatus`, grid (ref RawMaterial + RequiredQty + `type=number ConsumedQty`); Delay via `add kind=formFormula` (`apply PAT-calculated-field Execute`), Error field via `apply PAT-error-field-check Execute`, locks via `apply PAT-lock-fields-by-visibility Execute`.
+7. Released: `apply PAT-message-on-event Execute` — `kind=eventSsUpdateAfter spreadsheet=WorkOrderSheet` → `kind=branchSwitchCase field={param:"$Curr",field:"Status"}` → VALUE keyReleased → `kind=sendMessageToUsers` to creator.
+8. Production status change: `apply PAT-act-on-status-change Execute` → `apply PAT-update-linked-rows Execute` (`kind=rowUpdate rowIdPointer={spreadsheet:WorkOrderSheet,row:<from ref>}`) sets work order Status.
+9. Dashboard: `apply PAT-composite-report Execute` (date-range input form, active / delayed / WIP orders, counts by Status and WorkCenter); masters menu via `apply PAT-action-set-menu Execute`; `set kind=group actionPermissionMap`; `validate` till ok=true.
+
+Gaps: grid ref-row binder in rowUpdate (verify: describe); delay formula and dashboard report shapes per Enterprise.

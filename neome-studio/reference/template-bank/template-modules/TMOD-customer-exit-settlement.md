@@ -48,3 +48,18 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: ExitSheet, CustomerSheet, VarExitStatus. Needs first: Customer sheet (TMOD-customer-master); it has no Deposit field and OutstandingAmount as balance, so add Deposit (from TMOD-customer-onboarding) or Open Item.
+
+1. Roles + vars: `add kind=role` Employee; `add kind=var kind=setOfText` VarExitStatus (Pending, Approved, Cancelled).
+2. Exit: `add kind=form` → `kind=composite type=section` → Customer `type=ref spreadsheet=CustomerSheet layoutSpreadsheet=<list>`, UnpaidAmount, DamageAmount, OtherDeductions, RefundAmount `type=decimal`, Reading `type=decimal`, Photos `type=image`, Reason `type=paragraph`, Status `type=pickText source=VarExitStatus` → `add kind=spreadsheet` → `kind=spreadsheetLayout kind=table`.
+3. Logic: apply PAT-copy-fields-from-ref (deposit, balance), PAT-calculated-field (`formFormula assignToField=RefundAmount`), PAT-photo-and-document-capture Execute.
+4. Approve: apply PAT-act-on-status-change Execute (`eventSsUpdateAfter spreadsheet=ExitSheet` → `branchIfElse` Approved → `rowUpdate` customer row); tell customer: PAT-message-on-event.
+5. Actions + group: `kind=rowInsert` + `kind=spreadsheetEditor` Exit → `set kind=group actionPermissionMap` (Employee).
+6. `validate` till ok=true. `describe` sheet + workflow.
+
+Gaps: refund formula terms: confirm with user; customer `rowIdPointer` from ref field (verify: describe).

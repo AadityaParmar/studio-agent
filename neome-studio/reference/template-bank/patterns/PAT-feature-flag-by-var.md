@@ -36,3 +36,16 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: FlagStepOn, <Wf>, <StepNode>. Needs first: the workflow and its step.
+
+1. Var: `add kind=var kind=bool name=FlagStepOn deploy=fixedOnDeploy value={value:true}`.
+2. Node: `add kind=node parent=<Wf> kind=branchIfElse option=Condition condition={statement{lhs, operator:equalTo, rhs}}`, lhs/rhs = variable binder on FlagStepOn (verify: describe).
+3. `set kind=workflow edgeMap`: node before → branch NEXT; TRUE → StepNode; FALSE → node after the step.
+4. `validate` till ok=true.
+
+Gaps: condition lhs on a var (variable binder) shape unverified; ConditionVar not usable via MCP, use inline Condition.

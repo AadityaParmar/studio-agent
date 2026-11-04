@@ -1,6 +1,6 @@
 # Template bank
 
-Patterns, Template modules, Templates and App baselines learnt from past Neome Builds and Neome App Builds. Agent-facing. Terms per `GLOSSARY.md` § Template bank. Spec: Template bank effort `spec.md` (`.scratch/template-bank/`, later `docs/v2/history/`).
+Patterns, Template modules, Templates and App baselines learnt from past Neome Builds and Neome App Builds. Agent-facing. Terms per `GLOSSARY.md` § Template bank. Spec: Template bank effort `spec.md` (`docs/v2/history/`).
 
 Readers: ingest, review-draft, grill-module, neome-mapping. Writer: maintainer refine tool only. Never hand-edit entries outside that tool. Checked by `engine/template-bank.mjs` (`checkBank`, run in `npm test` via `cli.mjs check`).
 
@@ -51,9 +51,19 @@ Wins: APP entry wins on what the App has (catalog page = fallback). Template ban
 
 Every `## Flowchart` section holds a fenced ```` ```mermaid ```` block.
 
+## Execute
+
+Optional, any kind. When present, `## Execute` is the last body section (after `## Flowchart`). Steps to build the entry in a live Enterprise via `neome-studio` MCP (`add` / `set` / `validate` calls, in create order). How to write it: `EXECUTE.md` (MCP build guide, learnt from `docs/studio-ai-docs/`).
+
+- First body line must be exactly: `Only use this to apply this into a Studio Enterprise via MCP.` Nothing else on that line.
+- Only MCP apply work reads it. Ingest, review-draft, grill-module, neome-mapping ignore it.
+- Writes hit the live draft: confirm with user before the first `add` / `set` / `remove` (root `CLAUDE.md`).
+- Nothing buildable: keep the section with the guard line + one line why, no steps. Contract: `EXECUTE.md`.
+- Refine drafts keep `## Execute` of an existing entry; update steps when `How` / sheets / workflows change.
+
 ## Checks (`npm test`)
 
-Errors: front matter shape, body sections, file name = ID, prefix matches folder, unique IDs, `PAT-` / `TMOD-` references resolve, `neomeApp` slug, APP slug in catalog, `seenIn` rows (`NA-` slug in catalog; APP rows = own `NA-<slug>` only), `CHANGELOG.md` lines, retired ID still on file, any scrub word (case-insensitive) in an entry or `CHANGELOG.md`. Scrub words: `*.txt` in `NEOME_SCRUB_DIR`, else gitignored `.scratch/template-bank/raw/scrub/` when present.
+Errors: front matter shape, body sections, `## Execute` when present (last section, first body line = guard exactly), file name = ID, prefix matches folder, unique IDs, `PAT-` / `TMOD-` references resolve, `neomeApp` slug, APP slug in catalog, `seenIn` rows (`NA-` slug in catalog; APP rows = own `NA-<slug>` only), `CHANGELOG.md` lines, retired ID still on file, any scrub word (case-insensitive) in an entry or `CHANGELOG.md`. Scrub words: `*.txt` in `NEOME_SCRUB_DIR`, else gitignored `.scratch/template-bank/raw/scrub/` when present.
 
 Warnings: `replacedBy` target not in Template bank and not replaced later; APP entry no Template module links to (`neomeApp`).
 

@@ -66,3 +66,18 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: Form, VarType, Type, ASection, HideA, ShowA, ClearA, IsA. Needs first: Form.
+
+1. Control: `add kind=var kind=setOfText name=VarType deploy=fixedOnDeploy value={…}` → `add kind=field type=pickText name=Type source=VarType`.
+2. Targets: `add kind=composite type=section name=ASection` per type; Yes/No variant: `type=bool Has` + qty fields.
+3. Actions: `add kind=formEventAction kind=hidden name=HideA comps=[ASection] actionOn=component`; `kind=visible name=ShowA`; optional `kind=clear name=ClearA comps=[…]`.
+4. Condition: `add kind=formEventCondition name=IsA statement={lhs:Type,operator:equalTo,rhs:{argName:"rhs",kind:"constant",value:{type:"text",value:{value:"keyA"}}}}` (`hasValue`: omit rhs).
+5. Event: `add kind=formEvent kind=onInitAndOnChange eventComps=[Type] actions=[{action:ShowA,condition:IsA},{action:HideA,condition:IsA,negate:true}]`.
+6. `validate` till ok=true.
+
+Gaps: rhs takes option key vs label unconfirmed; `actionOn` for a section (verify: describe).

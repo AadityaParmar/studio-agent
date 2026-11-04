@@ -41,3 +41,17 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: target `LeadSheet`, source `VisitSheet` with `type=hyperlink name=LeadLink`, `OpenLeadLink`, `VisitLinkWf`. Needs first: both sheets; roles that may open the target.
+
+1. Deeplink: `add kind=deeplink kind=spreadsheetInsert name=OpenLeadLink spreadsheet=LeadSheet visibilityConstraint=enforceEnterpriseUserSignIn creationRoles=["Staff"] expiry=withinOneWeek successMessage={arg:<text var>}`. Row variant: `kind=spreadsheetRow spreadsheet=... formContentLayout=...`; report variant: `kind=report report=... outputFormContentLayout=...`.
+2. Workflow: `add kind=workflow name=VisitLinkWf` (4 maps `{}`) → `kind=eventSsInsertAfter spreadsheet=VisitSheet` → `kind=generateDeeplink deeplink=OpenLeadLink outputField={param:"$Curr",field:"LeadLink"}`.
+3. Then `kind=rowUpdate rowIdPointer={spreadsheet:"VisitSheet",row:<$Curr row id>} option=Mapping` (store link) → `kind=sendEmail subject={value:"..."} message={value:"${LeadLink}",paramSet:["LeadLink"]} toUsers=...` or `sendMessageToUsers`.
+4. Edges: NEXT chain; generateDeeplink ERROR → `sendMessageToUsers` to admin.
+5. `validate` till ok=true.
+
+Gaps: prefill of target fields from the source row (`userFieldMap` / `spreadsheetEditorAction`) unconfirmed (verify: describe).

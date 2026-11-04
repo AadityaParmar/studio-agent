@@ -61,3 +61,22 @@ flowchart TD
   D --> E
   E --> F
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: ExpenseForm, ExpenseSheet, TravelClaimForm, TravelClaimSheet, ExpenseCategorySheet. Needs first: TMOD-employee-master (manager). If Neome App expense-management is installed, `list` and reuse its sheets.
+
+1. Roles + vars: `add kind=role` Employee, Manager, Accounts, HR, Admin; `add kind=var kind=setOfText` VarClaimStatus {Pending, Approved, Rejected}, VarVehicleType, VarPaymentMode.
+2. Category list: `apply PAT-admin-kept-pick-list Execute` → ExpenseCategorySheet.
+3. Expense form: `add kind=form` ExpenseForm → `composite type=section` (Date `type=date`, EnteredBy `type=userId defaultValue=createdBy`, TotalAmount `type=decimal disabled=true`, Status `type=pickText source=VarClaimStatus`, ModeOfPayment `type=pickText`) → `composite type=grid` Lines (Amount `type=decimal`, Document `type=document`, Photo `type=camera`).
+4. Sheet: `add kind=spreadsheet` ExpenseSheet `insertRoles=[Employee] updateRoles=[Manager,Accounts,HR]` → `spreadsheetLayout kind=table` → Lines.Category `type=ref`.
+5. Total: `apply PAT-line-items-grid-with-totals Execute` (`formFormula assignToField=TotalAmount`, `SUM(${f:Lines.Amount})`).
+6. Travel: TravelClaimForm section (Date, VehicleType `type=pickText`, StartKm / EndKm / TotalKm `type=number`, TotalAmount `type=decimal`, ApprovalStatus `type=pickText`) → TravelClaimSheet → `apply PAT-travel-amount-from-km Execute`.
+7. Approval: `apply PAT-approval-by-status Execute`; `PAT-lock-fields-by-visibility` (Status locked for Employee); `PAT-message-on-event` (`eventSsUpdateAfter` → `branchIfElse` → `sendMessageToUsers` employee). Shared steps: `PAT-shared-sub-workflow`.
+8. Views: `apply PAT-role-views-of-one-sheet Execute` (`action kind=spreadsheetEditor` per role + `filterCondition`; `rowInsert` for Employee) → `set kind=group actionPermissionMap`.
+9. Reports: `apply PAT-composite-report Execute` (totals by status, employee, month, category; date-range `inputForm`).
+10. `validate` till ok=true. `describe` sheets + workflow to confirm.
+
+Gaps: line-by-line approved amount: grid field only, no shape in guides (Open Item if asked).

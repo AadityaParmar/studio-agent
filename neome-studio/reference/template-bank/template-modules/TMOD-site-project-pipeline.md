@@ -48,3 +48,18 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: SiteProject, ZoneMapping, roles SalesRep, Manager, Admin. Needs first: Lead and visit sheets (TMOD-lead-management, TMOD-field-visits); ProductSheet for products to pitch (TMOD-product-catalog). If Neome App crm is installed, `list` and reuse it; build only gaps.
+
+1. Roles + vars: `add kind=role` x3; `add kind=var kind=setOfText` ImportFrom {Lead|Visit}, ProjectType, ProjectStatus.
+2. SiteProject form: section → `type=date` Date, `type=pickText` ImportFrom, source pick (`apply PAT-lead-or-customer-pick Execute`), `type=text` ProjectName, `type=pickText` ProjectType, Status, `type=date` LaunchDate, CompletionDate, `type=refSet` Products, `type=pickUser` AssignTo; contact section (developer, architect, contractor: `type=text` name, `type=mobileNumber`) → `SiteProjectSheet` → table layout.
+3. Assign by zone: `apply PAT-assign-by-mapping-sheet Execute` (ZoneMappingSheet → AssignTo, Manager).
+4. Follow-up list: `apply PAT-query-report-with-filter Execute` (open projects by follow-up date).
+5. Actions + group: `kind=rowInsert` / `kind=spreadsheetEditor` SiteProjectSheet, `kind=report` → `set kind=group actionPermissionMap` (roles on every entry).
+6. `validate` till ok=true.
+
+Gaps: follow-up date field and reminder timing not in Usual sheets (Open Item).

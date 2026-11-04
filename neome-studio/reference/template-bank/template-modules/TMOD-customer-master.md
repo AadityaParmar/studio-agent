@@ -53,3 +53,22 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: CustomerSheet, StateSheet, CitySheet, ProductSheet, VarCustomerCategory, VarCustomerStatus. Needs first: ProductSheet for prices (TMOD-product-catalog); if Neome App crm is installed, reuse its customer sheet.
+
+1. Roles + vars: `add kind=role` SalesRep, Manager, Admin, SalesCoordinator; `add kind=var kind=setOfText` VarCustomerCategory, VarCustomerStatus.
+2. Places: apply PAT-chained-place-lists Execute (StateSheet → CitySheet refs).
+3. Customer: `add kind=form` → `kind=composite type=section` → CustomerId `type=identifier` (PAT-generated-id), Name, ContactPerson `type=text`, Mobile `type=mobileNumber`, Email `type=email`, TaxId `type=text validationPattern={value:gstin}`, Address `type=paragraph`, State, City `type=ref`, Category `type=pickText`, CreditAmount `type=decimal`, CreditDays `type=number`, OutstandingAmount `type=logDecimal`, Status `type=pickText`.
+4. Grids: `kind=composite type=grid` Contacts (name, mobile, email) + ShippingAddresses → `add kind=spreadsheet` (`searchables=[Name, Mobile]`) → `kind=spreadsheetLayout kind=table` + `kind=list`.
+5. Prices: apply PAT-customer-price-list Execute. Copy fields: PAT-copy-fields-from-ref.
+6. Outstanding: apply PAT-running-total-by-log-field Execute (orders, payments); credit days job: PAT-scheduled-job-over-rows.
+7. Read from document, only if asked: PAT-ai-reads-into-form.
+8. Views: apply PAT-role-views-of-one-sheet Execute (SalesRep own; Manager, Admin all).
+9. Actions + group: `kind=rowInsert` + `kind=spreadsheetEditor` per view → `set kind=group actionPermissionMap`.
+10. `validate` till ok=true. `describe` sheet.
+
+Gaps: tax ID pattern depends on country; "own customers" condition var (verify: describe).
