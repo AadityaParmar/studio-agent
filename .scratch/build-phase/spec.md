@@ -94,7 +94,7 @@ Closes Neomenta-owned Open Items from catalog, Template bank, `docs/studio-ai-do
 | # | Slice | Main files |
 |---|---|---|
 | 1 | **Done 2026-11-04.** Engine gate: cleared rule; `status` prints `implement | ready` / `blocked` + blockers (info only). The `step | implement` line moves to slice 4, when the skill exists | `engine/status.mjs`, `engine/implementation/gate.mjs`, `test/implementation-gate.test.mjs` |
-| 2 | Engine Implementation files: Frozen copy, names, target, step file format + lint, type table | new `engine/implementation/*.mjs`, fixtures, tests |
+| 2 | **Done 2026-11-04.** Engine `implement init` (gate-checked; Frozen copy, target with App choice table, names, steps/), `check` (target, names, step file names / order / header / HUMAN lines / coverage once a deploy file exists / ~40-call warning; `rework` files may follow deploy), `next` (strict line, failed first, paused on revisit), `fields` (spec type → Studio type) | `engine/implementation/files.mjs`, `cli.mjs`, `test/implementation-files.test.mjs`, plugin README |
 | 3 | execute-guide fixes from dry run (list `categoryFields` rejects pickText; option keys; schema size) | `reference/template-bank/execute-guide/` |
 | 4 | Skill `implement` plan mode + `step | implement` line in `status` (USER_SKILLS, studio table) | `skills/implement/SKILL.md` + `references/` |
 | 5 | Skill `implement` run mode (MCP, yes per file, human steps, resume, deploy file) + CLAUDE.md MCP line | `skills/implement/`, `CLAUDE.md` |

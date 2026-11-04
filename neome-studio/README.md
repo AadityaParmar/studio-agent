@@ -77,8 +77,9 @@ The pin lives only in each cloned skill's front-matter: `upstream` (path or list
 | `build-brd`, `mmdc-check` | `build-brd`; `ingest`, `review-draft`, `grill-module` validate with `build-brd --check` (writes nothing) |
 | `check` | `npm test`, maintainer (read-only pack lint; user skills must have the Next session step) |
 | `template-bank` | Template bank readers: `ingest`, `review-draft` (`set`), `resolve-module`, `grill-module`, `neome-mapping` (`index`, `fields`; read-only) |
+| `implement` | Implementation files (`_agent/implementation/`): `init` (Frozen copy, target, names; refuses unless every Module resolved and every Requirement cleared), `check` (lint), `next` (strict line), `fields` (spec type → Studio type). Skill `implement` comes in slice 4 |
 
-`setup-check` runs before `npm ci` (commands load lazily). Read-only commands: `setup-check`, `status`, `mmdc-check`, `spec-check`, `check`, `template-bank index` / `fields`, and any `build-brd --check`.
+`setup-check` runs before `npm ci` (commands load lazily). Read-only commands: `setup-check`, `status`, `mmdc-check`, `spec-check`, `check`, `template-bank index` / `fields`, `implement check` / `next` / `fields`, and any `build-brd --check`.
 
 ## Maintainer tools
 

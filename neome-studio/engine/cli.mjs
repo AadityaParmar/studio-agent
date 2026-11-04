@@ -21,6 +21,7 @@ const COMMANDS = {
   "setup-check": lazy("./setup-check.mjs", "setupCheck"),
   status: lazy("./status.mjs", "status"),
   "template-bank": lazy("./template-bank-match.mjs", "templateBank"),
+  implement: lazy("./implementation/files.mjs", "implement"),
 };
 
 const [name, ...args] = process.argv.slice(2);
