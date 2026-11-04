@@ -8,6 +8,8 @@ const SCREENS = ["record", "sheet", "kanban", "chat", "report", "rules"];
 const OPS = ["<", "<=", ">", ">=", "=", "!="];
 const MAX_LABEL = 40;
 // Field notes that mean the system fills the field in (shown on a create step).
+// Step action that makes a new record (the creator may not act on the start status, e.g. a Member raises a ticket).
+const CREATE_VERB = /^\s*(\w+\s+)?(raises|creates|makes|adds|drafts|logs|registers|books|requests|starts a new|opens a new|submits a new)\b/i;
 const AUTO_FIELD = /\b(auto[- ]?\w*|automatic(ally)?|(given|set|filled( in)?) by (the )?system|set automatically)\b/i;
 const TONES = ["blue", "lav", "green", "pink", "amber"];
 const DELIVERY = { standard: "Standard", configuration: "Configuration", custom: "Custom module" };
@@ -248,7 +250,7 @@ export function prototypeModel(data, prefix, pd, apps = {}) {
       }
       // Create step: the first time this scenario touches a row still in a start status, by a role that acts
       // on that status, with no transition. The page shows it as a New form with a Save button.
-      const create = row !== null && !t && !touched.has(row) && startIds.has(from) && actors(from).includes(actor);
+      const create = row !== null && !t && !touched.has(row) && startIds.has(from) && actor !== "system" && CREATE_VERB.test(text(s?.action));
       if (row !== null) touched.add(row);
       const label = s?.label !== undefined ? text(s.label).trim() : t ? t.action : shortLabel(text(s?.action));
       if (label.length > MAX_LABEL) err(`${w}: label is ${label.length} chars (max ${MAX_LABEL})`);

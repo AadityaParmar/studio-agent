@@ -29,7 +29,7 @@ Step: `{actor, action, label, row, transition, screen, report, behind, notify, p
 - `label` optional = short text for the step's box in the flow map, max 40 chars. Default: the transition's button label, else the first 4 words of `action`.
 - `behind` optional = list of short lines for "Behind the scenes" ("Gives it a number"). Default: the transition's rules and guards; on a create step, fields the spec says the system fills in.
 - `notify` optional = section 2 roles the bot tells at this step. Default: the transition's `notify`, else nobody. Use it on steps with no status change (a system step that tells someone, a comment that pings).
-- Create step (engine, no key): the first step of a scenario on a row in a start status, by a role that acts on it, with no `transition`. The page shows a New form and a Save button.
+- Create step (engine, no key): the first step of a scenario on a row in a start status, with no `transition`, whose `action` starts with a create word ("Raises", "Creates", "Makes", "Adds", "Drafts"…; a name before it is fine). The page shows a New form and a Save button.
 
 ## Done check (engine)
 

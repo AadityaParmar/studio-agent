@@ -211,7 +211,7 @@ test("steps: behind and notify optional; derived when missing; notify must be ro
   refused((d) => { d.scenarios[0].steps[0].behind = "x"; }, /behind must be a list/);
 });
 
-test("steps: create step = first touch of a start-status row by its owner, no transition", () => {
+test("steps: create step = first touch of a start-status row, no transition, action makes the record", () => {
   const m = modelAfter((d) => {
     d.scenarios[1].steps.unshift({ actor: "Sales exec", action: "Makes Q-1044 at 12%", row: "Q-1044", proves: [] });
     d.scenarios[1].steps.push({ actor: "Sales exec", action: "Looks at Q-1044 again", row: "Q-1044", proves: [] });
@@ -224,8 +224,15 @@ test("steps: create step = first touch of a start-status row by its owner, no tr
   assert.equal(submit.create, false);
   assert.equal(submit.from, "draft");
   assert.equal(again.create, false);
-  // A step by a role that does not own the start status is never a create step.
+  // A later look at the same row is never a create step.
   assert.equal(m.scenarios[2].steps[1].create, false);
+  // Any role creates when the action says so; a look by the owner is not a create step.
+  const m2 = modelAfter((d) => {
+    d.scenarios[1].steps.unshift({ actor: "Accounts", action: "Raises Q-1044 for a contractor", row: "Q-1044", proves: [] });
+    d.scenarios[0].steps.unshift({ actor: "Sales exec", action: "Opens Q-1046 and checks the buyer", row: "Q-1046", proves: [] });
+  });
+  assert.equal(m2.scenarios[1].steps[0].create, true);
+  assert.equal(m2.scenarios[0].steps[0].create, false);
 });
 
 test("scenarios: kind, lanes and proposed steps", () => {
