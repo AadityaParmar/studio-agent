@@ -1,0 +1,60 @@
+# Replay script for template-hr-small. Read by neome-studio/evals/run.mjs; shape in lib/replay.schema.json.
+# Briefs go to the simulated client (with the answer key); placeholders are listed in lib/replay.mjs fill().
+# prepare puts this case's template-bank/ fixture in the clones as neome-studio/reference/template-bank/.
+enterprise: fernbrook
+engagement: hr-desk
+consultants:
+  a: { name: Asha Rao, email: asha.rao@example.com }
+  b: { name: Ben Okafor, email: ben.okafor@example.com }
+
+steps:
+  - id: ingest-first
+    as: a
+    skill: ingest
+    args: "Enterprise folder fernbrook, Engagement hr-desk"
+    brief: >-
+      First run for this Enterprise. Three Inputs wait in {ent}/inputs/. Names and titles from the key's
+      Consultant choices. Template matches per the key's Consultant choices. Say yes to what the skill proposes
+      when the key agrees with it.
+
+  - id: review-draft
+    as: a
+    skill: review-draft
+    args: "fernbrook hr-desk"
+    brief: >-
+      Fresh session. Confirm the Module set and the Template matches per the key's Consultant choices. When the
+      skill suggests Modules the Template has and the draft lacks: Employee master yes (K-08), Attendance no
+      (K-09). Answer process, roles and Engagement-wide topics from the key; Don't know for the rest.
+
+  - id: resolve-leave
+    as: a
+    skill: resolve-module
+    args: "fernbrook hr-desk"
+    brief: >-
+      Work on the Leave Module, nothing else. Mode: live; the Enterprise answers through you from the key. A
+      suggested usual need: Yes when the key says yes, the key's No when it says no, Don't know when the key is
+      silent. Accept the skill's recommended options for Consultant choices.
+
+  - id: resolve-expenses
+    as: a
+    skill: resolve-module
+    args: "fernbrook hr-desk"
+    brief: >-
+      Fresh session. Work on the Expenses Module, nothing else. Mode: from Inputs; the Enterprise is not on the
+      call. Give no Enterprise facts: any question only the Enterprise can answer gets "Not in the Inputs; the
+      Enterprise is not on this call" as Don't know. Accept the skill's recommended options for Consultant
+      choices.
+
+  - id: build-brd
+    as: a
+    skill: build-brd
+    args: "fernbrook hr-desk"
+    brief: >-
+      Build a working preview of the BRD. No release, no sign-off. Leave plan weeks empty.
+
+  - id: questionnaire
+    as: a
+    skill: questionnaire
+    args: "fernbrook hr-desk"
+    brief: >-
+      Send to Maya Lindqvist per the key. Accept the suggested item list and the suggested answers.

@@ -1,0 +1,225 @@
+# Template bank changelog
+
+One line per applied change, newest last. Written by the maintainer refine tool; `npm test` checks every line. Never edit or delete old lines.
+
+Every line starting with `- ` outside a code fence is a change, so this header uses none. Line shape (fields split by ` | `):
+
+```
+- <YYYY-MM-DD> | <change> | <IDs> | <reason>
+```
+
+`<change>`: `add`, `enhance`, `split`, `merge`, `rename`, `retire`.
+
+`<IDs>`: comma-separated Template bank IDs. `split`, `merge`, `rename` write `<old IDs> -> <new IDs>`; the right side is `replacedBy`. `add`, `enhance`, `retire` take no `->`. Rename = one old -> one new. Merge = old IDs -> the one kept ID (old names go to its `aliases`). Split = one old -> two or more new. Retire = ID gone, nothing replaces it.
+
+`<reason>`: short, required. No client words (scrub check).
+
+Example:
+
+```
+- 2026-11-03 | add | TMOD-leave | seen in NB-02, NB-04
+- 2026-12-01 | merge | TMOD-leave-request -> TMOD-leave | same flow
+```
+
+## Changes
+
+- 2026-11-03 | add | PAT-approval-by-status | Status list plus workflow branch stands in for approval in all seven Builds.
+- 2026-11-03 | add | PAT-two-level-approval | Manager then HR approval with two status fields seen in NB-05.
+- 2026-11-03 | add | PAT-act-on-status-change | Update-after branch on a changed status drives follow-up steps in NB-01, NB-03, NB-04, NB-05.
+- 2026-11-03 | add | PAT-copy-fields-from-ref | Ref field with copied fields is used in every Build that links rows (NB-01 to NB-06).
+- 2026-11-03 | add | PAT-admin-kept-pick-list | Admin-kept list sheets picked by ref seen in NB-01, NB-02, NB-04, NB-05, NB-06, NB-07.
+- 2026-11-03 | add | PAT-chained-place-lists | Place tree by chained refs seen in NB-02, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | PAT-line-items-grid-with-totals | Grid lines with formula totals seen in every Build.
+- 2026-11-03 | add | PAT-calculated-field | Formula fields for derived values seen in NB-01, NB-02, NB-04, NB-05, NB-06, NB-07.
+- 2026-11-03 | add | PAT-show-field-by-value | Visibility rules by type or status seen in NB-01, NB-04, NB-05, NB-06, NB-07.
+- 2026-11-03 | add | PAT-stage-sections-on-one-record | Lead and project stages held as sections and a history grid in NB-07.
+- 2026-11-03 | add | PAT-lock-fields-by-visibility | Visibility rules lock status until save or after close in NB-01, NB-02, NB-03.
+- 2026-11-03 | add | PAT-running-total-by-log-field | Log number balances changed by workflows seen in all seven Builds.
+- 2026-11-03 | add | PAT-stock-moves-by-workflow | Stock kept by workflows on movement rows in NB-03, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | PAT-low-stock-alert | Stock level check with group message seen in NB-03 and NB-06.
+- 2026-11-03 | add | PAT-stop-save-by-workflow-check | Workflow checks with stop and error guard saves in NB-01 and NB-06.
+- 2026-11-03 | add | PAT-error-field-check | Formula error fields block bad entries in NB-02, NB-03, NB-06, NB-07.
+- 2026-11-03 | add | PAT-pick-from-report-ref | refReport fields fill lines from live reports in NB-02, NB-03, NB-05, NB-06.
+- 2026-11-03 | add | PAT-lead-or-customer-pick | Combined lead and customer report ref used across six areas of NB-04.
+- 2026-11-03 | add | PAT-sheet-row-drives-app-user | Person sheet keeps app users in step in NB-01, NB-02, NB-03, NB-04.
+- 2026-11-03 | add | PAT-fan-out-rows-from-report | Report plus grid loop creates rows per employee in NB-02, NB-05, NB-07.
+- 2026-11-03 | add | PAT-scheduled-job-over-rows | Timed jobs over sheets seen in NB-01, NB-02, NB-04, NB-05, NB-06, NB-07.
+- 2026-11-03 | add | PAT-scheduled-reminder-message | Timed reminder messages seen in NB-02, NB-04, NB-05, NB-06, NB-07.
+- 2026-11-03 | add | PAT-per-row-scheduler | Row-level schedulers seen in NB-01 and NB-06.
+- 2026-11-03 | add | PAT-message-on-event | Message nodes on events seen in all seven Builds.
+- 2026-11-03 | add | PAT-pdf-from-report | Report-based PDFs on approval or payment seen in NB-01, NB-03, NB-04, NB-05.
+- 2026-11-03 | add | PAT-composite-report | Composite reports for dashboards and profiles seen in all seven Builds.
+- 2026-11-03 | add | PAT-query-report-with-filter | Filter form plus query report seen in all seven Builds.
+- 2026-11-03 | add | PAT-menu-by-button-form | Button form menus for reports and masters seen in NB-03 and NB-04.
+- 2026-11-03 | add | PAT-action-set-menu | Action sets group master list actions in NB-01.
+- 2026-11-03 | add | PAT-role-copy-of-report | Per-role report copies seen in NB-02 and NB-04.
+- 2026-11-03 | add | PAT-role-views-of-one-sheet | Several actions per sheet for own, team and all views seen in NB-01, NB-02, NB-04, NB-05, NB-07.
+- 2026-11-03 | add | PAT-device-location-trail | User location points and map reports seen in NB-02, NB-04, NB-05.
+- 2026-11-03 | add | PAT-clock-in-out-with-photo | Photo and place clock in and out seen in NB-02, NB-04, NB-05.
+- 2026-11-03 | add | PAT-bulk-message-loop | Grid loop with wait for bulk sends seen in NB-04 and NB-07.
+- 2026-11-03 | add | PAT-read-document-into-form | Document-to-form node fills customer and lead rows in NB-04.
+- 2026-11-03 | add | PAT-insert-row-in-other-sheet | Workflow row inserts into other sheets seen in NB-01, NB-04, NB-06.
+- 2026-11-03 | add | PAT-update-linked-rows | Workflow updates of linked rows seen in NB-01, NB-02, NB-03, NB-04, NB-06, NB-07.
+- 2026-11-03 | add | PAT-undo-on-cancel | Cancel flag or status branch reverses effects in NB-01, NB-02, NB-06.
+- 2026-11-03 | add | PAT-generated-id | Workflow-built readable numbers seen in NB-01 and NB-06.
+- 2026-11-03 | add | PAT-order-from-quote-or-direct | Orders from a source record or direct seen in NB-03, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | PAT-status-from-quantities | Status driven by remaining quantity seen in NB-03 and NB-06.
+- 2026-11-03 | add | PAT-assign-by-mapping-sheet | Zone mapping sheet sets the assignee in NB-04.
+- 2026-11-03 | add | PAT-customer-price-list | Customer-specific price or discount grids seen in NB-04, NB-05, NB-06.
+- 2026-11-03 | add | PAT-sheet-history-action | History actions on ticket and expense sheets in NB-07.
+- 2026-11-03 | add | PAT-helper-sheet-for-tests-and-logs | Test and log sheets for developer and support roles in NB-01, NB-02, NB-04.
+- 2026-11-03 | add | PAT-trigger-row-for-workflow | Trigger sheets start jobs in NB-07.
+- 2026-11-03 | add | PAT-outside-service-by-plugin | Plugin calls and plugin reports seen in NB-01 and NB-05.
+- 2026-11-03 | add | PAT-online-payment-event | Payment receipt event updates rows in NB-01.
+- 2026-11-03 | add | PAT-feature-flag-by-var | Variable flag gates a scheduled step in NB-01.
+- 2026-11-03 | add | PAT-photo-and-document-capture | Capture fields for proof seen in NB-01, NB-04, NB-06, NB-07.
+- 2026-11-03 | add | PAT-bar-code-per-unit | Per-unit codes and scanning seen in NB-06.
+- 2026-11-03 | add | PAT-pick-many-rows | refSet and fixed-ref multi-picks seen in NB-06 and NB-07.
+- 2026-11-03 | add | PAT-forward-row | rowForward hands rows on in NB-03, NB-06, NB-07.
+- 2026-11-03 | add | PAT-button-runs-workflow | Buttons fetch data or mark rows in NB-01, NB-06, NB-07.
+- 2026-11-03 | add | PAT-default-value-on-form | Default values by formula or before-insert seen in NB-02 and NB-05.
+- 2026-11-03 | add | PAT-travel-amount-from-km | Km times rate travel claims seen in NB-02, NB-04, NB-05.
+- 2026-11-03 | add | PAT-shared-sub-workflow | Sub workflows reuse steps in NB-01, NB-02, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | PAT-deeplink-to-form | Deep links to forms and rows seen in NB-04 and NB-05.
+- 2026-11-03 | add | PAT-delayed-call-by-formula | Helper delay fields trigger calls in NB-04 and NB-05.
+- 2026-11-03 | add | PAT-follow-up-log | Follow-up logs on leads seen in NB-05 and NB-07.
+- 2026-11-03 | add | PAT-soft-disable-by-status | Active status and disable flag stand in for archive in NB-06.
+- 2026-11-03 | add | PAT-split-payment-by-script | JavaScript node splits a bill across sources in NB-01.
+- 2026-11-03 | add | PAT-board-from-lane-reports | Sprint lanes built from merged reports in NB-07.
+- 2026-11-03 | add | TMOD-attendance | Attendance with photo clock, regularisation and reports seen in NB-02, NB-04, NB-05.
+- 2026-11-03 | add | TMOD-leave | Leave with policy, balance register and approval seen in NB-02, NB-04, NB-05, NB-07.
+- 2026-11-03 | add | TMOD-expense-claims | Expense and travel claims with approval seen in NB-02, NB-04, NB-05.
+- 2026-11-03 | add | TMOD-office-petty-cash | Petty cash credits, balance and office expenses seen in NB-04 and NB-07.
+- 2026-11-03 | add | TMOD-asset-allocation | Asset register and give or take back seen in NB-05 and NB-07.
+- 2026-11-03 | add | TMOD-employee-master | Employee sheet that drives app users seen in NB-01, NB-02, NB-04, NB-05, NB-07.
+- 2026-11-03 | add | TMOD-master-data | Admin-kept lookup and place lists seen in NB-01, NB-02, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | TMOD-customer-master | Customer list with prices, credit and place seen in NB-02, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | TMOD-lead-management | Lead capture, assignment, stages and follow-up seen in NB-01, NB-04, NB-05, NB-07.
+- 2026-11-03 | add | TMOD-site-project-pipeline | Site project records with contacts and pitch status seen in NB-04.
+- 2026-11-03 | add | TMOD-visit-planning | Visit plans per rep and team seen in NB-04.
+- 2026-11-03 | add | TMOD-field-visits | Visit logs with place, type and outcome seen in NB-02, NB-04, NB-05.
+- 2026-11-03 | add | TMOD-location-tracking | Location points, timelines and km reports seen in NB-02 and NB-04.
+- 2026-11-03 | add | TMOD-quotation | Quotations with line totals, approval and PDF seen in NB-03, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | TMOD-sales-order | Orders from quotation or direct with approval and status seen in NB-03, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | TMOD-dispatch | Dispatch against order with stock checks seen in NB-03 and NB-06.
+- 2026-11-03 | add | TMOD-customer-payments | Payments that update order and customer balances seen in NB-01 and NB-06.
+- 2026-11-03 | add | TMOD-customer-account-ledger | Credit and debit ledger with approved balance changes seen in NB-01.
+- 2026-11-03 | add | TMOD-inventory | Stock per item and warehouse kept by workflows seen in NB-03, NB-04, NB-06.
+- 2026-11-03 | add | TMOD-purchase-orders | Purchase orders with approval and receipt status seen in NB-05 and NB-06.
+- 2026-11-03 | add | TMOD-goods-inward | Goods receipt that updates orders and stock seen in NB-03 and NB-06.
+- 2026-11-03 | add | TMOD-incoming-quality-check | Incoming material check that updates order and stock seen in NB-06.
+- 2026-11-03 | add | TMOD-vendor-return | Return of rejected material to vendors seen in NB-06.
+- 2026-11-03 | add | TMOD-material-request | Floor material requests issued by store seen in NB-06.
+- 2026-11-03 | add | TMOD-manufacturing | Bill of materials, work orders and production seen in NB-03.
+- 2026-11-03 | add | TMOD-payroll | Monthly payroll rows and payslips from a request seen in NB-05.
+- 2026-11-03 | add | TMOD-employee-grievance | Private grievance sheet read by HR seen in NB-05.
+- 2026-11-03 | add | TMOD-customer-complaints | Customer complaints with photos and status seen in NB-01 and NB-04.
+- 2026-11-03 | add | TMOD-service-job-work | Service jobs with parts and payment seen in NB-01.
+- 2026-11-03 | add | TMOD-ticket-tracker | Ticket logs with status, sprint and dashboards seen in NB-04 and NB-07.
+- 2026-11-03 | add | TMOD-my-profile | One-screen own profile from merged reports seen in NB-01, NB-02, NB-04.
+- 2026-11-03 | add | TMOD-management-reports | Admin and manager report sets seen in NB-01, NB-02, NB-04, NB-05, NB-06.
+- 2026-11-03 | add | TMOD-bulk-marketing-messages | Bulk sends looped over a recipients grid seen in NB-04 and NB-07.
+- 2026-11-03 | add | TMOD-samples | Sample handouts and sample box requests seen in NB-04.
+- 2026-11-03 | add | TMOD-new-product-request | New product requests sent as PDF seen in NB-04.
+- 2026-11-03 | add | TMOD-credit-note-request | Credit note requests with signed approval seen in NB-04.
+- 2026-11-03 | add | TMOD-dealer-stock-count | Dealer stock counts with customer discount seen in NB-04.
+- 2026-11-03 | add | TMOD-weekly-update | Weekly rep notes with a summary report seen in NB-04.
+- 2026-11-03 | add | TMOD-sales-library | Sales links and documents list seen in NB-04.
+- 2026-11-03 | add | TMOD-contact-meet-log | Meet log with attendee grid and number checks seen in NB-02.
+- 2026-11-03 | add | TMOD-support-tools | Support and developer helper sheets seen in NB-01, NB-02, NB-04.
+- 2026-11-03 | add | TMOD-rental-customer-and-fleet | Rental plans, balances and fleet with scheduled deductions seen in NB-01.
+- 2026-11-03 | add | TMOD-customer-onboarding | Customer sign-up with approval, payment and receipt seen in NB-01.
+- 2026-11-03 | add | TMOD-asset-assignment | Asset hand-over to customers with linked row updates seen in NB-01.
+- 2026-11-03 | add | TMOD-customer-exit-settlement | Customer exit with refund and approval seen in NB-01.
+- 2026-11-03 | add | TPL-vehicle-rental-company | Rental business with onboarding, assignment, balance and exit seen in NB-01.
+- 2026-11-03 | add | TPL-field-sales-company | Field sales team apps with attendance, claims, visits and location seen in NB-02 and NB-04.
+- 2026-11-03 | add | TPL-small-manufacturer | Make-and-sell businesses with quote, order, dispatch and stock seen in NB-03 and NB-06.
+- 2026-11-03 | add | TPL-trading-company-with-hr | Trading sales plus full HR and payroll seen in NB-05.
+- 2026-11-03 | add | TPL-software-product-company | Software firm with lead pipeline, tickets and HR seen in NB-07.
+- 2026-11-03 | rename | PAT-two-level-approval -> PAT-multi-level-approval | Approval Workflows App runs any number of levels from an approval matrix; two levels is one case.
+- 2026-11-03 | rename | PAT-read-document-into-form -> PAT-ai-reads-into-form | CRM App reads both uploaded documents and chat text into a lead; wider name fits.
+- 2026-11-03 | add | PAT-chat-bot-by-message-class | New: chat message classified by AI, then a lead is made or a report is sent back; seen in NA-crm.
+- 2026-11-03 | enhance | PAT-act-on-status-change | Seen in 13 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-action-set-menu | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-admin-kept-pick-list | Seen in 10 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-approval-by-status | Seen in 5 Neome App Builds; limits now point to multi-level approval.
+- 2026-11-03 | enhance | PAT-button-runs-workflow | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-calculated-field | Seen in 15 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-clock-in-out-with-photo | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-composite-report | Seen in 18 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-copy-fields-from-ref | Seen in 20 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-deeplink-to-form | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-error-field-check | Seen in 6 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-follow-up-log | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-forward-row | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-generated-id | Seen in 3 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-insert-row-in-other-sheet | Seen in 4 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-line-items-grid-with-totals | Seen in 6 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-lock-fields-by-visibility | Seen in 11 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-low-stock-alert | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-menu-by-button-form | Seen in 8 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-message-on-event | Seen in 10 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-order-from-quote-or-direct | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-pdf-from-report | Seen in 3 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-per-row-scheduler | Seen in 8 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-photo-and-document-capture | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-pick-from-report-ref | Seen in 4 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-query-report-with-filter | Seen in 16 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-role-views-of-one-sheet | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-running-total-by-log-field | Seen in 7 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-scheduled-job-over-rows | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-scheduled-reminder-message | Seen in 5 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-shared-sub-workflow | Seen in 4 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-sheet-history-action | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-sheet-row-drives-app-user | Seen in 20 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-show-field-by-value | Seen in 14 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-soft-disable-by-status | Neome Apps switch the app user off by employee status instead of deleting it; seen in 7 Apps.
+- 2026-11-03 | enhance | PAT-stock-moves-by-workflow | Seen in 1 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-stop-save-by-workflow-check | Seen in 2 Neome App Build(s) of this run.
+- 2026-11-03 | enhance | PAT-update-linked-rows | Seen in 12 Neome App Build(s) of this run.
+- 2026-11-03 | add | TMOD-amc-contracts | New: AMC contract per asset with planned technician visits; seen in NA-amc-and-service-management.
+- 2026-11-03 | add | TMOD-appointment-booking | New: book a service slot with reminders and reschedule link; seen in NA-appointment-booking.
+- 2026-11-03 | add | TMOD-approval-requests | New: general approval request routed by a level matrix; seen in NA-approval-workflows.
+- 2026-11-03 | add | TMOD-gate-pass | New: gate pass with entry and exit log at the gate; seen in NA-gate-pass-management.
+- 2026-11-03 | add | TMOD-machine-maintenance | New: machine register, preventive maintenance, breakdowns and spare parts; seen in NA-machine-tools-maintenance.
+- 2026-11-03 | add | TMOD-product-catalog | New: product master with price revision approval and customer inquiry; seen in NA-product-catalog.
+- 2026-11-03 | add | TMOD-product-versions | New: product versions and change requests; seen in NA-product-lifecycle-management.
+- 2026-11-03 | add | TMOD-project-management | New: delivery projects with team, phases, tasks, time and expenses; seen in NA-project-management.
+- 2026-11-03 | enhance | TMOD-lead-management | CRM and Lead Management Apps add lead scoring, conversion to account and opportunity, and follow-up reminders.
+- 2026-11-03 | enhance | TMOD-employee-master | Employee Directory App adds department and designation lists, joining and exit checklists, directory dashboard.
+- 2026-11-03 | enhance | TMOD-service-job-work | Field Service App adds service request with SLA escalation and technician visit with proof; links to field-service App.
+- 2026-11-03 | enhance | TMOD-field-visits | Field Visit Management App adds planned visits, distance check, visit expenses and visit dashboard.
+- 2026-11-03 | enhance | TMOD-inventory | Inventory App adds GRN, outward with over-stock block, safety stock and stock ledger.
+- 2026-11-03 | enhance | TMOD-manufacturing | Manufacturing App confirms BOM, work order and production flow; adds product and unit masters and delay value.
+- 2026-11-03 | enhance | TMOD-purchase-orders | Purchase Management App adds purchase request, department budget check, vendor invoice and payment.
+- 2026-11-03 | enhance | TMOD-quotation | Quotation and Order Flow App adds shipping and payment terms masters and a quotation dashboard.
+- 2026-11-03 | enhance | TMOD-ticket-tracker | Ticketing App adds customer support tickets with SLA due time, escalation and tasks under a ticket.
+- 2026-11-03 | enhance | TMOD-customer-master | CRM App keeps accounts and contact persons made from converted leads.
+- 2026-11-03 | enhance | TMOD-master-data | CRM App opens master lists from one Master menu.
+- 2026-11-03 | enhance | TMOD-visit-planning | Field Visit Management App plans visits for an executive and marks the plan complete.
+- 2026-11-03 | enhance | TMOD-attendance | Field Visit Management App has daily clock in and out with photo, km and place.
+- 2026-11-03 | enhance | TMOD-sales-order | Quotation and Order Flow App raises an order from a quotation or direct, with approval and PDF.
+- 2026-11-03 | rename | TMOD-incoming-quality-check -> TMOD-quality-check | Quality Control App checks both incoming goods and production by checklist; wider name fits.
+- 2026-11-03 | rename | TMOD-sales-library -> TMOD-knowledge-library | Knowledge Library App keeps articles by category with approval and ratings; sales library is one case.
+- 2026-11-03 | enhance | TPL-small-manufacturer | Module list text follows rename of incoming quality check to quality check.
+- 2026-11-03 | enhance | TPL-field-sales-company | Module list text follows rename of sales library to knowledge library.
+- 2026-11-03 | add | APP-amc-and-service-management | App baseline of NA-amc-and-service-management.
+- 2026-11-03 | add | APP-appointment-booking | App baseline of NA-appointment-booking.
+- 2026-11-03 | add | APP-approval-workflows | App baseline of NA-approval-workflows.
+- 2026-11-03 | add | APP-crm | App baseline of NA-crm.
+- 2026-11-03 | add | APP-employee-directory | App baseline of NA-employee-directory.
+- 2026-11-03 | add | APP-field-service | App baseline of NA-field-service.
+- 2026-11-03 | add | APP-field-visit-management | App baseline of NA-field-visit-management.
+- 2026-11-03 | add | APP-gate-pass-management | App baseline of NA-gate-pass-management.
+- 2026-11-03 | add | APP-inventory-and-stock-management | App baseline of NA-inventory-and-stock-management.
+- 2026-11-03 | add | APP-knowledge-library | App baseline of NA-knowledge-library.
+- 2026-11-03 | add | APP-lead-management | App baseline of NA-lead-management.
+- 2026-11-03 | add | APP-machine-tools-maintenance | App baseline of NA-machine-tools-maintenance.
+- 2026-11-03 | add | APP-manufacturing | App baseline of NA-manufacturing.
+- 2026-11-03 | add | APP-product-catalog | App baseline of NA-product-catalog.
+- 2026-11-03 | add | APP-product-lifecycle-management | App baseline of NA-product-lifecycle-management.
+- 2026-11-03 | add | APP-project-management | App baseline of NA-project-management.
+- 2026-11-03 | add | APP-purchase-management | App baseline of NA-purchase-management.
+- 2026-11-03 | add | APP-quality-control | App baseline of NA-quality-control.
+- 2026-11-03 | add | APP-quotation-and-order-flow | App baseline of NA-quotation-and-order-flow.
+- 2026-11-03 | add | APP-ticketing-and-task-management | App baseline of NA-ticketing-and-task-management.

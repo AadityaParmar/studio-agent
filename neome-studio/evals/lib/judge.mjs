@@ -29,7 +29,7 @@ export function judgeInput({ info, kase, log }) {
   const prompt = [
     `# Case ${kase.name}`,
     "",
-    `Golden Requirements: ${goldenRequirements(kase.golden).length} · golden Open Items: ${kase.golden.openItems.length} · golden Modules: ${kase.golden.modules.length}`,
+    `Golden Requirements: ${goldenRequirements(kase.golden).length} · golden Open Items: ${kase.golden.openItems.length} · golden Modules: ${kase.golden.modules.length} · golden forbidden: ${(kase.golden.forbidden ?? []).length}`,
     `Replay Requirements: ${replay.requirements.length} · replay Open Items: ${replay.openItems.length} · Don't know answers: ${dk.length}`,
     "",
     "## Golden",

@@ -53,7 +53,7 @@ before(() => {
 test("check: tiny-synthetic and every shipped case are valid; mini-case fixture too", () => {
   const r = run(["check"]);
   assert.equal(r.code, 0, r.out);
-  for (const c of ["tiny-synthetic", "anglo-gulf-crm"]) assert.ok(r.lines.includes(`case | ${c} | ok`), r.out);
+  for (const c of ["tiny-synthetic", "anglo-gulf-crm", "template-hr-small"]) assert.ok(r.lines.includes(`case | ${c} | ok`), r.out);
   const m = run(["check", mini]);
   assert.equal(m.code, 0, m.out);
   assert.deepEqual(run(["list"]).lines, r.lines);
@@ -133,7 +133,7 @@ test("thresholds: README table holds ticket 18 starting values; the runner refus
   const readme = readFileSync(join(evals, "README.md"), "utf8");
   const t = readThresholds(readme);
   assert.deepEqual(Object.fromEntries(Object.entries(t).map(([k, v]) => [k, v.pass])), {
-    valid: 0, uncited: 0, invented: 0, dontKnow: 0, mechanics: 0, replay: 0,
+    valid: 0, uncited: 0, invented: 0, dontKnow: 0, forbidden: 0, mechanics: 0, replay: 0,
     recall: 80, openItems: 70, modules: 80, mapping: 70, regression: 5,
   });
   assert.throws(() => readThresholds(readme.replace(/^\| Module set.*$/m, "")), /no row for modules/);
@@ -155,7 +155,7 @@ test("run: prepare + replay + judge + score with a fake claude → result file a
   assert.equal(r.lines.at(-1), "done | 0 pass, 1 fail");
 
   const text = readFileSync(join(W.results, "2026-10-29-mini-case.md"), "utf8");
-  for (const h of ["## Gates (hard)", "## Soft metrics", "## Mechanics", "## Requirements", "## Open Items", "## Modules and mapping", "## Extra Requirements (not failed)", "## Source check", "## Don't know → Open Item", "## Problems", "## Maintainer spot-check", "## Data"]) {
+  for (const h of ["## Gates (hard)", "## Soft metrics", "## Mechanics", "## Forbidden (must not be Requirements)", "## Requirements", "## Open Items", "## Modules and mapping", "## Extra Requirements (not failed)", "## Source check", "## Don't know → Open Item", "## Problems", "## Maintainer spot-check", "## Data"]) {
     assert.ok(text.includes(h), `result lacks ${h}`);
   }
   assert.match(text, /\| Requirement recall \| 83\.3% \| 5 \/ 6 \| 80% \|/);
@@ -168,7 +168,7 @@ test("run: prepare + replay + judge + score with a fake claude → result file a
   const d = dataBlock(text);
   assert.equal(d.branch, "main");
   assert.equal(d.verdict, "fail");
-  assert.deepEqual(d.metrics, { valid: 0, uncited: 0, invented: 0, dontKnow: 0, mechanics: 1, replay: 0, recall: 83.3, openItems: 66.7, modules: 100, mapping: 50 });
+  assert.deepEqual(d.metrics, { valid: 0, uncited: 0, invented: 0, dontKnow: 0, forbidden: 0, mechanics: 1, replay: 0, recall: 83.3, openItems: 66.7, modules: 100, mapping: 50 });
 });
 
 test("prepare: temp clones a and b over a bare remote; plugin without evals/ or tests; case Inputs only in a", () => {
@@ -293,6 +293,29 @@ test("score: invented fact and Don't know with no Open Item fail the hard gates"
   assert.match(text, /\| A2 \| ingest-first \| How many showrooms\? \| \*\*none\*\* \|/);
 });
 
+test("score: Don't know about a fact a cited Source already states passes without an Open Item", () => {
+  const { s, results } = rescore({ FAKE_DK_NULL: "1", FAKE_DK_SOURCE: "CE-2" });
+  assert.ok(!s.lines.some((l) => l.includes("Don't know without an Open Item")), s.out);
+  const text = readFileSync(join(results, readdirSync(results)[0]), "utf8");
+  assert.match(text, /\| A2 \| ingest-first \| How many showrooms\? \| Source CE-2 \|/);
+});
+
+test("score: Don't know pointing at a Source the replay never cites is a judge problem", () => {
+  const { s } = rescore({ FAKE_DK_NULL: "1", FAKE_DK_SOURCE: "XX-9" });
+  assert.equal(s.code, 1);
+  assert.match(s.out, /dontKnow \d+: XX-9/);
+});
+
+test("score: a forbidden statement that became a Requirement fails the forbidden gate and shows in the result", () => {
+  const { s, results } = rescore({ FAKE_FORBIDDEN: "QUO-03" });
+  assert.equal(s.code, 1);
+  assert.ok(s.lines.includes("fail | mini-case | Forbidden Requirements: 1 (max 0)"), s.out);
+  const text = readFileSync(join(results, readdirSync(results)[0]), "utf8");
+  assert.match(text, /\| Forbidden Requirements \| 1 \| 0 \| \*\*fail\*\* \|/);
+  assert.match(text, /\| FB-01 \| Quotations go out without any approval\. \| QUO-03 .*\| \*\*fail\*\* \|/);
+  assert.equal(dataBlock(text).metrics.forbidden, 1);
+});
+
 test("score: regression vs the last main result; other branches ignored; same-day runs numbered", () => {
   const results = box();
   const prior = (file, branch, metrics) =>
@@ -360,7 +383,7 @@ test("score: golden `score` limits soft metrics; the rest are n/a and never fail
   assert.equal(m.values.openItems, null);
   assert.equal(m.values.modules, 100);
   assert.equal(m.values.mapping, 100);
-  const t = Object.fromEntries(["valid", "uncited", "invented", "dontKnow", "mechanics", "replay"].map((k) => [k, { pass: 0 }]));
+  const t = Object.fromEntries(["valid", "uncited", "invented", "dontKnow", "forbidden", "mechanics", "replay"].map((k) => [k, { pass: 0 }]));
   for (const k of ["recall", "openItems", "modules", "mapping"]) t[k] = { pass: 80 };
   t.regression = { pass: 5 };
   assert.equal(verdict(m.values, t, null).pass, true);

@@ -24,6 +24,7 @@ Start here to change the `neome-studio` plugin. Consultants running the plugin r
 | [../neome-studio/HOW-TO-RUN.md](../neome-studio/HOW-TO-RUN.md) | Consultant step-by-step, zero to Sign-off |
 | [../neome-studio/evals/README.md](../neome-studio/evals/README.md) | evals: run, scorecard, thresholds (parsed by `scorecard.mjs`), eyeball checklist |
 | [../neome-studio/maintainer/upstream-check.md](../neome-studio/maintainer/upstream-check.md) | upstream skills bump driver |
+| [template-bank-refine.md](template-bank-refine.md) | how to refine the Template bank (maintainer guide) |
 | [../neome-studio/reference/](../neome-studio/reference/) | runtime refs skills load: git protocol, map logic, next session, Neome App catalog |
 
 Docs inside `neome-studio/` stay there: tests and the engine read them by path.
@@ -56,3 +57,4 @@ Local-only, gitignored: `skills-main/` (old upstream snapshot, never read), `exa
 | Pack lint only | `node neome-studio/engine/cli.mjs check neome-studio` |
 | Evals (skill text change) | `node neome-studio/evals/run.mjs run anglo-gulf-crm tiny-synthetic` |
 | Upstream diff | `node neome-studio/maintainer/upstream-check.mjs diff neome-studio` |
+| Refine Template bank | tell Claude: `follow neome-studio/maintainer/refine-template-bank.md` ([guide](template-bank-refine.md)) |

@@ -14,7 +14,7 @@ Turn one Module's grilling output into its Module spec. Synthesis, no interview:
 
 ## 1. Scope
 
-From the caller: `<ent>`, `<slug>`, `<PREFIX>`, and on a revisit the `revisitReason`.
+From the caller: `<ent>`, `<slug>`, `<PREFIX>`, `templateModule`, and on a revisit the `revisitReason`.
 
 - The ticket front-matter must say `status: claimed` and `claimedBy:` = `git config user.name`. Else stop: tell the Consultant to run `/neome-studio:resolve-module`.
 - First pass: grilling output is in `ticket.md`. Revisit: it is in `spec.md`; touch only the sections the `revisitReason` and the new grilling answers touch.
@@ -45,7 +45,7 @@ Every gap found in step 3 → a row in `open-items.md` (next free `OI-NN`, shape
 
 ## 5. Neome mapping
 
-Run the `neome-mapping` skill for `<PREFIX>`. It writes section 12 and any `Delivery:` override lines. Done when section 12 has its three lines.
+Run the `neome-mapping` skill for `<PREFIX>` with `templateModule`. It writes section 12 and any `Delivery:` override lines. Done when section 12 has its three lines.
 
 ## 6. Done check
 

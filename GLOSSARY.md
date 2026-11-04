@@ -100,6 +100,14 @@ _Avoid_: Requirement (for bank entries), feature
 A set of Template modules that runs as a small enterprise (for example a trading company: CRM, Quotation, Order, Invoice).
 _Avoid_: Blueprint, starter kit, package
 
+**Neome App Build**:
+Neome's own build of one catalog Neome App (its enterprise JSON, one Module). Build code `NA-<catalog slug>`. Source of an App baseline; also evidence for Patterns, Template modules and Templates.
+_Avoid_: Template (for the App JSON), client Build
+
+**App baseline**:
+Template bank entry (`APP-<catalog slug>`) saying what one Neome App gives out of the box: sheets, key fields, roles, workflows, a "gives" list. Learnt from its Neome App Build. Wins over the catalog page on what the App has; the Template module still wins on usual Delivery.
+_Avoid_: App template, catalog entry
+
 ## Outputs
 
 **BRD**:

@@ -1,6 +1,6 @@
 ---
 name: ingest
-description: "Register dropped Inputs as Sources and draft Modules, Requirements, Open Items and Enterprise glossary terms. First run creates the Enterprise and Engagement. Also reads Questionnaire replies back."
+description: "Register dropped Inputs as Sources and draft Modules, Requirements, Open Items and Enterprise glossary terms; propose Template bank matches. First run creates the Enterprise and Engagement. Also reads Questionnaire replies back."
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Turn Inputs dropped in `enterprises/<ent>/inputs/` and `confidential/` into Sources and a cited draft, and read Questionnaire replies back into the record. Every fact cites a Source or is `(proposed, to confirm)`. Every gap becomes an Open Item.
 
-`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Draft file shapes: [draft-shapes.md](references/draft-shapes.md). Ticket fields: [map-logic.md](../../reference/map-logic.md). Questionnaire replies: [reply-loop.md](references/reply-loop.md). Next session: [next-session.md](../../reference/next-session.md).
+`ENGINE` = `node neome-studio/engine/cli.mjs`, from the repo root. Git and lock: [git-protocol.md](../../reference/git-protocol.md). Draft file shapes: [draft-shapes.md](references/draft-shapes.md). Ticket fields and Template bank fields: [map-logic.md](../../reference/map-logic.md). Questionnaire replies: [reply-loop.md](references/reply-loop.md). Next session: [next-session.md](../../reference/next-session.md).
 
 ## 1. Scope
 
@@ -49,7 +49,7 @@ No reply → step 5. Per reply, follow [reply-loop.md](references/reply-loop.md)
 
 ## 5. Draft
 
-Only the new Inputs that are not replies; none → step 6. Read every text copy of this Engagement's Sources, whole. Then write, per draft-shapes:
+Only the new Inputs that are not replies; none → step 7. Read every text copy of this Engagement's Sources, whole. Then write, per draft-shapes:
 
 - **Modules**: groups of related needs, named in the Enterprise's words, each with a prefix; one draft ticket each + a map row.
 - **Requirements**: one testable statement each, in the Module that owns it.
@@ -58,11 +58,20 @@ Only the new Inputs that are not replies; none → step 6. Read every text copy 
 
 Draft is **exhaustive**: every need, pain, rule, number, role and system named in the Inputs sits in a Requirement, a Module section or an Open Item. Two Sources disagree → Open Item quoting both. Done when you can point each sentence of the Inputs that states a need at the line that holds it.
 
-## 6. Glossary
+## 6. Template bank
 
-No Inputs drafted in step 5 → only the terms replies confirmed (reply-loop Glossary); step 7. Collect the Enterprise's own terms from the Inputs (words they use for their things, roles, documents, statuses), each with a definition from the Inputs and its Source. Include existing glossary terms this Engagement uses, so their _Used in_ gets this slug. Input gives an existing term a different meaning → raise the Open Item it asks for. Hand all of them to the `enterprise-glossary` skill (it pulls, writes, commits and pushes `GLOSSARY.md` itself). Done when it reports every term written or disputed.
+Only for Modules drafted in step 5. The draft stays Inputs-only: no Module, Requirement, Open Item or ticket line comes from the Template bank. Follow map-logic Template bank fields; `ENGINE template-bank index` empty → step 7.
 
-## 7. Check
+- `template:` missing → the Template whose business type and Template modules fit the whole Engagement, or `none`. Set → leave it (`review-draft` owns changes).
+- Each Module drafted this run with `templateModule` missing → the Template module whose name or aliases fit its needs, or `none`. A Module with the field set keeps it.
+
+Show the Consultant one list: Engagement → Template name, then each Module → Template module name or `none`, each with seen in N Builds and why it fits. They accept or edit; then `ENGINE template-bank set` each. Done when `ENGINE template-bank fields <eng>` shows `template` and every draft Module checked.
+
+## 7. Glossary
+
+No Inputs drafted in step 5 → only the terms replies confirmed (reply-loop Glossary); step 8. Collect the Enterprise's own terms from the Inputs (words they use for their things, roles, documents, statuses), each with a definition from the Inputs and its Source. Include existing glossary terms this Engagement uses, so their _Used in_ gets this slug. Input gives an existing term a different meaning → raise the Open Item it asks for. Hand all of them to the `enterprise-glossary` skill (it pulls, writes, commits and pushes `GLOSSARY.md` itself). Done when it reports every term written or disputed.
+
+## 8. Check
 
 ```
 ENGINE build-brd enterprises/<ent>/engagements/<slug> --check
@@ -70,18 +79,19 @@ ENGINE build-brd enterprises/<ent>/engagements/<slug> --check
 
 Errors → fix your markdown, run again. Done at exit 0. Warnings about missing sections in draft Modules are expected.
 
-## 8. Report and end
+## 9. Report and end
 
 Tell the Consultant, short:
 
 - Sources: ID · title (confidential marked).
 - Replies: reply-loop Report.
 - Modules: prefix · name · Requirements count.
+- Template bank: Engagement Template, each Module's Template module or `none`.
 - Engagement-wide Requirements count; Open Items count (top 5 questions).
 - Glossary terms added, updated, disputed.
 
 Add the map change-log line(s). Clear the lock, then End (git-protocol): `ingest: <ent>/<slug> <n> Sources, <n> Modules drafted` (replies only: `ingest: <ent>/<slug> QA-n reply to <QN>, <n> Open Items closed`). Include renamed Inputs, `_agent/` files and the Engagement folder.
 
-## 9. Next session
+## 10. Next session
 
 Last thing of every run, after End; every stop above ends here too. Follow [next-session.md](../../reference/next-session.md): `ENGINE status <eng> --who "<who>"`, up to 3 `step` lines as `/neome-studio:<skill> <args> — <why>`. Done when the block is shown.

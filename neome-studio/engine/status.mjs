@@ -1,12 +1,14 @@
 // status: what the studio skill shows (ticket 38). Read-only: writes nothing, needs no mmdc, runs no git.
 //   status [<repo-root> | <enterprise-dir>] [--who <name>] [--now <ISO time>]   → one line per Engagement
-//   status <engagement-dir>                 [--who <name>] [--now <ISO time>]   → that Engagement in full
-// --who marks the lock and claims held by that name `yours`; --now fixes the clock (tests).
+//   status <engagement-dir>                 [--who <name>] [--now <ISO time>] [--bank <dir>]   → that Engagement in full
+// --who marks the lock and claims held by that name `yours`; --now fixes the clock (tests); --bank swaps the Template bank (tests).
 // Engagement lines, `|`-separated, in this order:
 //   engagement | <ent>/<slug> | <title>
 //   lock | none   or   lock | <who> | <skill> | <since> | <age>[ | yours]
 //   next | draft | claimed | blocked | resolved   (as `module frontier`; claimed + `since <date> | <age>`)
 //   gap | <P> | <what is missing>                 (resolved Module without its Prototype)
+//   template | warning | template or <P> | <ID> is not in the Template bank; maybe <IDs>; <who re-matches>
+//                                                 (only when a set ID is gone; never blocks anything)
 //   input | <path> | not in the Source register
 //   oi | open | … · oi | not asked | … · oi | chased | <OI>: <note> · oi | waiting | …
 //   hold | <P> | <who> | <map Note>              (reply answers kept for a claimed Module's holder)
@@ -28,18 +30,20 @@ import { frontierReport } from "./modules.mjs";
 import { validateEngagement, versionsOf } from "./build-brd.mjs";
 import { changeLog } from "./brd/changelog.mjs";
 import { signOffBlockers } from "./brd/signoff.mjs";
+import { templateWarnings } from "./template-bank-match.mjs";
+import { BANK_DIR } from "./template-bank.mjs";
 
-const USE = "status [<repo-root> | <enterprise-dir> | <engagement-dir>] [--who <name>] [--now <ISO time>]";
+const USE = "status [<repo-root> | <enterprise-dir> | <engagement-dir>] [--who <name>] [--now <ISO time>] [--bank <dir>]";
 export const USER_SKILLS = ["studio", "ingest", "review-draft", "resolve-module", "questionnaire", "build-brd"];
 const MAX_ERRORS = 5;
 
 export function status(args) {
-  const { pos, opts, problem } = parse(args, ["who", "now"]);
+  const { pos, opts, problem } = parse(args, ["who", "now", "bank"]);
   if (problem) return usage(problem, USE);
   if (pos.length > 1) return usage(`status: one folder at most (got ${pos.length})`, USE);
   const now = opts.now ? Date.parse(opts.now) : Date.now();
   if (Number.isNaN(now)) return usage(`status: --now "${opts.now}" is not a time`, USE);
-  const ctx = { who: opts.who?.trim() || null, now, out: [] };
+  const ctx = { who: opts.who?.trim() || null, now, bank: resolve(opts.bank ?? BANK_DIR), out: [] };
   const dir = resolve(pos[0] ?? process.cwd());
   if (existsSync(join(dir, "_agent", "map.md"))) engagement(ctx, dir);
   else if (existsSync(join(dir, "enterprises"))) overview(ctx, readdirs(join(dir, "enterprises")).map((e) => join(dir, "enterprises", e)));
@@ -134,6 +138,11 @@ function engagement(ctx, dir) {
     const missing = [!m.hasData && `modules/${m.folder}/prototype-data.json`, !m.hasView && `prototypes/${m.folder}.html`].filter(Boolean);
     if (missing.length) line(ctx, "gap", m.prefix, `resolved without its Prototype: ${missing.join(", ")} missing`);
   }
+
+  // Template bank IDs gone after a refine: warning only. A broken Template bank never breaks status.
+  let gone = [];
+  try { gone = templateWarnings(dir, ctx.bank); } catch (e) { line(ctx, "template", "warning", "-", `Template bank not readable: ${e.message}`); }
+  for (const w of gone) line(ctx, "template", "warning", w.where, w.message);
 
   // Inputs dropped since the last ingest.
   const inputs = unregistered(ent);

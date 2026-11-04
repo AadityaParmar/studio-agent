@@ -1,0 +1,859 @@
+{
+ "type": "ent",
+ "payload": {
+  "studioEnt": {
+   "version": 7,
+   "entId": "ent-acme01",
+   "details": {
+    "name": "Acme Widgets",
+    "about": "Acme Widgets sells widgets to Zorbia shops. Call +1 555 010 9999 or ops@acme-widgets.example"
+   },
+   "moduleMap": {
+    "keys": [
+     "mmd-quotes"
+    ],
+    "map": {
+     "mmd-quotes": {
+      "metaId": "mmd-quotes",
+      "name": "Quotes"
+     }
+    }
+   },
+   "pluginMap": {
+    "keys": [],
+    "map": {}
+   },
+   "roleMap": {
+    "keys": [
+     "mr-rep",
+     "mr-mgr"
+    ],
+    "map": {
+     "mr-rep": {
+      "metaId": "mr-rep",
+      "details": {
+       "name": "Sales Rep"
+      }
+     },
+     "mr-mgr": {
+      "metaId": "mr-mgr",
+      "details": {
+       "name": "Manager"
+      }
+     }
+    }
+   },
+   "varMap": {
+    "keys": [
+     "mw-kind",
+     "mw-status"
+    ],
+    "map": {
+     "mw-kind": {
+      "metaId": "mw-kind",
+      "details": {
+       "name": "Customer Kind"
+      },
+      "kind": "setOfText",
+      "value": {
+       "keys": [
+        "optRetail",
+        "optWholesale"
+       ],
+       "map": {
+        "optRetail": {
+         "metaId": "optRetail",
+         "value": "Retail"
+        },
+        "optWholesale": {
+         "metaId": "optWholesale",
+         "value": "Wholesale"
+        }
+       }
+      }
+     },
+     "mw-status": {
+      "metaId": "mw-status",
+      "details": {
+       "name": "Order Status"
+      },
+      "kind": "setOfText",
+      "value": {
+       "keys": [
+        "optDraft",
+        "optApproved",
+        "optRejected"
+       ],
+       "map": {
+        "optDraft": {
+         "metaId": "optDraft",
+         "value": "Draft"
+        },
+        "optApproved": {
+         "metaId": "optApproved",
+         "value": "Approved"
+        },
+        "optRejected": {
+         "metaId": "optRejected",
+         "value": "Rejected"
+        }
+       }
+      }
+     }
+    }
+   },
+   "formMap": {
+    "keys": [
+     "mf-cust",
+     "mf-order",
+     "mf-quote",
+     "mf-line",
+     "mf-prod",
+     "mf-old",
+     "mf-sumout"
+    ],
+    "map": {
+     "mf-cust": {
+      "metaId": "mf-cust",
+      "details": {
+       "name": "Customer"
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-cust"
+       ],
+       "map": {
+        "msc-cust": {
+         "metaId": "msc-cust",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-cname",
+           "mfd-cphone",
+           "mfd-ckind",
+           "mfd-cdiv"
+          ],
+          "map": {
+           "mfd-cname": {
+            "metaId": "mfd-cname",
+            "details": {
+             "name": "Name"
+            },
+            "type": "text",
+            "required": true
+           },
+           "mfd-cphone": {
+            "metaId": "mfd-cphone",
+            "details": {
+             "name": "Phone"
+            },
+            "type": "mobileNumber"
+           },
+           "mfd-ckind": {
+            "metaId": "mfd-ckind",
+            "details": {
+             "name": "Kind"
+            },
+            "type": "pickText",
+            "sourceVarId": "mw-kind"
+           },
+           "mfd-cdiv": {
+            "metaId": "mfd-cdiv",
+            "details": {
+             "name": "Line"
+            },
+            "type": "divider"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "mf-order": {
+      "metaId": "mf-order",
+      "details": {
+       "name": "Order"
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-order",
+        "msc-olines"
+       ],
+       "map": {
+        "msc-order": {
+         "metaId": "msc-order",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-ocust",
+           "mfd-ocname",
+           "mfd-ostatus",
+           "mfd-oamt",
+           "mfd-oappr"
+          ],
+          "map": {
+           "mfd-ocust": {
+            "metaId": "mfd-ocust",
+            "details": {
+             "name": "Customer"
+            },
+            "type": "ref",
+            "spreadsheetId": "mss-cust"
+           },
+           "mfd-ocname": {
+            "metaId": "mfd-ocname",
+            "details": {
+             "name": "CustName"
+            },
+            "type": "text",
+            "refTargetId": "mfd-ocust",
+            "refFieldId": "mfd-cname"
+           },
+           "mfd-ostatus": {
+            "metaId": "mfd-ostatus",
+            "details": {
+             "name": "Status"
+            },
+            "type": "pickText",
+            "sourceVarId": "mw-status",
+            "required": true
+           },
+           "mfd-oamt": {
+            "metaId": "mfd-oamt",
+            "details": {
+             "name": "Amount"
+            },
+            "type": "number"
+           },
+           "mfd-oappr": {
+            "metaId": "mfd-oappr",
+            "details": {
+             "name": "Approver"
+            },
+            "type": "pickUser",
+            "roleIdDataSource": {
+             "roleIdSet": [
+              "mr-mgr"
+             ]
+            }
+           }
+          }
+         }
+        },
+        "msc-olines": {
+         "metaId": "msc-olines",
+         "details": {
+          "name": "Lines"
+         },
+         "type": "grid",
+         "fieldMap": {
+          "keys": [
+           "mfd-oline"
+          ],
+          "map": {
+           "mfd-oline": {
+            "metaId": "mfd-oline",
+            "details": {
+             "name": "Line"
+            },
+            "type": "ref",
+            "spreadsheetId": "mss-line"
+           }
+          }
+         }
+        }
+       }
+      },
+      "formulaMap": {
+       "keys": [
+        "mfm-1"
+       ],
+       "map": {
+        "mfm-1": {
+         "metaId": "mfm-1",
+         "name": "tax",
+         "assignToFieldId": "mfd-oamt",
+         "formula": {
+          "value": "${f:Details.Amount} * 1.1"
+         }
+        }
+       }
+      },
+      "visibilityRuleMap": {
+       "keys": [
+        "mvr-1"
+       ],
+       "map": {
+        "mvr-1": {
+         "metaId": "mvr-1",
+         "name": "show approver",
+         "visibilityCondMap": {
+          "statement": {
+           "lhs": "mfd-ostatus",
+           "operator": "hasValue"
+          }
+         }
+        }
+       }
+      },
+      "eventMap": {
+       "keys": [
+        "mfe-1"
+       ],
+       "map": {
+        "mfe-1": {
+         "metaId": "mfe-1",
+         "name": "on status",
+         "kind": "onChange"
+        }
+       }
+      }
+     },
+     "mf-quote": {
+      "metaId": "mf-quote",
+      "details": {
+       "name": "Quote",
+       "modules": {
+        "moduleIdSet": [
+         "mmd-quotes"
+        ]
+       }
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-quote"
+       ],
+       "map": {
+        "msc-quote": {
+         "metaId": "msc-quote",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-qcust",
+           "mfd-qamt"
+          ],
+          "map": {
+           "mfd-qcust": {
+            "metaId": "mfd-qcust",
+            "details": {
+             "name": "Customer"
+            },
+            "type": "ref",
+            "spreadsheetId": "mss-cust"
+           },
+           "mfd-qamt": {
+            "metaId": "mfd-qamt",
+            "details": {
+             "name": "Total"
+            },
+            "type": "number"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "mf-line": {
+      "metaId": "mf-line",
+      "details": {
+       "name": "Order Line"
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-line"
+       ],
+       "map": {
+        "msc-line": {
+         "metaId": "msc-line",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-lprod",
+           "mfd-lqty"
+          ],
+          "map": {
+           "mfd-lprod": {
+            "metaId": "mfd-lprod",
+            "details": {
+             "name": "Product"
+            },
+            "type": "ref",
+            "spreadsheetId": "mss-prod"
+           },
+           "mfd-lqty": {
+            "metaId": "mfd-lqty",
+            "details": {
+             "name": "Qty"
+            },
+            "type": "number"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "mf-prod": {
+      "metaId": "mf-prod",
+      "details": {
+       "name": "Product"
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-prod"
+       ],
+       "map": {
+        "msc-prod": {
+         "metaId": "msc-prod",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-pname"
+          ],
+          "map": {
+           "mfd-pname": {
+            "metaId": "mfd-pname",
+            "details": {
+             "name": "Name"
+            },
+            "type": "text"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "mf-old": {
+      "metaId": "mf-old",
+      "details": {
+       "name": "Old Import"
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-old"
+       ],
+       "map": {
+        "msc-old": {
+         "metaId": "msc-old",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-xname"
+          ],
+          "map": {
+           "mfd-xname": {
+            "metaId": "mfd-xname",
+            "details": {
+             "name": "Name"
+            },
+            "type": "text"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "mf-sumout": {
+      "metaId": "mf-sumout",
+      "details": {
+       "name": "Summary Out"
+      },
+      "compositeMap": {
+       "keys": [
+        "msc-sumout"
+       ],
+       "map": {
+        "msc-sumout": {
+         "metaId": "msc-sumout",
+         "details": {
+          "name": "Details"
+         },
+         "type": "section",
+         "fieldMap": {
+          "keys": [
+           "mfd-stotal"
+          ],
+          "map": {
+           "mfd-stotal": {
+            "metaId": "mfd-stotal",
+            "details": {
+             "name": "Total"
+            },
+            "type": "number"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "spreadsheetMap": {
+    "keys": [
+     "mss-cust",
+     "mss-order",
+     "mss-quote",
+     "mss-line",
+     "mss-prod",
+     "mss-old"
+    ],
+    "map": {
+     "mss-cust": {
+      "metaId": "mss-cust",
+      "details": {
+       "name": "Customer"
+      },
+      "formId": "mf-cust",
+      "isMasterSheet": true,
+      "insertRoleSet": [
+       "mr-rep"
+      ],
+      "readRoleSet": [
+       "mr-rep",
+       "mr-mgr"
+      ]
+     },
+     "mss-order": {
+      "metaId": "mss-order",
+      "details": {
+       "name": "Order"
+      },
+      "formId": "mf-order",
+      "updateRoleSet": [
+       "mr-mgr"
+      ]
+     },
+     "mss-quote": {
+      "metaId": "mss-quote",
+      "details": {
+       "name": "Quote"
+      },
+      "formId": "mf-quote"
+     },
+     "mss-line": {
+      "metaId": "mss-line",
+      "details": {
+       "name": "Order Line"
+      },
+      "formId": "mf-line"
+     },
+     "mss-prod": {
+      "metaId": "mss-prod",
+      "details": {
+       "name": "Product"
+      },
+      "formId": "mf-prod"
+     },
+     "mss-old": {
+      "metaId": "mss-old",
+      "details": {
+       "name": "Old Import"
+      },
+      "formId": "mf-old"
+     }
+    }
+   },
+   "reportMap": {
+    "keys": [
+     "mrp-sum",
+     "mrp-old"
+    ],
+    "map": {
+     "mrp-sum": {
+      "metaId": "mrp-sum",
+      "details": {
+       "name": "Order Summary"
+      },
+      "kind": "query",
+      "fromSpreadsheetIdSet": [
+       "mss-order"
+      ],
+      "outputFormId": "mf-sumout"
+     },
+     "mrp-old": {
+      "metaId": "mrp-old",
+      "details": {
+       "name": "Old Dump"
+      },
+      "kind": "spreadsheet",
+      "fromSpreadsheetId": "mss-old"
+     }
+    }
+   },
+   "automationMap": {
+    "keys": [
+     "mau-legacy"
+    ],
+    "map": {
+     "mau-legacy": {
+      "metaId": "mau-legacy",
+      "details": {
+       "name": "Migrated legacy"
+      }
+     }
+    }
+   },
+   "actionMap": {
+    "keys": [
+     "mac-cust",
+     "mac-order",
+     "mac-quote"
+    ],
+    "map": {
+     "mac-cust": {
+      "metaId": "mac-cust",
+      "details": {
+       "name": "Customers"
+      },
+      "kind": "spreadsheetEditor",
+      "spreadsheetId": "mss-cust"
+     },
+     "mac-order": {
+      "metaId": "mac-order",
+      "details": {
+       "name": "New order"
+      },
+      "kind": "rowInsert",
+      "spreadsheetId": "mss-order"
+     },
+     "mac-quote": {
+      "metaId": "mac-quote",
+      "details": {
+       "name": "Quotes"
+      },
+      "kind": "spreadsheetEditor",
+      "spreadsheetId": "mss-quote"
+     }
+    }
+   },
+   "groupMap": {
+    "keys": [
+     "mgp-sales",
+     "mgp-lobby"
+    ],
+    "map": {
+     "mgp-sales": {
+      "metaId": "mgp-sales",
+      "details": {
+       "name": "Sales"
+      },
+      "actionPermissionMap": {
+       "keys": [
+        "mac-cust",
+        "mac-order",
+        "mac-quote"
+       ],
+       "map": {
+        "mac-cust": {
+         "metaId": "mac-cust",
+         "roleIdSet": [
+          "mr-rep"
+         ]
+        },
+        "mac-order": {
+         "metaId": "mac-order",
+         "roleIdSet": [
+          "mr-rep",
+          "mr-mgr"
+         ]
+        },
+        "mac-quote": {
+         "metaId": "mac-quote",
+         "roleIdSet": [
+          "mr-rep"
+         ]
+        }
+       }
+      }
+     },
+     "mgp-lobby": {
+      "metaId": "mgp-lobby",
+      "details": {
+       "name": "Lobby"
+      },
+      "actionPermissionMap": {
+       "keys": [],
+       "map": {}
+      }
+     }
+    }
+   },
+   "deeplinkMap": {
+    "keys": [],
+    "map": {}
+   },
+   "autoDiaMap": {
+    "keys": [
+     "mad-approve",
+     "mad-nightly"
+    ],
+    "map": {
+     "mad-approve": {
+      "metaId": "mad-approve",
+      "name": "wf1",
+      "label": "Order approval",
+      "nodeMap": {
+       "van-ev": {
+        "metaId": "van-ev",
+        "kind": "eventSsUpdateAfter",
+        "name": "NeoEvent",
+        "spreadsheetId": "mss-order"
+       },
+       "van-if": {
+        "metaId": "van-if",
+        "kind": "branchIfElse",
+        "name": "Approved?",
+        "condition": {
+         "statement": {
+          "lhs": {
+           "argName": "a",
+           "kind": "parameter",
+           "value": {
+            "paramId": "$Curr",
+            "compositeId": "msc-order",
+            "fieldId": "mfd-ostatus"
+           }
+          },
+          "operator": "equalTo",
+          "rhs": {
+           "kind": "derived",
+           "value": {
+            "derivedFieldId": "mfd-ostatus",
+            "valueOptionId": "optApproved"
+           }
+          }
+         }
+        }
+       },
+       "van-msg": {
+        "metaId": "van-msg",
+        "kind": "sendMessageToUsers",
+        "name": "Tell rep",
+        "message": {
+         "value": "Hi \"Acme\" team, order for Zorbia approved"
+        },
+        "toUsers": {
+         "users": {
+          "argName": "a",
+          "kind": "parameter",
+          "value": {
+           "paramId": "$Curr",
+           "compositeId": "msc-order",
+           "fieldId": "mfd-oappr"
+          }
+         }
+        }
+       },
+       "van-loop": {
+        "metaId": "van-loop",
+        "kind": "branchIterateGrid",
+        "name": "NeoIterate"
+       },
+       "van-line": {
+        "metaId": "van-line",
+        "kind": "rowInsert",
+        "name": "rowInsert",
+        "spreadsheetId": "mss-line"
+       },
+       "van-rej": {
+        "metaId": "van-rej",
+        "kind": "rowUpdate",
+        "name": "Mark rejected",
+        "spreadsheetId": "mss-order"
+       }
+      },
+      "edgeMap": {
+       "e1": {
+        "fromNodeId": "van-ev",
+        "toNodeId": "van-if",
+        "kind": "NEXT"
+       },
+       "e2": {
+        "fromNodeId": "van-if",
+        "toNodeId": "van-msg",
+        "kind": "TRUE"
+       },
+       "e3": {
+        "fromNodeId": "van-if",
+        "toNodeId": "van-rej",
+        "kind": "FALSE"
+       },
+       "e4": {
+        "fromNodeId": "van-msg",
+        "toNodeId": "van-loop",
+        "kind": "NEXT"
+       },
+       "e5": {
+        "fromNodeId": "van-loop",
+        "toNodeId": "van-line",
+        "kind": "ITERATE"
+       },
+       "e6": {
+        "fromNodeId": "van-line",
+        "toNodeId": "van-loop",
+        "kind": "NEXT"
+       }
+      }
+     },
+     "mad-nightly": {
+      "metaId": "mad-nightly",
+      "name": "wf2",
+      "label": "Nightly cleanup",
+      "nodeMap": {
+       "van-s": {
+        "metaId": "van-s",
+        "kind": "eventSchedule",
+        "name": "NeoSchedule",
+        "scheduler": {
+         "repeatSetting": {
+          "frequency": 1,
+          "repeatFrequencyKind": "day",
+          "setOfTime": [
+           "02:00"
+          ]
+         }
+        }
+       },
+       "van-x": {
+        "metaId": "van-x",
+        "kind": "ssRemoveRows",
+        "name": "Purge",
+        "spreadsheetId": "mss-old"
+       }
+      },
+      "edgeMap": {
+       "e1": {
+        "fromNodeId": "van-s",
+        "toNodeId": "van-x",
+        "kind": "NEXT"
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

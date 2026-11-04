@@ -2,7 +2,7 @@
 // computes hard gates, soft metrics and regression; writes results/<date>-<case>.md with per-item match tables.
 // The LLM judge only matches by meaning; every count, percentage, threshold and verdict is computed here.
 import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 import { validateEngagement, versionsOf } from "../../engine/build-brd.mjs";
 import { readRegister } from "../../engine/brd/read-engagement.mjs";
 import { schemaErrors, crossRefErrors } from "../../engine/brd/validate.mjs";
@@ -11,13 +11,14 @@ import { goldenRequirements, shapeErrors } from "./case.mjs";
 import { git } from "./workspace.mjs";
 import { newest } from "./replay.mjs";
 
-export const HARD = ["valid", "uncited", "invented", "dontKnow", "mechanics", "replay"];
+export const HARD = ["valid", "uncited", "invented", "dontKnow", "forbidden", "mechanics", "replay"];
 export const SOFT = ["recall", "openItems", "modules", "mapping"];
 const LABEL = {
   valid: "Schema + cross-ref valid (errors)",
   uncited: "Uncited non-proposed facts",
   invented: "Invented facts",
   dontKnow: "Don't know without an Open Item",
+  forbidden: "Forbidden Requirements",
   mechanics: "Case mechanics failed",
   replay: "Replay problems",
   recall: "Requirement recall",
@@ -123,7 +124,14 @@ export function judgeProblems(judge, golden, actual, log) {
   exactlyOnce("extras", judge.extras.map((x) => x.id), reqIds.filter((id) => !matched.has(id)));
   exactlyOnce("sourceCheck", judge.sourceCheck.map((x) => x.id), reqIds);
   exactlyOnce("dontKnow", judge.dontKnow.map((x) => String(x.n)), dontKnows(log).map((a) => String(a.n)));
-  for (const x of judge.dontKnow) if (x.oi !== null) known(`dontKnow ${x.n}`, [x.oi], oiIds);
+  const cited = [...new Set([...actual.reqs, ...actual.ois].flatMap((x) => x.sources ?? []))];
+  for (const x of judge.dontKnow) {
+    if (x.oi !== null) known(`dontKnow ${x.n}`, [x.oi], oiIds);
+    if (x.source) known(`dontKnow ${x.n}`, [x.source], cited);
+  }
+  const fb = judge.forbidden ?? [];
+  exactlyOnce("forbidden", fb.map((x) => x.golden), (golden.forbidden ?? []).map((f) => f.id));
+  for (const x of fb) known(`forbidden ${x.golden}`, x.matchedBy, reqIds);
   return out;
 }
 
@@ -149,6 +157,13 @@ function mechanic(m, engDir, actual, clone) {
       return atLeast(n, `file(s) match ${m.path}`);
     }
     case "text": {
+      if (isGlob(m.path)) {
+        const fs = globFiles(engDir, [m.path]);
+        if (!fs.length) return { pass: false, detail: `no file matches ${m.path}` };
+        const re = new RegExp(m.pattern, "mi");
+        const hit = fs.filter((rel) => re.test(readFileSync(join(engDir, rel), "utf8")));
+        return { pass: hit.length > 0, detail: hit.length ? `${hit.join(", ")} matches /${m.pattern}/` : `${fs.join(", ")} does not match /${m.pattern}/` };
+      }
       const f = join(engDir, m.path);
       if (!existsSync(f)) return { pass: false, detail: `${m.path} missing` };
       const ok = new RegExp(m.pattern, "mi").test(readFileSync(f, "utf8"));
@@ -161,9 +176,21 @@ function mechanic(m, engDir, actual, clone) {
           (!w.status || o.status === w.status) &&
           (!w.questionIncludes || o.question.toLowerCase().includes(w.questionIncludes.toLowerCase())) &&
           (!w.answerSourcePrefix || String(o.answerSource ?? "").startsWith(`${w.answerSourcePrefix}-`)) &&
-          (!w.raisedInPrefix || String(o.raisedIn ?? "").startsWith(`${w.raisedInPrefix}-`)),
+          (!w.raisedInPrefix || String(o.raisedIn ?? "").startsWith(`${w.raisedInPrefix}-`)) &&
+          (!w.owner || o.owner === w.owner),
       );
       return atLeast(hits.length, `Open Item(s)${hits.length ? `: ${hits.map((o) => o.id).join(", ")}` : ""}`);
+    }
+    case "absent": {
+      // Regex must match nowhere in the files under the paths. Nothing to scan fails: a missing view must not pass.
+      const fs = globFiles(engDir, m.paths);
+      if (!fs.length) return { pass: false, detail: `no file matches ${m.paths.join(", ")}` };
+      const re = new RegExp(m.pattern, "m");
+      const hits = fs.flatMap((rel) => {
+        const t = readFileSync(join(engDir, rel), "utf8").match(re);
+        return t ? [`${rel}: ${t[0]}`] : [];
+      });
+      return { pass: hits.length === 0, detail: hits.length ? `found ${hits.slice(0, 5).join("; ")}${hits.length > 5 ? ` (+${hits.length - 5} file(s))` : ""}` : `0 match(es) in ${fs.length} file(s)` };
     }
     case "gen":
       return atLeast(actual.reqs.filter((r) => r.module === "GEN").length, "live GEN Requirement(s)");
@@ -195,6 +222,33 @@ function mechanic(m, engDir, actual, clone) {
   }
 }
 
+const isGlob = (p) => /[*?]/.test(p);
+
+// Engagement-relative files matching any glob, sorted. `*` and `?` stay inside one folder; `**` spans folders.
+export function globFiles(engDir, globs) {
+  const res = globs.map((g) => {
+    const body = g
+      .split("**")
+      .map((x) => x.replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^/]*").replace(/\?/g, "[^/]"))
+      .join(".*");
+    return new RegExp(`^${body}$`);
+  });
+  const out = [];
+  const walk = (dir) => {
+    if (!existsSync(dir)) return;
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (e.isFile()) {
+        const rel = relative(engDir, full).split(sep).join("/");
+        if (res.some((re) => re.test(rel))) out.push(rel);
+      }
+    }
+  };
+  walk(engDir);
+  return out.sort();
+}
+
 function countMatches(engDir, pattern) {
   const parts = pattern.split("/");
   const dir = join(engDir, ...parts.slice(0, -1));
@@ -221,6 +275,7 @@ export function computeMetrics({ golden, actual, judge, log, mechanics, replayPr
       return { g, got, hit };
     });
   const invented = judge.sourceCheck.filter((x) => x.verdict === "invented");
+  const fbRows = (golden.forbidden ?? []).map((g) => ({ g, m: byGolden(judge.forbidden ?? [], g.id) }));
   const dk = dontKnows(log).map((a) => ({ a, j: judge.dontKnow.find((x) => x.n === a.n) }));
   const hits = (rows, key) => rows.filter((r) => r.m[key].length > 0).length;
   const failedMech = mechanics.filter((m) => !m.pass);
@@ -230,7 +285,8 @@ export function computeMetrics({ golden, actual, judge, log, mechanics, replayPr
       valid: actual.errors.length,
       uncited: actual.uncited.length,
       invented: invented.length,
-      dontKnow: dk.filter((x) => x.j.oi === null).length,
+      dontKnow: dk.filter((x) => x.j.oi === null && !x.j.source).length,
+      forbidden: fbRows.filter((r) => r.m.matchedBy.length > 0).length,
       mechanics: failedMech.length,
       replay: replayProblems.length,
       recall: scored("recall", pct(hits(reqRows, "matchedBy"), reqRows.length)),
@@ -244,7 +300,7 @@ export function computeMetrics({ golden, actual, judge, log, mechanics, replayPr
       modules: [hits(modRows, "matchedBy"), modRows.length],
       mapping: [mapRows.filter((r) => r.hit).length, mapRows.length],
     },
-    rows: { reqRows, oiRows, modRows, mapRows, invented, dk },
+    rows: { reqRows, oiRows, modRows, mapRows, invented, dk, forbidden: fbRows },
   };
 }
 
@@ -356,10 +412,17 @@ export function renderResult({ info, kase, actual, judge, metrics, mechanics, ve
     for (const x of rows.invented) p(`| ${x.id} | ${cell(actual.reqs.find((r) => r.id === x.id)?.sources?.join(", "))} | ${cell(x.note)} |`);
     p("");
   }
+  if (rows.forbidden.length) {
+    p("## Forbidden (must not be Requirements)", "", "| Golden | Statement | Became | Result | Judge note |", "|---|---|---|---|---|");
+    for (const { g, m } of rows.forbidden) {
+      p(`| ${g.id} | ${cell(g.statement)} | ${cell(m.matchedBy.map((id) => title(actual, id)).join("; ")) || "—"} | ${m.matchedBy.length ? "**fail**" : "pass"} | ${cell(m.note)} |`);
+    }
+    p("");
+  }
   p("## Don't know → Open Item", "");
   if (rows.dk.length) {
     p("| # | Step | Question | Open Item | Judge note |", "|---|---|---|---|---|");
-    for (const { a, j } of rows.dk) p(`| A${a.n} | ${a.step} | ${cell(a.question)} | ${j.oi ?? "**none**"} | ${cell(j.note)} |`);
+    for (const { a, j } of rows.dk) p(`| A${a.n} | ${a.step} | ${cell(a.question)} | ${j.oi ?? (j.source ? `Source ${j.source}` : "**none**")} | ${cell(j.note)} |`);
   } else p("The simulated client said Don't know to nothing.");
   p("", "## Problems", "");
   const probs = [...actual.errors.map((e) => `validation ${e}`), ...actual.uncited.map((u) => `uncited ${u}`), ...replayProblems.map((r) => `replay ${r}`)];

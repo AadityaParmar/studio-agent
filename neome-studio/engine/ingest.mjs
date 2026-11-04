@@ -224,7 +224,10 @@ export function lock(args) {
   }
   const since = new Date().toISOString().slice(0, 16) + "Z";
   const line = `lock: ${opts.who.trim()} · ${opts.skill.trim()} · ${since}`;
-  const out = /^# .*\n/.test(text) ? text.replace(/^(# .*\n)\n?/, `$1\n${line}\n\n`) : `${line}\n\n${text}`;
+  // Front matter (Template bank `template:` field) stays first; the lock line goes under the title.
+  const fm = text.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n\n?/)?.[0] ?? "";
+  const rest = text.slice(fm.length);
+  const out = fm + (/^# .*\n/.test(rest) ? rest.replace(/^(# .*\n)\n?/, `$1\n${line}\n\n`) : `${line}\n\n${rest}`);
   writeFileSync(p, out);
   console.log(line);
   return 0;

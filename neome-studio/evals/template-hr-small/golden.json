@@ -1,0 +1,74 @@
+{
+  "case": "template-hr-small",
+  "enterprise": { "id": "fernbrook", "name": "Fernbrook Interiors" },
+  "engagement": { "slug": "hr-desk", "title": "HR desk" },
+  "modules": [
+    {
+      "prefix": "LV",
+      "name": "Leave",
+      "mapping": { "neomeApp": "attendance-and-leave", "delivery": "configuration" },
+      "requirements": [
+        { "id": "LV-01", "title": "Ask for leave", "statement": "Staff ask for leave from their phone with leave type (Annual, Sick, Unpaid), from date, to date and reason.", "priority": "Must", "sources": ["hr-call-notes.md", "K-12"] },
+        { "id": "LV-02", "title": "Line manager decides", "statement": "The line manager approves or rejects each leave request; the employee is told the decision.", "priority": "Must", "sources": ["hr-call-notes.md", "K-12"] },
+        { "id": "LV-03", "title": "HR approval for long leave", "statement": "Leave longer than 5 working days also needs the HR Manager's approval, after the line manager.", "priority": "Must", "sources": ["hr-call-notes.md", "K-12"] },
+        { "id": "LV-04", "title": "Doctor's note", "statement": "Sick leave longer than 2 days needs a photo of the doctor's note on the request.", "priority": "Should", "sources": ["hr-call-notes.md", "K-12"] },
+        { "id": "LV-05", "title": "Team calendar", "statement": "Managers see a team calendar of who is off, to spot clashes before they approve.", "priority": "Should", "sources": ["hr-call-notes.md", "K-12"] },
+        { "id": "LV-06", "title": "Unpaid leave days to payroll", "statement": "Unpaid leave days reach Paystream Payroll by the 25th of each month without anyone retyping them; Paystream stays the payroll system.", "priority": "Must", "sources": ["hr-call-notes.md", "K-07", "K-13"] },
+        { "id": "LV-07", "title": "Leave balance", "statement": "Each employee has a leave balance per leave type; approved leave takes the days off it. Annual leave is 25 days a year.", "priority": "Must", "sources": ["K-03", "K-12"] },
+        { "id": "LV-08", "title": "Working-day count", "statement": "The day count of a request works itself out: working days Monday to Friday, leaving out public holidays from a list the HR Manager keeps.", "sources": ["K-04"] }
+      ]
+    },
+    {
+      "prefix": "EXP",
+      "name": "Expenses",
+      "mapping": { "neomeApp": "expense-management", "delivery": "standard" },
+      "requirements": [
+        { "id": "EXP-01", "title": "Submit a claim", "statement": "Staff submit an expense claim from their phone: date, category (Travel, Meals, Site materials), amount in euro, short description and a photo of the receipt.", "sources": ["expenses-email.txt"] },
+        { "id": "EXP-02", "title": "Line manager decides", "statement": "The line manager approves or rejects each claim; the claimant is told either way.", "sources": ["expenses-email.txt"] },
+        { "id": "EXP-03", "title": "Friday payment and Paid", "statement": "Accounts pays approved claims every Friday by bank transfer outside the system, then marks them Paid.", "sources": ["expenses-email.txt"] },
+        { "id": "EXP-04", "title": "60-day rule", "statement": "A claim for spending more than 60 days old is refused.", "sources": ["expenses-email.txt"] },
+        { "id": "EXP-05", "title": "Monthly spend report", "statement": "A monthly report of spend by category for the Owner and Accounts.", "sources": ["expenses-email.txt"] }
+      ]
+    }
+  ],
+  "general": {
+    "requirements": [
+      { "id": "GEN-01", "topic": "access", "title": "Who sees what", "statement": "Staff see only their own leave and claims; line managers see their team's leave; the HR Manager sees all leave; Accounts sees all claims.", "sources": ["hr-call-notes.md", "expenses-email.txt"] },
+      { "id": "GEN-02", "topic": "localisation", "title": "English and euro", "statement": "English only; amounts in euro.", "sources": ["hr-call-notes.md"] },
+      { "id": "GEN-03", "topic": "training", "title": "Training", "statement": "Neomenta trains the HR Manager and Accounts; they show the rest of the staff.", "sources": ["K-10"] },
+      { "id": "GEN-04", "topic": "support", "title": "Support", "statement": "Standard Neome support; the HR Manager raises issues.", "sources": ["K-11"] }
+    ]
+  },
+  "openItems": [
+    { "id": "OI-01", "question": "Can unused leave carry over to next year, and up to how many days?", "modules": ["LV"], "answeredBy": "unknown: usual need, left out of the key (Don't know)" },
+    { "id": "OI-02", "question": "Leave Delivery: the Template bank hint says Standard, but the payroll link points higher (Configuration). Which?", "modules": ["LV"], "answeredBy": "unknown: owner Neomenta" },
+    { "id": "OI-03", "question": "How do unpaid leave days get to Paystream Payroll: a monthly file or a direct link?", "modules": ["LV"], "answeredBy": "unknown: K-07 leaves it to Neomenta" },
+    { "id": "OI-04", "question": "Does each expense category have a spending limit, and does a claim over it need extra approval?", "modules": ["EXP"], "answeredBy": "unknown: usual need, from-Inputs mode" },
+    { "id": "OI-05", "question": "Can staff claim mileage, and at what rate per km?", "modules": ["EXP"], "answeredBy": "unknown: usual need, from-Inputs mode" },
+    { "id": "OI-06", "question": "Should each claim be tagged to a project or client?", "modules": ["EXP"], "answeredBy": "unknown: usual need, from-Inputs mode" },
+    { "id": "OI-07", "question": "Any hosting, data residency or single sign-on needs?", "modules": ["All"], "answeredBy": "unknown" }
+  ],
+  "forbidden": [
+    { "id": "FB-01", "statement": "Employees can ask for half-day leave.", "modules": ["LV"], "why": "Usual need the Enterprise refused: whole days only", "sources": ["K-05"] },
+    { "id": "FB-02", "statement": "The team is told when someone's leave is approved.", "modules": ["LV"], "why": "Usual need the Enterprise refused", "sources": ["K-06"] },
+    { "id": "FB-03", "statement": "Unused leave carries forward to next year.", "modules": ["LV"], "why": "Usual need the Enterprise did not confirm (Don't know): Open Item only" },
+    { "id": "FB-04", "statement": "Each expense category has a spending limit; a claim over it needs an extra approval.", "modules": ["EXP"], "why": "Usual need in from-Inputs mode: Open Item only" },
+    { "id": "FB-05", "statement": "Staff can claim mileage at a fixed rate per km.", "modules": ["EXP"], "why": "Usual need in from-Inputs mode: Open Item only" },
+    { "id": "FB-06", "statement": "Each expense claim is tagged to a project or client.", "modules": ["EXP"], "why": "Usual need in from-Inputs mode: Open Item only" },
+    { "id": "FB-07", "statement": "Staff check in and out each day; attendance is tracked.", "modules": ["All"], "why": "Template module the Enterprise refused (Attendance)", "sources": ["K-09"] }
+  ],
+  "mechanics": [
+    { "id": "template-matched", "what": "Engagement Template is the HR desk one, not the sales decoy", "type": "text", "path": "_agent/map.md", "pattern": "^template:\\s*TPL-hr-small\\s*$" },
+    { "id": "leave-tmod", "what": "Leave matched to TMOD-leave", "type": "text", "path": "_agent/modules/*leave*/ticket.md", "pattern": "^templateModule:\\s*TMOD-leave\\s*$" },
+    { "id": "expenses-tmod", "what": "Expenses matched to TMOD-expenses", "type": "text", "path": "_agent/modules/*expense*/ticket.md", "pattern": "^templateModule:\\s*TMOD-expenses\\s*$" },
+    { "id": "visitor-none", "what": "Visitor log checked, no match", "type": "text", "path": "_agent/modules/*visitor*/ticket.md", "pattern": "^templateModule:\\s*none\\s*$" },
+    { "id": "employee-master-added", "what": "Suggested Employee master Module added (Consultant yes), left open", "type": "text", "path": "_agent/map.md", "pattern": "^\\|\\s*[A-Z]{2,5}\\s*\\|\\s*(Employee|Staff)[^|]*\\|\\s*(open|draft)\\s*\\|" },
+    { "id": "no-attendance-module", "what": "Suggested Attendance Module dropped (Consultant no)", "type": "absent", "paths": ["_agent/map.md"], "pattern": "^\\|\\s*[A-Z]{2,5}\\s*\\|\\s*Attendance" },
+    { "id": "leave-resolved", "what": "Leave resolved (live)", "type": "text", "path": "_agent/modules/*leave*/ticket.md", "pattern": "^status:\\s*resolved\\s*$" },
+    { "id": "expenses-resolved", "what": "Expenses resolved (from Inputs)", "type": "text", "path": "_agent/modules/*expense*/ticket.md", "pattern": "^status:\\s*resolved\\s*$" },
+    { "id": "delivery-mismatch-oi", "what": "TMOD-leave Delivery hint vs heuristics mismatch raised as an Open Item, owner Neomenta", "type": "oi", "where": { "questionIncludes": "standard", "owner": "neomenta" } },
+    { "id": "brd-preview", "what": "BRD working preview built", "type": "file", "path": "brd/preview.html" },
+    { "id": "questionnaire-sent", "what": "Questionnaire master written", "type": "file", "path": "_agent/questionnaires/QN-*.md" },
+    { "id": "no-bank-ids-in-views", "what": "No Template bank IDs (incl. App baseline APP-), Build codes (NB-, NA-) or seenIn in BRD, Prototypes, Questionnaires", "type": "absent", "paths": ["brd/**", "prototypes/**", "questionnaires/**"], "pattern": "TPL-|TMOD-|PAT-|\\bAPP-|\\bNA-[a-z]|NB-\\d|[Ss]een in" }
+  ]
+}

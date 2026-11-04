@@ -10,7 +10,7 @@ neome-studio/
   skills/<skill>/SKILL.md       11 skills (+ references/ per skill)
   reference/                    shared: git protocol + lock, map logic, next session, Neome App catalog, fonts
   engine/                       deterministic CLI the skills call; tests + fixtures in engine/test/
-  maintainer/                   upstream-check (script + driver prompt)
+  maintainer/                   upstream-check, refine-template-bank (script + driver prompt each); template-bank/ digest, scrub, refine helpers + child prompts
   evals/                        eval runner (run.mjs + driver eval.md), Eval cases, results/, eyeball checklist
   LICENSE-upstream              MIT notice for text cloned from upstream
 ```
@@ -76,8 +76,9 @@ The pin lives only in each cloned skill's front-matter: `upstream` (path or list
 | `new-questionnaire`, `export-questionnaire` | `questionnaire` |
 | `build-brd`, `mmdc-check` | `build-brd`; `ingest`, `review-draft`, `grill-module` validate with `build-brd --check` (writes nothing) |
 | `check` | `npm test`, maintainer (read-only pack lint; user skills must have the Next session step) |
+| `template-bank` | Template bank readers: `ingest`, `review-draft` (`set`), `resolve-module`, `grill-module`, `neome-mapping` (`index`, `fields`; read-only) |
 
-`setup-check` runs before `npm ci` (commands load lazily). Read-only commands: `setup-check`, `status`, `mmdc-check`, `spec-check`, `check`, and any `build-brd --check`.
+`setup-check` runs before `npm ci` (commands load lazily). Read-only commands: `setup-check`, `status`, `mmdc-check`, `spec-check`, `check`, `template-bank index` / `fields`, and any `build-brd --check`.
 
 ## Maintainer tools
 
@@ -89,6 +90,8 @@ Not skills. `studio` never shows them.
 | `upstream-check` | Tell Claude: "follow `neome-studio/maintainer/upstream-check.md`". Script: `node neome-studio/maintainer/upstream-check.mjs diff neome-studio [--to <version>]` / `pin …` | On demand: about quarterly, or when upstream releases. Needs network. Works on branch `upstream-<to>`; you accept or reject each re-adapt; unchanged or rejected → pin-only bump; never auto-merges |
 | Eval runner | `node neome-studio/evals/run.mjs run --all`, or tell Claude: "follow `neome-studio/evals/eval.md`". Needs `claude` logged in; costs tokens; never in `npm test`/CI. Scorecard + thresholds: [evals/README.md](evals/README.md). Writes `neome-studio/evals/results/` | Skill text change, before merge to `main` |
 | Eyeball checklist | [evals/README.md](evals/README.md) | Any change to a BRD, Prototype or Questionnaire template |
+| Template bank digest + scrub | [maintainer/template-bank/README.md](maintainer/template-bank/README.md). Scripts, no model: `node neome-studio/maintainer/template-bank/digest.mjs`, then `scrub.mjs` | New or updated Neome Build JSON in the gitignored raw dir |
+| `refine-template-bank` | Tell Claude (in T3 Code): "follow `neome-studio/maintainer/refine-template-bank.md`". Script: `node neome-studio/maintainer/refine-template-bank.mjs status` / `prepare` / … / `commit` (header lists all). Runs digest + scrub, then tag / cluster / review children via `delegate_task` (Claude-sales, fallback default Claude, then ZCode GLM) | By hand, when new or updated Neome Build JSON is in the raw dir. First mining run and every later refine. Asks you only on split / merge / retire or reviewer doubt; commits on branch `template-bank-refine-<date>`; never merges or pushes. Costs tokens (logged per stage per Build) |
 
 Pending: upstream release 1.3.2 is out and waits for an `upstream-check` run (`grill-module` changed upstream).
 
