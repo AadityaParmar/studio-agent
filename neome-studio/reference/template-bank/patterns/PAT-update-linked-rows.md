@@ -64,3 +64,19 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: SourceSheet, TargetSheet, Target, TargetRowId, Status, LinkWf. Needs first: TargetSheet with a list|card layout.
+
+1. Link: `type=ref name=Target spreadsheet=TargetSheet layoutSpreadsheet=<list> copyFieldMap` copying rowId into TargetRowId (verify: describe).
+2. Workflow: `add kind=workflow name=LinkWf` (4 maps `{}`) → `eventSsInsertAfter` or `eventSsUpdateAfter spreadsheet=SourceSheet`.
+3. Write: `rowUpdate rowIdPointer={spreadsheet:TargetSheet,row:<B field $Curr TargetRowId>} option=Mapping outputMapping={fromForm,toForm,fieldMappingMap}`.
+4. Switch: `branchSwitchCase field=Status` → VALUE per key → its own `rowUpdate`.
+5. Unassign: `rowGet` target → `fieldRemove field={param:"$Prev",field:…}` → `rowUpdate`.
+6. Loop variant: `branchIterateSpreadsheet spreadsheet=TargetSheet filterCondition=…` → `rowUpdate` on `$Iter` row.
+7. `set kind=workflow edgeMap` (NEXT, VALUE `value`=key, ITERATE). `validate` till ok=true.
+
+Gaps: copyFieldMap shape; `$Curr` / `$Iter` row binder shape (verify: `schema kind=argBinder`). edgeMap entry keys unverified.

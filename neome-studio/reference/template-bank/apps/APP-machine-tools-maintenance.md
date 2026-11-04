@@ -63,3 +63,24 @@ flowchart TD
   E --> F
   F --> G
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Only if Neome App machine-tools-maintenance is not installed (check `list` first): rebuild what Gives lists. If installed, reuse it and build only gaps.
+
+Placeholders: MachineSheet, MaintenanceSheet, BreakdownSheet, SparePartSheet. Needs first: none.
+
+1. Roles: `add kind=role name=MaintenanceTechnician|MaintenanceManager|OrganizationAdmin details={}`.
+2. Masters (`apply PAT-admin-kept-pick-list Execute`): MachineCategory, MaintenanceType, SparePart (`type=logDecimal AvailableQuantity`, `type=number ReorderQuantity`); Employee via `apply PAT-sheet-row-drives-app-user Execute`.
+3. MachineForm → MachineSheet: `type=text MachineCode`, `type=ref Category`, `type=location Location`, `type=date InstallationDate`, `type=number MaintenanceFrequency`, NextMaintenanceDate + RemainderDate `type=date` via `add kind=formFormula`, `type=pickText Status`, `type=number TotalBreakdownHr`.
+4. MaintenanceForm → MaintenanceSheet: `type=ref Machine`, `type=ref MaintenanceType`, `type=pickUser AssignedTo`, `type=currency Cost`, `type=number DowntimeHours`, `type=pickText Status`, SpareParts and Checklist `type=grid` composites.
+5. BreakdownForm → BreakdownSheet: `type=ref Machine`, `type=dateTime ReportedOn`, `type=pickText Status`, `type=pickUser ResolvedBy`, `type=dateTime ResolvedOn`, `type=number DowntimeHours`, `type=paragraph RootCauseAnalysis`.
+6. Machine insert: dates via `apply PAT-calculated-field Execute`; per-row scheduler via `apply PAT-per-row-scheduler Execute` — scheduler node → `kind=rowInsert spreadsheet=MaintenanceSheet` (scheduled row) → `kind=sendMessageToUsers` technician (`apply PAT-message-on-event Execute`).
+7. Maintenance completed: `apply PAT-act-on-status-change Execute` → `apply PAT-update-linked-rows Execute` (machine last maintenance date + breakdown hours) + `apply PAT-stock-moves-by-workflow Execute` (spare part stock down per grid line, `kind=branchIterateGrid`).
+8. Breakdown: insert → machine Status = Breakdown + `kind=sendMessageToGroups toGroups`; resolve → machine available, downtime added, row locked (`apply PAT-lock-fields-by-visibility Execute`).
+9. Spare part update: `apply PAT-low-stock-alert Execute` at ReorderQuantity.
+10. Dashboard `apply PAT-composite-report Execute`; master data screen via `apply PAT-button-runs-workflow Execute`; `set kind=group actionPermissionMap`; `validate` till ok=true.
+
+Gaps: per-row scheduler `scheduleTrigger` binder and grid-line rowUpdate binder (verify: describe).

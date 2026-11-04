@@ -48,3 +48,22 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Only if Neome App employee-directory is not installed (check `list` first): rebuild what Gives lists. If installed, reuse it and build only gaps.
+
+Placeholders: EmployeeForm, EmployeeSheet, VarEmpStatus. Needs first: none.
+
+1. Roles: `add kind=role name=Employee|HR|Manager|OrganizationAdmin details={}` (skip names that exist).
+2. Vars: `add kind=var kind=setOfText name=VarEmpStatus deploy=fixedOnDeploy value={"Active":{},"Inactive":{}}`.
+3. Pick sheets (`apply PAT-admin-kept-pick-list Execute`): DepartmentForm → DepartmentSheet, DesignationForm → DesignationSheet; each `add kind=spreadsheetLayout kind=table showComps` + `kind=list` for refs.
+4. EmployeeForm: `add kind=form` → `add kind=composite type=section` → fields: `type=text EmployeeName required`, `type=pickUser Employee`, `type=pickUser Manager`, `type=ref spreadsheet=DepartmentSheet layoutSpreadsheet=DepartmentList`, same for Designation, `type=setOfRole Roles`, `type=date DateOfJoining`, `type=currency MonthlyCompensation`, `type=pickText Status source=VarEmpStatus`, `type=date ResignationDate`; education as a `type=grid` composite, documents as `type=setOfDocument`. `add kind=spreadsheet name=EmployeeSheet form=EmployeeForm` + `spreadsheetLayout kind=table showComps`.
+5. Checklists: JoiningChecklist and ExitChecklist forms → sheets (`type=text Title required`, `type=paragraph Description`).
+6. User sync: `apply PAT-sheet-row-drives-app-user Execute` — insert → `userAdd`, roles / manager change → `userUpdate`, Status → `userUpdate userActivateField`, remove → `userRemove`.
+7. Dashboard + master data report: `apply PAT-composite-report Execute`; `add kind=action kind=report report=… outputFormContentLayout=…`; `set kind=group actionPermissionMap` (HR + OrganizationAdmin on every entry).
+8. `validate` till ok=true.
+
+Gaps: dashboard formulas per Enterprise (verify: describe on a built report).

@@ -49,3 +49,21 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: CashCreditSheet, OfficeExpenseSheet, CashBalanceSheet, PettyCashWf. Needs first: expense category list (TMOD-master-data). If Neome App expense-management is installed, `list` and reuse.
+
+1. Roles + vars: `add kind=role` Accounts, OfficeStaff, Owner; `add kind=var kind=setOfText` VarExpenseStatus, VarPaymentMode (values from grilling).
+2. Credit: CashCreditForm section (Date `type=date`, Person `type=pickUser`, Amount `type=decimal`, Remarks `type=paragraph`) → CashCreditSheet `insertRoles=[Accounts]` → table.
+3. Expense: OfficeExpenseForm section (Date, Amount `type=decimal`, Status / PaymentMode `type=pickText`, Receipt `type=camera`) → OfficeExpenseSheet → table → Category `type=ref`.
+4. Form logic, apply Execute: PAT-show-field-by-value, PAT-calculated-field, PAT-photo-and-document-capture.
+5. Balance: `apply PAT-running-total-by-log-field Execute` (CashBalanceSheet Person + `type=logDecimal` Balance; credit insert → `rowUpdateFieldLogNumber operation=add`, expense → `subtract`) → `set kind=workflow edgeMap`.
+6. History: `apply PAT-sheet-history-action Execute` (`action kind=spreadsheetHistory spreadsheet=CashBalanceSheet`).
+7. Report: `apply PAT-composite-report Execute` (credits + expenses, date range).
+8. Actions: `rowInsert` + `spreadsheetEditor` per sheet → `set kind=group actionPermissionMap`.
+9. `validate` till ok=true. `describe` CashBalanceSheet, PettyCashWf to confirm.
+
+Gaps: where the balance lives (own sheet vs credit row) not in Template (Open Item).

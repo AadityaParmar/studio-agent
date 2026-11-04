@@ -47,3 +47,19 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: EventLog, TestSheet, roles Support, Developer. Needs first: the live sheets support may fix.
+
+1. Roles: `add kind=role` Support, Developer.
+2. Event log + test sheet: `apply PAT-helper-sheet-for-tests-and-logs Execute` (EventLog form: `type=dateTime` Date, `type=pickUser` Employee, `type=text` Event, key fields → `EventLogSheet`; TestSheet form: inputs, `type=button` per test, result fields).
+3. Fix live rows: `add kind=action kind=spreadsheetEditor spreadsheet=<LiveSheet> layoutSpreadsheet=<its table>` per sheet, only for Support.
+4. Outside calls: `apply PAT-outside-service-by-plugin Execute` (test button → `executePlugin` or `executeRpc` → result field).
+5. Gap and compliance checks: `apply PAT-query-report-with-filter Execute` → `kind=action kind=report`.
+6. Group: `set kind=group actionPermissionMap` (Support, Developer only; roles on every entry).
+7. `validate` till ok=true.
+
+Gaps: which live sheets and checks are needed (Open Item); plugin is import only.

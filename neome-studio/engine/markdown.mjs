@@ -23,13 +23,18 @@ export function firstHeading(text) {
 }
 
 // Sections under headings of one level: [{ title, body }]. Text before the first is dropped.
+// Headings inside ``` / ~~~ fences are body text.
 export function sections(text, level) {
   const marker = "#".repeat(level);
   const re = new RegExp(`^${marker}\\s+(.+?)\\s*#*\\s*$`);
   const out = [];
   let current = null;
+  let fence = null;
   for (const line of text.split(/\r?\n/)) {
-    const m = line.match(re);
+    const f = line.match(/^\s*(`{3,}|~{3,})/);
+    if (f && !fence) fence = f[1];
+    else if (f && f[1][0] === fence[0] && f[1].length >= fence.length && !line.trim().slice(f[1].length).trim()) fence = null;
+    const m = !f && !fence && line.match(re);
     if (m && !line.startsWith(marker + "#")) {
       current = { title: m[1].trim(), lines: [] };
       out.push(current);

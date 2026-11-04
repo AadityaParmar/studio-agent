@@ -56,3 +56,22 @@ flowchart TD
   D --> E
   E --> F
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Only if Neome App purchase-management is not installed (check `list` first): rebuild what Gives lists. If installed, reuse it and build only gaps. Placeholders: Department, Vendor, Employee, PurchaseRequest, PurchaseOrder, Invoice, roles PurchaseExecutive, OperationsManager, OrganizationAdmin. Needs first: none.
+
+1. Roles + vars: `add kind=role` x3; `add kind=var kind=setOfText` Status {Pending|Approved|Rejected}, PaymentStatus {Pending|Paid|Unpaid}, TransactionType, POGiven {Yes|No}.
+2. Department: `add kind=form` → section → `type=text` DepartmentID, Department, `type=decimal` MonthlyBudget, MinimumBudgetLimit, `type=logDecimal` RemainingMonthlyBudget → `DepartmentSheet` → table + list layouts. Low-budget alert: `apply PAT-low-stock-alert Execute` (RemainingMonthlyBudget < MinimumBudgetLimit → group message).
+3. Vendor: `type=text` VendorName, GSTIN, `type=mobileNumber`, PaymentTerms, Status → `VendorSheet` → table layout. Employee: `apply PAT-sheet-row-drives-app-user Execute`.
+4. PurchaseRequest: `type=ref` Department, `type=date` RequestDate, `type=decimal` FinalAmount (`disabled=true`), `type=pickText` Status, POGiven; `kind=composite type=grid` Purchase → `type=text` Name, `type=number` Quantity, `type=decimal` ExpectedPrice, Amount (`apply PAT-line-items-grid-with-totals Execute`) → `PurchaseRequestSheet` → table layout. Approve / reject + tell creator: `apply PAT-approval-by-status Execute`.
+5. PurchaseOrder: `type=ref` RefPurchaseRequest, `type=ref` RefVendor, `type=decimal` FinalAmount, ReceivedAmount, PendingAmount, `type=pickText` Status, `type=text` Error (`disabled=true`), same grid → `PurchaseOrderSheet` → table layout. Budget check on insert: `apply PAT-stop-save-by-workflow-check Execute` (budget short → `stopAndError`); pass → request POGiven (`apply PAT-update-linked-rows Execute`).
+6. Order approved: order PDF (`apply PAT-pdf-from-report Execute`) + budget down (`apply PAT-running-total-by-log-field Execute`, `rowUpdateFieldLogNumber operation=subtract`) + message (`apply PAT-message-on-event Execute`).
+7. Invoice: `type=ref` RefPurchaseOrder, `type=decimal` Amount, `type=pickText` PaymentStatus, TransactionType, `type=text` TransactionID → `InvoiceSheet` → table layout. Paid: invoice PDF + `rowUpdate` order ReceivedAmount.
+8. Monthly reset: `apply PAT-scheduled-job-over-rows Execute` (`eventSchedule` months → `rowUpdate` every Department budget).
+9. Dashboard: `apply PAT-query-report-with-filter Execute` (budget, order count, pending approvals; dateRange input) + `apply PAT-composite-report Execute`; actions → `set kind=group actionPermissionMap`.
+10. `validate` till ok=true.
+
+Gaps: log field write from another sheet's workflow (verify: describe); grid total → FinalAmount mapping; edgeMap entry keys unverified.

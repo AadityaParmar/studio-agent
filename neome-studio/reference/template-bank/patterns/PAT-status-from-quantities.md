@@ -41,3 +41,18 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: LineSheet, LineForm, Ordered, Dispatched, Remaining, VarOrderStatus, OrderStatus, PendingDispatch, DispatchSheet, QtyWf. Needs first: order + line sheets, DispatchSheet with ref to the line.
+
+1. Line fields: `type=decimal Ordered`, `type=logDecimal Dispatched` (or `logNumber`), `type=decimal Remaining`.
+2. Formula: `add kind=formFormula parent=LineForm assignToField=Remaining formula={value:"${f:Ordered} - ${f:Dispatched}"}`.
+3. Status: `add kind=var kind=setOfText name=VarOrderStatus deploy=fixedOnDeploy value={…}` → `type=pickText OrderStatus source=VarOrderStatus`; `type=bool PendingDispatch` on parent.
+4. Count: apply PAT-running-total-by-log-field Execute (`eventSsInsertAfter spreadsheet=DispatchSheet` → `rowUpdateFieldLogNumber outputLogNumberField=Dispatched operation=add`).
+5. Set status: then `rowGet rowIdPointer=<line>` → `applyFormula` remaining → `branchIfElse` Remaining lessThanOrEqualTo 0 → TRUE `rowUpdate` OrderStatus=keyDelivered; FALSE `rowUpdate` keyPartDispatched + PendingDispatch.
+6. `set kind=workflow edgeMap`. `validate` till ok=true.
+
+Gaps: form formula re-run after a workflow log update unconfirmed (so recompute in workflow). edgeMap entry keys unverified.

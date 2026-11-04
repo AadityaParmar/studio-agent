@@ -86,3 +86,16 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: master `Customer` / `CustomerSheet` (list layout `CustomerPickList`), picking form `Order`. Needs first: master sheet with a list or card layout.
+
+1. Copy targets on `Order`: `type=text name=ContactName disabled=true`, `type=decimal name=Price disabled=true`, `type=pickText name=Plan source=<same var as master>`, `type=logNumber name=Balance`, `type=text name=CustomerRowId disabled=true`.
+2. Ref: `add kind=field parent=Order type=ref name=Customer spreadsheet=CustomerSheet layoutSpreadsheet=CustomerPickList keyFields=[...] copyFieldMap=<master field → target field, rowId → CustomerRowId>` (verify: describe).
+3. Fetch again: `refreshOn=refreshOnDemand` on the ref, or a `type=button` (see PAT-button-runs-workflow).
+4. `validate` till ok=true.
+
+Gaps: `copyFieldMap` shape and how rowId is copied unconfirmed; copied values do not follow later master changes.

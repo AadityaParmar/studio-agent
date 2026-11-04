@@ -13,7 +13,7 @@ Builds in this run:
 Input (read all; never read digests, raw JSON or anything else under the raw dir):
 - Tag sheets of {{CLUSTER_BUILDS}}:
 {{TAG_SHEETS}}
-- Current Template bank entries: {{BANK_DIR}}/patterns/, template-modules/, templates/ and CHANGELOG.md. Index:
+- Current Template bank entries: {{BANK_DIR}}/patterns/, template-modules/, templates/, apps/ and CHANGELOG.md. Index:
 {{BANK_INDEX}}
 
 Neome App Builds in this run (code `NA-<catalog slug>`, Neomenta's own out-of-box App, not a client): {{APP_BUILDS}}
@@ -25,7 +25,7 @@ Mode:
 Steps:
 1. Group tag sheet items across Builds: same task done the same way = one Pattern; same Module shape = one Template module; Build tag sheets with a similar business = one Template. Weight count of Builds; `weight: low` items count less. One Build is enough for an entry.
 2. Compare each group with the current entries: same thing → `enhance` (new rows, new usual needs / Patterns / steps); one entry covering two things → `split`; two entries that are one → `merge` (keep the clearer ID); clearer name needed → `rename`; nothing backs it any more → `retire` (never for age).
-3. Write drafts to {{DRAFTS}}/<ID>.md for every `add`, every `split` part, and every `enhance` / `merge` / `rename` that changes content. Full entry in the format of {{BANK_README}}: all front matter keys, all body sections, a Mermaid flowchart. Template modules: `neomeApp` = a slug from `neome-studio/reference/neome-app-catalog-slugs.json` or `none`; `delivery` = standard | configuration | custom (hint only). Template `modules.core` / `optional` = TMOD- IDs that exist after this run.
+3. Write drafts to {{DRAFTS}}/<ID>.md for every `add`, every `split` part, and every `enhance` / `merge` / `rename` that changes content. Full entry in the format of {{BANK_README}}: all front matter keys, all body sections, a Mermaid flowchart. Template modules: `neomeApp` = a slug from `neome-studio/reference/neome-app-catalog-slugs.json` or `none`; `delivery` = standard | configuration | custom (hint only). Template `modules.core` / `optional` = TMOD- IDs that exist after this run. Keep an existing entry's `## Execute` section (README § Execute); update its steps when the content it builds changes.
 4. Write {{CHANGES}}. Each change: one-line reason, proof rows quoted exactly from the tag sheets.
 5. Check: `node neome-studio/maintainer/refine-template-bank.mjs validate-changes --run {{RUN}}` from the repo root (add `--raw {{RAW}}` and `--bank {{BANK_DIR}}` if not the defaults). Fix until it prints `ok`. It also dry-runs apply + the Template bank check.
 

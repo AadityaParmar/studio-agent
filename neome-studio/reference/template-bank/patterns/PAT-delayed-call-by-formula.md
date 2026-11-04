@@ -37,3 +37,17 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: form `Thing`, inputs `Person` / `Month`, helper `FetchKey`, report `ZoneFor`. Needs first: the report and its input / output mappings.
+
+1. Helper: `add kind=field parent=Thing type=text name=FetchKey disabled=true`.
+2. Formula: `add kind=formFormula name=FetchKeyCalc assignToField=FetchKey formula={value:"${f:Person} && ${f:Month} ? ${f:Person} + '-' + ${f:Month} : ''"}`.
+3. Call: `type=button name=FetchZone buttonKind=normal targetType=callReport report=ZoneFor reportInputMapping=... reportOutputMapping=...`; hide it with `formEventAction kind=hidden comps=["FetchZone"]` on `onInitForm`.
+4. Fire: `add kind=formEventCondition name=KeyReady statement={lhs:"FetchKey",operator:"hasValue"}` → `add kind=formEventAction kind=click name=ClickFetch comps=["FetchZone"]` → `add kind=formEvent kind=onChange name=OnFetchKey eventComps=["FetchKey"] actions=[{action:"ClickFetch",condition:"KeyReady"}]`.
+5. `validate` till ok=true.
+
+Gaps: `click` on a hidden button and formula changes firing `onChange` unconfirmed (verify: describe).

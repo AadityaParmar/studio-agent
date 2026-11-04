@@ -68,3 +68,19 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: Sheet, MsgWf, Status. Needs first: Sheet; mobile or email copied onto the row (`ref copyFieldMap`).
+
+1. Fields: `type=mobileNumber` / `type=email` copied from the ref; `type=pickUser` if a named person.
+2. Workflow: `add kind=workflow name=MsgWf` (4 maps `{}`).
+3. Event: `kind=eventSsInsertAfter|eventSsUpdateAfter spreadsheet=Sheet`, or `kind=eventRowComment` for comments.
+4. Branch: `kind=branchSwitchCase field{param:$Curr, field:Status}` or `kind=branchIfElse option=Condition`.
+5. Message node per case: `kind=sendWhatsappTemplate toUsers templateGroup templateVarMap` / `kind=sendWhatsappMessage toUsers message`; `kind=sendMessageToUsers message{value,paramSet} toUsers`; `kind=sendMessageToGroups toGroups`; `kind=sendPushNotification`; `kind=sendEmail subject message toUsers`.
+6. `set kind=workflow edgeMap`: switch VALUE `value=<option key>`, NEXT = Default; ERROR edge from message nodes if needed.
+7. `validate` till ok=true.
+
+Gaps: toUsers (U) binder from a mobile field of a non-member unverified; WhatsApp template approval is outside MCP.

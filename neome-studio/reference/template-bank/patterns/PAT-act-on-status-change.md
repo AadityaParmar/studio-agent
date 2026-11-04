@@ -62,3 +62,19 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: `Thing` form, `ThingSheet`, `VarThingStatus`, `ThingStatusWf`. Needs first: the sheet.
+
+1. Var: `add kind=var kind=setOfText name=VarThingStatus deploy=fixedOnDeploy value={"Open":{},"Done":{}}` (reuse if it exists).
+2. Field: `add kind=field parent=Thing type=pickText name=Status source=VarThingStatus`. `set kind=spreadsheet ref=ThingSheet queryables` add `Status`.
+3. Workflow: `add kind=workflow name=ThingStatusWf` (nodeMap, edgeMap, noteMap, regionMap = `{}`).
+4. Nodes: `add kind=node kind=eventSsUpdateAfter spreadsheet=ThingSheet` → `kind=branchIfElse option=Condition condition=<$Curr Status notEqualTo $Prior Status>` (verify: describe) → `kind=branchSwitchCase field={param:"$Curr",field:"Status"}`.
+5. Per value: step nodes (`rowUpdate` on linked sheet, `userUpdate`, `sendMessageToUsers`) or `executeSubWorkflow startNode=<node>` for long cases.
+6. Edges: `set kind=workflow ref=ThingStatusWf edgeMap`: event → if NEXT; if → switch TRUE (FALSE = end); switch → first step VALUE `value=keyDone` (one per option key); steps NEXT.
+7. `validate` till ok=true. `describe kind=workflow` to confirm edges.
+
+Gaps: condition shape comparing `$Curr` to `$Prior` unconfirmed; edgeMap entry keys unverified.

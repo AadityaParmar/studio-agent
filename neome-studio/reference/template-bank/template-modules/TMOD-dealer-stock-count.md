@@ -44,3 +44,19 @@ flowchart TD
   A --> B
   B --> C
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: StockCountSheet, CustomerSheet, ProductSheet. Needs first: Customer sheet + dealer discounts (TMOD-customer-master), ProductSheet (TMOD-product-catalog); if Neome App fmcg-field-sales-and-distribution is installed, reuse it.
+
+1. Roles: `add kind=role` SalesRep, Manager, Admin.
+2. Count: `add kind=form` → `kind=composite type=section` → Date `type=date`, EnteredBy `type=userId defaultValue=createdBy`, Customer `type=ref spreadsheet=CustomerSheet layoutSpreadsheet=<list>`, FinalAmount `type=decimal` → `kind=composite type=grid` Products → Product `type=ref spreadsheet=ProductSheet`, Quantity `type=number`, Discount, Rate, Total `type=decimal` → `add kind=spreadsheet` (`queryables=[Customer, Date]`) → `kind=spreadsheetLayout kind=table`.
+3. Discount + rate: apply PAT-customer-price-list + PAT-copy-fields-from-ref Execute (discount fetched before insert).
+4. Totals: apply PAT-line-items-grid-with-totals Execute (`formFormula assignToField=Products.Total`; FinalAmount `SUM(${f:Products.Total})`).
+5. Reports: apply PAT-composite-report Execute (by dealer, month, product; dealers missing a count).
+6. Actions + group: `kind=rowInsert` (SalesRep), `kind=spreadsheetEditor` + `kind=report` (Manager, Admin) → `set kind=group actionPermissionMap`.
+7. `validate` till ok=true. `describe` sheet + reports.
+
+Gaps: "dealers missing a count" needs a query report over customers (verify: describe).

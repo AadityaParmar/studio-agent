@@ -15,7 +15,7 @@ import { join, resolve } from "node:path";
 import { frontMatter } from "./markdown.mjs";
 import { parse, usage } from "./ingest.mjs";
 import { frontierReport } from "./modules.mjs";
-import { BANK_DIR, loadBank, checkTemplateRef, appFor, appSlugOf } from "./template-bank.mjs";
+import { BANK_DIR, SLUG, loadBank, checkTemplateRef, appFor, appSlugOf } from "./template-bank.mjs";
 
 const USE = [
   "template-bank index [--bank <dir>]",
@@ -23,7 +23,7 @@ const USE = [
   "template-bank set <engagement-dir> --template <TPL-…|none> [--bank <dir>]",
   "template-bank set <engagement-dir> <PREFIX> --template-module <TMOD-…|none> [--bank <dir>]",
 ].join("\n       ");
-const ID = /^(TPL|TMOD|PAT)-[a-z0-9]+(-[a-z0-9]+)*$/;
+const ID = new RegExp(`^(TPL|TMOD|PAT)-${SLUG}$`);
 const KIND_ORDER = ["template", "template-module", "pattern", "app"];
 
 export function templateBank(args) {

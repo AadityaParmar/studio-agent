@@ -51,3 +51,20 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: VisitPlanning, roles SalesRep, Manager, Viewer. Needs first: Lead, Customer, visit sheets (TMOD-lead-management, TMOD-customer-master, TMOD-field-visits). If Neome App field-visit-management is installed, `list` and reuse it; build only gaps.
+
+1. Roles + vars: `add kind=role` x3; `add kind=var kind=setOfText` VisitStatus {Pending|Completed}; `kind=sequence` PlanningId.
+2. VisitPlanning form: section → `type=identifier` PlanningId, `type=date` PlannedVisitDate, `type=userId defaultValue=createdBy` EnteredBy, `type=pickUser` Manager, target (`apply PAT-lead-or-customer-pick Execute`), `type=pickUser` AccompaniedBy, `type=pickText` VisitStatus → `VisitPlanningSheet` → table + calendar (`fromDateField=PlannedVisitDate`) layouts.
+3. Colleague copy: `apply PAT-insert-row-in-other-sheet Execute` (`eventSsInsertAfter` → `branchIfElse` AccompaniedBy hasValue → `rowInsert spreadsheet=VisitPlanningSheet`).
+4. Mark done on visit: workflow `eventSsInsertAfter spreadsheet=<VisitSheet>` → `rowUpdate` VisitStatus=Completed (verify: describe).
+5. Views: `apply PAT-role-views-of-one-sheet Execute` (my, team, today: `spreadsheetEditor` + `filterCondition`).
+6. Planned vs done: `report kind=query` or `kind=spreadsheet` → `kind=action kind=report`.
+7. Group: `set kind=group actionPermissionMap` (roles on every entry).
+8. `validate` till ok=true.
+
+Gaps: link from visit row to plan row (key field) per Enterprise (Open Item).

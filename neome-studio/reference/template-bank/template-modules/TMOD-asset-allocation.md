@@ -48,3 +48,18 @@ flowchart TD
   B --> C
   C --> D
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: AssetCategorySheet, AssetSheet, AllocationSheet, VarMoveType. Needs first: none.
+
+1. Roles + vars: `add kind=role` HR, Owner, Employee; `add kind=var kind=setOfText` VarMoveType (allocation, recovery). Category list: apply PAT-admin-kept-pick-list Execute.
+2. Asset: `add kind=form` → `kind=composite type=section` → AssetName `type=text`, Category `type=ref spreadsheet=AssetCategorySheet`, SerialNumber `type=text`, PurchaseDate `type=date`, Quantity `type=logNumber`, Holder `type=pickUser roleIdDataSource=[Employee]` → `add kind=spreadsheet` → `kind=spreadsheetLayout kind=table` + `kind=list`.
+3. Allocation: section → Date `type=date`, Employee `type=pickUser roleIdDataSource=[Employee]`, MoveType `type=pickText source=VarMoveType` → `kind=composite type=grid` Items → Asset `type=ref spreadsheet=AssetSheet layoutSpreadsheet=<list>`, Quantity `type=number` → sheet. Asset details: PAT-copy-fields-from-ref.
+4. Quantity: apply PAT-stock-moves-by-workflow Execute (`eventSsInsertAfter spreadsheet=AllocationSheet` → `branchIterateGrid grid=Items` → `rowUpdateFieldLogNumber outputLogNumberField=Quantity operation=subtract|add` by MoveType).
+5. Actions + group: `kind=spreadsheetEditor` Asset, `kind=rowInsert` Allocation → `set kind=group actionPermissionMap` (HR, Owner).
+6. `validate` till ok=true. `describe` sheets + workflow.
+
+Gaps: one sheet with MoveType vs two sheets: confirm with user; `rowIdPointer` from grid ref row (verify: describe).

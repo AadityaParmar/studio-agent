@@ -71,3 +71,25 @@ flowchart TD
   D --> E
   E --> F
 ```
+
+## Execute
+
+Only use this to apply this into a Studio Enterprise via MCP.
+
+Placeholders: LeadForm, LeadSheet, ActivityForm, ActivitySheet, LeadWf. Needs first: customer sheet (TMOD-customer-master), product sheet (TMOD-product-catalog), zone lists (TMOD-master-data). If Neome App lead-management (or crm) is installed, `list` and reuse.
+
+1. Roles + vars: `add kind=role` SalesRep, Marketing, Manager, Owner, Admin; `add kind=var kind=setOfText` VarLeadSource, VarLeadStage, VarActivityType; `kind=sequence` for LeadId.
+2. Lists: `apply PAT-admin-kept-pick-list Execute` (source, activity type, stage; stage-probability if asked).
+3. Lead: LeadForm section (LeadId `type=identifier`, Date, Source / Stage `type=pickText`, ContactName `type=text`, Mobile `type=mobileNumber`, Place `type=location`, AssignTo `type=pickUser`, FollowUpDate `type=date`, ActivityCount `type=logNumber`) + `composite type=grid` Products, FollowUps → LeadSheet → table + list + `kind=kanban kanbanField=Stage`.
+4. Activity: ActivityForm section (ActivityType `type=pickText`, Discussion `type=paragraph`, FollowUpDateTime `type=dateTime`) → ActivitySheet → Lead `type=ref`.
+5. Form logic, apply Execute: PAT-lead-or-customer-pick, PAT-copy-fields-from-ref, PAT-pick-from-report-ref, PAT-show-field-by-value, PAT-line-items-grid-with-totals, PAT-stage-sections-on-one-record.
+6. Assign + tell: `apply PAT-assign-by-mapping-sheet Execute` (zone → rep) + `PAT-message-on-event` (`eventSsInsertAfter` → `sendMessageToUsers` AssignTo).
+7. Follow-ups: `PAT-follow-up-log` + `PAT-running-total-by-log-field` (`rowUpdateFieldLogNumber operation=add`); visit plan row `PAT-insert-row-in-other-sheet`.
+8. Stage: `apply PAT-act-on-status-change Execute` (won → customer / quotation rows via `PAT-insert-row-in-other-sheet`).
+9. Schedules: `PAT-per-row-scheduler` (follow-up reminder), `PAT-scheduled-job-over-rows` (daily inactive chase).
+10. AI (optional): `apply PAT-ai-reads-into-form Execute` (document or chat → lead).
+11. Actions: `rowInsert` + `apply PAT-role-views-of-one-sheet Execute` → `set kind=group actionPermissionMap`.
+12. Reports: `PAT-composite-report`, `PAT-query-report-with-filter` (funnel, source, rep, revenue).
+13. `validate` till ok=true. `describe` LeadSheet, LeadWf to confirm.
+
+Gaps: lead score rules not in Template (Open Item when asked). `kanbanField` allowed types unstated (verify: describe).
